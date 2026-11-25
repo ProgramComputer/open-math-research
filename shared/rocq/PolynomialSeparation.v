@@ -78,4 +78,3 @@ Qed.
 Definition interlace (p q:list Z) := exists xs ys:list R,
  (forall z, In z xs <-> value p z=0) /\ (forall z, In z ys <-> value q z=0) /\
  (weave xs ys \/ weave ys xs).
-

@@ -27,7 +27,7 @@ Qed.
 Lemma unsplit_positive x : -840 < x < -56 -> 0 < value P x.
 Proof.
  intro H. assert (W:0<homogeneous weights (x+840) (-56-x)).
- { 
+ {
    change (0 < IZR 3826409662044539905758361 * (-56-x)^9 +
              (x+840)*homogeneous (tl weights) (x+840) (-56-x)).
    apply Rplus_lt_le_0_compat.

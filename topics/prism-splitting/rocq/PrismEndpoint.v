@@ -53,4 +53,3 @@ Theorem unsplit_full_series : numerator 11 6 unsplit P.
 Proof. apply (normalize_counts 10), unsplit_expansion. Qed.
 Theorem split_full_series : numerator 12 6 split Q.
 Proof. apply (normalize_counts 11), split_expansion. Qed.
-
