@@ -26,6 +26,23 @@
         "'OrderedThresholdTwoPhase.at_most_one_upper_pole' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'OrderedThresholdTwoPhase.consecutive_sign' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
+    },
+    {
+      "file": "topics/ordered-large-blocks/lean/OrderedThresholdThreeSigns.lean",
+      "sha256": "a56901925bb50cfc3a6b062856ae101284ce47c2fe9950814fd4229e19c42cf1",
+      "exit_code": 0,
+      "kernel_output": [
+        "'OrderedThresholdThreeSigns.cancel_negative_real_pole' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdThreeSigns.radius_lower_bound_from_log_derivatives' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdThreeSigns.radius_lower_bound_linear' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdThreeSigns.radius_ratio_exp_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdThreeSigns.real_pole_envelope' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdThreeSigns.signed_sine_dominates' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdThreeSigns.paired_tail_is_small' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdThreeSigns.cosine_error_budget' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdThreeSigns.third_pole_next_row_sign' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdThreeSigns.threshold_three_next_row' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
     }
   ]
 }
