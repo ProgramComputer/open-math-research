@@ -1,0 +1,129 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{The Narayana polynomial of a ribbon lattice path matroid}
+\author{}
+\date{25 November 2026}
+\begin{document}
+\begin{center}
+{\LARGE The Narayana polynomial of a ribbon lattice path matroid\par}
+\vspace{0.8em}
+25 November 2026
+\end{center}
+\begin{abstract}
+The cycle matroid of a polygon with noncrossing diagonals has the same
+$Z$-polynomial as its boundary cycle. We derive this observation from the
+deletion formula of Braden and Vysogorets. The multi-fan representation of
+snake matroids then identifies the $Z$-polynomial of every connected ribbon
+lattice path matroid of rank $r$ with the Narayana polynomial of order $r+1$.
+This answers a question of Alexandersson.
+\end{abstract}
+
+\section{Deleting a diagonal}
+Write $P_M$ and $Z_M$ for the Kazhdan--Lusztig and $Z$-polynomials of a
+loopless matroid. In terms of its lattice of flats $L(M)$,
+\[
+ Z_M(t)=\sum_{F\in L(M)}t^{\mathrm{rk}(F)}P_{M/F}(t).
+\]
+Both polynomials depend only on the ranked lattice. Write $M(G)$ for the
+cycle matroid of a graph. We will use the following immediate consequence
+of the deletion formula and the parallel-connection calculation of
+Braden and Vysogorets \cite{bv}.
+
+\begin{lemma}\label{lem}
+Let a simple graph $G$ be the union of two subgraphs $H_1,H_2$ meeting
+precisely in an edge $e=uv$ and its endpoints. If each $H_i-e$ is
+connected, then $Z_{M(G)}=Z_{M(G-e)}$.
+\end{lemma}
+\begin{proof}
+Set $M=M(G)$. Since $e$ is a noncoloop, Theorem~2.8, equation~(6), of
+\cite{bv} applies. The difference in question is a sum over flats $F$
+such that $e\notin F$ and $F\cup\{e\}$ is a flat. Each summand contains
+the factor $\tau(M/(F\cup\{e\}))$. In odd rank $s$, $\tau$ is the
+coefficient of $t^{(s-1)/2}$ in the Kazhdan--Lusztig polynomial. In even
+rank it is zero.
+
+As in the proof of Theorem~3.2 of \cite{bv}, contracting $F\cup\{e\}$
+leaves the two contracted sides meeting only in the vertex containing
+$u$ and $v$. Their cycle matroids form a direct sum. Both summands have
+positive rank. Indeed, at least one edge of each $H_i-e$ is missing from
+$F$, since otherwise $F$ connects $u$ and $v$ and its closure contains $e$.
+Each missing edge survives as a nonloop because $F\cup\{e\}$ is a flat.
+Lemma~2.7 of \cite{bv} gives $\tau=0$ for a direct sum of two positive-rank
+matroids. All correction terms therefore vanish.
+\end{proof}
+
+\begin{theorem}\label{polygon}
+Let $G$ be the boundary of a convex polygon on $r+1\ge3$ vertices with
+any set of pairwise noncrossing diagonals added. Then
+\[
+ Z_{M(G)}(t)=\sum_{j=0}^r \frac{1}{r+1}
+        \binom{r+1}{j}\binom{r+1}{j+1}t^j=:N_{r+1}(t).
+\]
+\end{theorem}
+\begin{proof}
+Each diagonal separates the graph into two subpolygons satisfying
+Lemma~\ref{lem}. Each remains connected after deleting the diagonal,
+since it contains the corresponding boundary arc. Delete all diagonals
+in turn. The remaining graph is the cycle on $r+1$ vertices, whose cycle
+matroid is $U_{r,r+1}$. Its $Z$-polynomial is the displayed polynomial by
+Proposition~4.9 of Proudfoot, Xu and Young \cite{pxy}.
+\end{proof}
+
+\section{Ribbons}
+A ribbon is a connected skew diagram containing no $2\times2$ square.
+The corresponding connected lattice path matroids are also called
+\emph{snakes}. Alexandersson asks whether their $Z$-polynomial depends
+only on the rank and equals $N_{r+1}$ \cite{alex}. The full fan case is
+the formula of Lu, Xie and Yang \cite{lxy}.
+
+\begin{theorem}
+Every connected ribbon lattice path matroid $M$ of rank $r$ has
+$Z_M=N_{r+1}$. Its zeros are simple and strictly negative.
+\end{theorem}
+\begin{proof}
+Theorem~3.2 of Knauer, Mart\'inez-Sandoval and Ram\'irez Alfons\'in
+\cite{kmr} represents $M$ by a multi-fan. Its vertices are a hub and
+the $r$ vertices of a path. Bundles of parallel spokes join the hub to
+selected path vertices including both endpoints. The interval presentation
+of the snake gives one path edge for each element shared by consecutive
+intervals, and a spoke for each element belonging to a single interval.
+
+Simplifying each parallel class preserves the ranked lattice of flats.
+For $r\ge2$, the path and its endpoint spokes form a polygonal boundary
+on $r+1$ vertices. The other spokes are noncrossing diagonals. Thus
+Theorem~\ref{polygon} gives the identity. In rank one the lattice of flats
+is a chain on two elements, giving $Z_M=1+t=N_2$. Finally, the Jacobi
+binomial expansion gives
+\[
+ N_{r+1}(t)=\frac{(1-t)^r}{r+1}
+ P_r^{(1,1)}\!\left(\frac{1+t}{1-t}\right).
+\]
+The $r$ simple Jacobi zeros in $(-1,1)$ map to negative real numbers
+under $x\mapsto(x-1)/(x+1)$.
+\end{proof}
+
+\paragraph{Relation to earlier work.}
+Braden and Vysogorets explicitly treat polygon dissections as iterated
+parallel connections in their study of Kazhdan--Lusztig polynomials. The
+same vanishing argument applied to their $Z$-deletion identity gives
+Lemma~\ref{lem}. Ferroni, Matherne and Vecchi also record the vanishing
+in their equivariant treatment \cite[Theorem~1.1 and \S4.1.2]{fmv}.
+Our deduction identifies the consequence for ribbons. Neither its
+validity nor its scope depends on a computation.
+
+\small
+\begin{thebibliography}{9}
+\setlength{\itemsep}{2pt}
+\bibitem{alex} P. Alexandersson, \emph{Real-rooted polynomials: open problems},
+\href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm}{Symmetric Functions Catalog}, 2026.
+\bibitem{bv} T. Braden and A. Vysogorets, Kazhdan--Lusztig polynomials of matroids under deletion, \emph{Electron. J. Combin.} 27 (2020), P1.17. \href{https://arxiv.org/abs/1909.09888}{arXiv:1909.09888}.
+\bibitem{fmv} L. Ferroni, J. P. Matherne, and L. Vecchi, Deletion formulas for equivariant Kazhdan--Lusztig polynomials of matroids, \emph{SIAM J. Discrete Math.} 39 (2025). \href{https://doi.org/10.1137/24M1673796}{doi:10.1137/24M1673796}.
+\bibitem{kmr} K. Knauer, L. Mart\'inez-Sandoval, and J. L. Ram\'irez Alfons\'in, A Tutte polynomial inequality for lattice path matroids. \href{https://arxiv.org/abs/1510.00600}{arXiv:1510.00600}.
+\bibitem{lxy} L. Lu, M. H. Y. Xie, and A. L. B. Yang, Kazhdan--Lusztig polynomials of fan matroids, wheel matroids, and whirl matroids, \emph{J. Combin. Theory Ser. A} (2022). \href{https://doi.org/10.1016/j.jcta.2022.105665}{doi:10.1016/j.jcta.2022.105665}.
+\bibitem{pxy} N. Proudfoot, Y. Xu, and B. Young, The $Z$-polynomial of a matroid, \emph{Electron. J. Combin.} 25 (2018), P1.26. \href{https://arxiv.org/abs/1706.05575}{arXiv:1706.05575}.
+\end{thebibliography}
+\end{document}

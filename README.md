@@ -6,8 +6,9 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an explicit counterexample | 🟩 Full · Lean 4 |
 | [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
+| [Ribbon matroids have the Narayana polynomial](topics/ribbon-matroids/README.md) | Proof | 🟨 Partial · Lean 4 |
 
-**Formal proof key**　🟩 Full　·　🟨 Partial　·　⬜ None
+**Lean or Rocq key**　🟩 Full statement　·　🟨 Named components　·　⬜ No checked proof
 
 ## Partial work
 

@@ -1,6 +1,6 @@
 name = "open_math_research"
 version = "0.1.0"
-defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily"]
+defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples"]
 
 [[require]]
 name = "mathlib"
@@ -30,3 +30,11 @@ srcDir = "../../topics/prism-splitting/lean"
 [[lean_lib]]
 name = "PrismDimensions"
 srcDir = "../../topics/prism-splitting/lean"
+
+[[lean_lib]]
+name = "Ribbon"
+srcDir = "../../topics/ribbon-matroids/lean"
+
+[[lean_lib]]
+name = "RibbonExamples"
+srcDir = "../../topics/ribbon-matroids/lean"

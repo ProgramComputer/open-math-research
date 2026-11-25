@@ -1,0 +1,33 @@
+{
+  "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
+  "mathlib": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "method": "Lake compiled both targets from the shared project with pinned Lean and mathlib. For every listed declaration the kernel reported the axiom dependencies shown below.",
+  "modules": [
+    {
+      "file": "topics/ribbon-matroids/lean/Ribbon.lean",
+      "sha256": "c9b88ff04c708167d87674b51eec40d69a379893612102e6512831bcaf30c632",
+      "exit_code": 0,
+      "kernel_output": [
+        "'Ribbon.polygonParallel' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'Ribbon.ParallelAlong.commonEdge' depends on axioms: [propext, Quot.sound]",
+        "'Ribbon.ParallelAlong.endpointsAfterDeletion' does not depend on any axioms",
+        "'Ribbon.polygon_eq_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'Ribbon.polygon_narayana' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'Ribbon.fan_narayana' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/ribbon-matroids/lean/RibbonExamples.lean",
+      "sha256": "4c376f897d81432365d1b400930533faa3d826637625ff01d97052d593139c4f",
+      "exit_code": 0,
+      "kernel_output": [
+        "'RibbonExamples.quadrilateral_kl' depends on axioms: [propext]",
+        "'RibbonExamples.diamond_kl' depends on axioms: [propext]",
+        "'RibbonExamples.doubledDiamond_kl' depends on axioms: [propext]",
+        "'RibbonExamples.diamond_narayana' depends on axioms: [propext]",
+        "'RibbonExamples.doubledDiamond_narayana' depends on axioms: [propext]",
+        "'RibbonExamples.diamond_deletion' depends on axioms: [propext]"
+      ]
+    }
+  ]
+}
