@@ -1,4 +1,8 @@
-# Splitting a bound can destroy interlacing for slices of prisms
+# Open Problems in Mathematics
+
+This repository publishes reviewed results on open problems across mathematics. The [result index](RESULTS.md) records their mathematical significance and formal proof status.
+
+## Splitting a bound can destroy interlacing for slices of prisms
 
 For every integer \(a\ge6\), the central integral box slice of level \(a\) with bounds \((1^{2a-2},2)\) and the slice obtained by splitting the final bound into \((1,1)\) have Ehrhart numerators that fail to interlace. This disproves the splitting clause of Ferroni–McGinnis Conjecture 5.12. The real-rootedness of an individual prism-slice numerator remains an open question in general. [Original conjecture](https://doi.org/10.4153/S0008414X24000233)
 
