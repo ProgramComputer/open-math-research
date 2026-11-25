@@ -1,0 +1,483 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<->cmex10}{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator{\Arg}{arg}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\ii}{\mathrm i}
+\newcommand{\Log}{\operatorname{Log}}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\CC}{\mathbb C}
+\hypersetup{pdftitle={Zeros of the Eulerian matrix square and extreme zeros of its powers}}
+
+\begin{document}
+\begin{center}
+{\LARGE Zeros of the Eulerian matrix square\par}
+\vspace{0.2\baselineskip}
+{\LARGE and extreme zeros of its powers\par}
+\end{center}
+\begin{abstract}
+Let \(A\) be the shifted Eulerian matrix, whose entry \(A(n,k)\) counts permutations of \([n]\) with \(k-1\) descents. For the row polynomials of the ordinary square \(A^2\), we prove that all nonzero zeros in each fixed closed disk are eventually simple and negative, with local interlacing of successive rows in each fixed annulus. The logarithms of the magnitudes have a Cauchy limit with scale \(\pi\). At least \(n-O(n^{2/3})\) simple negative zeros of row \(n\) lie in a window \(|\log(-x)|=O(n^{1/3})\). We also give asymptotic formulas and successive-row inequalities at each fixed extreme rank. At the large-modulus end of a fixed ordinary power \(A^p\), the zeros occur in clusters of \(p\) at successive exponential scales. The proofs use Eulerian pole expansions, a factorial integral, and coefficient limits on exponential scales.
+\end{abstract}
+
+\section{Results}
+
+Let \(e_{n,j}\) count permutations of \([n]\) with \(j\) descents, with entries outside \(0\le j\le n-1\) equal to zero for \(n\ge1\). Write \(A(n,k)=e_{n,k-1}\) for \(n,k\ge1\), \(A(0,0)=1\), and \(A(n,0)=0\) for \(n\ge1\). Let
+\[
+ A_n(t)=\sum_k A(n,k)t^k,\qquad
+ S_{n,p}(x)=\sum_k (A^p)(n,k)x^k,\qquad n,p\ge1.
+\]
+The matrix product is ordinary multiplication. The polynomial \(S_{n,p}\) is monic of degree \(n\) and has a simple zero at zero. For the square write \(S_{n,2}(x)=xH_n(x)\), so that
+\begin{equation}\label{eq:row}
+ xH_n(x)=\sum_{k=1}^n A(n,k) A_k(x),\qquad H_n(0)=n!.
+\end{equation}
+Mao and Wang ask whether every row polynomial of \(A^2\) has only real nonpositive zeros \cite[Conjecture 4.1]{MW}. The same conjecture has a Delannoy clause, for which an all-row proof has been posted separately \cite{Delannoy}. The results below concern the Eulerian clause, which remains open over all rows and all root ranks.
+
+\begin{theorem}\label{thm:bulk}
+For each \(0<R_0<R_1<\infty\), all zeros of \(H_n\) in \(R_0\le |x|\le R_1\) are simple and negative for sufficiently large \(n\). Between two consecutive zeros of either of \(H_n,H_{n+1}\) in this annulus there is exactly one zero of the other.
+
+If \(Z_n(a,b)\) counts the distinct negative zeros with \(a\le\log(-x)\le b\), then for finite \(a<b\),
+\begin{equation}\label{eq:cauchy}
+ \lim_{n\to\infty}\frac{Z_n(a,b)}{n-1}
+ =\frac1\pi\left(\arctan\frac b\pi-\arctan\frac a\pi\right).
+\end{equation}
+The same limit holds with multiplicity. There are absolute constants \(c,C>0\) such that, for all sufficiently large \(n\), at least \(n-Cn^{2/3}\) simple negative zeros satisfy \(|\log(-x)|\le c n^{1/3}\).
+\end{theorem}
+
+\begin{theorem}\label{thm:disk}
+For each fixed \(R>0\), every zero of \(H_n\) in \(|x|\le R\) is simple and negative for all sufficiently large \(n\). In particular, any sequence of nonreal or multiple zeros at unbounded row indices tends to infinite modulus.
+\end{theorem}
+
+\begin{theorem}\label{thm:extreme}
+Define \(\rho_0=1\), \(\rho_i=i/\log(i+1)\) for \(i\ge1\), and \(c_j=\rho_{j-1}/\rho_j\). For each fixed \(j\ge1\), the zero of \(H_n\) of modulus rank \(j\) from zero is eventually simple and negative. Calling it \(\alpha_{n,j}\), we have
+\begin{equation}\label{eq:right}
+ \alpha_{n,j}\sim -c_j^{n+1},\qquad
+ \alpha_{n+1,j}>\alpha_{n,j}>\alpha_{n+1,j+1}.
+\end{equation}
+For the large-modulus end, fix \(p,h\ge1\) and put
+\[
+ v_h=\frac{h+1}{h},\qquad
+ \gamma_j=h^{-(p-j)}v_h^{-(h-1)(j-1)}\quad(1\le j\le p),\qquad
+ G_{p,h}(u)=\sum_{r=0}^p v_h^{-\binom r2}e_r(\gamma_1,\ldots,\gamma_p)u^r,
+\]
+where \(e_r\) in this display is the elementary symmetric polynomial. The roots \(-x_1,\ldots,-x_p\) of \(G_{p,h}\) satisfy \(0<x_1<\cdots<x_p\) and \(x_{j+1}>v_hx_j\). The zeros \(\beta_{n,p(h-1)+j}^{(p)}\) of \(S_{n,p}\), ranked from largest modulus, are eventually simple and negative, and
+\begin{equation}\label{eq:left}
+ \beta_{n,p(h-1)+j}^{(p)}\sim-\frac{v_h^n}{x_j},\qquad
+ \beta_{n+1,k}^{(p)}<\beta_{n,k}^{(p)}<\beta_{n+1,k+1}^{(p)}
+\end{equation}
+for each fixed rank \(k\) and sufficiently large \(n\). All rankings count complex zeros with multiplicity.
+\end{theorem}
+
+For example, the nearest nonzero zero of the square is asymptotic to \(- (\log 2)^{n+1}\). At its opposite end there are two zeros at each exponential scale. More explicitly, if \(p=2\), put
+\begin{equation}\label{eq:quadratic}
+ a_h=h^{-(h-1)},\qquad b_h=(h+1)^{-(h-1)}+h^{-h},\qquad d_h=(h+1)^{-h}.
+\end{equation}
+If \(\kappa_h^+>\kappa_h^->0\) solve \(a_h\kappa^2-b_h\kappa+d_h=0\), the zeros of ranks \(2h-1,2h\) from largest modulus are asymptotic to \(-\kappa_h^+v_h^n,-\kappa_h^-v_h^n\), respectively. In particular the two farthest zeros have leading terms \(- (1\pm1/\sqrt2) 2^n\).
+
+The Cauchy law in \eqref{eq:cauchy} also describes the logarithms of the nonzero zeros of individual Eulerian polynomials, a result of Sobolev and Sirazhdinov with a later combinatorial proof of Melotti \cite{Sob,Sir,Mel}. The endpoint scale for an individual Eulerian row is known from Dur\'an \cite[Theorem 2]{Duran}. For the ordinary square the intermediate Eulerian row must be summed before the zeros can be controlled. The public discussion of \cite{MW} records recurrences and obstructions to some broader stability statements for this square \cite{Public}. We study the asymptotic zeros of the square and the largest-modulus zeros for fixed powers.
+
+\section{Eulerian coefficients and pole expansions}
+
+For a map \([m]\to[q]\), sort its indices by value and break ties by the index. For each resulting permutation with \(j\) descents the sorted values increase strictly at the descent positions and weakly elsewhere. Subtracting the cumulative number of required strict increases shows that the number of such assignments is \(\binom{q+m-j-1}{m}\), taken as zero for \(q\le j\). Summing over permutations gives
+\[
+ q^m=\sum_{j=0}^{m-1} e_{m,j}\binom{q+m-j-1}{m}.
+\]
+Taking \(q=j+1\) in the counting construction gives \(e_{m,j}\le (j+1)^m\) for \(j\le m-1\), and the same bound is automatic for larger \(j\). Multiplying by \(t^q\) and summing gives, for \(m\ge1\) and \(|t|<1\),
+\[
+ A_m(t)=(1-t)^{m+1}\sum_{q\ge1}q^m t^q.
+\]
+Extraction at \(t^{j+1}\) gives
+\begin{equation}\label{eq:coef}
+ e_{m,j}=\sum_{i=0}^j(-1)^i\binom{m+1}{i}(j+1-i)^m,
+ \qquad e_{m,j}=(j+1)^m+O_j((m+1)^j j^m)
+\end{equation}
+for fixed \(j\ge1\), with \(e_{m,0}=1\). Complementing the permutation values gives \(e_{m,j}=e_{m,m-1-j}\) within its support.
+
+Summing the Eulerian identity exponentially in \(m\) and adding \(A_0(t)=1\) yields
+\begin{equation}\label{eq:egf}
+ \sum_{m\ge0} A_m(t)\frac{z^m}{m!}=\frac{1-t}{1-t e^{(1-t)z}}.
+\end{equation}
+One can first sum for \(|t|<1\) and small \(z\) and then extend coefficientwise. For \(t\ne0,1\) and \(k\ge1\), a partial fraction calculation gives
+\begin{equation}\label{eq:poles}
+ \frac{A_k(t)}{k!}=\sum_{m\in\mathbb Z}\left(\frac{t-1}{\log t+2\pi\ii m}\right)^{k+1}.
+\end{equation}
+Any logarithm of \(t\) gives the same absolutely convergent sum. To see this, set \(\xi=(t-1)z-\log t\) in \eqref{eq:egf}. The resulting function is \((1-t)/(1-e^{-\xi})\). Write \(f(\xi)=(1-e^{-\xi})^{-1}\). Integrate \(f(\xi)/(\xi+\log t)^{k+1}\) on the rectangles with horizontal and vertical boundaries at \(\pm(2M+1)\pi\) on the corresponding axes. The function \(f\) is bounded on these boundaries. The integrals tend to zero since the contour length is \(O(M)\) and the denominator grows as \(M^{k+1}\). Besides the residue at \(-\log t\), which is its \(k\)th Taylor coefficient of \(f\), the residues are \((\log t+2\pi\ii m)^{-k-1}\). Multiplying the resulting Taylor coefficient by \((1-t)(t-1)^k\) gives \eqref{eq:poles}.
+
+\section{Zeros at fixed extreme ranks}
+
+We use the following elementary limit argument at both ends. Suppose \(f_{n,i}\) are polynomial coefficients satisfying \(|f_{n,i}|\le U_n P(i)g_i^n\), where \(P\) grows polynomially, \(g_i^{1/i}\to1\), and all missing coefficients are zero. Fix \(0<s<1\) and \(D>0\). If the individual coefficients of
+\[
+ (U_nD^n)^{-1}\sum_i f_{n,i}s^{ni} u^i
+\]
+converge, then the polynomials converge locally uniformly. For some \(\eta>0\) and all large \(i\), \(g_i s^i/D\le e^{-\eta i}\). On \(|u|\le R\), the tail is bounded by \(\sum_{i\ge I}P(i)(Re^{-\eta n})^i\), tending to zero for fixed sufficiently large \(I\). If a limit polynomial is \(u^\ell\) times a polynomial with distinct nonzero negative roots, Rouch\'e's theorem locates exactly one zero counted with multiplicity near each such root. Use disjoint disks centered at the real roots and contained in the left half-plane. Each zero is simple and real by conjugation. Circles centered at zero between successive moduli give their precise indices, with \(\ell\) zeros inside the first circle.
+
+\subsection{The nearest roots of the square}
+
+Let \(p_{n,i}=[x^i]H_n(x)\). For fixed \(i\ge1\), equation \eqref{eq:coef} and the nonnegativity of \(A(n,k)\) give
+\[
+ p_{n,i}=A_n(i+1)+O_i((n+1)^i A_n(i)).
+\]
+Indeed one may apply \eqref{eq:coef} to all the internal rows \(k\) in \eqref{eq:row}, including the zero coefficients in rows of small degree. For each \(t>1\), the first pole in \eqref{eq:egf} is \(z_0=\log(t)/(t-1)>0\), and it is the unique closest pole to zero. Its part is \(1/(z_0-z)\). Subtracting this part and using Cauchy's coefficient bound on a circle of radius between the first and second pole moduli gives
+\[
+ A_n(t)/n!=z_0^{-n-1}+O_t(R_t^{-n})\qquad(R_t>z_0).
+\]
+The function \(\rho(x)=x/\log(1+x)\) extended by \(\rho(0)=1\) is strictly increasing and strictly log-concave on \([0,\infty)\). Its reciprocal is \(\int_0^1(1+sx)^{-1}\dd s\), which strictly decreases. The integrand is strictly log-convex in \(x\) for \(s>0\), and integration with H\"older's inequality gives strict log-convexity of the reciprocal. Thus \(0<c_1<c_2<\cdots<1\). It follows that \(p_{n,i}/(n!\rho_i^{n+1})\to1\) for each fixed \(i\), including \(i=0\) by \eqref{eq:row}.
+
+For fixed \(j\), the sequence \(\rho_i c_j^i\) has maximum \(D=\rho_{j-1}c_j^{j-1}=\rho_j c_j^j\) exactly at \(i=j-1,j\), since the successive ratio at \(i-1,i\) is \(c_j/c_i\). The bound \(p_{n,i}\le A_n(i+1)\le n!(i+1)^n\) follows from \(e_{m,i}\le (i+1)^m\). The local limit argument gives
+\[
+ \frac{H_n(c_j^n u)}{n!D^n}\longrightarrow u^{j-1}(\rho_{j-1}+\rho_j u).
+\]
+The nonzero root of the limit is \(-c_j\), proving the asymptotic and the modulus rank in \eqref{eq:right}. The ratio \(|\alpha_{n+1,j}|/|\alpha_{n,j}|\) tends to \(c_j<1\), and \(|\alpha_{n,j}|/|\alpha_{n+1,j+1}|\) tends to zero since \(c_j<c_{j+1}\). This proves the inequalities.
+
+\subsection{The farthest roots for fixed powers}
+
+For \(0\le i\le n-1\) write \(q_{n,i}=(A^p)(n,n-i)\). Complementing descents in each factor in the matrix product gives
+\begin{equation}\label{eq:paths}
+ q_{n,i}=\sum_{b_1+\cdots+b_p=i}\prod_{j=1}^p
+    e_{n-b_1-\cdots-b_{j-1},b_j},
+\end{equation}
+where the sum runs over nonnegative compositions. Put \(M_i=\max_{\sum b_j=i}\prod_j(b_j+1)\). If two parts differ by at least two, transferring a unit from the larger to the smaller strictly increases this product. Thus at \(i=p(h-1)+r\), \(0\le r\le p\), the maximum is \(h^{p-r}(h+1)^r\), attained exactly at \(b_j=h-1+\varepsilon_j\) with \(\varepsilon_j\in\{0,1\}\) and \(\sum_j\varepsilon_j=r\).
+
+For fixed \(i\), the normalized coefficient \(q_{n,i}/M_i^n\) receives a nonvanishing limit only from maximizing compositions, by \eqref{eq:coef}. For one such composition the limiting factor is
+\begin{align*}
+ \prod_j(h+\varepsilon_j)^{-((j-1)(h-1)+\sum_{\ell<j}\varepsilon_\ell)}
+ &=h^{-(h-1)\binom p2} v_h^{-\binom r2}
+   \prod_{j:\varepsilon_j=1}h^{-(p-j)}v_h^{-(h-1)(j-1)}.
+\end{align*}
+For the factor of \(h\), each chosen index \(j\) occurs in \(p-j\) later prefix sums. For the extra factor of \(v_h\), each pair of chosen indices occurs once. Summing over the maximizing compositions gives the coefficients of \(G_{p,h}\) up to a common factor. By the uniform Eulerian coefficient bound,
+\[
+ q_{n,i}\le \binom{i+p-1}{p-1}M_i^n,\qquad M_i\le(1+i/p)^p.
+\]
+Set \(s=v_h^{-1}\). The successive ratios of the \(M_i\) equal \(v_h\) within this block and decrease strictly when moving from one block to the next. Thus \(M_i s^i\) has its maximum \(D\) exactly at \(i=p(h-1),\ldots,ph\). Define the reversed polynomial \(L_{n,p}(z)=z^n S_{n,p}(1/z)=\sum_{i=0}^{n-1}q_{n,i}z^i\). The local limit argument now shows
+\begin{equation}\label{eq:extremelimit}
+ D^{-n}L_{n,p}(s^n u)\longrightarrow h^{-(h-1)\binom p2} u^{p(h-1)}G_{p,h}(u).
+\end{equation}
+
+To prove the root and spacing statement for the limit, fix \(v>1\). Inserting an additional positive argument \(\gamma\) in \(\sum_r v^{-\binom r2}e_r u^r\) changes a polynomial \(G(u)\) into \(G(u)+\gamma uG(u/v)\). Suppose \(g(x)=G(-x)\) has positive simple zeros \(x_1<\cdots<x_m\) with \(vx_i<x_{i+1}\), and \(g(0)=1\). The new polynomial \(g(x)-\gamma x g(x/v)\) has sign \((-1)^i\) at both \(x_i\) and \(vx_i\). At \(x_i\), the sign of \(g(x_i/v)\) is \((-1)^{i-1}\). At \(vx_i\), the second term vanishes and the sign is that of \(g(vx_i)\). The new polynomial is positive at zero and has leading sign \((-1)^{m+1}\). It therefore has one zero in each of
+\[
+ (0,x_1),\ (vx_1,x_2),\ \ldots,\ (vx_{m-1},x_m),\ (vx_m,\infty).
+\]
+These intervals account for its degree and give the same strict ratio separation. Starting with \(G(u)=1+\gamma_1u\) proves the claim for \(G_{p,h}\).
+
+Applying localization in \eqref{eq:extremelimit} and inverting proves the ranks and asymptotics in \eqref{eq:left}. Within a cluster the new row has each magnitude larger than the corresponding magnitude of the old row, and \(x_{j+1}>v_hx_j\) makes the magnitude of the next new-row root smaller than the current old-row magnitude. Between clusters, the base \(v_h\) strictly decreases. This proves the inequalities in \eqref{eq:left}. For \(p=2\), the three normalized coefficients of the limiting block are respectively \(a_h,b_h,d_h\) from \eqref{eq:quadratic}, either by \eqref{eq:paths} or by expanding \eqref{eq:extremelimit}. Substituting \(u=-1/\kappa\) gives the stated quadratic for the reciprocal moduli.
+
+\section{A uniform factorial saddle estimate}\label{sec:saddle}
+
+The outer coefficients in \eqref{eq:row} will occur with a factorial weight. Define
+\begin{equation}\label{eq:F}
+ F_n(w)=\sum_{k=1}^n A(n,k)k!w^k=\int_0^\infty e^{-s}A_n(ws)\dd s.
+\end{equation}
+The integral follows by integrating each monomial. Put \(N=n+1\), \(L=\log N\), \(R=|w|\), \(\vartheta=\Arg w\in(-\pi,\pi)\), \(\lambda=\log(NR)\), and \(\Delta=\pi-|\vartheta|\). We need both a fixed-sector estimate and a quantitative bound when \(w\) varies with \(N\). In a fixed small complex neighborhood of \([1/2,2]\), set
+\begin{equation}\label{eq:phase}
+ \Phi_w(u)=-u+\Log u+\Log(1-(Nwu)^{-1})-\Log(L+\Log w+\Log u).
+\end{equation}
+The logarithms are principal. The arguments of the last two logarithms are near \(1\) and have large positive real part, respectively, in the ranges considered here.
+
+\begin{lemma}\label{lem:saddle}
+Suppose, uniformly over a set of arguments \(w\) depending on \(N\),
+\begin{equation}\label{eq:saddle-domain}
+ \tfrac12 L-O(1)\le\lambda\le O(N^{1/3}),\qquad
+ \frac{\vartheta^2}{\Delta\lambda^2}=o(1).
+\end{equation}
+For all sufficiently large \(N\), \(\Phi_w'\) has a unique zero \(u_w\) in a fixed small disk about \(1\), and
+\begin{equation}\label{eq:mainF}
+ F_n(w)=n!N(Nw)^N e^{N\Phi_w(u_w)}
+       \left(\frac{2\pi}{-N\Phi_w''(u_w)}\right)^{1/2}(1+E_n(w)).
+\end{equation}
+Here \(-\Phi_w''(u_w)=1+O(1/\lambda)\), the square root is taken near the positive real branch, and, for some fixed \(c>0\),
+\begin{equation}\label{eq:saddleerror}
+ |E_n(w)|\le O(N^{-1/5})+O(e^{-cN\Delta/\lambda^2})
+                         +O(\lambda e^{-cN/\lambda^2}).
+\end{equation}
+Also \(u_w=1+O(1/\lambda)\), \(u_w-u_R=O(|\vartheta|/\lambda^2)\), and \(\Phi_w(u_w)=-1-\log\lambda+O(1/\lambda)\). On fixed compact annular sectors avoiding the negative real axis the error tends uniformly to zero.
+\end{lemma}
+
+\begin{proof}
+On the neighborhood in \eqref{eq:phase}, \(\Phi_w(u)+\log\lambda\) and its first three derivatives are uniformly within \(O(1/\lambda)\) of those of \(\log u-u\). Indeed \(\log(Nwu)=\lambda+\ii\vartheta+\Log u\), while \((Nwu)^{-1}=O(e^{-\lambda})\) there. Rouch\'e's theorem for the derivatives on a small circle about \(1\) gives the unique saddle, which satisfies \(u_w=1+O(1/\lambda)\). It is holomorphic in \(w\) wherever the prescribed branches are holomorphic, by the implicit function theorem. At positive \(R\) the saddle is real by uniqueness. At fixed radius, direct differentiation of \eqref{eq:phase} with respect to the angle shows that its first \(u\)-derivative changes by \(O(|\vartheta|/\lambda^2)\), uniformly on a small disk about \(1\). The contribution from the middle logarithm is \(O(|\vartheta|e^{-\lambda})\). Integrating \(\Phi''_w=-1+O(1/\lambda)\) along the segment between \(u_R\) and \(u_w\) proves \(u_w-u_R=O(|\vartheta|/\lambda^2)\).
+
+Let \(b=\Re u_w\). Taylor expansion at the saddle gives
+\[
+ |\Phi_w(b)-\Phi_w(u_w)|=O(\vartheta^2/\lambda^4),\qquad
+ |\Phi'_w(b)|=O(|\vartheta|/\lambda^2).
+\]
+On the real interval \([1/2,2]\) the real part of the second derivative is bounded above by a negative constant. Maximizing its quadratic upper bound about \(b\) shows that
+\begin{equation}\label{eq:concavity}
+ \sup_{1/2\le u\le 2}\Re\Phi_w(u)
+   \le \Re\Phi_w(u_w)+O(\vartheta^2/\lambda^4).
+\end{equation}
+The real maximizer is interior since the endpoint derivatives of the real part have opposite signs. The integrated modulus on this interval is at most \(C N^{-1/2}\exp(N\sup\Re\Phi_w)\), by integrating the concavity bound about the maximizer.
+
+On \(N/2\le s\le2N\), insert \eqref{eq:poles} into \eqref{eq:F} and set \(s=Nu\). The pole with \(m=0\) gives the integral of \(e^{N\Phi_w(u)}\) over \([1/2,2]\) after dividing by \(n!N(Nw)^N\). For \(m=\pm1\), the increase in the squared imaginary part of the logarithm denominator is at least \(4\pi\Delta\). With \(\log(|w|s)=\lambda+O(1)\), the magnitude of each respective pole relative to \(m=0\) is at most \(e^{-cN\Delta/\lambda^2}\). For \(|m|\ge2\) the increase is at least a constant times \(m^2\), so the sum of these ratios is \(O(\lambda e^{-cN/\lambda^2})\). For the latter bound, extract the factor \((1+c'/\lambda^2)^{-(N-2)/2}\) and sum the remaining reciprocal quadratics, which have sum \(O(\lambda)\). Using the integrated modulus bound and \eqref{eq:concavity}, the exponential cost of replacing the real maximum by the saddle value is \(O(N\vartheta^2/\lambda^4)=o(N\Delta/\lambda^2)\) by \eqref{eq:saddle-domain}. This proves the two exponential terms in \eqref{eq:saddleerror} relative to the stated Gaussian main term.
+
+To evaluate the \(m=0\) integral, shift the interval horizontally to height \(\Im u_w\). The connecting vertical segments have exponentially smaller magnitude than \(e^{N\Re\Phi_w(u_w)}\) because \(\Re(\log u-u)\) has strictly smaller values at the real endpoints than at \(1\), and the displacement is \(O(1/\lambda^2)\). Along the shifted interval the real part of \(\Phi_w''\) is bounded above by a negative constant. Outside \(u=u_w+t\), \(|t|\le N^{-2/5}\), the integral is therefore exponentially smaller than its saddle value in \(N^{1/5}\). Inside this range the third derivative bound gives
+\[
+ e^{N\Phi_w(u_w+t)}=e^{N\Phi_w(u_w)}
+          e^{N\Phi_w''(u_w)t^2/2}(1+O(N^{-1/5})).
+\]
+The Gaussian integral over the real line is \((2\pi/(-N\Phi_w''(u_w)))^{1/2}\), by continuation from positive real curvature. Extending the small Gaussian interval to the line has exponentially small cost. Its absolute integral and the modulus of its integral both have order \(N^{-1/2}\), which justifies the relative error in \eqref{eq:mainF}.
+
+It remains to control the tails of \eqref{eq:F} with \(s\notin[N/2,2N]\). Use \(|A_n(ws)|\le A_n(Rs)\). The lower bound on \(\lambda\) gives \(R\ge c'N^{-1/2}\), so \(RN^{3/5}>1\) for large \(N\). For \(s\le N^{3/5}\) use \(A_n(Rs)\le n!(RN^{3/5})^n\). Its contribution after dividing by \(n!N(NR)^N\) is \(O(N^{-2n/5})\), using \(\int_0^{N^{3/5}}e^{-s}\dd s\le1\). This is exponentially smaller than \(e^{N(-1-\log\lambda)}\) since \(\lambda=O(N^{1/3})\). For \(s\ge N^{3/5}\), the positive number \(Rs\) is greater than one. Formula \eqref{eq:poles} bounds \(A_n(Rs)/n!\) by its \(m=0\) term in modulus times \(C(1+\log(Rs))\), by summing reciprocal quadratics. Thus after \(s=Nu\) the normalized integrand is at most
+\begin{equation}\label{eq:tails}
+ C(1+\lambda+\log u)e^{N(-1-\log\lambda)}
+       \left(u e^{1-u}\frac{\lambda}{\lambda+\log u}\right)^N.
+\end{equation}
+For \(N^{-2/5}\le u\le1/30\) the ratio of logarithms is at most \(6\) by the lower bound on \(\lambda\), so the parenthesis is at most \(e^{29/30}/5<1\). On \([1/30,1/2]\) the ratio is \(1+O(1/L)\) and \(u e^{1-u}\le e^{1/2}/2<1\). For \(u\ge2\) the ratio is at most one and \(u e^{1-u}\le(2/e)e^{-(u-2)/2}\), by logarithmic differentiation. Integrating these bounds yields an exponentially small tail relative to \(e^{N(-1-\log\lambda)}\). By \eqref{eq:phase}, \(\Phi_w(u_w)=-1-\log\lambda+O(1/\lambda)\), making these tails exponentially small relative to the complex Gaussian as well. This proves the lemma.
+\end{proof}
+
+\section{Fixed annuli and the limiting law}\label{sec:annuli}
+
+On a compact subset of \(\CC\setminus(-\infty,0]\) the leading pole in \eqref{eq:poles} is \(w(x)=(x-1)/\Log x\), extended by \(w(1)=1\). All other pole factors have modulus at most \(\delta |w(x)|\) for a uniform \(\delta<1\), and the squares of their relative moduli sum to a bounded number. Indeed \(|\Arg x|\) is bounded away from \(\pi\) on the compact set and each squared ratio is \(O((|m|+1)^{-2})\). At \(x=1\) all nonleading factors vanish in the limit. Factoring out the squared ratios in each exponent \(k+1\) and using the nonnegative coefficients in \eqref{eq:F} gives
+\begin{equation}\label{eq:onepole}
+ xH_n(x)=w(x)F_n(w(x))+O\bigl(|w(x)|F_n(\delta |w(x)|)\bigr).
+\end{equation}
+The logarithmic mean \(w(x)=\int_0^1 e^{t\Log x}\dd t\) lies in the sector from \(1\) to \(x\). This sector has angle less than \(\pi\), so \(w(x)\ne0\). The values of \(w(x)\) stay in a fixed compact annular sector avoiding the negative real axis. Lemma \ref{lem:saddle} gives, for \(w\) in this sector,
+\begin{equation}\label{eq:comparison}
+ \frac{F_n(\delta |w|)}{|F_n(w)|}\le C\delta^N\exp(O(N/L)).
+\end{equation}
+To check \eqref{eq:comparison}, the two positive radii are bounded above and away from zero, so both saddle values are \(-1-\log L+O(1/L)\), and their Gaussian factors have comparable magnitudes. The powers \((Nw)^N\) then give the factor \(\delta^N\). Thus \(H_n\) has no zeros on the indicated compact set for large \(n\).
+
+\subsection{The analytic phase near the negative axis}
+
+For the given annulus let \(a=\log R_0\) and \(b=\log R_1\). Write \(x=-e^z\) and work in a thin rectangle about a real interval containing \([a,b]\) in its interior. Use a larger interval and rectangle when seeking uniform estimates for derivatives. The two nearest pole factors and their contributions are
+\[
+ w_-(z)=-\frac{1+e^z}{z-\ii\pi},\qquad
+ w_+(z)=-\frac{1+e^z}{z+\ii\pi},\qquad
+ T_\pm(z)=w_\pm(z)F_n(w_\pm(z)).
+\]
+For real \(z\), \(w_-(z)\) has negative imaginary part, and \(w_+\) is its conjugate. Both remain in a fixed compact annular sector avoiding the branch cut for a thin enough rectangle. The other pole factors have relative moduli at most \(\delta<1\) compared with the larger of \(|w_-|,|w_+|\), by continuity and the uniform bound on their tails. Their squared ratios are uniformly summable. The bound from \eqref{eq:comparison} applied with the larger modulus now yields
+\begin{equation}\label{eq:twopole}
+ xH_n(x)=T_-(z)+T_+(z)+O\bigl(e^{-cN}(|T_-(z)|+|T_+(z)|)\bigr)
+\end{equation}
+uniformly on the rectangle for some \(c>0\). The difference on the left after subtracting the first two terms is holomorphic.
+
+Let \(\ell_{n,\pm}=\log T_\pm\) be holomorphic logarithms that are conjugate on the real segment. They can be taken from \eqref{eq:mainF}, using principal branches for the displayed logarithms and the logarithm of \(1+E_n\) near one for the relative factor. With a common real constant omitted the logarithm for \(wF_n(w)\) is
+\begin{equation}\label{eq:logT}
+ (N+1)\Log w+N\Phi_w(u_w)-\tfrac12\Log(-\Phi_w''(u_w))+o(1).
+\end{equation}
+The last term here is holomorphic with uniform convergence to zero. Put
+\[
+ \Psi_n(z)=\frac{\ell_{n,-}(z)-\ell_{n,+}(z)}{2\ii},\qquad
+ \theta(z)=\frac{\Log w_-(z)-\Log w_+(z)}{2\ii}.
+\]
+On the real interval, \(\theta(y)=-\pi/2-\arctan(y/\pi)\). From \eqref{eq:logT}, \(\Psi_n=(N+1)\theta+O(N/L)\) uniformly on the complex rectangle, since the common real term in the saddle exponent cancels. Cauchy's derivative estimate gives the corresponding estimate for \(\Psi'_n\) on a smaller rectangle. Thin it further while keeping a margin around \([a,b]\). Since \(\theta'<0\) on the real interval, the derivative satisfies there and throughout the resulting rectangle
+\begin{equation}\label{eq:derivatives}
+ \Re\Psi_n'(z)\le-c_0N,\qquad |\Psi_n'(z)|\le C_0N
+\end{equation}
+for constants \(C_0\ge c_0>0\). Integrating along a segment gives \(|\Psi_n(z_2)-\Psi_n(z_1)|\ge c_0N|z_2-z_1|\), in particular injectivity. On a vertical segment starting at its real intersection this also yields \(|\Im\Psi_n(z)|\ge c_0N|\Im z|\), by using the bound on the real part of the derivative.
+
+\subsection{Localization of all zeros in an annulus}
+
+Divide \eqref{eq:twopole} by \(\exp((\ell_{n,-}+\ell_{n,+})/2)\). This gives the holomorphic expression
+\begin{equation}\label{eq:cosine}
+ 2\cos\Psi_n(z)+E(z),\qquad |E(z)|\le C e^{-cN+|\Im\Psi_n(z)|}.
+\end{equation}
+At a zero, write \(\Psi_n(z)=u+\ii v\). Since \(|\cos(u+\ii v)|^2=\cos^2u+\sinh^2v\), we have \(|\sinh v|e^{-|v|}=O(e^{-cN})\). The left side is \((1-e^{-2|v|})/2\), so \(|v|=O(e^{-cN})\). Then \(u\) is within \(O(e^{-cN})\) of a level \((j+1/2)\pi\). By \eqref{eq:derivatives}, \(\Im z=O(e^{-cN}/N)\), and \(\Psi_n(\Re z)\) is within \(O(e^{-cN})\) of the same level. The real phase is strictly decreasing. For any such zero with \(\Re z\in[a,b]\), the margins at both ends give a unique real preimage \(z_j\) of this level, and \(|z-z_j|=O(e^{-cN}/N)\).
+
+Around each level preimage in the interior of the larger interval take a disk of radius \(1/(4C_0N)\). By \eqref{eq:derivatives}, the difference of the phase from its value at the center has modulus between \(c_0/(4C_0)\) and \(1/4\) on the circle. Thus the modulus of its cosine on the circle has a uniform positive lower bound. The cosine has one simple zero in the disk by injectivity and the derivative bound. Rouch\'e's theorem applied to \eqref{eq:cosine} gives exactly one zero counted with multiplicity of \(xH_n(x)\) in the disk under the parametrization \(x=-e^z\). The disk is invariant under conjugation and \(H_n\) has real coefficients. Hence this zero is real in \(z\) and gives a simple negative zero in \(x\). All possible zeros with \(\Re z\in[a,b]\) lie in such disks, and the localization estimate for each zero is \(O(e^{-cN}/N)\). The compact part of the original annulus away from this strip has already been excluded by \eqref{eq:onepole}.
+
+Since the endpoints \(a,b\) are fixed, the number of zeros over \([a,b]\) differs by \(O(1)\) from the number of half-integer phase levels between \(\Psi_n(a)\) and \(\Psi_n(b)\). The derivative bound separates the preimages by order \(N^{-1}\), whereas their zero displacements are exponentially smaller. Consequently
+\[
+ Z_n(a,b)=\frac{N+1}{\pi}\bigl(\theta(a)-\theta(b)\bigr)+O(N/L).
+\]
+This proves \eqref{eq:cauchy}. The Cauchy measure with density \(1/(\pi^2+y^2)\) assigns mass tending to one to expanding fixed intervals. The interval limits and the degree bound therefore give weak convergence of the logarithmic empirical measures normalized by \(n-1\), even if zeros outside the negative real axis are omitted. The same conclusion holds with negative-root multiplicities, since every fixed interval eventually contains only simple zeros and the total mass is at most one.
+
+\subsection{Successive-row interlacing}
+
+On the enlarged real interval we use the more precise increment
+\begin{equation}\label{eq:phaseincrement}
+ \Psi_{n+1}-\Psi_n=\theta+o(1)
+\end{equation}
+uniformly. To verify it, allow \(N\) to vary continuously in the saddle formula. The derivative of the saddle location cancels in the derivative of the critical value. At \(u=u_w\),
+\[
+ \frac{\dd}{\dd N}\bigl(N\Phi_w(u_w)\bigr)
+ =\Phi_w(u)+\frac{1}{Nwu-1}-\frac{1}{\log(Nwu)}
+ =-1-\log\log N+O(1/\log N).
+\]
+Here the logarithm of \(Nwu\) means \(\lambda+\ii\Arg w+\Log u\) as above. Integrating for one unit of \(N\) gives imaginary change \(O(1/L)\). The Gaussian logarithm and the analytic logarithm of the relative error tend to zero uniformly. The other summand in \eqref{eq:logT} increments by \(\Log w\), proving \eqref{eq:phaseincrement}.
+
+The values of \(\theta\) stay a fixed positive distance from \(-\pi\) and zero. At a root of row \(n\) its phase is within \(O(e^{-cN})\) of the corresponding half-integer level. For consecutive roots of row \(n\) in the annulus the levels are consecutive, because every intervening level has a root. The phases of row \(n+1\) at these roots accordingly straddle exactly one half-integer level, at positive phase distance from each endpoint. By localization its root lies strictly between them and is the only root of the new row there. Applying the same argument with the phase difference negated gives the reverse comparison. This proves the local alternation of Theorem \ref{thm:bulk}.
+
+\section{The moving logarithmic interval}\label{sec:moving}
+
+Let \(Y=\varepsilon N^{1/3}\) for a positive constant \(\varepsilon\le1\) to be fixed. For real \(|y|\le Y\) put
+\begin{equation}\label{eq:movingparams}
+ w=w(y)=\frac{1+e^y}{-y+\ii\pi},\quad
+ R=|w|,\quad \theta=\Arg w=-\frac\pi2-\arctan(y/\pi),\quad
+ \delta=\left(\frac{y^2+\pi^2}{y^2+9\pi^2}\right)^{1/2}.
+\end{equation}
+The quantities \(w,\overline w\) are again the pair of leading Eulerian pole factors in \eqref{eq:poles} at \(x=-e^y\). We first control \(F_n\) at \(w\) and at the positive radii between \(\delta R\) and \(R\).
+
+For each such argument, \(\lambda=\log(N|w|)\) is comparable to \(L+\max(y,0)\), is at least \((2/3)L-O(1)\), and is \(O(N^{1/3})\). The angular gap obeys \(\Delta\ge c_1/(1+\max(y,0))\). These bounds follow from \eqref{eq:movingparams} and \(\delta\ge1/3\). In particular \(\vartheta^2/(\Delta\lambda^2)=O(1/L)\) uniformly, using \((1+\max(y,0))/(L+\max(y,0))^2=O(1/L)\). All constants may be taken independent of \(\varepsilon\in(0,1]\). In Lemma \ref{lem:saddle} the term \(\lambda e^{-cN/\lambda^2}\) tends uniformly to zero. The other outer-pole term is \(O(e^{-c'/\varepsilon^3})\) for all large \(N\) at each fixed \(\varepsilon\), since
+\[
+ N\Delta/\lambda^2\ge c_2 N/((1+Y)(L+Y)^2).
+\]
+Fix \(\varepsilon\) sufficiently small and then \(N\) sufficiently large to ensure \(|E_n|\le1/8\) in \eqref{eq:mainF} over all these arguments. In particular \(F_n(w)\ne0\) and its magnitude is comparable to the main term.
+
+The error in replacing \(-e^y H_n(-e^y)\) by \(2\Re(wF_n(w))\) is at most \(C(1+Y)R F_n(\delta R)\). Indeed each other inner pole has relative magnitude at most \(\delta\), and the sum of the squared ratios is \(O(1+|y|)\) by integral comparison of
+\[
+ \sum_{m\in\mathbb Z}\frac{y^2+\pi^2}{y^2+(2m+1)^2\pi^2}.
+\]
+Factor these squares out of the powers \(k+1\) in \eqref{eq:poles}. The remaining factor is \(\delta^{k-1}\), and \(\delta\ge1/3\) absorbs the index shift after summation against the nonnegative outer coefficients.
+
+For the moving comparison, first vary a positive radius between \(\delta R\) and \(R\). The derivative with respect to the logarithm of the radius of \(\log(NR)+\Phi_R(u_R)\) is
+\[
+ 1+\frac{1}{NRu_R-1}-\frac{1}{\lambda+\log u_R}\ge1-O(1/L).
+\]
+The saddle equation cancels the derivative of \(u_R\). Integrate this bound and use \eqref{eq:mainF} with bounded relative error to obtain \(F_n(\delta R)/F_n(R)\le C\exp(N(1-O(1/L))\log\delta)\).
+
+At the radius \(R\) and angle \(\theta\), the loss in the real saddle value satisfies
+\begin{equation}\label{eq:angularpenalty}
+ \Phi_R(u_R)-\Re\Phi_w(u_w)\le(1/2+o(1))\theta^2/\lambda^2.
+\end{equation}
+At the positive saddle, \(|1-e^{-\ii\theta}/(NRu_R)|\ge1-1/(NRu_R)\), so the middle logarithm can only improve the real part. The loss from the last logarithm is \(\tfrac12\log(1+\theta^2/(\lambda+\log u_R)^2)\). Changing \(u_R\) to \(u_w\) costs \(O(\theta^2/\lambda^4)\) by the displacement bound in Lemma \ref{lem:saddle} and Taylor expansion at the critical point. This proves \eqref{eq:angularpenalty} and gives
+\[
+ \frac{F_n(\delta R)}{|F_n(w)|}
+ \le C\exp\!\left(N\left\{(1-O(1/L))\log\delta
+                      +(1/2+o(1))\frac{\theta^2}{\lambda^2}\right\}\right).
+\]
+The expression in braces is at most \(-c_3/(1+y^2)\) uniformly for \(|y|\le Y\). For bounded \(y\), \(\delta<1\) uniformly and \(\lambda\to\infty\). As \(y\to-\infty\), \(|\theta|\le\pi/|y|\) and the angular term is a vanishing fraction of \(-\log\delta\sim4\pi^2/y^2\). For positive large \(y\), \(\lambda\ge y\) in the stated range, and the angular loss is at most \((1/2+o(1))\pi^2/y^2\), again smaller than the radial gain. The moving inner-pole error is consequently \(o(|wF_n(w)|)\), since \((1+Y)e^{-c_3N/(1+Y^2)}\to0\).
+
+Use \eqref{eq:mainF} to define a continuous real argument \(\Theta_n(y)\) of \(wF_n(w)\). It is the sum of \((N+1)\theta\), \(N\Im\Phi_w(u_w)\), and the bounded arguments of the Gaussian factor and \(1+E_n(w)\). Direct evaluation at \(u_R\), followed by the displacement estimate, gives \(\Im\Phi_w(u_w)=O(|\theta|/\lambda)\). At \(y=-Y\), \(|\theta|=O(1/Y)\), so \(\Theta_n(-Y)=O(N/Y)\). At \(y=Y\), \(\theta=-\pi+O(1/Y)\) and \(\lambda\ge Y\), giving \(\Theta_n(Y)=-(N+1)\pi+O(N/Y)\). Between these values successive integer multiples of \(\pi\) can be sampled in increasing order of \(y\) by using first hitting times after each previous sample. The values of the leading cosine alternate between \(1\) and \(-1\), and the moving inner-pole error is relatively \(o(1)\). Hence the signs of \(H_n(-e^y)\) alternate at the sampled points, forcing at least \(N-O(N/Y)\) distinct negative zeros. The degree bound leaves at most \(O(N/Y)\) excess multiplicities. Taking \(Y=\varepsilon N^{1/3}\) finishes Theorem \ref{thm:bulk}.
+
+\section{All zeros in the closed unit disk}\label{sec:disk}
+
+The proof has two parts. Coefficient bounds count every complex zero inside a collection of small circles. A two-pole estimate reaches those circles from the fixed annuli, with an overlap at logarithmic distance of order \(\sqrt N\).
+
+\subsection{Exact counts on small circles}
+
+Recall \(p_{n,j}=[x^j]H_n(x)\). For \(u\ge0\) put \(f(u)=\log\rho(u)\), where \(\rho\) is as in the nearest-root argument. Then \(f\) is smooth at zero, \(f'>0\), \(f''<0\), and there are absolute constants \(c,C>0\) such that
+\begin{equation}\label{eq:f-bounds}
+ f'(u)\ge\frac{c}{1+u},\qquad -f''(u)\ge\frac{c}{(1+u)^2},\qquad
+ |f'''(u)|\le\frac{C}{(1+u)^3}.
+\end{equation}
+For strictness, differentiate the logarithm of \(\rho(u)^{-1}=\int_0^1(1+su)^{-1}\dd s\). Its second derivative is the mean of \(s^2/(1+su)^2\) plus the variance of \(-s/(1+su)\), with weights proportional to \((1+su)^{-1}\dd s\). The first derivative of the integral is negative. The bounds then follow on compact intervals by continuity and at infinity by differentiating \(f(u)=\log u-\log\log(1+u)\). In particular \(u f'(u)\to1\) and \(u^2 f''(u)\to-1\).
+
+Uniformly for integers \(1\le t\le n\), equation \eqref{eq:poles} gives
+\begin{equation}\label{eq:uniformA}
+ A_n(t)/n!=\rho(t-1)^N\bigl(1+O(e^{-cN/L^2})\bigr).
+\end{equation}
+For \(t=1\) this is exact. For \(2\le t\le n\) divide by the principal term and bound the rest by the sum of \((1+4\pi^2m^2/(\log t)^2)^{-N/2}\) over \(m\ne0\). Extracting the \(m=1\) bound to exponent \((N-2)/2\) leaves a sum of reciprocal quadratics of order \(O(1+L)\), which is absorbed by decreasing \(c\).
+
+The bound and alternating formula for Eulerian coefficients give
+\[
+ 0\le A_n(j+1)-p_{n,j}\le\sum_{l=1}^j\binom Nl A_n(j+1-l)
+ \qquad(0\le j<n).
+\]
+Indeed \(p_{n,j}=\sum_k A(n,k)e_{k,j}\), and the inner binomial factors are bounded by \(\binom Nl\). By \eqref{eq:uniformA} and concavity, \(A_n(j+1-l)/A_n(j+1)\le C e^{-Nl f'(j)}\). The binomial sum relative to \(A_n(j+1)\) is thus bounded by \(C((1+e^{-Nf'(j)})^N-1)\), tending uniformly to zero for \(j\le K\sqrt N\) and fixed \(K>0\) by \eqref{eq:f-bounds}. Consequently
+\begin{equation}\label{eq:smallcoef}
+ \begin{split}
+ p_{n,j}&=(1+o(1))n! e^{Nf(j)}\quad(0\le j\le K\sqrt N),\\
+ p_{n,j}&\le C n!e^{Nf(j)}\quad(0\le j<n).
+ \end{split}
+\end{equation}
+
+For \(j\ge0\) set \(r_j=e^{-Nf'(j)}\), an increasing sequence. Fix \(K>0\). Uniformly for integers \(0\le j\le K\sqrt N\) and \(x=r_j e^{\ii t}\), we have
+\begin{equation}\label{eq:theta}
+ \frac{H_n(x)}{p_{n,j}x^j}=
+ \sum_{l\in\mathbb Z}e^{N f''(j)l^2/2}e^{\ii l t}+o(1).
+\end{equation}
+To prove this, the original term with \(k=j+l\) is bounded by \(C e^{NG_j(k)}\), for \(G_j(k)=f(k)-f(j)-f'(j)(k-j)\). On \(0\le k\le2j+1\), equation \eqref{eq:f-bounds} gives \(G_j(k)\le-c(k-j)^2/(2j+2)^2\), a summable Gaussian majorant uniform for \(j\le K\sqrt N\). For \(k>2j+1\), the value at \(2j+1\) is at most \(-c'\) and concavity makes it decrease thereafter. The sum of these original terms is \(O(Ne^{-c'N})\). The Gaussian series itself has the same type of majorant. For \(j<N^{2/5}\), the noncentral terms tend to zero uniformly in total because \(N/(2j+2)^2\to\infty\) uniformly there. For \(j\ge N^{2/5}\) and bounded \(l\), Taylor's theorem and \eqref{eq:f-bounds} give
+\[
+ NG_j(j+l)=N f''(j)l^2/2+O(N |l|^3/(1+j)^3),
+\]
+with a uniformly vanishing error. Equation \eqref{eq:smallcoef} applies to these offsets with a slightly larger \(K\). Summing against the majorant proves \eqref{eq:theta}.
+
+For \(a>0\), the Fourier series \(\sum_l e^{-a l^2}e^{\ii l t}\) is
+\[
+ \sqrt{\pi/a}\sum_{m\in\mathbb Z}\exp(-(t-2\pi m)^2/(4a)).
+\]
+This follows by calculating the Fourier coefficients of the periodic sum with the ordinary Gaussian integral. It is strictly positive. In \eqref{eq:theta}, \(a=-N f''(j)/2\) is bounded below by a positive constant depending on \(K\). The original Fourier series tends uniformly to \(1\) as \(a\to\infty\). Hence the positive minimum over the allowed \(a,t\) is bounded away from zero. For large \(n\), the left side of \eqref{eq:theta} therefore lies in the open right half-plane around the whole circle. Its winding number is zero. The argument principle gives exactly \(j\) zeros of \(H_n\) inside \(|x|=r_j\) and none on the circle. Each annulus between consecutive circles contains exactly one zero with multiplicity. It must be simple and real by conjugation, and negative since the coefficients of \(H_n\) are nonnegative with positive constant term. This covers the disk up to \(r_{\lfloor K\sqrt N\rfloor}\).
+
+\subsection{Two-pole confinement toward zero}
+
+Write \(z=-y+\ii t\) and \(x=-e^z\). For fixed large \(Y_0\) and small \(\eta>0\), consider \(Y_0\le y\le\eta\sqrt N\), \(|t|\le\pi\). For the estimates enlarge the rectangle by real margins of length two and use \(|t|\le\pi+1\). Define \(w_\pm\) and \(T_\pm\) as in Section \ref{sec:annuli}. Uniformly here, \(|w_\pm|\asymp1/y\) and \(|\Arg w_\pm|=O(1/y)\). They lie in the sector
+\begin{equation}\label{eq:rightsector}
+ c_*N^{-1/2}\le |w|\le C_*,\qquad |\Arg w|\le1
+\end{equation}
+with fixed constants. By taking \(Y_0\) large and the radial bounds with slack, the logarithms \(\zeta_\pm=\Log w_\pm\) have a fixed margin in the logarithmic image of this sector. Here \(\lambda\asymp L\), so Lemma \ref{lem:saddle} applies with relative error \(O(N^{-1/5})\).
+
+Two consequences of this saddle estimate will be used. At a fixed radius \(R=|w|\), the angular comparison \eqref{eq:angularpenalty} follows from the same Taylor estimate for all \(w\) in \eqref{eq:rightsector}, with \(\vartheta\) in place of \(\theta\). Hence
+\begin{equation}\label{eq:rightcmp}
+ \frac{F_n(R)}{|F_n(w)|}\le C e^{CN(\Arg w)^2/L^2},\qquad
+ |F_n(w)|\ge c n!\sqrt N(NR)^N e^{N(-1-\log\lambda-O(1/\lambda))}.
+\end{equation}
+The second bound follows directly from \eqref{eq:mainF}. We also use a logarithm in the coordinate \(w=e^\zeta\) as in \eqref{eq:logT}, now of the form
+\begin{equation}\label{eq:rightlog}
+ \ell_n(\zeta)=C_n+(N+1)\zeta+Q_n(\zeta),
+ \qquad Q_n',Q_n''=O(N/L),
+\end{equation}
+where \(C_n\) is real and the logarithm respects conjugation. To check this, the derivative with respect to \(\zeta\) of the critical value equals its partial derivative at \(u_w\), namely
+\[
+ \frac1{Nwu_w-1}-\frac1{L+\zeta+\Log u_w}=O(1/L).
+\]
+The estimates are uniform on a slightly larger sector of the same type. Cauchy's estimates in fixed-radius disks of the \(\zeta\)-plane bound the second derivative of the critical value, and both derivatives of the Gaussian and relative-error logarithms in \eqref{eq:logT}. This gives \eqref{eq:rightlog}.
+
+In the inner Eulerian pole expansion keep the two factors \(w_\pm\). Let \(R=\max(|w_-|,|w_+|)\) and choose \(w_*\) attaining it. The moduli of the other factors relative to \(R\) are bounded by numbers \(r_m\le(1+c m^2/(1+y^2))^{-1/2}\), with at most two factors for each index \(m\ge1\). The omitted imaginary denominator parts are \(t\pm(2m+1)\pi\), whereas \(\min(|t-\pi|,|t+\pi|)\le\pi\). On the enlarged rectangle the differences of squares are bounded below by a positive constant times \(m^2\). Thus \(\sum_m r_m^2=O(1+y)\). For \(k\ge n/2\), the stronger bound is
+\begin{equation}\label{eq:rightinner}
+ \sum_m r_m^{k+1}\le C e^{-cN/(1+y^2)}.
+\end{equation}
+For \(m\le 1+y\), use \(\log(1+c m^2/(1+y^2))\ge c' m^2/(1+y^2)\) and sum the resulting Gaussian. Here \(N/(1+y^2)\ge1\) for sufficiently small \(\eta\). For the remaining terms extract \(e^{-c'N}\) from the powers beyond the first two and use the bound on the squared ratios. This proves \eqref{eq:rightinner}.
+
+For \(k<n/2\), the squared ratio bound suffices because
+\[
+ \sum_{k<n/2} A(n,k) k!R^k\le n!(nR)^{n/2}.
+\]
+This follows from \(k!\le n^k\), \(nR>1\), and \(\sum_k A(n,k)=n!\). By \eqref{eq:rightcmp} the quotient of this bound by \(|F_n(w_*)|\) is \(O(e^{-cNL})\), since \(\lambda\asymp L\). For \(k\ge n/2\), the total absolute inner-pole error is bounded by \(C R F_n(R)e^{-cN/(1+y^2)}\) using \eqref{eq:rightinner}. The angular loss in \eqref{eq:rightcmp} is smaller than the pole gap in the exponent by order \(L^{-2}\), because \(|\Arg w_*|=O(1/y)\). Consequently
+\begin{equation}\label{eq:righttwo}
+ xH_n(x)=T_-+T_++E(z),\qquad
+ |E(z)|\le C e^{-cN/y^2}(|T_-|+|T_+|)
+\end{equation}
+on the enlarged rectangle, with a holomorphic remainder. All constants in these estimates can be chosen independently of sufficiently small \(\eta\), since the same sector covers every such rectangle.
+
+Set \(\Psi_n=(\ell_n(\zeta_-)-\ell_n(\zeta_+))/(2\ii)\) and \(\theta=(\zeta_--\zeta_+)/(2\ii)\). Both are real on the real interval. Direct differentiation gives \(\theta'(z)=-\pi/(z^2+\pi^2)\), \(\zeta_\pm'=O(1/y)\), and \(\zeta_--\zeta_+=O(1/y)\). The contribution of \(Q_n\) to \(\Psi_n'\) is \(O(N/(Ly^2))\). Indeed, split its difference of derivatives into
+\[
+ Q_n'(\zeta_-)(\zeta_-'-\zeta_+')+
+       (Q_n'(\zeta_-)-Q_n'(\zeta_+))\zeta_+'\,.
+\]
+The first term uses \(\zeta_-'-\zeta_+'=2\ii\theta'=O(y^{-2})\). The second uses the bound on \(Q_n''\) along the segment between the two logarithms. Taking \(Y_0\) large ensures the negative real part of \(\theta'\) is bounded below in magnitude by a constant times \(y^{-2}\) uniformly for the bounded imaginary parts. We obtain
+\begin{equation}\label{eq:rightderiv}
+ \Re\Psi_n'(z)\le -c_0N/y^2,\qquad |\Psi_n'(z)|\le C_0N/y^2.
+\end{equation}
+
+Dividing \eqref{eq:righttwo} by the analogue of the nonzero analytic factor in \eqref{eq:cosine} gives \(2\cos\Psi_n(z)\) plus a remainder bounded by \(C e^{-cN/y^2+|\Im\Psi_n(z)|}\). For sufficiently small \(\eta\), the argument used in \eqref{eq:cosine} forces every zero to have \(|\Im\Psi_n|=O(e^{-cN/y^2})\) with real phase within \(O(e^{-cN/y^2})\) of a half-integer level. Integration of \eqref{eq:rightderiv} on a vertical segment gives \(|\Im z|=O((y^2/N)e^{-cN/y^2})\). The phase at \(\Re z\) is then within \(O(e^{-cN/y^2})\) of the same level. By the intermediate value theorem, using the derivative bound and the fixed margins, the level has a unique real preimage \(z_j\) with \(|z-z_j|=O((y^2/N)e^{-cN/y^2})\).
+
+Write \(y_j=-z_j\). Around each such center take a disk of radius \(a y_j^2/N\) for a fixed sufficiently small \(a>0\). On the disk, \(y\asymp y_j\). Integration of \eqref{eq:rightderiv} along a segment from the center bounds the phase distance from its central level between uniform positive constants on the boundary, with upper bound less than \(1/4\). The analogous lower bound on all nonzero displacements within the disk prevents a second preimage of the same level. The cosine has just one simple zero in the disk, and its modulus on the boundary is bounded below. By taking \(\eta\) sufficiently small, the remainder in \eqref{eq:righttwo} is uniformly smaller than this bound after normalization. Rouch\'e's theorem gives one zero with multiplicity. The disk is conjugation-invariant in \(z\), so this zero is simple and real in \(z\) and simple negative in \(x\). Every possible zero over the original rectangle lies in one of these disks because its distance to its real preimage is \(O((y^2/N)e^{-cN/y^2})\), smaller than the disk radius for small enough \(\eta\). The representation with \(|t|\le\pi\) covers the entire annulus in \(x\), and the fixed annulus theorem covers \(0\le y\le Y_0\). We conclude that every zero in \(e^{-\eta\sqrt N}\le |x|\le1\) is simple and negative.
+
+Choose fixed \(K>2/\eta\) and put \(J=\lfloor K\sqrt N\rfloor\). Since \(u f'(u)\to1\), we have \(Nf'(J)\sim \sqrt N/K\), and \(r_J\ge e^{-\eta\sqrt N}\) for large \(n\). The small-circle counts therefore overlap the two-pole range and finish the proof for the closed unit disk. Combining with Theorem \ref{thm:bulk} on any fixed annulus outside the unit circle proves Theorem \ref{thm:disk}.
+
+\section{The intervening scales}
+
+The moving estimate uses a single outer pole for each of the two inner contributions. On the large-modulus side its gap to the next outer pole is controlled by \(N\Delta/\lambda^2\), of order \(N/y^3\) when \(y\) is positive and large compared with \(L\). This comparison yields a small relative error only with a restriction on the constant in the \(N^{1/3}\) scale. The analogous inner-pole gap is of constant order when \(|y|\) is of order \(\sqrt N\). The fixed-rank extreme roots have \(|y|\) of order \(N\). The closed-disk result covers the small-modulus side. On the large-modulus side, control of all roots in the transition ranges remains open, as does the Eulerian conjecture.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{Duran}
+A.~J.~Dur\'an, \emph{Asymptotic for the rightmost zeros of Bell and Eulerian polynomials},
+\href{https://arxiv.org/abs/2404.03249v2}{arXiv:2404.03249v2}, 2024.
+\bibitem{MW}
+J.~Mao and L.~Wang, \emph{The Narayana transformation},
+\href{https://arxiv.org/pdf/2607.01572v1}{arXiv:2607.01572v1}, 2026.
+\bibitem{Mel}
+P.~Melotti, \emph{Distribution of the roots of Eulerian polynomials},
+\href{https://arxiv.org/abs/2507.15908v2}{arXiv:2507.15908v2}, 2025.
+\bibitem{Sir}
+S.~Kh.~Sirazhdinov, \emph{On the limit distribution of the roots of Euler polynomials},
+Dokl. Akad. Nauk SSSR \textbf{239} (1978), no.~1, 56--59.
+\bibitem{Sob}
+S.~L.~Sobolev, \emph{On the roots of Euler polynomials},
+\href{https://www.mathnet.ru/eng/dan/v235/i2/p277}{Dokl. Akad. Nauk SSSR \textbf{235} (1977), no.~2, 277--280}.
+\bibitem{Delannoy}
+\emph{Written proof for the Delannoy matrix square},
+solved-conjectures research repository,
+\href{https://github.com/1337isnot1337/solved-conjectures/blob/30a77bf/research/mao-wang/delannoy-proof.md}{commit 30a77bf}, 2026.
+\bibitem{Public}
+\emph{Mao--Wang Eulerian and Delannoy square conjectures},
+solved-conjectures research repository,
+\href{https://github.com/1337isnot1337/solved-conjectures/issues/83}{issue 83}, 2026.
+\end{thebibliography}
+\end{document}
