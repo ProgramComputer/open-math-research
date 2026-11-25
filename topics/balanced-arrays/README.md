@@ -30,3 +30,11 @@ From the repository root, using Python 3.10 or later and a virtual environment, 
 python -m pip install python-flint==0.9.0
 python -I -O topics/balanced-arrays/verify_source_range.py
 ~~~
+
+## Every row has a simple negative zero closest to the origin
+
+When $d\ge2$ and $nr\ge d$, the unique closest zero is $-b_n$. In the next row exactly one zero has modulus at most $b_n$, and it satisfies $0<b_{n+1}<b_n$. This applies to every admissible rank at every nonconstant row. The proof counts decompositions into quota-one layers. Lean checks the disk estimate and its geometric bound. The counting argument and the transfer between rows have independent mathematical review. [Proof](first-root.md) · [Formal scope](lean/README.md) · [Exact verifier](verify_first_root.py)
+
+~~~sh
+python -I -O topics/balanced-arrays/verify_first_root.py
+~~~

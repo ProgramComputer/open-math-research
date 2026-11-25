@@ -38,6 +38,19 @@
         "'BalancedTorusComponents.rowObjective_exists_diagonal_in_component' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'BalancedTorusComponents.dilated_rowObjective_exists_diagonal_in_component' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
+    },
+    {
+      "file": "shared/lean/OpenMathResearch/DiskUniqueness.lean",
+      "sha256": "1a9a7a01e83da3714253ffaa87ad249eb927d0836b5a6a3a1ef434bcfc19c996",
+      "exit_code": 0,
+      "kernel_output": [
+        "'OpenMathResearch.DiskUniqueness.power_difference_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OpenMathResearch.DiskUniqueness.derivative_tail_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OpenMathResearch.DiskUniqueness.linear_derivative_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OpenMathResearch.DiskUniqueness.injective_on_disk' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OpenMathResearch.DiskUniqueness.geometric_tail_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OpenMathResearch.DiskUniqueness.extended_disk_budget' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
     }
   ]
 }

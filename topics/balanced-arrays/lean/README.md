@@ -11,3 +11,7 @@ From the [shared Lean project](../../../shared/lean/README.md) with the pinned d
 ~~~sh
 lake build BalancedTorusComponents
 ~~~
+
+## The first zero at every row count
+
+Lean checks injectivity on a closed complex disk under linear-coefficient dominance, nonvanishing of the formal derivative there, and the geometric comparison giving the bound $36/37$. The layer-count inequalities and the comparison of consecutive balanced-array rows have written proofs. Rebuild these supporting lemmas with `lake build OpenMathResearch.DiskUniqueness`. [Shared Lean source](../../../shared/lean/OpenMathResearch/DiskUniqueness.lean) · [All-row theorem](../first-root.md)
