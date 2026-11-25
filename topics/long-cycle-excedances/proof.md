@@ -8,6 +8,8 @@ $$
 $$
 Uniformly in $k$, for each fixed $h$ we have $r_{n,k,h}\sim a_h(n,k)/a_{h+1}(n,k)$ and $r_{n+1,k,h}/r_{n,k,h}\to h/(h+1)$.
 
+In fact the number of ranks can grow with $n$: the final section proves these conclusions simultaneously up to $\lfloor\tfrac14\sqrt{n/\log n}\rfloor$ at each end, uniformly in $k$.
+
 ## Encoding the coefficients by decreasing runs
 
 Cut every cycle immediately after the source of each ascent in its cyclic list of labels. An ascent is exactly an excedance. Since cycles have distinct labels and length at least two, each has at least one ascent. The cuts give $h$ nonempty strictly decreasing runs. Temporarily label them by $[h]$. The data are then a word $w$ indexed by the original labels, with $w(i)$ the run containing $i$, and a permutation $\sigma$ of the runs describing their cyclic succession. Conversely sort each color class in decreasing order. The word and permutation specify precisely one admissible permutation with the prescribed cuts when all classes are nonempty, each boundary goes upwards from the minimum of its departing class to the maximum of its successor, and the sum of the class sizes on every cycle of $\sigma$ is at least $k$. There are $h!$ labellings for each original permutation. Thus
@@ -61,3 +63,55 @@ $$
  \lim a_h(n,k)/h^n=\Pr_{\sigma\in S_h}\{\text{every cycle of }\sigma\text{ has length }>\lambda h\}.
 $$
 For example, the same exponential scale can have different leading constants as the minimum allowed cycle length varies with $n$.
+
+## A growing number of extreme ranks
+
+**Quantitative strengthening.** For all sufficiently large $n$, uniformly in $3\le k\le n$, all the preceding strict root and order conclusions hold simultaneously for
+$$
+ 1\le h\le H_n=\left\lfloor\frac14\sqrt{\frac{n}{\log n}}\right\rfloor .
+$$
+We track the coefficients at $h\le H_n+2$, also at row $n+1$. Write $p=p_{n,h,k}$ as above. The case $h=1$ satisfies all probability estimates directly. The constants below are absolute.
+
+We first bound $p$ below. If $k\le n/2$, put $L=\lceil2hk/n\rceil$. A uniform permutation of $u$ elements has all cycles of length at least $L$ with probability $d(u,L)\ge1/(2L)$ for every $u\ge L$. Indeed the cycle of the first element has uniform length, so $u d(u,L)=\sum_{s=L}^u d(u-s,L)$. The term $d(0,L)=1$ suffices for $L\le u<2L$. For $u\ge2L$, induction adds at least $(u-2L+1)/(2L)$. Condition on this event at $u=h$. Each cycle then has a binomial number of assigned labels of mean at least $2k$ and at least $n/h$. The probability this number is less than $k$ is at most $e^{-n/(8h)}$ by the binomial half-mean bound. A union bound over the cycles costs at most $h e^{-n/(8h)}=o(1)$. For $k>n/2$, a single cycle of the run permutation always meets the constraint. These cases prove
+$$
+ p_{n,h,k}\ge c/(1+hk/n)
+$$
+for an absolute constant $c>0$.
+
+In the consecutive-row coupling the new letter must land in a cycle that had size exactly $k-1$. The expected number of $s$-cycles in a uniform permutation of $h$ elements is $1/s$, by choosing their labels, cyclic order and the remaining permutation. Such a cycle receives the new letter with probability $s/h$. The all-color cycle always satisfies the lower bound for $k\le n$. Thus
+$$
+ 0\le p_{n+1,h,k}-p_{n,h,k}
+ \le\frac1h\sum_{s=1}^{h-1} b(s/h),\qquad
+ b(x)=\binom n{k-1}x^{k-1}(1-x)^{n-k+1}.
+$$
+This kernel increases up to $(k-1)/n$ and decreases thereafter. Its sum on the interior grid, divided by $h$, is bounded by its integral plus $h^{-1}\max_{1\le s<h} b(s/h)$. To see this, omit the largest sample and charge every other sample to its adjacent interval toward that maximum; by unimodality the kernel there is at least the smaller endpoint value. The intervals have disjoint interiors. The beta integral is $1/(n+1)$.
+
+There are two useful bounds on the sampled maximum. For a binomial variable with parameter $x=s/h$, its largest point probability is at most $C/\sqrt{n x(1-x)}\le C'\sqrt{h/n}$. This follows by Stirling's bounds at a binomial mode; here $n/h\to\infty$ uniformly. When $k\le(n+1)/2$ the continuous maximum at $x=(k-1)/n$ is at most $C''/\sqrt{k}$ by the same bounds. Using the first estimate for the constant term in $1+hk/n$ and the second for $hk/n$ gives
+$$
+ \frac{p_{n+1,h,k}-p_{n,h,k}}{p_{n,h,k}}
+ =O\left(\frac{1+h}{n}+\frac1{\sqrt{nh}}+\frac{\sqrt{k}}n\right)
+ =O(h/n+n^{-1/2}).
+$$
+If $k>(n+1)/2$, the size constraints force a single cycle of $\sigma$ in both rows, so both probabilities are $1/h$. The discarded empty-color and failed-boundary probabilities are at most $2h\exp(-\lfloor n/2\rfloor/h)$. Even after division by $p\ge c/(1+h)$ these are smaller than $1/n$ uniformly in our range. In particular, with $u_{n,h}=a_h/a_{h+1}$ and $b_h=h/(h+1)$,
+$$
+ \frac{u_{n+1,h}}{u_{n,h}}=b_h\bigl(1+O(h/n+n^{-1/2})\bigr).
+$$
+
+It remains to bound the two-term approximation on the scale of the gap $1/h$. Let $H=H_n+2$. For $h\le H$ the single-cycle lower bound gives $h^n/(2h)\le a_h\le h^n$ for all sufficiently large $n$. For $h<H$ this gives $b_h^n/(2h)\le u_{n,h}\le 2(h+1)b_h^n$. In the annulus $1/2\le|z|\le2$, bound terms left of $h$ in the normalized Laurent polynomial starting at $h$ and moving down. Their upper bounds have successive ratios at most
+$$
+ 4h\bigl[(h-1)(h+1)/h^2\bigr]^n\le4h e^{-n/h^2},
+$$
+starting with an envelope of $2h$ at index $h$. For terms right of $h+1$ start instead at $h+1$ with envelope $2(h+1)|z|$ and move up, using $a_p\le p^n$ also far outside the range of the lower bound. The ratios are at most
+$$
+ 4(h+1)\bigl[(h+2)h/(h+1)^2\bigr]^n
+ \le4(h+1)e^{-n/(h+1)^2}.
+$$
+Consequently the annular error is $O((H+1)^2 e^{-n/(H+1)^2})=o(1/H)$; for example $n/(H+1)^2\ge8\log n$ for all sufficiently large $n$. The same estimates apply at $n+1$ with the old cutoff. Apply the three-circle count above with $\epsilon=H^{-2}$, which dominates the error. It gives $r_{n,k,h}/u_{n,h}=1+o(1/H)$ uniformly. Since $H(h/n+n^{-1/2})\to0$ uniformly, the consecutive ratio is $b_h(1+o(1/H))<1$.
+
+Finally, the lower bound on $u_{n+1,h+1}$ and upper bound on $u_{n,h}$ give
+$$
+ \frac{u_{n+1,h+1}}{u_{n,h}}\ge
+ \frac{b_{h+1}}{4(h+1)^2}
+ \left(1-\frac1{(h+1)^2}\right)^{-n}.
+$$
+This tends to infinity uniformly for $h\le H_n$. It supplies the other consecutive inequality and completes the growing-rank proof. The estimates control a sublinear number of roots; the central ranks remain open.
