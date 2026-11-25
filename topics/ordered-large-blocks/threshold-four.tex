@@ -1,0 +1,373 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<->cmex10}{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\ii}{\mathrm{i}}
+\hypersetup{pdftitle={Strict interlacing for ordered set partitions at threshold four},pdfauthor={ProgramComputer}}
+\title{Strict interlacing for ordered set partitions\\ at threshold four}
+\author{ProgramComputer}
+\date{November 25, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove that the polynomials of ordered set partitions counted by blocks of size at least four have simple negative zeros and that consecutive rows strictly interlace in every size. Two conjugate pole pairs contribute to the generating-function coefficients. A divided-difference estimate separates their moduli. When the moduli are close, an exact two-row determinant combines the oscillations, with a second-order phase bound from a common analytic parametrization of the two poles. The analytic sign proof applies from row \(119\) and the interlacing proof from pairs beginning at row \(199\). Certified interval arithmetic and exact integer polynomial computations complete the proof.
+\end{abstract}
+
+Let \(O_n(t)\) count ordered set partitions of \([n]\), with weight \(t\) for each block of size at least four. The degree is \(\lfloor n/4\rfloor\), since four elements are necessary for each weighted block and the maximum number is attained. All coefficients are positive. The following is the threshold-four case of Alexandersson's ordered-set-partition conjecture~\cite{original}. The thresholds two and three are treated in \cite{two,three}.
+
+\begin{theorem}\label{thm:main}
+For every \(n\ge0\), all zeros of \(O_n\) are simple and negative. In increasing absolute value, the \(j\)th zero of \(O_{n+1}\) precedes the \(j\)th zero of \(O_n\), which precedes the \((j+1)\)st zero of \(O_{n+1}\) whenever it exists.
+\end{theorem}
+
+\section{Four poles in the inner strip}
+
+Put \(E_k(z)=\sum_{\ell=0}^k z^\ell/\ell!\), \(C_4(z)=e^z-E_3(z)\), and \(v=1/(1+q)\) for \(q>0\). The first-block decomposition gives
+\[
+\sum_{n\ge0} O_n(-q)\frac{z^n}{n!}=\frac{1}{(1+q)D_v(z)},\qquad
+D_v(z)=(1-v)e^z-E_3(z)+2v.
+\]
+We use the identity \(D_v(z)=C_4(z)+v(2-e^z)\).
+
+\begin{lemma}[Pole locations]\label{lem:poles}
+There is a number \(v_*\in(0,1/12)\) such that for \(0<v<v_*\) the zeros of \(D_v\) in \(|\Im z|\le\pi\) are two simple conjugate pairs \(z,\overline z\) and \(w,\overline w\), with \(\Re z>0>\Re w\) and \(\Im z,\Im w>0\). They have modulus less than two and imaginary parts of absolute value less than \(4/3\). As \(v\to0\), the arguments of \(z,w\) tend to \(\pi/4,3\pi/4\), respectively. As \(v\uparrow v_*\), the right pair coalesces at a positive double pole \(s_*\) and the left pair remains simple.
+\end{lemma}
+
+\begin{proof}
+Let \(s=(12v)^{1/3}\) and consider \(J(s)=s+\log(1-s^3/12)-\log E_2(s)\) on \(0\le s<12^{1/3}\). Its derivative for \(s>0\) equals \((s^2/4)(2/E_2(s)-1/(1-s^3/12))\), of the sign of \(2-E_3(s)\). Thus \(J\) first increases from zero, then decreases to \(-\infty\), and \(J(1)<0\) follows from \(e<30/11\). Let \(s_*\in(0,1)\) be its positive zero and \(v_*=s_*^3/12\).
+
+For negative real \(x\), \(D_v(x)>0\) by the Taylor integral for \(C_4\). On the positive ray \(e^x/E_2(x)\) increases strictly, so \(D'_v(x)\) has one zero \(x_c\). When \(v<v_*\), the inequality \(J((12v)^{1/3})>0\) gives \(x_c<(12v)^{1/3}\). The value at the minimum is \(D_v(x_c)=2v-x_c^3/6>0\). At \(v=v_*\) the minimum is zero and \(D''_{v_*}(s_*)=s_*^2/2\). There are no purely imaginary zeros for \(v>0\), since
+\[
+\Re D_v(\ii y)=\cos y-1+y^2/2+v(2-\cos y)>0.
+\]
+
+On the line \(z=x+\ii\pi\), the imaginary equation for a zero gives \(u^2=\pi^2/3-1\), with \(u=x+1\). At those two choices \(\Re E_3(z)=1/3-u-4u^3/3\). For \(7/5<u<8/5\) this is less than \(-4\), whereas \(-(1-v)e^x>-2\). For \(u<-7/5\) it is greater than \(5\), whereas \(-(1-v)e^x+2v\le1/6\). This excludes the line for all \(0\le v\le1/12\), and conjugation excludes its reflection. The following integral shows that the fourth-order zero at the origin is the only zero in the closed strip at \(v=0\):
+\[
+C_4(z)=\frac{z^4}{6}\int_0^1(1-t)^3e^{tz}\,dt.
+\]
+Indeed, the integral after rotation by \(e^{-\ii\Im z/2}\) has positive real part for \(|\Im z|\le\pi\). The exponential dominates on the right and the cubic on the left, uniformly in \(v\) on the two vertical sides of sufficiently long rectangles. The argument principle keeps the count of four in this strip.
+
+For the narrower domain \(|z|<2,\ |\Im z|<4/3\) we use a certified horizontal boundary test. At \(z=x+\ii y\) with \(y=4/3\), a zero would require
+\begin{align*}
+v(x)&=1-\frac{y(1+x+x^2/2-y^2/6)}{e^x\sin y},\\
+0&=(1-v(x))e^x\cos y-1-x-(x^2-y^2)/2-(x^3-3xy^2)/6+2v(x).
+\end{align*}
+The checker in Section~\ref{sec:finite} covers \([-2,2]\) by 51 dyadic intervals using certified Arb balls~\cite{arb}. On each interval it proves that either \(v(x)\) is outside \([0,1/12]\) or the second expression excludes zero. Thus the horizontal edges of the narrower domain have no zeros.
+
+On \(|z|=2\), \(|\Im z|\le4/3\), the same rotated integral (with \(\cos(\Im z/2)\ge1/\sqrt2\)) and Jensen's inequality for \(4(1-t)^3\,dt\), of mean \(1/5\), give
+\[
+|C_4(z)|\ge(\sqrt2/3)e^{x/5},\qquad
+|v(2-e^z)|\le \tfrac1{12}\sqrt{4+e^{2x}}.
+\]
+The first bound is greater than the second, because \(4e^{-2x/5}+e^{8x/5}<32\) for \(-2\le x\le2\). Convexity reduces this inequality to the endpoints, where one can use \(e^{16/5}<28\) and \(e^{4/5}<3\). Hence the count of four also stays fixed in the narrower domain, which proves that it contains all four poles.
+
+Scaling \(D_v\) by \(z=(24v)^{1/4}\xi\) gives \(D_v(z)/v\to1+\xi^4\) near zero as \(v\to0\). Thus there are two poles on either side of the imaginary axis, and none crosses it. Since no pole is real for \(v<v_*\), a multiple pole would give a multiple conjugate pair on one side and violate the count. This proves the simplicity, labeling and limiting assertions, including the coalescence at \(v=v_*\).
+\end{proof}
+
+\section{The modulus gap and residue estimates}
+
+\begin{lemma}[Modulus and argument inequalities]\label{lem:gap}
+Set \(\rho=|w|\) and \(r=|z|/|w|\). Then
+\[
+r\le e^{-\rho/36},\qquad
+0<\arg z<\pi/4,\quad \pi/2<\arg w<3\pi/4,\qquad
+0<\Im z\le\Im w.
+\]
+If \(r>4/5\), the stronger bound
+\begin{equation}\label{eq:gap}
+-\log r \ge \rho\,c(\rho),\qquad
+c(\rho)=\frac{1/2-5\rho^2/48}{\sqrt{41/16+7\rho^2/8}}
+\end{equation}
+holds.
+\end{lemma}
+
+\begin{proof}
+
+Factor $D_v(t)=(t-z)(t-\bar z)(t-w)(t-\bar w)g(t)$. The Hermite--Genocchi formula for divided differences~\cite{deboor} expresses $g$ as $(1-v)$ times the simplex integral of
+
+\begin{equation*}
+\exp(\alpha z+\beta\bar z+\gamma w+\delta\bar w+\eta t),
+\qquad \alpha+\beta+\gamma+\delta+\eta=1,
+\end{equation*}
+
+with nonnegative barycentric coordinates and simplex measure of total mass $1/24$. For real $t$, averaging with the permutation of coordinates that conjugates the exponent gives a positive integrand, because the imaginary parts of all four nodes have absolute value less than $\pi/2$. Let $c_k=(\log g)^{(k)}(0)$ for $1\le k\le3$. These are respectively the mean, variance and third centered moment of $\eta$ in a probability measure, so
+
+\begin{equation*}
+0\le c_1\le1,\qquad 0\le c_2\le1/4,\qquad |c_3|\le c_2.
+\end{equation*}
+
+Set $a=\Re(1/z)>0$, $b=-\Re(1/w)>0$, $U=|z|^{-2}$, $V=|w|^{-2}$, $d=a-b$, and $h=a+b$. Since $D_v(0)=v$ and each of the first three derivatives at zero is $-v$, the first three logarithmic derivatives of $D_v$ are $-1,-2,-6$. In the factorization these give
+
+\begin{equation*}
+d=\frac{1+c_1}{2},\qquad U+V=h^2+d^2-1-c_2/2,\qquad
+4(a^3-b^3)-3aU+3bV=3/2+c_3/4.
+\end{equation*}
+
+Consequently
+
+\begin{equation}
+\frac32 h(U-V)=\frac32d(U+V)+3d-2d^3+\frac32d c_2-(3/2+c_3/4)
+\ge\frac{U+V}{8}.
+\label{eq:gap-identity}
+\end{equation}
+
+For the inequality, $d\in[1/2,1]$, $U+V\ge1/2$, and the concave function $(15/4)d-2d^3$ has minimum at least $13/8$ on this range. This bounds the right-hand side below by $1/16+(3/4)(U+V-1/2)$, which is at least $(U+V)/8$.
+
+Thus $U>V$. With $\rho=|w|$ and $r=|z|/\rho$, we get $r\le e^{-\rho/36}$. If $r\le1/2$ this follows from $\rho<2$. Otherwise $U<4V$, hence $h\le\sqrt U+\sqrt V<3/\rho$. Equation~\eqref{eq:gap-identity} and $\tfrac12\log(U/V)\ge(U-V)/(U+V)$ then give $-\log r\ge\rho/36$.
+
+Write $\varphi=\arg z$ and $\chi=\arg w$. We also have $\varphi<\pi/4$ and $\chi<3\pi/4$. For either upper pole $\zeta$, let $I(\zeta)=C_4(\zeta)/\zeta^4$. Its argument lies strictly between zero and $\Im\zeta$ by the positive integral, and $2-e^\zeta$ is below the real axis. The identity \(D_v(\zeta)=0\) implies
+
+\begin{equation*}
+4\arg\zeta+\arg I(\zeta)-\arg(2-e^\zeta)\ \in\ \pi+2\pi\mathbb Z .
+\end{equation*}
+
+The expression is continuous and tends to $\pi$ for $z$ and $3\pi$ for $w$ as $v\to0$. Both extra terms are positive, proving the claims. In particular $\Im w>\rho/\sqrt2$, so $\Im z/\Im w\le\sqrt2\,\sin\varphi$.
+
+
+We have $a>b$ and $U>V$. The bound $\pi/2<\arg w<3\pi/4$ gives $2b^2<V$. The function $(u-b^2)/u^2$ decreases on $u\ge V$, so
+
+\begin{equation*}
+(\Im z)^2=\frac{U-a^2}{U^2}\le\frac{U-b^2}{U^2}
+\le\frac{V-b^2}{V^2}=(\Im w)^2.
+\end{equation*}
+
+
+For a sharper estimate set $S=U+V$. The right-hand side of \eqref{eq:gap-identity} before estimation is at least
+
+\begin{equation*}
+\frac32 dS+3d-2d^3-\frac{25}{16}.
+\end{equation*}
+
+Its minimum for $1/2\le d\le1$ occurs at an endpoint and is $3S/4-5/16$, as $S\ge1/2$. Also $h^2=S-d^2+1+c_2/2\le S+7/8$. If $r>4/5$, these inequalities give
+
+\begin{equation*}
+-\log r\ge\frac{1/2-5/(24S)}{\sqrt{S+7/8}}\ge\rho\,c(\rho),
+\end{equation*}
+
+using $2/\rho^2\le S\le(41/16)/\rho^2$.
+
+\end{proof}
+
+\begin{lemma}[Two-pair expansion]\label{lem:expansion}
+Let \(N=n+1\), \(\varphi=\arg z\), \(\chi=\arg w\), and put
+\[
+\Phi=N\varphi+\arg D'_v(z),\quad \Psi=N\chi+\arg D'_v(w),\quad
+A=\frac{|D'_v(z)|}{|D'_v(w)|}r^N.
+\]
+A positively normalized value \(C_n\) of \(O_n(-q)\) satisfies
+\begin{align}
+C_n&=-\cos\Phi-A\cos\Psi+E_N,\nonumber\\
+|E_N|&\le 56\sin\varphi\,\rho^3(2/3)^N,\label{eq:tail}\\
+A&\le \min(1,\sqrt2\sin\varphi)\,e^{16\rho/5}r^N.\label{eq:amplitude}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+
+The entire quotient $g$ has the simplex integral in the proof of Lemma~\ref{lem:gap}. The factor $g(0)$ is real positive and bounded below by
+
+\begin{equation*}
+g(0)\ge\frac{11}{12}\cdot\frac1{24}\cdot e^{-2}\cdot \cos(4/3) >\frac1{2000}.
+\end{equation*}
+
+On $|t|=2L$ with $L\ge3$, the bound $|g(t)|\le2e^{2L}$ follows by dividing the elementary exponential and cubic bound for $D_v$ by the four factors of modulus at least $2L-2$. Jensen's formula therefore gives at most $(2L+\log4000)/\log 2<10L$ distant poles in $|t|\le L$. Since every distant pole has modulus larger than $\pi>3$, summing over the dyadic annuli beginning at radius three bounds the sum of their reciprocal cubes by $80/27<3$.
+
+The two integrals defining $g(z)$ and $g(w)$ have moduli of their integrands differing by at most $e^{2\rho}$. At $w$ the complex argument of each integrand has absolute value at most $t_0=\max(\Im z,\Im w)\le\min(4/3,\rho)$, so the absolute value of the integral is at least $\cos t_0$ times the integral of the absolute values. The certified bound $-\log\cos(4/3)<8/5$ gives $-\log\cos t_0\le (6/5)t_0$ by convexity. It follows that $|g(z)|/|g(w)|\le e^{(16/5)\rho}$.
+
+Differentiating the factorization at \(z,w\) cancels the two cross-pair distances and gives
+\[
+\frac{|D'_v(z)|}{|D'_v(w)|}=\frac{\Im z}{\Im w}\frac{|g(z)|}{|g(w)|}.
+\]
+This yields \eqref{eq:amplitude} by Lemma~\ref{lem:gap}.
+
+At every pole \(\zeta\), \(D'_v(\zeta)=\zeta^3/6-2v\). Therefore each distant pole is simple, with derivative magnitude at least \(|\zeta|^3/7\). At the principal pole \(|g(z)|\le e^2/24<1/3\), giving \(|D'_v(z)|\le(8/3)\sin\varphi\,\rho^3\) by the four-factor representation. The residue formula is
+\[
+\frac{O_n(-q)}{n!}=-\frac1{1+q}\sum_{D_v(\zeta)=0}
+       \frac{1}{\zeta^{N} D'_v(\zeta)}.
+\]
+To justify it, integrate \(1/(t^N D_v(t))\) on the squares with side coordinates \(\pm2\pi M\). The exponential and the cubic dominate respectively on the right and left vertical sides. On a horizontal side \(y=\pm2\pi M\), the imaginary part is \(-y(1+x+x^2/2-y^2/6)\) for \(x=\Re t\). When the parenthesis has magnitude at least one, this bounds \(|D_v|\) below by \(|y|\). Otherwise \(x+1\) is within \(O(1/|y|)\) of \(\pm |y|/\sqrt3\). The exponential dominates at the positive choice and the cubic at the negative choice. Thus the integrals tend to zero. The residues away from zero are absolutely summable by the reciprocal-cube estimate. Multiplying the formula by \((1+q)|z|^N|D'_v(z)|/2\) gives the main cosines. The reciprocal-cube estimate, the bound on the distant derivatives, and \(|z|\le2\) give \eqref{eq:tail}.
+
+\end{proof}
+
+\section{Real roots and their phase ranks}
+
+For \(N\ge120\), \eqref{eq:amplitude} and \(r\le e^{-\rho/36}\) give \(A\le e^{-\rho/8}\). Also \eqref{eq:tail} is at most \(224\rho(2/3)^N<\rho/100\). Since \(1-e^{-\rho/8}\ge \rho/(8+\rho)>\rho/10\), the sign at \(\Phi=k\pi\) is \(-(-1)^k\).
+
+The continuous argument \(\arg D'_v(z)\) can be chosen in \((0,\pi)\) since \(\Im(z^3)>0\). As \(v\to0\) it tends to \(3\pi/4\), so the phase tends to \((n+4)\pi/4\). At \(v=v_*\), \(\partial_v D_v(s_*)=2-e^{s_*}<0\) by \(C_4(s_*)>0\), and \(D_{v_*}''(s_*)>0\). The expansion \(z-s_*=\ii a\sqrt{v_*-v}+O(v_*-v)\) with \(a>0\) follows by substituting the square-root parameter in the double-root equation. Thus \(\arg D'_v(z)\to\pi/2\) and \(\varphi\to0\), so \(\Phi\to\pi/2\).
+
+
+Put $q_*=1/v_*-1$. As $q$ increases from $q_*$ to infinity, let $m=\lfloor n/4\rfloor$. The two phase limits yield a sign change between each successive pair of levels $k\pi,(k+1)\pi$ for $k=1,\ldots,m$, except possibly when the last upper level equals the terminal phase. If that level is unattained at finite $q$, take the ray beginning at the last hit of its lower level and use the leading sign $(-1)^m$ of $O_n(-q)$ as $q\to\infty$. For the other brackets take the first upper hit and the last preceding lower hit. These ordered disjoint brackets have phases strictly between their boundary levels at every interior point. The resulting $m$ distinct negative roots exhaust the degree. In particular $\sin\Phi_n$ has sign $(-1)^j$ at the old root of rank $j$ in increasing absolute value.
+\section{Consecutive signs away from the outer edge}
+
+All pairs in the analytic part of the proof have \(N=n+1\ge200\). At the same argument \(-q\), the next row has normalized value
+\[
+C_{n+1}=-\cos(\Phi+\varphi)-Ar\cos(\Psi+\chi)+E_{N+1}.
+\]
+On the intervals $[3/50,1/2]$, $[1/2,1]$ and $[1,2]$, the decreasing function $c$ is bounded below respectively by $7/25$, $1/5$ and $3/100$. For $N\ge200$, each lower bound yields $(Nc(\rho)-16/5)\rho>2$. If $r\le4/5$, instead use $-\log r\ge1/5$ and $\rho<2$. By $\Im w>\rho/\sqrt2$ and \eqref{eq:amplitude}, this proves
+
+\begin{equation}
+A\le\sqrt2 e^{-2}\sin\varphi<\tfrac14\sin\varphi
+\qquad (N\ge200,\ \rho\ge3/50).
+\label{eq:bulk}
+\end{equation}
+
+At a zero of $C_n$, this gives $|\cos\Phi|\le A+|E_N|\le(26/100)\sin\varphi$ and hence $|\sin\Phi|>9/10$. The difference between $C_{n+1}$ and $\sin\Phi\sin\varphi$ is at most $(1+r)A+|E_N|+|E_{N+1}|\le(52/100)\sin\varphi$, using \eqref{eq:tail}. Therefore $C_{n+1}$ has the sign of $\sin\Phi$ at these roots of $C_n$.
+
+
+\section{Two-pair cancellation close to the outer edge}
+
+Assume $\rho\le3/50$ and $N\ge200$. Let $h=(24v)^{1/4}$. Since $\Re w<0$, the Taylor remainder gives $|C_4(w)|\le\rho^4/24$ and $|2-e^w|>1$, so $h\le\rho$. On this range \eqref{eq:gap} gives $-\log r\ge(3/10)\rho$, including when $r\le4/5$ by the elementary bound above. Consequently
+
+\begin{equation}
+A\le \exp\!\bigl(-(3N/10-16/5)\rho\bigr)\le e^{-Nh/4}.
+\label{eq:small-amplitude}
+\end{equation}
+
+Set $\lambda=h e^{i\pi/4}$, so $v=-\lambda^4/24$, and write $z=\lambda L(\lambda)$ and $w=i\lambda L(i\lambda)$. The two poles are expressed by the same analytic function $L$ because multiplication of $\lambda$ by $i$ preserves $v$. More explicitly, $L$ is the unique solution in $|L-1|<1/4$ of
+
+\begin{equation*}
+L^4 S_4(\lambda L)=2-e^{\lambda L},\qquad
+S_4(\xi)=\sum_{\ell\ge0}\frac{24}{(\ell+4)!}\xi^\ell .
+\end{equation*}
+
+For $|\lambda|\le1/4$, on $|L-1|=1/4$ the perturbation of $L^4-1$ is bounded by $(1+(5/4)^4/5)(e^{5/16}-1)$, because $|S_4(\xi)-1|\le(e^{|\xi|}-1)/5$. This is strictly smaller than $(1/4)(\sqrt2-1/4)^2(2-1/4)$, a lower bound for $|L^4-1|$ there. Rouché's theorem proves existence and uniqueness with multiplicity one, giving analyticity by the implicit function theorem. Conjugation and uniqueness imply real Taylor coefficients. These branches agree with the two upper poles by their limiting directions, and $\rho\le(5/4)h$.
+
+Use analytic logarithms
+
+\begin{equation*}
+F(\lambda)=\log L(\lambda),\qquad
+T(\lambda)=3F(\lambda)+\log(1+\lambda/(2L(\lambda)^3))
+\end{equation*}
+
+with value zero at zero. The derivative identity $D'_v(z)=z^3/6-2v$ gives $D'_v(\lambda L(\lambda))=(\lambda^3/6)e^{T(\lambda)}$. On $|\lambda|\le1/4$, the log series give $|F|\le\log(4/3)<3/10$ and $|T|\le\log(64/19)<5/4$. Expanding the defining equation then gives
+
+\begin{equation*}
+F(\lambda)=-\frac3{10}\lambda-\frac{49}{300}\lambda^2+O(\lambda^3),
+\qquad
+T(\lambda)=-\frac25\lambda-\frac{33}{200}\lambda^2+O(\lambda^3).
+\end{equation*}
+
+Indeed the coefficients of $z$ and $z^2$ in $\log(2-e^z)-\log S_4(z)$ are $-6/5$ and $-76/75$, and this series equals $4F$ upon substituting $z=\lambda e^F$. The first two coefficients of $T$ then follow from its logarithm formula.
+
+Define
+
+\begin{equation*}
+\delta=\chi-\varphi-\pi/2,\qquad
+\beta=\arg D'_v(w)-\arg D'_v(z)+\pi/2,\qquad
+\kappa=N\delta+\beta.
+\end{equation*}
+
+Choose the two derivative arguments continuous from their limits $3\pi/4$ at $z$ and $\pi/4$ at $w$. Then $\delta=\Im(F(i\lambda)-F(\lambda))$ and $\beta=\Im(T(i\lambda)-T(\lambda))$. Since $i\lambda=-\bar\lambda$ and both series have real coefficients, only powers of order $2$ modulo $4$ contribute to either difference. Cauchy's coefficient bounds therefore give, for $h\le3/50$,
+
+\begin{equation}
+0\le\pi/4-\varphi\le h/3,\qquad
+|\delta|\le(2/5)h^2,\qquad
+|\beta|\le h^2/2,\qquad
+|\kappa|\le(41/100)Nh^2 .
+\label{eq:phase-gaps}
+\end{equation}
+
+For the first inequality use the first two coefficients of $F$. The tail is bounded by $(3/10)(4h)^3/(1-4h)$. For the next two inequalities, the coefficients of order two contribute magnitudes $(49/150)h^2$ and $(33/100)h^2$. The corresponding remainder bounds are
+\[
+\frac{(3/5)(4h)^6}{1-(4h)^4}
+\qquad\text{and}\qquad
+\frac{(5/2)(4h)^6}{1-(4h)^4}.
+\]
+
+Let $s=n\bmod4$ and $\alpha=s\pi/2+\kappa$. Then $\Psi-\Phi=\alpha$ modulo $2\pi$. Write
+
+\begin{equation*}
+U_0=1+A e^{i\alpha},\qquad
+V_0=e^{i\varphi}(1+iAr e^{i(\alpha+\delta)}),\qquad
+\Delta=\Im(V_0\overline{U_0}) .
+\end{equation*}
+
+At an old root, $\Re(e^{i\Phi}U_0)=E_N$ and hence the exact identity
+
+\begin{equation}
+(\Re U_0) C_{n+1}=\sin\Phi\,\Delta+(\Re U_0)E_{N+1}-(\Re V_0)E_N
+\label{eq:determinant}
+\end{equation}
+
+holds. We have $\Re U_0\ge1-A>0$. Temporarily setting $\kappa=\delta=0$ gives the following four values of $\Delta$, in order of $s$.
+
+\begin{equation*}
+\begin{array}{ll}
+(1+A)(\sin\varphi+Ar\cos\varphi),&
+(1-Ar)(\sin\varphi-A\cos\varphi),\\
+(1-A)(\sin\varphi-Ar\cos\varphi),&
+(1+Ar)(\sin\varphi+A\cos\varphi).
+\end{array}
+\end{equation*}
+
+The factor $\sin\varphi-A\cos\varphi$ is positive. Indeed $1-\tan\varphi\le2(\pi/4-\varphi)\le2h/3$, and $(1-A)^{-1}\le1+4/(Nh)$ by \eqref{eq:small-amplitude}, giving $2h/(3(1-A))<3/50$. Each of the four values is therefore at least $(1-A)(\sin\varphi-A\cos\varphi)>(7/10)(47/50)(1-A)^2$, using $\cos\varphi\ge1/\sqrt2>7/10$. By the elementary bound on differences of unit complex exponentials, the change in the determinant from nonzero phase gaps is at most
+
+\begin{equation*}
+2A(2|\kappa|+|\delta|)\le (33/20)ANh^2\le\frac{132}{1000}(1-A)^2 .
+\end{equation*}
+
+The last step uses \eqref{eq:small-amplitude} and $e^{-x}x^2\le(1-e^{-x})^2$ at $x=Nh/4$. Hence $\Delta>(1-A)^2/2$.
+
+Finally $|E_N|,|E_{N+1}|\le(1-A)^2/100$. This follows from \eqref{eq:tail}, $\rho\le(5/4)h$, and
+
+\begin{equation*}
+\frac{\rho^3}{(1-A)^2}\le(5/4)^3 h(h+4/N)^2 .
+\end{equation*}
+
+To bound $\sin\Phi$ at the root, first note $\Re U_0/|U_0|\ge1/3$. If $A\le1/2$, use $1-A$ and $1+A$ to bound numerator and denominator. If $A>1/2$, then $Nh<4\log 2<3$, so $|\kappa|<1/10$ by \eqref{eq:phase-gaps}. For $s\ne2$ this gives $\Re U_0\ge9/10$ and $|U_0|\le2$. For $s=2$, use
+
+\begin{equation*}
+\frac{|\Im U_0|}{\Re U_0}\le\frac{A|\kappa|}{1-A}
+\le(41/25)h<1/10
+\end{equation*}
+
+by $1-A\ge A Nh/4$. Now $|\cos(\Phi+\arg U_0)|=|E_N|/|U_0|\le1/100$, since $|U_0|\ge1-A$. The angle addition identity gives
+
+\begin{equation*}
+|\sin\Phi|\ge\frac13\sqrt{1-1/10000}-1/100>1/4.
+\end{equation*}
+
+In \eqref{eq:determinant} the term $\sin\Phi\,\Delta$ therefore has magnitude greater than $(1-A)^2/8$. The two residual terms together have magnitude at most $4(1-A)^2/100$, because both $U_0$ and $V_0$ have modulus at most two. This proves that $C_{n+1}$ has the sign of $\sin\Phi$ also in the outer region.
+
+
+\section{Interlacing and the finite certificate}\label{sec:finite}
+
+For $n\ge199$, the two bounds give $O_{n+1}(-q)$ of sign $(-1)^j$ at the old root $-q$ of rank $j$ in increasing absolute value. Because $O_{n+1}(0)>0$, there is a new root before the first old root and one between each pair of old roots. If $n\equiv3\bmod4$, the degree increases by one and the leading sign at infinity gives one additional root beyond the last old root. These strictly ordered roots exhaust the degree in both cases.
+
+It remains to verify the finite prefix. The exact finite check reconstructs the coefficients from the first-block rule and the delayed recurrence
+
+\begin{equation*}
+O_{n+1}=(n+1)O_n+2tO_n'+(n+\tbinom n2)O_{n-1}
+       +(\tbinom n2+\tbinom n3)O_{n-2}
+       +t\tbinom n3\bigl(O_{n-3}+(t-1)O_{n-3}'\bigr)
+\end{equation*}
+
+for $n\ge3$. Indeed, for the exponential generating function $H(z,t)$ the defining reciprocal gives
+
+\begin{equation*}
+(2-E_3(z))\,\partial_z H
+=(E_2(z)+tz^3/6)H+t(2+(t-1)z^3/6)\,\partial_t H.
+\end{equation*}
+
+Equating coefficients gives the delayed recurrence. The first four polynomials are constants $1,1,3,13$. The two methods agree through row 200. The positive leading coefficients and the successive degree drops in the signed Euclidean remainder chains certify strict oriented interlacing through the pair ending at row 200. For equal degrees the chain starts with the later row and the remainder of the earlier row modulo the later row. For successive degrees it starts with the later and earlier rows. At each zero of the later row the earlier row has the sign of the second member of the chain, which is positive at the largest zero and alternates at the others. These checks also prove individual real-rootedness and simplicity in the finite prefix.
+
+The checker certifies numerical margins with rational arithmetic or interval bounds. At 120-bit interval precision it reproduces 51 successful dyadic tests for the horizontal line and 201 exact rows with 200 strictly interlacing pairs. This covers the finite prefix and overlaps with the analytic bounds, proving Theorem~\ref{thm:main}.
+
+For reproduction, from the root of the \href{https://github.com/ProgramComputer/open-math-research}{companion repository}, use \texttt{python-flint==0.9.0} and run
+\begin{verbatim}
+python -I -O topics/ordered-large-blocks/code/threshold_four_effective.py
+\end{verbatim}
+
+\begin{thebibliography}{9}
+\bibitem{original} P. Alexandersson, \emph{Real-rooted polynomials: open problems}, The symmetric functions catalog, section on set partitions and trees. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#openProblemsSetPartitions}{Author's conjecture}.
+\bibitem{deboor} C. de Boor, Divided differences, \emph{Surveys in Approximation Theory} \textbf{1} (2005), 46--69. \href{https://pages.cs.wisc.edu/~deboor/sat/papers/2/2.pdf}{Author's copy}.
+\bibitem{arb} F. Johansson, Arb: Efficient arbitrary-precision midpoint-radius interval arithmetic, \emph{IEEE Transactions on Computers} \textbf{66} (2017), 1281--1292. \href{https://doi.org/10.1109/TC.2017.2690633}{DOI}.
+\bibitem{two} ProgramComputer, \emph{Interlacing and limiting zeros of ordered set partitions counted by nonsingleton blocks}, 2026. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/ordered-large-blocks/paper.pdf}{Companion manuscript}.
+\bibitem{three} ProgramComputer, \emph{Three-pole interlacing for ordered partitions and the largest zeros at arbitrary thresholds}, 2026. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/ordered-large-blocks/threshold-three.pdf}{Companion manuscript}.
+\end{thebibliography}
+\end{document}

@@ -56,6 +56,17 @@
         "'OrderedGlobalAngular.abs_sin_nat_multiple_le' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'OrderedGlobalAngular.first_sector_derivative_positive' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
+    },
+    {
+      "file": "topics/ordered-large-blocks/lean/OrderedThresholdFourSigns.lean",
+      "sha256": "ad0e9e2b6e69dddb592bfb85c1efdb6a16a5d0f46fb57339d90b62e0f89fc067",
+      "exit_code": 0,
+      "kernel_output": [
+        "'OrderedThresholdFourSigns.determinant_identity' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdFourSigns.determinant_margin_after_perturbation' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdFourSigns.determinant_sign_transfer' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdFourSigns.threshold_four_two_pair_sign' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
     }
   ]
 }
