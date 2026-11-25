@@ -5,12 +5,14 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | Result | Outcome | Formal verification |
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an explicit counterexample | 🟩 Full · Lean 4 |
+| [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
 
 **Formal proof key**　🟩 Full　·　🟨 Partial　·　⬜ None
 
 ## Partial work
 
 - The [infinite-family strengthening](topics/prism-splitting/README.md) extends the counterexample to every $a\ge6$. Its geometric coefficient identification for general $a$ is still being formalized.
+- For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.
 
 ## Citation
 

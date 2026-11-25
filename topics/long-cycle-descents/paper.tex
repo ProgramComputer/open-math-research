@@ -1,0 +1,411 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1.05in]{geometry}
+\setlength{\emergencystretch}{0.8em}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\des}{\operatorname{des}}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\PP}{\mathcal P}
+\newcommand{\Rea}{\operatorname{Re}}
+
+\title{Real zeros of descent polynomials for permutations with long cycles}
+\author{}
+\date{25 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove that the ordinary descent polynomial of permutations of $[n]$
+whose cycle lengths are at least $k$ has simple nonpositive zeros whenever
+$n\ge25$ and $52\log n\le k\le n$. The same conclusion holds for each
+individual cycle type in that range, and for nonzero nonnegative mixtures
+of such types. We also prove real-rootedness for the descent polynomial
+of single-cycle permutations in every size. For the single-cycle family,
+a finite exact check complements the uniform argument. Its only multiple
+zero is the double zero at $-1$ for $n=5$.
+\end{abstract}
+
+\section{Statements and necklace specialization}
+
+We count ordinary descents in one-line notation. Thus
+$\des(\pi)=|\{i\in[n-1]:\pi(i)>\pi(i+1)\}|$, even when $\pi$ is a single
+cycle. If $\lambda\vdash n$ is a partition of $n$, let $D_\lambda(t)$
+sum $t^{\des(\pi)}$ over permutations of cycle type $\lambda$. Write
+\[
+D_{n,k}(t)=\sum_{\substack{\lambda\vdash n\\\min(\lambda)\ge k}}
+D_\lambda(t).
+\]
+Alexandersson asks whether $D_{n,k}$ is real-rooted for all $3\le k\le n$
+in the Symmetric Functions Catalog~\cite{Alex}. The derangement case
+$k=2$ has a separate proof~\cite{AlexD}. Here and throughout,
+$\log$ is the natural logarithm.
+
+\begin{theorem}\label{thm:main}
+Suppose $n\ge25$ and $52\log n\le k\le n$. Every nonzero
+nonnegative linear combination of the polynomials $D_\lambda(t)$ with
+$\lambda\vdash n$ and $\min(\lambda)\ge k$ has degree $n-2$ and has
+simple zeros, one at zero and all others strictly negative. In particular
+this holds for $D_{n,k}$.
+\end{theorem}
+
+\begin{theorem}\label{thm:single}
+For every $n\ge1$, $D_{(n)}$ is real-rooted. For $n\ge2$, zero is a
+simple root, and every other root is strictly negative. All roots are
+simple except in size $5$, where $D_{(5)}(t)=6t(t+1)^2$.
+\end{theorem}
+
+For $s\ge1$, define the primitive necklace polynomial
+\[
+M_s(z)=\frac1s\sum_{d\mid s}\mu(d)z^{s/d}.
+\]
+At a positive integer $q$, $M_s(q)$ counts primitive necklaces of
+length $s$ over $q$ letters. If $r_s$ parts of $\lambda$ equal $s$, put
+\[
+B_\lambda(z)=\prod_{s:r_s>0}\binom{M_s(z)+r_s-1}{r_s}
+ =\prod_{s:r_s>0}\frac1{r_s!}\prod_{i=0}^{r_s-1}(M_s(z)+i).
+\]
+The Gessel--Reutenauer necklace bijection gives
+\begin{equation}\label{eq:gr}
+D_\lambda(t)=(1-t)^{n+1}\sum_{q\ge1} B_\lambda(q)t^{q-1}.
+\end{equation}
+Indeed, consider a permutation of type $\lambda$ with $a$ descents and
+a weakly increasing sequence of $n$ letters, with strict increases across
+the descents. For a $q$-letter alphabet there are
+$\binom{q+n-a-1}{n}$ such sequences, interpreted as zero if $q\le a$.
+The necklace bijection identifies these decorated permutations with
+multisets of primitive necklaces of lengths $\lambda$. Choosing the
+multiset of necklaces at each size gives $B_\lambda(q)$. Summing
+$\binom{q+n-a-1}{n}t^{q-1}$ over $q\ge1$ gives
+$t^a/(1-t)^{n+1}$. This also follows from Gessel and Zhuang's
+principal-specialization formula~\cite[Theorem 3.1(c)]{GZ}.
+See \cite{GR,DMP,ET} for the cycle-type and single-cycle enumeration.
+
+\section{A root criterion for the numerator transform}
+
+For a polynomial $f$ of degree $m$, define
+\[
+\PP_f(t)=(1-t)^{m+1}\sum_{q\ge1}f(q)t^{q-1}.
+\]
+A finite difference of order $m+1$ of $f$ vanishes, so $\PP_f$ is a
+polynomial. We use a criterion for inputs divisible by $z(z^2-1)$.
+The shifted series and degree-dependent denominator in this transform
+are part of its definition.
+
+\begin{lemma}\label{lem:disc}
+Let $f\in\RR[z]$ have degree $m\ge7$. Suppose $z(z^2-1)$ divides $f$,
+the coefficients of $z^{m-1}$ and $z^{m-2}$ vanish, and every zero of
+$f$ lies in $|z|<\sqrt{19}/4$. Then $\PP_f$ has degree $m-2$, has a
+simple zero at zero, and has $m-3$ simple strictly negative zeros.
+\end{lemma}
+
+We first establish the effect of factors. The starting polynomial
+$f_0(z)=z(z^2-1)$ has $\PP_{f_0}(t)=6t$, by the power series for
+$\sum_{q\ge1}q^3t^{q-1}$ and $\sum_{q\ge1}qt^{q-1}$. Use the change
+of variable $t=-x/(1-x)$ and the normalization
+\[
+H_f(x)=(1-x)^{m-3}\frac{\PP_f(t)}{t}\bigg|_{t=-x/(1-x)}.
+\]
+For $a\in\CC$, differentiation of the generating series gives
+\[
+\PP_{(z-a)f}(t)
+  =\bigl(1-a+(m+a)t\bigr)\PP_f(t)
+      +t(1-t)\PP'_f(t).
+\]
+Consequently
+\begin{equation}\label{eq:operator}
+H_{(z-a)f}=T_a H_f,\qquad
+T_a H=(2-a-4x)H+x(1-x)H'.
+\end{equation}
+For clarity, writing $V=\PP_f/t$ gives
+$V_{\rm new}=(2-a+(m+a-1)t)V+t(1-t)V'$.
+For $t=-x/(1-x)$ one has $t(1-t)d/dt=x\,d/dx$.
+Multiplying this identity by $(1-x)^{m-2}$ gives
+\eqref{eq:operator}. It follows by induction from $H_{f_0}=6$ that
+$H_f$ is a polynomial of degree $m-3$ for every nonzero multiple of
+$f_0$: at each step $T_a$ raises the degree by one, with new leading
+coefficient $-(4+\deg H)$ times the old one.
+
+Suppose next that $H$ is a real polynomial of degree $d$ with simple
+zeros $x_1<\cdots<x_d$ in $(0,1)$, allowing a nonzero constant when
+$d=0$. For real $u$ with $|u|<2$, put $\alpha=2-u$, $\beta=2+u$ and
+$Q=T_uH$. At $x_i$, the sign of $Q(x_i)$ is the sign of $H'(x_i)$.
+Also $Q(0)=\alpha H(0)$ and $Q(1)=-\beta H(1)$. The alternating
+signs give one zero of $Q$ in each interval cut out by the $x_i$ and
+the endpoints $0,1$. Since $\deg Q=d+1$, they are all simple.
+
+For a conjugate pair $u\pm iv$, its two operators compose to
+$S=(T_u^2+v^2)H$, a polynomial of degree $d+2$. At a zero $x$ of $Q$,
+\[
+\frac{S(x)}{H(x)}=v^2-J(x),\qquad
+J(x)=-x(1-x)\left(\frac{Q}{H}\right)'(x).
+\]
+Write $w_i=x(1-x)/(x-x_i)$. The equation $Q(x)=0$ gives
+$\sum_i w_i=4x-\alpha$. Also
+\[
+-x(1-x)w_i'=w_i^2+(2x-1)w_i.
+\]
+This follows directly by differentiating, with $x_i$ fixed. Hence
+\begin{equation}\label{eq:margin}
+J(x)=4x^2-2\alpha x+\alpha+\sum_{i=1}^{d}w_i^2.
+\end{equation}
+If $J(x)>v^2$ at every zero of $Q$, then $S$ has the sign opposite
+to $H$ at each of those zeros. At $0$ and $1$, $S$ has the same sign
+as $H$, since the endpoint multipliers are $\alpha^2+v^2$ and
+$\beta^2+v^2$. The strict interlacing of $H$ and $Q$ forces a change
+of sign in each of the $d+2$ intervals between the zeros of $Q$ and
+the endpoints. Thus $S$ has simple zeros, all in $(0,1)$.
+
+There are two useful sufficient bounds on $v^2$. First, completing
+the square in \eqref{eq:margin} gives $J\ge1-u^2/4$, so any pair
+strictly in $u^2/4+v^2<1$ is admissible for any $d$. At equality and
+$d\ge1$, $J>v^2$ because each term $w_i^2$ is positive. At $d=0$
+and equality with $|u|<2$, $S/H=(\alpha-4x)^2-4x(1-x)+v^2$ has a
+zero at $x=\alpha/4$ whose derivative is $-2u$. If $u=0$, this
+zero is double. Otherwise it is simple, and the equal positive endpoint
+values in sign force a second simple zero in $(0,1)$.
+
+Second, since $|x-x_i|\le\max(x,1-x)$, each $|w_i|$ is at least
+$\min(x,1-x)$. For $x\le1/2$ equation \eqref{eq:margin} gives
+\[
+J(x)\ge (d+4)x^2-2\alpha x+\alpha
+       \ge \alpha-\frac{\alpha^2}{d+4}.
+\]
+For $x\ge1/2$, replacing $x$ by $1-x$ and $\alpha$ by $\beta$ gives
+$J(x)\ge\beta-\beta^2/(d+4)$. If $d\ge1$, a common lower bound is
+$s-s^2/5$ with $s=2-|u|$: indeed
+$\alpha-\alpha^2/5$ and $\beta-\beta^2/5$ differ by
+$(\alpha-\beta)/5$. Completing a square again shows
+\begin{equation}\label{eq:disc}
+u^2+s-\frac{s^2}{5}
+ =\frac{19}{16}+\frac45\left(|u|-\frac18\right)^2
+ \ge\frac{19}{16}.
+\end{equation}
+Thus, as soon as $d\ge1$, every conjugate pair with
+$u^2+v^2<19/16$ preserves simplicity and the interval.
+
+\begin{proof}[Proof of Lemma~\ref{lem:disc}]
+Factor out $f_0$ and consider the remaining $m-3$ roots, with
+multiplicity. If one is real, its operator starts the construction with
+a simple zero in $(0,1)$. Otherwise, at least one pair is strictly in
+the ellipse $u^2/4+v^2<1$. To see this, the two zero leading
+coefficients and Newton's identities say that the sum of the squares
+of all roots of $f$ is zero. The remaining roots therefore have sum
+of squares $-2$. If a remaining root $u+iv$ is outside or on the
+ellipse, the disk bound implies
+\[
+u^2<\frac{4}{3}\left(\frac{19}{16}-1\right)=\frac14,
+\qquad
+\Rea((u+iv)^2)=u^2-v^2\le \frac54u^2-1<-\frac{11}{16}.
+\]
+If every remaining root satisfied these inequalities, their real
+parts of squares would sum to less than $-2$, since $m-3\ge4$.
+This contradiction supplies the starting pair.
+
+Apply the operator for the starting real root or pair. Each subsequent
+real root or conjugate pair is admissible by \eqref{eq:disc}, since the
+current polynomial has positive degree. It follows that $H_f$ has
+$m-3$ simple zeros in $(0,1)$. The inverse change of variable
+$x=-t/(1-t)$ turns these zeros into distinct negative ones.
+More explicitly, if $H_f(x)=C\prod_i(x-x_i)$ with $0<x_i<1$, then
+$\PP_f(t)=Ct\prod_i(-(1-x_i)t-x_i)$. This establishes the claimed
+degree and the simple zero at zero.
+\end{proof}
+
+\section{Long cycles}
+
+Put $R=13/12$, so that $R^2<19/16$. On $|z|=R$, the leading term
+of $M_s$ is $z^s/s$ and the relative error has absolute value at
+most $2\sqrt{s}\,R^{-s/2}$. To see this, use $s/d\le s/2$ for
+every divisor $d\ge2$ and use the elementary divisor bound
+$\tau(s)\le2\sqrt{s}$, obtained by pairing divisors below and above
+$\sqrt{s}$. If $0\le i<r_s$ and $\lambda\vdash n$, then $si\le n$.
+Under the hypotheses of Theorem~\ref{thm:main}, each factor
+$M_s(z)+i$ in $B_\lambda$ can therefore be written
+\[
+M_s(z)+i=\frac{z^s}s(1+\delta_{s,i}(z)),\qquad
+|\delta_{s,i}(z)|\le
+ \varepsilon=2\sqrt n\,R^{-k/2}+nR^{-k}.
+\]
+The inequality $\log(1+x)>x/(1+x)$ for $x>0$ gives
+$\log R>1/13$, so $R^{k/2}>n^2$ and $R^k>n^4$. In particular
+\[
+n\varepsilon<2/\sqrt n+1/n^2<1/2\qquad(n\ge25).
+\]
+There are at most $n$ factors. Thus for the positive leading
+coefficient $c_\lambda$ of $B_\lambda$,
+\begin{equation}\label{eq:rouche}
+|B_\lambda(z)-c_\lambda z^n|
+   \le c_\lambda R^n\bigl((1+\varepsilon)^n-1\bigr)
+   <c_\lambda R^n
+\qquad (|z|=R).
+\end{equation}
+The last step uses $(1+\varepsilon)^n\le e^{n\varepsilon}<2$.
+The strict inequality is preserved after taking any nonzero
+nonnegative linear combination of the $B_\lambda$, with its
+positive leading coefficient in place of $c_\lambda$.
+Rouch\'e's theorem puts all its zeros in $|z|<R$.
+
+Each $M_s$ for $s\ge3$ is divisible by $z(z^2-1)$. The values at
+$0,1$ are immediate. For odd $s$, all exponents $s/d$ are odd, so
+$M_s(-1)=0$ follows from $M_s(1)=0$. For $4\mid s$, every divisor with
+nonzero M\"obius value leaves $s/d$ even. Finally, if $s=2b$ with odd
+$b>1$, the terms $d$ and $2d$ for $d\mid b$ give
+$sM_s(-1)=2\sum_{d\mid b}\mu(d)=0$.
+Each nonempty type includes a factor $M_s+0$, so $z(z^2-1)$ divides
+$B_\lambda$ and every linear combination under consideration.
+Finally, $s\ge k\ge6$ implies the first lower term of $M_s+i$ is at
+least three degrees below its leading term. Hence the coefficients
+of degrees $n-1,n-2$ in $B_\lambda$ and in the combinations vanish.
+Lemma~\ref{lem:disc} and \eqref{eq:gr} now prove
+Theorem~\ref{thm:main}.
+
+\section{Single cycles and the finite check}
+
+For $n\ge80$, the dominant term in $nM_n(z)$ on $|z|=R$ has modulus
+$R^n$, and the sum of all other terms has modulus at most
+$2\sqrt n\,R^{n/2}$. One has $R^{n/2}>2\sqrt n$ for every $n\ge80$.
+At $n=80$ this follows from
+$R^{12}\ge59/24>12/5$ and $R^4\ge4/3$, giving
+$R^{40}>(12/5)^3(4/3)>18>2\sqrt{80}$.
+The ratio $R^{n/2}/\sqrt n$ increases for $n\ge80$ since
+$\log R>1/13>1/n$. Rouch\'e's theorem and Lemma~\ref{lem:disc}
+therefore prove the single-cycle statement for $n\ge80$.
+
+The range $1\le n\le79$ is checked separately over the integers and
+rationals. Equation~\eqref{eq:gr} gives the coefficient formula
+\[
+[t^i]D_{(n)}(t)=\sum_{j=0}^i(-1)^j
+        \binom{n+1}{j}M_n(i+1-j).
+\]
+The certificate computes the square-free part by the polynomial gcd
+with the derivative, and applies Sturm's theorem on the whole real
+line using exact rational remainders. Every square-free part has
+as many distinct real zeros as its degree. The coefficients are
+nonnegative, and $[t^0]D_{(n)}=0$ and $[t^1]D_{(n)}>0$ for $n\ge2$.
+The square-free degree equals the degree in every case except $n=5$,
+where the displayed coefficient formula gives $6t+12t^2+6t^3$.
+For $n=1,2$ the polynomials are $1,t$. This proves
+Theorem~\ref{thm:single}, with the finite computation recorded
+in the supplementary source and per-row certificates. A second,
+standard-library verifier counts primitive words by subtracting all
+proper periods, then proves real-rootedness by integer sign evaluations
+on a dyadic grid. Its sign changes account for the entire degree after
+removing the zero at the origin. It evaluates the exceptional size five
+separately.
+
+One infinite subfamily also has a direct argument without finite
+verification. For a prime power $n=p^a\ge3$,
+$nM_n(z)=z^{n/p}(z^{n-n/p}-1)$, so after removing $z(z^2-1)$,
+all remaining roots are in the closed unit disk. When $n=3$ there
+are no remaining factors. The ellipse
+argument already covers every nonreal pair, strictly unless the
+pair is $\pm i$ and is the first pair used. A real root or a
+different pair can be used first except at $n=5$. That case is
+exactly the double-zero boundary described after
+\eqref{eq:margin}.
+
+\section{Scope and prior work}
+
+The necklace formulas here come from prior enumeration results.
+Those formulas count ordinary descents of permutations with specified
+cycle type. Real-rooted results for cyclic descent counts, where
+position $n$ is also compared with position $1$, address a different
+statistic. The real-input hypotheses in Brenti's criterion for
+$f$-Eulerian numerator polynomials~\cite[Theorem 4.4.1]{Brenti}
+do not cover the necklace inputs used here, which can have nonreal
+zeros. Wagner's Hadamard closure theorem~\cite{Wagner} starts from
+polynomially interpolated sequences already known to be P\'olya
+frequency. The linear power-to-Eulerian
+transformation of Br\"and\'en and Jochemko~\cite{BJ} also differs
+from the degree-normalized rational numerator used here.
+
+For a closer comparison, write $f(z)=z(z^2-1)g(z)$. After removing
+the factor $t$ from $\PP_f$, the substitution $q=\ell+2$ in the series
+gives
+\[
+\frac{\PP_f(t)}{t}
+ =6(1-t)^{4+\deg g}\sum_{\ell\ge0}\frac{(4)_\ell}{\ell!}\,
+     g(\ell+2)t^\ell .
+\]
+This is the weighted Euler numerator of $g(z+2)$ at weight $4$,
+up to the factor $6$. Karp and Vishnyakova give an explicit
+criterion for a standalone quadratic with conjugate input roots
+to have a real-rooted weighted numerator~\cite[\S2]{KV}. Cheng and
+Xin prove that the corresponding weak root property is closed under
+multiplication of inputs~\cite[Theorem 1.1]{CX}. Our sign argument
+additionally uses the positive degree of the current transformed
+polynomial to admit larger conjugate pairs that need not be
+admissible as standalone quadratics. This degree-dependent estimate
+and the use of the two vanishing coefficients are what give the
+disk criterion applied above.
+
+We did
+not locate a previous proof of these real-rooted ranges in the
+enumeration and transformation references checked. The findings
+leave open the long-cycle descent conjecture for fixed $k\ge3$ and
+all $n$, and make no claim about the separate excedance conjecture.
+
+\begin{thebibliography}{99}
+\bibitem{Alex} P.~Alexandersson, \emph{Real-rooted polynomials: open problems},
+Symmetric Functions Catalog, 2026.
+\href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm}{Open problems}.
+\bibitem{AlexD} P.~Alexandersson, \emph{Real-rooted Eulerian polynomials
+from permutations, words, and paths}, 2026.
+\href{https://arxiv.org/abs/2609.07325}{arXiv:2609.07325}.
+\bibitem{GR}
+I.~M.~Gessel and C.~Reutenauer,
+\emph{Counting permutations with given cycle structure and descent set},
+J. Combin. Theory Ser. A \textbf{64} (1993), 189--215.
+\href{https://doi.org/10.1016/0097-3165(93)90095-P}{doi:10.1016/0097-3165(93)90095-P}.
+
+\bibitem{GZ}
+I.~M.~Gessel and Y.~Zhuang,
+\emph{Plethystic formulas for permutation enumeration}.
+\href{https://arxiv.org/abs/2001.00654}{arXiv:2001.00654}.
+
+\bibitem{DMP}
+P.~Diaconis, M.~McGrath, and J.~Pitman,
+\emph{Riffle shuffles, cycles, and descents},
+Combinatorica \textbf{15} (1995), 11--29.
+\href{https://doi.org/10.1007/BF01294457}{doi:10.1007/BF01294457}.
+
+\bibitem{ET}
+S.~Elizalde and J.~M.~Troyka,
+\emph{Exact and asymptotic enumeration of cyclic permutations according to descent set},
+J. Combin. Theory Ser. A \textbf{165} (2019), 360--391.
+\href{https://arxiv.org/abs/1710.05103}{arXiv:1710.05103}.
+
+\bibitem{BJ}
+P.~Br\"and\'en and K.~Jochemko, \emph{The Eulerian transformation}.
+\href{https://arxiv.org/abs/2103.00890}{arXiv:2103.00890}.
+
+\bibitem{Brenti}
+F.~Brenti, \emph{Unimodal, log-concave and P\'olya frequency sequences
+in combinatorics}, Mem. Amer. Math. Soc. \textbf{81} (1989), no.~413.
+\href{https://doi.org/10.1090/memo/0413}{doi:10.1090/memo/0413}.
+
+\bibitem{Wagner}
+D.~G.~Wagner, \emph{Total positivity of Hadamard products},
+J. Math. Anal. Appl. \textbf{163} (1992), 459--483.
+\href{https://doi.org/10.1016/0022-247X(92)90261-B}{doi:10.1016/0022-247X(92)90261-B}.
+
+\bibitem{KV}
+D.~Karp and A.~Vishnyakova, \emph{Generalized $f$-Eulerian polynomials:
+zeros and hypergeometric representations with applications}, Linear
+Algebra Appl. (2026).
+\href{https://doi.org/10.1016/j.laa.2026.06.024}{doi:10.1016/j.laa.2026.06.024}.
+
+\bibitem{CX}
+Y.~Cheng and G.~Xin, \emph{Weighted Euler transforms, real-rootedness,
+and $\gamma$-positivity}.
+\href{https://arxiv.org/abs/2611.17839}{arXiv:2611.17839}.
+\end{thebibliography}
+
+\end{document}
