@@ -1,0 +1,123 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newcommand{\bin}[2]{\binom{#1}{#2}}
+\title{Splitting a bound can destroy interlacing\protect\\for slices of prisms}
+\author{}
+\date{25 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Ferroni and McGinnis conjectured that splitting a coordinate bound of
+an integral prism slice produces interlacing Ehrhart $h^*$-polynomials.
+We give counterexamples for every central slice of a box with bounds
+$(1^{2a-2},2)$ and $a\ge6$. For $a\ge7$, Ehrhart reciprocity and
+Vieta's formula yield a contradiction using only the top two coefficients.
+At $a=6$ both polynomials have simple negative roots, and an integer
+separates their leftmost roots in the forbidden order.
+\end{abstract}
+
+For positive integers $c_1,\ldots,c_s$ and $0<k<\sum_i c_i$, put
+\[
+ R_{k,c}=\{x\in\mathbb R^s:0\le x_i\le c_i,\quad \textstyle\sum_i x_i=k\}.
+\]
+This is a lattice polytope of dimension $D=s-1$. Write $H_{k,c}$ for its
+Ehrhart $h^*$-polynomial, so that its lattice counts $L(t)$ satisfy
+$\sum_{t\ge0} L(t)z^t=H_{k,c}(z)/(1-z)^{D+1}$.
+Ferroni and McGinnis \cite[Conjecture~5.12]{fm} ask whether all these
+numerators are real-rooted, and whether splitting $c_s\ge2$ into
+$c_s-1,1$ makes the two numerators interlace. We disprove the latter
+assertion. The individual real-rootedness question remains open.
+
+\begin{theorem}
+For each integer $a\ge6$, the polynomials
+$P=H_{a,(1^{2a-2},2)}$ and $Q=H_{a,(1^{2a})}$ do not interlace.
+\end{theorem}
+
+\begin{proof}
+The two slices are central. Since their centers are interior to their
+boxes, the relative interior of a slice is given by strict coordinate
+bounds. The dimensions of the two slices are $D_P=2a-2$ and $D_Q=2a-1$.
+Let $L^\circ$ count the lattice points in the relative interior of a
+positive integer dilation. Ehrhart reciprocity gives
+\begin{equation}\label{recip}
+ \sum_{t\ge1}L^\circ(t)z^t=
+   \frac{z^{D+1}H_{k,c}(1/z)}{(1-z)^{D+1}}.
+\end{equation}
+For both slices $L^\circ(1)=0$ and $L^\circ(2)=1$. In the second
+dilation all unit-bound coordinates must be one, and the sum forces the
+exceptional coordinate of the first slice to be two. By
+\eqref{recip}, each numerator is monic of degree $D-1$, and its next
+leading coefficient is $L^\circ(3)-(D+1)$.
+
+Put $b=a-1$. In the third dilation of the first slice the exceptional
+coordinate ranges from one to five. The other $2b$ coordinates are one
+or two and their sum determines the exceptional coordinate. Therefore
+\[
+ L_P^\circ(3)=\bin{2b}{b}+2\bin{2b}{b-1}+2\bin{2b}{b-2}.
+\]
+In the second slice exactly $a$ of the $2a$ coordinates are two, so
+$L_Q^\circ(3)=\bin{2a}{a}$. Write $p$ and $q$ for the next leading
+coefficients of $P$ and $Q$. Subtracting, we obtain
+\begin{equation}\label{gap}
+ p-q=1+\bin{2b}{b}\frac{b^2-5b-2}{(b+1)(b+2)}.
+\end{equation}
+This is positive for $b\ge6$.
+
+If the roots interlaced, they would all be negative, by nonnegativity
+of the Ehrhart numerators and their positive constant terms. Since
+$Q$ has one higher degree, writing the zeros in increasing order
+would give $v_1\le u_1\le v_2\le\cdots\le u_m\le v_{m+1}<0$,
+with the $u_i$ from $P$. Hence
+\[
+ p=-\sum_{i=1}^m u_i\ \le\ -\sum_{i=1}^m v_i
+ \ <\ -\sum_{i=1}^{m+1}v_i=q.
+\]
+This contradicts \eqref{gap} for $a\ge7$. Already at $a=7$ the two
+coefficients are $3485$ and $3418$.
+
+At $a=6$ the Ehrhart numerators have the following coefficients.
+\begin{center}\small
+\begin{tabular}{r|r|r@{\qquad}r|r|r}
+$i$&$[z^i]P$&$[z^i]Q$&$i$&$[z^i]P$&$[z^i]Q$\\\hline
+0&1&1&6&347986&3834832\\
+1&661&912&7&38686&878932\\
+2&31846&62767&8&901&62767\\
+3&312146&878932&9&1&912\\
+4&927706&3834832&10&0&1\\
+5&960774&6169360&&&\end{tabular}
+\end{center}
+For explicit reproduction, the entries are
+\[
+ [z^j]H_{k,c}(z)=\sum_{t=0}^j(-1)^{j-t}\bin{s}{j-t}
+       [u^{kt}]\prod_{i=1}^s(1+u+\cdots+u^{tc_i}).
+\]
+We have $P(-850)=1625988474636775883423151>0$. Its odd degree and
+positive leading coefficient force a root below $-850$. For the other
+numerator, direct binomial expansion of the displayed table gives
+\[
+ [y^i]Q(-850-y)=(-1)^i\sum_{j=i}^{10}\bin ji(-850)^{j-i}[z^j]Q(z)>0
+ \quad(0\le i\le10).
+\]
+Thus $Q$ has no root at or below $-850$. The smaller-degree polynomial
+has a root to the left of every real root of the larger-degree one,
+which rules out interlacing.
+\end{proof}
+
+\paragraph{Exact checks.}
+The accompanying certificate gives disjoint rational sign-change intervals
+for all nine and all ten roots at $a=6$. The two leftmost intervals are
+$(-857,-856)$ and $(-839,-838)$. Each polynomial separately has only
+simple negative roots. The verifier obtains all lattice counts again by
+bounded-composition inclusion--exclusion and evaluates endpoint signs
+using integer or rational arithmetic. The argument for $a\ge7$ requires
+no computation of roots.
+
+\begin{thebibliography}{9}
+\bibitem{fm} L. Ferroni and D. McGinnis, Lattice points in slices of prisms,
+\emph{Canadian Journal of Mathematics} 77 (2025), 1013--1040.
+\href{https://doi.org/10.4153/S0008414X24000233}{doi:10.4153/S0008414X24000233}.
+\end{thebibliography}
+\end{document}
