@@ -1,6 +1,6 @@
 # Splitting a prism-slice bound can destroy interlacing
 
-For every integer $a\ge6$, the slice of level $a$ with bounds $(1^{2a-2},2)$ and the slice obtained by splitting the final bound into $(1,1)$ have Ehrhart numerators that fail to interlace. This disproves the splitting clause of Ferroni–McGinnis Conjecture 5.12. Individual real-rootedness for general prism slices remains open. [Original conjecture](https://doi.org/10.4153/S0008414X24000233)
+For every integer $a\ge6$, the slice of level $a$ with bounds $(1^{2a-2},2)$ and the slice obtained by splitting the final bound into $(1,1)$ have Ehrhart numerators that fail to interlace. This disproves the splitting clause of Ferroni–McGinnis Conjecture 5.12. Individual real-rootedness for general prism slices remains open. [Published Conjecture 5.12, §5.3, p. 1034 (PDF page 22)](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/BD4DAAE19B3FBECB840B658A189198ED/S0008414X24000233a.pdf/lattice-points-in-slices-of-prisms.pdf#page=22)
 
 At $a=6$, the degree-nine numerator has a root below $-850$ and the degree-ten numerator is strictly positive there. Both have simple negative roots. For $a\ge7$, their next leading coefficients contradict the ordering of root sums that interlacing requires. [Full disproof](paper.pdf) · [Manuscript source](paper.tex) · [Exact coefficient vectors](certificates/transport_split.json)
 
