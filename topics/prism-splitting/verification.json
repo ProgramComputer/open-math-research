@@ -1,7 +1,7 @@
 {
   "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
   "mathlib": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
-  "method": "Fresh Lean process per source, single thread, using an empty project object directory before compiling dependencies. Source digests are SHA-256.",
+  "method": "Each source was compiled with pinned Lean and mathlib. The finite prism dependency chain was rebuilt by Lake with an empty project object directory. Module entries record source SHA-256, exit code and printed kernel axiom dependencies.",
   "modules": [
     {
       "file": "topics/prism-splitting/lean/PrismSplit.lean",
@@ -54,6 +54,33 @@
         "'PrismSplit.ehrhartNumerator_eq_series_prefix' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'PrismSplit.ehrhartNumerator_of_seriesPolynomial' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'PrismSplit.integerPointSeriesPolynomialsDoNotInterlace' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/prism-splitting/lean/PrismSeriesClosure.lean",
+      "sha256": "af43e475a78d1892906173f624e3fa86c7acfb49ce365e5a45c4e0da5454e30f",
+      "exit_code": 0,
+      "kernel_output": [
+        "'PrismSplit.unsplitEhrhartSeries' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.splitEhrhartSeries' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.ehrhartPolynomialsDoNotInterlace' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/prism-splitting/lean/PrismDimensions.lean",
+      "sha256": "1ba0a0455a8a13ba2739afc7da173ecc5d44c8d5fc7137929e253dc79615df59",
+      "exit_code": 0,
+      "kernel_output": [
+        "'PrismSplit.realFinSlice_eq_box_intersection' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.ofFn_image_realFinSlice' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.unsplitAffineDimension' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.splitAffineDimension' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.finLatticeEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.unsplitFinEhrhartSeries' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.splitFinEhrhartSeries' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.unsplitEhrhartDegree' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.splitEhrhartDegree' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.finBoxSplitCounterexample' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
     }
   ]

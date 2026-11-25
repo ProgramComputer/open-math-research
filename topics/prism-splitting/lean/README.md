@@ -1,5 +1,7 @@
-# Lean verification of prism-slice splitting
+# Formal proof of the prism counterexample
 
-[PrismSplit](PrismSplit.lean) defines the bounded-composition count and proves the root separation. [PrismCounts](PrismCounts.lean) checks each of the 23 samples. [PrismGeometry](PrismGeometry.lean) identifies these counts with lattice points in actual dilations and relates their finite differences to the normalized count series. [PrismFamily](PrismFamily.lean) proves the binomial and Vieta obstruction for the infinite family.
+The final theorem `PrismSplit.finBoxSplitCounterexample` identifies the two full Ehrhart numerators for the published split at level six and proves they cannot interlace. It has no additional hypotheses. [Final Lean source](PrismDimensions.lean) · [Definitions, dimensions and verification](Dimensions.md)
 
-The [geometry report](Geometry.md) states the remaining Ehrhart hypotheses in this version. [Kernel outputs](../verification.json) give the source digests and printed axiom dependencies. [Shared build instructions](../../../shared/lean/README.md)
+The proof goes from [bounded compositions](PrismSplit.lean) and [count certificates](PrismCounts.lean) to [geometric dilations](PrismGeometry.lean), the [entire count series](PrismSeriesClosure.lean), and the actual affine dimensions and root obstruction. The separate [infinite-family module](PrismFamily.lean) proves the algebraic obstruction given the identified coefficients.
+
+From the [shared Lean project](../../../shared/lean/README.md), run `lake build PrismDimensions`. [Recorded source digests and kernel reports](../verification.json)

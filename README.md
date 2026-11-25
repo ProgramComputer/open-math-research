@@ -4,13 +4,13 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 | Result | Outcome | Formal verification |
 |---|---|---|
-| [Splitting a prism-slice bound can destroy interlacing](topics/prism-splitting/README.md) | Disproof for an infinite family | 🟨 Partial · Lean 4 |
+| [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an explicit counterexample | 🟩 Full · Lean 4 |
 
 **Formal proof key**　🟩 Full　·　🟨 Partial　·　⬜ None
 
 ## Partial work
 
-- The [prism-slice formalization](topics/prism-splitting/lean/README.md) checks the finite lattice-point and root certificates and the infinite family's coefficient obstruction.
+- The [infinite-family strengthening](topics/prism-splitting/README.md) extends the counterexample to every $a\ge6$. Its geometric coefficient identification for general $a$ is still being formalized.
 
 ## Citation
 
