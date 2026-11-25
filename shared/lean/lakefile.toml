@@ -1,6 +1,6 @@
 name = "open_math_research"
 version = "0.1.0"
-defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples"]
+defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression"]
 
 [[require]]
 name = "mathlib"
@@ -38,3 +38,7 @@ srcDir = "../../topics/ribbon-matroids/lean"
 [[lean_lib]]
 name = "RibbonExamples"
 srcDir = "../../topics/ribbon-matroids/lean"
+
+[[lean_lib]]
+name = "BalancedPairCompression"
+srcDir = "../../topics/balanced-arrays/lean"

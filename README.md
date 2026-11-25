@@ -5,14 +5,16 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | Result | Outcome | Formal verification |
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an explicit counterexample | 🟩 Full · Lean 4 |
+| [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Partial theorem for every fixed rank and dimension | 🟨 Partial · Lean 4 |
 | [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
 | [Ribbon matroids have the Narayana polynomial](topics/ribbon-matroids/README.md) | Proof | 🟨 Partial · Lean 4 |
 
-**Lean or Rocq key**　🟩 Full statement　·　🟨 Named components　·　⬜ No checked proof
+**Lean or Rocq key**　🟩 Full (entire statement) · 🟨 Partial (named components) · ⬜ None (no checked proof)
 
 ## Partial work
 
 - The [infinite-family strengthening](topics/prism-splitting/README.md) extends the counterexample to every $a\ge6$. Its geometric coefficient identification for general $a$ is still being formalized.
+- For [balanced arrays](topics/balanced-arrays/README.md), the large-row theorem has an unspecified threshold $N(d,r)$. The all-row claim remains open.
 - For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.
 
 ## Citation

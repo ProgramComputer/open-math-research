@@ -1,0 +1,782 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=1in]{geometry}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<->cmex10}{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\DeclareMathOperator{\CT}{CT}
+\DeclareMathOperator{\Arg}{arg}
+\newcommand{\dd}{\mathrm d}
+
+\title{Eventual real-rootedness of balanced array polynomials with fixed column count}
+\hypersetup{pdftitle={Eventual real-rootedness of balanced array polynomials with fixed column count}}
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begingroup
+  \centering\LARGE\@title\par
+  \endgroup
+  \vspace{0.4\baselineskip}}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study the polynomial that counts binary arrays with equal column
+sums and a prescribed bound on the row sums, weighted by the common
+column sum. At any fixed column count and fixed proper row cap, we prove
+that all zeros are eventually simple and negative as the number of rows
+increases, and that successive polynomials then strictly interlace.
+A discrete sine comparison identifies two dominant diagonal points of a
+torus integral. Uniform saddle estimates and the absolute indexing of
+zeros in two entire endpoint limits account for every zero.
+\end{abstract}
+
+\begin{theorem}\label{thm:main}
+Fix integers \(d\ge2\) and \(1\le r<d\). Let \(a_{n,k}\) count labeled
+\(n\times d\) binary arrays with each column sum equal to \(k\) and each
+row sum at most \(r\). Put
+\[
+P_n(q)=\sum_k a_{n,k}q^k,\qquad D_n=\lfloor nr/d\rfloor.
+\]
+There is \(N(d,r)\) such that for \(n\ge N(d,r)\) the \(D_n\) zeros of
+\(P_n\) are simple and negative. The pair \(P_n,P_{n+1}\) strictly
+interlaces, with the rightmost zero belonging to \(P_{n+1}\), whenever
+there are zeros to compare.
+\end{theorem}
+
+The balanced-array conjecture asks for real-rootedness for every
+\(n,d,r\) \cite{balanced}. Its discussion reports a preliminary local
+eventual argument at \(d=4,r=2\) based on endpoint limits and saddle
+estimates. Here the threshold is existential for each fixed pair
+\((d,r)\). The result gives a large-row theorem throughout the proper
+row caps. It leaves the general finite gap to the all-row conjecture.
+
+For \(n\ge1\), every integer \(k\) from \(0\) to \(D_n\) is feasible.
+Take \(dk\) consecutive positions in a cyclic list of the \(n\) row
+labels and use successive blocks of \(k\) positions to mark the ones in
+successive columns. Each block uses distinct labels, and every row
+receives at most \(\lceil dk/n\rceil\le r\) ones. This proves the
+degree assertion together with the necessary inequality \(dk\le nr\).
+
+When \(d=2,r=1\), direct enumeration gives
+\(a_{n,k}=n!/((n-2k)!(k!)^2)\).
+The generating function in \(n\) is
+\[
+\sum_{n\ge0}P_n(q)x^n=\big(1-2x+(1-4q)x^2\big)^{-1/2},
+\]
+by the constant term of \((1+\sqrt q(z+z^{-1}))^n\).
+Thus for \(q<0\),
+\[
+P_n(q)=(1-4q)^{n/2}L_n\big((1-4q)^{-1/2}\big),
+\]
+where \(L_n\) is the Legendre polynomial \cite{dlmf}.
+Its positive zeros are simple and correspond to negative zeros
+under the increasing map \(y\mapsto(1-y^{-2})/4\).
+Parity gives exactly \(\lfloor n/2\rfloor\) positive zeros of \(L_n\).
+The interlacing of successive Legendre polynomials, restricted to
+their positive zeros, gives the desired directed interlacing.
+In the rest of the proof assume \(d\ge3\).
+
+\section{Endpoint limits}
+
+We first establish the limiting behavior needed at the ends.
+Suppress the subscript in \(D=D_n\), and put
+\[
+s=nr-dD,\quad
+\gamma=\frac{\binom d{r-1}}{\binom dr}=\frac{r}{d-r+1},\quad
+E_d(x)=\sum_{j\ge0}\frac{x^j}{(j!)^d},\quad
+H_s(x)=\sum_{j\ge0}\frac{x^j}{(dj+s)!}.
+\]
+
+\begin{lemma}\label{lem:limits}
+The following limits hold locally uniformly in \(x\in\mathbb C\),
+with \eqref{eq:reverse} taken along the residue \(s\).
+\begin{align}
+P_n(x/n^d)&\longrightarrow E_d(x),\label{eq:forward}\\
+n\big(P_{n+1}(x/n^d)-P_n(x/n^d)\big)&\longrightarrow d x E_d'(x),
+\label{eq:difference}\\
+\sum_{j=0}^{D}\frac{a_{n,D-j}}{a_{n,D}}
+      \left(\frac{x}{(\gamma n)^d}\right)^j&\longrightarrow s!H_s(x).
+\label{eq:reverse}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+The unrestricted count \(b_{n,k}=\binom nk^d\) is obtained by choosing
+the column supports independently. A union bound over rows and over
+sets of \(r+1\) columns gives, for \(0\le k\le n\),
+\[
+0\le b_{n,k}-a_{n,k}
+ \le n\binom d{r+1}(k/n)^{r+1} b_{n,k}.
+\]
+For fixed \(k\), \(a_{n,k}/n^{dk}\to1/(k!)^d\), and this expression is
+bounded by \(1/(k!)^d\) for all \(k\). This proves \eqref{eq:forward}.
+At fixed \(k\), the unrestricted differences satisfy
+\(n(b_{n+1,k}-b_{n,k})/n^{dk}\to dk/(k!)^d\) by the binomial ratio.
+Pascal's identity bounds the scaled differences by
+\(e^{2d}dk/(k!)^d\) on \(k\le n+1\), since
+\(b_{n+1,k}-b_{n,k}\le dk(n+1)^{dk-1}/(k!)^d\).
+For \(r\ge2\), the two capped-to-unrestricted errors after the same
+scaling vanish at fixed \(k\), and the union bound dominates them
+by a constant times \(k^{r+1}/(k!)^d\). This proves
+\eqref{eq:difference} in that case.
+For \(r=1\) the column supports must be disjoint, so
+\(a_{n,k}=(n)_{dk}/(k!)^d\) with a falling factorial in the numerator.
+The constant coefficient is fixed, and for \(k\ge1\) the identity
+\((n+1)_{dk}-(n)_{dk}=dk(n)_{dk-1}\) proves the same limit with
+majorant \(dk/(k!)^d\).
+
+We give the lattice estimate used for \eqref{eq:reverse}.
+Write \(h=d-1\), and let \(Y\in\mathbb Z^h\) be the indicator vector
+of the first \(h\) positions of a uniformly random \(r\)-subset of
+\([d]\). Write \(\iota=(1,\ldots,1)^\top\) for the \(h\)-dimensional ones vector.
+The mean is \(\mu=(r/d)\iota\), and the covariance is
+\[
+\Sigma=\frac{r(d-r)}{d(d-1)}
+       \left(I_h-\frac1d\iota\iota^\top\right)>0.
+\]
+Indeed the diagonal variances are \(r(d-r)/d^2\), and the off-diagonal
+covariances are \(-r(d-r)/(d^2(d-1))\). The support differences
+include each standard basis vector, by fixing \(r-1\) positions
+outside \(\{i,d\}\) and adjoining either \(i\) or \(d\).
+Thus the characteristic function \(\varphi(t)=\mathbb E e^{it\cdot Y}\)
+has modulus one on \([-\pi,\pi]^h\) only at \(0\).
+For \(S_M\) a sum of \(M\) independent copies of \(Y\), Fourier
+inversion and the centered expansion
+\[
+e^{-it\cdot\mu}\varphi(t)=1-\frac12 t^\top\Sigma t+O(\|t\|^3)
+\]
+give
+\begin{align*}
+\sup_v\Pr(S_M=v)&=O_{d,r}((M+1)^{-h/2}),\\
+\Pr(S_M=v)&=M^{-h/2}\big(\kappa+o(1)\big)
+   \quad(\|v-M\mu\|\le B),
+\end{align*}
+where \(v\) ranges over \(\mathbb Z^h\), the last estimate is
+uniform for bounded \(B\), and
+\(\kappa=(2\pi)^{-h/2}(\det\Sigma)^{-1/2}\).
+For the upper bound use \(|\varphi(t)|\le e^{-c\|t\|^2}\)
+near zero and a strict compact modulus gap on the rest of the
+cube. For the asymptotic, rescale the integral by \(t=w/\sqrt M\)
+in the small neighborhood. The phase from \(v-M\mu\) tends
+uniformly to 1 on compact sets of \(w\), the centered power
+converges to \(e^{-w^\top\Sigma w/2}\), and Gaussian domination
+controls the tails. This also fixes the lattice factor.
+
+Set \(A=\binom dr\) and \(b_i=\binom d{r-i}/A\) for \(1\le i\le r\).
+A row of size \(r-i\) has deficiency \(i\). At column sum \(D-j\),
+the total deficiency is \(e=s+dj\). Without balance the count is
+\[
+U_{n,e}=A^n[z^e]\left(1+\sum_{i=1}^{r}b_i z^i\right)^n.
+\]
+For fixed \(e\) the leading term comes from \(e\) rows of deficiency
+one, hence \(U_{n,e}\sim A^n n^e\gamma^e/e!\).
+Conditional on the ordered row sizes, choose rows independently
+and uniformly among subsets of those sizes. There are \(M\)
+regular rows of size \(r\), with \(M=n-O(e)\). Given all deficient
+rows, the targets of the first \(h\) projected regular column
+counts differ from \(M\mu\) by \(O(e)\), since
+\((D-j)-nr/d=-e/d\) and at most \(e\) rows are deficient.
+Once those \(h\) targets are reached, the last column sum follows
+from the fixed total. At fixed \(e\) the Fourier asymptotic thus
+gives
+\[
+a_{n,D-j}\sim \kappa A^n n^{e-h/2}\gamma^e/e!.
+\]
+It follows that the coefficient of \(x^j\) in the reverse scaling
+tends to \(s!/(s+dj)!\).
+
+To dominate the coefficients uniformly in \(j\), put
+\(W_e=[z^e]\exp(\sum_{i=1}^r b_i z^i)\).
+Choosing the deficient rows first gives \(U_{n,e}\le A^n n^e W_e\):
+there are at most \(e\) deficient rows, and
+\(\binom n v\le n^v/v!\) for their number \(v\).
+If \(e\le n/2\), the Fourier upper bound supplies a factor
+\(O_{d,r}(n^{-h/2})\) on the conditional balance probability, since
+\(M\ge n/2\). If \(e>n/2\), use probability at most one, and
+\(n^{h/2}\le(2e)^{h/2}\).
+A uniform lower bound for the top coefficient follows from its
+asymptotic with \(e=s\), since only finitely many residues occur.
+Altogether the coefficient at \(j\) in \eqref{eq:reverse} is at
+most
+\[
+C_{d,r}(1+e)^{h/2}\gamma^{-dj}W_e,\qquad e=s+dj.
+\]
+For each \(R>0\), \(W_e\le R^{-e}\exp(\sum_i b_i R^i)\).
+Choosing \(R\) sufficiently large gives a summable majorant on
+any specified disk in \(x\). This proves \eqref{eq:reverse}.
+\end{proof}
+
+\begin{lemma}\label{lem:simple}
+The functions \(E_d,H_0,\ldots,H_{d-1}\) have infinitely many
+simple negative zeros. If \(\eta_{s,i}\) is the \(i\)-th zero
+of \(H_s\) from the right, then
+\[
+\eta_{0,i}>\eta_{1,i}>\cdots>\eta_{d-1,i}>\eta_{0,i+1}.
+\]
+\end{lemma}
+
+\begin{proof}
+The negative zero location is a special case of the hyper-Bessel
+zero theorem \cite[Theorem 2]{hyperbessel}. In generalized
+hypergeometric notation, \(E_d\) is \({}_0F_{d-1}\) with all
+denominator parameters one. The function \(s!H_s\) has
+parameters \((s+1)/d,\ldots,(s+d)/d\) with the parameter one
+removed, at argument \(x/d^d\). Their series give order at
+most \(1/d<1\). For instance, the absolute series for \(E_d\)
+is bounded by \((\sum_{j\ge0}|x|^{j/d}/j!)^d\), and that for
+\(H_s\) by \(e^{|x|^{1/d}}\) for \(|x|\ge1\).
+Hadamard factorization gives infinitely many zeros and a
+genus-zero product because these functions are nonpolynomial.
+
+Put \(\vartheta=x\partial_x\). The coefficient identities are
+\[
+\vartheta^d E_d=xE_d,\qquad
+\prod_{\nu=0}^{d-1}(d\vartheta+s-\nu)H_s=xH_s.
+\]
+Each intermediate function in either operator product has
+only real nonpositive zeros. Indeed canonical product
+truncations approximate the initial functions locally uniformly
+by polynomials with such zeros. The operators \(\vartheta\)
+and \(\vartheta+\alpha\) for \(\alpha>0\) preserve this property.
+The former follows from Rolle's theorem. For the latter,
+on simple negative roots the values \(xf'(x)\) alternate, and
+the sign at zero gives the final sign change, accounting for
+the degree. Approximation handles multiple roots and zeros at zero.
+In the product for \(H_s\), apply \(d\vartheta\) first, obtaining
+a factor \(x\). Each remaining factor on the quotient is
+\(d\vartheta+d+s-\nu\) with positive constant.
+The operators pass to locally uniform limits. Their intermediate
+functions are nonpolynomial of order below one by their series.
+
+If \(f\) has a zero of multiplicity \(h_0\ge1\) at a negative
+point, \(d\vartheta+\alpha\) lowers it to \(h_0-1\).
+If \(f\) is nonzero there, use its genus-zero product to obtain
+\[
+\frac{\dd}{\dd x}\left(\frac{f'}{f}+\frac{\alpha}{dx}\right)
+=-\sum_{\rho:f(\rho)=0}\frac1{(x-\rho)^2}-\frac{\alpha}{dx^2}.
+\]
+This is strictly negative for \(\alpha\ge0\), and also if \(f\)
+already vanishes at zero and \(\alpha>-d\), using that zero's
+contribution. Thus any newly introduced negative zero is simple
+for the factors above. This also applies to \(\vartheta\) by
+scaling. An initial multiplicity at least two would strictly
+decrease across the product, contradicting its preservation
+by the right-hand side \(xf\). This proves simplicity.
+
+For \(s\ge1\), \((d\vartheta+s)H_s=H_{s-1}\).
+The logarithmic derivative of \(H_s\) plus \(s/(dx)\)
+goes strictly from positive infinity to negative infinity
+in each gap and in the rightmost interval ending at zero.
+The unmodified logarithmic derivative of \(H_0\) is positive
+on its rightmost interval, and \(dH_0'=H_{d-1}\) gives the
+closing comparison. These facts yield the displayed order.
+\end{proof}
+
+\section{The two dominant points of the torus integral}
+
+Put \(\phi=\pi/d\), \(\zeta=e^{i\phi}\), \(a_j=\binom dj\), and
+\[
+R(t,y)=\sum_{j=0}^r t^j e_j(y),\qquad
+F(z)=\sum_{j=0}^r a_j z^j,\qquad S(t)=F(t\zeta).
+\]
+Here \(e_j\) is the \(j\)-th elementary symmetric polynomial.
+Integrate on the torus of unit coordinates \(y_i\) with product
+\(-1\), using independent uniform angles for the first \(d-1\)
+coordinates and \(y_d=-1/\prod_{i<d}y_i\).
+Then for \(t>0\),
+\begin{equation}\label{eq:torus}
+P_n(-t^d)=\int R(t,y)^n\,\dd y,
+\end{equation}
+where the measure has mass one. Indeed this constant term
+selects equal exponents \(k\) in all coordinates and gives
+factor \((-t^d)^k\).
+
+\begin{lemma}\label{lem:dominance}
+For every \(t>0\) the modulus of \(R\) has exactly two
+maximizing points on this torus, the all-\(\zeta\) point and
+its conjugate. Both are nondegenerate maxima of \(\log|R|\).
+\end{lemma}
+
+\begin{proof}
+First, for integers \(1\le j<d\) and \(1\le k\le d\),
+\begin{equation}\label{eq:sines}
+\left|\frac{\sin(kj\phi)}{\sin(j\phi)}\right|
+ \le \frac{\sin(k\phi)}{\sin\phi}.
+\end{equation}
+Both sides are zero if \(k=d\). Otherwise use the symmetries
+\(j\mapsto d-j\), \(k\mapsto d-k\) to take \(j,k\le d/2\).
+The case \(k=1\) is immediate. For \(k\ge2\) and
+\(x=j\phi\le\pi/k\), the nonnegative ratio
+\(\sin(kx)/\sin x\) decreases on \((0,\pi/k)\), since its
+logarithmic derivative is \(k\cot(kx)-\cot x<0\) by the
+strict decrease of \(u\cot u\) on \((0,\pi)\). For
+\(\pi/k\le x\le\pi/2\), the ratio in absolute value is at
+most \(1/\sin(\pi/k)\le k/2\), while
+\(\sin(k\phi)/\sin\phi\ge2k/\pi>k/2\).
+This proves \eqref{eq:sines}.
+
+Consider the diagonal values \(F(te^{i\alpha})\) with
+\(\alpha\) an odd multiple of \(\phi\). In the coefficient
+of \(t^s\) in \(|F(te^{i\alpha})|^2\), the frequencies are
+\(2i-s\) with weights \(\binom di\binom d{s-i}\) over
+\(\max(0,s-r)\le i\le\min(s,r)\).
+The weights are symmetric and increase to the center, by
+the consecutive binomial ratios. Decompose them into
+nonnegative layers on nested centered intervals. The
+frequencies on a layer have form \(-m,-m+2,\ldots,m\),
+with \(m\le r\), so their exponential sum is
+\(\sin((m+1)\alpha)/\sin\alpha\).
+At \(\alpha=j\phi\), \(1\le j<d\), \eqref{eq:sines}
+bounds every coefficient by its value at \(\phi\).
+For \(j>1\) the coefficient of \(t\), namely
+\(2d\cos(j\phi)\), is strictly smaller. Conjugation
+handles the negative angles.
+
+There remains \(\alpha=\pi\) when \(d\) is odd.
+Let \(u_i=a_i t^i\) for \(0\le i\le r\) and choose a peak
+\(p\). Consecutive ratios \(u_{i+1}/u_i\) strictly decrease
+when two such ratios exist. Positive superlevel sets
+are intervals containing \(p\). On any such interval the
+alternating sum at \(\pi\) has absolute value at most one,
+so \(|F(-t)|\le u_p\) by summing the threshold layers.
+For the evaluation at \(\phi\), project each interval's
+geometric sum onto the direction \(e^{ip\phi}\).
+For length \(L\le d\) this projection is minimized when
+the peak is an endpoint of the interval. Its minimum is
+\[
+\frac{\sin(L\phi/2)\cos((L-1)\phi/2)}{\sin(\phi/2)}
+ =\frac12\left(1+\frac{\sin((2L-1)\phi/2)}{\sin(\phi/2)}\right)
+ \ge1.
+\]
+The bound is strict if \(1<L<d\), or if \(L=d\) and \(p\)
+is interior. If \(r+1<d\), the full support gives strictness.
+If \(r+1=d\) and an interior peak exists, choose it.
+Otherwise the unique peak is an endpoint, and the strict
+ratio inequalities force a layer of length two with
+positive weight. Since odd \(d\ge3\), this layer also gives
+strictness. Thus \(|S(t)|>u_p\ge|F(-t)|\).
+The only diagonal maximizers are the nearest conjugate pair.
+
+To lift the comparison to the torus, take any connected
+component of the compact maximizing set, and maximize
+\(|\sum_i y_i|\) on it. If \(y_i\ne y_j\) at this point,
+hold their product and all other coordinates fixed. Their
+sum ranges continuously on the full segment from
+\(-2\sqrt{y_i y_j}\) to \(2\sqrt{y_i y_j}\), with current
+sum in its interior. Symmetry and multiaffinity make \(R\)
+affine in the pair sum. Unless the slope is zero, strict
+convexity of the squared modulus excludes an interior
+maximum. If the slope vanishes, the full pair variation
+stays in the same maximizing component, while
+\(|\sum_i y_i|^2\) is strictly convex along the segment.
+This contradicts the auxiliary maximum. Every maximizing
+component therefore contains a diagonal point, which must
+be one of the two preferred ones.
+
+At the all-\(\zeta\) point put \(z=t\zeta\) and
+\(B(z)=\sum_{\ell=0}^{r-1}\binom{d-2}{\ell}z^\ell\).
+Its terms lie in a sector of width \((r-1)\phi<\pi\), so
+\(B(z)\ne0\). Perturbing a pair of angles by \(p,-p\)
+changes \(S\) to \(S+2zB(z)(\cos p-1)\).
+Maximality compared to \(p=\pi\) gives
+\[
+\Re(zB(z)\overline S)\ge 2|zB(z)|^2>0.
+\]
+In angular displacements \(p_i\) with \(\sum_i p_i=0\),
+write \(Q=\sum_i p_i^2\). Expanding each elementary
+symmetric polynomial gives
+\begin{equation}\label{eq:quadratic}
+\log(R/S)=-\lambda(t)Q/2+O(\|p\|^3),
+ \qquad \lambda(t)=\frac{zB(z)}{S(t)}.
+\end{equation}
+Indeed \(\sum_{|I|=j}(\sum_{i\in I}p_i)^2
+=\binom{d-2}{j-1}Q\). The branch of the logarithm
+vanishes at the point. The displayed real-part inequality
+gives \(\Re\lambda>0\), so both diagonal maxima are
+nondegenerate and isolated. Each maximizing component
+contains one of these and hence is a singleton.
+\end{proof}
+
+\section{Uniform overlap estimates}
+
+Put \(\nu=(d-1)/2\),
+\(\theta(t)=\Arg S(t)\),
+\(\Psi_n(t)=n\theta(t)-\nu\Arg\lambda(t)\), and
+\[
+C_n(t)=\frac{\sqrt d\,(2\pi n)^\nu|\lambda(t)|^\nu}{2|S(t)|^n}.
+\]
+Use the arguments \(\theta\in(0,r\phi)\),
+\(\Arg\lambda\in(-\pi/2,\pi/2)\).
+All terms of \(S\) lie in a sector of width \(r\phi<\pi\),
+and \(\Im S>0\).
+
+\begin{lemma}\label{lem:overlap}
+For a common fixed sufficiently large \(K\), and all sufficiently
+large \(n\), the following two estimates hold on
+\(K/n\le t\le\gamma n/K\):
+\begin{align}
+ |C_n P_n(-t^d)-\cos\Psi_n|&<\tfrac12,\label{eq:sign}\\
+ \left|\frac{C_n}{\Im S}
+ \big(P_{n+1}(-t^d)-(\Re S)P_n(-t^d)\big)+\sin\Psi_n\right|
+ &<\tfrac12.\label{eq:sw}
+\end{align}
+The phase is strictly increasing there.
+\end{lemma}
+
+\begin{proof}
+The two integral amplitudes in \eqref{eq:torus} are
+\(1\) and \((R-\Re S)/\Im S\). The latter has values \(i,-i\)
+at the conjugate saddles. In the \(d-1\) free coordinates,
+the matrix of \(Q\) is \(I+\iota\iota^\top\), of
+determinant \(d\). At the first saddle the leading term
+of the integral is
+\[
+\frac{S^n}{\sqrt d\,(2\pi n)^\nu\lambda^\nu}
+\]
+times the amplitude there. The power of \(\lambda\) uses
+the indicated argument, from analyticity of the Gaussian
+integral in the right half-plane. The other leading term
+is conjugate. On any fixed compact \(t\)-interval the
+quadratic form has a uniform strictly negative real part
+in \eqref{eq:quadratic}, and there is a uniform modulus
+gap off fixed small neighborhoods. Interpolating between
+the quadratic exponent and the full exponent bounds
+the difference of their \(n\)-th exponentials in a
+normalized neighborhood by
+\(O(n\|p\|^3 e^{-cn\|p\|^2})\). Integrating costs
+\(O(n^{-\nu-1/2})\), also the size of the error from
+variation of a uniformly smooth amplitude. Off the
+neighborhoods the contribution is exponentially smaller.
+
+As \(t\downarrow0\), \(\lambda/t\to\zeta\) with
+\(\Re\zeta>0\) because \(d\ge3\). The cubic remainder
+in \eqref{eq:quadratic} is \(O(t\|p\|^3)\), uniformly
+since the normalized logarithm vanishes identically
+at \(t=0\). The torus function \(\Re e_1(y)\)
+has maximum \(d\cos\phi\) only at the same conjugate pair.
+Indeed the component argument of Lemma~\ref{lem:dominance}
+applies to this real affine function of each pair sum.
+If its slope along the segment is zero the auxiliary
+strict convexity applies as before. The two maximizing
+diagonal points are isolated by their negative real
+quadratic coefficient \(-(\cos\phi)Q/2\).
+The expansions \(|R|^2=1+2t\Re e_1+O(t^2)\) and
+\(|S|^2=1+2td\cos\phi+O(t^2)\) thus give
+\(|R|/|S|\le e^{-ct}\) off those neighborhoods.
+The weighted amplitude and its angular derivatives are
+uniformly bounded since both its numerator and denominator
+are of order at most \(t\), with the denominator of exact
+order \(t\). Gaussian scaling with parameter \(nt\) and
+the complement bound give normalized errors
+\[
+O\big((nt)^{-1/2}+(nt)^\nu e^{-cnt}\big).
+\]
+
+At infinity use \(v=1/t\) and divide \(R,S\) by \(t^r\).
+At \(v=0\), the modulus of \(e_r\) reaches \(a_r\) only
+at the \(d\) diagonal points. Equality requires all
+\(r\)-subset products to agree, and comparison of subsets
+differing only by exchanging \(i,j\) gives \(y_i=y_j\).
+Such subsets exist since \(1\le r<d\).
+Consequently there is a uniform strict modulus gap off
+fixed neighborhoods of all \(d\) points. At each point
+the normalized quadratic coefficient tends to
+\(\binom{d-2}{r-1}/a_r>0\). At a diagonal angle \(\alpha\)
+the rescaled modulus is
+\(a_r+a_{r-1}v\cos\alpha+O(v^2)\).
+Thus the additional points have modulus ratio at most
+\(e^{-cv}\) to \(|S/t^r|\) for small \(v>0\), and their
+local integrals have size bounded by their modulus to
+the \(n\)-th power times \(O(n^{-\nu})\).
+The weighted amplitude stays uniformly smooth after
+division of numerator and denominator by \(t^r\),
+since \(t^{-r}\Im S\) has a positive limit.
+This yields normalized errors
+\[
+O(n^{-1/2}+e^{-cnv}+n^\nu e^{-cn}).
+\]
+Combining the three ranges and selecting \(K\) large
+enough for both amplitudes gives the sign errors
+less than \(1/2\) on the overlap. The conjugate leading
+terms give \(\cos\Psi_n\) and
+\(\Re(i e^{i\Psi_n})=-\sin\Psi_n\).
+
+Finally
+\[
+|S|^2\theta'(t)=
+\sum_{0\le\ell<j\le r}(j-\ell)a_j a_\ell t^{j+\ell-1}
+                \sin((j-\ell)\phi)>0.
+\]
+Near zero the ratio \((\Arg\lambda)'/\theta'\) is bounded
+because \(\lambda/t\) extends smoothly and nonvanishingly,
+and \(\theta'\) tends to \(d\sin\phi>0\).
+Near infinity use \(v=1/t\), where \(\lambda\) has a
+smooth nonzero extension, and
+\(\theta(1/v)=r\phi-\gamma\sin\phi\,v+O(v^2)\).
+Both derivatives in \(t\) are of size at most \(O(t^{-2})\),
+and \(\theta'\) has a positive leading coefficient of that
+order. Compactness handles the intermediate range.
+Therefore \(\Psi_n'\) is positive for all sufficiently
+large \(n\).
+\end{proof}
+
+\section{Absolute indexing of the endpoint zeros}
+
+Write \(b=\sin\phi\), \(c=db\), and let \(T_i\) and \(T_{s,i}\)
+be the positive \(d\)-th roots of the magnitudes of the zeros
+of \(E_d\) and \(H_s\), respectively, in increasing order.
+The index shifts in their asymptotics will fix the integer
+phase cutoffs.
+
+\begin{lemma}\label{lem:index}
+For fixed \(d\ge3\) and \(0\le s<d\),
+\begin{align}
+T_i&=\frac{\pi}{c}(i+\nu/d-\tfrac12)+O(i^{-1/2}),
+\label{eq:index-small}\\
+T_{s,i}&=\frac{\pi}{b}(i+s/d-\tfrac12)+O(e^{-c_1i})
+\label{eq:index-large}
+\end{align}
+for some \(c_1>0\).
+\end{lemma}
+
+\begin{proof}
+We first record an index calculation for an entire function
+\(f\) of order below one with \(f(0)>0\) and only simple
+negative roots \(-V_i^d\) in increasing magnitude.
+Suppose \(V_i=a(i+\delta)+O(i^{-\epsilon})\) for
+\(a,\epsilon>0\). By the canonical product,
+\(\log f(T^d)=\log f(0)+\sum_i\log(1+(T/V_i)^d)\).
+When \(V_i\) is replaced by \(a(i+\delta)\) for \(i\ge I\)
+with \(I+\delta>0\), the error is uniformly bounded in \(T\),
+since the derivative of each term with respect to \(V_i\)
+has absolute value at most \(d/V_i\).
+
+Put \(\beta=I+\delta\), \(U=T/a\), and let \(\alpha\)
+run over the roots of \(\alpha^d=(-1)^{d+1}\).
+The Euler gamma limit and \(\sum_\alpha\alpha=0\) give
+\[
+\prod_{j\ge0}\left(1+\frac{U^d}{(\beta+j)^d}\right)
+=\prod_{\alpha^d=(-1)^{d+1}}
+   \frac{\Gamma(\beta)}{\Gamma(\beta+\alpha U)}.
+\]
+Indeed each factor on the left splits into
+\(\prod_\alpha(1+\alpha U/(\beta+j))\), while the
+normalizing powers in the gamma limits cancel.
+No \(\alpha\) is negative real, so Stirling's formula
+applies in sectors avoiding the negative axis \cite{dlmf}.
+Its real logarithm gives
+\[
+-U\Re\sum_\alpha\alpha\log\alpha
+ -d(\beta-\tfrac12)\log U+O(1).
+\]
+For the principal arguments \(\vartheta_j=(2j-d+1)\phi\),
+\(0\le j<d\), the geometric sum
+\(\sum_j e^{i\vartheta_j x}=\sin(\pi x)/\sin(\phi x)\)
+has derivative \(-\pi/\sin\phi\) at \(x=1\).
+Thus \(\Re\sum_\alpha\alpha\log\alpha=-\pi/\sin\phi\).
+The initial \(I-1\) factors contribute \(d(I-1)\log T+O(1)\),
+giving
+\begin{equation}\label{eq:offset-product}
+\log f(T^d)=\frac{\pi T}{a\sin\phi}
+            -d(\delta+\tfrac12)\log T+O(1).
+\end{equation}
+
+The torus average of \(\exp(T e_1(y))\) with product
+\(-1\) is \(E_d(-T^d)\), by expanding the exponentials and
+taking the constant term. Its real exponent has the same
+two strict maximizing points as in the small-\(t\) estimate.
+The expansion at the first point is
+\(e_1=d\zeta-\zeta Q/2+O(\|p\|^3)\).
+The Gaussian estimate gives
+\[
+G(T):=\frac{\sqrt d\,(2\pi T)^\nu}{2}
+       e^{-dT\cos\phi}E_d(-T^d)
+ =\cos(cT-\nu\phi)+O(T^{-1/2}).
+\]
+Differentiating the integral introduces the amplitude
+\(e_1\), with value \(d\zeta\) at the first point.
+The real term \(d\cos\phi\) cancels against the derivative
+of the exponential normalization, and the term \(\nu/T\)
+is within the error. Thus
+\(G'(T)=-c\sin(cT-\nu\phi)+O(T^{-1/2})\).
+These estimates place exactly one zero in each sufficiently
+large fixed-width band around a zero of the cosine, and no
+zeros outside them. On each band the derivative has fixed
+sign and is bounded away from zero, and the root differs
+from its band center by \(O(T^{-1/2})\).
+This gives \(T_i=(\pi/c)(i+\delta)+O(i^{-1/2})\) for some
+fixed index shift \(\delta\).
+
+For the positive argument use the same exponential integral
+on the torus with product \(+1\).
+The real part of \(e_1\) is maximized only when all coordinates
+are one, with quadratic coefficient one.
+Therefore \(\log E_d(T^d)=dT-\nu\log T+O(1)\).
+Comparing the logarithmic term in \eqref{eq:offset-product}
+gives \(\delta=\nu/d-\tfrac12\), proving
+\eqref{eq:index-small}.
+
+For \(H_s\) the exponential root-of-unity filter gives
+\[
+dT^s H_s(-T^d)
+ =\sum_{\eta^d=-1}\eta^{-s}e^{\eta T}
+ =2e^{T\cos\phi}\cos(bT-s\phi)
+   +O(e^{T\cos(3\phi)}).
+\]
+The two leading conjugate exponentials have real part
+\(T\cos\phi\), and the normalized error and its derivative
+are exponentially small. The band argument therefore gives
+\(T_{s,i}=(\pi/b)(i+\delta_s)+O(e^{-c_1i})\).
+Filtering with roots of \(+1\) gives the single leading
+exponential and \(\log H_s(T^d)=T-s\log T+O(1)\).
+Equation \eqref{eq:offset-product} yields
+\(\delta_s=s/d-\tfrac12\), proving \eqref{eq:index-large}.
+\end{proof}
+
+\section{Matching the phases and interlacing}
+
+At zero, \(\theta(t)=ct+O(t^2)\) and
+\(\Arg\lambda(t)\to\phi\).
+At infinity, \(\theta(t)=r\phi-\gamma b/t+O(t^{-2})\)
+and \(\Arg\lambda(t)\to0\).
+Hence for \(T\) in a compact positive interval
+\begin{equation}\label{eq:phase-limit}
+\Psi_n(T/n)\longrightarrow cT-\nu\phi,\qquad
+\Psi_n(\gamma n/T)-D\pi\longrightarrow s\phi-bT,
+\end{equation}
+with the second limit along the residue \(s\), since
+\(nr\phi-D\pi=s\phi\).
+
+Choose \(K\) as in Lemma~\ref{lem:overlap}, for both estimates.
+Choose fixed large positive integers \(L,M\) with
+\[
+U=\frac{\pi L+\nu\phi}{c}>K,\qquad
+V_s=\frac{\pi M+s\phi}{b}>K.
+\]
+The index formulas show that \(U\) falls strictly between
+\(T_L,T_{L+1}\) and that each \(V_s\) falls strictly between
+\(T_{s,M},T_{s,M+1}\) once \(L,M\) are sufficiently large.
+The two gaps each have a positive asymptotic half-spacing
+on either side.
+
+For all sufficiently large \(n\) there are unique nodes
+\(t_{\ell,n}<t_{h,n}\) in the overlap satisfying
+\(\Psi_n(t_{\ell,n})=L\pi\) and
+\(\Psi_n(t_{h,n})=(D-M)\pi\).
+Indeed bracket each endpoint limit by two fixed \(T\)
+values greater than \(K\), use \eqref{eq:phase-limit}
+with opposite signs on the brackets, and apply strict
+monotonicity. Shrinking the brackets yields
+\(nt_{\ell,n}\to U\) and
+\(\gamma n/t_{h,n}\to V_s\) in the indicated residues.
+The order of the nodes follows from \(D-M>L\) for large \(n\).
+
+In the forward scaling of Lemma~\ref{lem:limits}, choose
+two circles about zero with radii bracketing \(U^d\) in
+the same gap between consecutive limit root magnitudes.
+Rouch\'e's theorem on both circles gives exactly \(L\)
+roots with \(|q|<t_{\ell,n}^d\), and on disjoint small
+conjugation-invariant disks centered at the negative limit
+zeros it gives one root in each disk. Thus these roots are
+simple and negative. In the reversed scaling use radii
+bracketing \(V_s^d\), where a nonzero root \(q\) corresponds
+to \(x=(\gamma n)^d/q\). This gives exactly \(M\) simple
+negative roots with \(|q|>t_{h,n}^d\).
+Finiteness of the residues makes the assertions simultaneous.
+
+For every integer \(j=L,\ldots,D-M\), the intermediate
+node of phase \(j\pi\) has sign \((-1)^j\) by \eqref{eq:sign}.
+Between successive nodes there are therefore \(D-M-L\)
+distinct negative roots. They are disjoint from the endpoint
+regions, and the total count is \(D\). This proves the
+real-rootedness and simplicity assertion of
+Theorem~\ref{thm:main}.
+
+We next compare successive polynomials. At a central
+root \(q=-t^d\) with phase in \((j\pi,(j+1)\pi)\),
+\eqref{eq:sign} gives \(|\sin\Psi_n|>\sqrt3/2\).
+The weighted estimate \eqref{eq:sw} shows that
+\(P_{n+1}(q)\) has sign opposite to \((-1)^j\), the sign
+of this sine. There is exactly one simple root in the
+node interval, where \(P_n(-t^d)\) crosses from sign
+\((-1)^j\) to sign \((-1)^{j+1}\) as \(t\) increases.
+Since \(q=-t^d\) decreases with \(t\), \(P_n'(q)\)
+has sign \((-1)^j\). Thus \(P_{n+1}(q)/P_n'(q)<0\).
+
+We show the same for the fixed number of endpoint roots.
+Let \(R_{n,i}\) denote the \(i\)-th negative root from the
+right, and let \(\xi_i\) be the corresponding zero of \(E_d\).
+By \eqref{eq:forward}, \(X_n=n^dR_{n,i}\) and
+\(Y_n=n^dR_{n+1,i}\) tend to \(\xi_i\).
+The difference limit \eqref{eq:difference} evaluated at
+\(X_n\) gives
+\(nP_{n+1}(X_n/n^d)\to d\xi_i E_d'(\xi_i)\).
+The derivative of \(x\mapsto P_{n+1}(x/n^d)\) tends
+locally uniformly to \(E_d'\), by \eqref{eq:forward}
+and the argument scaling \((1+1/n)^d x\).
+The mean value theorem applied between \(X_n,Y_n\)
+therefore gives \(n(X_n-Y_n)\to d\xi_i<0\).
+Distinct limits also give the next-index gap, so
+\[
+R_{n+1,i}>R_{n,i}>R_{n+1,i+1}
+\]
+eventually at each fixed index.
+
+At the left, let \(L_{n,i}\) denote the \(i\)-th root
+from the left and let \(s'=(s+r)\bmod d\) be the next
+residue. Lemma~\ref{lem:simple} implies
+\(\eta_{u,i}>\eta_{v,i}>\eta_{u,i+1}\) for every \(u<v\),
+using the closing comparison with \(\eta_{0,i+1}\).
+Reciprocate the limit roots in \eqref{eq:reverse},
+noting that the scale ratio \((1+1/n)^d\) tends to one.
+If the residue wraps, then \(s'<s\), the degree rises by
+one, and \(L_{n+1,i}<L_{n,i}<L_{n+1,i+1}\) eventually.
+Otherwise \(s'>s\), the degree is unchanged, and
+\(L_{n,i}<L_{n+1,i}<L_{n,i+1}\) eventually.
+
+At the \(i\)-th root from the right, \(P_{n+1}\) has
+exactly \(i\) roots to its right, while \(P_n'(q)\) has
+sign \((-1)^{i-1}\).
+At the \(i\)-th root from the left, \(P_{n+1}\) has
+exactly \(i\) roots to its left if the degree increases,
+and \(i-1\) otherwise. In either case the signs from
+the positive leading coefficients give the same negative
+quotient as in the center. All comparisons here are
+needed only for finitely many fixed indices, together
+with one more from each end.
+
+Consequently \(P_{n+1}\) has alternating signs at
+successive roots of \(P_n\) and a root between the
+rightmost root and zero, since its constant coefficient
+is positive. If the degree increases, the sign at negative
+infinity supplies a further root to the left. These signs
+account for its entire degree and prove the directed
+strict interlacing.
+
+\begin{thebibliography}{9}
+\bibitem{balanced}
+P. Alexandersson, \emph{Open problems on real-rooted polynomials},
+SymCat. See the balanced-array conjecture and
+\href{https://github.com/PerAlexandersson/RealRooted/issues/2005}
+{RealRooted issue \#2005}.
+
+\bibitem{hyperbessel}
+\'A. Baricz and S. Singh, Zeros of some special entire functions,
+\href{https://arxiv.org/abs/1702.00626}{arXiv:1702.00626},
+Theorem 2.
+
+\bibitem{dlmf}
+\emph{NIST Digital Library of Mathematical Functions}.
+See the \href{https://dlmf.nist.gov/18.12.E11}{Legendre generating
+function}, \href{https://dlmf.nist.gov/18.2.vi}{orthogonal-polynomial
+zero interlacing}, \href{https://dlmf.nist.gov/5.8.E1}{Euler gamma limit},
+and \href{https://dlmf.nist.gov/5.11.E1}{Stirling expansion}.
+\end{thebibliography}
+
+\end{document}

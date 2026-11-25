@@ -1,0 +1,18 @@
+{
+  "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
+  "mathlib": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "method": "The shared Lake project independently built the module with pinned Lean and mathlib. A second process imported it and printed the kernel axiom dependencies of all four exported theorems.",
+  "modules": [
+    {
+      "file": "topics/balanced-arrays/lean/BalancedPairCompression.lean",
+      "sha256": "c732c88cd3b5777afe8c9acbaf09fdc0be6456d10b0d20088b56e2203f6768d3",
+      "exit_code": 0,
+      "kernel_output": [
+        "'BalancedPairCompression.unit_pair_interior' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedPairCompression.affine_normSq_lt_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedPairCompression.exists_compressing_unit_pair' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedPairCompression.slope_eq_zero_at_unit_pair_max' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    }
+  ]
+}
