@@ -10,7 +10,12 @@ Give an ordered set partition of $[n]$ weight $t^k$ when exactly $k$ blocks have
 | Three | [Proof and finite prefix](threshold-three.md) · [Manuscript](threshold-three.pdf) · [Source](threshold-three.tex) |
 | Four | [All-size proof](threshold-four-effective.md) · [Pole classification](threshold-four-eventual.md) · [Manuscript](threshold-four.pdf) · [Source](threshold-four.tex) |
 | Every fixed $j\ge2$ | [Eventual strict interlacing and distribution](all-fixed-thresholds.md) · [Proof of the outer root count](fixed-threshold-outer-interface.md) · [Manuscript](all-fixed-thresholds.pdf) · [Source](all-fixed-thresholds.tex) |
+| Threshold and degree both growing | [Proposed partial theorem for the smallest-modulus zeros](joint-inner-zeros.md) · [Bounded proportional window](proportional-window.md) |
 | Edges at every threshold | [Sharp zero-free interval for every row](lower-spectral-edge.md) · [Strict interlacing for an initial positive fraction in sufficiently large rows](fixed-threshold-inner-zeros.md) · [Outermost complex zeros and their scales](fixed-threshold-outer-zeros.md) |
+
+The proposed joint-growth argument gives an interval containing a positive fraction of the smallest-modulus zeros, all simple and negative, with strict consecutive interlacing when both $j$ and $n/j$ are sufficiently large. It also gives the sharp first-zero scale. For each fixed $K$, the first $K$ ranks by modulus, or all available ranks if the degree is smaller, have this property outside a finite set of pairs $(j,n)$. The upper comparison is omitted at the last available rank if the next row has the same degree. The original all-size conjecture remains open in general. This is a proposed partial theorem under review. [Joint-growth argument](joint-inner-zeros.md) · [Research issue #1](https://github.com/ProgramComputer/open-math-research/issues/1)
+
+**⬜ None.** The joint-growth argument and its bounded proportional-window companion have written proofs. Their new claims have no Lean or Rocq verification. The formal coverage below applies to the previously published components.
 
 The written proof for arbitrary fixed thresholds uses a dominant conjugate pole pair. Two independent exact calculations verify all 27 polynomial inequalities needed for thresholds four through twelve. The smallest rational lower bound is $29/150$. [Bernstein certificate](results/angular-modulus.json) · [Independent verifier](code/check_angular_separation_independent.py)
 
