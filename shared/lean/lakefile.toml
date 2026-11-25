@@ -93,3 +93,7 @@ srcDir = "../../topics/ordered-large-blocks/lean"
 [[lean_lib]]
 name = "OrderedThresholdThreeSigns"
 srcDir = "../../topics/ordered-large-blocks/lean"
+
+[[lean_lib]]
+name = "OrderedGlobalAngular"
+srcDir = "../../topics/ordered-large-blocks/lean"

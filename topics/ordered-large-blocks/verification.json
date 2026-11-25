@@ -43,6 +43,19 @@
         "'OrderedThresholdThreeSigns.third_pole_next_row_sign' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'OrderedThresholdThreeSigns.threshold_three_next_row' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
+    },
+    {
+      "file": "topics/ordered-large-blocks/lean/OrderedGlobalAngular.lean",
+      "sha256": "4555ae361a8df4d86c99ace479e45cb197b60d558293344a61c33c36ac1cadc5",
+      "exit_code": 0,
+      "kernel_output": [
+        "'OrderedGlobalAngular.sector_weight_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedGlobalAngular.sector_boundary_sines' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedGlobalAngular.rotated_numerator_im_negative' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedGlobalAngular.angle_lt_of_sin_sub_neg' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedGlobalAngular.abs_sin_nat_multiple_le' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedGlobalAngular.first_sector_derivative_positive' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
     }
   ]
 }

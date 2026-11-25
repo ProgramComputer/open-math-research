@@ -5,8 +5,8 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | Result | Outcome | Formal verification |
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟨 Partial · Rocq ($a=6$) |
+| [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | Strict interlacing at every fixed threshold for sufficiently large rows, and at every size for thresholds two and three | 🟨 Partial · Lean 4 |
 | [Eventual real-rootedness of the Eulerian matrix square](topics/eulerian-matrix-square/README.md) | Partial theorem covering every sufficiently large row | 🟨 Partial · Lean 4 |
-| [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | All sizes at thresholds two and three, with sharp bounds for every threshold | 🟨 Partial · Lean 4 |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Partial theorems, including the closest zero in every nonconstant row with $d\ge2$ | 🟨 Partial · Lean 4 |
 | [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
 | [Ribbon matroids have the Narayana polynomial](topics/ribbon-matroids/README.md) | Proof | 🟨 Partial · Lean 4 |
