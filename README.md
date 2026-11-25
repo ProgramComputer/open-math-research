@@ -23,7 +23,7 @@ python3 verify_counterexample.py --emit
 
 The verifier uses only the Python standard library. It reconstructs the coefficients from the bounded lattice counts, certifies the root intervals at \(a=6\), and checks the top-coefficient contradiction at \(a=7\). The [certificate](certificates/transport_split.json) contains the complete vectors, exact intervals and integer evaluations. The all-parameter argument is in the paper.
 
-This branch publishes one reviewed result package. The separate research branch contains the broader conjecture dashboard, research notes and exploratory computations.
+This branch publishes one reviewed result package. The broader research program is maintained privately.
 
 ## Citation
 
@@ -32,7 +32,8 @@ This branch publishes one reviewed result package. The separate research branch 
   author       = {{ProgramComputer}},
   title        = {{Open Problems in Mathematics}},
   year         = {2026},
-  howpublished = {Git repository}
+  howpublished = {GitHub repository},
+  url          = {https://github.com/ProgramComputer/open-math-research}
 }
 ```
 
