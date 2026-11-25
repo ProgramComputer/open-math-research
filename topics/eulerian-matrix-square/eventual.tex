@@ -1,0 +1,638 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<->cmex10}{}
+\newtheorem{theorem}{Theorem}
+\hypersetup{pdftitle={Eventual real-rootedness of the Eulerian matrix square},pdfauthor={ProgramComputer}}
+\begin{document}
+\begin{center}
+{\Large\bfseries Eventual real-rootedness of the Eulerian matrix square\par}
+\medskip ProgramComputer\par
+\smallskip November 2026
+\end{center}
+
+\begin{abstract}
+Let $A(n,k)$ count permutations of $[n]$ with $k-1$ descents. We prove that, for all sufficiently large $n$, the degree-$n$ row polynomial of the ordinary matrix product $A^2$ has a simple root at zero and $n-1$ distinct negative roots. At moderately large moduli we count roots inside circles by controlling the winding of a sum of four pole terms. At larger moduli a reciprocal coefficient expansion gives two factors whose zeros can coalesce. A mixed derivative separates the two roots at every such collision. These arguments overlap a fixed-disk result and an extreme-root count. The proof does not evaluate the threshold. The all-row Eulerian clause of Mao and Wang's conjecture remains open.
+\end{abstract}
+\section{The theorem and its proof}
+Write $A(0,0)=1$ and $A(n,k)=0$ outside $1\le k\le n$ for $n\ge1$. Put $A_n(x)=\sum_k A(n,k)x^k$ and
+\[
+ P_n(x)=\sum_k(A^2)(n,k)x^k=\sum_{k=1}^n A(n,k)A_k(x)=xH_n(x).
+\]
+The Eulerian clause of Mao and Wang's Conjecture 4.1 asks whether $P_n$ has only real nonpositive zeros for every $n$~\cite{MW}. The Delannoy clause has a separate public proof~\cite{public}.
+\begin{theorem}
+There exists $n_0$ such that for every $n\ge n_0$ the polynomial $P_n$ has only simple real zeros. Its nonzero zeros are strictly negative.
+\end{theorem}
+\begin{proof}
+$P_n$ is monic and its coefficient of $x$ is $n!$, so zero is simple. Set $N=n+1$ and $y=\log|x|$ for a zero of $H_n$. The fixed-disk theorem of the companion paper~\cite[Theorem 2]{disk} covers every $y\le Y$ for each fixed $Y$. Section~\ref{lower} gives absolute constants $Y_0$ and $n_1$ and covers $Y_0+1\le y\le3N^{1/4}$ for $n\ge n_1$. Section~\ref{four} supplies an absolute $a>0$ and covers $(3/2)N^{1/4}\le y\le(a/2)\sqrt{N/\log N}$ eventually. Sections~\ref{extreme}--\ref{bridge} cover $y\ge d\sqrt{n/\log n}$ for every fixed $d>0$, eventually in $n$.
+Take $Y=Y_0+2$ and $d=a/4$. Each range overlaps the next for all sufficiently large $n$, since $\sqrt{N/\log N}/\sqrt{n/\log n}\to1$. A maximum of the four thresholds suffices. Every zero of $H_n$ is therefore simple and negative.
+\end{proof}
+For reference, the pole identity and auxiliary integral used throughout Sections~\ref{four} and~\ref{lower} are
+\[
+ \frac{A_k(t)}{k!}=\sum_{m\in\mathbb Z}
+ \left(\frac{t-1}{\log t+2\pi i m}\right)^{k+1},\qquad
+ F_n(w)=\int_0^\infty e^{-s}A_n(ws)\,ds.
+\]
+The first holds for $k\ge1$, $t\ne0,1$, with any logarithm. Its derivation, the base saddle estimate, and the fixed-disk and fixed-annulus results are given in the companion paper~\cite{disk}. The last three sections use $e_{k,j}=A(k,j+1)$. Numbered estimates within each section are local to that section.
+
+\section{Counting circles when four poles compete}\label{four}
+Let $P_n(x)=xH_n(x)$ be the shifted Eulerian-square row polynomial, of degree $n$, and put $N=n+1$, $L=\log N$. The following counts resolve the range where the two nearest outer poles are comparable but all farther poles are still negligible. The count includes the zero at the origin. We use the Eulerian pole formula and factorial integral of~\cite{disk}.
+
+\textbf{Theorem.} There is a constant $a>0$ such that, on the interval
+
+\[
+N^{1/4}\le y\le a\sqrt{N/\log N},
+\tag{1}
+\]
+
+one can define a real phase $\Xi_n(y)$ with $\Xi_n'(y)=(2\pi+o(1))N/y^2$ uniformly. At every cross-section $\Xi_n(y)=k\pi$, the circle $|x|=e^y$ contains no zero of $P_n$ and encloses exactly $k$ zeros with multiplicity. Thus every zero between two consecutive such circles is simple and negative. In particular, for sufficiently large $n$ every zero with log modulus between $(3/2)N^{1/4}$ and $(a/2)\sqrt{N/\log N}$ is simple and negative.
+
+\subsection{The four terms on an upper semicircle}
+
+For $|x|=e^y$ in the upper half-plane write $x=-e^\xi$, $\xi=y-it$, $0\le t\le\pi$. Define
+
+\[
+w_\sigma=-\frac{1+e^\xi}{\xi+i\sigma\pi},\qquad
+\tau_{\sigma\eta}=\log(1+e^\xi)-\log(\xi+i\sigma\pi)+i\eta\pi,
+\qquad \sigma,\eta\in\{+1,-1\}.
+\]
+
+Here $\log(1+e^\xi)=\xi+\log(1+e^{-\xi})$ and the other logarithms of $\xi+i\sigma\pi$ are principal. Then $e^{\tau_{\sigma\eta}}=w_\sigma$. Set
+
+\[
+G_N(\omega)=\int_{1/2}^{2}e^{-Nu}u^N(\omega+\log u)^{-N}\,du,\qquad
+W_{\sigma\eta}=n!N^{N+1}w_\sigma^{N+1}G_N(L+\tau_{\sigma\eta}).
+\tag{2}
+\]
+
+On the upper semicircle, $R=|w_+|\asymp e^y/y$, $|w_-|\le R$, and the two logarithmic radii differ by $O(y^{-2})$. Write $\lambda=\log(NR)\sim y$ uniformly in (1). The real parts of the four arguments of $G_N$ are $\lambda+O(y^{-2})$, and their imaginary parts are bounded. The phase of the principal term is taken continuously from the positive point of the semicircle, where $W_{++}$ is positive. Define $\Xi_n(y)$ to be this phase at $t=0$. In particular its formula is the imaginary part of $(N+1)\tau_{++}(y)+\log G_N(L+\tau_{++}(y))$, with the analytic logarithm of $G_N$ specified below.
+
+The saddle estimate for $G_N$ gives, with $J_N=\log G_N$,
+
+\[
+J_N(\omega)=c_N-N\log\omega+R_N(\omega),\qquad
+R_N^{(j)}(\omega)=O(N/y^{2+j}),\quad 0\le j\le3,
+\tag{3}
+\]
+
+where $c_N=-N+\frac12\log(2\pi/N)$ is real. The branches are real on the positive real line. To justify (3), use the saddle argument for the factorial integral with phase $-u+\log u-\log(\omega+\log u)$. On a disk of radius a small fixed multiple of $y$ about an argument with real part $\sim y$, the critical point is $1+O(y^{-1})$, the critical value is $-1-\log\omega+O(y^{-2})$, and the second derivative there is $-1+O(y^{-1})$. The error $O(y^{-2})$ in the critical value uses $\log u-u=-1+O((u-1)^2)$ and $\log u=O(y^{-1})$ at the critical point. A horizontal contour through the critical point gives the Gaussian main term with relative $O(N^{-1/5})$ error, uniformly on a slightly smaller disk. The endpoint connectors are exponentially small because $\Re(\log u-u)$ has a strict gap away from $u=1$ on the original segment. This gives the analytic logarithm from the saddle formula and $R_N=O(N/y^2)$ there. Cauchy's estimates on smaller disks give the derivative bounds. For bounded $\Im\omega$, comparison with the real saddle also shows
+
+\[
+\int_{1/2}^2\left|e^{-Nu}u^N(\omega+\log u)^{-N}\right|du\le C|G_N(\omega)|.
+\tag{4}
+\]
+
+Indeed the displacement from the corresponding real saddle is $O(y^{-2})$, and the best real modulus exponent costs at most $O(N/y^4)=O(1)$ relative to the complex saddle exponent. This follows from Taylor expansion at the critical point and strict concavity of the real modulus exponent, as in the factorial saddle proof~\cite{disk}. The real and complex Gaussian factors have comparable moduli.
+
+We claim the uniform residual bound
+
+\[
+\frac{P_n(x)}{W_{++}}=1+\frac{W_{--}}{W_{++}}+\frac{W_{+-}}{W_{++}}+\frac{W_{-+}}{W_{++}}
++O(e^{-y/2}+e^{-cN/y^2})
+\tag{5}
+\]
+
+on the semicircle, for some $c>0$ and a sufficiently small absolute $a$. The details of the residual bound follow.
+
+First keep the two inner poles $w_+,w_-$ in the exact Eulerian pole sum. The remainder is bounded by summing the omitted ratios to $R$. If $\phi=\pi-t\in[0,\pi]$, each omitted inner denominator has imaginary part $\phi+2\pi m$ with $m\ne0,-1$. The gap of its squared imaginary part over $\phi^2$ is at least $4\pi^2$. The squared ratios have sum $O(y)$ by comparison with $y^2/(y^2+c m^2)$. For $k\ge3n/4$, extract the $N/2$th power of the largest omitted ratio and bound the sum of the remaining powers by the squared sum. This bounds the omitted sum of $(k+1)$st powers relative to $R^{k+1}$ by
+
+\[
+Cy\left(1+\frac{4\pi^2}{y^2+\pi^2}\right)^{-N/4}
+\le Cy\exp(-(\pi^2+o(1))N/y^2).
+\]
+
+For $k<3n/4$, use the squared-ratio sum and $\sum_{k<3n/4} A(n,k)k!R^k\le n!(nR)^{3n/4}$. By (2)--(3) this is exponentially small compared with $|W_{++}|/R$, even after multiplying by $y$. The large-$k$ bound multiplies $R F_n(R)$, and the positive-radius saddle gives
+
+\[
+R F_n(R)/|W_{++}|\le C\exp((\pi^2/2+o(1))N/y^2).
+\]
+
+For this last inequality, the positive-radius principal term is $n!N^{N+1}R^{N+1}G_N(\lambda)$ up to a bounded relative factor. Its other poles have a fixed squared angular gap. The cost of changing $\lambda$ to $L+\tau_{++}$ in $G_N$ is at most $(\pi^2/2+o(1))N/y^2$, by the logarithm in (3) and the reality of $R_N$ on the positive real line. In particular the first-order variation of $R_N$ in the imaginary direction is purely imaginary. These estimates give an inner residual $O(e^{-cN/y^2})$ for small $a$, absorbing the factor $y$ because $N/y^2\ge a^{-2}\log N$.
+
+For each retained $w_\sigma$ insert the outer pole sum into the integral defining $F_n(w_\sigma)$. For $s=Nu$, $1/2\le u\le2$, retain the two logarithmic branches $\tau_{\sigma,+},\tau_{\sigma,-}$. On the semicircle $\Im\tau_{++}=\phi-\arctan(\phi/y)+O(e^{-y})$, and its exact branch lies between $0$ and $\pi$. The other upper branch $\Im\tau_{-+}$ lies between $0$ and $\pi+O(1/y)$. In fact it equals $\phi+\arctan((2\pi-\phi)/y)+O(e^{-y})$ and is positive for all $\phi\in[0,\pi]$. Every omitted outer branch has absolute imaginary part at least $2\pi-O(e^{-y})$. Its squared gap over the principal denominator remains at least a positive constant, since the two real logarithmic parts differ by only $O(y^{-2})$. For branches with large index the squared gap is at least a constant times the squared index. Extracting the smallest gap factor and summing reciprocal quadratics bounds the normalized sum by $Cy e^{-cN/y^2}$. The factor $|w_-|^{N+1}/|w_+|^{N+1}\le1$ helps this comparison, and (4) transfers it to the complex principal integral. On each retained branch, replacing $(Nw_\sigma u-1)^N$ by $(Nw_\sigma u)^N$ has relative pointwise error $O(1/R)$. Equation (4) transfers this bound after integration. The four retained magnitudes are bounded by a constant times $|W_{++}|$, as also follows from (7) below. This gives the $O(e^{-y/2})$ term.
+
+The tails of the two outer integrals outside $s\in[N/2,2N]$ are exponentially small relative to the principal term. One may bound $|A_n(w_\sigma s)|$ by $A_n(Rs)$. For $s\le N^{1/4}$ the elementary bound $A_n(Rs)\le n!\max(1,Rs)^n$ after normalization by $n!(NR)^N$ gives $O(N^{-3n/4})$, exponentially small compared to $e^{-N}\lambda^{-N}$. For $s\ge N^{1/4}$ and $u=s/N$, the positive-radius pole estimate gives the outside-interval factor $(u e^{1-u}\lambda/(\lambda+\log u))^N$ times $O(1+\lambda+\log u)e^{N(-1-\log\lambda)}$. On $N^{-3/4}\le u\le1/2$ the logarithmic ratio is $1+o(1)$ since $y\ge N^{1/4}$, and $u e^{1-u}\le e^{1/2}/2$. On $u\ge2$ the ratio is at most one and $u e^{1-u}\le (2/e)e^{-(u-2)/2}$. The angular penalty to compare with $|W_{++}|$ is at most $\exp(O(N/y^2))$, so the integrated tails are negligible. This also proves the positive-radius estimate used for the inner omitted poles. All these bounds establish (5).
+
+\subsection{Winding at a phase level}
+
+For brevity put
+
+\[
+A=W_{--}/W_{++},\qquad B=W_{+-}/W_{++},\qquad C=W_{-+}/W_{++},\qquad g=N/y^3.
+\]
+
+In the arguments of $J_N$, let $\omega=L+\tau_{++}$ and $d=\log(\xi+i\pi)-\log(\xi-i\pi)$. The four arguments are $\omega,\omega-2\pi i,\omega+d,\omega+d-2\pi i$. Also $w_-/w_+=e^d$. This gives the exact identity
+
+\[
+A=BCe^{\mathcal K},\qquad
+\mathcal K=J_N(\omega+d-2\pi i)-J_N(\omega-2\pi i)-J_N(\omega+d)+J_N(\omega).
+\tag{6}
+\]
+
+Uniformly along the semicircle,
+
+\[
+\begin{gathered}\Re\mathcal K=(4\pi^2+o(1))g,\qquad
+|\partial_t\mathcal K|=O(g/y),\\
+\partial_t\log|B|=-(2\pi+o(1))N/y^2,\quad
+\partial_t\log|C|=-(2\pi+o(1))N/y^2.\end{gathered}
+\tag{7}
+\]
+
+Indeed, $d=2\pi i/y+O(y^{-2})$, $d'=-2\pi i/(\xi^2+\pi^2)$, $\omega'=1+O(y^{-1})$, with primes in $\xi$. The mixed difference $\mathcal K$ equals $-2\pi i d$ times the average of $J_N''$ over the two straight shifts. In (3), $J_N''=N/\omega^2+O(N/y^4)$ and $J_N'''=O(N/y^3)$, proving the first two estimates. The derivative of $\log B$ in $\xi$ is $(J_N'(\omega-2\pi i)-J_N'(\omega))\omega'=-(2\pi i+o(1))N/y^2$. The derivative of $\log C$ is $(N+1)d'$ plus $O(N/y^3)$ from the $J_N$ difference. Multiplication by $-i$ and taking real parts gives the estimates in $t$. Likewise, differentiating
+
+\[
+\log A=(N+1)d+J_N(\omega+d-2\pi i)-J_N(\omega)
+\]
+
+twice in $\xi$ gives $O(g)$, by $d''=O(y^{-3})$, $\omega''=O(y^{-2})$, and the $J_N$ derivative bounds. At $t=0$, by conjugation $W_{--}=\overline{W_{++}}$ and $W_{-+}=\overline{W_{+-}}$. Thus $|A|=1$ and $|B|=|C|=\exp(-\Re\mathcal K/2)$ there. In particular both $|B|,|C|$ start below one and decay. Equation (6) shows $|A|\le\exp(-ctN/y^2)$, using (7).
+
+Suppose $\Xi_n(y)=k\pi$. Then $A=1$ at $t=0$. The first derivative of $\log A$ in $\xi$ at that point is purely imaginary by conjugation on the real interval. Its contribution along $\xi=y-it$ is real, so the continuous argument of $A$ starting at zero satisfies $|\arg A|\le Cgt^2$. We claim that
+
+\[
+\Re(1+A+B+C)\ge c_0\min(1,g)
+\tag{8}
+\]
+
+for a positive absolute constant. If $g$ exceeds a sufficiently large fixed $G$, then $|B|+|C|\le1/4$. Either $|A|\le1/4$ or $t=O(y^2/N)$ by its decay. In the latter case $|\arg A|=O(y/N)=o(1)$, so $\Re A\ge0$. Both cases give a positive constant bound.
+
+If $g\le G$, then for $t$ greater than a fixed small $t_0>0$ all three ratios are $o(1)$ by (7) and $N/y^2\to\infty$. For $0\le t\le t_0$, choose $t_0$ small enough depending on $G$ that $e^{\Re\mathcal K}\cos(\arg A)\ge1+c_1g$ uniformly. This follows from $|\arg A|\le Cgt^2$ and $\Re\mathcal K\ge c_2 g$. With $b=|B|$, $c=|C|$ and (6),
+
+\[
+\Re(1+A+B+C)\ge (1-b)(1-c)+c_1g b c.
+\]
+
+If $b,c\le1/2$ the first term is at least $1/4$. If either exceeds $1/2$, the derivative and initial value estimates in (7) give $tN/y^2=O(1)$ and bound the other below by a positive constant, since $g\le G$. This proves (8). All constants are independent of $a$ once it is chosen sufficiently small.
+
+The residual in (5) is $o(\min(1,g))$ in (1): $g\ge a^{-3} (\log N)^{3/2}/\sqrt N$, and choosing $a$ small makes the power bound $e^{-cN/y^2}$ smaller than $N^{-2}$. Consequently $P_n/W_{++}$ has positive real part on the entire upper semicircle. At its positive endpoint both $P_n$ and $W_{++}$ are positive real. At its negative endpoint both are real and their ratio is positive. The continuous argument of $P_n$ along this arc therefore starts at $0$ and ends at $k\pi$, since the ratio contributes zero at both endpoints. Reflection in the real axis gives a total winding of $k$ on the full circle, which is zero-free. By the argument principle the disk contains exactly $k$ roots with multiplicity.
+
+Finally, at $t=0$, $\Im\tau_{++}=\pi-\arctan(\pi/y)$ and $\partial_y\tau_{++}=1-1/(y+i\pi)+O(e^{-y})$. With (3) these give $\partial_y\Xi_n=(2\pi+o(1))N/y^2$. Successive phase levels give annuli containing exactly one root counted with multiplicity. Conjugation and positivity on the positive real axis make that root simple and negative. The spacing in $y$ is $O(y^2/N)$, proving the stated interior range.
+
+\section{Counting circles from a fixed radius}\label{lower}
+There is a fixed $Y_0>0$ such that, for all sufficiently large $n$, every zero of the Eulerian-square row $P_n=xH_n$ in
+\[
+ Y_0+1\le\log|x|\le3(n+1)^{1/4}
+\]
+is simple and negative. The estimate supplements the fixed-annulus theorem~\cite{disk} and overlaps the larger moving cross-sections (Section~\ref{four}). Within this interval the winding at each phase cross-section gives the absolute number of roots inside its circle, including the root at zero.
+
+\subsection{The four central integrals}
+
+Use $N=n+1$ and $L=\log N$. On the upper semicircle $|x|=e^y$ write $x=-e^\xi$ with $\xi=y-it$, $0\le t\le\pi$, and let $Y_0\le y\le4N^{1/4}$. Use the four terms and branches from the larger moving cross-sections:
+\[
+ w_\sigma=-\frac{1+e^\xi}{\xi+i\sigma\pi},\qquad
+ \tau_{\sigma\eta}=\xi+\log(1+e^{-\xi})-\log(\xi+i\sigma\pi)+i\eta\pi ,
+ \qquad \sigma,\eta\in\{+1,-1\}.
+\]
+Thus $e^{\tau_{\sigma\eta}}=w_\sigma$. Set $R=|w_+|$, $\lambda=\log(NR)$, and keep the exact factor $1-1/(Nw_\sigma u)$ in the outer Eulerian numerator:
+\[
+ \begin{aligned}
+ \mathcal G_N(\omega)
+ &=\int_{1/2}^2
+ \exp(-Nu)u^N(1-e^{-\omega}/u)^N(\omega+\log u)^{-N}\,du,\\
+ W_{\sigma\eta}
+ &=n!N^{N+1}w_\sigma^{N+1}\mathcal G_N(L+\tau_{\sigma\eta}).
+ \end{aligned}
+ \tag{1}
+\]
+Uniformly over the semicircles, $R\asymp e^y/y$, $|w_-|\le R$ and $\lambda\ge y$, $\lambda\asymp L+y$. In fact, writing $\phi=\pi-t$, the two denominator magnitudes are $\sqrt{y^2+\phi^2}$ and $\sqrt{y^2+(2\pi-\phi)^2}$. The logarithmic radii differ by $O(y^{-2})$, and $\log R=y-\tfrac12\log(y^2+\phi^2)+O(e^{-y})$, which gives $\lambda\ge y$ for all large $N$.
+
+The saddle estimate for (1) gives an analytic logarithm $J_N=\log\mathcal G_N$ with
+\[
+ J_N(\omega)=c_N-N\log\omega+B_N(\omega),\qquad
+ B_N^{(j)}(\omega)=O(N/\lambda^{2+j}),\quad 0\le j\le3,
+ \tag{2}
+\]
+on neighborhoods of the four arguments in (1), with $c_N=-N+\frac12\log(2\pi/N)$ real and $J_N$ real for positive real arguments. Here and below the bounds hold also on horizontal and vertical segments joining those arguments. To verify (2), use the phase
+\[
+ -u+\log u+\log(1-e^{-\omega}/u)-\log(\omega+\log u)
+\]
+on a fixed small complex neighborhood of $[1/2,2]$. On disks of radius a small fixed multiple of $\lambda$ about the required $\omega$, the last logarithm has argument with positive real part, and $\log(1-e^{-\omega}/u)$ and its first three $u$ derivatives are $O(e^{-\lambda/2})$. The first three $u$ derivatives of the whole phase differ from those of $\log u-u$ by $O(1/\lambda)$. The unique critical point near $1$ is $1+O(1/\lambda)$. Its critical value is $-1-\log\omega+O(\lambda^{-2})$ by expanding $\log u-u$ to second order at $1$ and using $\log u=O(\lambda^{-1})$ there. Shift the contour horizontally to the imaginary height of the critical point. The connecting endpoints have a fixed negative real phase gap from the saddle. The shifted contour has uniformly negative real second derivative, and the Gaussian and cubic-error estimates from the factorial saddle~\cite{disk} give relative error $O(N^{-1/5})$. Thus the analytic logarithm is defined by the saddle expression, including its relative error near $1$. The critical value and Gaussian logarithm give $B_N=O(N/\lambda^2)$, and Cauchy's estimate on smaller disks gives (2).
+
+For bounded $\Im\omega$ we also use
+\[
+ \frac{\int_{1/2}^2
+ |e^{-Nu}u^N(1-e^{-\omega}/u)^N(\omega+\log u)^{-N}|\,du}
+ {|\mathcal G_N(\omega)|}
+ \le C\exp(CN/\lambda^4).
+ \tag{3}
+\]
+Indeed, the critical point moves by $O(\lambda^{-2})$ when $\omega$ moves vertically a bounded distance from the positive axis. This follows by differentiating the phase's first $u$ derivative in $\omega$, with bound $O(\lambda^{-2})$, and using its second $u$ derivative bounded away from zero near the saddle. The real modulus maximum and complex critical value differ in real part by at most $O(\lambda^{-4})$ by the same concavity and Taylor comparison as for the factorial saddle. The real and complex Gaussian factors are of comparable size. This gives (3).
+
+\subsection{Ratios on a semicircle}
+
+Write
+\[
+ \begin{gathered}A=W_{--}/W_{++},\quad B=W_{+-}/W_{++},\quad C=W_{-+}/W_{++},\\
+ \omega=L+\tau_{++},\quad D=\log(\xi+i\pi)-\log(\xi-i\pi).\end{gathered}
+\]
+The four arguments of $J_N$ are $\omega,\omega-2\pi i,\omega+D,\omega+D-2\pi i$. Multiplication gives the exact identity
+\[
+ A=BCe^{\mathcal K},\qquad
+ \mathcal K=J_N(\omega+D-2\pi i)-J_N(\omega-2\pi i)-J_N(\omega+D)+J_N(\omega).
+\]
+By (2), $J_N''=N/\omega^2+O(N/\lambda^4)$. The mixed difference is $-2\pi iD$ times an average of $J_N''$ over the two straight shifts. Since $D=(2\pi i/y)(1+O(1/y))$, it satisfies
+\[
+ \Re\mathcal K\ge c\frac{N}{y\lambda^2}.
+ \tag{4}
+\]
+The small $O(1/y)$ terms can be made uniformly small by fixing $Y_0$ sufficiently large. At $t=0$ conjugation gives $|A|=1$, $|B|=|C|=e^{-\Re\mathcal K/2}$. In the stated range the right-hand side of (4) is bounded below by a positive constant times $N^{1/4}$.
+
+Differentiate using $\partial_t=-i\partial_\xi$, $D'=-2\pi i/(\xi^2+\pi^2)$, and $\omega'=1+O(1/y)$, with primes in $\xi$. The identity $\log B=J_N(\omega-2\pi i)-J_N(\omega)$ gives
+\[
+ \partial_t\log|B|\le -c N/\lambda^2.
+\]
+Indeed its derivative in $\xi$ is $-2\pi iN/\lambda^2$ up to relative $O(1/y)+O(1/\lambda)$ in complex modulus, by (2). The derivative of $\log C=(N+1)D+J_N(\omega+D)-J_N(\omega)$ in $\xi$ is $(N+1)D'$ plus
+\[
+ O\!\left(\frac{N}{y\lambda^2}+\frac{N}{y^2\lambda}\right)=O(N/y^3),
+\]
+using $\lambda\ge y$. Thus $\partial_t\log|C|\le-cN/y^2$. For $\log A=(N+1)D+J_N(\omega+D-2\pi i)-J_N(\omega)$ the derivative in $\xi$ equals
+\[
+ -2\pi i(N+1)/y^2-2\pi iN/\lambda^2
+ +O\!\left((1/y+1/\lambda)(N/y^2+N/\lambda^2)\right).
+\]
+In fact the shift of $J_N'$ is given by integration of $J_N''$ along $D-2\pi i$, and the additional term $J_N'(\omega+D-2\pi i)D'$ is $O(N/(y^2\lambda))$. Therefore $\partial_t\log|A|\le-cN/y^2$. Also $(\log A)''=O(N/y^3)$. To see the latter, use $D''=O(y^{-3})$, $\omega''=O(y^{-2})$, and $J_N'''=O(N/\lambda^3)$ on the shifts. Consequently all four central terms are bounded by $|W_{++}|$, with
+\[
+ |B|+|C|\le 2e^{-cN/(y\lambda^2)},\qquad
+ |A|\le e^{-ctN/y^2}.
+ \tag{5}
+\]
+
+\subsection{Pole errors and integral tails}
+
+We verify uniformly along the semicircles that
+\[
+ \frac{P_n(x)}{W_{++}}=1+A+B+C
+      +O(e^{-cN/\lambda^2}+e^{-cN/y^2}).
+ \tag{6}
+\]
+The exact Eulerian pole formula, followed by the factorial integral on $s=Nu$ for $1/2\le u\le2$, gives the four terms (1) after one retains the two nearest inner poles $w_+,w_-$ and the two indicated outer branches for each. No Eulerian numerator is dropped in (1).
+
+For the inner poles use $\phi=\pi-t$. The omitted squared imaginary denominators exceed $\phi^2$ by at least $4\pi^2$ and grow quadratically with the index. The sum of squared ratios to the largest inner pole is $O(y)$. Thus for $k\ge3n/4$, extracting the $N/2$th power of the largest omitted ratio gives a total ratio for exponent $k+1$ at most
+\[
+ Cy\left(1+\frac{4\pi^2}{y^2+\pi^2}\right)^{-N/4}
+ \le Cy \exp\big(-(\pi^2+O(y^{-2}))N/y^2\big).
+\]
+This is then multiplied by $R F_n(R)$ after summing the outer row. From (2) and the positive-radius principal-pole estimate justified below,
+\[
+ \frac{R F_n(R)}{|W_{++}|}
+ \le C\exp\big((\pi^2/2+o(1))N/\lambda^2\big).
+\]
+Indeed the principal term in $R F_n(R)$ is the expression in (1) at radius $R$ and with $\omega=\lambda$. On the upper arc the principal angle $\theta=\Im\tau_{++}$ lies in $[0,\pi]$. Its formula is
+\[
+ \theta=\phi-\arctan(\phi/y)+\Im\log(1+e^{-\xi}).
+\]
+Here the last imaginary part is nonnegative and bounded by $C e^{-y}\min(t,\pi-t)$. In particular the angle remains between $0$ and $\pi$, with the latter inequality following from $\pi-\phi=t$ and the bound by $Ce^{-y}t$. The real part cost of changing $\lambda$ to $\lambda+i\theta$ in $-N\log\omega$ is at most $N\theta^2/(2\lambda^2)$. In $B_N$ the first imaginary variation is purely imaginary by reality on the positive axis, and its real cost is $O(N\theta^2/\lambda^4)$ by (2). This proves the angular bound. Since $\lambda\ge y$, fixing $Y_0$ large preserves a positive fraction of the inner gap. The factor $y$ is absorbed since $N/y^2\gg\log N$. For $k<3n/4$, using the sum of squared ratios gives an error bounded by $CyR n!(nR)^{3n/4}$, and (2) bounds its ratio to $|W_{++}|$ by $\exp(-cN\lambda)$. This accounts for the inner error.
+
+For each retained inner pole use the central part of the outer integral. The two branches in (1) contain one of smallest absolute angle. For $w_+$ this is the angle $\theta$ above. For $w_-$ the upper angle is
+\[
+ \phi+\arctan((2\pi-\phi)/y)+\Im\log(1+e^{-\xi}),
+\]
+which belongs to $[0,\pi+O(1/y)]$, and the lower angle is this quantity minus $2\pi$. In both cases all omitted branches have absolute angles at least $2\pi-O(1/y)$. Compare the omitted factors pointwise to the retained branch of smallest absolute angle for each fixed $\sigma$. The real part of the logarithmic denominator is the same for this comparison and equals $\lambda+O(1)$ when $u\in[1/2,2]$. The squared-angle gap is bounded below by a positive constant and grows quadratically with the index. Extracting that gap factor for exponent $(N-2)/2$ and summing the remaining reciprocal quadratics gives a ratio bounded by $C\lambda e^{-cN/\lambda^2}$. The ratio between the integral of the modulus of the comparison term and its complex integral is bounded by (3). By (5) its modulus after integration is at most $|W_{++}|$. The entire outer error on this segment is therefore $O(e^{-c'N/\lambda^2})|W_{++}|$, since $N/\lambda^2\gg \log N$ and $N/\lambda^4=o(N/\lambda^2)$.
+
+For completeness, outside $s\in[N/2,2N]$ use $|A_n(w_\sigma s)|\le A_n(Rs)$. For $s\le\sqrt N$ the bound by $n!(R\sqrt N)^n$ after normalization by $n!(NR)^N$ is $O(N^{-n/2})$, which is exponentially smaller than $e^{-N}\lambda^{-N}$ since $\lambda=O(N^{1/4})$. For $s\ge\sqrt N$ and $u=s/N$, the positive-radius Eulerian pole estimate bounds the normalized integrand by
+\[
+ C(1+\lambda+\log u)e^{N(-1-\log\lambda)}
+ \left(u e^{1-u}\frac{\lambda}{\lambda+\log u}\right)^N.
+\]
+This follows by bounding the nonprincipal ratios by the reciprocal quadratics, with sum $O(1+\lambda+\log u)$. Since $R>1$ for large fixed $Y_0$, $\lambda\ge\log N$ and the logarithmic ratio is at most $2$ for $N^{-1/2}\le u\le1/10$. The bracket there is at most $(2/10)e^{9/10}<1$. On $[1/10,1/2]$ the ratio is $1+O(1/\lambda)$ and the other factor is at most $e^{1/2}/2$. On $[2,\infty)$ the ratio is at most one and $u e^{1-u}\le(2/e)e^{-(u-2)/2}$. The tails of the normalized integral are exponentially small. The comparison with $|W_{++}|$ introduces only $\exp(O(N/\lambda^2))$ by (2). This argument also applies to the positive-radius integral itself, and its central error from the poles other than the real principal term is exponentially small in $N/\lambda^2$ by the same pointwise denominator comparison. This establishes the positive-radius estimate used above and completes (6).
+
+\subsection{Winding and coverage}
+
+Define $\Xi_n(y)$ as the continuous argument of $W_{++}$ at the negative endpoint of the upper arc, taken from the positive endpoint, where $W_{++}$ is positive real. Its value is
+\[
+ \Xi_n(y)=\Im\big((N+1)\tau_{++}(y)+J_N(L+\tau_{++}(y))\big).
+\]
+This is the correct branch of the continuous argument since $\tau_{++}$ and $J_N$ are real at the positive endpoint. When $\Xi_n(y)=k\pi$, conjugation at $t=0$ gives $A=1$. The logarithmic derivative of $A$ in $\xi$ on the real axis is purely imaginary, because $|A|=1$ there. In the motion $\xi=y-it$ its first derivative in $t$ is therefore real at zero. With the second derivative estimate from the ratio analysis this yields
+\[
+ |\arg A|\le C N t^2/y^3
+\]
+for the continuous argument starting at zero. If $|A|>1/4$, (5) gives $t=O(y^2/N)$, leading to $|\arg A|=O(y/N)=o(1)$ and hence $\Re A\ge0$. Otherwise $\Re A\ge-1/4$. Equations (5) and (6) now imply $\Re(P_n/W_{++})>0$ on the entire semicircle for all large $n$.
+
+At the positive endpoint $P_n$ is positive from its coefficients. At the negative endpoint the quotient is real and positive, so the principal argument of the quotient starts and ends at zero along the arc. Thus the continuous argument of $P_n$ rises by exactly $k\pi$ along the upper arc from positive to negative real. Reflection using the real coefficients gives a change of $2k\pi$ on the full circle. No root lies on it, and the argument principle counts exactly $k$ roots inside with multiplicity. This count is absolute since the branch is fixed at the positive endpoint of every circle.
+
+On the real $y$ line set $\theta=\pi-\arctan(\pi/y)$. Differentiation gives $\Im\tau_{++}'=\pi/(y^2+\pi^2)$ exactly and $\Re\tau_{++}'=1+O(1/y)$. With $\omega=\lambda+i\theta$ and $\lambda\ge y$, the contribution of $-N\log\omega$ to the phase derivative equals
+\[
+ N\frac{\theta\,\Re\tau_{++}'-\lambda\,\Im\tau_{++}'}{\lambda^2+\theta^2}
+ \ \ge\ -O\!\left(\frac{N}{\lambda y^2}\right).
+\]
+The $B_N$ derivative contributes only $O(N/\lambda^3)=o(N/y^2)$. Hence $\Xi_n'(y)\ge cN/y^2$ and is also $O(N/y^2)$. Consecutive phase cross-sections are separated by $O(N^{-1/2})$ throughout the interval $Y_0\le y\le4N^{1/4}$, so every root with $Y_0+1\le y\le3N^{1/4}$ is between two consecutive zero-free cross-section circles. Their absolute counts differ by one. Conjugation puts the single root on the real axis, positivity puts it on the negative axis, and the count proves its simplicity.
+\section{The extreme pairs at growing ranks}\label{extreme}
+Let $L_n(z)=z^{n-1}H_n(1/z)$ be the reciprocal of the degree-$n-1$ Eulerian-square row after its zero at the origin is removed. There are absolute constants $c,C>0$ such that for every sufficiently large $n$ and every $1\le h\le c\sqrt{n/\log n}$, the $(2h-1)$st and $2h$th largest-modulus zeros of $H_n$ are simple and negative. Every zero of $H_n$ of modulus at least $\exp(C\sqrt{n\log n})$ is simple and negative. This extends the previously fixed-$h$ cluster theorem~\cite{disk}. The estimates here concern all sufficiently large $n$.
+
+Write $v_h=(h+1)/h$, $s_h=1/v_h$ and
+\[
+ F_h(u)=1+b_hu+c_hu^2,\quad b_h=h^{-1}+v_h^{-(h-1)},\quad c_h=v_h^{-h}/h .
+\]
+We use the $p=2$ matrix-power expansion with $A=a+1,B=b+1$. Its exact term is $e_{n,A-1} e_{n-A+1,B-1}z^{A+B-2}$, where $e_{m,k}$ counts permutations with $k$ descents, $A,B\ge1$ and $A+B-2\le n-1$. The modulus of its coefficient is at most $A^n B^{n+1-A}$. For central points $A,B\in\{h,h+1\}$ the relative error in this approximation is $O(n^{-5})$ uniformly. Indeed the explicit Eulerian formula bounds the relative error for $e_{m,b}$ by $(1+e^{-m/(b+1)})^{m+1}-1$. In the central square $m\ge n-h$ and $b+1\le h+1$; the resulting bound decreases faster than every fixed inverse power of $n$. All four central points lie in the feasible range.
+
+At $z=s_h^n u$ put
+\[
+ K_{n,h}=(h^2 s_h^{2h-2})^n h^{-(h-1)} .
+\]
+The four central model terms then sum exactly to $K_{n,h}u^{2h-2}F_h(u)$, as follows by evaluating the four pairs $(h,h),(h+1,h),(h,h+1),(h+1,h+1)$. We claim that on the whole complex annulus $1/10\le |u|\le64h$,
+\[
+ \left|\frac{L_n(s_h^n u)}{K_{n,h}u^{2h-2}}-F_h(u)\right|
+ \le C_1 n^{-4}\big(1+b_h|u|+c_h|u|^2\big). \tag{1}
+\]
+
+To prove this bound, send each positive integer $A$ to its nearest value $A_0$ in $\{h,h+1\}$ and likewise for $B$. Write $D=|A-A_0|+|B-B_0|$. For $t=1,2,\dots$ the consecutive ratio of $t s_h^t$ is $v_t/v_h$. It equals one at $t=h$ and decreases with $t$. Outside the central pair each step away incurs a factor at most $e^{-\eta_h}$, where
+\[
+ \eta_h=\log(v_h/v_{h+1})=\log(1+1/(h(h+2)))\ge 1/(h+1)^2 .
+\]
+This also bounds the loss on the lower side since $\eta_t$ decreases with $t$. The product part $(A B s_h^{A+B-2})^n$ consequently loses at least $e^{-n\eta_h D}$ relative to the corresponding central magnitude.
+
+The remaining factor $B^{1-A}$ costs at most $\exp(3\log(n+1)D)$ in this comparison. At fixed $B$ changing $A_0$ to $A$ costs at most $\exp(\log n\,|A-A_0|)$ since $B\le n$. With $A=A_0$ the only possible gain on changing $B_0$ to $B$ occurs for $B<B_0$. Then $B_0\ge2$ and convexity of $-\log x$ on $[1,B_0]$ gives
+\[
+ (A_0-1)\log(B_0/B)\le\frac{A_0-1}{B_0-1}(B_0-B)\log B_0
+ \le2(B_0-B)\log(n+1).
+\]
+Finally $|u|^{A+B-A_0-B_0}$ costs at most $\exp(2\log(n+1)D)$ for the displayed annulus and large $n$. Choose the absolute $c$ sufficiently small that $n/(h+1)^2\ge12\log(n+1)$ throughout the range. There are $O(D+1)$ lattice points per fixed central point and distance $D$. Summing the geometric losses for $D\ge1$ and adding the Eulerian approximation errors at the four central points proves (1).
+
+On $|u|=1/10$ the constant coefficient of $F_h$ dominates the two others since $b_h\le2$, $c_h\le1$. On $|u|=64h$ the quadratic term dominates by a fixed factor since $c_h\ge 1/(eh)$, again using $b_h\le2$. Inequality (1) preserves strict dominance at both boundaries. Rouché's theorem therefore counts exactly $2h-2$ zeros of $L_n$ inside the smaller circle and $2h$ inside the larger circle, both after scaling by $s_h^n$.
+
+There are two real roots in between. At $u=-2/b_h$, the quadratic equals $-1+4c_h/b_h^2$, uniformly bounded away from zero on the negative side. In fact $b_h=X+Y$ with $X=1/h$, $Y=v_h^{-(h-1)}$, and $XY/c_h=v_h>1$. Thus $b_h^2/(4c_h)>1$ for every $h$, and this ratio tends to infinity as $h\to\infty$. Also $1\le2/b_h\le2e$ and $1+b_h|u|+c_h|u|^2\le4$ at that point. Inequality (1) gives negative sign there and positive signs at $u=-1/10$ and $-64h$. The two sign changes exhaust the count, giving distinct simple negative zeros. Between adjacent scales the circles are disjoint because $(v_h/v_{h+1})^n\ge(n+1)^{12}>640h$. The counts on the boundaries therefore identify the stated modulus ranks among all complex roots.
+
+For $h=\lfloor c\sqrt{n/\log n}\rfloor$, the outer radius in the reciprocal variable is $64h s_h^n$, and $n\log v_h\le n/h=O(\sqrt{n\log n})$. Thus for a sufficiently large absolute $C$ all original roots with modulus at least $\exp(C\sqrt{n\log n})$ are accounted for by these pairs.
+\section{The square-root transition and its upper extension}\label{theta}
+Let $L_n$ be the reciprocal of the Eulerian-square row $H_n$ after removing the zero at the origin. For any fixed $0<c<C<\infty$, every zero of $H_n$ with
+\[
+ c\sqrt n\le \log |x|\le C\sqrt n
+\]
+is simple and negative for all sufficiently large $n$. The cutoff in $n$ can depend on $c,C$. The argument resolves collisions between the two zero families of the product of Jacobi theta functions. A mixed term in the coefficient expansion splits each collision into two real simple zeros.
+
+\subsection{Local expansion of the coefficients}
+
+The exact reciprocal row is
+\[
+ L_n(z)=\sum_{\substack{A,B\ge1\\ A+B\le n+1}}
+ e_{n,A-1}\,e_{n+1-A,B-1}\,z^{A+B-2}.
+\]
+Here $e_{k,j}$ counts permutations of $k$ with $j$ descents. Its alternating formula~\cite{disk} and nonnegativity give
+\[
+ 0\le e_{k,j}\le(j+1)^k,\qquad
+ 0\le 1-\frac{e_{k,j}}{(j+1)^k}
+ \le (1+e^{-k/(j+1)})^{k+1}-1.
+\]
+The last inequality follows by taking absolute values of all terms after the first and using $(1-h/(j+1))^k\le e^{-kh/(j+1)}$ for $1\le h\le j$.
+
+Choose a real $y_0\in[c\sqrt n,C\sqrt n]$. Let $b$ and $a$ be the nearest integers to $n/y_0$ and $n/(y_0+\log b)$, respectively, and let $m=n+1-a$. For large $n$, both $a$ and $b$ are comparable to $\sqrt n$, $m\sim n$, and
+\[
+ \nu_U=n/a-y_0-\log b=O(1),\qquad
+ \nu_V=m/b-y_0=O(1).
+\]
+The first bound follows from the rounding error for $a$ and $n/a^2=O(1)$. The second follows from the rounding error for $b$ and $a/b=O(1)$. All bounds below are uniform in $y_0$ in the displayed range.
+
+Put $z=-e^{-(y_0+w)}$ and normalize by the nonvanishing monomial term at $(a,b)$ in the coefficient model:
+\[
+ S(w)=\frac{L_n(z)}{a^n b^m z^{a+b-2}}.
+\]
+Define two real analytic functions for bounded complex $w$ by
+\[
+ \begin{aligned}
+ U(w)&=\sum_{i\ge 1-a}(-1)^i
+ \exp\!\big(n\log(1+i/a)-(y_0+\log b+w)i\big),\\
+ V(w)&=\sum_{j\ge 1-b}(-1)^j
+ \exp\!\big(m\log(1+j/b)-(y_0+w)j\big).
+ \end{aligned}
+\]
+The series converge locally uniformly on any fixed bounded set for sufficiently large $n$. The model term $A^nB^{n+1-A}z^{A+B-2}$, after normalization and with $A=a+i$, $B=b+j$, is the product of the indicated $i,j$ terms of $U,V$ times $\exp[-i\log(1+j/b)]$. Consequently
+\[
+ S(w)=U(w)V(w)-b^{-1}U'(w)V'(w)+O(b^{-2})
+ \tag{1}
+\]
+uniformly on any fixed bounded rectangle of complex $w$. Here primes are derivatives with respect to $w$.
+
+To verify the uniform error, first consider the box $a/2\le A\le2a$, $b/2\le B\le2b$. The logarithm of the modulus of the model, as a function of positive real $A,B$, has Hessian
+\[
+ -\begin{pmatrix} n/A^2 & 1/B\\[2pt] 1/B &(n+1-A)/B^2\end{pmatrix}.
+\]
+The diagonal magnitudes have fixed positive lower bounds and the off-diagonal magnitude is $O(b^{-1})$, so the Hessian is bounded above by a negative constant times the identity throughout the box. Its gradient at the anchor $(a,b)$ is $(\nu_U-\Re w,\nu_V-\Re w)=O(1)$. Thus the normalized absolute weight is bounded by $\exp(C_1(|i|+|j|)-c_1(i^2+j^2))$. The separate unsigned $U,V$ terms satisfy the same type of bound there by the single-variable second derivatives of their exponents.
+
+Outside the box, bound the model by $A^nB^n|z|^{A+B-2}$ since $B^{1-A}\le1$. Put $t=y_0+\Re w$ and $h=n/t$. Each of the exponents $n\log A-tA$ and $n\log B-tB$ has maximum at $h$. Its difference from that maximum at $T>0$ is $n(\log(T/h)-T/h+1)$. At least one of $A/h,B/h$ lies outside $[3/5,9/5]$ outside the box for large $n$, since $a/h,b/h\to1$. It then loses at least a fixed positive multiple of $n$. At the anchors $a=h+O(\log n)$, $b=h+O(1)$, the independent exponents differ from their maxima by $O((\log n)^2)$. Restoring the actual normalization costs at most the additional $(a-1)\log b=O(\sqrt n\log n)$ in the exponent. Summing over the at most $n^2$ feasible pairs outside the box gives an exponentially small error. For the separate $U,V$ series outside their anchor intervals, concavity gives geometric tails from the endpoints of $[a/2,2a]$ and $[b/2,2b]$, with slopes of magnitude bounded below by a positive constant times $\sqrt n$ directed into the intervals. The bounds at those endpoints are $O(e^{-c_2 n})$. These same estimates bound the tails when terms are multiplied by fixed powers of $i,j$ for derivatives.
+
+In the box, the terms with $|i|+|j|>n^{1/20}$ are smaller in total than any power of $n^{-1}$ by the Gaussian bound. For the remaining terms,
+\[
+ \exp[-i\log(1+j/b)]
+  =1-\frac{ij}{b}
+   +O\!\left(\frac{(|i|+i^2)j^2}{b^2}\right).
+\]
+Both Eulerian numbers in the box have relative model error $O(e^{-c_3\sqrt n})$ by the alternating formula, since the lengths are comparable to $n$ and the descent indices are $O(\sqrt n)$. The Gaussian bounds allow the errors to be summed in absolute value, and replacing the truncated sums by the full separate series has negligible cost. The factor $ij$ gives $U'V'$ because each derivative contributes one minus sign. This proves (1).
+
+\subsection{Limits of the separate factors}
+
+Let
+\[
+ \Theta_\lambda(t)=\sum_{j\in\mathbb Z}(-1)^j e^{-\lambda j^2+tj},\qquad
+ \lambda_U=\frac{n}{2a^2},\quad \lambda_V=\frac{m}{2b^2}.
+\]
+Both $\lambda_U,\lambda_V$ lie in a fixed compact subinterval of $(0,\infty)$. Taylor expansion with the preceding Gaussian bounds gives
+\[
+ U(w)=\Theta_{\lambda_U}(\nu_U-w)+O(b^{-1}),\qquad
+ V(w)=\Theta_{\lambda_V}(\nu_V-w)+O(b^{-1}).
+ \tag{2}
+\]
+Indeed, on $|i|\le n^{1/20}$ the cubic remainder in the logarithm of the $U$ weight is $O(|i|^3/b)$ and analogous for $V$. On this truncation the remainders tend uniformly to zero, and the Gaussian bounds sum the errors to $O(b^{-1})$. The tails of both the original and model series are smaller than any fixed power of $n^{-1}$. The same argument holds with derivatives through order two, by weighting the series with the corresponding powers of $i$ or $j$.
+
+For $q=e^{-2\lambda}$ and $p=e^{t-\lambda}$, Jacobi's product gives $\Theta_\lambda(t)=(q,p,q/p;q)_\infty$. The zero set consists of the simple zeros $t=(2j+1)\lambda+2\pi i k$, $j,k\in\mathbb Z$. Jacobi's triple product~\cite{DLMF}
+
+We record the uniform consequences needed below. For either $W=U$ or $V$, let $Z_W$ be its real zeros in $[-1,1]$, and on $|\Re w|\le1/2$, $|\Im w|\le\pi$ write $d_W(w)=\min(1,\operatorname{dist}(w,Z_W))$, taking the distance to the empty set to be $+\infty$. There are constants $d_0,c_0,M>0$ independent of the anchor and $n$ such that for large $n$
+\[
+ \begin{gathered}
+ |W(w)|\ge c_0 d_W(w),\qquad
+ |W'(u)|\ge c_0\quad (u\in Z_W),\\
+ |u-v|\ge d_0\quad\text{for distinct }u,v\in Z_W,\qquad
+ |W^{(j)}(w)|\le M\quad(j=0,1,2)
+ \tag{3}
+ \end{gathered}
+\]
+where the derivative upper bounds hold on any fixed rectangle by increasing $M$. To see this, take a small fixed disk radius $\delta<1/8$, also less than one quarter the uniform theta zero spacing. The moduli of the theta derivatives at real zeros in $[-2,2]$ have a positive minimum by compactness of the parameters. The second derivatives are uniformly bounded there. Shrink $\delta$ so the linear term gives a fixed positive lower bound on the disk boundaries. By (2) and Rouché, each disk contains exactly one zero of $W$, simple and real by conjugation. For any real zero of $W$ in $[-1,1]$ there must be a theta zero within such a disk, since compactness gives a uniform positive lower bound for the theta modulus away from its zeros. The same compactness bound applies to all $w$ in the evaluation rectangle outside those disks about theta zeros. Each disk meeting that rectangle has center within $[-1/2-\delta,1/2+\delta]$ and its zero of $W$ belongs to $Z_W$. Inside the disks, uniform lower derivative and upper second derivative bounds give $|W(w)|\ge c_0|w-u|$ about the unique zero $u$, by the Taylor estimate and further shrinking $\delta$ if needed. This proves (3).
+
+\subsection{Localization and splitting}
+
+Let $z$ be any reciprocal zero in the stated modulus range. Choose $y_0=-\log|z|$ and $w_0$ purely imaginary with $|\Im w_0|\le\pi$ such that $z=-e^{-(y_0+w_0)}$. By (1) and (3), $|U(w_0)V(w_0)|=O(b^{-1})$. Therefore one of the factors has a real zero $u$ with $|w_0-u|\le Kb^{-1/2}$ for a uniform constant $K$. Exchange the factor names for this argument if needed, so $u$ is a zero of $U$.
+
+Fix a sufficiently large constant $R>2K$. If $V$ has no zero in distance $2Rb^{-1/2}$ of $u$, consider the circle of radius $Rb^{-1/2}$ about $u$. Both distances in (3) on the circle are at least $Rb^{-1/2}$ for all large $n$, since the other zeros of $U$ are uniformly separated. Thus $|UV|\ge c_0^2R^2/b$. The error $S-UV$ is $O(b^{-1})$ with a uniform constant independent of $R$, by (1). With $R$ sufficiently large, Rouché gives exactly one zero with multiplicity of $S$ in the disk, where $UV$ has just the single simple zero $u$. The same estimates (3) ensure that $U,V$ have no other complex zeros there. The disk contains $w_0$, and conjugation gives that this zero is real and simple.
+
+Otherwise there is one zero $v$ of $V$ within $2Rb^{-1/2}$ of $u$. Set
+\[
+ \tau=\tfrac12(u+v),\qquad
+ \Delta=\tfrac12\sqrt b\,(u-v),\qquad
+ \xi=\sqrt b\,(w-\tau).
+\]
+Then $\Delta$ is real and $|\Delta|\le R$. For bounded $\xi$, the derivative bounds (3) and the expansion (1) give
+\[
+ \frac{b\,S(\tau+\xi/\sqrt b)}{U'(u)V'(v)}
+   =\xi^2-\Delta^2-1+O_R(b^{-1/2}).
+ \tag{4}
+\]
+The product term gives $(\xi-\Delta)(\xi+\Delta)$ up to the stated error by Taylor expansion at $u,v$. The mixed term gives $-1+O_R(b^{-1/2})$, and the residual in (1) contributes $O(b^{-1})$. The limiting quadratic for this comparison has the two real zeros $\pm\sqrt{1+\Delta^2}$, separated by at least $2$. Use disks of radius $1/4$ about them. The quadratic has a uniform positive lower bound in modulus on both boundaries, so Rouché gives exactly one root with multiplicity in each disk. These roots are simple and real by conjugation. The candidate $w_0$ has $|\sqrt b(w_0-\tau)|\le K+R$, so (4) places it in one of the two disks for large $n$. It is therefore real and simple as well.
+
+In either case $z=-e^{-(y_0+w_0)}$ is negative. The exponential substitution has nonzero derivative, and the normalizing factor is nonzero, so the multiplicity is unchanged. Inversion transfers the result to $H_n$.
+
+\subsection{Upper logarithmic extension}
+
+For every fixed $c>0$, the conclusion extends to \textbf{all} $\log|x|\ge c\sqrt n$. By the growing extreme-rank theorem (Section~\ref{extreme}), it suffices to prove (1) and (3) with uniform constants for $c\sqrt n\le y_0\le C\sqrt{n\log n}$, for any fixed $C>0$. We use the same definitions of $S,U,V$ but take $(a,b)$ to maximize the positive coefficient model $A^nB^{n+1-A}e^{-y_0(A+B-2)}$ over feasible integer pairs.
+
+Write $h=n/y_0$ and $\Lambda=y_0^2/n$. Uniformly, $a/h,b/h\to1$. In fact, temporarily dropping $B^{1-A}\le1$ leaves two independent continuous maxima at $h$. Departure by a fixed fraction of $h$ in either coordinate loses a fixed positive multiple of $n$, by the function $\log(T/h)-T/h+1$. Testing the feasible pair with each coordinate nearest to $h$ loses only $O(n/h^2)=O(\log n)$ from rounding and $O(h\log h)=o(n)$ from the mixed factor. Holding each coordinate at its maximizing value, the other coordinate's continuous optimum is $n/(y_0+\log b)$ or $m/y_0$, respectively. Both are strictly inside the feasible intervals. Strict concavity puts the respective integer maximizers at a floor or ceiling, giving $\nu_U,\nu_V=O(\Lambda)$.
+
+In the box $[a/2,2a]\times[b/2,2b]$ the separate unsigned terms at $w=0$ are at most one by anchor maximality. Their exponents have second derivatives at most $-c_6\Lambda$, so consecutive log-weight differences decrease by at least $c_6\Lambda$ at each step away from the anchor. The first step costs a nonpositive log-weight difference. The separate unsigned terms are therefore bounded by $\exp(-c_7\Lambda |i|(|i|-1))$ and $\exp(-c_7\Lambda |j|(|j|-1))$. Bounded $w$ costs at most $\exp(O(|i|+|j|))$, while the cross factor costs at most $\exp(O(|ij|/b))$. Since $\Lambda\ge c^2$ and $b\to\infty$, the uniform Gaussian majorants still apply. The estimates outside the box follow by the same independent-exponent argument as before. At $n/(y_0+\Re w)=(1+o(1))h$ the independent exponents attain their maxima, the loss at $a,b$ is $o(n)$, and the discarded normalization factor costs $O(h\log h)=o(n)$. The separate tails decay geometrically from the interval endpoints, where their weights are $O(e^{-c_8n})$ by $\Lambda a^2,\Lambda b^2\asymp n$. The endpoint derivatives have magnitudes at least a fixed multiple of $y_0$, directed into the intervals. Thus the same truncation and Taylor argument proves (1) with absolute error $O(b^{-2})$ uniformly.
+
+To prove (3), split according to the size of $\Lambda$. For bounded $\Lambda$, the parameters in (2) remain in compact sets with $\lambda_U,\lambda_V$ bounded away from zero. This proves (3) with constants that can depend on the chosen upper bound for $\Lambda$. For large $\Lambda$, only the indices $-1,0,1$ in each factor contribute up to $O(e^{-c_9\Lambda})$, including derivatives through order two on any fixed rectangle by the new separate-term majorants. The unsigned coefficients at $-1,1$ belong to $[0,1]$, and their product is at most $e^{-c_6\Lambda}$ by the second difference at zero. Keep the larger coefficient. The approximating function for each factor is now $1-\alpha e^{w}$ or $1-\alpha e^{-w}$ with $\alpha\in[0,1]$, with error $O(e^{-c_{10}\Lambda})$ up through two derivatives. These functions form a compact family on a fixed rectangle. They have only simple real zeros in $|\Im w|\le\pi$, with derivative modulus one there. The disk and compactness argument used for (3) applies to this family, with constants independent of $\Lambda$, once $\Lambda$ exceeds a fixed threshold. Treat $\Lambda$ below this threshold by (2). This proves (3) on the entire enlarged range.
+
+The localization and splitting argument uses only (1) and (3), so it applies without further changes. Taking $C$ larger than the constant in the growing extreme-rank theorem proves the asserted upper extension. The lower logarithmic bridge (Section~\ref{bridge}) extends the result to smaller values of $\Lambda$.
+\section{The lower logarithmic transition}\label{bridge}
+For any fixed $d>0$, every zero of $H_n$ satisfying
+\[
+ \log|x|\ge d\sqrt{n/\log n}
+\]
+is simple and negative for all sufficiently large $n$. Here $H_n$ is the Eulerian-square row after dividing out its zero at the origin. The square-root and upper logarithmic analysis (Section~\ref{theta}) already gives the assertion when $\log |x|\ge c\sqrt n$ for any fixed $c>0$. We prove the range from $d\sqrt{n/\log n}$ to $c\sqrt n$ for sufficiently small fixed $c$ by making the mixed coefficient expansion relative to the two small one-dimensional factors.
+
+\subsection{Frozen factors and their pole estimates}
+
+For a real $y_0$ in the new range write $\Lambda=y_0^2/n$ and $h=n/y_0$, and use the notation from the upper logarithmic extension (Section~\ref{theta}). Thus $z=-e^{-y_0-w}$ and $(a,b)$ is an integer maximizer of $A^nB^{n+1-A}e^{-y_0(A+B-2)}$ over the feasible pairs of the reciprocal row. We retain the associated normalized polynomial $S(w)$ and separated factors $U(w),V(w)$, with $m=n+1-a$. The proof for the upper extension that $a,b=(1+o(1))h$ still applies: the losses at the feasible pair nearest to $(h,h)$ are $O(n/h^2)$ and $O(h\log h)$, both $o(n)$. In particular $a,b\asymp h$, $m\sim n$ and
+\[
+ d^2/\log n\le\Lambda\le c^2,\qquad
+ b\Lambda\asymp y_0,\qquad
+ \sqrt b\,\Lambda\longrightarrow\infty .
+ \tag{1}
+\]
+As in the upper extension, each anchor coordinate is within one of its continuous optimum while the other coordinate is held fixed.
+
+We treat $U,V$ together by writing a factor as
+\[
+ W(w)=\sum_{i\ge1-f}(-1)^i
+       \exp\bigl(p\log(1+i/f)-(\sigma+w)i\bigr),
+\]
+with $(p,\sigma,f)=(n,y_0+\log b,a)$ or $(m,y_0,b)$. Then $p\sim n$, $\sigma\sim y_0$, and $|f-p/\sigma|\le1$. The Eulerian pole identity applied at $-e^{-(\sigma+w)}$ gives the exact formula on $\Re(\sigma+w)>0$
+\[
+ W(w)=(-1)^f\frac{p!\,e^{(\sigma+w)f}}{f^p}
+       \sum_{k\in\mathbb Z}(\sigma+w+(2k+1)i\pi)^{-p-1}.
+ \tag{2}
+\]
+Indeed, the same power sum for $A=f+i$ is $A_p(t)/(1-t)^{p+1}$ at $t=-e^{-(\sigma+w)}$, by the Eulerian generating identity. The Eulerian pole expansion cancels the factors $(1-t)^{p+1}$. Eulerian generating and pole identities~\cite{disk}
+
+Set $s=\sigma+w$ and use the logarithms of $s+i\pi,s-i\pi$ with imaginary parts in $(-\pi/2,\pi/2)$. Define
+\[
+ \begin{aligned}
+ M(w)&=(-1)^f\frac{p!\,e^{sf}}{f^p}
+        \exp\bigl(-\tfrac{p+1}{2}[\log(s+i\pi)+\log(s-i\pi)]\bigr),\\
+ \Psi(w)&=\tfrac{p+1}{2i}[\log(s+i\pi)-\log(s-i\pi)],\\
+ E_W(w)&=|M(w)|e^{|\Im\Psi(w)|}.
+ \end{aligned}
+\]
+Here $E_W$ is the larger modulus of the two kept poles including their common prefactor in (2). On $|\Re w|\le 8\Lambda$, $|\Im w|\le\pi+1$, the omitted poles satisfy
+\[
+ |W(w)-2M(w)\cos\Psi(w)|\le C e^{-c_1/\Lambda} E_W(w).
+ \tag{3}
+\]
+To prove this, let $t=\Im w$. The closer of $t\pm\pi$ has squared magnitude at most $\pi^2$, while every omitted $t\pm(2k+1)\pi$ for $k\ge1$ has magnitude at least $2k\pi-1$. The squared denominator difference is at least $c_2 k^2$. The relative absolute sum is bounded by twice the sum of $(1+c_3 k^2/\sigma^2)^{-(p+1)/2}$. For $k\le\sigma$, use the bound by $\exp(-c_4 p k^2/\sigma^2)$ and sum, giving $O(e^{-c_5/\Lambda})$ as $p/\sigma^2\asymp1/\Lambda$. For $k>\sigma$, extract an $e^{-c_6p}$ factor using exponent $(p-1)/2$, and sum the remaining reciprocal quadratics, whose sum is $O(\sigma)$. These estimates prove (3) with constants uniform for $\Lambda$ in the stated range.
+
+On this rectangle direct differentiation gives
+\[
+ \Psi'(w)=-\frac{\pi(p+1)}{s^2+\pi^2},\qquad
+ -\Re\Psi'(w)\ge c_7/\Lambda,\qquad
+ |\Psi'(w)|\le C_7/\Lambda .
+ \tag{4}
+\]
+For the two kept pole terms, the logarithmic derivatives are $f-(p+1)/(s\pm i\pi)=O(\Lambda^{-1})$, using $|f-p/\sigma|\le1$, bounded $w$, and $p/\sigma^2\asymp\Lambda^{-1}$. Hence for any fixed radius multiple $K$, $E_W$ is comparable at points at distance at most $K\Lambda$ in the rectangle, by integrating these derivatives and taking the maximum. Applying Cauchy estimates to (3) and the two kept terms on disks of radius a fixed multiple of $\Lambda$ gives, for each fixed integer $r\ge0$,
+\[
+ |W^{(r)}(w)|\le C_r E_W(w)\Lambda^{-r}
+ \qquad (|\Re w|\le6\Lambda,\ |\Im w|\le\pi).
+ \tag{5}
+\]
+For (5) with larger imaginary part bounded by $\pi+1/2$, the same proof uses disks inside $|\Im w|\le\pi+1$ by taking $c$ small.
+
+We also need an absolute lower bound for $E_W$. Put $r=\Re s$. The value of the geometric mean of $|s+i\pi|,|s-i\pi|$ is at most $r(1+C/r^2)$ on the rectangle. Stirling's formula then gives
+\[
+ \begin{aligned}
+ E_W(w)&\ge |M(w)|
+ \ge c_8\frac{\sqrt p}{r}
+   \exp\left[p\left(\frac{rf}{p}-1-\log\frac{rf}{p}\right)
+                 -C_8\frac{p+1}{r^2}\right]\\
+ &\ge n^{-K_d}
+ \end{aligned}
+ \tag{6}
+\]
+for a constant $K_d$ depending on $d$. Here $u-1-\log u\ge0$ for $u>0$, $\sqrt p/r\asymp \Lambda^{-1/2}$, and $\Lambda^{-1}\le(\log n)/d^2$.
+
+\subsection{Distance from a simple zero of a factor}
+
+Let $Z_W$ be the real zeros of $W$ in $[-2\Lambda,2\Lambda]$, and put $d_W(w)=\min(1,\operatorname{dist}(w,Z_W)/\Lambda)$, with the empty-set convention. There are constants $c_9,c_{10}>0$ such that for sufficiently small fixed $c$ and large $n$
+\[
+ \begin{gathered}
+ |W(w)|\ge c_9 E_W(w)d_W(w)
+ \qquad (|\Re w|\le\Lambda,\ |\Im w|\le\pi),\\
+ |W'(u)|\ge c_9 E_W(u)/\Lambda\quad(u\in Z_W),\qquad
+ |u-v|\ge c_{10}\Lambda\quad(u,v\in Z_W,\ u\ne v).
+ \tag{7}
+ \end{gathered}
+\]
+Here and below (5) is available on larger rectangles than the evaluation region of (7).
+
+The real phase $\Psi$ is strictly decreasing by (4). Each real preimage of a half-integer level $(j+1/2)\pi$ in $[-3\Lambda,3\Lambda]$ is separated from the others by at least $\pi\Lambda/C_7$. On a disk of radius $2\rho\Lambda$ about such a preimage $w_j$, with a sufficiently small fixed $\rho>0$, integration of (4) bounds $|\Psi(w)-\Psi(w_j)|$ above and below by constants times $|w-w_j|/\Lambda$. The lower bound follows by integrating the negative real part of the derivative along the segment. The upper bound can be made less than $1/4$ on the whole disk by choosing $\rho$ small. Thus $\cos\Psi$ has a unique simple zero on this disk and has modulus bounded below by a constant times $\rho$ on the circle of radius $\rho\Lambda/2$. By (3) the error in $W/M$ is at most $C e^{-c_1/\Lambda}$ on the larger disk, since $|\Im\Psi|$ is bounded there. Taking $c$ small, Rouché gives a unique real simple zero $u$ of $W$ within $\rho\Lambda/2$ of $w_j$. Conjugation gives reality. Cauchy's estimate on the larger disk for the analytic error in $W/M$ bounds its derivative at $u$ by $C e^{-c_1/\Lambda}/\Lambda$. The derivative of $2\cos\Psi$ at $u$ has magnitude bounded below by a constant times $\Lambda^{-1}$ by (4) and the upper phase bound. Since $W(u)=0$, this yields $|W'(u)|\ge c_{11}E_W(u)/\Lambda$. Combining this derivative estimate with (5) and local comparability of $E_W$, Taylor's formula gives
+\[
+ |W(w)|\ge c_{12}E_W(w)|w-u|/\Lambda
+ \qquad\text{if } |w-w_j|\le\rho\Lambda .
+\]
+Choose $\rho$ small enough for the Taylor estimate as well, using the uniform constants in (4) and (5) on disks of radius at most $\Lambda$.
+
+To see that every small value of $|W|/E_W$ belongs to such a disk, (3) first gives $|\cos\Psi|e^{-|\Im\Psi|}\le \eta$ when the normalized value and the omitted-pole bound are sufficiently small. The inequality $|\cos(\alpha+i\beta)|\ge|\sinh\beta|$ implies $|\Im\Psi|\le C\eta$ since $|\sinh\beta|e^{-|\beta|}=(1-e^{-2|\beta|})/2$. The real part of the phase is then within $C\eta$ of a half-integer level. Integrating (4) on the vertical segment gives $|\Im w|\le C'\eta\Lambda$ and then puts the phase at $\Re w$ within $C''\eta$ of the same level. The monotone real derivative in (4) gives its real preimage within $C'''\eta\Lambda$ of $\Re w$, using the fixed margins of the real interval. Choosing $\eta$ small, this puts $w$ within $\rho\Lambda$ of the preimage. In the first evaluation rectangle of (7), the corresponding zero lies in $[-2\Lambda,2\Lambda]$. Applying the same confinement to any real zero in $[-2\Lambda,2\Lambda]$ uses the preimages in $[-3\Lambda,3\Lambda]$ above. This gives their simplicity and uniform separation. Outside the phase disks, the normalized modulus is bounded below by a fixed positive constant, proving the remaining part of (7).
+
+\subsection{Relative approximation of the mixed coefficient term}
+
+We claim uniformly for $|\Re w|\le\Lambda$, $|\Im w|\le\pi$ that
+\[
+ S(w)=U(w)V(w)-\frac{U'(w)V'(w)}b
+        +O\!\left(\frac{E_U(w)E_V(w)}{b^2\Lambda^4}\right).
+ \tag{8}
+\]
+The normalization of the exact row and the univariate factors is the same as in the transition proof. In the box $a/2\le A\le2a$, $b/2\le B\le2b$, at $w=0$ their univariate log weights obey
+\[
+ \log |\text{term of }U|\le -c_{13}\Lambda |i|(|i|-1),\qquad
+ \log |\text{term of }V|\le -c_{13}\Lambda |j|(|j|-1).
+\]
+This follows from the second derivative and maximal-anchor argument from the upper extension. For the present $w$ the modulus gains at most $e^{\Lambda(|i|+|j|)}$. The cross factor gains at most $e^{C|ij|/b}$; by (1), $b\Lambda\to\infty$, so this term is absorbed in the Gaussian bound after reducing the curvature constant. For any fixed moment order, the weights and their moments are thus bounded in total by powers of $\Lambda^{-1}$, from a Gaussian of the form $\exp(C\Lambda(|i|+|j|)-c_{14}\Lambda(i^2+j^2))$.
+
+The arguments outside the box in the upper extension still apply. The two independent continuous maxima at $n/(y_0+\Re w)$ differ from the anchors by $o(h)$, and any point outside the box loses a fixed positive multiple of $n$ in their exponent sum, against a normalization cost $o(n)$. The separate infinite tails from the endpoints of their box intervals start with $O(e^{-c_{15}n})$ and decay geometrically with exponents of order $y_0$. Inside the box, Eulerian coefficients differ from their model values by relative $O(e^{-c_{16}y_0})$ by the alternating formula, because the lengths are comparable to $n$ and the descent indices are $O(h)$. The sum of these errors is smaller than any power of $n^{-1}$. The same is true of the Gaussian tails with $|i|+|j|>n^{1/20}$, since $\Lambda\ge d^2/\log n$.
+
+On the remaining truncation expand the cross factor to some fixed order $J$:
+\[
+ (1+j/b)^{-i}=
+  \sum_{k=0}^J \frac{(-1)^k(i)_k j^k}{k!\,b^k}
+  +O_J\left(\frac{(1+|i|)^{J+1}|j|^{J+1}}{b^{J+1}}\right),
+\]
+where $(i)_k=i(i+1)\cdots(i+k-1)$. This follows from Taylor's formula in $j/b$ because $(|i|+J+1)|j|/b=o(1)$ on the truncation. The absolute total error is $O_J(b^{-J-1}(\log n)^{T_J})$ for a fixed $T_J$ by the Gaussian moment bounds. The first two terms give $UV-U'V'/b$. Each other term of degree $k$ is a linear combination of products $U^{(r)}V^{(k)}$ with $r\le k$, times $b^{-k}$ and fixed coefficients. By (5), its modulus is at most $C_k E_UE_V(b\Lambda^2)^{-k}$ since $\Lambda\le1$. The finite sum for $k\ge2$ is $O(E_UE_V b^{-2}\Lambda^{-4})$, using $b\Lambda^2\to\infty$ from (1). Finally $E_UE_V\ge n^{-2K_d}$ by (6) and $b\gg\sqrt n$. Choosing the fixed order $J>4K_d+3$ makes the absolute remainder $O(E_UE_V b^{-2}\Lambda^{-4})$. This proves (8).
+
+\subsection{Localization for the reciprocal row}
+
+Given any reciprocal zero in this range, center at $y_0=-\log|z|$ so its parameter $w_0$ is purely imaginary with $|\Im w_0|\le\pi$. At a zero (8) and (5) give $|U(w_0)V(w_0)|/(E_U(w_0)E_V(w_0))=O(1/(b\Lambda^2))$. By (7) one factor has a real zero $u$ within $K/\sqrt b$ of $w_0$, for an absolute $K$ uniform over this range. Exchange the names of the factors if needed.
+
+Fix a large constant $R>2K$. If the other factor has no zero within $2R/\sqrt b$ of $u$, consider the circle of radius $R/\sqrt b$ about $u$. It lies in $|\Re w|\le\Lambda$ for large $n$. Its distances to the two sets of real zeros are at least $R/\sqrt b$ by separation in (7) and the assumption. Thus $|UV|\ge c_{17} E_UE_V R^2/(b\Lambda^2)$ there. By (5) and (8), $|S-UV|\le C E_UE_V/(b\Lambda^2)$ with $C$ independent of $R$. For $R$ sufficiently large, Rouché gives just one simple zero in the disk, since $UV$ has only the zero $u$ there by (7). The disk is invariant under conjugation, so the zero is real. It is the candidate $w_0$.
+
+If the other factor has a zero $v$ within $2R/\sqrt b$ of $u$, use $\tau=(u+v)/2$, $\Delta=\sqrt b(u-v)/2$, and $\xi=\sqrt b(w-\tau)$. At bounded $\xi$ all points under consideration are at distance $O_R(1/\sqrt b)=o(\Lambda)$ from the two univariate zeros. Their envelopes are comparable there, and (5) and (7) give
+\[
+ U(w)=U'(u)\left((w-u)+O\!\left(\frac{|w-u|^2}{\Lambda}\right)\right),
+ \qquad
+ U'(w)=U'(u)\left(1+O\!\left(\frac{|w-u|}{\Lambda}\right)\right),
+\]
+and likewise for $V$. Substitution in (8) yields uniformly at bounded $\xi$
+\[
+ \frac{b S(\tau+\xi/\sqrt b)}{U'(u)V'(v)}
+ =\xi^2-\Delta^2-1
+   +O_R\!\left(\frac1{\sqrt b\,\Lambda}\right).
+\]
+The remainder from (8) in this formula is $O(1/(b\Lambda^2))$. As in the fixed square-root regime, the two roots of the comparison quadratic are real and at distance at least $2$ from each other. Rouché on disks of fixed radius $1/4$ around them gives one simple real zero in each disk. The candidate has bounded $\xi$ and hence must be in one of these disks for large $n$. This proves that every candidate is real and simple in $w$. The exponential substitution and inversion transfer the conclusion to $H_n$.
+\section{Exact finite checks and the outstanding gap}
+The exact census covers $0\le n\le256$, as well as rows $384,512,768,1024$. At $n=1024$, rational sign changes account for all $1023$ nonzero roots. The supplementary files~\cite{project} give the integer coefficients, exact rational separators for the larger rows and an independent reconstruction from the Eulerian alternating formula. The asymptotic threshold has not been bounded above by the census. An effective bound small enough for exact verification, or an argument applying to every row, would settle the Eulerian clause.
+
+\begin{thebibliography}{9}
+\bibitem{MW} J. Mao and L. Wang, \emph{The Narayana transformation}, 2026. \href{https://arxiv.org/abs/2607.01572}{arXiv:2607.01572}.
+\bibitem{disk} ProgramComputer, \emph{Zeros of the Eulerian matrix square and extreme zeros of its powers}, 2026. \href{https://github.com/ProgramComputer/open-math-research/blob/adaf65207ac972d491e8759b83ef07c5d483401d/topics/eulerian-matrix-square/paper.pdf}{Companion manuscript}.
+\bibitem{DLMF} NIST Digital Library of Mathematical Functions, \href{https://dlmf.nist.gov/17.8.E1}{17.8.1, Jacobi's triple product}.
+\bibitem{public} \emph{Mao--Wang's conjecture}, public investigation and proof record, November 2026. \href{https://github.com/1337isnot1337/solved-conjectures/issues/83}{Issue 83}.
+\bibitem{project} ProgramComputer, \emph{Open Problems in Mathematics}, 2026. \href{https://github.com/ProgramComputer/open-math-research/tree/main/topics/eulerian-matrix-square}{Verification materials}.
+\end{thebibliography}
+\end{document}
