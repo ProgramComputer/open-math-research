@@ -6,6 +6,8 @@ Let $A(n,k)$ count permutations of $[n]$ with $k-1$ descents. Mao and Wang conje
 
 The proof counts zeros inside circles until two families of roots approach each other. On the remaining scales a coefficient expansion gives the local quadratic $\xi^2-\Delta^2-1$, whose two real roots stay separated even when $\Delta=0$. The fixed-disk argument, Cauchy limit for logarithmic root magnitudes, consecutive interlacing in each fixed annulus, and extreme-root laws for every fixed power are in the companion paper. [Counting circles](left-cross-sections.md) · [Collision analysis](theta-lower-bridge.md) · [Companion manuscript](paper.pdf) · [Companion source](paper.tex)
 
+**For every $n\ge3$**, the two smallest and two largest nonzero roots in modulus are simple and negative. At each end they strictly alternate with the corresponding roots of the next row, including separation from its next remaining root. Explicit estimates begin at rows 256 and 40, respectively. Exact checks cover both finite prefixes. These effective endpoint theorems have written proofs and arithmetic certificates. [Smallest roots](nearest-pairs-all-rows.md) · [Largest roots](extreme-pairs-all-rows.md)
+
 **🟨 Partial · Lean 4.** For every matrix power $p$ and cluster index $h\ge1$, Lean verifies the limiting polynomial's coefficient formula and its complete real factorization. The positive root moduli are strictly separated by the factor $(h+1)/h$. The analytic convergence, winding numbers and eventual all-root conclusion have independently reviewed written proofs. [Lean source and checks](lean/README.md)
 
 ## Exact computations
