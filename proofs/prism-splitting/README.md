@@ -4,4 +4,4 @@ At level \(a\), separating the double bound in \((1^{2a-2},2)\) into two unit bo
 
 [Complete disproof](../../output/pdf/prism-splitting.pdf) · [Source](../../prism-splitting.tex) · [Exact coefficient vectors](../../certificates/transport_split.json) · [Standalone verifier](../../verify_counterexample.py)
 
-Lean 4 verifies all 23 bounded-composition counts at the endpoint, the root obstruction and the algebraic coefficient gap at every larger parameter. The manuscript gives the Ehrhart interpretation. [Formal scope and reproduction](../../formalization/README.md)
+Lean 4 proves that integer points in both dilated slices correspond to the counted compositions, computes the normalized count-series coefficients through the two dimensions, and rules out interlacing for those vectors. It also verifies the binomial and Vieta obstruction for the infinite family. The paper supplies Ehrhart polynomiality and its degree bound. [Geometric formalization and hypotheses](../../formalization/PRISM_GEOMETRY.md) · [Reproduction](../../formalization/README.md)

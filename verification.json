@@ -38,6 +38,23 @@
         "'PrismSplit.splitSamplesAgree' depends on axioms: [propext, Quot.sound]",
         "'PrismSplit.compositionRowsDoNotInterlace' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
+    },
+    {
+      "file": "formalization/PrismGeometry.lean",
+      "sha256": "b2ac968ccef79338ec761f172a6f3a245fa86b0d049a7e0362219bcf6bc60b87",
+      "exit_code": 0,
+      "kernel_output": [
+        "'PrismSplit.integerCoordinateSlice_iff_real' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.integerPointEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.cardinality_eq_boundedCount' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.integerPoint_iff_in_dilation' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.unsplitRealSliceDilation' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.splitRealSliceDilation' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.integerPointNumeratorsDoNotInterlace' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.ehrhartNumerator_eq_series_prefix' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.ehrhartNumerator_of_seriesPolynomial' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismSplit.integerPointSeriesPolynomialsDoNotInterlace' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
     }
   ]
 }
