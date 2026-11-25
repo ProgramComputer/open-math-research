@@ -4,7 +4,7 @@
   "method": "Fresh Lean process per source, single thread, using an empty project object directory before compiling dependencies. Source digests are SHA-256.",
   "modules": [
     {
-      "file": "formalization/PrismSplit.lean",
+      "file": "topics/prism-splitting/lean/PrismSplit.lean",
       "sha256": "3ca6c87546927ddd0fef7427adcda14e06766f05f2323611eb5430373d11335a",
       "exit_code": 0,
       "kernel_output": [
@@ -20,7 +20,7 @@
       ]
     },
     {
-      "file": "formalization/PrismFamily.lean",
+      "file": "topics/prism-splitting/lean/PrismFamily.lean",
       "sha256": "73211a83f47cd885203de68c2937de29d1b7a9116a82a520b2024452a7909305",
       "exit_code": 0,
       "kernel_output": [
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "file": "formalization/PrismCounts.lean",
+      "file": "topics/prism-splitting/lean/PrismCounts.lean",
       "sha256": "38ee045e0ab84335216213f33e3eed6c21e2561d9d8c21ac46e4c36d52b29288",
       "exit_code": 0,
       "kernel_output": [
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "file": "formalization/PrismGeometry.lean",
+      "file": "topics/prism-splitting/lean/PrismGeometry.lean",
       "sha256": "b2ac968ccef79338ec761f172a6f3a245fa86b0d049a7e0362219bcf6bc60b87",
       "exit_code": 0,
       "kernel_output": [

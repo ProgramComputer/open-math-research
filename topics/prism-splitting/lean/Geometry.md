@@ -9,19 +9,7 @@
 
 ## Reproduction
 
-With `elan` on `PATH`, run from this directory. The project pins Lean and mathlib to version 4.19.0.
-
-```sh
-lake update
-awk '/^import Mathlib\./ {print $2}' PrismSplit.lean PrismCounts.lean PrismGeometry.lean | sort -u | xargs lake exe cache get
-mkdir -p .lake/build/lib/lean
-export LEAN_NUM_THREADS=1
-lake env lean -j1 -o .lake/build/lib/lean/PrismSplit.olean PrismSplit.lean
-lake env lean -j1 -o .lake/build/lib/lean/PrismCounts.olean PrismCounts.lean
-lake env lean -j1 PrismGeometry.lean
-```
-
-The macOS cache fallback in the [reproduction guide](README.md) also applies. The `PrismCounts.lean` check can take a few minutes.
+Build `PrismGeometry` with the [shared Lean project](../../../shared/lean/README.md). The target imports both the bounded-composition recurrence and all finite count certificates.
 
 ## Recorded check
 
