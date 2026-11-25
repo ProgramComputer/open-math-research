@@ -13,7 +13,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 ## Partial work
 
-- For [balanced arrays](topics/balanced-arrays/README.md), the column bound $d\ge(n+1)\log(2)/2$ covers every rank. The large-row theorem has an unspecified threshold $N(d,r)$.
+- For [balanced arrays](topics/balanced-arrays/README.md), every rank and dimension is covered through 24 rows. For arbitrary row counts, $d\ge(n+1)\log(2)/2$ suffices.
 - For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.
 
 ## Citation
