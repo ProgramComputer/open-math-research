@@ -1,6 +1,6 @@
 name = "open_math_research"
 version = "0.1.0"
-defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing"]
+defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents"]
 
 [[require]]
 name = "mathlib"
@@ -62,3 +62,11 @@ srcDir = "../../topics/prism-splitting/lean"
 [[lean_lib]]
 name = "PrismFamilyInterlacing"
 srcDir = "../../topics/prism-splitting/lean"
+
+[[lean_lib]]
+name = "BalancedTorusMaxima"
+srcDir = "../../topics/balanced-arrays/lean"
+
+[[lean_lib]]
+name = "BalancedTorusComponents"
+srcDir = "../../topics/balanced-arrays/lean"

@@ -1,7 +1,7 @@
 {
   "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
   "mathlib": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
-  "method": "The shared Lake project independently built the module with pinned Lean and mathlib. A second process imported it and printed the kernel axiom dependencies of all four exported theorems.",
+  "method": "The shared Lake project independently built the modules with pinned Lean and mathlib. Separate processes imported the built modules and printed the kernel axiom dependencies of the named theorems.",
   "modules": [
     {
       "file": "topics/balanced-arrays/lean/BalancedPairCompression.lean",
@@ -12,6 +12,31 @@
         "'BalancedPairCompression.affine_normSq_lt_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'BalancedPairCompression.exists_compressing_unit_pair' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'BalancedPairCompression.slope_eq_zero_at_unit_pair_max' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/balanced-arrays/lean/BalancedTorusMaxima.lean",
+      "sha256": "b5dd4c097d9494af85bb7bffe7e5a887dc7a28638e08b9bbe3a077fbcfb1b815",
+      "exit_code": 0,
+      "kernel_output": [
+        "'BalancedTorusMaxima.prod_replacePair' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedTorusMaxima.replacePair_mem_unitProductTorus' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedTorusMaxima.diagonal_of_two_maxima' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedTorusMaxima.rowObjective_eq_elementary_sum' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedTorusMaxima.pairAffine_rowObjective' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/balanced-arrays/lean/BalancedTorusComponents.lean",
+      "sha256": "2a7b4391552ec92d7838f30f6be0ea123563276b2d63dbad864539ebc6bcc366",
+      "exit_code": 0,
+      "kernel_output": [
+        "'BalancedTorusComponents.isCompact_unitProductTorus' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedTorusComponents.modulusMaxima_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedTorusComponents.exists_diagonal_in_modulusMaxima_component' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedTorusComponents.continuous_rowObjective' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedTorusComponents.rowObjective_exists_diagonal_in_component' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedTorusComponents.dilated_rowObjective_exists_diagonal_in_component' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
     }
   ]
