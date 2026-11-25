@@ -1,6 +1,6 @@
 name = "open_math_research"
 version = "0.1.0"
-defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression"]
+defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing"]
 
 [[require]]
 name = "mathlib"
@@ -42,3 +42,23 @@ srcDir = "../../topics/ribbon-matroids/lean"
 [[lean_lib]]
 name = "BalancedPairCompression"
 srcDir = "../../topics/balanced-arrays/lean"
+
+[[lean_lib]]
+name = "PrismFamilyCounts"
+srcDir = "../../topics/prism-splitting/lean"
+
+[[lean_lib]]
+name = "PrismFamilyReciprocity"
+srcDir = "../../topics/prism-splitting/lean"
+
+[[lean_lib]]
+name = "PrismFamilyTop"
+srcDir = "../../topics/prism-splitting/lean"
+
+[[lean_lib]]
+name = "PrismFamilyGeometry"
+srcDir = "../../topics/prism-splitting/lean"
+
+[[lean_lib]]
+name = "PrismFamilyInterlacing"
+srcDir = "../../topics/prism-splitting/lean"

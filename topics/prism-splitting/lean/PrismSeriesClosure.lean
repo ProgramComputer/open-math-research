@@ -12,10 +12,10 @@ namespace PrismSplit
 
 open scoped BigOperators fwdDiff
 
-private noncomputable def capSeries (c : Nat) : PowerSeries Int :=
+noncomputable def capSeries (c : Nat) : PowerSeries Int :=
   ∑ j ∈ Finset.range (c + 1), PowerSeries.X ^ j
 
-private noncomputable def boxSeries (caps : List Nat) : PowerSeries Int :=
+noncomputable def boxSeries (caps : List Nat) : PowerSeries Int :=
   (caps.map capSeries).prod
 
 private theorem sum_range_eq_list (f : Nat → Int) (m : Nat) :
@@ -24,7 +24,7 @@ private theorem sum_range_eq_list (f : Nat → Int) (m : Nat) :
   | zero => simp
   | succ m ih => simp [Finset.sum_range_succ, ih, List.range_succ, List.sum_append]
 
-private theorem boxSeries_coeff (caps : List Nat) (t : Nat) :
+theorem boxSeries_coeff (caps : List Nat) (t : Nat) :
     PowerSeries.coeff Int t (boxSeries caps) = (boundedCount caps t : Int) := by
   rw [boundedCount_eq_length]
   induction caps generalizing t with
@@ -62,7 +62,7 @@ private theorem capSeries_mul_one_sub (c : Nat) :
     simp only [mul_sub, mul_one, ← pow_succ]
     ring
 
-private theorem capSeries_eq (c : Nat) :
+theorem capSeries_eq (c : Nat) :
     capSeries c = (1 - PowerSeries.X ^ (c + 1)) * (PowerSeries.mk 1 : PowerSeries Int) := by
   calc
     capSeries c = capSeries c * ((1 - PowerSeries.X) * PowerSeries.mk 1) := by
@@ -70,15 +70,15 @@ private theorem capSeries_eq (c : Nat) :
     _ = _ := by
       rw [← mul_assoc, capSeries_mul_one_sub]
 
-private theorem boxSeries_replicate (c n : Nat) :
+theorem boxSeries_replicate (c n : Nat) :
     boxSeries (List.replicate n c) = capSeries c ^ n := by
   simp [boxSeries, List.map_replicate, List.prod_replicate]
 
-private theorem boxSeries_append (a b : List Nat) :
+theorem boxSeries_append (a b : List Nat) :
     boxSeries (a ++ b) = boxSeries a * boxSeries b := by
   simp [boxSeries]
 
-private theorem one_sub_X_pow_expansion (p n : Nat) :
+theorem one_sub_X_pow_expansion (p n : Nat) :
     (1 - PowerSeries.X ^ p : PowerSeries Int) ^ n =
       ∑ j ∈ Finset.range (n + 1),
         PowerSeries.C Int ((-1 : Int) ^ j * (n.choose j : Int)) * PowerSeries.X ^ (p * j) := by
@@ -91,39 +91,39 @@ private theorem one_sub_X_pow_expansion (p n : Nat) :
   simp only [map_mul, map_pow, map_natCast]
   ring
 
-private def affineChoose (s b d : Nat) : Nat → Int :=
+def affineChoose (s b d : Nat) : Nat → Int :=
   fun q => ((s * q + b).choose d : Int)
 
-private noncomputable def signedRows (n d w e : Nat) : Nat → Int :=
+noncomputable def signedRows (n d k w e : Nat) : Nat → Int :=
   ∑ j ∈ Finset.range (n + 1),
-    if j + w < 6 then
-      ((-1 : Int) ^ j * (n.choose j : Int)) • affineChoose (6 - (j + w)) (d - (j + e)) d
+    if j + w < k then
+      ((-1 : Int) ^ j * (n.choose j : Int)) • affineChoose (k - (j + w)) (d - (j + e)) d
     else 0
 
-private theorem coeff_shifted_choose (q j w e d : Nat) (hw : w ≤ 5) (hd : 5 + e ≤ d) :
-    PowerSeries.coeff Int (6 * q)
+private theorem coeff_shifted_choose (q j w e d k : Nat) (hw : w < k) (hd : k - 1 + e ≤ d) :
+    PowerSeries.coeff Int (k * q)
       (PowerSeries.X ^ ((j + w) * q + (j + e)) *
         PowerSeries.mk (fun x => ((d + x).choose d : Int))) =
-      if j + w < 6 then affineChoose (6 - (j + w)) (d - (j + e)) d q else 0 := by
+      if j + w < k then affineChoose (k - (j + w)) (d - (j + e)) d q else 0 := by
   rw [PowerSeries.coeff_X_pow_mul']
-  by_cases hl : j + w < 6
-  · have hsum : 6 * q = (j + w) * q + (6 - (j + w)) * q := by
+  by_cases hl : j + w < k
+  · have hsum : k * q = (j + w) * q + (k - (j + w)) * q := by
       rw [← Nat.add_mul, Nat.add_sub_of_le hl.le]
     have hje : j + e ≤ d := by omega
     rw [if_pos hl]
-    by_cases hb : (j + w) * q + (j + e) ≤ 6 * q
+    by_cases hb : (j + w) * q + (j + e) ≤ k * q
     · rw [if_pos hb, PowerSeries.coeff_mk, affineChoose]
       congr 2
       omega
-    · rw [if_neg hb, affineChoose, Nat.choose_eq_zero_of_lt (by omega : (6 - (j + w)) * q + (d - (j + e)) < d)]
+    · rw [if_neg hb, affineChoose, Nat.choose_eq_zero_of_lt (by omega : (k - (j + w)) * q + (d - (j + e)) < d)]
       simp
-  · have hm := Nat.mul_le_mul_right q (show 6 ≤ j + w by omega)
+  · have hm := Nat.mul_le_mul_right q (show k ≤ j + w by omega)
     rw [if_neg hl, if_neg (by omega)]
 
-private theorem coeff_signedRows (q n d w e : Nat) (hw : w ≤ 5) (hd : 5 + e ≤ d) :
-    PowerSeries.coeff Int (6 * q)
+theorem coeff_signedRows (q n d k w e : Nat) (hw : w < k) (hd : k - 1 + e ≤ d) :
+    PowerSeries.coeff Int (k * q)
       ((1 - PowerSeries.X ^ (q + 1)) ^ n * PowerSeries.X ^ (w * q + e) *
-        PowerSeries.mk (fun x => ((d + x).choose d : Int))) = signedRows n d w e q := by
+        PowerSeries.mk (fun x => ((d + x).choose d : Int))) = signedRows n d k w e q := by
   rw [one_sub_X_pow_expansion, Finset.sum_mul, Finset.sum_mul, map_sum, signedRows, Finset.sum_apply]
   apply Finset.sum_congr rfl
   intro j _
@@ -131,10 +131,10 @@ private theorem coeff_signedRows (q n d w e : Nat) (hw : w ≤ 5) (hd : 5 + e �
     ← mul_assoc (PowerSeries.X ^ ((q + 1) * j)) (PowerSeries.X ^ (w * q + e)),
     ← pow_add,
     show (q + 1) * j + (w * q + e) = (j + w) * q + (j + e) by ring,
-    coeff_shifted_choose q j w e d hw hd]
-  by_cases hj : j + w < 6 <;> simp [hj, smul_eq_mul]
+    coeff_shifted_choose q j w e d k hw hd]
+  by_cases hj : j + w < k <;> simp [hj, smul_eq_mul]
 
-private theorem unsplitAllCounts : unsplitByCompositions = signedRows 10 10 0 0 - signedRows 10 10 2 1 := by
+private theorem unsplitAllCounts : unsplitByCompositions = signedRows 10 10 6 0 0 - signedRows 10 10 6 2 1 := by
   funext q
   change (boundedCount (List.replicate 10 q ++ [2 * q]) (6 * q) : Int) = _
   rw [← boxSeries_coeff, boxSeries_append, boxSeries_replicate]
@@ -150,16 +150,16 @@ private theorem unsplitAllCounts : unsplitByCompositions = signedRows 10 10 0 0 
     simp only [zero_mul, zero_add, pow_zero, mul_one]
     ring
   rw [h, PowerSeries.mk_one_pow_eq_mk_choose_add, map_sub,
-    coeff_signedRows q 10 10 0 0 (by decide) (by decide),
-    coeff_signedRows q 10 10 2 1 (by decide) (by decide)]
+    coeff_signedRows q 10 10 6 0 0 (by decide) (by decide),
+    coeff_signedRows q 10 10 6 2 1 (by decide) (by decide)]
   rfl
 
-private theorem splitAllCounts : splitByCompositions = signedRows 12 11 0 0 := by
+private theorem splitAllCounts : splitByCompositions = signedRows 12 11 6 0 0 := by
   funext q
   change (boundedCount (List.replicate 12 q) (6 * q) : Int) = _
   rw [← boxSeries_coeff, boxSeries_replicate, capSeries_eq, mul_pow,
     PowerSeries.mk_one_pow_eq_mk_choose_add]
-  have h := coeff_signedRows q 12 11 0 0 (by decide) (by decide)
+  have h := coeff_signedRows q 12 11 6 0 0 (by decide) (by decide)
   simpa only [zero_mul, zero_add, pow_zero, mul_one] using h
 
 private theorem choose_difference (x a d : Nat) :
@@ -194,8 +194,8 @@ private theorem affineChoose_difference_zero (a b d : Nat) :
     rw [Function.iterate_succ_apply, affineChoose_difference, fwdDiff_iter_finset_sum]
     simp [ih]
 
-private theorem signedRows_difference_zero (n d w e : Nat) :
-    Δ_[1]^[d + 1] (signedRows n d w e) = 0 := by
+theorem signedRows_difference_zero (n d k w e : Nat) :
+    Δ_[1]^[d + 1] (signedRows n d k w e) = 0 := by
   rw [signedRows, fwdDiff_iter_finset_sum]
   apply Finset.sum_eq_zero
   intro j _
@@ -217,28 +217,28 @@ private theorem coeff_normalized_eq_diff (m q : Nat) (f : Nat → Int) :
     rw [hshift, show q + (m + 1) = (q + 1) + m by omega, ih, ih,
       Function.iterate_succ_apply', fwdDiff]
 
-private theorem normalized_zero_above (d : Nat) (f : Nat → Int)
+theorem normalized_zero_above (d : Nat) (f : Nat → Int)
     (hdiff : Δ_[1]^[d + 1] f = 0) (i : Nat) (hi : d < i) :
     PowerSeries.coeff Int i (normalizedCountSeries d f) = 0 := by
   have hindex : i = (i - (d + 1)) + (d + 1) := (Nat.sub_add_cancel hi).symm
   rw [normalizedCountSeries, hindex, coeff_normalized_eq_diff, hdiff]
   rfl
 
-private noncomputable def polynomialPrefix (d : Nat) (s : PowerSeries Int) : Polynomial Int :=
+noncomputable def polynomialPrefix (d : Nat) (s : PowerSeries Int) : Polynomial Int :=
   ∑ i ∈ Finset.range (d + 1), Polynomial.C (PowerSeries.coeff Int i s) * Polynomial.X ^ i
 
-private theorem coeff_polynomialPrefix (d i : Nat) (s : PowerSeries Int) :
+theorem coeff_polynomialPrefix (d i : Nat) (s : PowerSeries Int) :
     (polynomialPrefix d s).coeff i = if i ≤ d then PowerSeries.coeff Int i s else 0 := by
   rw [polynomialPrefix, Polynomial.finset_sum_coeff]
   simp [Polynomial.coeff_C_mul_X_pow, Finset.sum_ite_eq', Finset.mem_range, Nat.lt_succ_iff]
 
-private theorem polynomialPrefix_degree (d : Nat) (s : PowerSeries Int) :
+theorem polynomialPrefix_degree (d : Nat) (s : PowerSeries Int) :
     (polynomialPrefix d s).natDegree ≤ d := by
   rw [Polynomial.natDegree_le_iff_coeff_eq_zero]
   intro i hi
   rw [coeff_polynomialPrefix, if_neg (not_le_of_gt hi)]
 
-private theorem polynomialPrefix_series (d : Nat) (s : PowerSeries Int)
+theorem polynomialPrefix_series (d : Nat) (s : PowerSeries Int)
     (htail : ∀ i > d, PowerSeries.coeff Int i s = 0) :
     (polynomialPrefix d s : PowerSeries Int) = s := by
   ext i
@@ -276,7 +276,7 @@ theorem splitEhrhartSeries :
   apply polynomialPrefix_series
   intro i hi
   rw [splitCountSeries, splitIntegerCounts, splitAllCounts]
-  exact normalized_zero_above _ _ (signedRows_difference_zero _ _ _ _) i hi
+  exact normalized_zero_above _ _ (signedRows_difference_zero _ _ _ _ _) i hi
 
 /-- No additional existence or degree hypotheses about the Ehrhart series are required. -/
 theorem ehrhartPolynomialsDoNotInterlace :

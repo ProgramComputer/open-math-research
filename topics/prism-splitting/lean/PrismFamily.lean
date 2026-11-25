@@ -65,6 +65,14 @@ theorem coefficient_gap (b : ℕ) (hb : 6 ≤ b) : after b < before b := by
     exact_mod_cast choose_gap b hb
   linarith
 
+theorem coefficient_gap_beyond_one (b : ℕ) (hb : 6 ≤ b) : after b + 1 < before b := by
+  unfold before after
+  rw [central_two_steps]
+  push_cast
+  have h : ((2*b).choose b : ℤ) < 2*((2*b).choose (b+2) : ℤ) := by
+    exact_mod_cast choose_gap b hb
+  linarith
+
 /-- Weakly alternating negative roots, in increasing order with one extra
 root on the second side. -/
 inductive AlternatingNegative : List ℝ → List ℝ → Prop
@@ -108,5 +116,6 @@ theorem polynomial_obstruction (b : ℕ) (hb : 6 ≤ b) (p q : Polynomial ℝ)
 
 #print axioms polynomial_obstruction
 #print axioms coefficient_gap
+#print axioms coefficient_gap_beyond_one
 #print axioms no_family_interlacing
 end PrismFamily

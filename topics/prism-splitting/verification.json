@@ -1,7 +1,7 @@
 {
   "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
   "mathlib": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
-  "method": "Each source was compiled with pinned Lean and mathlib. The finite prism dependency chain was rebuilt by Lake with an empty project object directory. Module entries record source SHA-256, exit code and printed kernel axiom dependencies.",
+  "method": "Pinned Lean and mathlib checked the source modules. The concrete disproof and parametric family were each independently rebuilt through the shared Lake project with an empty project object directory. Entries record source SHA-256, process exit status and the kernel axiom reports.",
   "modules": [
     {
       "file": "topics/prism-splitting/lean/PrismSplit.lean",
@@ -21,11 +21,12 @@
     },
     {
       "file": "topics/prism-splitting/lean/PrismFamily.lean",
-      "sha256": "73211a83f47cd885203de68c2937de29d1b7a9116a82a520b2024452a7909305",
+      "sha256": "ac4e350b24255d1b0bd873f1f33dc77c6c30ed5702c75c49429e0edac78c41ce",
       "exit_code": 0,
       "kernel_output": [
         "'PrismFamily.polynomial_obstruction' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'PrismFamily.coefficient_gap' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.coefficient_gap_beyond_one' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'PrismFamily.no_family_interlacing' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
     },
@@ -58,7 +59,7 @@
     },
     {
       "file": "topics/prism-splitting/lean/PrismSeriesClosure.lean",
-      "sha256": "af43e475a78d1892906173f624e3fa86c7acfb49ce365e5a45c4e0da5454e30f",
+      "sha256": "0474d85e47c9fe6072b54f69afb5732300d361b6bb43b31d5b11cf7b124d239d",
       "exit_code": 0,
       "kernel_output": [
         "'PrismSplit.unsplitEhrhartSeries' depends on axioms: [propext, Classical.choice, Quot.sound]",
@@ -81,6 +82,60 @@
         "'PrismSplit.unsplitEhrhartDegree' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'PrismSplit.splitEhrhartDegree' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'PrismSplit.finBoxSplitCounterexample' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/prism-splitting/lean/PrismFamilyCounts.lean",
+      "sha256": "416ad95c4d46d034b85ede30370c1ed51ffcec5a02a9774afd54db32368fceea",
+      "exit_code": 0,
+      "kernel_output": [
+        "'PrismFamily.beforeIntExtension_nat' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.afterIntExtension_nat' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.beforeIntExtension_diff' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.afterIntExtension_diff' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.beforeNumeratorSeries' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.afterNumeratorSeries' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/prism-splitting/lean/PrismFamilyReciprocity.lean",
+      "sha256": "f1b13731e5cd53d730eb53622b6d411909420bc21b7c7b0ef63334f8ee2b0de4",
+      "exit_code": 0,
+      "kernel_output": [
+        "'PrismFamily.beforeInterior_reflection' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.afterInterior_reflection' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/prism-splitting/lean/PrismFamilyTop.lean",
+      "sha256": "da35a65af1ec0b0019bb5b0f252db43ed5b5f50a25976c7a6b64157a82e72723",
+      "exit_code": 0,
+      "kernel_output": [
+        "'PrismFamily.beforeNumerator_top' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.afterNumerator_top' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.familyNumeratorsDoNotAlternate' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/prism-splitting/lean/PrismFamilyGeometry.lean",
+      "sha256": "6f7b157989f5523f6e7e99c2f6fdb2cd9068ebfc2905394bec5388fa530d4839",
+      "exit_code": 0,
+      "kernel_output": [
+        "'PrismFamily.beforeAffineDimension' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.afterAffineDimension' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.beforeFinSeries' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.afterFinSeries' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/prism-splitting/lean/PrismFamilyInterlacing.lean",
+      "sha256": "e69bc99d8bb81c13476620e505f5a2a8fa57c909fdd8f692fe72ffdfa1637379",
+      "exit_code": 0,
+      "kernel_output": [
+        "'PrismFamily.afterNumerator_reflect' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.afterNumerator_no_root_gt_one' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.familyNumeratorsDoNotInterlace' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'PrismFamily.familyBoxSplitCounterexample' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
     }
   ]

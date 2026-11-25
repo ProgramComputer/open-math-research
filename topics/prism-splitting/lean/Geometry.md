@@ -5,7 +5,7 @@
 - `realSliceDilation` proves that scaling every coordinate by the dilation factor agrees with scaling the bounds and the prescribed sum, including at dilation zero. `integerPoint_iff_in_dilation` identifies the corresponding integer lattice points.
 - `integerPointEquiv` maps each integer point to a bounded composition by taking natural values of its nonnegative coordinates. The inverse casts the coordinates back to integers. `cardinality_eq_boundedCount` uses the duplicate-free enumeration in [PrismSplit.lean](PrismSplit.lean) to identify the cardinality with the certified count.
 - `ehrhartNumerator_eq_series_prefix` identifies the finite coefficient vector with the first $D+1$ coefficients of the count series multiplied by $(1-X)^{D+1}$. [PrismCounts.lean](PrismCounts.lean) checks every count needed for the two coefficient vectors. `integerPointNumeratorsDoNotInterlace` proves noninterlacing for those vectors.
-- `integerPointSeriesPolynomialsDoNotInterlace` concludes noninterlacing for the polynomial evaluations given the normalized count-series identities and degree bounds $10$ and $11$. The accompanying mathematical proof supplies the lattice-polytope Ehrhart theorem and dimension calculation for these bounds, as well as the identification with two-row transportation polytopes.
+- `integerPointSeriesPolynomialsDoNotInterlace` concludes noninterlacing for the polynomial evaluations given the normalized count-series identities and degree bounds $10$ and $11$. The [series closure](PrismSeriesClosure.lean) and [dimension proof](PrismDimensions.lean) supply those identities and bounds. The mathematical proof also identifies the slices with two-row transportation polytopes.
 
 ## Reproduction
 
