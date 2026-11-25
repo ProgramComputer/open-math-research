@@ -10,6 +10,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Partial theorems, including the closest zero in every nonconstant row with $d\ge2$ | 🟨 Partial · Lean 4 |
 | [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
 | [Ribbon matroids have the Narayana polynomial](topics/ribbon-matroids/README.md) | Proof | 🟨 Partial · Lean 4 |
+| [Largest real zero for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Partial theorem for every length from three, with a zero-free interval at every length | ⬜ None |
 
 **Lean or Rocq key**　🟩 Full (entire statement) · 🟨 Partial (named components) · ⬜ None (no checked proof)
 
