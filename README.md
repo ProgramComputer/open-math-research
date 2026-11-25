@@ -2,9 +2,9 @@
 
 This repository publishes reviewed results on open problems across mathematics. The [result index](RESULTS.md) records their mathematical significance and formal proof status.
 
-| Result | Rank | Scope | Lean or Rocq status | Result folder |
-|---|---:|---|---|---|
-| [Prism-slice splitting fails](output/pdf/prism-splitting.pdf) | 1 | Disproof for every central split in the family with \(a\ge6\). | Lean 4 checks the finite counts, separation of the roots, and the algebraic obstruction for the family. | [Result README](proofs/prism-splitting/README.md) |
+| Result | Rank | Scope | Lean or Rocq status |
+|---|---:|---|---|
+| [Prism-slice splitting fails](proofs/prism-splitting/README.md) | 1 | Disproof for every central split in the family with \(a\ge6\). | Lean 4 checks the finite counts, separation of the roots, and the algebraic obstruction for the family. |
 
 ## Splitting a bound can destroy interlacing for slices of prisms
 
