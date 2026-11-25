@@ -1,0 +1,500 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<->cmex10}{}
+\hypersetup{pdftitle={Interlacing and limiting zeros of ordered set partitions counted by nonsingleton blocks},pdfauthor={ProgramComputer}}
+\title{Interlacing and limiting zeros of ordered set partitions counted by nonsingleton blocks}
+\author{ProgramComputer}
+\date{November 25, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove the threshold-two case of Alexandersson's conjecture for ordered partitions of a labeled set. In every size the polynomial counting nonsingleton blocks has simple negative zeros, and the zeros of successive sizes strictly interlace. The exponential generating function admits a conjugate pair of poles that controls the polynomial uniformly on a half-line. Counting signs between consecutive phase levels also yields a limiting zero distribution, a positive lower edge for the root moduli, and quadratic scaling at both extremes. The ordered conjecture for arbitrary thresholds remains open.
+\end{abstract}
+\section{Ordered partitions by nonsingleton blocks}
+
+Let $O_n(t)=\sum_\pi t^{b(\pi)}$, where $\pi$ runs over ordered set partitions of $[n]$ and $b(\pi)$ is the number of blocks of size at least two. Alexandersson asks whether the corresponding polynomials for blocks of size at least $j$ are real-rooted and interlace consecutively for every $j\ge2$~\cite{alex}. Its constant term is $n!$, its degree is $\lfloor n/2\rfloor$, and its leading coefficient is positive.
+
+\textbf{Theorem.} For every $n\ge0$, all zeros of $O_n$ are simple and negative. For $m=\lfloor n/2\rfloor\ge1$, write them as $-q_{n,1},\ldots,-q_{n,m}$ with $0<q_{n,1}<\cdots<q_{n,m}$. Then
+
+\[
+0<q_{n+1,1}<q_{n,1}<q_{n+1,2}<q_{n,2}<\cdots<q_{n+1,m}<q_{n,m},
+\]
+
+and if $n$ is odd, the extra modulus $q_{n+1,m+1}$ is strictly larger than $q_{n,m}$. The initial constant rows have the vacuous interlacing property.
+
+\section{Poles of the generating function}
+
+The ordered sequence construction gives
+
+\[
+\sum_{n\ge0}O_n(t)\frac{z^n}{n!}=\frac1{1-z-t(e^z-1-z)}.
+\]
+
+At $t=-q$ with $q>0$, put $v=1/(1+q)$ and $a=1-2v$. The denominator is
+
+\[
+D_q(z)=(1+q)\big((1-v)e^z-z-a\big).
+\]
+
+With $u=z+a$, its zeros satisfy
+
+\[
+e^u=p u,\qquad p=\frac{e^{1-2v}}{1-v}.
+\tag{1}
+\]
+
+The function $\log p=1-2v-\log(1-v)$ decreases from $1$ to $\log 2$ on $0<v\le1/2$ and then increases to infinity as $v\to1$. Let $v_*$ be its unique solution of $\log p=1$ in $(1/2,1)$ and put $q_*=1/v_*-1$. We use $q>q_*$, so that $0<v<v_*$ and $2\le p<e$. In this range there are no real solutions of (1). A nonpositive $u$ cannot occur, and $e^u/u\ge e$ for positive real $u$.
+
+For a solution $u=s+i\theta$ in the upper half-plane, imaginary and real parts of (1) give $\sin\theta>0$, $s=\theta\cot\theta$, and
+
+\[
+f(\theta):=\theta\cot\theta-\log\left(\frac\theta{\sin\theta}\right)=\log p.
+\tag{2}
+\]
+
+On each interval $(2\pi k,(2k+1)\pi)$, $k\ge0$,
+
+\[
+f'(\theta)=-\theta-\frac{(\theta\cot\theta-1)^2}{\theta}<0.
+\]
+
+The limits of $f$ at the left and right endpoints are $1,-\infty$ when $k=0$, and $+\infty,-\infty$ when $k\ge1$. Thus there is exactly one upper pole $z_k=u_k-a$ per interval, together with its conjugate. Each is simple since $D'_q(z_k)=(1+q)(u_k-1)$ and $u_k$ is nonreal. We call $z=z_0$ the principal upper pole and write $u=u_0$, $\theta=\Im z$.
+
+Integrating $f'\le-\theta$ gives $f(\theta)\le 1-\theta^2/2$. Since $\log 2>1/2$, it follows that $0<\theta<1$. Also $1-\theta^2/2\le\theta\cot\theta\le1$, using $\sin\theta\le\theta$, $\cos\theta\ge1-\theta^2/2>0$ and $\tan\theta\ge\theta$. Consequently $|u-1|\le(\sqrt5/2)\theta$. Equation (2) yields
+
+\[
+0<\Re z=\log\left(\frac{\theta/\sin\theta}{1-v}\right)
+=\theta\cot\theta-1+2v\le2v<2.
+\]
+
+In particular, $|z|<\sqrt5$, whereas $|z_k|,|u_k-1|>2\pi k$ for $k\ge1$. Put
+
+\[
+\varphi(q)=\arg z\in(0,\pi/2),\qquad \beta(q)=\arg(u-1)\in(\pi/2,\pi).
+\]
+
+Both are continuous for $q>q_*$. At $q\downarrow q_*$ we have $\theta\to0$, $\Re z\to2v_*>0$, so $(\varphi,\beta)\to(0,\pi/2)$. At $q\to\infty$ we again have $\theta\to0$, and
+
+\[
+f(\theta)=1-\theta^2/2+O(\theta^4),\qquad
+\log p=1-v+O(v^2),
+\]
+
+so $\theta^2\sim2v$. Since $\Re z\le2v$, this gives $(\varphi,\beta)\to(\pi/2,\pi/2)$.
+
+\section{A uniform relative residue estimate}
+
+For $N=n+1$, the coefficient is given exactly by
+
+\[
+\frac{O_n(-q)}{n!}=-\frac2{1+q}\Re\sum_{k\ge0}\frac1{(u_k-1)z_k^{N}}.
+\tag{3}
+\]
+
+To derive (3), integrate $1/(z^N D_q(z))$ on squares whose sides have real or imaginary part $\pm 2\pi M$. On a horizontal side, $e^z$ is real, so $|D_q(z)|\ge(1+q)2\pi M$. On the right vertical side the exponential term dominates the linear term for large $M$, and on the left the linear term dominates. Thus the integrals tend to zero as $M\to\infty$. The pole at zero records the coefficient, and the remaining residues are absolutely summable by the bound $|u_k-1|,|z_k|>2\pi k$. Pairing their conjugates proves (3).
+
+Define the positive normalizer $M_n(q)=2/((1+q)|u-1||z|^N)$ and the real phase $\Phi_n(q)=N\varphi(q)+\beta(q)$. Equation (3) gives
+
+\[
+\frac{O_n(-q)}{n!M_n(q)}=-\cos\Phi_n(q)+E_n(q),
+\qquad |E_n(q)|\le\theta\,(3/8)^{N+1}.
+\tag{4}
+\]
+
+Indeed, divide the other terms of (3) by $M_n(q)$ and use $\sqrt5<9/4$, $2\pi>6$, and $\sum_{k\ge1} k^{-N-1}\le2$ to bound their total relative magnitude by
+
+\[
+\sum_{k\ge1}\frac{(9/8)\theta}{2\pi k}
+ \left(\frac{9/4}{2\pi k}\right)^N
+\le\theta\,(3/8)^{N+1}.
+\]
+
+The relative error vanishes with $\theta$ at either endpoint. This is needed for a consecutive-row comparison when the principal phase shift is small.
+
+\section{Counting the roots and comparing consecutive rows}
+
+For $n\ge2$, the phase $\Phi_n$ starts at $\pi/2$ and tends to $(n+2)\pi/2$. For $j=1,\ldots,m=\lfloor n/2\rfloor$, both levels
+
+\[
+(j+1/2)\pi-\pi/6,\qquad (j+1/2)\pi+\pi/6
+\]
+
+are strictly inside this endpoint range, and the bands they bound are disjoint and ordered. Choose a compact $q$ interval on which the starting phase is below all the bands and the final phase is above them. For each band take the first hit of its upper level and the last hit of its lower level before that upper hit. These give ordered disjoint intervals in $q$, and the phase stays within the indicated band on each interval. Their two endpoints have opposite signs in (4), since $|\cos\Phi_n|=1/2$ there and $|E_n|<1/2$. Thus each interval has a negative root of $O_n$ under $x=-q$. There are $m$ intervals, which exhaust the degree. In particular every root is simple, and at $q=q_{n,j}$ the phase belongs to the $j$th band. This argument uses only continuity of the phase.
+
+At $q=q_{n,j}$ we have $|\cos\Phi_n|\le |E_n|$ by (4), and $\sin\Phi_n$ has sign $(-1)^j$ and modulus at least $\sqrt3/2$ by the band. The next row uses $\Phi_{n+1}=\Phi_n+\varphi$. Its normalized value at $q$ is therefore
+
+\[
+\sin\Phi_n\sin\varphi-\cos\Phi_n\cos\varphi+E_{n+1}.
+\]
+
+The final two terms in absolute value are at most $\theta(3/8)^{N+1}(1+3/8)$, whereas $\sin\varphi=\theta/|z|>4\theta/9$. For $N\ge3$,
+
+\[
+\frac94 (3/8)^{N+1}(1+3/8)<\frac14.
+\]
+
+Thus the main sine product dominates and $O_{n+1}(-q_{n,j})$ has sign $(-1)^j$. Its value at $q=0$ is positive, so it has one root before the first $q_{n,j}$ and one between each pair of successive $q_{n,j}$. If its degree is $m+1$, its leading sign as $q\to\infty$ gives a further root after $q_{n,m}$. These roots exhaust its degree and prove the required strict order. The constant cases $n=0,1$ follow directly.
+
+\section{The limiting zeros at ordered threshold two}
+
+Let $q_{n,j}$ denote the positive moduli of the zeros of $O_{n,2}$, listed in increasing order, and let $m=\lfloor n/2\rfloor$. The phase and both edges below use the principal upper pole from the preceding sections. This gives a probability law for all the zeros as well as different scales for the smallest and largest ones.
+
+Let $v_*\in(1/2,1)$ solve $-2v_*-\log(1-v_*)=0$ and set $q_*=1/v_*-1$. For $q>q_*$ put $v=1/(1+q)$, $a=1-2v$. Let $0<\theta<1$ be the unique solution of
+\[
+\theta\cot\theta-\log(\theta/\sin\theta)=1-2v-\log(1-v).
+\]
+Define $u=\theta\cot\theta+i\theta$, $z=u-a$, $\varphi=\arg z$ and $\beta=\arg(u-1)$.
+
+\textbf{Theorem.} All zero moduli are strictly greater than $q_*$. Their empirical distribution functions converge uniformly to
+\[
+F(q)=
+ \begin{cases}
+ 0 & q\le q_*,\\
+ 2\varphi(q)/\pi & q>q_* .
+ \end{cases}
+\]
+This distribution is continuous, strictly increasing on $(q_*,\infty)$, and real analytic there. For every fixed $j\ge1$,
+\[
+\lim_{n\to\infty} n^2(q_{n,j}-q_*)
+ =\frac{2(1-v_*)}{2v_*-1}\pi^2j^2.
+\]
+For every fixed $l\ge0$, the opposite edge satisfies
+\[
+\lim_{m\to\infty}\frac{q_{2m,m-l}}{(2m)^2}
+  =\frac8{9\pi^2(l+1/2)^2},
+ \qquad
+ \lim_{m\to\infty}\frac{q_{2m+1,m-l}}{(2m+1)^2}
+  =\frac8{9\pi^2(l+1)^2}.
+\]
+
+\textbf{Proof.} Set $\Phi=(n+1)\varphi+\beta$. The phase proof locates the $j$th root in the band $|\Phi-(j+1/2)\pi|\le\pi/6$. At a root the uniform relative residue estimate and the mean-value theorem therefore give
+\[
+|\Phi(q_{n,j})-(j+1/2)\pi|\le (2/\sqrt3)\theta(q_{n,j})(3/8)^{n+2}.
+ \tag{5}
+\]
+For a fixed $q>q_*$, each band whose upper end is strictly below $\Phi(q)$ has already been crossed completely in traveling to $q$ from $q_*$. Each band whose lower end is strictly above $\Phi(q)$ must still be crossed completely in traveling from $q$ to infinity. In each such crossing the two endpoint signs are opposite, and the crossings can be chosen disjoint in order as in the interlacing proof. Thus the number of roots up to $q$ is bounded below by the number of the former bands and above by $m$ minus the number of the latter bands. These counts differ from $\Phi(q)/\pi$ by a bounded absolute constant, uniformly in $q,n$, since $0<\varphi<\pi/2$ and $\pi/2<\beta<\pi$. Dividing by $m$ proves uniform convergence. All roots are in $(q_*,\infty)$ by the same band count. The limit is nondecreasing, and the implicit function theorem and the strict derivative of the equation for $\theta$ give analyticity on the open interval (also at $v=1/2$). Its endpoint limits are zero and one. An analytic nondecreasing function with these distinct limits is strictly increasing.
+
+For fixed $j$, equation (5) gives $\varphi(q_{n,j})\to0$, hence $q_{n,j}\to q_*$. As $q\downarrow q_*$, the defining equation gives
+\[
+\theta^2\sim 2\lambda(q-q_*),\qquad
+ \lambda=\frac{(2v_*-1)v_*^2}{1-v_*},\qquad
+ \varphi\sim\theta/(2v_*),\qquad \beta\to\pi/2.
+\]
+Indeed the left side defining $\theta$ is $1-\theta^2/2+O(\theta^4)$, and the derivative of its right side with respect to $q$ at $q_*$ is $-\lambda$. Equation (5) now gives $(n+1)\varphi\to j\pi$, proving the lower-edge limit.
+
+For fixed $l$, take $j=m-l$. Then (5) gives $\varphi(q_{n,m-l})\to\pi/2$, hence $q_{n,m-l}\to\infty$. Here $\theta^2\sim2v$, and $\Re z=2v-\theta^2/3+O(\theta^4)\sim4v/3$. Consequently $\pi/2-\varphi\sim(4/(3\sqrt2))q^{-1/2}$ and $\beta\to\pi/2$. Subtracting (5) from the limiting phase value $(n+2)\pi/2$ gives
+\[
+(n+1)(\pi/2-\varphi)\longrightarrow
+ \begin{cases}(l+1/2)\pi & n\text{ even},\\(l+1)\pi & n\text{ odd}.\end{cases}
+\]
+Squaring yields the stated limits. $\square$
+
+
+\section{Finite verification}
+The first-block recurrence
+\[
+ O_n(t)=nO_{n-1}(t)+t\sum_{s=2}^n\binom ns O_{n-s}(t)
+\]
+and the differential identity for the exponential generating function give independent coefficient algorithms. The latter takes the form
+\[
+ O_{n+1}=(n+1)O_n+2tO'_n+nt\big(O_{n-1}+(t-1)O'_{n-1}\big).
+\]
+Both agree through $n=104$. Exact square-free Sturm counts and signed Euclidean remainders verify every row and consecutive pair in this interval. Figure~1 illustrates the limiting law. The finite staircase uses rational isolators of width at most $10^{-10}$ for the positive roots of $O_{20}(-q)$. The smooth curve evaluates the principal angle numerically. The proof of the theorem uses the uniform bound (4).
+\begin{figure}[ht]
+\centering\setlength{\unitlength}{1pt}
+\begin{picture}(286,118)(-27,-17)
+\linethickness{0.35pt}\put(0,0){\line(1,0){244}}\put(0,0){\line(0,1){92}}
+\put(0.00,0){\line(0,-1){3}}\put(0.00,-8){\makebox(0,0){\scriptsize 0}}
+\put(61.00,0){\line(0,-1){3}}\put(61.00,-8){\makebox(0,0){\scriptsize 0.25}}
+\put(122.00,0){\line(0,-1){3}}\put(122.00,-8){\makebox(0,0){\scriptsize 0.5}}
+\put(183.00,0){\line(0,-1){3}}\put(183.00,-8){\makebox(0,0){\scriptsize 0.75}}
+\put(244.00,0){\line(0,-1){3}}\put(244.00,-8){\makebox(0,0){\scriptsize 1}}
+\put(0,0.00){\line(-1,0){3}}\put(-6,0.00){\makebox(0,0)[r]{\scriptsize 0}}
+\put(0,46.00){\line(-1,0){3}}\put(-6,46.00){\makebox(0,0)[r]{\scriptsize 0.5}}
+\put(0,92.00){\line(-1,0){3}}\put(-6,92.00){\makebox(0,0)[r]{\scriptsize 1}}
+\color{gray}\linethickness{0.65pt}
+\qbezier(0.000,0.000)(25.929,0.000)(51.859,0.000)
+\qbezier(51.859,0.000)(51.859,4.600)(51.859,9.200)
+\qbezier(51.859,9.200)(55.412,9.200)(58.966,9.200)
+\qbezier(58.966,9.200)(58.966,13.800)(58.966,18.400)
+\qbezier(58.966,18.400)(65.269,18.400)(71.573,18.400)
+\qbezier(71.573,18.400)(71.573,23.000)(71.573,27.600)
+\qbezier(71.573,27.600)(80.974,27.600)(90.375,27.600)
+\qbezier(90.375,27.600)(90.375,32.200)(90.375,36.800)
+\qbezier(90.375,36.800)(102.902,36.800)(115.428,36.800)
+\qbezier(115.428,36.800)(115.428,41.400)(115.428,46.000)
+\qbezier(115.428,46.000)(130.425,46.000)(145.423,46.000)
+\qbezier(145.423,46.000)(145.423,50.600)(145.423,55.200)
+\qbezier(145.423,55.200)(161.400,55.200)(177.377,55.200)
+\qbezier(177.377,55.200)(177.377,59.800)(177.377,64.400)
+\qbezier(177.377,64.400)(192.212,64.400)(207.047,64.400)
+\qbezier(207.047,64.400)(207.047,69.000)(207.047,73.600)
+\qbezier(207.047,73.600)(218.493,73.600)(229.938,73.600)
+\qbezier(229.938,73.600)(229.938,78.200)(229.938,82.800)
+\qbezier(229.938,82.800)(236.166,82.800)(242.394,82.800)
+\qbezier(242.394,82.800)(242.394,87.400)(242.394,92.000)
+\qbezier(242.394,92.000)(243.197,92.000)(244.000,92.000)
+\color{black}\linethickness{1pt}
+\qbezier(0.000,0.000)(0.488,0.000)(0.976,0.000)
+\qbezier(0.976,0.000)(1.464,0.000)(1.952,0.000)
+\qbezier(1.952,0.000)(2.440,0.000)(2.928,0.000)
+\qbezier(2.928,0.000)(3.416,0.000)(3.904,0.000)
+\qbezier(3.904,0.000)(4.392,0.000)(4.880,0.000)
+\qbezier(4.880,0.000)(5.368,0.000)(5.856,0.000)
+\qbezier(5.856,0.000)(6.344,0.000)(6.832,0.000)
+\qbezier(6.832,0.000)(7.320,0.000)(7.808,0.000)
+\qbezier(7.808,0.000)(8.296,0.000)(8.784,0.000)
+\qbezier(8.784,0.000)(9.272,0.000)(9.760,0.000)
+\qbezier(9.760,0.000)(10.248,0.000)(10.736,0.000)
+\qbezier(10.736,0.000)(11.224,0.000)(11.712,0.000)
+\qbezier(11.712,0.000)(12.200,0.000)(12.688,0.000)
+\qbezier(12.688,0.000)(13.176,0.000)(13.664,0.000)
+\qbezier(13.664,0.000)(14.152,0.000)(14.640,0.000)
+\qbezier(14.640,0.000)(15.128,0.000)(15.616,0.000)
+\qbezier(15.616,0.000)(16.104,0.000)(16.592,0.000)
+\qbezier(16.592,0.000)(17.080,0.000)(17.568,0.000)
+\qbezier(17.568,0.000)(18.056,0.000)(18.544,0.000)
+\qbezier(18.544,0.000)(19.032,0.000)(19.520,0.000)
+\qbezier(19.520,0.000)(20.008,0.000)(20.496,0.000)
+\qbezier(20.496,0.000)(20.984,0.000)(21.472,0.000)
+\qbezier(21.472,0.000)(21.960,0.000)(22.448,0.000)
+\qbezier(22.448,0.000)(22.936,0.000)(23.424,0.000)
+\qbezier(23.424,0.000)(23.912,0.000)(24.400,0.000)
+\qbezier(24.400,0.000)(24.888,0.000)(25.376,0.000)
+\qbezier(25.376,0.000)(25.864,0.000)(26.352,0.000)
+\qbezier(26.352,0.000)(26.840,0.000)(27.328,0.000)
+\qbezier(27.328,0.000)(27.816,0.000)(28.304,0.000)
+\qbezier(28.304,0.000)(28.792,0.000)(29.280,0.000)
+\qbezier(29.280,0.000)(29.768,0.000)(30.256,0.000)
+\qbezier(30.256,0.000)(30.744,0.000)(31.232,0.000)
+\qbezier(31.232,0.000)(31.720,0.000)(32.208,0.000)
+\qbezier(32.208,0.000)(32.696,0.000)(33.184,0.000)
+\qbezier(33.184,0.000)(33.672,0.000)(34.160,0.000)
+\qbezier(34.160,0.000)(34.648,0.000)(35.136,0.000)
+\qbezier(35.136,0.000)(35.624,0.000)(36.112,0.000)
+\qbezier(36.112,0.000)(36.600,0.000)(37.088,0.000)
+\qbezier(37.088,0.000)(37.576,0.000)(38.064,0.000)
+\qbezier(38.064,0.000)(38.552,0.000)(39.040,0.000)
+\qbezier(39.040,0.000)(39.528,0.000)(40.016,0.000)
+\qbezier(40.016,0.000)(40.504,0.000)(40.992,0.000)
+\qbezier(40.992,0.000)(41.480,0.000)(41.968,0.000)
+\qbezier(41.968,0.000)(42.456,0.000)(42.944,0.000)
+\qbezier(42.944,0.000)(43.432,0.000)(43.920,0.000)
+\qbezier(43.920,0.000)(44.408,0.000)(44.896,0.000)
+\qbezier(44.896,0.000)(45.384,0.000)(45.872,0.000)
+\qbezier(45.872,0.000)(46.360,0.000)(46.848,0.000)
+\qbezier(46.848,0.000)(47.336,0.000)(47.824,0.000)
+\qbezier(47.824,0.000)(48.312,0.000)(48.800,0.000)
+\qbezier(48.800,0.000)(49.189,0.000)(49.578,0.000)
+\qbezier(49.578,0.000)(49.677,1.265)(49.776,2.531)
+\qbezier(49.776,2.531)(50.264,4.339)(50.752,6.147)
+\qbezier(50.752,6.147)(51.240,7.225)(51.728,8.302)
+\qbezier(51.728,8.302)(52.216,9.147)(52.704,9.991)
+\qbezier(52.704,9.991)(53.192,10.707)(53.680,11.423)
+\qbezier(53.680,11.423)(54.168,12.054)(54.656,12.686)
+\qbezier(54.656,12.686)(55.144,13.256)(55.632,13.826)
+\qbezier(55.632,13.826)(56.120,14.349)(56.608,14.872)
+\qbezier(56.608,14.872)(57.096,15.358)(57.584,15.843)
+\qbezier(57.584,15.843)(58.072,16.298)(58.560,16.753)
+\qbezier(58.560,16.753)(59.048,17.182)(59.536,17.610)
+\qbezier(59.536,17.610)(60.024,18.017)(60.512,18.423)
+\qbezier(60.512,18.423)(61.000,18.811)(61.488,19.198)
+\qbezier(61.488,19.198)(61.976,19.568)(62.464,19.938)
+\qbezier(62.464,19.938)(62.952,20.293)(63.440,20.648)
+\qbezier(63.440,20.648)(63.928,20.990)(64.416,21.331)
+\qbezier(64.416,21.331)(64.904,21.660)(65.392,21.990)
+\qbezier(65.392,21.990)(65.880,22.308)(66.368,22.626)
+\qbezier(66.368,22.626)(66.856,22.935)(67.344,23.243)
+\qbezier(67.344,23.243)(67.832,23.542)(68.320,23.841)
+\qbezier(68.320,23.841)(68.808,24.131)(69.296,24.421)
+\qbezier(69.296,24.421)(69.784,24.704)(70.272,24.986)
+\qbezier(70.272,24.986)(70.760,25.262)(71.248,25.537)
+\qbezier(71.248,25.537)(71.736,25.805)(72.224,26.074)
+\qbezier(72.224,26.074)(72.712,26.336)(73.200,26.598)
+\qbezier(73.200,26.598)(73.688,26.854)(74.176,27.110)
+\qbezier(74.176,27.110)(74.664,27.361)(75.152,27.611)
+\qbezier(75.152,27.611)(75.640,27.857)(76.128,28.102)
+\qbezier(76.128,28.102)(76.616,28.342)(77.104,28.583)
+\qbezier(77.104,28.583)(77.592,28.819)(78.080,29.054)
+\qbezier(78.080,29.054)(78.568,29.286)(79.056,29.517)
+\qbezier(79.056,29.517)(79.544,29.744)(80.032,29.971)
+\qbezier(80.032,29.971)(80.520,30.195)(81.008,30.418)
+\qbezier(81.008,30.418)(81.496,30.637)(81.984,30.857)
+\qbezier(81.984,30.857)(82.472,31.073)(82.960,31.289)
+\qbezier(82.960,31.289)(83.448,31.501)(83.936,31.714)
+\qbezier(83.936,31.714)(84.424,31.923)(84.912,32.132)
+\qbezier(84.912,32.132)(85.400,32.338)(85.888,32.545)
+\qbezier(85.888,32.545)(86.376,32.748)(86.864,32.951)
+\qbezier(86.864,32.951)(87.352,33.152)(87.840,33.352)
+\qbezier(87.840,33.352)(88.328,33.550)(88.816,33.748)
+\qbezier(88.816,33.748)(89.304,33.943)(89.792,34.138)
+\qbezier(89.792,34.138)(90.280,34.331)(90.768,34.523)
+\qbezier(90.768,34.523)(91.256,34.714)(91.744,34.904)
+\qbezier(91.744,34.904)(92.232,35.092)(92.720,35.280)
+\qbezier(92.720,35.280)(93.208,35.466)(93.696,35.652)
+\qbezier(93.696,35.652)(94.184,35.836)(94.672,36.020)
+\qbezier(94.672,36.020)(95.160,36.201)(95.648,36.383)
+\qbezier(95.648,36.383)(96.136,36.563)(96.624,36.743)
+\qbezier(96.624,36.743)(97.112,36.921)(97.600,37.099)
+\qbezier(97.600,37.099)(98.088,37.275)(98.576,37.451)
+\qbezier(98.576,37.451)(99.064,37.626)(99.552,37.800)
+\qbezier(99.552,37.800)(100.040,37.973)(100.528,38.146)
+\qbezier(100.528,38.146)(101.016,38.317)(101.504,38.488)
+\qbezier(101.504,38.488)(101.992,38.658)(102.480,38.827)
+\qbezier(102.480,38.827)(102.968,38.995)(103.456,39.164)
+\qbezier(103.456,39.164)(103.944,39.330)(104.432,39.497)
+\qbezier(104.432,39.497)(104.920,39.662)(105.408,39.828)
+\qbezier(105.408,39.828)(105.896,39.992)(106.384,40.156)
+\qbezier(106.384,40.156)(106.872,40.318)(107.360,40.481)
+\qbezier(107.360,40.481)(107.848,40.642)(108.336,40.804)
+\qbezier(108.336,40.804)(108.824,40.964)(109.312,41.124)
+\qbezier(109.312,41.124)(109.800,41.283)(110.288,41.442)
+\qbezier(110.288,41.442)(110.776,41.600)(111.264,41.758)
+\qbezier(111.264,41.758)(111.752,41.915)(112.240,42.072)
+\qbezier(112.240,42.072)(112.728,42.228)(113.216,42.384)
+\qbezier(113.216,42.384)(113.704,42.538)(114.192,42.693)
+\qbezier(114.192,42.693)(114.680,42.847)(115.168,43.001)
+\qbezier(115.168,43.001)(115.656,43.154)(116.144,43.307)
+\qbezier(116.144,43.307)(116.632,43.459)(117.120,43.610)
+\qbezier(117.120,43.610)(117.608,43.762)(118.096,43.913)
+\qbezier(118.096,43.913)(118.584,44.063)(119.072,44.213)
+\qbezier(119.072,44.213)(119.560,44.362)(120.048,44.512)
+\qbezier(120.048,44.512)(120.536,44.660)(121.024,44.809)
+\qbezier(121.024,44.809)(121.512,44.957)(122.000,45.105)
+\qbezier(122.000,45.105)(122.488,45.252)(122.976,45.399)
+\qbezier(122.976,45.399)(123.464,45.545)(123.952,45.692)
+\qbezier(123.952,45.692)(124.440,45.837)(124.928,45.983)
+\qbezier(124.928,45.983)(125.416,46.128)(125.904,46.273)
+\qbezier(125.904,46.273)(126.392,46.417)(126.880,46.562)
+\qbezier(126.880,46.562)(127.368,46.706)(127.856,46.849)
+\qbezier(127.856,46.849)(128.344,46.993)(128.832,47.136)
+\qbezier(128.832,47.136)(129.320,47.278)(129.808,47.421)
+\qbezier(129.808,47.421)(130.296,47.563)(130.784,47.705)
+\qbezier(130.784,47.705)(131.272,47.847)(131.760,47.988)
+\qbezier(131.760,47.988)(132.248,48.129)(132.736,48.270)
+\qbezier(132.736,48.270)(133.224,48.411)(133.712,48.551)
+\qbezier(133.712,48.551)(134.200,48.691)(134.688,48.831)
+\qbezier(134.688,48.831)(135.176,48.971)(135.664,49.111)
+\qbezier(135.664,49.111)(136.152,49.250)(136.640,49.389)
+\qbezier(136.640,49.389)(137.128,49.528)(137.616,49.667)
+\qbezier(137.616,49.667)(138.104,49.805)(138.592,49.943)
+\qbezier(138.592,49.943)(139.080,50.081)(139.568,50.220)
+\qbezier(139.568,50.220)(140.056,50.357)(140.544,50.495)
+\qbezier(140.544,50.495)(141.032,50.632)(141.520,50.770)
+\qbezier(141.520,50.770)(142.008,50.907)(142.496,51.044)
+\qbezier(142.496,51.044)(142.984,51.180)(143.472,51.317)
+\qbezier(143.472,51.317)(143.960,51.454)(144.448,51.590)
+\qbezier(144.448,51.590)(144.936,51.726)(145.424,51.863)
+\qbezier(145.424,51.863)(145.912,51.999)(146.400,52.134)
+\qbezier(146.400,52.134)(146.888,52.270)(147.376,52.406)
+\qbezier(147.376,52.406)(147.864,52.541)(148.352,52.677)
+\qbezier(148.352,52.677)(148.840,52.812)(149.328,52.948)
+\qbezier(149.328,52.948)(149.816,53.083)(150.304,53.218)
+\qbezier(150.304,53.218)(150.792,53.353)(151.280,53.488)
+\qbezier(151.280,53.488)(151.768,53.623)(152.256,53.758)
+\qbezier(152.256,53.758)(152.744,53.892)(153.232,54.027)
+\qbezier(153.232,54.027)(153.720,54.162)(154.208,54.296)
+\qbezier(154.208,54.296)(154.696,54.431)(155.184,54.565)
+\qbezier(155.184,54.565)(155.672,54.700)(156.160,54.834)
+\qbezier(156.160,54.834)(156.648,54.969)(157.136,55.103)
+\qbezier(157.136,55.103)(157.624,55.237)(158.112,55.372)
+\qbezier(158.112,55.372)(158.600,55.506)(159.088,55.640)
+\qbezier(159.088,55.640)(159.576,55.775)(160.064,55.909)
+\qbezier(160.064,55.909)(160.552,56.043)(161.040,56.177)
+\qbezier(161.040,56.177)(161.528,56.312)(162.016,56.446)
+\qbezier(162.016,56.446)(162.504,56.580)(162.992,56.715)
+\qbezier(162.992,56.715)(163.480,56.849)(163.968,56.984)
+\qbezier(163.968,56.984)(164.456,57.118)(164.944,57.252)
+\qbezier(164.944,57.252)(165.432,57.387)(165.920,57.522)
+\qbezier(165.920,57.522)(166.408,57.656)(166.896,57.791)
+\qbezier(166.896,57.791)(167.384,57.926)(167.872,58.061)
+\qbezier(167.872,58.061)(168.360,58.195)(168.848,58.330)
+\qbezier(168.848,58.330)(169.336,58.465)(169.824,58.601)
+\qbezier(169.824,58.601)(170.312,58.736)(170.800,58.871)
+\qbezier(170.800,58.871)(171.288,59.007)(171.776,59.142)
+\qbezier(171.776,59.142)(172.264,59.278)(172.752,59.413)
+\qbezier(172.752,59.413)(173.240,59.549)(173.728,59.685)
+\qbezier(173.728,59.685)(174.216,59.821)(174.704,59.958)
+\qbezier(174.704,59.958)(175.192,60.094)(175.680,60.230)
+\qbezier(175.680,60.230)(176.168,60.367)(176.656,60.504)
+\qbezier(176.656,60.504)(177.144,60.641)(177.632,60.778)
+\qbezier(177.632,60.778)(178.120,60.915)(178.608,61.053)
+\qbezier(178.608,61.053)(179.096,61.191)(179.584,61.328)
+\qbezier(179.584,61.328)(180.072,61.466)(180.560,61.605)
+\qbezier(180.560,61.605)(181.048,61.743)(181.536,61.882)
+\qbezier(181.536,61.882)(182.024,62.021)(182.512,62.159)
+\qbezier(182.512,62.159)(183.000,62.299)(183.488,62.438)
+\qbezier(183.488,62.438)(183.976,62.578)(184.464,62.718)
+\qbezier(184.464,62.718)(184.952,62.858)(185.440,62.999)
+\qbezier(185.440,62.999)(185.928,63.140)(186.416,63.281)
+\qbezier(186.416,63.281)(186.904,63.422)(187.392,63.563)
+\qbezier(187.392,63.563)(187.880,63.706)(188.368,63.848)
+\qbezier(188.368,63.848)(188.856,63.990)(189.344,64.133)
+\qbezier(189.344,64.133)(189.832,64.276)(190.320,64.419)
+\qbezier(190.320,64.419)(190.808,64.563)(191.296,64.707)
+\qbezier(191.296,64.707)(191.784,64.852)(192.272,64.997)
+\qbezier(192.272,64.997)(192.760,65.142)(193.248,65.288)
+\qbezier(193.248,65.288)(193.736,65.434)(194.224,65.580)
+\qbezier(194.224,65.580)(194.712,65.727)(195.200,65.874)
+\qbezier(195.200,65.874)(195.688,66.022)(196.176,66.170)
+\qbezier(196.176,66.170)(196.664,66.318)(197.152,66.467)
+\qbezier(197.152,66.467)(197.640,66.617)(198.128,66.767)
+\qbezier(198.128,66.767)(198.616,66.917)(199.104,67.068)
+\qbezier(199.104,67.068)(199.592,67.219)(200.080,67.371)
+\qbezier(200.080,67.371)(200.568,67.524)(201.056,67.677)
+\qbezier(201.056,67.677)(201.544,67.831)(202.032,67.984)
+\qbezier(202.032,67.984)(202.520,68.139)(203.008,68.295)
+\qbezier(203.008,68.295)(203.496,68.451)(203.984,68.607)
+\qbezier(203.984,68.607)(204.472,68.765)(204.960,68.922)
+\qbezier(204.960,68.922)(205.448,69.081)(205.936,69.240)
+\qbezier(205.936,69.240)(206.424,69.400)(206.912,69.561)
+\qbezier(206.912,69.561)(207.400,69.723)(207.888,69.885)
+\qbezier(207.888,69.885)(208.376,70.048)(208.864,70.211)
+\qbezier(208.864,70.211)(209.352,70.377)(209.840,70.542)
+\qbezier(209.840,70.542)(210.328,70.708)(210.816,70.875)
+\qbezier(210.816,70.875)(211.304,71.044)(211.792,71.213)
+\qbezier(211.792,71.213)(212.280,71.383)(212.768,71.554)
+\qbezier(212.768,71.554)(213.256,71.727)(213.744,71.899)
+\qbezier(213.744,71.899)(214.232,72.074)(214.720,72.249)
+\qbezier(214.720,72.249)(215.208,72.426)(215.696,72.603)
+\qbezier(215.696,72.603)(216.184,72.783)(216.672,72.962)
+\qbezier(216.672,72.962)(217.160,73.144)(217.648,73.326)
+\qbezier(217.648,73.326)(218.136,73.511)(218.624,73.696)
+\qbezier(218.624,73.696)(219.112,73.884)(219.600,74.072)
+\qbezier(219.600,74.072)(220.088,74.263)(220.576,74.454)
+\qbezier(220.576,74.454)(221.064,74.648)(221.552,74.842)
+\qbezier(221.552,74.842)(222.040,75.040)(222.528,75.238)
+\qbezier(222.528,75.238)(223.016,75.440)(223.504,75.641)
+\qbezier(223.504,75.641)(223.992,75.847)(224.480,76.053)
+\qbezier(224.480,76.053)(224.968,76.263)(225.456,76.474)
+\qbezier(225.456,76.474)(225.944,76.689)(226.432,76.904)
+\qbezier(226.432,76.904)(226.920,77.125)(227.408,77.345)
+\qbezier(227.408,77.345)(227.896,77.572)(228.384,77.798)
+\qbezier(228.384,77.798)(228.872,78.031)(229.360,78.264)
+\qbezier(229.360,78.264)(229.848,78.504)(230.336,78.744)
+\qbezier(230.336,78.744)(230.824,78.992)(231.312,79.239)
+\qbezier(231.312,79.239)(231.800,79.496)(232.288,79.753)
+\qbezier(232.288,79.753)(232.776,80.020)(233.264,80.287)
+\qbezier(233.264,80.287)(233.752,80.565)(234.240,80.843)
+\qbezier(234.240,80.843)(234.728,81.135)(235.216,81.427)
+\qbezier(235.216,81.427)(235.704,81.734)(236.192,82.042)
+\qbezier(236.192,82.042)(236.680,82.368)(237.168,82.695)
+\qbezier(237.168,82.695)(237.656,83.044)(238.144,83.394)
+\qbezier(238.144,83.394)(238.632,83.773)(239.120,84.151)
+\qbezier(239.120,84.151)(239.608,84.569)(240.096,84.987)
+\qbezier(240.096,84.987)(240.584,85.460)(241.072,85.933)
+\qbezier(241.072,85.933)(241.560,86.492)(242.048,87.051)
+\qbezier(242.048,87.051)(242.536,87.778)(243.024,88.504)
+\qbezier(243.024,88.504)(243.512,90.252)(244.000,92.000)
+\end{picture}
+\caption{The empirical distribution at $n=20$ (steps) and its limit (smooth curve), plotted against $q/(1+q)$ to show both ends of the support.}
+\end{figure}
+\begin{thebibliography}{9}
+\bibitem{alex} P. Alexandersson, \emph{Real-rooted polynomials: open problems}, The symmetric functions catalog, section on set partitions and trees. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#openProblemsSetPartitions}{Author's conjecture and reported finite checks}, accessed 25 November 2026.
+\bibitem{issue} Public investigation of the ordered-partition problem, \emph{solved-conjectures}, issue 108. \url{https://github.com/1337isnot1337/solved-conjectures/issues/108}, accessed 25 November 2026.
+\end{thebibliography}
+\end{document}

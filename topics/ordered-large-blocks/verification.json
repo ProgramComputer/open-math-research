@@ -1,0 +1,31 @@
+{
+  "lean": "4.19.0",
+  "mathlib": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "method": "Lake compiled the modules in both worktrees. Separate Lean processes imported the compiled modules and printed the kernel axioms of the named declarations.",
+  "modules": [
+    {
+      "file": "topics/ordered-large-blocks/lean/OrderedThresholdTwoSigns.lean",
+      "sha256": "32a5a73646a7c7b73e4dfc07e3e45859ad0a9d9c148a07ecf1c3ead63ee5c559",
+      "exit_code": 0,
+      "kernel_output": [
+        "'OrderedThresholdTwoSigns.roots_of_alternating_sign_mesh' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdTwoSigns.transfer_same_degree' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdTwoSigns.transfer_extra_root' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdTwoSigns.threshold_two_next_row' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/ordered-large-blocks/lean/OrderedThresholdTwoPhase.lean",
+      "sha256": "9231314343984c6b0cf25581907e984479fb78e21d40606e39eb841a11dd5e71",
+      "exit_code": 0,
+      "kernel_output": [
+        "'OrderedThresholdTwoPhase.upper_pole_iff' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdTwoPhase.derivative_polePhase' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdTwoPhase.strictAntiOn_polePhase' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdTwoPhase.unique_in_pole_band' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdTwoPhase.at_most_one_upper_pole' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OrderedThresholdTwoPhase.consecutive_sign' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    }
+  ]
+}
