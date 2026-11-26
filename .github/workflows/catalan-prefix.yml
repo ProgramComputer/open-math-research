@@ -1,0 +1,55 @@
+name: Catalan finite Lean prefix
+
+on:
+  pull_request:
+    branches: [research]
+    paths:
+      - .github/workflows/catalan-prefix.yml
+      - shared/lean/lakefile.toml
+      - shared/lean/lean-toolchain
+      - 'shared/lean/OpenMathResearch/**'
+      - 'topics/catalan-word-peaks/lean/**'
+
+permissions:
+  contents: read
+
+jobs:
+  kernel-replay:
+    name: Kernel replay and axiom audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: shared/lean
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
+        with:
+          lake-package-directory: shared/lean
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+      - name: Fetch the upstream imports
+        run: >-
+          lake exe cache get
+          Mathlib.Algebra.BigOperators.Group.Finset.Sigma
+          Mathlib.Algebra.Polynomial.Roots
+          Mathlib.Analysis.Polynomial.Basic
+          Mathlib.Combinatorics.Enumerative.Catalan
+          Mathlib.Data.Fin.Tuple.Basic
+          Mathlib.Data.Finset.Prod
+          Mathlib.Data.Finset.Sigma
+          Mathlib.Data.Fintype.Pi
+          Mathlib.Data.Nat.Choose.Bounds
+          Mathlib.Order.Fin.Basic
+          Mathlib.Tactic.Linarith
+          Mathlib.Tactic.Positivity
+          Mathlib.Topology.Algebra.Polynomial
+          Mathlib.Topology.Instances.Real.Lemmas
+          Mathlib.Topology.Order.IntermediateValue
+      - name: Check the finite prefix
+        run: lake build CatalanStrictPeaksPrefix
+      - name: Print the theorem axioms
+        run: lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
