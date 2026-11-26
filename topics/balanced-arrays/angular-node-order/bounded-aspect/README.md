@@ -24,4 +24,6 @@ $$
 
 Then $(-1)^k P_n(-w_k^d)>0$ at that quota. A binomial phase bracket locates the true node. The seven terms centered at quota $k$ give a strictly positive signed contribution, and log-concavity controls the omitted tails. [Proof and constants](finite-rare-overflow-angular.md) · [Independent review and rational replay](finite-rare-overflow-review.md)
 
+Coefficient ratios give a quantitative order at mixed angular and geometric interfaces. Exact examples record the limits of the prior finite sign tests. [Mixed angular and geometric test radii](interface/README.md)
+
 **Formal verification**　⬜ None. Both arguments have independent agent-assisted reviews.
