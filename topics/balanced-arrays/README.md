@@ -16,6 +16,8 @@ For $2\le d\le n$ and every cap, a reviewed comparison with the unrestricted pol
 
 The rank-dependent theorem gives all simple negative zeros for $d\ge C_\varepsilon\sqrt{nr/\log n}$ when $r\le n^{1/5-\varepsilon}$ or $d\ge n^{3/4+\varepsilon}$, for each fixed $0<\varepsilon<1/5$ and all sufficiently large $n$. The constants are existential. **⬜ None** for Lean or Rocq. [Rank-dependent theorem](dense-regime/rank-dependent/README.md)
 
+A reviewed [sparse-rank curvature bound](sparse-rank-curvature/README.md) gives an explicit sufficient criterion for simple negative zeros with effective rank $r-\sqrt{r\log r}/8$ when $n\ge d\ge2r$ and $\log r\ge32$. **⬜ None** for Lean or Rocq.
+
 For four columns with row cap two, the polynomial has exactly $\lfloor n/2\rfloor$ distinct negative zeros at every row count $n$. The computer-assisted proof covers $0\le n\le532$ by exact finite certificates and $n\ge533$ by a uniform sign argument. Consecutive-row interlacing remains open in this case. **⬜ None** for Lean or Rocq. [Theorem, proof and independent review](four-columns/README.md)
 
 For every $d\ge2$, balanced arrays with row cap $r=d-1$ have $\lfloor n(d-1)/d\rfloor$ simple negative zeros for every row count $n$. Consecutive rows strictly interlace. When the degree stays the same, the new rightmost zero is closer to zero. This settles the entire family $U(d-1,d)$. The general conjecture remains open. [Four-page paper](no-full-row.pdf) · [Proof](no-full-row.md) · [Independent review](review-no-full-row.md) · [Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)
