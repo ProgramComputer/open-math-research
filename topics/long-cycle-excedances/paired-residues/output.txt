@@ -1,0 +1,9 @@
+4 6 high margin 465271 low relative margin automatic per million
+6 10 high margin 545073 low relative margin automatic per million
+10 16 high margin 568480 low relative margin 572281 per million
+16 22 high margin 573256 low relative margin 558026 per million
+22 28 high margin 560525 low relative margin 524526 per million
+28 34 high margin 544080 low relative margin 463111 per million
+34 40 high margin 526927 low relative margin 381423 per million
+40 44 high margin 520382 low relative margin 325797 per million
+44 48 high margin 508222 low relative margin 324751 per million
