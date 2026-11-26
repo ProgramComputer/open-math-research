@@ -1,0 +1,10 @@
+'OpenMathResearch.OrientedNegativeInterlace.CompleteNegativeRoots.unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.modulus_sub_transition_ge_one_sub_cos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.first_checkpoint_modulus_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.roots_after_first_modulus_gap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
