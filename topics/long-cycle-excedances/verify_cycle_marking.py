@@ -31,6 +31,10 @@ def main():
             if n + 1 - k >= k:
                 new += comb(n, k - 1) * u * y * eulerian[k - 1] * rows[n + 1 - k]
             rows[n + 1] = sp.expand(new)
+            if k == 3 and n + 1 == 6:
+                point = {y: sp.I / 8, u: (-11 + 3 * sp.I) / 5}
+                if sp.expand(rows[6].subs(point)) != 0:
+                    raise ValueError("The upper-half-plane obstruction failed")
             res = sp.Poly(sp.resultant(rows[n], rows[n + 1], y), u)
             if res.eval(0) == 0:
                 raise ValueError(f"Common gamma root at the Eulerian endpoint for {(n, k)}")
