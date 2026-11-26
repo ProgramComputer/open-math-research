@@ -1,0 +1,5 @@
+All 809 quotas 505662 through 506470: signed seven-term lower bound greater than 1/1000.
+Minimum lower bound at quota 506470; low decimal display 217539/100000000.
+S_506000 bracket on 10^6 grid: 62487772 to 62524872.
+Cap curvature bracket on 10^6 grid: 105843 to 179898.
+At quota 507000 the six independent intervals admit a monotone synthetic slope vector with parity below -33/200.
