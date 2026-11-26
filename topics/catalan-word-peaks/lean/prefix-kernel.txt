@@ -1,0 +1,4 @@
+'CatalanStrictPeaks.Finite.checkRow_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Finite.checkPair_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Finite.roots_through_20' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Finite.interlacing_before_20' depends on axioms: [propext, Classical.choice, Quot.sound]
