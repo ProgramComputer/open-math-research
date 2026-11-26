@@ -1,6 +1,7 @@
 # Excedance zeros for permutations with long cycles
 
-The uniform theorem gives one cutoff $N$ such that for every $n\ge N$ and every $3\le k\le n$, the nonzero roots are simple, negative and strictly interlace the next row at the same $k$. This leaves only finitely many pairs in the full conjecture. The proof gives no numerical $N$. [Uniform argument](uniform-interlacing.md) · [Independent review](review-uniform-interlacing.md)
+For every $n\ge10^{20}$ and every $3\le k\le n$, the nonzero roots are simple, negative and strictly interlace the next row at the same $k$. Another explicit sufficient condition is $n\ge10^6$ and $n/(200k)>30\log n+20$. The proof counts phase crossings and needs no monotonicity assumption. The finite complement remains too large for exhaustive verification. [Proof](effective-uniform.md) · [Independent review](review-uniform-effective.md) · [Earlier existence argument](uniform-interlacing.md)
+
 
 For $n\ge10{,}000$, an explicit sufficient condition for strict interlacing is $k\ge2000\sqrt n(3+\log(3\sqrt{n/k}))$. For every threshold in those rows the first $\lfloor7\sqrt n/20\rfloor$ nonzero roots at each end obey strict consecutive order, including when the condition on $k$ fails. [Effective theorem](effective-threshold.md) · [Extreme-root estimates](effective-front.md) · [Pole estimates and review](review-separated-poles.md)
 
@@ -29,3 +30,10 @@ The insertion recurrence suggests an all-size induction at the old roots. Its su
 Every consecutive pair before three cycles can occur strictly interlaces, at every admissible threshold. The proof treats both lag signs for $2k\le n\le3k-2$ using 16 rational bounds above the analytic cutoff and exactly 3,007 smaller pairs. [Two-cycle theorem](two-cycle-band.md) · [Independent review](review-two-cycle-band.md)
 
 For arbitrary cycle counts, every old real root in a specified central interval is simple and meets the strict insertion inequality. There is an explicit lower bound for the number of such roots at every $n\ge k\ge8$. [Central interval and root count](central-interval.md) · [Independent review](review-central-interval.md)
+
+Reproduce the effective bounds from the repository root with the following commands.
+
+~~~sh
+python3 -I topics/long-cycle-excedances/verify_front_constants.py
+python3 -I topics/long-cycle-excedances/verify_uniform_effective_constants.py
+~~~
