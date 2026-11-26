@@ -12,6 +12,8 @@ Give an ordered set partition of $[n]$ weight $t^k$ when exactly $k$ blocks have
 | Every fixed $j\ge2$ | [Eventual strict interlacing and distribution](all-fixed-thresholds.md) · [Proof of the outer root count](fixed-threshold-outer-interface.md) · [Manuscript](all-fixed-thresholds.pdf) · [Source](all-fixed-thresholds.tex) |
 | Edges at every threshold | [Sharp zero-free interval for every row](lower-spectral-edge.md) · [Strict interlacing for an initial positive fraction in sufficiently large rows](fixed-threshold-inner-zeros.md) · [Outermost complex zeros and their scales](fixed-threshold-outer-zeros.md) |
 
+A single eventual old-size cutoff works for any fixed number of available outer ranks, uniformly over every block threshold. These roots are simple and negative, with strict consecutive order. Formal verification of this partial theorem is ⬜ None. [Proof and independent replays](outer-ranks/README.md)
+
 The written proof for arbitrary fixed thresholds uses a dominant conjugate pole pair. Two independent exact calculations verify all 27 polynomial inequalities needed for thresholds four through twelve. The smallest rational lower bound is $29/150$. [Bernstein certificate](results/angular-modulus.json) · [Independent verifier](code/check_angular_separation_independent.py)
 
 For every threshold, rescaling about the sharp lower edge gives a sinc limit. Its derivatives identify the first real zeros of every fixed derivative through Bessel zeros. These general edge results have independently reviewed written arguments. [Sharp-edge manuscript](sharp-edge.pdf) · [Source](sharp-edge.tex)

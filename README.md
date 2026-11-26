@@ -20,7 +20,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [Root distributions of balanced binary arrays](topics/balanced-arrays/root-distributions/README.md) | Finite disk counts and five limiting laws, including the uniform law for growing sparse caps | ⬜ None |
 | [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Strict interlacing at every threshold for old sizes $n\le250$ or $n\ge10{,}000$, at all sizes for $k=3$, and through old size $4k-1$ | ⬜ None |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Strict interlacing for every row count and dimension at $r=d-1$ | 🟨 Partial · Lean 4 (labeled-array coefficient formula) |
-| [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | Strict interlacing at every fixed threshold for sufficiently large rows, and at every size for thresholds two through four | 🟨 Partial · Lean 4 |
+| [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | Eventual strict interlacing at each fixed threshold and at all fixed outer ranks uniformly in the threshold, with all sizes at thresholds two through four | 🟨 Partial · Lean 4 (earlier components) |
 | [Eventual real-rootedness of the Eulerian matrix square](topics/eulerian-matrix-square/README.md) | Partial theorem covering every sufficiently large row | 🟨 Partial · Lean 4 |
 | [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Repository partial theorem for single cycles and large-cutoff cycle-type mixtures | ⬜ None |
 | [Ribbon matroids have the Narayana polynomial](topics/ribbon-matroids/README.md) | Proof of the identity and simple negative roots for every nonempty connected ribbon | 🟩 Full · Lean 4 |
@@ -31,6 +31,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 ## Partial work
 
+- The [uniform outer-rank theorem for ordered partitions](topics/ordered-large-blocks/outer-ranks/README.md) gives one eventual cutoff across all block thresholds for each fixed number of outer ranks.
 - A [linear dimension bound for every row cap](topics/balanced-arrays/adjacent-quotas/README.md) gives simple negative zeros when $200d\ge59n$ at the lower height $n\ge10^{200}$.
 - Earlier balanced-array bounds: [five-thirds row bound and polynomial cap or corank range](topics/balanced-arrays/fifth-thirds/README.md), [all fixed quadratic aspects](topics/balanced-arrays/critical-aspect/README.md), [absolute quadratic cutoff](topics/balanced-arrays/quadratic/README.md), [quartic-log cutoff](topics/balanced-arrays/very-tall/README.md), and [dimension-uniform fixed-cap threshold](topics/balanced-arrays/fixed-cap/README.md).
 - For [balanced arrays](topics/balanced-arrays/README.md), the corank-one theorem covers every dimension. Other caps are settled [through 36 rows](topics/balanced-arrays/finite-36/README.md) and [through degree fourteen](topics/balanced-arrays/low-degree.md).
