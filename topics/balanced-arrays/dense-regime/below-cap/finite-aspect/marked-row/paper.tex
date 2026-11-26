@@ -1,0 +1,122 @@
+\documentclass[11pt]{article}
+\usepackage[hmargin=.95in,vmargin=.72in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\linespread{.97}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prob}{\mathbb P}
+\title{A marked-row test for the signs of balanced-array polynomials}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A recursively computed pair of one-dimensional bounds certifies signs and disk counts for the original labeled binary arrays with equal column sums and capped rows. We compare the law of a marked row with binomial laws truncated at the cap. The finite test uses the variation of normalized column-extension ratios over four quotas. In a polynomial of degree 508,000 it isolates the first 505,661 roots by modulus as simple and negative. The previously isolated last 95 roots leave 2,244 roots of undetermined type.
+\end{abstract}
+
+Fix $n$ rows, $d$ columns and row cap $1\le r<d$. At column margins $\mathbf k$, write $C(\mathbf k)$ for the number of admissible labeled zero-one arrays. Put
+\[
+p(\mathbf k)=C(\mathbf k)\big/\prod_i\binom n{k_i},\quad
+p_k=p(k\mathbf1),\quad a_k=\binom nk^d p_k,\quad P(z)=\sum_k a_kz^k .
+\]
+Its positive support runs from zero to $D=\lfloor nr/d\rfloor$, by cyclically allocating the ones of successive columns to rows. We use the orientation comparison~\cite{orientation,kahn}: wherever defined, $p(\mathbf k+e_i)/p(\mathbf k)$ is nonincreasing in every margin. It follows that $p_k$ is log-concave. It is nonincreasing since reducing column sizes can only help the cap in the nested uniform-subset coupling. For an interior quota let $v_k=\sqrt{a_{k-1}/a_{k+1}}$.
+
+\section{The loss in one column}
+At a balanced base of $N$ rows of quota $K$, let $e(N,K)$ be the probability that a specified row is saturated conditional on being missing in a specified column. Set $p=K/N$, $\alpha=(1-r/d)/(1-p)$ and write $q(z)$ for the probability of exactly $r$ under $\mathrm{Bin}(d,z)$ conditional on being at most $r$. We use $0<p<r/d$. By column symmetry a row of size $r$ misses a specified column with probability $1-r/d$. Therefore $e(N,K)=\alpha\Prob(J=r)$, with $J$ the marked row size. At arbitrary margins the normalized extension ratio in column $i$ equals one minus its corresponding conditional saturation probability: count insertions into available zeros and the $k_i+1$ inverse deletions.
+
+\begin{lemma}\label{sand}
+Let $z_*$ be the unique parameter for which the truncated binomial has mean $dp$. Then $e(N,K)\le\alpha q(z_*)$. For a recursive lower bound define
+\[
+\mathcal T_p(x)=\alpha q\!\left(\frac p{1-(1-p)x}\right).
+\]
+If the required residual fibers are feasible and the ratios below are positive, then
+\[
+\mathcal T_p(e(N-1,K-1))\le e(N,K)\le\mathcal T_p(e(N-1,K)).
+\]
+Zero is an admissible starting lower bound. Every trial $z$ with $d(z-p)\ge z(d-r)q(z)$ gives the upper bound $\alpha q(z)$.
+\end{lemma}
+\begin{proof}
+The marked row law has weights $\binom djF_j$ on $0\le j\le r$, where $F_j$ counts the remaining arrays at quota $K-1$ on its $j$ indicated columns and $K$ elsewhere. The mixed orientation comparison gives $F_j^2\ge F_{j-1}F_{j+1}$: the two singly raised residual counts come from raising two of $j+1$ low columns. The independent binomial factors cancel. Feasibility is an interval by deletion. Relative to the truncated law at $z_*$, the marked row likelihood ratio is log-concave. Both laws have mean $dp$. If the marked law had larger mass at $r$, their mass difference could change sign only from negative to positive, ending strictly positive. Equal total mass would give a strictly larger mean. This proves the first bound. The truncated mean is $dz-z(d-r)q(z)$ by the binomial identity, increases strictly with the log odds by the positive variance, and has limits zero and $r$. The top mass increases with the parameter. This proves the trial test.
+
+The ratio $F_j/F_{j-1}$ equals $[K/(N-K)]/(1-e_{\rm res})$, using a single-column extension in the residual fiber at height $N-1$. Each residual base lies coordinatewise between the balanced margins $K-1$ and $K$. Orientation bounds its loss between $e(N-1,K-1)$ and $e(N-1,K)$. The consecutive likelihood ratios of the marked law therefore bound it from below and above in likelihood-ratio order by the two truncated laws with the corresponding odds. Their top masses have the stated order. The map $\mathcal T_p$ is increasing, so iteration preserves the lower inequality.
+\end{proof}
+
+\section{A sign test using variation across quotas}
+
+\begin{theorem}\label{test}
+Suppose $n\ge10^6$, $n/4\le d\le n/2$, $1/8\le k/n\le7/8$ and $k+2\le D$. Let $0\le l\le e(n,k-2)$ and $e(n,k+2)\le h<1$ be certified bounds at feasible bases. If
+\[
+4d(h-l)\le1-h ,
+\]
+then $(-1)^k P(-v_k)>0$, there is no zero of modulus $v_k$, and exactly $k$ roots lie inside that circle, with multiplicity. A single pair of bounds for $e(n,a-2)$ and $e(n,b+2)$ suffices throughout any interval $a\le k\le b$ satisfying the other hypotheses.
+\end{theorem}
+\begin{proof}
+Put $D_i=\log(p_{k+i-1}/p_{k+i})$. These are increasing in $i$ by log-concavity. Each of the $d$ losses on a diagonal extension path is between those at its two balanced ends. Thus the range of $D_{-1},D_0,D_1,D_2$ has length at most
+\[
+L=d\log((1-l)/(1-h))\le d(h-l)/(1-h)\le1/4.
+\]
+Define the unrestricted weights $B_i=\binom ni^d$, the geometric radius $v_k^0=\sqrt{B_{k-1}/B_{k+1}}$, and the normalized magnitudes $b_j=B_{k+j}(v_k^0)^j/B_k$. Then $b_{-1}=b_1$. Moving to the actual radius multiplies the $j$th magnitude by
+\[
+w_j=(p_{k+j}/p_k)\exp(j(D_0+D_1)/2).
+\]
+Set $u=e^{-(D_1-D_0)/2}\le1$. Then $w_{\pm1}=u$ and $w_j\le u^{|j|}$ wherever present by concavity. At distance two the two logs are $D_0-D_2$ and $D_{-1}-D_1$. Their sum is at least $-L-(D_1-D_0)$. Hence the total contribution at distance two is at least $2\sqrt{b_{-2}b_2}e^{-L/2}u$. Each alternating tail from distance four is nonnegative, by pairing decreasing outward magnitudes, starting with a positive one. If distance three is absent on one side, its subtraction below is still a lower bound. Consequently the signed normalized polynomial is at least
+\[
+1-2b_1u+2\sqrt{b_{-2}b_2}e^{-1/8}u-(b_{-3}+b_3)u^3 .
+\]
+Since $\sqrt{b_{-2}b_2}<b_1$ the minimum of this lower bound on $[0,1]$ is at one.
+
+Put $p=k/n$ and $A=d/[2np(1-p)]\ge1/2$. For $|j|\le3$,
+\[
+|\log b_j+Aj^2|<1/1000 .
+\]
+Indeed the log second quotient of $B$ at $k+i$ is $d$ times the sum of $\log(1+1/(k+i))$ and $\log(1+1/(n-k-i))$. For $z\ge n/8$, $|i|\le2$, the deviation of $\log(1+1/(z+i))$ from $1/z$ is at most $1/[2(z-2)^2]+2/[z(z-2)]<162/n^2$. Reconstructing each log magnitude at the geometric center uses nonnegative second-quotient weights summing to $j^2/2$ (the central first step has weight $1/2$, and the successive increments of slope are full second differences). Since $d\le n/2$, the error is at most $729/n$.
+
+The ideal lower function $1-2e^{-A}+2e^{-4A-1/8}-2e^{-9A}$ increases for $A\ge1/2$ by $e^{3A}>4$. At $A=1/2$ it exceeds $3/1000$. Replacing the ideal weights by the actual $b_j$ costs at most $1.51(e^{1/1000}-1)<3/1000$, since the six unsigned ideal terms sum to less than $1.51$. The supplied rational Taylor bounds verify these constants. This proves the sign. All internal second quotients of $P$ are greater than $e^{4d/(n+2)}>9/4$ by the orientation inequality. The geometric disk-count theorem~\cite{sharp} converts the sign into both asserted counts. Monotonicity of the extension loss proves the interval statement.
+\end{proof}
+
+\section{A polynomial of degree 508,000}
+Take $(n,d,r)=(10^6,250000,127000)$. The exact checker first takes $l=0$ and uses a single trial tilt at $K=504160$, namely $(K+1)/n$. This certifies all central-density indices through $504158$. An additional 270 blocks cover $504159$ through $505610$, including both endpoints. For a block $[a,b]$, the checker iterates the lower bound of Lemma~\ref{sand} at $(n,a-2)$ five times starting from zero and certifies a rational trial upper tilt at $(n,b+2)$. All residual equal margins and their single increments are feasible: their slack exceeds $d$ even after the five row deletions. Each of the 270 rational tests in Theorem~\ref{test} passes. At each of the next 51 indices through $505661$ the same bounds give the strict inequality
+\[
+1-2b_1+2\sqrt{b_{-2}b_2}\left(\frac{1-h}{1-l}\right)^{d/2}-b_{-3}-b_3>0 .
+\]
+This is the unrounded seven-term test from the proof, with $u=1$. The negative-axis sign and both disk counts follow by the same argument without requiring the sufficient upper bound $1/4$. The even factor and all three odd weights can be enclosed by integer powering, since $d$ is even. Small positive indices $k<n/8$ already have second quotient greater than nine by orientation. Their central monomial dominates on the geometric circle~\cite{outer}.
+
+The geometric radii increase strictly. At each interior radius from the first through index $505661$, the sign alternates and the disk count is the index. The constant term is one. Hence each intervening negative real interval, starting at zero, has exactly one root, simple. The independent row-deficit bound~\cite{outer} certifies the last 95 roots in modulus by the same count argument. This gives $505756$ simple negative roots and leaves $2244$ roots in the intervening annulus. Neither their types nor the conjecture in full generality are decided here.
+
+\section{Variation far below the cap}
+Suppose $d/n$ stays in a compact subinterval of $(0,\infty)$ and $k/n$ stays in a compact subinterval of $(0,1)$. Put $T=r-dk/n$ and $z=T/\sqrt d$. If $z\to\infty$, the diagonal log decrements $\log(p_{k+j-1}/p_{k+j})$ across each fixed window of indices differ from each other by $o(1)$. This holds even when the individual decrements are large.
+
+To see this, write $L(N,K)=-\log(1-e(N,K))$ and conjugate the two recursion bounds in Lemma~\ref{sand} by this change of variable. The resulting map is
+\[
+\Psi_p(y)=-\log(1-\alpha(p)q(\zeta)),\qquad
+  \zeta/(1-\zeta)=e^y p/(1-p).
+\]
+Follow the two extremal recursion paths for $H=\lceil4\log n\rceil$ generations. The headroom at each visited state changes by at most $O(H)$ from its initial value. The constants below are uniform over these states. At any probability within $O(1/\sqrt d)$ of their column densities, the truncated top mass satisfies $q\le C d^{-1/2}e^{-c z^2}$. For $r/d$ in a compact subinterval of $(0,1)$ this is the binomial Stirling bound with divergence at least twice the squared difference of the parameters. If $r/d$ is close to one, its distance from the column density is bounded below and the Chernoff exponential absorbs the prefactor. The truncation denominator is at least $1-e^{-c z^2}$ in either case.
+
+Taking the trial $\zeta=p+1/\sqrt d$ in Lemma~\ref{sand} shows that all actual $L$ lie between zero and $Y=C'd^{-1/2}e^{-cz^2}$. For $0\le y\le Y$, the derivative of $q(\zeta)$ in its log odds is $q(\zeta)(r-\E_\zeta J)$, and the mean formula bounds this deficit by $O(T)$. Since $\alpha$ and the derivative of the log odds in $p$ are bounded on the specified density interval, both partial derivatives of $\Psi_p(y)$ are bounded by $\eta=C(1+z)e^{-c'z^2}$.
+
+For fixed integers $a<b$, compare $L(n-j,k+b)$ and $L(n-j,k+a-j)$ at depth $j$. Their difference $\Delta_j$ is nonnegative by orientation. The recursion and the two derivative bounds give
+\[
+\Delta_j\le\eta\,\Delta_{j+1}+\eta(b-a+j)/(n-j).
+\]
+For large $n$, $\eta<1/2$. Summing the geometric series yields $\Delta_0=O(\eta/n)+2^{-H}O(Y)=o(1/n)$. Multiplication by $d$ and the diagonal path comparison prove the claimed log-decrement estimate.
+
+On the actual geometric circle, the centered log-cap corrections are therefore $o(1)$ at every fixed offset $j$. The unrestricted normalized weights are $\exp(-A j^2+O_j(n^{-1}))$ with $A=d/[2np(1-p)]$. Both the unrestricted and capped tails are bounded by a common geometric sequence by orientation and log-concavity. Hence the rotated polynomial divided by its central magnitude converges uniformly, in the sense of vanishing difference, to
+\[
+\sum_{j\in\mathbb Z}e^{-Aj^2}e^{ij\theta}
+=\sqrt{\pi/A}\sum_{m\in\mathbb Z}e^{-(\theta-2\pi m)^2/(4A)} .
+\]
+Poisson summation gives the identity and the closest summand gives a uniform positive lower bound. This recovers the sign and both disk counts. The conclusion still holds if $z\ge Z$ for a sufficiently large fixed $Z$ and $n$ is sufficiently large: first truncate the common tails below a fraction of the uniform positive bound, then make the fixed-window errors smaller than the remaining margin by the choice of $Z$. Earlier work establishes eventual geometric signs throughout a broader range~\cite{earlier}. This argument supplies the local variation estimate and the finite marked-row test.
+
+\small
+\begin{thebibliography}{9}
+\bibitem{alex} P. Alexandersson. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Balanced arrays of uniform matroids}. The symmetric functions catalog.
+\bibitem{kahn} J. Kahn and M. Neiman. \href{https://doi.org/10.1002/rsa.20395}{Conditional negative association for competing urns}. Random Structures Algorithms, Lemma 8.
+\bibitem{orientation} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/blob/14a7c082563830be7b42e5353c2269944a4260b5/topics/balanced-arrays/orientation-normalization.md}{An orientation proof of normalized log-concavity for balanced arrays}.
+\bibitem{sharp} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/pull/175}{Sharp coefficient thresholds for counting zeros on geometric circles}.
+\bibitem{outer} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/pull/173}{Simple negative outer roots from row deficits}.
+\bibitem{earlier} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/pull/148}{Explicit sublinear-dimension bounds and geometric signs}.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,2 @@
+Standard verified [504159,505610], count 1452, minimum margin 36824208291462/72057594037927936
+Signed verified [504159,505661], count 1503, minimum margin 5604823047/281474976710656, first noncertification 505662
