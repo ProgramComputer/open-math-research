@@ -1,0 +1,108 @@
+# All roots at small corank in the below-cap comparison range
+
+2026-11-26 · Private research note
+
+There is an absolute constant $`C_*>0`$ such that the following holds. Let $`n\ge2`$, $`d\ge2`$, and $`1\le r\le d`$. If $`d\le n`$ and
+
+$$
+b=\frac{d^2}{n}\ge C_{\ast}\log(n+1),
+\qquad
+c=d-r\le\frac{b}{1000},
+\tag{1}
+$$
+
+then the balanced-array polynomial $`P(q)=\sum_{k=0}^D a_kq^k`$, $`D=\lfloor nr/d\rfloor`$, has exactly $`D`$ simple negative roots. For $`d>n`$ the normalized coefficient separation already gives the same conclusion for every cap. The full-rank case $`c=0`$ is also known. Thus consider $`1\le c<d\le n`$ under (1). Increase $`C_*`$ as needed below. Since $`b\le d`$, this also forces $`d`$ arbitrarily large once $`C_*`$ is chosen large.
+
+Let $`F(q)=\sum_{k=0}^n b_kq^k`$ with $`b_k=\binom nk^d`$, and write $`-\rho_i`$ for its simple negative roots ordered by increasing absolute value. Set
+
+$$
+j_0=\lfloor d/10\rfloor,\qquad i_0=n-j_0.
+$$
+
+Because $`D=n-\lceil nc/d\rceil`$ and $`nc/d\le d/1000`$, we have $`D\ge i_0+1`$ for $`d`$ sufficiently large. The proof transfers the first $`i_0`$ full-rank roots and then finds $`D-i_0`$ roots by alternating signs beyond the join.
+
+## Transferring the root disks
+
+Use the full-rank disk of radius $`\rho_i/(4n^2)`$ about $`-\rho_i`$ for every $`1\le i\le i_0`$. These disks are pairwise disjoint by the logarithmic spacing estimate. At a boundary point $`z`$, put $`t=|z|`$, and let $`K`$ have weights $`b_k t^k/F(t)`$. Given $`K`$, sample $`d`$ independent uniform $`K`$-subsets as the columns. Write $`L=n-K`$ for the hole quota and $`j=n-i\ge j_0`$. Then
+
+$$
+\frac{|P(z)-F(z)|}{F(t)}
+\le \Pr(\text{some row has fewer than }c\text{ holes}).
+\tag{2}
+$$
+
+The root-circle bound gives
+
+$$
+\frac{|F(z)|}{F(t)}
+\ge\exp[-C_1(1+\mathrm{Var}(L))\log(n+1)] .
+\tag{3}
+$$
+
+Here and below we use the full-rank root-circle and variance estimates in the below-cap proof. To apply the local variance near the right endpoint, reflect its argument. The law of $`L`$ has weights proportional to $`\binom n\ell^d t^{-\ell}`$, so if $`m`$ is a mode the same mode estimate gives $`\mathbb E(L-m)^2\le C_2(1+m/d)`$. The law of $`K`$ is a sum of independent Bernoulli variables with success parameters $`t/(t+\rho_j)`$, and the law of $`L`$ is the reflected sum. On the disk boundary the number of full-rank moduli below $`t`$ is $`i`$ or $`i-1`$. The discrepancy of each Bernoulli parameter from its corresponding threshold indicator is at most twice its variance term. Thus $`|\mathbb E L-j|\le1+2\mathrm{Var}(L)`$. Combining these bounds gives $`m\le j+C_3(1+m/d)`$. For large enough $`d`$, absorb $`C_3m/d`$ and conclude
+
+$$
+m=O(j+1),\qquad
+\mathrm{Var}(L)\le C_4(1+j/d),\qquad
+|\mathbb E L-j|\le C_5(1+j/d).
+$$
+
+As $`j\ge\lfloor d/10\rfloor`$, the last bound is $`o(j)`$ uniformly. In particular $`\mathbb E L\ge 0.9j`$ once $`d`$ is large. Bernstein's inequality for the Bernoulli sum, applied to a downward deviation of at least $`0.4j`$, gives $`\Pr(L<j/2)\le e^{-c_1j}`$. [Below-cap proof and root-circle bound, pinned main revision](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/dense-regime/below-cap/proof.md)
+
+Given $`L\ge j/2`$, the hole count in any specified row has law $`\mathrm{Bin}(d,L/n)`$ and mean $`\lambda=dL/n\ge b j/(2d)`$. For large $`d`$, $`j/d\ge0.09`$, so $`c\le b/1000\le\lambda/4`$. A multiplicative binomial lower-tail bound gives $`\Pr(\text{row has fewer than }c\text{ holes}\mid L)\le e^{-c_2\lambda}`$. Union over $`n`$ rows and using $`b\le d`$ yields
+
+$$
+\frac{|P(z)-F(z)|}{F(t)}
+\le e^{-c_1j}+n e^{-c_3 b j/d}
+\le (n+1)e^{-\kappa b j/d}.
+$$
+
+Choose $`C_*`$ in (1) large enough that this is strictly smaller than (3) using $`\mathrm{Var}(L)\le C_4(1+j/d)`$ and $`j/d\ge0.09`$. Rouché gives one root, counted with multiplicity, in each of the first $`i_0`$ disks. Since each disk is conjugation-invariant and lies strictly in the left half-plane, its root is simple and negative.
+
+## The join between the disks and the upper signs
+
+For any positive coefficient sequence $`u_k`$ let $`R_k=u_k/u_{k-1}`$, $`\Gamma_k=R_k/R_{k+1}`$, and $`t_k=(R_kR_{k+1})^{-1/2}`$. If the ratios $`R_k`$ decrease, the relative magnitudes of the two neighbors of the $`k`$th term at radius $`t_k`$ are both $`\Gamma_k^{-1/2}`$, and every further outward term ratio is no larger. At radii $`s`$ with $`|\log(s/t_k)|\le0.1`$, every outward ratio is at most $`e^{0.1}\Gamma_k^{-1/2}`$.
+
+For $`F`$ at $`k=i_0`$, its coefficient curvature satisfies
+
+$$
+\log \Gamma_{i_0}(F)
+=d\log[(1+1/i_0)(1+1/j_0)]
+\gt \frac{d}{j_0+1}>6
+$$
+
+for all sufficiently large $`d`$. Put $`t_F=\sqrt{b_{i_0-1}/b_{i_0+1}}`$. On every circle of radius $`s`$ with $`t_F e^{-0.1}\le s\le t_F e^{0.1}`$, the sum of off-center term magnitudes is bounded by $`2q/(1-q)`$ times the central magnitude, with $`q=e^{0.1-3}<1/3`$. Thus the single central monomial dominates on every such circle. In particular Rouché at the lower boundary gives exactly $`i_0`$ full-rank roots below radius $`t_F e^{-0.1}`$, and hence $`\rho_{i_0}<t_F e^{-0.1}`$.
+
+At each deterministic quota $`k=i_0-1,i_0+1`$, the hole quota $`\ell=n-k`$ is at least $`0.08d`$ for large $`d`$. Its specified-row mean is at least $`0.08b`$, so the same binomial bound gives
+
+$$
+1-\frac{a_k}{b_k}\le n e^{-\kappa' b}\le(n+1)^{-2}
+$$
+
+after increasing $`C_*`$. Let $`t_P=\sqrt{a_{i_0-1}/a_{i_0+1}}`$. This deterministic acceptance estimate gives $`|\log(t_P/t_F)|=O((n+1)^{-2})`$. Therefore all first $`i_0`$ transferred disks are strictly below radius $`t_P`$, since their upper modulus is at most $`\rho_{i_0}(1+1/(4n^2))<t_F e^{-0.09}`$ for large $`n`$.
+
+At every $`i_0\le k<D`$, the normalized log-concavity inequality for actual coefficients gives
+
+$$
+\log\Gamma_k(P)\ge d\log[(1+1/k)(1+1/(n-k))]
+\gt \frac{d}{n-k+1}\ge\frac{d}{j_0+1}>6 .
+$$
+
+The coefficient ratios are strictly decreasing throughout the support. At each geometric node $`t_k(P)`$, therefore, the central monomial dominates the total magnitude of the other terms by the same geometric-series bound with $`q=e^{-3}`$. This proves the sign $`(-1)^k`$ at $`-t_k(P)`$. The nodes strictly increase in magnitude, start at $`t_P`$, and the sign sufficiently far to the left is $`(-1)^D`$ by the leading coefficient. The $`D-i_0`$ intervening intervals give distinct negative roots of modulus greater than $`t_P`$. Together with the $`i_0`$ transferred roots they exhaust the degree and are simple. [Normalized log-concavity, pinned main revision](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/orientation-normalization.md)
+
+## Example parameter sequences
+
+- For $`d=\lceil n^{2/3}\rceil`$, all coranks $`1\le c\le\lfloor n^{1/3}/1000\rfloor`$ are covered eventually.
+- For a fixed sufficiently large $`A`$, take $`d=\lceil A\sqrt{n\log(n+1)}\rceil`$. This covers $`1\le c\le\lfloor A^2\log(n+1)/1000\rfloor`$ eventually.
+
+Both examples have $`n/d^2\to0`$. The argument leaves larger corank outside condition (1) open.
+
+## Transfer to a corank bound in the row count
+
+Suppose the separate universal height theorem is available in the form $`n\ge C_Hd^{5/3}`$ for some absolute $`C_H\ge1`$. Combining it with (1) gives an absolute constant $`\kappa>0`$ for which every cap with $`d-r\le\kappa n^{1/5}`$ has all roots real, and simple negative for $`d\ge2`$. In fact, if $`d\le(n/C_H)^{3/5}`$, apply the height theorem. If $`(n/C_H)^{3/5}<d\le n`$, then
+
+$$
+b=\frac{d^2}{n}>C_H^{-6/5}n^{1/5}.
+$$
+
+For sufficiently large $`n`$ this is at least $`C_*\log(n+1)`$. Choose $`\kappa\le C_H^{-6/5}/1000`$ to get $`d-r\le b/1000`$. The theorem above then applies with its same integer join: the cap condition gives $`\lceil n(d-r)/d\rceil\le d/1000+1<\lfloor d/10\rfloor`$ for large $`d`$, leaving the join index internal. The disk transfer and the capped-center comparison use only this cap condition and the logarithmic lower bound on $`b`$. For $`d>n`$, use normalized coefficient separation. Full rank handles the remaining finitely many row counts after decreasing $`\kappa`$ so that $`\kappa n^{1/5}<1`$ at those counts. For $`d=1`$, the polynomial is $`(1+q)^n`$.

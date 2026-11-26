@@ -1,0 +1,74 @@
+# Subquadratic interior saddle with a fifth-order remainder
+
+Let $`d\to\infty`$, $`1\le r<d`$, and let $`S`$ be a binomial law tilted and truncated to $`\{0,\ldots,r\}`$, with weights proportional to $`\binom ds v^s`$, $`v>0`$. Set $`\mu=\mathbb ES`$, $`V=\mathrm{Var}(S)`$, $`a_s=s(d-s)/[d(d-1)]`$, and $`a=\mathbb E a_S`$. For a uniform $`S`$-subset $`I`$, use $`R(\theta)=\mathbb E\exp(i\sum_{i\in I}\theta_i)`$ and $`\phi(t)=\mathbb E e^{itS}`$. Write $`H=\sum_{s\le r}\binom ds v^s`$, $`a(t)=\mathbb E[a_S e^{itS}]/\phi(t)`$, and $`t_*=\pi/d`$. Fix $`h_0>0`$ and assume
+
+$$
+\mu\ge1/10,\quad r-\mu\ge h_0,\quad
+n/d^{5/3}\to\infty,\quad na/d\to\infty,\quad nV/d^2\to\infty.
+$$
+
+Then $`P_n^{(r,d)}(-v^d)/H^n`$ equals
+
+$$
+\frac{2}{\sqrt d}(2\pi n)^{-(d-1)/2}\mathrm{Re}\negthinspace \left[\phi(t_{\ast})^n a(t_{\ast})^{-(d-1)/2}\right]+o(B_{\ast}),
+\qquad B_{\ast}=\frac{|\phi(t_{\ast})|^n}{\sqrt d}(2\pi n|a(t_{\ast})|)^{-(d-1)/2}.
+$$
+
+The error is absolute on the scale of one principal saddle, uniformly along the stated sequences. The conclusion concerns the angular integral on this interior range.
+
+## Pointwise fifth-moment estimate
+
+For $`y\in\mathbf1^\perp`$ put $`L=\sum_{i\in I}y_i`$, $`Q_j=\sum_i y_i^j`$. At fixed size $`s`$ the centered vector allows passage to the complement with a sign reversal, so use $`m=\min(s,d-s)`$ draws. Hoeffding's convex comparison theorem for sampling without replacement, with $`\Phi(x)=|x|^5`$, bounds $`\mathbb E[|L|^5\mid S=s]`$ by the corresponding moment for $`m`$ independent draws from the finite population $`y_1,\ldots,y_d`$. This is Theorem 4 of Hoeffding (1963). [Published DOI](https://doi.org/10.1080/01621459.1963.10500830), [scan of primary article](https://www.cs.rpi.edu/academics/courses/spring06/random/hoefding.pdf).
+
+The comparison can also be seen by drawing an ordered sample of $`m`$ distinct population indices, independently drawing the equality pattern of $`m`$ draws with replacement, and assigning the pattern blocks in first-appearance order to the first distinct sampled indices. The resulting sequence has the with-replacement law. Conditional on the unordered distinct sample and the pattern, each assigned population value has the sample average as its expectation. The conditional expected sum is therefore the without-replacement sample sum. Jensen gives the desired convex comparison.
+
+Here is a short proof of the independent fifth-moment bound, avoiding a separate moment-theorem dependency. For centered independent identically distributed draws $`X_i`$ with variance $`\sigma_0^2`$, $`S_j'=\sum_{i\le j}X_i`$, and $`M_j=\mathbb E|S_j'|^5`$, Taylor gives
+$`|x+u|^5\le |x|^5+5x|x|^3u+C(|x|^3u^2+|u|^5)`$. The linear term vanishes upon conditioning on the past. Jensen gives $`M_{j-1}\le M_j`$. Summing the moment increments yields $`M_m\le C m\sigma_0^2 M_m^{3/5}+Cm\mathbb E|X_1|^5`$. Splitting according to which right-hand term is larger implies $`M_m\le C[(m\sigma_0^2)^{5/2}+m\mathbb E|X_1|^5]`$. Here $`\sigma_0^2=Q_2/d`$ and $`\mathbb E|X_1|^5=d^{-1}\sum_i|y_i|^5`$. Since $`m/d\asymp a_s`$ for $`0<s<d`$, we obtain
+
+$$
+\mathbb E[|L|^5\mid S=s]\le C\left(a_s\sum_i|y_i|^5+a_s^{5/2}Q_2^{5/2}\right).
+$$
+
+Both sides vanish for $`s=0`$. The moment bound $`\mathbb E a_S^{5/2}\le C a^{5/2}`$ follows from $`O(1/d)`$ Lipschitz continuity, $`a_\mu=a+V/[d(d-1)]`$, $`a\ge\max(V/d,1/(11d))`$, and $`\mathbb E|S-\mu|^{5/2}\le C(1+V)^{5/4}`$. The latter follows from log-concavity of $`S-S'`$ and its geometric survival bound at scale $`\sqrt{1+V}`$, as proved in [the quadratic interior note](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/very-tall-quadratic-interior-saddle.md). Thus the unconditional fifth bound has the same form with $`a`$ replacing $`a_s`$.
+
+## Near-chart expansion and exponential domination
+
+Use the angular charts $`\theta=t\mathbf1+y`$ with $`\|y\|\le\eta`$ at odd multiples $`t`$ of $`\pi/d`$. For $`|t|\le c_0/\sqrt{1+V}`$, $`\phi(t)`$ is bounded away from zero. The normalized complex row logarithm is
+
+$$
+\log\negthinspace \left(\frac{R(t\mathbf1+y)}{\phi(t)}\right)
+=-\tfrac12a(t)Q_2-\tfrac i6\gamma(t)Q_3+K_4(y)+B_5(y).
+$$
+
+Here $`|\gamma(t)|\le Ca`$, $`|\mathrm{Im}\gamma(t)|\le Ca\sqrt{1+V}|t|`$, and $`|K_4|\le CaQ_4`$, using the cancellation in [the fourth cumulant proof](https://github.com/ProgramComputer/open-math-research/blob/605cc467a5be93a8408519da331e46f1008df96e/topics/balanced-arrays/critical-aspect/fourth-transverse-cumulant.md). For clarity, the $`Q_2^2`$ coefficient left after taking the logarithm is $`O(a/d)`$: at fixed $`s`$ the raw coefficient divided by 3 is $`(s)_2(d-s)_2/(d)_4=a_s^2+O(a_s/d)`$, and the complex variance of $`a_S`$ is $`O(V/d^2)\le O(a/d)`$. Then $`Q_2^2/d\le Q_4`$.
+
+The log remainder satisfies $`|B_5|\le C\mathbb E|L|^5`$. Indeed $`R/\phi-1=O(\mathbb E|L|^2)`$ because the conditional first moment vanishes. Taylor of the exponential through order four gives a remainder bounded by the fifth absolute moment. For the logarithm, only the square of the quadratic term contributes at order four. Bounding the difference from that square uses $`O((\mathbb E|L|^2)(\mathbb E|L|^3))`$ and the log cubic remainder uses $`O((\mathbb E|L|^2)^3)`$. Both are at most $`C\mathbb E|L|^5`$ by moment monotonicity and the bound $`\mathbb E|L|^2\le C\eta^2`$. Consequently $`|B_5|\le C(a\sum_i|y_i|^5+a^{5/2}Q_2^{5/2})`$.
+
+The diagonal coefficient estimates from the quadratic note give $`\alpha_t=\mathrm{Re}\,a(t)\asymp a`$, $`\alpha_t/a=1+O((1+V)t^2)`$ and $`\mathrm{Im}\,a(t)/a=O(\sqrt{1+V}|t|)`$. Let $`A=n\alpha_t\asymp na`$. The real exponential correction above the Gaussian of precision $`A`$ is bounded on the chart by
+
+$$
+Cna\left(\sqrt{1+V}|t|\sum_i|y_i|^3+Q_4\right)
++Cna^{5/2}Q_2^{5/2},
+$$
+
+using $`\sum |y_i|^5\le\eta Q_4`$. Its exponential moment, with any fixed multiplier involved in Cauchy–Schwarz, is $`O(\exp(Cd(1+V)t^2))`$. To verify this, separate coordinate and radial terms by Cauchy–Schwarz. For the coordinate terms represent $`y_i=Z_i-\bar Z`$ with iid $`N(0,A^{-1})`$ and restrict also to $`|\bar Z|\le\eta`$, independently with probability $`1-o(1)`$. Then $`|Z_i|\le2\eta`$ and $`\sum |y_i|^j\le2^j\sum |Z_i|^j`$. On the resulting interval the single-coordinate exponent can be absorbed into half the original Gaussian quadratic by making $`\eta`$ small. Integrating $`e^u-1\le u e^u`$ yields a factor at most $`1+C(\sqrt{1+V}|t|/\sqrt A+1/A)`$ per coordinate. Their product is at most $`\exp(Cd((1+V)t^2+1/A))`$ by Young's inequality, with $`d/A=o(1)`$.
+
+For the radial term put $`U=AQ_2`$, a chi-square variable with $`d-1`$ degrees of freedom. The exponent is at most $`C U^{5/2}/n^{3/2}`$. On $`U\le L_0 d`$ for fixed large $`L_0`$, this is $`O_{L_0}(d^{5/2}/n^{3/2})=o(1)`$. For $`U>L_0d`$ on the chart it is at most $`\epsilon U`$ with fixed $`\epsilon<1/8`$, since $`Q_2\le\eta^2`$ and $`a\le1`$. The chi-square exponential moment at $`1/4`$ bounds this part by $`\exp(-c d)`$ after taking $`L_0`$ sufficiently large. This proves the exponential domination without an $`\exp(O(d^2/n))`$ penalty.
+
+## Integrated comparison and phase exclusion
+
+Under the same real Gaussian, the $`L^2`$ norms of $`Q_3`$, $`Q_4`$ and $`\sum_i|y_i|^5`$ are respectively $`O(\sqrt d\,A^{-3/2})`$, $`O(d A^{-2})`$, and $`O(d A^{-5/2})`$. The first is Wick's formula with the row-sum-zero covariance cancellation; the others follow by the triangle inequality. Also $`\|Q_2^{5/2}\|_2=O((d/A)^{5/2})`$. Multiplying by the respective coefficients and $`n`$ bounds the total log perturbation in $`L^2`$ by
+
+$$
+O\negthinspace \left(\sqrt{\frac d{na}}+\frac d{na}+\frac{d^{5/2}}{n^{3/2}}\right)=o(1).
+$$
+
+The coordinate quintic term is absorbed into the quartic bound on the chart. Applying Cauchy–Schwarz to the difference of exponentials gives an absolute chart error bounded by this $`o(1)`$ times $`C I_0|\phi(t)|^n e^{Cd(1+V)t^2}`$, where $`I_0=(2\pi na)^{-(d-1)/2}/\sqrt d`$. The complex Gaussian may be extended beyond the chart because $`na\gg d`$. The chart modulus itself is at most $`C I_0|\phi(t)|^n e^{Cd(1+V)t^2}`$. At $`t_*`$ the determinant correction is bounded because $`V=O(d)`$, and hence the two principal chart errors are $`o(B_*)`$.
+
+For completeness the global localization uses only the unchanged hypotheses behind the quadratic note: off-chart the random disjoint-pair estimate yields $`|R|\le\exp[-c\min(aD_z,1)]`$, $`D_z=\sum_i|z_i-\bar z|^2`$. On the unsaturated part, retaining half the penalty and integrating the other half using Haar relative angles at a closest anchor gives relative bound $`\exp(O(d)-cna+O(nV/d^2))`$. This vanishes because $`na\gg d`$ and $`V/d^2\le a/d`$. The saturated part and far diagonal charts have row modulus bounded away from one, so their suppression $`e^{-cn}`$ absorbs the reciprocal Gaussian factor $`e^{O(d\log n)}`$ and radial loss $`e^{O(nV/d^2)}`$. Here $`n\gg d\log n`$. The normalized torus measure, of Euclidean covolume $`\sqrt d(2\pi)^{d-1}`$, gives the factor in the Gaussian formula.
+
+Finally the near radial gap is $`|\phi(t)/\phi(t_*)|\le e^{-c V(t^2-t_*^2)}`$ for $`t_*\le|t|\le c_0/\sqrt{1+V}`$, by the fourth moment bound for $`S-S'`$ and differentiation as in the quadratic note. Since $`V\ge c_{h_0}`$ and $`n\gg d`$, the determinant factor $`e^{Cd(1+V)t^2}`$ is absorbed in this gap at odd labels $`j=|t|/t_*\ge3`$. The sum over such phases is $`O(\sum_{j\ge3}\exp[-cnV(j^2-1)/d^2])=o(1)`$ relative to $`B_*`$. Only the two conjugate principal charts remain.
+
+## Raw remainder at the further four-thirds scale
+
+At the further height scale $`n\asymp d^{4/3}`$, using a raw sixth moment after retaining the signed fifth term would still leave a radial bound of order $`d^3/n^2`$. For instance at tilt $`v=1`$ and cap $`r=d-1`$, the transverse coefficient $`a`$ is of constant order. On a typical Gaussian shell $`Q_2\asymp d/n`$, so $`n\mathbb E|L|^6\ge n(\mathbb E L^2)^3\asymp d^3/n^2`$. This is a limitation of that remainder estimate. The five-thirds proof above uses a fifth absolute moment after retaining the fourth-order logarithm.

@@ -1,0 +1,82 @@
+# A polynomial range of ranks and coranks for balanced arrays
+
+**Theorem.** There are absolute constants $`C,c>0`$ with the following properties. Let $`d\ge2`$, $`1\le r\le d`$ and $`n\ge0`$. Write $`a_k`$ for the number of labeled binary $`n\times d`$ matrices with row sums at most $`r`$ and column sums all equal to $`k`$. Then $`P(q)=\sum_{k=0}^{D}a_kq^k`$, $`D=\lfloor nr/d\rfloor`$, has exactly $`D`$ simple negative zeros whenever either
+
+1. $`n\ge C d^{5/3}`$, for any cap $`r`$, or
+2. $`\min(r,d-r)\le c n^{1/5}`$, for all sufficiently large $`n`$, in every dimension.
+
+At $`d=1`$ the polynomial is $`(1+q)^n`$, with only real roots. The constants in the theorem are existential. In particular, every sufficiently large counterexample to the original real-rootedness conjecture must simultaneously satisfy
+
+$$
+d>C^{-3/5}n^{3/5},\qquad
+r>c n^{1/5},\qquad d-r>c n^{1/5}.
+$$
+
+These necessary conditions leave an infinite range of parameters. The argument supplies no counterexample. [Alexandersson's statement](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)
+
+## Height reduction
+
+If the first conclusion admitted no absolute $`C`$, there would be a sequence of exceptional triples with $`n/d^{5/3}\to\infty`$. Bounded dimensions cannot give such a sequence, by eventual real-rootedness at each fixed cap and dimension (or by the reviewed quadratic result). Also $`r=d\ge2`$ is the unrestricted binomial-power case. Pass to $`d\to\infty`$, $`r<d`$. A subsequence with $`n/d^2`$ bounded below is excluded by the fixed-quadratic-aspect theorem. We may therefore take
+
+$$
+b=d^2/n\longrightarrow\infty,\qquad b=o(d^{1/3}).
+$$
+
+The latter condition is exactly $`n/d^{5/3}\to\infty`$. Every quota through $`D`$ is feasible by filling row slots, at most $`r`$ per row, cyclically in column order. [Fixed-quadratic-aspect theorem](https://github.com/ProgramComputer/open-math-research/tree/605cc467a5be93a8408519da331e46f1008df96e/topics/balanced-arrays/critical-aspect) · [Unrestricted case](https://github.com/ProgramComputer/open-math-research/blob/605cc467a5be93a8408519da331e46f1008df96e/topics/balanced-arrays/finite-linear-reduction.md)
+
+Take a further subsequence on which $`r/b`$ has a limit in $`[0,\infty]`$. If it is finite, $`D/d`$ is bounded. The bounded-rank-ratio lemma gives strict signs at all geometric centers in that regime. The proof uses the sparse binary margin formula for $`k`$ of order $`d`$ and $`r=O(b)=o(d^{1/3})`$. A positive limit of the variance divided by $`b`$ gives a positive Gaussian alternating sum. Vanishing normalized variance gives coefficient separation, including at exact saturation. The ordered centers then account for every root. [Bounded-rank-ratio lemma](small-cap-bounded-degree-ratio.md)
+
+It remains to consider $`r/b\to\infty`$, so that $`D/d\to\infty`$. After a subsequence the corank ratio $`(d-r)/b`$ tends either to infinity or to some finite $`\gamma\ge0`$.
+
+## Phase nodes and the lower endpoint
+
+Let $`H(w)=\sum_{s=0}^r\binom ds w^s`$ and, at positive $`w`$, give the row size $`S`$ probabilities proportional to these terms. Write $`\mu=\mathbb ES`$, $`h=r-\mu`$, $`V=\mathrm{Var}(S)`$, $`G(s)=s(d-s)/(d(d-1))`$, $`a=\mathbb E G(S)`$, $`T=nr/d`$ and $`y=n\mu/d`$. With $`\phi=\pi/d`$, $`\nu=(d-1)/2`$ take the phase
+
+$$
+\Psi(w)=n\arg H(we^{i\phi})
+-\nu\arg\left(\frac{\mathbb E[G(S)e^{i\phi S}]}{\mathbb E e^{i\phi S}}\right).
+$$
+
+The arguments continue from zero angle since both sums lie in a sector of width $`r\phi<\pi`$. The limiting values at radii zero and infinity are $`-\nu\phi`$ and $`T\pi`$. The first hitting radii $`v_k`$ where $`\Psi(v_k)=k\pi`$ exist and strictly increase for $`1\le k<D`$ by continuity. We use the previously proved inequality, valid independently of $`n`$,
+
+$$
+|\Psi(w)/\pi-y|\le C_0 d+C_0\min(y,T-y)/\sqrt d.
+$$
+
+In particular $`k/d\to\infty`$ implies $`y(v_k)/d\to\infty`$, and $`(D-k)/d\to\infty`$ similarly implies $`(T-y(v_k))/d\to\infty`$. At bounded $`k/d`$ or $`(D-k)/d`$ the corresponding quota distance at $`v_k`$ is $`O(d)`$. [Phase localization](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/proof.md)
+
+For $`1\le k<D`$ put $`t_k=\sqrt{a_{k-1}/a_{k+1}}`$ and $`\Gamma_k=a_k^2/(a_{k-1}a_{k+1})`$. The normalized orientation inequality gives strict log-concavity and $`\Gamma_k\ge(1+1/k)^d(1+1/(n-k))^d`$. At $`k/d\to0`$ the curvature ratio thus tends to infinity, so $`(-1)^kP(-t_k)>0`$ eventually. The normalized central term equals one, its two immediate neighbors have magnitude $`1/\sqrt{\Gamma_k}`$, and the remaining alternating tails give a nonnegative sum on each side. [Orientation inequality](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/orientation-normalization.md)
+
+For $`k/d\to\beta\in(0,\infty)`$, the lower-quota lemma gives $`\log\Gamma_{k+j}\to1/\beta`$ for all fixed translates and $`\log t_k=d\log v_k+o(1)`$. It controls rare large row degrees in both the original balanced arrays and the scalar coefficient model. At either radius $`x=t_k`$ or $`x=v_k^d`$, log-concavity and these fixed-offset curvatures therefore give
+
+$$
+\frac{(-1)^kP(-x)}{a_k x^k}
+\longrightarrow\sum_{j\in\mathbb Z}(-1)^j e^{-j^2/(2\beta)}>0
+$$
+
+by Gaussian Poisson summation. Indeed each fixed-offset term converges by multiplying adjacent ratios. Past any large fixed distance the tails have decreasing outward ratios, bounded geometrically by the ratio at that distance. Both distances to the ends of the support diverge. [Lower-quota estimates](fifth-thirds-lower-quota.md)
+
+## Angular signs away from a bounded complementary band
+
+The angular sign lemma applies at every internal phase node for which $`\mu\ge1/10`$, $`na/d\to\infty`$ and $`n/d^{5/3}\to\infty`$. Its proof integrates the $`n`$th power of the row polynomial over the torus of product $`-1`$. In logarithmic coordinates with deviations $`z_i`$ of zero sum, the quadratic approximation is accurate after integration because the mixed fourth logarithmic term cancels up to a multiple of $`a(\sum z_i^2)^2/d`$. At the next order the radial error is $`O(d^{5/2}/n^{3/2})=o(1)`$. When several diagonal phases contribute, the significant odd multiples of $`\pi/d`$ all have real parts of the required sign at the phase node. This treats both bounded and unbounded $`nV/d^2`$. [Angular sign lemma](subquadratic-angular-nodes.md) · [Integration and fifth-moment bounds](subquadratic-interior-saddle.md)
+
+The variance inequality $`V\le\mu(1-\mu/d)`$ implies $`a\ge\mu(d-\mu)/d^2`$. Consequently
+
+$$
+\frac{na}{d}\ge \frac{\mu(d-\mu)}{bd}
+\ge\frac{\min(\mu,d-\mu)}{2b}.
+$$
+
+At $`k/d\to\infty`$ the phase inequality gives $`\mu/b=y/d\to\infty`$. If $`(d-r)/b\to\infty`$ we have $`(d-\mu)/b\ge(d-r)/b\to\infty`$ throughout. For that corank regime, use $`t_k`$ when $`k\le d`$ and $`v_k^d`$ thereafter. Every sequence of indices with $`k/d\to\infty`$ is covered by the angular sign lemma, and all remaining subsequential limits are covered at the lower endpoint.
+
+If $`(d-r)/b\to\gamma<\infty`$, use $`t_k`$ also for $`D-k\le d`$, and $`v_k^d`$ at other internal indices. When both $`k/d`$ and $`(D-k)/d`$ tend to infinity, $`h/b=(T-y)/d\to\infty`$ and $`d-\mu\ge h`$, so again the angular lemma gives the sign. For bounded $`(D-k)/d`$, the complementary coefficient lemma proves the geometric signs, including when the last quota is exactly saturated. At $`(D-k)/d\to\beta\in(0,\infty)`$ every fixed-offset log curvature tends to $`1/(\gamma+\beta)`$ and $`d\log v_k=\log t_k+o(1)`$, so the angular sign is also strict there. At zero limiting offset only geometric signs are needed. The proof uses a single-row switching count for holes and sparse margin enumeration on the resulting typical profiles. [Complementary coefficient and overlap estimates](subquadratic-scaling-corank-upper.md)
+
+Inside each chosen range the radii are strictly increasing. At either join the adjacent geometric log radii have gap $`(\log\Gamma_k+\log\Gamma_{k+1})/2`$ tending to $`1`$ at the lower join and $`1/(\gamma+1)>0`$ at the upper join if it occurs. Replacing one of these radii by its designated phase radius changes its log by $`o(1)`$. Together with the endpoint signs $`1`$ and $`(-1)^D`$ at zero and positive infinity these ordered tests alternate: an infinite sequence of failures would have further limits for $`k/d`$ and $`(D-k)/d`$ in $`[0,\infty]`$, all excluded above. Hence $`P`$ has $`D`$ distinct negative zeros by continuity, contradicting the supposed exceptional sequence. This proves the height assertion.
+
+## From height to rank and corank
+
+For each $`n,d`$ outside the first height range, $`b=d^2/n>C^{-6/5}n^{1/5}`$. First choose an absolute $`c>0`$ with $`c\le C^{-6/5}/\log 4`$. If $`r\le c n^{1/5}`$ then $`d\ge\sqrt{nr\log 4}`$, a known sufficient condition for simple negative roots by the orientation inequality. This proves the lower-rank conclusion.
+
+For the upper-rank conclusion we use the separate large-dimension transfer: whenever $`2\le d\le n`$, $`b\ge C_1\log(n+1)`$ and $`1\le d-r\le b/1000`$, the entire degree consists of simple negative roots. The proof transfers the first $`n-\lfloor d/10\rfloor`$ roots from the unrestricted array polynomial by a relative comparison on root circles. It then places all remaining roots above that band by coefficient separation in the complementary column quota. Its ordering argument handles the join explicitly. [Transfer for small corank](small-corank-subquadratic.md)
+
+Since $`n^{1/5}/\log(n+1)\to\infty`$, outside the height range $`b\ge C_1\log(n+1)`$ for sufficiently large $`n`$. Reduce $`c`$ if necessary to $`c\le C^{-6/5}/1000`$. Then $`1\le d-r\le c n^{1/5}`$ implies the needed corank bound. Full rank is already settled. When $`d>n`$, coefficient separation gives simplicity for every cap (constant polynomials included). Thus the two-sided assertion holds in every dimension as claimed.
