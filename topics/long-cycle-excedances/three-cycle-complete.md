@@ -4,6 +4,8 @@ Let $E_{n,k}$ count permutations of $[n]$ with every cycle of length at least $k
 
 **Formal verification** ⬜ None. The proof combines analytic inequalities with certified polynomial signs. The conjecture for all sizes remains open. Together with earlier results, this theorem restricts any counterexample to $k\ge4$ and $4k\le n<10^{20}$. [Uniform upper cutoff](effective-uniform.md) · [All sizes at minimum length three](fixed-threshold.md)
 
+[Independent agent-assisted review and exact replay scopes](review-complete-band.md)
+
 ## Proof
 
 Write $A_j$ for the ordinary Eulerian polynomial. Inserting the largest label in an existing cycle, or on a new cycle of length $k$, gives
@@ -23,9 +25,9 @@ At every root $x$ of $P_n$ we prove $|L(x)|<|x(1-x)P_n'(x)|$. The two polynomial
 
 For the small sizes the verifier reconstructs each row by choosing the cycle of label one and verifies the insertion identity. Starting with an Eulerian row, it refines dyadic brackets by certified integer Horner signs. A sign at both ends of a bracket is used together with the full polynomial degree and the signs in neighboring brackets. These counts force the next zeros into the gaps. Independent enumeration by the number of shortest cycles reproduces all 4,785 whole coefficient vectors. [Bracket argument](two-cycle-finite.md) · [Independent whole-vector comparison](verify_three_cycle_short_counts.py)
 
-For intermediate sizes the primary calculation uses the first 48 coefficients. It encloses the omitted terms by a convergent geometric series and compares each entire value interval with that bound. Positive and negative insertion terms are tested at both ends of every exterior bracket. The analytic middle signs join to the last bracket by the same degree count. The [rolling coefficient algorithm](three_cycle_prefix.py) counts two- and three-cycle contributions separately, including the four-cycle contribution in the new row when $n=4k-1$. [Independent prefix comparison](check-exterior-prefix-agreement.py)
+For intermediate sizes the primary calculation uses the first 48 coefficients. It encloses the omitted terms by a convergent geometric series and compares each entire value interval with that bound. Positive and negative insertion terms are tested at both ends of every exterior bracket. The analytic middle signs join to the last bracket by the same degree count. The [rolling coefficient algorithm](three_cycle_prefix.py) counts two- and three-cycle contributions separately, including the four-cycle contribution in the new row when $n=4k-1$. The two implementations agreed on all 201,485 distinct positive-row prefixes, including all 502 new rows that admit four cycles. [Independent prefix comparison](check-exterior-prefix-agreement.py) · [Replay output](three-cycle-prefix-agreement-output.txt)
 
-A separate integer audit reconstructs the polynomials and checks 3,306 signs at rational dyadic endpoints on 29 stratified pairs. It covers all 19 exterior ranks for each selected pair. [Integer audit and sampling scope](three-cycle-integer-audit.md)
+A separate integer audit reconstructs the polynomials and checks 3,306 signs at rational dyadic endpoints on 29 stratified pairs. It covers all 19 exterior ranks for each selected pair. [Integer audit and sampling scope](three-cycle-integer-audit.md) · [All 29 sampled pairs](three-cycle-integer-audit-output.txt)
 
 ## Reproduction
 
