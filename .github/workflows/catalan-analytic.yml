@@ -41,10 +41,13 @@ jobs:
           Mathlib.Analysis.Analytic.OfScalars
           Mathlib.Analysis.Analytic.Uniqueness
           Mathlib.Analysis.Complex.Basic
+          Mathlib.Analysis.Normed.Ring.InfiniteSum
+          Mathlib.Analysis.SpecificLimits.Normed
           Mathlib.Analysis.Polynomial.Basic
           Mathlib.Analysis.SpecialFunctions.Complex.Analytic
           Mathlib.Analysis.SpecialFunctions.Gamma.Beta
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+          Mathlib.Data.Real.Sqrt
           Mathlib.Data.Fin.Tuple.Basic
           Mathlib.Data.Finset.Prod
           Mathlib.Data.Finset.Sigma
@@ -58,6 +61,13 @@ jobs:
           Mathlib.Tactic.Linarith
           Mathlib.Tactic.Positivity
           Mathlib.Tactic.Ring
+      - name: Check the right endpoint pole formulas and positive radical
+        run: lake build CatalanStrictPeaksPoleValues
+      - name: Audit the right endpoint pole formulas
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/PoleValuesAxioms.lean > "$RUNNER_TEMP/catalan-pole-values.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/pole-values-kernel.txt "$RUNNER_TEMP/catalan-pole-values.txt"
       - name: Check the analytic branch and radial moments
         run: lake build CatalanStrictPeaksAnalyticBranch CatalanStrictPeaksBetaMoments
       - name: Audit the theorem axioms
