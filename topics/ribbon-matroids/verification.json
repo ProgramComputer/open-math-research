@@ -833,7 +833,31 @@
     "source_convention": {
       "description": "The source describes a connected skew shape. The standard snake convention requires at least two ground elements, with a one-square ribbon as its smallest case. The empty-area singleton coloop lies outside this convention.",
       "definition": "https://doi.org/10.1016/j.aam.2016.11.008",
-      "section": "Definition at the start of section 3.2"
+      "section": "Definition at the start of section 3.2",
+      "empty_area_singleton_coloop": "The written rank-one argument covers this optional degenerate case."
+    },
+    "original_author_issue": "https://github.com/PerAlexandersson/RealRooted/issues/2650",
+    "provenance": {
+      "original_conjecture": "https://github.com/PerAlexandersson/symmetricfunctions.com/blob/b4a005205cfd78dd987facedf2e1916ef1e308fd/tex-source/realRootedOpenProblems.tex#L496-L506",
+      "repository_proof": {
+        "commit": "https://github.com/ProgramComputer/open-math-research/commit/d27bf1897bff2f426d57bea5efdbc9fca6f17d4f",
+        "public_push_utc": "2026-11-25T21:14:08Z"
+      },
+      "symcat_credit": {
+        "theorem": "https://www.symmetricfunctions.com/schubertMatroidZ.htm#ribbonMatroidZNarayana",
+        "source_commit": "https://github.com/PerAlexandersson/symmetricfunctions.com/commit/c697a84b47c36a53e3b63b3dcb4cd6305905a19d",
+        "source_commit_utc": "2026-11-26T12:33:36Z",
+        "credited_author": "Steve Raj",
+        "draft_title": "Outerplanarity from the Z-polynomial of a graphic matroid",
+        "draft_date": "2026-11-25"
+      },
+      "relationship": "Unknown. This audit verifies the preexisting repository argument."
+    },
+    "blind_coverage_review": {
+      "file": "topics/ribbon-matroids/formal-coverage-review.md",
+      "sha256": "7149fdbf2e16ca6c477a712ad9c40bb57c61abb3986855317a4f607c4fa0740b",
+      "method": "Agent-assisted blind review of the anonymized written argument and Lean source statements. Build and independent-kernel replay are separate machine checks.",
+      "verdict": "The definitions and exported statements cover the exact nonempty ribbon conjecture and the stronger simple-negative-root result."
     }
   }
 }

@@ -3,6 +3,7 @@ on:
   pull_request:
     branches: [research, main]
     paths:
+      - 'shared/lean/OpenMathResearch/Matroid*.lean'
       - 'shared/lean/publication/**'
       - 'topics/*/lean/publication/**'
       - '.github/workflows/publication-lean.yml'
