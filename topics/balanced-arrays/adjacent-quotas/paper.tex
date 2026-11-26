@@ -1,0 +1,495 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,geometry}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\geometry{margin=1in}
+\emergencystretch=3em
+\title{An explicit all-cap dimension bound for balanced binary arrays}
+\author{ProgramComputer}
+\date{November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the balanced-array polynomial in Alexandersson's uniform-matroid conjecture,
+we prove that every zero is simple and negative if $n\ge 10^{200}$ and $d\ge 59n/200$,
+uniformly over the row cap. A Gaussian expansion for fixed row sums and a monotone
+coupling of row profiles control the change of the equal-column probability between
+successive quotas. A local limit estimate for a single tilted row then controls
+the two neighboring coefficient curvatures at each difficult sign.
+\end{abstract}
+\section{Simple negative zeros at an explicit linear dimension bound}
+
+\textbf{Theorem.} Let $n\ge10^{200}$, let $200d\ge59n$, and let $1\le r\le d$. For each $k$ let $a_k$ count the labeled $n\times d$ binary matrices with all column sums $k$ and all row sums at most $r$. The polynomial $\sum_{k=0}^D a_k q^k$ has $D=\lfloor nr/d\rfloor$ simple negative zeros. Every row cap is allowed. The theorem gives a numerical height cutoff in part of the range covered by the qualitative eventual theorem. The full conjecture remains open. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Alexandersson's conjecture}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/eventual-all/README.md}{Eventual theorem in every dimension}
+
+
+\subsection{From consecutive quotas to all roots}
+
+The coefficients are positive through $D$. For example, fill the $dk$ column positions successively, using consecutive blocks of $k$ residues modulo $n$ as the row labels of each column. Every row then has at most $\lceil dk/n\rceil\le r$ cells. For $D\le1$ the assertion follows at once. Write $\Gamma_k=a_k^2/(a_{k-1}a_{k+1})$ for $1\le k<D$. By the orientation inequality the normalized sequence $a_k/\binom nk^d$ is log-concave, so
+
+\[
+\log\Gamma_k\ge d\log\left[(1+1/k)(1+1/(n-k))\right]\ge4d/(n+2).
+\]
+
+The last inequality follows from $\log(1+1/u)\ge1/(u+1)$ and convexity of the reciprocal. For $d\ge n$ this gives $\Gamma_k>4$ at every internal index. For $59n/200\le d\le n$ it gives $\Gamma_k>3.2$. Call an index difficult if $\Gamma_k\le4$. Such an index lies in $.305n<k<.695n$, by retaining both individual reciprocal bounds. Consequently the two feasible edges from $k-1$ to $k+1$ lie in the density interval $[.30,.70]$. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/orientation-normalization.md}{Orientation proof}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/scalar.md}{Localization and constants}
+
+Let $U_j$ be the number of arrays with the row cap and $dj$ ones in total, and $Q_j=a_j/U_j$. Put $x_j=j/n$ and $L_j=(2\pi n x_j(1-x_j))^{-(d-1)/2}$. The adjacent-quota estimate gives, for consecutive feasible indices in that density interval,
+
+\[
+\left|\log\frac{Q_{j+1}}{\sqrt d\thinspace{}L_{j+1}}-\log\frac{Q_j}{\sqrt d\thinspace{}L_j}\right|<10^{-6}.
+\]
+
+The Gaussian expansion for fixed row sums controls the leading factor even when both the number of rows and the number of columns vary. A monotone coupling then compares consecutive total sums before the equal-column condition is imposed. Conditioning on two actual rows bounds the contribution of irregular profiles after that condition is imposed. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/fixed-profile.md}{Fixed-profile estimate}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/comparison.md}{Coupling and averaging proof}
+
+At a difficult index, the two immediate comparisons give
+
+\[
+\log\frac{U_k^2}{U_{k-1}U_{k+1}}\le\log4+2\cdot10^{-6}+50/n<1.4 .
+\]
+
+Here the contribution of $\log L$ has absolute value at most $50/n$ by its second derivative. Write $e=nr-dk$, $h=e/d\ge1$. We give the scalar lower bound needed to locate the difficult indices away from the upper end of the support. Put $b_s=\binom d{r-s}$ for $0\le s\le r$, extend it by zero, and put $C_{m,u}=[z^u](\sum b_s z^s)^m$. Thus $C_{n,e}=U_k$. Under masses proportional to $(s+1)b_s C_{n-1,e-s}$ the expectation of $b_{s+1}/b_s$ is $(e+1)C_{n,e+1}/((n+e)C_{n,e})$, by symmetry and differentiation. As $e$ increases, this distribution moves upwards in likelihood-ratio order by log-concavity of the convolution $C_{n-1,\cdot}$. The adjacent ratio $b_{s+1}/b_s$ decreases, so $C_{n,e}/\binom{n+e-1}e$ is log-concave. The mass supports are intervals, and a zero at $s=r+1$ includes the last adjacent ratio. \href{https://github.com/ProgramComputer/open-math-research/blob/8a0a986e6baeed69b30de189e75c02fd2c8cb955/topics/balanced-arrays/deficit-curvature/scalar.md}{Full scalar normalization proof and literature}
+
+For the $d$-step curvature the binomial factor alone consequently gives a log lower bound of
+
+\[
+\sum_{i=1}^d\int_0^d\frac{n-1}{(e-d+i+t)(n+e-d+i-1+t)}\thinspace{}dt
+\ \ge\ \frac{d(n-1)}{n+e+d-1}\log(1+1/h)
+\ \ge\ \frac{n-1}{(h+1)(h+5)} .
+\]
+
+The last estimate uses $n/d\le4$. At $h\le .84\sqrt n$ the last quantity exceeds $1.4$ for $n\ge10^{200}$. Therefore $h>.84\sqrt n$ at every difficult index. This gives room for three further quotas on both sides using the lower density bound on $k$. All four edges from $k-2$ through $k+2$ now obey the adjacent-quota estimate. The scalar local limit estimate and the variance bound for the tilted row size give $\Gamma_{k\pm1}\le1.001\Gamma_k$. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/scalar.md}{Proof of neighboring curvature control}
+
+Finally take the geometric nodes $t_k=\sqrt{a_{k-1}/a_{k+1}}$. Strict log-concavity gives $0<t_1<\cdots<t_{D-1}$. At $-t_k$ the two first neighbors have relative magnitude $1/\sqrt{\Gamma_k}$. On either side the successive magnitudes decrease outwards, so the alternating remainders after the first neighbors are nonnegative. This gives the sign $(-1)^k$ when $\Gamma_k>4$. When $\Gamma_k\le4$, retain the second and third neighbors on both sides. The resulting signed value, divided by $a_k t_k^k$, is at least
+
+\[
+1-2/\sqrt{\Gamma_k}+1.88/\Gamma_k^2>0,
+\]
+
+by the neighbor bound and $\Gamma_k>3.2$. At zero the sign is positive, and sufficiently far to the left the sign is $(-1)^D$. Thus $D$ disjoint open negative intervals each contain a zero. Degree $D$ gives simplicity. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/scalar.md}{Alternating-tail bounds}
+
+\section{Direct cubic-phase lower bound for nearly homogeneous row profiles}
+
+The cubic-phase estimate uses its full Gaussian second moment, including the linear component.
+
+\textbf{Proposition.} Let $n\ge10^{30}$, $n/4\le d\le n$, $x=k/n\in[.3,.7]$, and let integers $\ell_1,\dots,\ell_n$ have sum $dk$ and satisfy $|\ell_i/d-x|\le10^{-6}$. Select each row independently as a uniform $\ell_i$-subset of $[d]$. Its probability of equal column margins $k$ is at least
+
+\[
+\frac{\sqrt d}{200}\thinspace{}[2\pi n x(1-x)]^{-(d-1)/2}.
+\]
+
+In particular the assertion covers the homogeneous profiles and profiles with $|\ell_i/d-x|\le1/d$. The explicit cutoff is deliberately loose.
+
+\subsection{Joint margin integral and covariance}
+
+Take independent Bernoulli cells with row parameters $p_i=\ell_i/d$, put $v_i=p_i(1-p_i)$ and $A=\sum_i v_i$. All $v_i\ge1/5$. Write $F$ for the centered joint row-and-column characteristic product, with cell argument $\phi_i+\theta_j$. The centered margins are integral, so the full joint characteristic product is periodic and invariant under shifting the row angles by $t$ and column angles by $-t$. The probability of all margins is its normalized torus integral, which equals the integral on the section $\theta_d=0$.
+
+The quadratic form on that section is $Q=\sum_{ij}v_i(\phi_i+\theta_j)^2$. Its matrix has row block $\mathrm{diag}(dv_i)$, column block $AI_{d-1}$ and cross column $(v_i)_i$. The Schur complement is $A(I-\mathbf1\mathbf1^{\mathsf T}/d)$, with determinant $A^{d-1}/d$. The normalized Gaussian integral is therefore
+
+\[
+G=B_0(2\pi A)^{-d/2}\sqrt{2\pi d A},\qquad
+B_0=\prod_i (2\pi d v_i)^{-1/2}.
+\]
+
+Use the gauge $\sum_j\theta_j=0$. Then the row angles are unrestricted and the column angles lie in the centered hyperplane. The change of gauge preserves all cell arguments and the normalized Gaussian law. The quadratic form splits into $d\sum_i v_i\phi_i^2+A\sum_j\theta_j^2$. For the cell arguments $X_{ij}=\phi_i+\theta_j$, this gives
+
+\[
+c_{ij,kl}=\frac{\delta_{ik}}{d v_i}+\frac{\delta_{jl}-1/d}{A}.
+\]
+
+Write $\sigma_i^2=c_{ij,ij}$. The simple uniform bound $\sigma_i^2\le30/n$ will suffice.
+
+\subsection{Cubic phase and quartic loss}
+
+Put $b_i=v_i(1-2p_i)$, $a_i=v_i(6v_i-1)/24>0$, and define
+
+\[
+\Phi=-\frac16\sum_{ij}b_iX_{ij}^3,\qquad
+\Lambda=\sum_{ij}a_iX_{ij}^4.
+\]
+
+For jointly centered Gaussian $X,Y$, with variances $\sigma_X^2,\sigma_Y^2$ and covariance $c$, Wick's identity gives
+
+\[
+\mathbb E(X^3Y^3)=6c^3+9\sigma_X^2\sigma_Y^2c,\qquad
+\mathrm{Cov}(X^4,Y^4)=24c^4+72\sigma_X^2\sigma_Y^2c^2.
+\]
+
+The second term in the cubic identity is the contribution from the linear component of the cubic monomial and is essential in this estimate.
+
+In the homogeneous case let $v=x(1-x)$. Equivalently, the covariance at homogeneity is $(\delta_{ik}-1/n)/(dv)+\delta_{jl}/(nv)$. Then
+
+\[
+\sum c_{ij,kl}^3=\frac{n^2+d^2-1}{nd\thinspace{}v^3},
+\quad
+\sum c_{ij,kl}=\frac{nd}{v},
+\quad
+\sigma^2=\frac{n+d-1}{ndv}.
+\]
+
+For the cube sum, expand across the row and column pieces. The centered row projection $P_{ik}=\delta_{ik}-1/n$ has sums $\sum P_{ik}=0$, $\sum P_{ik}^2=n-1$ and $\sum P_{ik}^3=(n-1)(n-2)/n$. Thus
+
+\[
+\mathbb E\Phi^2=
+\frac{(1-2x)^2}{36v}\frac{6(n^2+d^2-1)+9(n+d-1)^2}{nd}
+\le \frac{109}{63}<\frac74 .
+\]
+
+Indeed $n/d+d/n\le17/4$ and $(1-2x)^2/v\le16/21$. Also $\mathbb E\Lambda=(6v-1)(n+d-1)^2/(8vnd)\le25/16$.
+
+The following explicit comparison controls heterogeneity. Put $\eta=\max_i|p_i-x|$, use subscript $0$ for the homogeneous values, and let
+
+\[
+H_{ij,kl}=\delta_{ik}/d+\delta_{jl}/n+1/(nd).
+\]
+
+The covariance formula and $|v_i-v|\le\eta$ imply $|c|,|c_0|\le5H$, $|c-c_0|\le25\eta H$. Also $|b_i-b_0|\le\eta$ and $|b_i|,|b_0|\le1/4$. Direct summation yields $\sum H=3nd$, $\sum H^2\le9n$, and $\sum H^3\le54$, using $(s_1+s_2+s_3)^j\le3^{j-1}\sum_i s_i^j$. Consequently the change in the $c^3$ contribution to $\mathbb E\Phi^2$ is at most $1620\eta$. For the linear contribution, write $B_i=b_i\sigma_i^2$. One has $|B_i|\le7.5/n$ and $|B_i-B_0|\le70\eta/n$, so that change is at most $5025\eta$ using $\sum H=3nd$. Thus changing the profile alters the full cubic moment by at most $10^4\eta$. For $\eta\le10^{-6}$ the result remains $\mathbb E\Phi^2<7/4$.
+
+Similarly $\mathbb E\Lambda=\sum_{ij}v_i(6v_i-1)\sigma_i^4/8$ differs from its homogeneous value by at most $400\eta$. Use $|(v_i(6v_i-1))-(v(6v-1))|\le2\eta$ and $|\sigma_i^2-\sigma_0^2|\le150\eta/n$. Hence $\mathbb E\Lambda<2$. The quartic Wick identity, $a_i\le1/192$, $\sigma_i^2\le30/n$ and $\sum c^2\le225n$ give $\mathrm{Var}(\Lambda)\le1000/n$. As $e^{-t}$ is 1-Lipschitz on $t\ge0$ and $1-\cos \Phi\le\Phi^2/2$, it follows that
+
+\[
+\mathbb E[e^{-\Lambda}\cos\Phi]
+\ge e^{-\mathbb E\Lambda}\left(1-\frac12\mathbb E\Phi^2\right)
+ -\sqrt{\mathrm{Var}(\Lambda)}
+\ge\frac1{72}-\sqrt{1000/n}.
+\]
+
+\subsection{An explicit torus tail bound}
+
+Set $\epsilon=n^{-2/5}$. Let the central angular set consist of column angles of circular diameter at most $\epsilon$, and row angles within circular distance $\epsilon$ of $-\arg\sum_j e^{i\theta_j}$. On $\theta_d=0$, this set is in the real chart with $|\theta_j|\le\epsilon$, $|\phi_i|\le2\epsilon$, and $|X_{ij}|\le3\epsilon$. It contains the real cube $|\theta_j|,|\phi_i|\le\epsilon/4$.
+
+The modulus at one cell is bounded by $\exp[-v_i(1-\cos(\phi_i+\theta_j))]$. Put $R=|\sum_j e^{i\theta_j}|$. Integrating this majorant in each row angle gives $\prod_i e^{-dv_i} I_0(v_iR)$. For ease of checking, the elementary Bessel inequalities used below are
+
+\[
+J(z)=e^{-z}I_0(z)\ge (6\sqrt{1+z})^{-1},\qquad
+J(z)\le \frac{e^{1/(2z)}}{\sqrt{2\pi z}}\quad(z\ge10).
+\]
+
+The lower bound integrates $e^{-z(1-\cos t)}/\pi$ on $0\le t\le(1+z)^{-1/2}$. The sharp upper bound uses $u=2\sin(t/2)$, with $(1-u^2/4)^{-1/2}\le 1+3u^2/8$ for $u^2\le2$, and bounds the remaining interval by $e^{-z}$. The large-$z$ remainder in Gaussian units is at most $1/(8z)$ for $z\ge10$. \href{https://github.com/ProgramComputer/open-math-research/blob/7b585bad34491cf9e733a316e1b62f6c3529880f/topics/balanced-arrays/bessel-margins/upper.md}{Detailed one-dimensional Bessel estimate}
+
+For $R<d/2$, the row-integrated bound is at most $e^{-Ad/2}\le e^{-nd/10}$ since $I_0(z)\le e^z$. Relative to $G$ this is at most $e^{-n^2/80}$, using $G\ge(2\pi n)^{-n}$ and $d\ge n/4$.
+
+For $R\ge d/2$, $v_iR\ge d/10$ and the sharp Bessel upper bound gives a total exponential correction at most $e^{20}$. Also $(d/R)^{n/2}\le e^{(n/d)(d-R)}$. Hence the row-integrated majorant is at most
+
+\[
+e^{20}B_0 e^{-A'(d-R)},\qquad A'=A-n/d\ge n/6 .
+\]
+
+The lower Bessel bound implies $e^{A'R}\le6\sqrt{1+A'd}\,I_0(A'R)$. The exact integral identity
+
+\[
+I_0(A'R)=\int_{-\pi}^{\pi}\prod_j e^{A'\cos(\theta_j-t)}\thinspace{}\frac{dt}{2\pi}
+\]
+
+allows one to use a product law on the column angles at each common angle $t$. Integrating all columns and applying the sharp Bessel upper bound at $A'$ gives a total aligned-region bound at most $6e^{26}G$. Indeed the column Bessel correction is at most $e^{d/(2A')}\le e^3$, replacing $A'$ by $A$ costs at most another $e^3$ by $\log(A/A')\le(A-A')/A'$, and $\sqrt{1+A'd}\le\sqrt{nd}\le\sqrt{2\pi Ad}$.
+
+If the column diameter exceeds $\epsilon$, for every $t$ there is a column angle at circular distance greater than $\epsilon/2$ from $t$. The product von Mises tail at that threshold is bounded by $6d\sqrt n\,e^{-n\epsilon^2/120}$ by the lower Bessel bound and $1-\cos u\ge2u^2/\pi^2$. In the aligned region the conditional row majorants are themselves independent von Mises laws of parameters $v_iR\ge n/40$, centered at $-\arg\sum_j e^{i\theta_j}$. The probability of a row-angle violation is at most $6n\sqrt n\,e^{-n\epsilon^2/200}$ by the same estimate. Combining these estimates, the absolute contribution outside the central set is at most
+
+\[
+G\left(e^{-n^2/80}+10^{15}n^{3/2}e^{-n^{1/5}/200}\right).
+\]
+
+These torus estimates can be obtained before fixing $\theta_d=0$, since the events and the integrand's modulus are gauge invariant.
+
+\subsection{Central remainder and normalization}
+
+On the central chart the per-cell logarithm is
+
+\[
+\log(1+p_i(e^{iu}-1))-ip_i u
+=-v_i u^2/2-i b_i u^3/6-a_i u^4+R_i(u).
+\]
+
+On the complex disk $|u|\le1/4$, the left side has modulus at most $3/4$: use $|p_i(e^{iu}-1)|\le e^{1/4}-1<1/3$. Cauchy's coefficient bound and parity give, for real $|u|\le1/8$,
+
+\[
+|R_i(u)|\le1536|u|^5,\qquad |\Re R_i(u)|\le6144|u|^6 .
+\]
+
+On the central set the sum of real remainders has magnitude at most $6144nd(3\epsilon)^6<1$. The normalized Gaussian expectation of $\sum_{ij}|R_i(X_{ij})|$ on that set is at most $1536\cdot nd\cdot8(30/n)^{5/2}$. Since $\Lambda\ge0$, replacing its exponential with the version including the full remainder costs at most $2\cdot10^8/\sqrt n$ in Gaussian units, using $|e^{R}-1|\le e^{|\Re R|}|R|$.
+
+The Gaussian loss from restricting to the central set is at most $4n e^{-n^{1/5}/3840}$. To see this, work in the section $\theta_d=0$ and note that $\phi_i=X_{id}$ and $\theta_j=X_{1j}-X_{1d}$ have variances at most $120/n$. The Gaussian tail bound on the cube of radius $\epsilon/4$, which is contained in the central set, gives the asserted loss. The integrand $e^{-\Lambda}\cos\Phi$ has absolute value at most one. For $n\ge10^{30}$ each of $\sqrt{1000/n}$, the Taylor error, the Gaussian chart loss, and the full torus tail loss is less than $10^{-4}$, directly from the displayed bounds. The joint probability, which is the real part of the integral, is therefore larger than $G/100$.
+
+Conditioning on the prescribed row sums divides by the product of the row binomial mean atoms. Stirling's bounds put that product at most $B_0e^{n/(12d)}<2B_0$. Thus the balance probability is at least $\sqrt d(2\pi A)^{-(d-1)/2}/200$. Finally $A=\sum_i p_i(1-p_i)\le nx(1-x)$ because the average of the $p_i$ is $x$. This proves the proposition.
+
+\section{Smoothness of the equal-column probability at consecutive quotas}
+
+Suppose $n\ge 10^{200}$ and $n/4\le d\le n$. Both $k$ and $k+1$ are feasible, and their densities lie in $[3/10,7/10]$. Write $x=k/n$, $v=x(1-x)$, $U_k=[z^{dk}](\sum_{s=0}^r\binom ds z^s)^n$, $Q_k=a_k/U_k$ and $L_k=(2\pi nv)^{-(d-1)/2}$. Then
+
+\[
+\left|\log\frac{Q_{k+1}}{\sqrt d L_{k+1}}-\log\frac{Q_k}{\sqrt d L_k}\right|<10^{-6}.
+\]
+
+\subsection{Conditional margin probabilities}
+
+The scalar law on row profiles $\ell$ of total $dk$, with each $0\le\ell_i\le r$, assigns mass proportional to $\prod_i\binom d{\ell_i}$. For each such profile let $P_\ell$ be the probability of equal column sums when each labeled row independently chooses a uniform subset of its prescribed size. Put $H_k(\ell)=P_\ell/(\sqrt d L_k)$ and $W_k=\mathbb E H_k=Q_k/(\sqrt d L_k)$. Tilting the scalar law by $H_k/W_k$ gives the law of the row profile of a uniformly random capped array with equal column sums.
+
+Call a profile regular when $|p_i-x|\le\eta=n^{-1/4}$ for every $p_i=\ell_i/d$. Set $v_i=p_i(1-p_i)$, $A=\sum_i v_i$, and $B=\sum_i(p_i-x)^2$, so $A=nv-B$. Write $b_i=\Pr(\mathrm{Bin}(d,p_i)=\ell_i)$. The joint Fourier expansion in \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/fixed-profile.md}{the fixed-profile estimate} gives, on regular profiles,
+
+\[
+H_k=(1-B/(nv))^{-(d-1)/2}
+\prod_i\frac{1}{b_i\sqrt{2\pi d v_i}}\thinspace{}(K_{\bf p}+E_{\bf p}),\qquad
+1/100\le K_{\bf p}+E_{\bf p}\le2 .
+\]
+
+Here $K_{\bf p}=\mathbb E(e^{-\Lambda}\cos\Phi)$ with the Gaussian polynomials defined there. Its explicit Taylor and chart bounds, in the present range, give $|E_{\bf p}|\le 3\cdot 10^8/\sqrt n$. Indeed each exponential remainder there is at most $1/\sqrt n$ for $n\ge10^{200}$, by taking logarithms. The displayed lower bound also holds at exact saturation if the profile is regular.
+
+\subsection{Comparing the Gaussian correction}
+
+On $[1/4,3/4]^n$ the correction satisfies
+
+\[
+|K_{\bf p}-K_{\bf p'}|\le10^8\max_i|p_i-p_i'|.
+\]
+
+To see this, write $s=\|{\bf p}-{\bf p'}\|_\infty$ and use the same independent standard Gaussians $Z_i,Y_j$ for both profiles. With $T_j=Y_j-\bar Y$, the cell arguments are $a_i+c_j$ where $a_i=Z_i/\sqrt{dv_i}$ and $c_j=T_j/\sqrt A$. These centered Gaussians have precisely the covariance of the joint Fourier quadratic form. Put $u_i=v_i(1-2p_i)$, and use bars for averages over rows. Since $\sum_jT_j=0$, the three terms in $-6\Phi$ are
+
+\[
+\begin{aligned}
+& d^{-1/2}\sum_i u_i v_i^{-3/2}Z_i^3,\\
+& 3\sqrt{n/d}\thinspace{}(d/A)\left(n^{-1/2}\sum_i u_i v_i^{-1/2}Z_i\right)
+\left(d^{-1}\sum_jT_j^2\right),\\
+& \sqrt{d/n}\thinspace{}\bar u\thinspace{}\bar v^{-3/2}\ d^{-1/2}\sum_jT_j^3 .
+\end{aligned}
+\]
+
+On this interval $3/16\le v_i\le1/4$, $|v_i'|\le1$ and $|u_i'|\le2$. Thus the factors $u_i v_i^{-3/2}$, $u_i v_i^{-1/2}$ and $\bar u\bar v^{-3/2}$ have Lipschitz constants at most 100 in the indicated supremum distance, by differentiation. The factor $d/A$ is at most 6 and has Lipschitz constant at most 30. The first term changes by at most $100s\sqrt{15n/d}$ in $L^2$, since $\mathbb E Z_i^6=15$. In the second term the $Z$ and $T$ factors are independent and $\mathbb E(d^{-1}\sum T_j^2)\le1$. The $Z$ factor has $L^2$ norm at most 1 and changes by at most $100s$ in $L^2$. For the last term $\|d^{-1/2}\sum T_j^3\|_2\le\sqrt6$ by Wick's identity, since the projection $I-\mathbf1\mathbf1^\mathsf T/d$ has zero row sums and the sum of the cubes of its entries is at most $d$. These estimates give $\mathbb E|\Phi-\Phi'|<1000s$ when $s>0$.
+
+For the quartic term, $\|a_i+c_j\|_4\le10/\sqrt n$ and $\|(a_i+c_j)-(a_i'+c_j')\|_4\le100s/\sqrt n$, from the derivatives of $v^{-1/2}$ on the same interval and $n\le4d$. The weights $v_i(6v_i-1)/24$ are nonnegative, bounded by 1 and vary by at most $s$. By Hölder and the fourth-power difference formula, each quartic monomial changes in $L^1$ by at most $4\cdot10^3\cdot100s/n^2$ before multiplication by its weight. Summing over $nd\le n^2$ gives $\mathbb E|\Lambda-\Lambda'|\le 10^6s$. The functions $\cos$ on the real line and $e^{-t}$ for $t\ge0$ are 1-Lipschitz and bounded by 1 in absolute value. This proves the stated comparison.
+
+\subsection{Coupling the regular profiles}
+
+Couple scalar profiles at $k,k+1$ coordinatewise in increasing order. For completeness, for independent integer log-concave weights conditioned on total $m$, the last coordinate $S$ has masses proportional to $f(s)g(m-s)$, where $g$ is the convolution of the remaining weights. Log-concavity of $g$ implies that the last-coordinate distribution at $m+1$ stochastically dominates the one at $m$ by the increasing likelihood ratio. Log-concavity of $f$ likewise shows that the remaining total stochastically increases. Interval supports include their endpoints by contiguous support; equivalently one can use crossed products including zeros. Thus the common-quantile last coordinates satisfy $S_m\le S_{m+1}\le S_m+1$. Conditionally couple the remaining profiles by induction, using equality if their totals coincide. Composing $d$ successive couplings gives the assertion and $\sum_i|p_i'-p_i|=1$.
+
+If both coupled profiles are regular, $s\le2\eta+1/n\le3\eta$. The centered displacements have total absolute change at most 2; hence $|B'-B|\le4\eta$. Also $B,B'\le n\eta^2$. As $v\ge1/5$ and $|v'-v|\le1/n$, this gives
+
+\[
+|B'/(nv')-B/(nv)|\le(20\eta+25\eta^2)/n .
+\]
+
+Multiplication by $(d-1)/2$ and the derivative bound for $-\log(1-u)$ on $0\le u\le 5\eta^2$ yield a change below $50\eta$ in the logarithm of the first factor of $H$.
+
+Robbins' factorial bounds give $\log(m!)-\log(\sqrt{2\pi m}(m/e)^m)=1/(12m)+e_m$ with $|e_m|\le1/(144m^2)$. Applied to each mean binomial atom, the logarithm of the product in $H$ equals $\sum_i(1/v_i-1)/(12d)$ with error at most $n/d^2$, because $\ell_i,d-\ell_i\ge d/4$. Its difference between the two profiles is bounded by $100\eta+32/n$. By the lower bound $1/100$ and the preceding Lipschitz estimate, the logarithm of the last factor changes by at most $100(3\cdot10^8\eta+6\cdot10^8/\sqrt n)$. Combining these three bounds gives $|\log H_{k+1}-\log H_k|<10^{-8}$ on the event of joint regularity.
+
+\subsection{Removing the regularity condition}
+
+The scalar law can be obtained by conditioning independent tilted rows of mean $dx$ on total $dk$. A single tilted capped binomial is dominated in convex order by $\mathrm{Bin}(d,x)$, and the conditioning event has probability at least $1/(nd+1)$ by log-concavity and entropy. The proofs apply unchanged to point masses. Consequently the scalar probability of an irregular profile is at most $t=2n(nd+1)e^{-2d\eta^2}$. For the actual array, condition on all but two rows. Their size gap has the law of $2Y-b$ for $Y\sim\mathrm{Bin}(b,1/2)$ conditioned to a symmetric central interval, with $b\le d$. If a row differs from $dx$ by more than $d\eta$, some pair differs by more than $d\eta$. Thus the actual irregular-profile probability is at most $t'=2n^2e^{-d\eta^2/2}$. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/dense-regime/quantitative-margins.md}{Tail and conditioning proofs}
+
+On regular profiles, $H\le e^{100+10B}$ by the product formula, the factorial bounds above, and $-\log(1-u)\le2u$. Also $H\ge1/200$ there: the determinant factor is at least 1 and the factorial estimate bounds the product below by $e^{-n/d^2}\ge1/2$. In particular $W_k\ge1/400$. For a single unconditioned tilted row put $Y=(S-dx)/d$. Integrating $\Pr(|Y|>z)\le 2e^{-2dz^2}$ gives $\mathbb E e^{20Y^2}\le1+40/(2d-20)$. Independence and conditioning therefore give
+
+\[
+\mathbb E_{\rm scalar}[H^2\mathbf1_{\rm regular}]\le (nd+1)e^{500}.
+\]
+
+Under the coupled law, the contribution to $W_k$ of its own irregularity is at most $t'W_k$ by the actual profile bound. Its contribution on own regularity and irregularity of its partner is at most $\sqrt{t(nd+1)e^{500}}$ by Cauchy--Schwarz. The same bounds hold with the two quotas interchanged. Since $d\eta^2\ge\sqrt n/4$, we have $t'+400\sqrt{t(nd+1)e^{500}}<10^{-8}$ for $n\ge10^{200}$ (the exponents dominate $10\log n+500$ already at the lower endpoint and the difference is increasing). Thus joint regularity accounts for at least $1-10^{-8}$ of each $W$. Combining with the regular-profile comparison gives the claimed log difference. $\square$
+
+\section{Effective variation of scalar quota curvature above the saturation strip}
+
+Let $n\ge10^{200}$, $59/200\le d/n\le1$, and $1\le r\le d$.
+Put $\rho=r/d$, $D=\lfloor nr/d\rfloor$, and
+
+\[
+U_j=[z^{dj}]\left(\sum_{s=0}^r\binom ds z^s\right)^n,
+\qquad a_j=U_jQ_j,\qquad
+L_j=[2\pi n x_j(1-x_j)]^{-(d-1)/2},
+\qquad x_j=j/n,
+\]
+
+where $a_j$ is the actual balanced-array count and $Q_j$ is the probability of
+column balance when restricted rows are independently counted subject to
+their total. Write $\Gamma_j=a_j^2/(a_{j-1}a_{j+1})$ and $E_j=\log(Q_j/L_j)$.
+
+Suppose $x_k\in[.30,.70]$, $h=nr/d-k\ge .4\sqrt{n/\log n}$, and
+$\Gamma_k\le4$. If $|E_{j+1}-E_j|\le10^{-6}$ for $k-2\le j\le k$,
+then $\Gamma_{k-1}\le1.001\Gamma_k$. If the same bound holds also at
+$j=k+1$, then $\Gamma_{k+1}\le1.001\Gamma_k$. All quota indices used are
+strictly within the support under the stated density and deficit conditions.
+
+
+\subsection{An explicit scalar local limit estimate}
+
+The following quantitative restricted version of the
+\href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/dense-regime/uniform-lattice-lemma.md}{uniform lattice estimate} suffices.
+Let $X$ have a finite log-concave mass function with integer interval
+support, mean $\mu$ and standard deviation $10^4\le\sigma\le n$.
+If $n\ge10^{200}$ and $n\mu$ is an integer, then for the sum of $n$
+independent copies,
+
+\[
+\left|\log\Pr\left(\sum_iX_i=n\mu\right)
++\tfrac12\log(2\pi n\sigma^2)\right|\le 10^{11}n^{-1/4}.
+\]
+
+For the same family under an interior exponential tilt,
+$|d\sigma/d\mu|\le 10^9$.
+
+Choose a mode $m$ and let $b=\Pr(X=m)$. Chebyshev's inequality on the interval
+of radius $2\sigma$ about $\mu$ gives $b\ge1/(8\sigma)$. On either side of
+the mode the first crossing of $b/2$ lies at distance at most $3/b$,
+including a zero immediately outside the support if necessary. Concavity of
+the log mass beyond that crossing and the modal bound before it give
+
+\[
+\Pr(X=m\pm j)\le2b\exp(-bj/5)\qquad(j\ge0).
+\]
+
+In fact the usual bound has rate $b\log 2/3>b/5$. For any positive integer
+$q$, $\sum_{j\ge1}j^q e^{-u j}\le e^u q!/u^{q+1}$ by comparison with the
+integral over intervals $[j,j+1]$. With $u=b/5$, this gives
+$\mathrm{Var}(X)\le2000/b^2$ and
+$\mathbb E|X-m|^3\le30000/b^3$. Centering the latter costs at most a factor
+eight by Jensen, so $b\le100/\sigma$ and
+$\mathbb E|X-\mu|^3\le10^9\sigma^3$.
+For an exponential tilt in parameter $\eta$, one has
+$d\mu/d\eta=\sigma^2$ and $d\sigma^2/d\eta=\mathbb E(X-\mu)^3$.
+Dividing proves the Lipschitz bound on $\sigma$.
+
+For the centered characteristic function $\phi(t)$ on $[-\pi,\pi]$,
+retain the sites within $2\sigma$ of $\mu$ with mass at least
+$1/(24\sigma)$. There are at most $6\sigma$ sites in the interval, so
+the retained sites have probability at least $1/2$. Log-concavity
+makes them a contiguous block of length $M\ge\sigma/200\ge50$.
+Using this block in the independent-pair cosine identity gives
+
+\[
+1-|\phi(t)|^2\ge (M/(24\sigma))^2(1-|U_M(t)|^2),
+\qquad
+U_M(t)=M^{-1}\sum_{j=0}^{M-1} e^{ijt}.
+\]
+
+For $|t|\ge2\pi/M$, the sine quotient bounds $|U_M(t)|\le1/2$.
+For $|t|\le2\pi/M$, at least $M^2/32$ ordered pairs in one direction
+have distance between $M/8$ and $M/4$. Their angles have modulus
+at most $\pi/2$, and $1-\cos u\ge u^2/5$ there. Thus
+$1-|U_M(t)|^2\ge M^2t^2/10240$ on this interval.
+Using $M/\sigma\ge1/200$ in both cases gives the deliberately weakened bound
+
+\[
+|\phi(t)|\le \exp[-10^{-18}\min(\sigma^2t^2,1)].
+\]
+
+In Fourier inversion put $y=\sigma\sqrt n\,t$. For
+$|y|\le n^{1/12}$, the third moment and the log series at one show
+
+\[
+|n\log\phi(t)+y^2/2|\le 2\cdot10^9 n^{-1/4}.
+\]
+
+Indeed the contribution from the cubic Taylor bound is at most
+$10^9 n^{-1/4}$. Also $|\phi(t)-1|\le y^2/n<1/2$ there, so the
+quadratic remainder of the log series is at most $y^4/n\le n^{-2/3}$
+after multiplying by $n$. Therefore the scaled integrand on the central
+interval differs from the Gaussian by at most $4\cdot10^9 n^{-1/4}$
+times the Gaussian. The remaining characteristic-function integral,
+in the same scaled units, is at most
+$7n^{3/2}\exp(-10^{-18}n^{1/6})$, since $\sigma\le n$.
+The omitted Gaussian tail is at most $2\exp(-n^{1/6}/2)$.
+For $n\ge10^{200}$, $10^{-18}n^{1/6}>4\log n$ at the lower endpoint
+and thereafter by monotonicity of $n^{1/6}/\log n$.
+Comparing to the full Gaussian integral and taking a logarithm proves
+the stated numerical estimate.
+
+\subsection{Rate curvature and its variation}
+
+Tilt the row size at a real mean $\mu$ using the generating polynomial
+$G(z)=\sum_{s\le r}\binom ds z^s$. The tilted mass is log-concave,
+since its successive ratios are the ratios of the binomial coefficients
+times the common factor $z$. Write $V(\mu)=\sigma(\mu)^2$ and
+$\Phi(\mu)=\log G(z)-\mu\log z$ at this tilt. Then
+$\Phi''(\mu)=-1/V(\mu)$ by the mean derivative identity.
+For the real means in the interval $[d(k-2)/n,d(k+2)/n]$, the
+variance comparison below
+gives
+
+\[
+V(d x)\ge d x\frac{\rho-x}{\rho}\ge .04 h.
+\]
+
+For the first inequality compare $S$ with a binomial of $r$ trials of the same mean. On $0,\ldots,r$ the ratio of the tilted masses to the binomial masses has consecutive ratios proportional to $(d-s)/(r-s)$ and hence is log-convex. The set where the first mass is below the second is an interval. Subtract an affine secant of the convex test function across that interval, placing the endpoints between adjacent sites. The remaining signs and equality of means show that $S$ dominates this binomial in convex order. Equivalently for variance alone one can use the quadratic $(s-a)(s-b)$ with its sign changes at the endpoints. Identical laws give equality. This proves $V\ge dx(1-dx/r)$. \href{https://github.com/ProgramComputer/open-math-research/blob/8a0a986e6baeed69b30de189e75c02fd2c8cb955/topics/balanced-arrays/engset-curvature/carried-load.md}{Carried-load derivation and references}
+
+For the last inequality use $x\ge .29$, $\rho\le1$, $d/n\ge .295$,
+and the fact that each local deficit in quota units is at least $h-2\ge h/2$.
+For $n\ge10^{200}$, $h\ge n^{1/3}$, using monotonicity of
+$n^{1/6}/\sqrt{\log n}$. Thus all these standard deviations exceed
+$n^{1/8}\ge10^4$ and are at most $d\le n$ by support size.
+The explicit local limit estimate applies at integer quotas and the
+Lipschitz bound on $\sigma$ applies throughout the entire real mean interval.
+
+Write $s=d/n$ and $\mu_j=dj/n$. The tilted counting identity and local
+limit estimate give
+
+\[
+\log U_j=n\Phi(\mu_j)-\tfrac12\log(2\pi n V(\mu_j))+\varepsilon_j,
+\qquad |\varepsilon_j|\le10^{11}n^{-1/4}.
+\]
+
+The positive entropy contribution to logarithmic curvature at $j$ is
+
+\[
+B_j=n\int_{-s}^s\frac{s-|t|}{V(\mu_j+t)}\thinspace{}dt .
+\]
+
+The remaining scalar contribution has absolute value at most
+$2\cdot10^9 n^{-1/8}+4\cdot10^{11}n^{-1/4}$, by the Lipschitz bound
+on $\sigma$, the lower bound $\sigma\ge n^{1/8}$, and $s\le1$.
+The curvature contribution from $\log L$ is at most $50/n$ in
+absolute value, since throughout the interval both $x$ and $1-x$
+exceed $.29$ and
+$|[\log(x(1-x))]''|=x^{-2}+(1-x)^{-2}$.
+The error from $E$ in the log curvature is at most $2\cdot 10^{-6}$
+where the two adjacent slope assumptions hold.
+Consequently
+
+\[
+|\log\Gamma_j-B_j|<3\cdot10^{-6}
+\]
+
+at $j=k,k-1$ and, if the last slope assumption is available, at $k+1$.
+
+At the difficult center, $B_k<\log 4+3\cdot10^{-6}<1.4$.
+The integral has total weight $ns^2$, so its maximum variance on the
+center interval is at least $ns^2/1.4$. This implies that
+$\sigma>.24\sqrt n$ somewhere on that interval.
+Every point in the full local mean interval is within $3s\le3$
+of that point, so there $\sigma\ge .24\sqrt n-3\cdot10^9>.23\sqrt n$.
+Therefore
+
+\[
+\left|\frac{d}{d\mu}\frac1{V(\mu)}\right|
+\le\frac{2\cdot10^9}{(.23\sqrt n)^3}<2\cdot10^{11}n^{-3/2}.
+\]
+
+Translate the entropy integral by one mean step of length $s$ and use this
+derivative bound. It gives $|B_{k\pm1}-B_k|<2\cdot10^{11}/\sqrt n$.
+Combining the error bounds yields
+$|\log\Gamma_{k\pm1}-\log\Gamma_k|<10^{-5}<\log(1.001)$
+for each of the tested neighbors.
+
+\subsection{Signs at geometric nodes}
+
+A difficult center lies in $.305n<k<.695n$:
+the baseline orientation bound and
+$\log(1+1/u)\ge1/(u+1)$ would otherwise give
+
+\[
+\log\Gamma_k\ge .295
+\left(\frac1{.305+1/n}+\frac1{.695+1/n}\right)>1.39>\log4 .
+\]
+
+Thus there is room for both neighboring quotas in $[.30n,.70n]$, and
+the condition on $h$ gives room for the next three indices. Suppose the slope bounds in the statement hold.
+The global baseline also gives $\Gamma_j>3.2$ at every internal quota,
+using $4d/(n+2)\le\log g_j$ for the binomial baseline $g_j$.
+At a difficult center the comparison just proved gives
+$\Gamma_{k\pm1}\le1.001\Gamma_k$.
+With $\tau=1/\sqrt{\Gamma_k}<.56$, the geometric-node compensation
+formula then bounds the normalized signed value below by
+
+\[
+1-2/\sqrt{\Gamma_k}+1.88/\Gamma_k^2.
+\]
+
+Indeed at $t_k=\sqrt{a_{k-1}/a_{k+1}}$ the first neighbors have magnitude $\tau$ relative to the center, the second neighbors have magnitude $\tau^2/\Gamma_{k\pm1}$, and the ratios from second to third are $\tau/(\Gamma_{k\pm1}\Gamma_{k\pm2})$. Subsequent terms decrease because every curvature exceeds one. The alternating tail beyond the third has nonnegative net contribution on each side. Each second term less the corresponding third is at least $\tau^2(1-.56/3.2^2)/(1.001\Gamma_k)$. The displayed expression is increasing past $3.2$, since
+$3.2^{3/2}>3.76$, and positive at $3.2$ by squaring its equivalent
+inequality with positive sides. The normalized value is strictly positive at each such center. The \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/README.md}{assembly of the argument} supplies the slope hypotheses.
+\end{document}
