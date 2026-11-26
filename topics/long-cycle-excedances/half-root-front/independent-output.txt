@@ -1,0 +1,10 @@
+Exterior actual-next error < 614294/10^6 in normalized units.
+20..25, A=24: squared sign slack > 81148/10^6, old row cutoff 1,000,000.
+25..32, A=21: squared sign slack > 20610/10^6, old row cutoff 1,000,000.
+32..40, A=18: squared sign slack > 2032/10^6, old row cutoff 1,000,000.
+40..50, A=17: squared sign slack > 79977/10^6, old row cutoff 1,000,000.
+50..64, A=16: squared sign slack > 22727/10^6, old row cutoff 1,000,000.
+64..80, A=16: squared sign slack > 32471/10^6, old row cutoff 1,000,000.
+80..92, A=16: squared sign slack > 13835/10^6, old row cutoff 1,000,000.
+92..96, A=16: squared sign slack > 16878/10^6, old row cutoff 1,000,000.
+96..100, A=17: squared sign slack > 132515/10^6, old row cutoff 1,179,592.

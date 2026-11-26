@@ -1,0 +1,1 @@
+All exact constants pass for the half-square-root exterior range.

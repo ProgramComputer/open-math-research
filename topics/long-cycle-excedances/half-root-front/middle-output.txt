@@ -1,0 +1,11 @@
+ x interval    A    row cutoff     estimate
+ 20..25    24     1,000,000     degree split
+ 25..32    21     1,000,000     degree split
+ 32..40    18     1,000,000     degree split
+ 40..50    17     1,000,000     degree split
+ 50..64    16     1,000,000     degree split
+ 64..80    16     1,000,000     degree split
+ 80..92    16     1,000,000     degree split
+ 92..96    16     1,000,000     degree split
+ 96..100   17     1,179,592     degree split
+Uniform bounded-aspect row cutoff: 1,179,592.
