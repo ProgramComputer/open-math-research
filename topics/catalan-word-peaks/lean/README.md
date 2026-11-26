@@ -38,9 +38,9 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** The written proof covers analytic convergence,
-branch continuation, the Cauchy deformation to the cuts, the complete integral
-and endpoint comparisons, and finite lengths $21$ through $150$.
+**Partial Lean verification.** Lean verifies the entire finite prefix. The
+written proof covers analytic convergence, branch continuation, the Cauchy
+deformation to the cuts, and the complete integral and endpoint comparisons.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -107,26 +107,33 @@ The identification of the continued branches, the Cauchy cuts, the beta
 moment identities, and the derivation of all checkpoint and old-root signs
 remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
 
-## Exact isolating intervals through length 20
+## Exact isolating intervals through length 150
 
-[The interval checker](CatalanStrictPeaksFinite.lean) evaluates the actual
-word-count coefficients at the two endpoints of each dyadic interval. It
-checks the signs using integer arithmetic, verifies the within-row and
-consecutive-row interval order, and uses the intermediate value theorem
-and the exact degree to exhaust each root multiset.
+The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
+uses the proved first-return convolution to certify the evaluation of every
+row at $q=4^{150}+1$. This base exceeds each Catalan word count in the
+prefix. Lean checks the successive convolution identities and recovers
+all coefficients by base-$q$ digit extraction.
 
-[The prefix theorems](CatalanStrictPeaksPrefix.lean) prove that rows $0$
-through $20$ have only simple negative zeros (`roots_through_20`) and
+The [interval checker](CatalanStrictPeaksFinite.lean) certifies both signs
+at the endpoints of every dyadic interval by comparing the positive and
+negative terms with exact natural-number arithmetic. It checks the
+within-row and consecutive-row interval order and uses the intermediate
+value theorem and the exact degree to exhaust each root multiset.
+
+The [prefix theorems](CatalanStrictPeaksPrefix.lean) prove that rows $0$
+through $150$ have only simple negative zeros (`roots_through_150`) and
 strictly interlace in the specified orientation for old row lengths
-$0\le n<20$ (`interlacing_before_20`). The assertions about constant rows
-are vacuous. The kernel checks the interval data against the executable
-word recurrence. [Prefix kernel output](prefix-kernel.txt)
+$0\le n<150$ (`interlacing_before_150`). The assertions about constant rows
+are vacuous. `interlacing_from_analytic_signs` combines the checked prefix
+with the analytic checkpoint and old-root sign hypotheses from length $150$
+onward. [Prefix kernel output](prefix-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45741075005)
 
-To regenerate the candidate interval data from the repository root, run
+To regenerate the candidate data from the repository root, run
 
 ~~~sh
 python -I -O topics/catalan-word-peaks/code/make_lean_intervals.py \
-  topics/catalan-word-peaks/results/family-rows.jsonl --last 20 \
+  topics/catalan-word-peaks/results/family-rows.jsonl --last 150 --bits 72 \
   > topics/catalan-word-peaks/lean/CatalanStrictPeaksIntervalData.lean
 ~~~
 

@@ -46,6 +46,56 @@ private theorem homogeneousEval_coefficients (n : ℕ) (a : ℤ) {b : ℕ} (hb :
   rw [List.getElem?_eq_getElem hlist, Option.getD_some]
   rw [Recurrence.coefficients_get_eq_C n ⟨k, hk'⟩]
 
+/-- Evaluate the positive and negative terms separately at `-a / b`,
+with the same positive scale as `homogeneousEval`. -/
+private def positiveNegative (a b : ℕ) : List ℕ → ℕ × ℕ
+  | [] => (0, 0)
+  | c :: cs =>
+    let (pos, neg) := positiveNegative a b cs
+    (c * b ^ (cs.length + 1) + a * neg, a * pos)
+
+private theorem positiveNegative_spec (a b : ℕ) (cs : List ℕ) :
+    homogeneousEval (-(a : ℤ)) b cs =
+      ((positiveNegative a b cs).1 : ℤ) - ((positiveNegative a b cs).2 : ℤ) := by
+  induction cs with
+  | nil => simp [homogeneousEval, positiveNegative]
+  | cons c cs ih =>
+    rw [homogeneousEval, ih, positiveNegative]
+    cases positiveNegative a b cs
+    push_cast
+    ring
+
+private def sign (a b : ℕ) (coefficients : List ℕ) : Ordering :=
+  let (pos, neg) := positiveNegative a b coefficients
+  compare pos neg
+
+private def opposite : Ordering → Ordering → Bool
+  | .lt, .gt | .gt, .lt => true
+  | _, _ => false
+
+private theorem opposite_sound {p q : ℕ × ℕ}
+    (h : opposite (compare p.1 p.2) (compare q.1 q.2) = true) :
+    ((p.1 : ℤ) - (p.2 : ℤ)) * ((q.1 : ℤ) - (q.2 : ℤ)) < 0 := by
+  cases hp : compare p.1 p.2 <;> cases hq : compare q.1 q.2 <;> simp [opposite, hp, hq] at h
+  · have hp' := compare_lt_iff_lt.mp hp
+    have hq' := compare_gt_iff_gt.mp hq
+    exact mul_neg_of_neg_of_pos (sub_neg.mpr (by exact_mod_cast hp'))
+      (sub_pos.mpr (by exact_mod_cast hq'))
+  · have hp' := compare_gt_iff_gt.mp hp
+    have hq' := compare_lt_iff_lt.mp hq
+    exact mul_neg_of_pos_of_neg (sub_pos.mpr (by exact_mod_cast hp'))
+      (sub_neg.mpr (by exact_mod_cast hq'))
+
+private theorem opposite_signs {l u b : ℕ} {coefficients : List ℕ}
+    (h : opposite (sign l b coefficients) (sign u b coefficients) = true) :
+    homogeneousEval (-(l : ℤ)) b coefficients *
+      homogeneousEval (-(u : ℤ)) b coefficients < 0 := by
+  rw [positiveNegative_spec, positiveNegative_spec]
+  apply opposite_sound
+  cases hl : positiveNegative l b coefficients
+  cases hu : positiveNegative u b coefficients
+  simpa only [sign, hl, hu] using h
+
 /-- Natural endpoint numerators on a grid with denominator `b`. -/
 abbrev Boxes := Array (ℕ × ℕ)
 
@@ -58,15 +108,17 @@ noncomputable def boxUpper (b : ℕ) (boxes : Boxes) (i : ℕ) : ℝ :=
   (box boxes i).2 / (b : ℝ)
 
 /-- Verify the interval widths, separation, and signs for an exact row. -/
-def checkRow (b n : ℕ) (boxes : Boxes) : Bool :=
-  let coefficients := Recurrence.coefficients n
+def checkRowWithCoefficients (b n : ℕ) (coefficients : List ℕ) (boxes : Boxes) : Bool :=
   (List.range (rowDegree n)).all (fun i =>
     let l := (box boxes i).1
     let u := (box boxes i).2
-    decide (l < u) && decide (homogeneousEval (-(l : ℤ)) b coefficients *
-      homogeneousEval (-(u : ℤ)) b coefficients < 0)) &&
+    decide (l < u) && opposite (sign l b coefficients) (sign u b coefficients)) &&
   (List.range (rowDegree n - 1)).all (fun i =>
     decide ((box boxes i).2 ≤ (box boxes (i + 1)).1))
+
+/-- Verify the isolating intervals from the executable word recurrence. -/
+def checkRow (b n : ℕ) (boxes : Boxes) : Bool :=
+  checkRowWithCoefficients b n (Recurrence.coefficients n) boxes
 
 /-- Verify that the old and new isolating intervals have the oriented order. -/
 def checkPair (n : ℕ) (old new : Boxes) : Bool :=
@@ -102,7 +154,7 @@ theorem checkRow_sound {b n : ℕ} (hb : 0 < b) {boxes : Boxes}
     let u := (box boxes i).2
     have hs : homogeneousEval (-(l : ℤ)) b (Recurrence.coefficients n) *
         homogeneousEval (-(u : ℤ)) b (Recurrence.coefficients n) < 0 :=
-      of_decide_eq_true (hbox i).2
+      opposite_signs (hbox i).2
     have hs' : (homogeneousEval (-(l : ℤ)) b (Recurrence.coefficients n) : ℝ) *
         (homogeneousEval (-(u : ℤ)) b (Recurrence.coefficients n) : ℝ) < 0 := by
       exact_mod_cast hs

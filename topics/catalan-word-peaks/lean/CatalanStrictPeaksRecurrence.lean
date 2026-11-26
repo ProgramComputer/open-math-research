@@ -417,4 +417,18 @@ theorem coefficients_get_eq_C (n : ℕ) (k : Fin (rowDegree n + 1)) :
       (fun i _ => coefficientCount_lt_base n i) k.val k.isLt
   simpa only [coefficients, List.getElem_ofFn] using congrArg (fun a : ℕ => (a : ℝ)) hdigit
 
+/-- A base exceeding the word count recovers all coefficients from the same
+evaluation, so it can be shared across a whole prefix. -/
+theorem digits_eq_coefficients (b n : ℕ) (hb : (words n).card < b) :
+    (List.ofFn fun k : Fin (rowDegree n + 1) => enumerate b n / b ^ k.val % b) =
+      coefficients n := by
+  have ha (k : ℕ) : coefficientCount n k < b := (card_filter_le _ _).trans_lt hb
+  have hb' : 0 < b := Nat.zero_lt_of_lt hb
+  simp only [coefficients, List.ofFn_inj]
+  funext k
+  rw [enumerate_eq_sum_coefficients b n, enumerate_eq_sum_coefficients (encodingBase n) n,
+    recover_digit hb' (rowDegree n + 1) (coefficientCount n) (fun i _ => ha i) k.val k.isLt,
+    recover_digit (by simp [encodingBase]) (rowDegree n + 1) (coefficientCount n)
+      (fun i _ => coefficientCount_lt_base n i) k.val k.isLt]
+
 end CatalanStrictPeaks.Recurrence
