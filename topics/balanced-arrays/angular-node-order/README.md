@@ -8,7 +8,7 @@ $$
 
 is strictly increasing, with limits $`-\nu\theta`$ and $`nr\theta`$ at zero and infinity. For every internal quota $`1\le k<\lfloor nr/d\rfloor`$ there is exactly one positive solution of $`\Psi(w_k)=k\pi`$. The radii $`w_k^d`$ therefore increase strictly. This also characterizes the endpoint-adjacent solutions for every integer strictly between the limiting phases divided by $`\pi`$. The arguments start at zero and are continued along the positive real tilt.
 
-The phase comes from the principal term of the Fourier integral for Alexandersson’s balanced-array polynomial. Its determinant uses $`a(t)=\mathbb E[q_Se^{itS}]/\mathbb E[e^{itS}]`$, where $`q_s=s(d-s)/(d(d-1))`$. The identity $`q_s\binom ds=\binom{d-2}{s-1}`$ gives exactly $`a(\theta)=we^{i\theta}B(we^{i\theta})/H(we^{i\theta})`$. Strict ordering removes a possible obstruction to using these test points at every finite height in this range. Establishing the sign of the actual polynomial at each of the radii is a separate open question. The geometric test point can give the opposite sign at quadratic aspect. [Conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays) · [Sign reversal at geometric test points](../effective-sublinear/square-phase.md)
+The phase comes from the principal term of the Fourier integral for Alexandersson’s balanced-array polynomial. Its determinant uses $`a(t)=\mathbb E[q_Se^{itS}]/\mathbb E[e^{itS}]`$, where $`q_s=s(d-s)/(d(d-1))`$. The identity $`q_s\binom ds=\binom{d-2}{s-1}`$ gives exactly $`a(\theta)=we^{i\theta}B(we^{i\theta})/H(we^{i\theta})`$. Strict ordering removes a possible obstruction to using these test points at every finite height in this range. Establishing the prescribed sign at every radius and height remains open. The geometric test point can give the opposite sign at quadratic aspect. [Conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays) · [Sign reversal at geometric test points](../effective-sublinear/square-phase.md)
 
 **Formal verification**　⬜ None. The analytic comparison and the finite certificates have an independent agent-assisted review. [Review and independent replay](ordered-phase-variance-review.md)
 
@@ -46,3 +46,13 @@ The [sample ledger](screen-angular-signs.jsonl.gz) records exact coefficient vec
 ~~~sh
 python3 -IB screen-angular-signs.py verify screen-angular-signs.jsonl.gz --finite-vectors ../finite-36/exact-vectors.jsonl
 ~~~
+
+## Signs near the two quota edges
+
+For fixed dimension and proper cap, every fixed positive deficit from the
+top quota has the prescribed sign at its exact angular radius once the
+height is large enough. At a fixed bottom quota the signed value converges
+to a hyper-Bessel evaluation. Only finitely many dimension–quota pairs
+can fail strict positivity of that limit, with no explicit cutoff.
+The all-height sign problem remains open. **⬜ None.**
+[Edge proofs and independent reviews](edges/README.md)
