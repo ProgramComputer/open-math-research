@@ -11,6 +11,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
 | [Ribbon matroids have the Narayana polynomial](topics/ribbon-matroids/README.md) | Proof | 🟨 Partial · Lean 4 |
 | [Extreme excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Partial theorem for every closest and largest nonzero root, and for a growing number of extreme ranks in large rows | ⬜ None |
+| [Largest real zero for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Partial theorem for every length from three, with a zero-free interval at every length | ⬜ None |
 
 **Lean or Rocq key**　🟩 Full (entire statement) · 🟨 Partial (named components) · ⬜ None (no checked proof)
 
