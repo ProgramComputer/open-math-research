@@ -1,5 +1,13 @@
 # Real zeros of balanced binary arrays
 
+For every $d\ge2$, balanced arrays with row cap $r=d-1$ have $\lfloor n(d-1)/d\rfloor$ simple negative zeros for every row count $n$. Consecutive rows strictly interlace. When the degree stays the same, the new rightmost zero is closer to zero. This settles the entire family $U(d-1,d)$. Other caps, including $U(2,4)$, remain open. [Four-page paper](no-full-row.pdf) · [Proof](no-full-row.md) · [Independent review](review-no-full-row.md) · [Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)
+
+**🟨 Partial · Lean 4.** Lean proves the all-dimension inclusion–exclusion formula directly from the labeled binary matrices. The determinant, spectral argument and strict interlacing have written proofs. The independent referee reviewed the written proof before this Lean theorem was added. A separate exact computation reconstructed 275 rows and checked 242 consecutive nonconstant pairs. [Lean theorem](lean/BalancedNoFullRowCounting.lean) · [Build and axiom audit](lean/README.md#arrays-with-no-full-row) · [Replay](verify_corank_one.py) · [Archive](results/corank-one.jsonl.gz)
+
+The same nested scalar determinant fails for $U(2,4)$ at every nonnegative power of the falling-factorial normalization. [Obstruction at the next cap](scalar-normalization-obstruction.md)
+
+## Eventual interlacing at each fixed rank and dimension
+
 Fix a column count $d\ge2$ and a row cap $1\le r<d$. Let $a_{n,k}$ count labeled $n\times d$ binary arrays with $k$ ones in each column and at most $r$ ones in each row. Define $P_n(q)=\sum_k a_{n,k}q^k$.
 
 **Theorem.** For every fixed pair $(r,d)$ and all sufficiently large $n$, all $\lfloor nr/d\rfloor$ zeros of $P_n$ are simple and negative. They strictly interlace the zeros of $P_{n+1}$, whose rightmost zero is further right. The proof gives an existential threshold $N(d,r)$. The conjecture for every $n$ remains open. [Proof](fixed-rank-eventual.pdf) · [Manuscript source](fixed-rank-eventual.tex)

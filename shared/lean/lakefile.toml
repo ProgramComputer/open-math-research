@@ -189,3 +189,7 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 [[lean_lib]]
 name = "CatalanStrictPeaksBetaMoments"
 srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "BalancedNoFullRowCounting"
+srcDir = "../../topics/balanced-arrays/lean"
