@@ -1,6 +1,6 @@
 name = "open_math_research"
 version = "0.1.0"
-defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns", "BalancedThreeColumnCounting", "CatalanStrictPeaksInterlacing", "CatalanStrictPeaksRecurrence", "CatalanStrictPeaksDiscriminant", "CatalanStrictPeaksCutParameter", "CatalanStrictPeaksCutBounds", "CatalanStrictPeaksMomentArithmetic", "CatalanStrictPeaksBetaMoments", "CatalanStrictPeaksAnalyticBranch", "CatalanStrictPeaksRayTransfer", "CatalanStrictPeaksNearAmplitude", "CatalanStrictPeaksNearCovariance", "CatalanStrictPeaksFarRay", "CatalanStrictPeaksNormalizedRays", "CatalanStrictPeaksPhaseOrder", "CatalanStrictPeaksAllRoots"]
+defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns", "BalancedThreeColumnCounting", "CatalanStrictPeaksInterlacing", "CatalanStrictPeaksRecurrence", "CatalanStrictPeaksDiscriminant", "CatalanStrictPeaksCutParameter", "CatalanStrictPeaksCutBounds", "CatalanStrictPeaksMomentArithmetic", "CatalanStrictPeaksBetaMoments", "CatalanStrictPeaksAnalyticBranch", "CatalanStrictPeaksRayTransfer", "CatalanStrictPeaksNearAmplitude", "CatalanStrictPeaksNearCovariance", "CatalanStrictPeaksFarRay", "CatalanStrictPeaksNormalizedRays", "CatalanStrictPeaksPhaseOrder", "CatalanStrictPeaksAllRoots", "CatalanStrictPeaksMiddleRoots"]
 
 [[require]]
 name = "mathlib"
@@ -228,6 +228,10 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
 name = "CatalanStrictPeaksPhaseBridge"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksMiddleRoots"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
