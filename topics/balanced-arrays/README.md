@@ -18,6 +18,8 @@ For $2\le d\le n$ and every cap, a reviewed comparison with the unrestricted pol
 
 The rank-dependent theorem gives all simple negative zeros for $d\ge C_\varepsilon\sqrt{nr/\log n}$ when $r\le n^{1/5-\varepsilon}$ or $d\ge n^{3/4+\varepsilon}$, for each fixed $0<\varepsilon<1/5$ and all sufficiently large $n$. The constants are existential. **⬜ None** for Lean or Rocq. [Rank-dependent theorem](dense-regime/rank-dependent/README.md)
 
+A reviewed [sparse-rank curvature bound](sparse-rank-curvature/README.md) gives an explicit sufficient criterion for simple negative zeros with effective rank $r-\sqrt{r\log r}/8$ when $n\ge d\ge2r$ and $\log r\ge32$. **⬜ None** for Lean or Rocq.
+
 For four columns with row cap two, the balanced-array polynomial has only simple negative zeros at every row count. The computer-assisted proof combines forty lower sign changes, uniform analytic phase estimates, and exact checks through 532 rows. A blind agent-assisted review checked the full argument against the original conjecture. **⬜ None** for Lean or Rocq. [Four-column theorem and verification](four-columns/README.md)
 
 Fix a column count $d\ge2$ and a row cap $1\le r<d$. Let $a_{n,k}$ count labeled $n\times d$ binary arrays with $k$ ones in each column and at most $r$ ones in each row. Define $P_n(q)=\sum_k a_{n,k}q^k$.
