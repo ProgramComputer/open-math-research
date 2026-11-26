@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\bone}{\mathbf{1}}
+\newcommand{\supp}{\mathrm{supp}}
+\setlength{\emergencystretch}{2em}
+\title{Binomial normalization of weighted binary matrices\ with interval row degrees}
+\author{ProgramComputer}
+\date{26 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Fix intervals for the row sums of a binary matrix and arbitrary nonnegative weights for its cells. For the weighted count at each column profile, normalization by the product of the unrestricted binomial counts makes every coordinate extension ratio decrease with all the margins. The proof adapts Kahn and Neiman's antipodal-pair comparison to one distinguished column. An integral-flow argument controls zeros of the profile counts. We deduce an explicit real-rootedness criterion on the common-quota diagonal and an exact marked-row odds inequality for row caps at most three. A four-row column marginal has a nonreal conjugate pair.
+\end{abstract}
+
+\section{Margin profiles}
+For $n,d\ge1$, let $A(q)$ be the sum of the weights of labeled binary $n\times d$ matrices with column profile $q\in\{0,\ldots,n\}^d$ and row $i$ having size in $[L_i,U_i]\subseteq[0,d]$. An occupied cell contributes a factor $w_{ij}\ge0$. Write
+\[
+ B(q)=A(q)\bigg/\prod_{j=1}^d\binom n{q_j}.
+\]
+The case of unit weights and a common upper row bound gives Alexandersson's balanced arrays \cite{symcat}. The binomial normalization in that case, and a weighted mixed-coordinate comparison, were previously obtained by an orientation argument \cite{repo}.
+
+\begin{theorem}\label{normal}
+For $q\le p$ coordinatewise and a coordinate $j$, whenever $q,q+e_j,p,p+e_j$ have positive weight,
+\[
+ \frac{B(q+e_j)}{B(q)}\ \ge\ \frac{B(p+e_j)}{B(p)} .
+\]
+The sequence $B(k\bone)$ has interval positive support if it is nonzero, and is log-concave. Unit cell weights and unrestricted rows give equality in all the comparisons.
+\end{theorem}
+
+\begin{lemma}\label{support}
+Let $C_i$ be the set of columns available to row $i$, namely those of positive cell weight. A profile is feasible precisely when, for each subset $J$ of columns,
+\[
+ \sum_i\max(0,L_i-|C_i\setminus J|)
+ \ \le\sum_{j\in J}q_j\ \le\sum_i\min(U_i,|C_i\cap J|).
+\]
+Every integer profile between two comparable feasible profiles is feasible.
+\end{lemma}
+\begin{proof}
+Use a circulation with arcs from the source to the columns fixed to $q_j$, unit-capacity available arcs from columns to rows, and row-to-sink arcs of bounds $L_i,U_i$. Give the return arc from sink to source an upper bound greater than the sum of the other upper bounds. The circulation criterion compares entering lower bounds with leaving upper bounds at every cut. For a set containing neither terminal and with columns $J$, minimize over its rows to get the upper inequality. When both terminals belong to the set, let $J$ denote the columns outside it and maximize the deficit over rows outside it. This gives the lower inequality. The remaining cuts either have zero entering lower bound or include the return arc among the leaving arcs. Integral feasible bounds admit an integral circulation. Each displayed subset sum is increasing in the profile, giving the last assertion.
+\end{proof}
+
+\section{The distinguished-column comparison}
+Fix the other column margins. The occupied set of a distinguished column has a Boolean measure obtained by summing the matrix weights over its completions. We follow the conditional antipodal-pairs method of Kahn and Neiman \cite{app,urns}.
+\begin{lemma}\label{ulc}
+The weight sequence $Z(k)$ of the distinguished column satisfies log-concavity of $Z(k)/\binom nk$.
+\end{lemma}
+\begin{proof}
+Pin any collection of target-column bits leaving $2t$ free, $t\ge1$. Consider ordered red and blue matrices whose target masks agree on the pins and are complementary on the free bits. Fix their common occupied and exclusive cells. The product weight is constant. In every other column the exclusive slots split equally between the colors. Pair them bijectively within that column. Every coloring of this fixed cell data has the same refinement multiplicity, the product of the factorials of the red-exclusive counts.
+
+Fix the uncolored pairs. The ground set of exclusive cells now contains disjoint two-element pairs and $2t$ uncovered target slots. Its disjoint row groups $H_i$ have sizes $h_i$. If row $i$ has $c_i$ common ones, its interval in both colors is equivalent to requiring at least $\max(0,L_i-c_i,c_i+h_i-U_i)$ cells of each color in $H_i$. If an empty group has a positive threshold there are no colorings. Every other column pair must contain one cell of each color.
+
+These are precisely the disjoint group and pair constraints in \cite[Lemma~10]{urns}. That lemma bounds the number of colorings with $t+1$ free red slots by $t/(t+1)$ times the middle count: each ordinary pair contributes one red slot to the total size in the lemma. Reversing colors identifies the lower and upper neighboring counts. Divide by the refinement multiplicities, multiply by the common weights, and sum over data. As $\binom{2t}{t}/\binom{2t}{t-1}=(t+1)/t$, the middle antipodal average dominates the preceding one after every positive-mass pinning. This is the conditional antipodal-pairs property. Lemma~\ref{support} gives interval support in the distinguished size. The conditional antipodal-pairs theorem \cite{app}, also \cite[Theorem~11]{urns}, now gives the assertion. Zero fibers satisfy the local inequalities directly.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{normal}]
+Lemma~\ref{ulc} handles a repeated coordinate. For different coordinates $i,j$, the weighted comparison
+\[
+ A(q)A(q+e_i+e_j)\le A(q+e_i)A(q+e_j)
+\]
+holds also with row-specific intervals \cite{repo}. Indeed add one distinguishable auxiliary cell for each of the two unequal column margins. After pairing exclusive cells within columns, all real rows have symmetric in- and outdegree requirements. The two auxiliaries are outward on the left. One switches to inward on the right. The orientation inequality \cite[Lemma~8]{urns} applies. The refinement multiplicities agree and weights are constant on the fixed cell data. The binomial normalizations cancel across this rectangle.
+
+The two local comparisons and Lemma~\ref{support} allow each step along a monotone path from $q$ to $p$. This proves the ratio assertion. Multiply it along corresponding unit steps from $(k-1)\bone$ to $k\bone$ and from $k\bone$ to $(k+1)\bone$ when both endpoint counts are positive. Zero neighboring counts give the diagonal inequality directly.
+\end{proof}
+
+\begin{corollary}
+If $(1+2/n)^{2d}>4$ and the weighted diagonal polynomial is nonzero, all its nonzero roots are simple and negative. The order of its zero at the origin is its smallest feasible quota.
+\end{corollary}
+\begin{proof}
+At internal positive indices, for $a_k=A(k\bone)$ the second quotient $a_k^2/(a_{k-1}a_{k+1})$ is at least $[(1+1/k)(1+1/(n-k))]^d\ge(1+2/n)^{2d}$. Remove the initial power of the variable. At each strictly increasing geometric radius $\sqrt{a_{k-1}/a_{k+1}}$, the two adjacent terms have magnitude below half the central term. The remaining alternating tails start with the central sign and decrease in magnitude. These signs on the negative axis, together with the endpoint signs, isolate a full degree of distinct negative roots.
+\end{proof}
+
+\section{The marked row}
+Let $F_k(j)$ be the total weight at common column margin $k$ and marked-row size $j$.
+\begin{corollary}
+If each unmarked row satisfies $U_i\le3$, then for $1\le a<b\le n-1$ and $s<t$,
+\[
+ F_a(s)F_b(t)\ge
+ \left[\frac{b(n-a)}{a(n-b)}\right]^{t-s} F_a(t)F_b(s).
+\]
+\end{corollary}
+\begin{proof}
+Take positive weights and suppose the right-hand product is positive. The weak two-margin orientation comparison \cite{marked} gives positive swapped endpoints: add $b-a$ red auxiliary slots per column and reverse the red and blue requirements at the marked vertex, keeping all auxiliaries outward. The set of feasible marked sizes at each margin is an interval by interpolation and integrality of the marked-row flow. At homogeneous margins, column permutations imply every mask of any feasible size has positive weight.
+
+Write $f_k(S)$ for the weight with marked mask $S$ and let $Z(v)$ count residual matrices on $N=n-1$ rows. For $i\notin S$, $v_k=k\bone-\bone_S$ satisfies
+\[
+ \frac{f_k(S\cup\{i\})}{f_k(S)}
+ =w_{\star i}\frac{k}{n-k}\frac{B_N(v_k-e_i)}{B_N(v_k)},\qquad
+ B_N(v)=Z(v)\bigg/\prod_j\binom N{v_j}.
+\]
+In the common range of positive sizes, Theorem~\ref{normal} shows the last ratio at $b$ is at least its value at $a$. For $\lambda=b(n-a)/[a(n-b)]$, the density $f_b(S)/(\lambda^{|S|}f_a(S))$ consequently increases along inclusions. At margin $a$, adjacent marked-size slices admit an inclusion coupling when the other row caps are at most three \cite{marked,chan}. Averaging the density over this coupling makes $F_b(j)/(\lambda^j F_a(j))$ nondecreasing in $j$ throughout the interval. Cross multiply, then allow zero weights by continuity of the finite sums.
+\end{proof}
+
+\section{A nonreal marginal}
+Give four rows the intervals $[0,1],[1,3],[2,2],[2,2]$, use three columns and unit weights, and fix the second and third margins at $2,3$. The first marginal is
+\[
+ [x^2y^3](1+t+x+y)((1+t)(1+x)(1+y)-1)(tx+ty+xy)^2
+ =1+11t+14t^2+5t^3.
+\]
+The cubic discriminant is $-695$. Thus Lemma~\ref{ulc} need not arise from a real-rooted column marginal. The example leaves the original common-cap, common-quota question open.
+
+\begin{thebibliography}{9}
+\bibitem{symcat} P. Alexandersson, \emph{Balanced arrays of uniform matroids}, SymCat, \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays}{original conjecture}.
+\bibitem{app} J. Kahn and M. Neiman, \emph{A strong log-concavity property for measures on Boolean algebras}, \href{https://doi.org/10.1016/j.jcta.2011.02.007}{J. Combin. Theory Ser. A}.
+\bibitem{urns} J. Kahn and M. Neiman, \emph{Conditional negative association for competing urns}, \href{https://doi.org/10.1002/rsa.20395}{Random Structures Algorithms}. Numbering follows \href{https://arxiv.org/abs/1001.0610}{arXiv:1001.0610}.
+\bibitem{chan} S. H. Chan, \emph{Normalized matching property for competing urn models}, \href{https://arxiv.org/abs/2509.06273}{arXiv:2509.06273}.
+\bibitem{repo} ProgramComputer, \href{https://github.com/ProgramComputer/open-math-research/blob/106ccf3/topics/balanced-arrays/orientation-normalization.md}{An orientation proof of normalized log-concavity for balanced arrays}.
+\bibitem{marked} ProgramComputer, \href{https://github.com/ProgramComputer/open-math-research/tree/d67335eb435d232228e6165afa6c28f1e4670f50/topics/balanced-arrays/marked-row-likelihood}{How a column-quota increase changes one row}, including the inclusion coupling for row caps at most three.
+\end{thebibliography}
+\end{document}

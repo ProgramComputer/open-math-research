@@ -2,6 +2,8 @@
 
 One absolute threshold $N$ gives $\lfloor nr/d\rfloor$ simple negative zeros for every $n\ge N$, $d\ge2$, and $1\le r\le d$. The threshold is ineffective, and the original all-row-count conjecture remains open. **⬜ None** for Lean or Rocq. [Proof and independent reviews](eventual-all/README.md)
 
+Binomial normalization makes column-extension ratios decrease even with arbitrary cell weights, forbidden cells and row-specific intervals. This gives a weighted real-rootedness criterion and identifies the limitation of a proof based on coefficient separation. [Theorem, example and review](weighted-normalization/README.md)
+
 A sharp likelihood bound for one marked row gives a finite real-rootedness criterion for every proper cap greater than one. Two reviewed arguments prove that all 508,000 roots of the fixed million-row instance are simple and negative. Lean checks supporting array-pairing, refinement and overlap lemmas. [Marked-row theorem, proofs and verification](marked-row-likelihood/README.md)
 
 A [finite root-count estimate and five limiting distributions](root-distributions/README.md) locate the moduli of the zeros, including the cap and corank boundaries.
