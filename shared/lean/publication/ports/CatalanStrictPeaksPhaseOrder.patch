@@ -1,0 +1,20 @@
+--- CatalanStrictPeaksPhaseOrder.lean
++++ CatalanStrictPeaksPhaseOrder.lean
+@@ -83,7 +83,7 @@
+   refine ⟨1 / 2 + (1 / 2) * ((1 / (1 + f ^ 2)) * f') +
+     2 * ((1 / (1 + g ^ 2)) * g'), by linarith, ?_⟩
+   unfold phaseCorrection
+-  simpa only [div_eq_mul_inv, one_mul, id_eq, f, g, A, B, c, s] using
++  simpa only [div_eq_mul_inv, one_mul, id_eq, f, g, A, B, c, s] using!
+     ((((hasDerivAt_id θ).div_const 2).sub_const (π / 4)).add
+       (hf.arctan.const_mul ((2 : ℝ)⁻¹))).add (hg.arctan.const_mul 2)
+ 
+@@ -96,7 +96,7 @@
+   rw [interior_Icc] at hθ
+   obtain ⟨v, hv, hderiv⟩ := phaseCorrection_hasDerivAt_le ⟨hθ.1.le, hθ.2.le⟩
+   have h : HasDerivAt (checkpointPhase n) ((n : ℝ) - v) θ := by
+-    simpa only [checkpointPhase, mul_one] using
++    simpa only [checkpointPhase, mul_one, id_eq] using!
+       ((hasDerivAt_id θ).const_mul (n : ℝ)).sub hderiv
+   rw [h.deriv]
+   have hnR : (150 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
