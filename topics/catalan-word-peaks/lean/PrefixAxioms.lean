@@ -1,6 +1,8 @@
 import CatalanStrictPeaksPrefix
 
+#print axioms CatalanStrictPeaks.FastCoefficients.row_eq_coefficients
 #print axioms CatalanStrictPeaks.Finite.checkRow_sound
 #print axioms CatalanStrictPeaks.Finite.checkPair_sound
-#print axioms CatalanStrictPeaks.Finite.roots_through_20
-#print axioms CatalanStrictPeaks.Finite.interlacing_before_20
+#print axioms CatalanStrictPeaks.Finite.roots_through_150
+#print axioms CatalanStrictPeaks.Finite.interlacing_before_150
+#print axioms CatalanStrictPeaks.Finite.interlacing_from_analytic_signs

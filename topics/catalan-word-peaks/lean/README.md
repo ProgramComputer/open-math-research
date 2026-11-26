@@ -107,26 +107,33 @@ The identification of the continued branches, the Cauchy cuts, the beta
 moment identities, and the derivation of all checkpoint and old-root signs
 remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
 
-## Exact isolating intervals through length 20
+## Exact isolating interval certificates for length 150
 
-[The interval checker](CatalanStrictPeaksFinite.lean) evaluates the actual
-word-count coefficients at the two endpoints of each dyadic interval. It
-checks the signs using integer arithmetic, verifies the within-row and
-consecutive-row interval order, and uses the intermediate value theorem
-and the exact degree to exhaust each root multiset.
+The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
+uses the proved first-return convolution to certify the evaluation of every
+row at $q=4^{150}+1$. This base exceeds each Catalan word count in the
+prefix. Lean checks the successive convolution identities and recovers
+all coefficients by base-$q$ digit extraction.
 
-[The prefix theorems](CatalanStrictPeaksPrefix.lean) prove that rows $0$
-through $20$ have only simple negative zeros (`roots_through_20`) and
+The [interval checker](CatalanStrictPeaksFinite.lean) certifies both signs
+at the endpoints of every dyadic interval by comparing the positive and
+negative terms with exact natural-number arithmetic. It checks the
+within-row and consecutive-row interval order and uses the intermediate
+value theorem and the exact degree to exhaust each root multiset.
+
+The [extended prefix statements](CatalanStrictPeaksPrefix.lean) cover only
+simple negative zeros for rows $0$ through $150$ (`roots_through_150`) and
 strictly interlace in the specified orientation for old row lengths
-$0\le n<20$ (`interlacing_before_20`). The assertions about constant rows
-are vacuous. The kernel checks the interval data against the executable
-word recurrence. [Prefix kernel output](prefix-kernel.txt)
+$0\le n<150$ (`interlacing_before_150`). The assertions about constant rows
+are vacuous. `interlacing_from_analytic_signs` connects this prefix to the
+analytic checkpoint and old-root sign hypotheses from length $150$ onward.
+The extended build is awaiting a complete kernel replay. [Prior prefix kernel output](prefix-kernel.txt)
 
-To regenerate the candidate interval data from the repository root, run
+To regenerate the candidate data from the repository root, run
 
 ~~~sh
 python -I -O topics/catalan-word-peaks/code/make_lean_intervals.py \
-  topics/catalan-word-peaks/results/family-rows.jsonl --last 20 \
+  topics/catalan-word-peaks/results/family-rows.jsonl --last 150 --bits 72 \
   > topics/catalan-word-peaks/lean/CatalanStrictPeaksIntervalData.lean
 ~~~
 

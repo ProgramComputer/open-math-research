@@ -174,3 +174,7 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 [[lean_lib]]
 name = "CatalanStrictPeaksPrefix"
 srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFastCoefficients"
+srcDir = "../../topics/catalan-word-peaks/lean"
