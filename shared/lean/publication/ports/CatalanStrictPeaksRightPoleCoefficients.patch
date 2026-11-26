@@ -1,0 +1,29 @@
+--- CatalanStrictPeaksRightPoleCoefficients.lean
++++ CatalanStrictPeaksRightPoleCoefficients.lean
+@@ -73,8 +73,7 @@
+   have hk' : k ≤ n := Nat.le_of_lt_succ (Finset.mem_range.mp hk)
+   have hpow : g ^ (n - k) * g ^ k = g ^ n := by rw [← pow_add, Nat.sub_add_cancel hk']
+   rw [coeff_geo, inv_pow, ← hpow]
+-  field_simp [pow_ne_zero _ hg.ne']
+-  ring
++  field_simp [pow_ne_zero _ hg.ne'] <;> ring
+ 
+ private theorem norm_coeff_geo_term {P : S} (hp : SmallCoeffs P) {g : ℝ} (hg : 0 < g) (k : ℕ) :
+     |cf k P * (g⁻¹) ^ k| ≤ 5 * (β / g) ^ k := by
+@@ -141,14 +140,12 @@
+       have hpow : g ^ n * q ^ n = β ^ n := by
+         dsimp only [q]
+         rw [div_pow]
+-        field_simp [pow_ne_zero n hg0.ne']
+-        ring
++        field_simp [pow_ne_zero n hg0.ne'] <;> ring
+       have hq : 5 * q / (1-q) = 5 * β / (g-β) := by
+         have hden : 1-q ≠ 0 := sub_ne_zero.mpr hq₁.ne'
+         apply (div_eq_div_iff hden (sub_pos.mpr hg).ne').mpr
+         dsimp only [q]
+-        field_simp [hg0.ne']
+-        ring
++        field_simp [hg0.ne'] <;> ring
+       rw [pow_succ]
+       calc
+         _ = (g ^ n * q ^ n) * (5 * q / (1 - q)) := by ring
