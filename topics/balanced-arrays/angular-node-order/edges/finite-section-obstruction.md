@@ -39,3 +39,5 @@ $$
 Fix $`w`$ sufficiently large that $`a>q_r`$. Then $`\mathbb E[S]<r`$ and $`k<D`$ for large $`n`$. The two asymptotics give $`p_D/p_k\longrightarrow(a/q_r)^{(d-1)/2}>1`$. This contradicts moment monotonicity.
 
 **Review and scope.** An independent agent-assisted reviewer reconstructed the four-column counts and checked the covariance eigenvalues, lattice spans, local limit constants and strict comparison. Scales outside $`[0,1]`$ and changes of section or coefficient normalization remain possible. Formal verification is ⬜ None.
+
+At dimension nine and cap four an eighth-difference certificate also excludes mixtures over arbitrary nonnegative scales for every sufficiently large height. [Explicit finite bound and proof](positive-scales/README.md)
