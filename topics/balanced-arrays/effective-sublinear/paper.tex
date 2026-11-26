@@ -1,0 +1,648 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,geometry}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\geometry{margin=1in}
+\emergencystretch=3em
+\title{An explicit logarithmic dimension bound for balanced binary arrays}
+\author{ProgramComputer}
+\date{November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the balanced-array polynomial in Alexandersson's uniform-matroid conjecture,
+we prove that every zero is simple and negative if $\log n\ge 10^6$ and $d\ge 100n/\log n$,
+uniformly over the row cap. We integrate out each row size before expanding
+the column characteristic function. This leaves a bounded cubic Gaussian variance
+even as the dimension-to-height ratio tends to zero. Coupling row profiles then
+gives quantitative neighboring quota bounds, which yield a sign at each geometric node.
+\end{abstract}
+\section{An explicit logarithmic dimension bound for balanced arrays}
+
+\textbf{Theorem.} Let $n,d,r$ be integers with $\log n\ge10^6$, $d\ge100n/\log n$, and $1\le r\le d$. Write $a_k$ for the number of labeled $n\times d$ binary matrices with all column sums $k$ and every row sum at most $r$. Then $P(q)=\sum_{k=0}^{\lfloor nr/d\rfloor} a_k q^k$ has exactly $\lfloor nr/d\rfloor$ simple negative zeros. Here $\log$ is the natural logarithm. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Alexandersson's conjecture}  $\cdot$  \href{https://github.com/PerAlexandersson/RealRooted/issues/2005}{Author's issue}
+
+A previous theorem in this repository gives the scale $Cn/\log n$ with unspecified constants. This result supplies both constants and an effective bound for the change in the equal-column probability between successive quotas. The all-height conjecture remains open. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/dense-regime/README.md}{Earlier large-dimension theorem}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/eventual-all/README.md}{Eventual theorem in every dimension}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/README.md}{Explicit linear sector at a lower height}
+
+
+\subsection{From consecutive quotas to all roots}
+
+Let $D=\lfloor nr/d\rfloor$. To realize every quota $0\le k\le D$, assign consecutive blocks of $k$ cyclic row labels to the successive columns. Each row is used at most $\lceil dk/n\rceil\le r$ times. For $D\le1$ the conclusion follows immediately. Otherwise set $\Gamma_k=a_k^2/(a_{k-1}a_{k+1})$ at every internal index. The orientation inequality for $a_k/\binom nk^d$ yields
+
+\[
+\log\Gamma_k\ge d\left(\frac1{k+1}+\frac1{n-k+1}\right)\ge\frac{4d}{n+2}.
+\]
+
+At a geometric node $t_k=\sqrt{a_{k-1}/a_{k+1}}$ the two first neighboring terms relative to the center have magnitude $1/\sqrt{\Gamma_k}$. Further terms decrease outwards by log-concavity. Alternating tails therefore give the strict sign $(-1)^k$ at $-t_k$ if $\Gamma_k>4$. This handles every internal quota when $d\ge n$. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/orientation-normalization.md}{Orientation inequality}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/README.md}{Geometric sign bound}
+
+Suppose $d\le n$ and $\Gamma_k\le4$. Put $u=\log n$, $s=d/n$, $\delta=100/u$, and let $J$ be the smallest odd integer at least $2/\delta$. The displayed orientation inequality gives $\min(k,n-k)\ge d/\log4-1$. Since $J+3<u$ and $d/3>u+1$, all densities within $J+2$ indices of $k$ lie in $[s/3,1-s/3]$ whenever they are feasible.
+
+Put $U_j=[z^{dj}](\sum_{i=0}^r\binom di z^i)^n$, $Q_j=a_j/U_j$, and $L_j=[2\pi n (j/n)(1-j/n)]^{-(d-1)/2}$. For each consecutive feasible pair in this density window the direct row-conditioned comparison gives
+
+\[
+\left|\log(Q_{j+1}/L_{j+1})-\log(Q_j/L_j)\right|< n^{-1/8}.
+\]
+
+Conditioning on each row size first removes the common row-angle fluctuation from the Fourier integral. The variance of the remaining cubic Gaussian phase is at most $5/6$ on regular profiles. This yields a positive lower bound independent of $s$, which is needed as the aspect decreases. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/direct-row-expansion.md}{Subset cumulants and Taylor bound}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/direct-row-tail.md}{Off-chart estimate}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/direct-comparison.md}{Direct fixed-profile comparison and averaging}
+
+The two immediately adjacent edges are feasible, even if $k+1=D$. The log curvature contributed by $L_j$ has absolute value at most $10/(n s^2)$ by the second derivative of $\log(x(1-x))$ on $[s/3,1-s/3]$. Consequently $\log(U_k^2/(U_{k-1}U_{k+1}))<2$. On the other hand scalar deficit normalization bounds this log curvature below by
+
+\[
+\frac{n-1}{(h+1)(h+1+1/s)},\qquad h=nr/d-k .
+\]
+
+If $h\le\sqrt n/2$, the denominator is at most $(.6\sqrt n)^2$, since $1+1/s\le1+u/100<.1\sqrt n$. This contradicts the upper bound. Thus $h>\sqrt n/2$, so every quota required by the window is feasible. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/README.md}{Scalar deficit inequality}
+
+Choose $\lambda_\theta=\delta$ in the finite theta sign lemma. Its tolerance is $\epsilon_\theta=(\delta/4)\exp(-\pi^2/(4\delta))$. The baseline gives $\lambda_\theta\le(\log\Gamma_k)/2$. Also
+
+\[
+\log(1/\epsilon_\theta)=\log(u/25)+\pi^2u/400<.04u .
+\]
+
+The adjacent slope estimate is smaller than $\epsilon_\theta/100$. The scalar local limit estimate and the variance bound for tilted row sizes control the log curvature throughout the window. The explicit sufficient inequalities are $\sqrt n\ge 10^{12}(J+2)/(\delta^3\epsilon_\theta)$ and $n^{1/4}\ge10^{14}/(\delta\epsilon_\theta)$. Taking logarithms of their right sides gives upper bounds $36+.08u$ and $42+.05u$, respectively, using $\log u\le .01u$. Thus both hold. The theta lemma gives $(-1)^kP(-t_k)>0$ at every difficult quota. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/theta-window.md}{Theta sign lemma and scalar estimates}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/scalar.md}{Explicit scalar local limit proof}
+
+The geometric nodes strictly increase because all internal curvatures exceed one. The signs at these nodes, at zero, and sufficiently far to the left give $D$ disjoint negative intervals containing zeros. Since $P$ has degree $D$, these are all its zeros and each is simple. $\square$
+
+\section{Explicit expansion after conditioning on the row size}
+
+For integers $d\ge10$ and $0\le\ell\le d$, let $I$ be a uniform
+$\ell$-subset of $\{1,\ldots,d\}$. Write $p=\ell/d$, $v=p(1-p)$,
+and let $y=(y_1,\ldots,y_d)$ be real with $\sum_j y_j=0$.
+Put $Q_b=\sum_j y_j^b$, $M=\max_j|y_j|$, and
+$L=\sum_{j\in I}y_j$. The characteristic function is the
+conditional row factor obtained by taking the coefficient of
+degree $\ell$ in the row marker and dividing by $\binom d\ell$.
+
+Define the following real coefficients, with the falling factorial
+notation $(m)_b=m(m-1)\cdots(m-b+1)$:
+
+\[
+a=\frac{d v}{d-1},\qquad
+\gamma=a\frac{d-2\ell}{d-2},\qquad
+\xi=\frac{(\ell)_2(d-\ell)_2}{(d)_4},\qquad
+A_4=a-6\xi,\qquad B_4=\xi-a^2 .
+\]
+
+The cumulants of $L$ of orders one through four are
+$0$, $aQ_2$, $\gamma Q_3$, and $A_4Q_4+3B_4Q_2^2$.
+The coefficients satisfy
+
+\[
+|\gamma|\le a,\qquad |A_4|\le a\le 2v,\qquad
+|B_4|\le \frac{2v}{d},\qquad
+|\kappa_4(L)|\le6v(Q_4+Q_2^2/d).
+\]
+
+If $M\le1/2$, the analytic logarithm through zero gives
+
+\[
+\log\mathbb E e^{iL}
+=-\frac a2Q_2-\frac{i\gamma}{6}Q_3
++\frac{A_4}{24}Q_4+\frac{B_4}{8}Q_2^2+R,
+\qquad
+|R|\le 8vQ_2M^3,\qquad |\Re R|\le6vQ_2M^4 .
+\]
+
+The expansion is a quantitative version of the uniform row logarithm
+in the sparse fixed-profile argument. It applies at both ends of the
+row-size range by complementation. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/eventual-all/sparse-fixed-profile-edgeworth.md\#uniform-logarithmic-expansion-for-one-row}{Sparse fixed-profile expansion}
+
+\subsection{Exact moments and fourth coefficient bounds}
+
+Put $P_b=(\ell)_b/(d)_b$, the inclusion probability for a specified
+$b$-element subset. The mean is $P_1\sum_j y_j=0$.
+The second raw moment is $(P_1-P_2)Q_2=aQ_2$.
+In the third raw moment, terms with precisely one, two and three
+distinct indices contribute $Q_3$, $-3Q_3$ and $2Q_3$, before
+multiplication by $P_1,P_2,P_3$ respectively. The coefficient is
+$P_1-3P_2+2P_3=a(d-2\ell)/(d-2)$, using
+$P_2-P_3=a(\ell-1)/(d-2)$.
+
+For the fourth raw moment, grouping monomials by their number of
+distinct indices gives the following coefficients before multiplying
+by the corresponding inclusion probability:
+
+\[
+Q_4,\qquad 3Q_2^2-7Q_4,\qquad 12Q_4-6Q_2^2,\qquad 3Q_2^2-6Q_4,
+\]
+
+in order from one through four distinct indices.
+
+For two distinct indices, the exponent patterns $(3,1)$ and $(2,2)$
+contribute $-4Q_4$ and $3(Q_2^2-Q_4)$. For three distinct indices
+the sum over the two singleton factors distinct from index $j$ is
+$y_j^2-Q_2/2$, which gives the third expression. The last expression follows by
+summing all four expressions to zero, since $(\sum_j y_j)^4=0$.
+The identity $P_2-2P_3+P_4=\xi$ is inclusion-exclusion for two
+specified elements inside and two specified elements outside $I$.
+The $Q_4$ coefficient equals $(P_1-P_2)-6\xi$, and the fourth
+cumulant subtracts $3a^2Q_2^2$ from the fourth raw moment.
+
+For $1\le\ell\le d-1$, let $u=\ell(d-\ell)$. Then
+
+\[
+\frac{\xi}{a}=\frac{u-d+1}{(d-2)(d-3)},\qquad
+\frac{\xi}{a}-a=\frac{(4d-6)a-(d-1)}{(d-2)(d-3)}.
+\]
+
+The first ratio lies between zero and
+$(d-2)/(4(d-3))\le1/3$, by
+$(\ell-1)(d-\ell-1)\le(d-2)^2/4$.
+Thus $|a-6\xi|\le a$. Since $0\le a\le d/(4(d-1))$, the numerator
+in the second ratio is at least $-(d-1)$ and at most
+$(d-2)/(2(d-1))$. Hence
+$|B_4|\le d v/[(d-2)(d-3)]\le2v/d$ at $d\ge10$.
+The bound on $\gamma$ follows from $|d-2\ell|\le d-2$.
+The fourth cumulant bound follows by taking absolute values.
+For $\ell=0,d$, all coefficients and cumulants vanish.
+
+\subsection{A zero-free coefficient bound with explicit constants}
+
+Assume $M>0$ and $0<\ell<d$. Put
+$K(z)=\log\mathbb E e^{zL}$, taking the branch with $K(0)=0$.
+It is analytic for $|z|<\pi/(2M)$. In this disk each $u_j=e^{zy_j}$
+has positive real part. All roots of $\prod_j(w+u_j)$ are strictly in the
+left half-plane, as are the roots of each nonconstant derivative
+by Gauss--Lucas. The derivative of order $d-\ell$ at zero is
+$(d-\ell)!e_\ell(u)$, so the row moment generating function
+$e_\ell(u)/\binom d\ell$ has no zeros in the disk.
+
+For $|z|M\le1$, write $t=\Re z$. If $\ell>d/2$, replace $L$ in the
+modulus bound by the negative sum over the uniform complement.
+Let $q=\min(p,1-p)\le1/2$ and choose $t$ or $-t$ accordingly.
+The triangle inequality and the elementary symmetric mean inequality
+give
+
+\[
+\log|\mathbb E e^{zL}|
+\le qd\log\left(\frac1d\sum_j e^{\pm t y_j}\right)
+\le q t^2 Q_2
+\le 2v |z|^2 Q_2.
+\]
+
+For the second inequality use $e^w\le1+w+w^2$ for real $|w|\le1$,
+which follows by summing the absolute Taylor remainder from degree
+two, and then use $\sum_j y_j=0$. The symmetric mean inequality
+follows also by pair averaging positive variables with fixed sum,
+since that preserves the pair's sum and increases its product,
+and each elementary symmetric polynomial is affine in these two
+quantities with nonnegative coefficients.
+
+Let $K(z)=\sum_{b\ge1}c_bz^b$, $r_0=1/M$, and
+$H=2vQ_2/M^2$. On the circle of radius $r_0$,
+$H-\Re K$ is nonnegative and has mean $H$ because $K(0)=0$.
+Its Fourier coefficient at positive index $b$ is
+$-c_b r_0^b/2$, which is bounded in modulus by its mean.
+This gives the coefficient bound
+
+\[
+|c_b|\le 4vQ_2 M^{b-2}\qquad(b\ge1).
+\]
+
+The coefficients are real since $K$ is real on the real segment
+through zero. At $z=i$, the tail from degree five is bounded by
+$4vQ_2M^3/(1-M)\le8vQ_2M^3$. Its real part has only even
+degrees, starting at degree six, and is bounded by
+$4vQ_2M^4/(1-M^2)\le6vQ_2M^4$. This proves the expansion.
+If $M=0$, or if the row is empty or full, the logarithm is
+identically zero. The formulas include these cases.
+
+\subsection{Summed form in the proposed density window}
+
+Suppose $u=\log n\ge10^6$, $100/u\le s=d/n\le1$, $x=k/n\in[s/3,1-s/3]$ and each $p_i$ is within $n^{-1/4}$ of $x$. Since $x(1-x)\ge2s/9$, the identity $\sum_i p_i(1-p_i)=nx(1-x)-\sum_i(p_i-x)^2$ gives $\sum_i v_i\ge d/5$, using $n^{-1/2}<s/50$. Also $d\ge100n/u>10$.
+Put $\lambda=\sum_i a_i$, $\Gamma=\sum_i\gamma_i$,
+$A_{\ast}=\sum_i A_{4,i}$ and $B_{\ast}=\sum_i B_{4,i}$.
+In the centered angular coordinates of the column Fourier integral,
+the logarithm of the independent row factors sums to
+
+\[
+-\frac{\lambda}{2}Q_2-\frac{i\Gamma}{6}Q_3+
+\frac{A_{\ast}}{24}Q_4+\frac{B_{\ast}}{8}Q_2^2+R_{\ast},
+\qquad |R_{\ast}|\le8\lambda Q_2M^3,\quad
+|\Re R_{\ast}|\le6\lambda Q_2 M^4 .
+\]
+
+Here $\lambda\ge d/5$, $|\Gamma|\le\lambda$,
+$|A_{\ast}|\le\lambda$ and $|B_{\ast}|\le2\lambda/d$.
+These are local estimates independent of a torus localization bound.
+
+For clarity, the summed bounds give uniform control of the Gaussian
+cubic and the quartic mean. Under the zero-sum Gaussian
+$Y_j=(Z_j-\overline Z)/\sqrt\lambda$, with independent standard
+normals $Z_j$, the projection matrix
+$P=I-\mathbf1\mathbf1^{\mathsf T}/d$ has zero row sums. The linear Wick
+term in the variance of $Q_3(Y)$ cancels, and
+$\sum_{j,l}P_{jl}^3=(d-1)(d-2)/d\le d$. Thus
+$\mathrm{Var}(\Gamma Q_3/6)\le d/(6\lambda)\le5/6$, giving
+$\mathbb E\cos(\Gamma Q_3/6)\ge7/12$.
+The Gaussian quartic exponent
+$\Pi=A_{\ast}Q_4/24+B_{\ast}Q_2^2/8$ satisfies
+$|\mathbb E\Pi|\le3d/(8\lambda)\le15/8$ because
+$\mathbb E Q_4\le3d/\lambda^2$ and
+$\mathbb E Q_2^2=(d-1)(d+1)/\lambda^2$.
+Moreover
+$\|Q_4-\mathbb E Q_4\|_2\le\sqrt{96d}/\lambda^2$ by the fourth-power
+Wick covariance and $\sum_{j,l}P_{jl}^2=d-1$.
+The identity $\lambda Q_2\sim\chi^2_{d-1}$ gives
+$\|Q_2^2-\mathbb E Q_2^2\|_2\le4d^{3/2}/\lambda^2$.
+Consequently $\|\Pi-\mathbb E\Pi\|_2\le (3/2)\sqrt d/\lambda$.
+The direct row method therefore leaves a bounded Gaussian quartic
+mean and a uniformly positive Gaussian cubic characteristic factor
+on the stated density window.
+
+\section{Direct row-conditioned Fourier tails at logarithmic aspect}
+
+Let $u=\log n\ge10^6$ and $s=d/n\in[100/u,1]$. Put $\delta=\min(s,1/4)$ and $T=100/\delta$, so $400\le T\le u$.
+Suppose $x=k/n\in[s/3,1-s/3]$ and the integer row sizes $\ell_i$
+satisfy $\sum_i\ell_i=dk$ and $|p_i-x|\le n^{-1/4}$ for $p_i=\ell_i/d$.
+In each row independently choose a uniform $\ell_i$-subset. Write
+$\chi_i$ for that row's vector characteristic function and put
+$v_i=p_i(1-p_i)$, $A=\sum_i v_i$, and $\Lambda=dA/(d-1)$.
+Use normalized Haar measure, and let $E_\epsilon$ be the event that
+some pair of column angles has circular distance greater than
+$\epsilon=n^{-2/5}$. Then
+
+\[
+\int_{E_\epsilon}\left|\prod_i\chi_i(\boldsymbol\theta)\right|d\theta
+\le \sqrt d(2\pi\Lambda)^{-(d-1)/2} e^{T^2/12+1/2}
+\left[
+e^{-n^2/(4T^2)}
++n^{3/2}e^{3T^2-n^{1/5}/(40T^2)}
+\right].
+\]
+
+In particular this is less than
+$e^{-T^2}n^{-10}\sqrt d(2\pi\Lambda)^{-(d-1)/2}$.
+The column-centering factor in the Fourier inversion for balance
+is a pure phase and leaves the estimate unchanged.
+
+\subsection{Passing from conditioned subsets to the row-angle envelope}
+
+Denote the Bernoulli mean atom by
+$b_i=\Pr(\mathrm{Bin}(d,p_i)=\ell_i)$. Row Fourier inversion gives exactly
+
+\[
+b_i\chi_i(\boldsymbol\theta)=\int_{-\pi}^{\pi}
+e^{-i\ell_i\phi}
+\prod_{j=1}^d [1-p_i+p_i e^{i(\phi+\theta_j)}]
+\frac{d\phi}{2\pi}.
+\]
+
+The normalized law given that row sum is the uniform row-subset
+law. The elementary bound
+$|1-p+p e^{it}|\le e^{-p(1-p)(1-\cos t)}$ follows by squaring
+and using $1-y\le e^{-y}$. Apply it in each row integral and put
+$R=|\sum_j e^{i\theta_j}|$. The row-angle integral of the envelope
+is $e^{-dv_i}I_0(v_i R)$, where
+$I_0(z)=\int e^{z\cos t}\,dt/(2\pi)$. Hence
+
+\[
+\left|\prod_i\chi_i(\boldsymbol\theta)\right|
+\le\frac{B(R)}{\prod_i b_i},\qquad
+B(R)=e^{-A(d-R)}\prod_i J(v_iR),\qquad J(z)=e^{-z}I_0(z).
+\]
+
+Thus the joint-envelope argument bounds the directly conditioned
+row integral. Absolute values are taken inside each row integral,
+so no estimate of the phases of those individual integrals is used.
+Both the modulus and $E_\epsilon$ are invariant under a common
+column-angle translation. It follows that the same integrals are
+obtained on the section $\theta_d=0$.
+
+\subsection{Determinant-scale bound on the envelope tail}
+
+Set $B_0=\prod_i(2\pi d v_i)^{-1/2}$ and
+$G=\sqrt d(2\pi A)^{-(d-1)/2}B_0$.
+The interval for $x$ and $n^{-1/4}\le\delta/12$ give
+$p_i\in[\delta/4,1-\delta/4]$ and $v_i\ge1/T$, with $A\ge n/T$.
+Also $d\ge n/T$. The one-dimensional bounds used below are
+
+\[
+J(z)\ge(6\sqrt{1+z})^{-1}\quad(z\ge0),\qquad
+J(z)\le e^{1/(2z)}(2\pi z)^{-1/2}\quad(z\ge10).
+\]
+
+These follow directly from the cosine integral as in the
+\href{https://github.com/ProgramComputer/open-math-research/blob/7b585bad34491cf9e733a316e1b62f6c3529880f/topics/balanced-arrays/bessel-margins/upper.md}{existing Bessel proof}.
+
+On $R<d/2$, use $J\le1$ to get $B(R)\le e^{-n^2/(2T^2)}$.
+Every variance factor is at most $n$, so $G\ge(2\pi n)^{-n}$.
+Since $\log(2\pi n)< n/(4T^2)$, the relative diffuse-region
+loss is at most $e^{-n^2/(4T^2)}$.
+
+On $R\ge d/2$, the Bessel arguments satisfy $v_iR\ge n/(2T^2)\ge10$.
+Their total exponential cost is at most
+$\sum_i(2v_iR)^{-1}\le Tn/d\le T^2$.
+The factors $(d/R)^{1/2}$ multiply to at most
+$\exp[n(d-R)/d]$. Thus for $A'=A-n/d\ge n/(2T)$,
+
+\[
+B(R)\le e^{T^2}B_0 e^{-A'(d-R)}.
+\]
+
+The lower bound on $J$ converts $e^{A'R}$ to
+$6\sqrt{1+A'd}\,I_0(A'R)$. The defining integral for the last term is
+
+\[
+I_0(A'R)=\int_{-\pi}^{\pi}\prod_j e^{A'\cos(\theta_j-\beta)}
+\frac{d\beta}{2\pi}.
+\]
+
+For fixed $\beta$ the factors normalize to independent von Mises
+angles with common parameter $A'$. Their product normalization is
+$I_0(A')^d$. Applying the upper Bessel bound at $A'$ and dividing by
+$G$ gives at most $e^{2T^2}$ times the probability of the column event
+in that product law. To check the constant, the extra exponent from
+$I_0(A')^d$ is at most $d/(2A')\le T$. Replacing the determinant's $A'$
+by $A$ costs at most $n/(2A')\le T$ in the exponent. The remaining
+factor is $6\sqrt{(1+A'd)/(2\pi A'd)}\le6$.
+
+If $E_\epsilon$ holds, for any $\beta$ at least one column angle
+has circular distance greater than $\epsilon/2$ from $\beta$.
+The von Mises tail at distance $t$ with parameter $z$ is at most
+$6\sqrt{1+z}\,e^{-zt^2/5}$, using $1-\cos t\ge t^2/5$ up to $\pi$
+and the lower bound on $J$. Thus the product-law probability
+is at most $6d\sqrt{1+A'}\exp[-A'\epsilon^2/20]$.
+Since $A'\le A\le n/4$, this bound is at most
+$6n^{3/2}\exp[-n^{1/5}/(40T)]$. Combining the two regions gives
+
+\[
+\int_{E_\epsilon} B(R)\thinspace{}d\theta
+\le G\left[e^{-n^2/(4T^2)}
++n^{3/2}e^{3T^2-n^{1/5}/(40T^2)}\right]
+\]
+
+with room in the weakened aligned-region exponent.
+
+\subsection{Normalization at the true subset covariance}
+
+The exact covariance of a single uniform-size row on the
+sum-zero column subspace is $d v_i/(d-1)$ times the identity.
+Indeed the diagonal variances are $v_i$, the off-diagonal
+covariances are $-v_i/(d-1)$, and the common-angle direction
+has variance zero. Their sum gives precision $\Lambda=dA/(d-1)$
+for the Gaussian exponent on that subspace.
+In the gauge with one column angle fixed, its matrix is
+$\Lambda(I_{d-1}-\mathbf1\mathbf1^{\mathsf T}/d)$, whose determinant
+is $\Lambda^{d-1}/d$.
+
+Stirling's lower bound for each row mean atom gives
+$b_i\ge(2\pi d v_i)^{-1/2}e^{-1/(12d v_i)}$.
+Here all $p_i$ are interior. Hence $B_0/(\prod_i b_i)\le e^{T^2/12}$.
+Changing the Gaussian factor from $A$ to $\Lambda$ costs only
+
+\[
+\left(\frac{\Lambda}{A}\right)^{(d-1)/2}
+=\left(1+\frac1{d-1}\right)^{(d-1)/2}<e^{1/2}.
+\]
+
+Together these yield the claimed tail in subset Gaussian units.
+
+For explicit numerical controls, $n^{1/4}\ge u/4\ge12/\delta$ ensures
+regular variances. Also $n\ge u^4/24$ gives $n\ge20T^2$ and
+$\log(2\pi n)<2u<n/(4T^2)$, using $T\le u$ and $u\ge10^6$.
+Use the sixth Taylor term for the aligned-region exponent:
+
+\[
+\frac{n^{1/5}}{40T^2}
+\ge\frac{u^6}{450{,}000{,}000T^2}
+\ge\frac{u^4}{450{,}000{,}000}>1000u^2.
+\]
+
+The diffuse exponent is also larger than $1000u^2$, since
+$n^2/(4T^2)\ge u^6/2304$. The prefactor $e^{T^2/12+1/2}$,
+the aligned loss $3T^2+(3/2)u$, and the extra factor of two from
+adding the regions are absorbed by this margin. In detail
+$(4+1/12)T^2+(23/2)u+1/2+\log2<1000u^2$ for $u\ge10^6$,
+so the sum is less than $e^{-T^2-10u}$. This verification uses
+only $d\ge100n/\log n$ and $u\ge10^6$.
+
+\section{Direct comparison of balanced quotas at logarithmic dimension scale}
+
+Let $u=\log n\ge10^6$, $100/u\le s=d/n\le1$, and $1\le r\le d$. If $k,k+1$ are feasible quotas and both densities belong to $[s/3,1-s/3]$, then, with $x_j=j/n$ and $L_j=(2\pi n x_j(1-x_j))^{-(d-1)/2}$,
+
+\[
+\left|\log\frac{Q_{k+1}}{\sqrt d L_{k+1}}-\log\frac{Q_k}{\sqrt d L_k}\right|<n^{-1/8}.
+\]
+
+Here $Q_j=a_j/U_j$, where $a_j$ is the balanced coefficient and $U_j$ counts all row-capped labeled arrays with $dj$ ones in total. We work with scalar row-size profiles conditioned on this total, as in the \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/comparison.md}{earlier coupling argument}. Put $\eta=n^{-1/4}$. Regularity means $|p_i-x|\le\eta$, $p_i=\ell_i/d$. With $A=\sum p_i(1-p_i)$ and $v=x(1-x)$, one has $A=nv-B$, $B=\sum(p_i-x)^2\le n\eta^2$. Since $v\ge2s/9$ and $\eta^2<s/50$, the true Gaussian precision $\lambda=dA/(d-1)$ is at least $d/5$. Also $d\ge100n/u\ge n^{.99}$, since $\log u\le .01u$ for $u\ge10^6$.
+
+\subsection{The fixed-profile coefficient after conditioning on each row sum}
+
+For row sizes as above, let $P_{\ell}$ be the probability of equal column sums under independent uniform row subsets, and put $G=\sqrt d(2\pi\lambda)^{-(d-1)/2}$. Write $Y_j=(Z_j-\bar Z)/\sqrt\lambda$ with independent standard Gaussians. Put $Q_b(Y)=\sum Y_j^b$. Using the summed subset cumulants in \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/direct-row-expansion.md}{the row expansion}, define
+
+\[
+\Phi=-\Gamma Q_3/6,\qquad \Pi=A_{\ast} Q_4/24+B_{\ast}Q_2^2/8,\quad m=\mathbb E\Pi,\qquad K_{\ell}=e^m\mathbb E\cos\Phi .
+\]
+
+We prove $|P_{\ell}/G-K_{\ell}|<n^{-0.18}$. The \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/direct-row-tail.md}{off-chart estimate} bounds the relative torus contribution above column diameter $\epsilon=n^{-2/5}$ by $n^{-10}$. On the complementary set the zero-sum column lifts have $M=\max|Y_j|\le\epsilon$, and their quotient-coordinate Gaussian density is normalized by $G$. Indeed the fixed-last-column form for variance $\lambda$ has matrix $\lambda(I_{d-1}-\mathbf1\mathbf1^{\mathsf T}/d)$ of determinant $\lambda^{d-1}/d$. With column sum $k$ and total row size $dk$, the Fourier integrand is invariant under a common shift. The chart contains all centered real vectors of maximum modulus at most $\epsilon/3$. Thus the Gaussian chart failure probability is at most $2d\exp[-\lambda\epsilon^2/18]$.
+
+On the chart the contribution is the real part of $\mathbb E[\mathbf1_{\mathcal C}e^{i\Phi+\Pi+R}]$, where $|R|\le8\lambda Q_2M^3$ and $|\Re R|\le6\lambda Q_2M^4$. Since $\lambda\le n$ and $Q_2\le d\epsilon^2$, $|\Re R|\le6nd\epsilon^6<1$. Under the Gaussian $\lambda Q_2$ is chi-square with $d-1$ degrees of freedom, of second moment $d^2-1$. Therefore $\|R\mathbf1_{\mathcal C}\|_2\le8d\epsilon^3\le8n^{-1/5}$.
+
+The coefficient bounds $|A_{\ast}|\le\lambda$ and $|B_{\ast}|\le2\lambda/d$, together with $Q_2^2\le dQ_4$, imply $2|\Pi|\le(7/12)\lambda Q_4$. In the centered Gaussian coordinates $T_j=Z_j-\bar Z$, this is at most $\sum_j T_j^4/\lambda$. The event $|\bar Z|\le1$ is independent of the centered coordinates and has probability at least $1/2$. Insert it on the chart at cost at most two, use $T_j^4\le8(Z_j^4+1)$, and observe that $|Z_j|\le1+\sqrt\lambda\,\epsilon\le2n^{1/10}$. With $t=8/\lambda$, one has $4tn^{1/5}\le1/4$ since $\lambda\ge d/5\ge n^{.99}/5$. For a standard normal $Z$,
+
+\[
+\mathbb E[e^{t Z^4}\mathbf1_{|Z|\le2n^{1/10}}]\le 1+t\mathbb E[Z^4 e^{Z^2/4}]\le1+20t .
+\]
+
+The independent product gives $\mathbb E[e^{2|\Pi|}\mathbf1_{\mathcal C}]\le2e^{21td}\le2e^{840}$ because $d/\lambda\le5$. The row expansion gives $|m|\le15/8$, $\|\Pi-m\|_2\le1.5\sqrt d/\lambda\le8/\sqrt d$, and $\mathbb E\cos\Phi\ge7/12$. Hence $1/16<K_{\ell}<8$. Replacing $e^{i\Phi+\Pi+R}$ by $e^{i\Phi+m}$ on the chart has expected absolute error at most
+
+\[
+e^{422}\left(8n^{-1/5}+16/\sqrt d\right)
+\]
+
+by Cauchy--Schwarz, $|e^z-1|\le |z|e^{\max(0,\Re z)}$ and $|e^z-e^m|\le |z-m|(e^{|z|}+e^{|m|})$ for real $z$. Extending the last bounded integrand to the entire Gaussian incurs at most $16d e^{-\lambda\epsilon^2/18}$. This is less than $n^{-10}$ since $\lambda\epsilon^2\ge n^{.19}/5$ and $u\ge10^6$. Adding the torus tail proves the $n^{-.18}$ estimate. In particular it is valid at a feasible saturated endpoint.
+
+\subsection{Comparing the fixed-profile factors under the monotone coupling}
+
+Couple neighboring scalar profiles by coordinatewise ordering. The two totals differ by $d$, so $\sum_i|p_i'-p_i|=1$. The cumulants vary regularly enough for this strong distance. For fixed $d\ge10$, regard the formulas in the row expansion as polynomials in $p$. Their derivatives on the interval $[0,1]$ satisfy
+
+\[
+|a'|\le2,\quad |\gamma'|\le5,\quad |(dB_4)'|\le20,\quad |A_4'|\le30 .
+\]
+
+Indeed $dB_4= da((4d-6)a-(d-1))/((d-2)(d-3))$, $0\le a\le d/(4(d-1))$ and $A_4=a-6(a^2+B_4)$. Thus the changes of $\lambda,\Gamma,dB_{\ast},A_{\ast}$ are bounded by $2,5,20,30$, respectively. Under joint regularity both precisions exceed $d/5$. Coupling the two Gaussians by the same centered standard normals, the cubic phases involve the same variable $d^{-1/2}\sum T_j^3$ of $L^2$ norm at most $\sqrt6$, multiplied by $-\Gamma\sqrt d/(6\lambda^{3/2})$. The change of this coefficient is below $100/d$ by the preceding bounds. To see this by differentiation along the segment of the two pairs $(\Gamma,\lambda)$, $|\Gamma|\le\lambda$ and $\lambda\ge d/5$ on the segment.
+
+The exact quartic mean is
+
+\[
+m=\frac{A_{\ast}d(1-1/d)^2+B_{\ast}(d^2-1)}{8\lambda^2} .
+\]
+
+The same segment argument bounds its change by $1000/d$, since $|A_{\ast}|\le\lambda$, $|dB_{\ast}|\le2\lambda$ and the numerator changes by at most $50d$. The cosine expectations at either end exceed $7/12$. It follows that $|\log K_{\ell'}-\log K_{\ell}|<2000/d$. The corresponding log difference for the actual normalized fixed-profile probabilities $P_\ell/G$ is at most $2000/d+64n^{-.18}$.
+
+Besides this factor, the scalar weight $H_k(\ell)=P_\ell/(\sqrt d L_k)$ consists exactly of the factor $((d-1)/d)^{(d-1)/2}$ and the determinant $(1-B/(nv))^{-(d-1)/2}$. The first factor is independent of $k$. If both profiles are regular, $|B'-B|\le4\eta$ by monotonicity and centering, $B,B'\le n\eta^2$, and $|v'-v|\le1/n$. With $v,v'\ge s/5$, $B/(nv)<1/2$, the change in the determinant log is at most $20\eta+25\eta^2/s$, by the derivative bound of $-\log(1-z)$ on this range. Hence the total regular-pair log difference is below $n^{-1/6}$ for $u\ge10^6$.
+
+\subsection{Averaging the two profiles}
+
+The actual and scalar irregularity probabilities are bounded by $t'=2n^2e^{-d\eta^2/2}$ and $t=2n(nd+1)e^{-2d\eta^2}$ as in the earlier two-row and tilted-binomial estimates. Also $((d-1)/d)^{(d-1)/2}\ge e^{-1/2}$ and the determinant log is in $[0,5B]$. Thus $1/40\le H\le10e^{5B}$ on regular profiles; the fixed-profile lower bound $K> (7/12)e^{-15/8}$ leaves room in the constant. In particular $W_k=\mathbb EH_k\ge1/80$. The scalar second-moment calculation for $H^2\mathbf1_{\rm regular}$ costs at most $100(nd+1)\exp(20 n/d)$: for a single unconditioned tilted row $S$ the binomial Hoeffding bound gives $\mathbb E e^{10(S/d-x)^2}\le1+20/(2d-10)$. Since $n/d\le u/100$, this second moment is bounded by $n^3$. The fraction lost by requiring joint regularity is at most $t'+80\sqrt{tn^3}<1/n$ since $d\eta^2\ge n^{.49}$. Combining $n^{-1/6}$ with the two discarded log errors gives the stated comparison. $\square$
+
+\section{Explicit geometric-node tolerances at any positive linear aspect}
+
+The theta comparison is already part of the
+\href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sectors/sector-proof.md}{effective high-cap sector}.
+Its \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sectors/sector-logarithmic.md}{logarithmic sector supplement}
+also uses Poisson summation for the lower bound. The new quantitative
+ingredient here is a tolerance in terms of the \emph{actual center curvature},
+with Gaussian-weighted perturbation control instead of treating every
+term in the finite window at its maximum relative error. This gives an
+explicit all-cap reduction. The estimate for the change in the balancing probability is proved separately.
+
+\subsection{A finite sign lemma}
+
+Let $P(z)=\sum_{j=0}^D a_jz^j$ have positive log-concave coefficients and
+put $b_j=\log(a_j^2/(a_{j-1}a_{j+1}))$ at its internal indices. For a
+center $k$ define $t_k=\sqrt{a_{k-1}/a_{k+1}}$. If $b_k>\log4$,
+coefficient separation gives $(-1)^kP(-t_k)>0$. Otherwise suppose
+$0<\lambda\le b_k/2\le\log2$. Let $J$ be the smallest odd integer
+at least $2/\lambda$ and set
+
+\[
+\epsilon_{\theta}(\lambda)=\frac{\lambda}{4}
+  \exp\left(-\frac{\pi^2}{4\lambda}\right).
+\]
+
+If $k-J\ge0$, $k+J\le D$, and
+$|b_{k+i}-b_k|\le\epsilon_{\theta}(\lambda)$ for $1\le |i|\le J-1$,
+then $(-1)^kP(-t_k)>0$. The radius is explicitly smaller than
+$2/\lambda+2$.
+
+To prove this, write $w_{\pm j}=a_{k\pm j}t_k^{\pm j}/a_k$ and
+$a=b_k/2$. The normalized first neighbors are both $e^{-a}$.
+Iterating the logarithmic coefficient ratios on each side gives
+
+\[
+\log w_{\pm j}=-j b_k/2-\sum_{i=1}^{j-1}(j-i)b_{k\pm i}.
+\]
+
+Let $\epsilon=\epsilon_\theta(\lambda)$. At $j\le J$, the exponent differs
+from $-a j^2$ by at most $\epsilon j^2/2$. The difference of exponentials
+is therefore at most $(\epsilon j^2/2)e^{-\lambda j^2/2}$, using
+$a\ge\lambda$ and $\epsilon\le\lambda$. Summing both sides of the
+center bounds the perturbation by
+
+\[
+\epsilon\sum_{j\ge1}j^2e^{-\lambda j^2/2}
+\le 3\epsilon\lambda^{-3/2}.
+\]
+
+Indeed $j^2e^{-\lambda j^2/4}\le4/(e\lambda)$, and the remaining
+Gaussian sum is at most its integral on $[0,\infty)$, which equals
+$\sqrt{\pi/\lambda}$. We used $4\sqrt\pi/e<3$.
+
+Poisson summation at frequency one half gives
+
+\[
+\sum_{j\in\mathbb Z}(-1)^j e^{-a j^2}
+=\sqrt{\pi/a}\sum_{m\in\mathbb Z}e^{-\pi^2(m+1/2)^2/a}
+\ge 2\sqrt{\pi/\lambda}e^{-\pi^2/(4\lambda)}=:M_\lambda .
+\]
+
+For the last step keep just $m=0,-1$ and note that
+$a^{-1/2}e^{-\pi^2/(4a)}$ increases up to $a=\pi^2/2$.
+The perturbation above is less than $M_\lambda/4$.
+The omitted ideal tail has absolute value at most
+$2e^{-\lambda(J+1)^2}/(1-e^{-\lambda(2J+3)})$.
+Since $J\ge2/\lambda$, $\pi^2<10$, and $\lambda\le\log2<.7$,
+its ratio to $M_\lambda$ is at most
+$e^{-3/(2\lambda)}/(1-e^{-4})<7/48<1/6$.
+Thus the truncated actual signed sum is strictly positive. The
+remaining actual terms start at even distance from the center because
+$J$ is odd. Their magnitudes decrease outward by log-concavity, so
+pairing them leaves a nonnegative contribution on each side.
+
+For the baseline $b_j\ge4\delta/(1+2/n)$ at prescribed $\delta>0$,
+one can use $\lambda=2\delta/(1+2/n)$ whenever there are difficult
+centers. Alternatively fix any positive $\lambda<2\delta$ with
+$\lambda\le\log2$ and require $n$ large enough that the baseline implies
+it. The tolerance has exponential order $\exp(-\pi^2/(8\delta))$ as
+$\lambda$ approaches $2\delta$, rather than the $\exp(-O(\delta^{-2}))$
+lower bound from the crude triple-product estimate. No claim of
+optimality or novelty for the underlying sign method is made.
+
+\subsection{From the profile comparison to scalar curvature}
+
+Take $0<\delta\le1$, $\delta n\le d\le n$ and $1\le r\le d$.
+The orientation baseline implies that every difficult center
+$\Gamma_k\le4$ has $k/n\in(\delta/4,1-\delta/4)$ for $n\ge8/\delta$.
+For example, when $x=k/n\le\delta/4$, the baseline logarithm is at
+least $d/(k+1)\ge8/3>\log4$, using $\log(1+u)\ge u/(1+u)$.
+The opposite side is symmetric. Larger dimensions $d\ge n$ are
+already covered by separation.
+
+Suppose that an effective balancing comparison gives
+$|E_{j+1}-E_j|\le\epsilon_\theta(\lambda)/16$ for consecutive feasible
+quotas with densities in $[\delta/8,1-\delta/8]$, for all sufficiently
+large $n$. Here $E_j=\log(Q_j/L_j)$ is as in \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/scalar.md}{the scalar local limit estimate};
+a constant factor such as $\sqrt d$ in the normalization cancels.
+Only the two immediately adjacent edges and the edges in the feasible local window are used. The proof applies when the slope estimate is available at these edges. The following deductions reduce all difficult centers to the sign lemma.
+
+First apply the comparison only at the two immediate edges of a
+difficult center, which are feasible even next to saturation. The
+contribution of the baseline $\log L$ is $O_\delta(1/n)$ by a second
+derivative bound on this density window. Thus the logarithmic scalar
+deficit curvature is less than two when $n$ is sufficiently large.
+The \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/README.md}{scalar deficit comparison}
+bounds it below by
+
+\[
+\frac{d(n-1)}{n+d(h+1)-1}\log(1+1/h)
+\ge \frac{n-1}{(h+1)(h+1+1/\delta)},
+\qquad h=nr/d-k.
+\]
+
+This forces $h>\sqrt n/2$ for large $n$: if $h\le\sqrt n/2$ and
+$n\ge100(1+1/\delta)^2$, the denominator is at most $(.6\sqrt n)^2$.
+Thus the full fixed window of radius $J+1$ is feasible at every
+difficult center. There is no need to assume a separate saturation strip.
+
+Second, the proof of \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/scalar.md}{the scalar local limit estimate} applies uniformly on this
+fixed window. For clarity, for $n$ sufficiently large each local
+deficit is at least $\sqrt n/4$ and each density at least $\delta/8$,
+so the carried-load bound gives $V\ge\delta^2\sqrt n/32$ at the tilted
+row means. The explicit scalar local limit estimate then applies.
+The scalar prefactor curvature is $O(10^9\delta^{-1}n^{-1/4})$ by
+the standard-deviation Lipschitz bound. Its local-limit log error is
+$O(10^{11}n^{-1/4})$. These bounds follow directly from the constants
+in scalar.md and are effective. The center entropy curvature is
+therefore at most three for large $n$. Its triangular-kernel
+representation then gives $\sigma\ge\delta\sqrt{n/3}$ at some
+center-window mean. Using $|d\sigma/d\mu|\le10^9$ over at most $J+2$
+mean units ensures $\sigma\ge\delta\sqrt n/2$ on the whole window
+for explicitly large $n$. The variation in rate curvature between
+the center and any of its tested indices is at most
+$16\cdot10^9J\delta^{-3}/\sqrt n$, since
+$|(1/V)'|\le2\cdot10^9/\sigma^3$. The profile error contributes
+at most four times its assumed slope tolerance to the variation.
+The scalar errors and the baseline density curvature can each be
+made smaller than the remaining margin by increasing $n$ by a
+computable amount. Hence the required log-curvature tolerance holds.
+The sign lemma and increasing geometric nodes give all simple
+negative roots.
+
+For example, an explicit sufficient row cutoff \emph{in addition to that
+required by the hypothesized profile comparison} is any integer satisfying
+
+\[
+n\ge10^{200},\qquad
+\sqrt n\ge\frac{10^{12}(J+2)}{\delta^3\epsilon_\theta(\lambda)},\qquad
+n^{1/4}\ge\frac{10^{14}}{\delta\epsilon_\theta(\lambda)},
+\qquad
+\lambda\le\frac{2\delta}{1+2/n}.
+\]
+
+Here $0<\lambda\le\log2$ can be fixed strictly below $2\delta$.
+The inequalities ensure that the window fits in the feasible support
+and density interval after the deficit bootstrap. They make the
+scalar prefactor and local-limit log errors together smaller than
+$\epsilon_\theta/16$, since those errors are bounded in each
+curvature by $(5\cdot10^{11}/\delta)n^{-1/4}$.
+The absolute baseline density-curvature error is at most
+$64/(\delta^2 n)<\epsilon_\theta/16$. The standard-deviation bootstrap
+loses at most $10^9(J+2)$, and the entropy variation bound above is
+smaller than $\epsilon_\theta/16$. Taking differences of the two
+curvatures and adding the assumed slope losses therefore stays
+strictly below $\epsilon_\theta$. These constants are intentionally loose.
+
+\end{document}
