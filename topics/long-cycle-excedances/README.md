@@ -1,5 +1,7 @@
 # Excedance zeros for permutations with long cycles
 
+For every minimum cycle length $k\ge3$, the pair from $3k-1$ to $3k$ has simple negative nonzero roots and strictly interlaces. It is the first pair whose next row can contain three cycles. [All-size transition theorem and exact replay](first-three-cycle-boundary.md) · [Independent review](review-first-three-cycle-boundary.md)
+
 For every $n\ge10^{20}$ and every $3\le k\le n$, the nonzero roots are simple, negative and strictly interlace the next row at the same $k$. Another explicit sufficient condition is $n\ge10^6$ and $n/(200k)>30\log n+20$. The proof counts phase crossings and needs no monotonicity assumption. The finite complement remains too large for exhaustive verification. [Proof](effective-uniform.md) · [Independent review](review-uniform-effective.md) · [Earlier existence argument](uniform-interlacing.md)
 
 

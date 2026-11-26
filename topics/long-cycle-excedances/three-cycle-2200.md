@@ -78,7 +78,7 @@ Second, for the occupied set $\lbrace -1,1\rbrace$, the logarithmic derivative o
 
 Finally replace $K(p)$ by $1+(149/100)(p^2-1)/192$. The same envelope exponents $23,96,64$ apply and $A=kS\ge14$, $nS\ge(29/10)A$. Let $E$ and $D$ denote the upper bounds on the scaled value error and scaled derivative error relative to $2d_n\cos(n\theta)$ and $-2d_n\sin(n\theta)$, respectively, including both the occupied-pole and far single-pole terms. Let $J$ bound $k|B_kF_m|/(nS)$. The checker, using the same finite sums through nine and integral tails, gives $1-E^2>(19/100+D)^2$ and $J<16/100$. In particular $E<1$, so the integer sample signs are $(-1)^j$. At an old zero $|\cos(n\theta)|<E$ and $k|F_n'|/n>19/100$, using $2kd_n\ge1$. In the common insertion scaling this exceeds the lag bound $16/100$. Reflection, degree exhaustion, and both outside next intervals finish exactly as in the companion proof.
 
-This leaves the remainder $3k-1\le n<\min(4k,2200)$ for sharper estimates or exact verification.
+The first transition $n=3k-1$ also holds below this cutoff. After combining the two arguments, the part of the band still outside their scope is $3k\le n\lt \min(4k,2200)$. [All-size first transition](first-three-cycle-boundary.md)
 
 ## Verification
 
