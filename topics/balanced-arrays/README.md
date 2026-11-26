@@ -2,6 +2,8 @@
 
 One absolute threshold $N$ gives $\lfloor nr/d\rfloor$ simple negative zeros for every $n\ge N$, $d\ge2$, and $1\le r\le d$. The threshold is ineffective, and the original all-row-count conjecture remains open. **⬜ None** for Lean or Rocq. [Proof and independent reviews](eventual-all/README.md)
 
+A [proposed coefficientwise comparison for the size of one row](marked-row-likelihood/README.md) gives a finite real-rootedness criterion at every cap greater than one and a second sign proof for the million-row instance. Both await independent review.
+
 A [finite root-count estimate and five limiting distributions](root-distributions/README.md) locate the moduli of the zeros, including the cap and corank boundaries.
 
 Earlier bounds include the [five-thirds row bound and polynomial cap or corank range](fifth-thirds/README.md), [all fixed quadratic aspects](critical-aspect/README.md), the [absolute quadratic cutoff](quadratic/README.md), [quartic-log cutoff](very-tall/README.md), and [dimension-uniform fixed-cap threshold](fixed-cap/README.md).

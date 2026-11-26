@@ -1,0 +1,9 @@
+9848 exact couplings across 6025 small-cap fibers.
+13103 nonempty weighted fibers enumerated in total.
+21869 nonzero tilted size comparisons.
+1260 coefficientwise comparisons.
+231 coefficient vectors agreed by row and column counting.
+n=10000, r=2, d=130: unrestricted floor < 4 < new uniform floor.
+n=10000, r=3, d=190: unrestricted floor < 4 < new uniform floor.
+n=10000, r=4, d=220: unrestricted floor < 4 < new uniform floor.
+n=10000, r=12, d=395: unrestricted floor < 4 < new uniform floor.

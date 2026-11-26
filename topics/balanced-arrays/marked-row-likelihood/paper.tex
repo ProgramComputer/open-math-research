@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\q}{\boldsymbol q}
+\title{A sharp coefficientwise comparison for the size of a row in a binary array}
+\author{ProgramComputer}
+\date{Research draft, November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We compare the size of a distinguished row in two binary matrices whose column margins differ by one in every coordinate. An orientation inequality of Kahn and Neiman, applied after weighting the partner of an auxiliary cell in each column, gives an explicit exponential tilt in likelihood ratio order. The comparison holds coefficientwise in the cell weights and the factor is attained at every size gap. For balanced columns with upper row bound $r$, it gives a finite sufficient condition for simple negative roots. At fixed $r$ the condition captures regimes $d^2/n\to c$ with $(r-1)\log4<c<r\log4$, where the unrestricted binomial curvature alone falls below the factor-four threshold.
+\end{abstract}
+
+\section{The comparison}
+Consider $n$ labeled rows and $d$ labeled columns. Each unmarked row has a prescribed interval of admissible sizes. For a fixed marked row, let $F_{\q}(u)$ be the generating polynomial of arrays with column sums $\q$, marked size $u$, and a separate commuting indeterminate for each occupied cell. Write $A\succeq B$ if $A-B$ has nonnegative coefficients.
+
+\begin{theorem}\label{th:tilt}
+Let $0\le q_j<n$ and let $K$ be a positive integer with $K\ge\max_j\min(q_j,n-q_j-1)$. If $s<t$, then
+\[
+ F_{\q}(s)F_{\q+\one}(t)
+ \succeq (1+1/K)^{t-s}F_{\q}(t)F_{\q+\one}(s).
+\]
+For every $K$ and every positive size gap the factor is attained at a cell monomial.
+\end{theorem}
+
+\begin{proof}
+Use red for an array of smaller column margins and blue for one of larger margins. A monomial of the product specifies exactly which cells are common to both colors and which belong to just one. In column $j$ let $h_j$ be the number of red-only cells. There are $h_j+1$ blue-only cells. The fixity of the common cells and the margins fixes $h_j$, and $h_j\le \min(q_j,n-q_j-1)$.
+
+Give each column a separate auxiliary red cell on an extra row. In column $j$ pair the $h_j+1$ red-only slots bijectively with the blue-only slots. Set $\rho=K/(K+1)$. If the auxiliary cell is paired with the marked cell, assign the pairing weight $1-(h_j+1)/(K+1)$ in that column. Every other column factor is one. All factors are nonnegative. For a fixed array pair with a blue-only mark in the column, exactly $1/(h_j+1)$ of the bijections pair it with the auxiliary cell. Thus the weighted multiplicity is $(h_j+1)!\rho$ in this case and $(h_j+1)!$ otherwise.
+
+Fix the resulting unordered pairs. Their edges join rows, retain their labels, and point from red to blue. Orientations determine the underlying array pairs. In a row with $H$ incident edges and $c$ common cells, the two sizes are $c+\deg^+$ and $c+\deg^-$. If both colors must lie in $[l,u]$, each directed degree must be at least $\max(0,l-c,H+c-u)$. An auxiliary vertex requires outdegree one.
+
+Write $c_*$ for the number of common marks. A source orientation gives the red row size $t$ and the blue row size $s$. Thus at the marked vertex its out- and indegrees are $t-c_*$ and $s-c_*$. Interchanging these requirements gives the target. For nonzero source count both are nonnegative. Their sum is the whole degree, so lower bounds suffice. For fixed total data incompatible with $t+s$ both counts vanish. The source outdegree lower bound dominates both target lower bounds at every vertex, and the sum of the two bounds is preserved there. By Kahn and Neiman's orientation comparison \cite[Lemma 8]{kn}, the source count is at most the target count.
+
+Multiply by the weights of the fixed pairings and sum on the same cell monomial. Apart from the common product of factorials, source pairs have multiplicity $\rho^{s-c_*}$ and target pairs have multiplicity $\rho^{t-c_*}$. Cancellation gives the claimed factor.
+
+For equality take $n=2K+1$, unrestricted rows and column sums $K$ in the smaller array. For $s=0,t=d$ select the monomial in which every cell occurs once. In each column the red cells outside the mark can be chosen in $\binom{2K}{K}$ ways for the target and $\binom{2K}{K-1}$ for the source. The choices in the columns are independent, giving the claimed ratio exactly.
+\end{proof}
+
+\section{Application to balanced columns}
+Let $a_k$ count arrays with all column sums $k$ and all row sizes at most $r$. Alexandersson asks whether $\sum_k a_k x^k$ is real-rooted \cite{alex}. Its positive support is $0,\ldots,D$, where $D=\lfloor nr/d\rfloor$. To realize a feasible vector of column margins, allocate blocks of the successive prescribed lengths around a cyclic ordering of the rows. Each block uses distinct rows and all row sizes differ by at most one.
+
+\begin{corollary}\label{cor:roots}
+Suppose $2\le r<d$. All roots are simple and negative if
+\[
+ \left(1+\frac{d}{d+n(r-1)}\right)^d>4.
+\]
+\end{corollary}
+
+\begin{proof}
+Only $D\ge2$ needs an argument. Fix $1\le k<D$. Along the path that raises each column from $k-1$ to $k$ in order, let $\q$ denote a base and $i$ the next column. The corresponding base on the next path is $\q+\one$. In the original base let $e$ be the probability of saturation in a fixed row conditional on missing column $i$. Write $e^+$ for the analogous probability in the increased base. The conditional events have positive probability by feasibility and row symmetry.
+
+In both models give that cell zero weight. Apply Theorem~\ref{th:tilt} with $K=k$ and $\lambda=1+1/k$. Summing the cross-inequalities with the top size $r$ shows that $e^+$ is at least the top probability in the original law tilted by $\lambda^J$, where $J$ is the conditional row size. For $U=r-J$ put $v=\mathbb E[\lambda^{-U}\mid U>0]\le1/\lambda$. Positive survival in either fiber follows from the feasibility of the next insertion. Therefore
+\[
+ e^+\ge\frac{e}{e+(1-e)v},\qquad
+ \frac{1-e}{1-e^+}\ge 1-e+e/v\ge1+e/k .
+\]
+The normalized extension ratio, after dividing counts by $\prod_h\binom n{q_h}$, is $1-e$ by counting insertions and inverse deletions. The previously proved orientation bound \cite{orient} shows that $e$ is nondecreasing in every column quota, so $e\ge e_0$, its value at equal quota $k-1$. In that balanced fiber let $y=d(k-1)/n$ and $J_0$ denote the unrestricted marked size. Row and column symmetry give
+\[
+ e_0=\frac{d-r}{d-y}\Pr(J_0=r)\ge \frac{d-r}{d-y}(y-r+1)_+ ,
+\]
+since $\mathbb EJ_0=y$ and $J_0\le r-1+\one_{\{J_0=r\}}$. Multiplying the survival ratios along the paths and restoring the binomial coefficients gives
+\[
+ \left(\frac{a_k^2}{a_{k-1}a_{k+1}}\right)^{1/d}
+ \ge (1+1/k)(1+1/(n-k))(1+e_0/k).
+\]
+Now $1+e_0+k/(n-k)\ge\max(1,y/(r-1))$. Indeed for $y>r-1$ put $h=y-r+1$. Both $h$ and $r-y$ lie in $[0,1]$, and $y\ge1$. As $k/(n-k)\ge y/(d-y)$, the two lower bounds give $e_0+k/(n-k)\ge h$, and $1+h\ge y/(r-1)$. The case $y\le r-1$ is immediate. Keeping just the linear terms in the preceding product and using $k=1+ny/d$ yields the lower bound $1+d/(d+n(r-1))$.
+
+Finally, second quotients strictly greater than four give alternating signs at the increasing geometric centers $v_k=\sqrt{a_{k-1}/a_{k+1}}$ on the negative axis. Relative to the central term each first neighbor has magnitude less than $1/2$. Each alternating tail from distance two contributes nonnegatively by log-concavity. The signs at zero, at the test points and at negative infinity supply $D$ distinct roots.
+\end{proof}
+
+For every fixed $r\ge2$, if $d\to\infty$ and $d^2/n\to c$, the log of the sufficient bound tends to $c/(r-1)$. In contrast the log of the unrestricted binomial second quotient at $k=D-1$ tends to $c/r$. This proves the comparison of regimes in the abstract. A separate finite calculation in the accompanying repository applies concentration to the same weighted-pairing argument at $n=10^6,d=250000,r=127000$.
+
+\begin{thebibliography}{9}
+\bibitem{alex} P. Alexandersson. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays}{Balanced arrays of uniform matroids}. The symmetric functions catalog.
+\bibitem{kn} J. Kahn and M. Neiman. Conditional negative association for competing urns. \emph{Random Structures \& Algorithms}, \href{https://doi.org/10.1002/rsa.20395}{doi:10.1002/rsa.20395}. Lemma numbers refer to \href{https://arxiv.org/abs/1001.0610}{arXiv:1001.0610}.
+\bibitem{orient} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/blob/64b3d20d5fa9a8d2eb502de1531969aff6a0fec4/topics/balanced-arrays/orientation-normalization.md}{An orientation proof of normalized log-concavity for balanced arrays}.
+\end{thebibliography}
+\end{document}
