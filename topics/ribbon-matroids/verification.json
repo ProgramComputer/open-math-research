@@ -855,7 +855,7 @@
     },
     "blind_coverage_review": {
       "file": "topics/ribbon-matroids/formal-coverage-review.md",
-      "sha256": "7149fdbf2e16ca6c477a712ad9c40bb57c61abb3986855317a4f607c4fa0740b",
+      "sha256": "f891e49bf5032e209a4a373e3dfcbc950aba8c22bc2465b9aac80c2f35dd6e8b",
       "method": "Agent-assisted blind review of the anonymized written argument and Lean source statements. Build and independent-kernel replay are separate machine checks.",
       "verdict": "The definitions and exported statements cover the exact nonempty ribbon conjecture and the stronger simple-negative-root result."
     }
