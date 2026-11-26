@@ -1,6 +1,6 @@
 name = "open_math_research"
 version = "0.1.0"
-defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns", "BalancedThreeColumnCounting", "CatalanStrictPeaksInterlacing", "CatalanStrictPeaksRecurrence", "CatalanStrictPeaksDiscriminant", "CatalanStrictPeaksCutParameter", "CatalanStrictPeaksCutBounds", "CatalanStrictPeaksMomentArithmetic", "CatalanStrictPeaksBetaMoments", "CatalanStrictPeaksAnalyticBranch", "CatalanStrictPeaksRayTransfer", "CatalanStrictPeaksNearAmplitude", "CatalanStrictPeaksFarRay", "CatalanStrictPeaksNormalizedRays"]
+defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns", "BalancedThreeColumnCounting", "CatalanStrictPeaksInterlacing", "CatalanStrictPeaksRecurrence", "CatalanStrictPeaksDiscriminant", "CatalanStrictPeaksCutParameter", "CatalanStrictPeaksCutBounds", "CatalanStrictPeaksMomentArithmetic", "CatalanStrictPeaksBetaMoments", "CatalanStrictPeaksAnalyticBranch", "CatalanStrictPeaksRayTransfer", "CatalanStrictPeaksNearAmplitude", "CatalanStrictPeaksNearCovariance", "CatalanStrictPeaksFarRay", "CatalanStrictPeaksNormalizedRays"]
 
 [[require]]
 name = "mathlib"
@@ -196,6 +196,14 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
 name = "CatalanStrictPeaksBetaMoments"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksCovarianceArithmetic"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksNearCovariance"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
