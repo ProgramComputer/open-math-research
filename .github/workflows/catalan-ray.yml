@@ -69,18 +69,5 @@ jobs:
         run: |
           lake env lean -j1 ../../topics/catalan-word-peaks/lean/RayTransferAxioms.lean |
             tee "$RUNNER_TEMP/catalan-ray-axioms.txt"
-          python3 - "$RUNNER_TEMP/catalan-ray-axioms.txt" <<'PYTHON'
-          from pathlib import Path
-          import re
-          import sys
-
-          report = Path(sys.argv[1]).read_text()
-          groups = re.findall(r"depends on axioms: \[([^\]]*)\]", report)
-          if len(groups) != 8:
-              raise SystemExit("Expected eight theorem axiom reports")
-          allowed = {"propext", "Classical.choice", "Quot.sound"}
-          for group in groups:
-              unexpected = {name.strip() for name in group.split(",")} - allowed
-              if unexpected:
-                  raise SystemExit(f"Unexpected axioms {unexpected}")
-          PYTHON
+          diff -u ../../topics/catalan-word-peaks/lean/ray-transfer-kernel.txt \
+            "$RUNNER_TEMP/catalan-ray-axioms.txt"
