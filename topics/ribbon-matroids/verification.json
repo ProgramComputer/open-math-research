@@ -112,12 +112,21 @@
     ],
     "status": "passed",
     "upstream_source_rebuild": {
-      "status": "pending",
+      "status": "passed",
       "scope": "Union of direct mathlib imports for all six published results and their transitive prerequisites, rebuilt without a mathlib object cache. The Lean standard library is supplied with the pinned compiler release.",
       "workflow": "https://github.com/ProgramComputer/open-math-research/actions/runs/45762866977/job/139716713982",
       "command": "mapfile -t modules < upstream-roots.txt; targets=(); for module in \"${modules[@]}\"; do targets+=(\"+$module:olean\"); done; MATHLIB_NO_CACHE_ON_UPDATE=1 lake build \"${targets[@]}\"",
-      "module_list": "upstream-roots.txt in the stable-upstream-source-rebuild artifact",
-      "reproducer": ".github/workflows/publication-dependencies.yml"
+      "module_list": "shared/lean/publication/upstream/roots.txt",
+      "reproducer": ".github/workflows/publication-dependencies.yml",
+      "direct_upstream_roots": 75,
+      "lake_jobs": 5930,
+      "mathlib_olean_count": 2671,
+      "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45762866977/artifacts/15092401006",
+      "hosted_artifact_digest": "sha256:9107c0d5a3dc6aa8ea5ac9b3960a43958f5f22b59550ce6c8efbe5b073ffe6ee",
+      "module_list_sha256": "7415aaba714ae8ed3c8d155662602bc2ba94d3b45689d22a85579a904149944a",
+      "olean_manifest": "shared/lean/publication/upstream/olean-sha256.txt.gz",
+      "uncompressed_olean_manifest_sha256": "fb30abd6e41cfc3f2152a4771136b99b42c371b32a79031d9c22b7999e69aaa4",
+      "build_log_sha256": "0c3e8ec191f2631823a31cbcb7e90c126dc05dfdf9874f741cfe1a3df1325111"
     }
   }
 }

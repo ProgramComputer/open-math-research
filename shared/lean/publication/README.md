@@ -13,7 +13,7 @@ The baseline is the public research release at commit `312293aa850010e9d9509d685
 | [Eulerian matrix square](../../../topics/eulerian-matrix-square/verification.json) | Passed, 5 declarations | Outside the Partial audit |
 | [Ribbon matroids](../../../topics/ribbon-matroids/verification.json) | Passed, 13 declarations | Outside the Partial audit |
 
-The four Partial rows cover the components identified in their topic records. A separate [upstream source rebuild](https://github.com/ProgramComputer/open-math-research/actions/runs/45762866977/job/139716713982) tracks compilation of their shared mathlib prerequisites.
+The four Partial rows cover the components identified in their topic records. A separate [upstream source rebuild](https://github.com/ProgramComputer/open-math-research/actions/runs/45762866977/job/139716713982) completed all 5,930 Lake jobs for the 75 distinct direct mathlib imports and their prerequisites. The manifest records 2,671 rebuilt mathlib objects. [Import list](upstream/roots.txt) · [Object hashes](upstream/olean-sha256.txt.gz)
 
 ## Reproduction
 
