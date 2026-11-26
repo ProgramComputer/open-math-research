@@ -46,4 +46,8 @@ python3 -I topics/long-cycle-excedances/verify_uniform_effective_constants.py
 
 Marking the cycles gives a continuous deformation from Eulerian rows to the conjectured rows. A resultant detects collisions. In 91 exact cases strict interlacing holds throughout the unit interval, and a symbolic example shows why the unrestricted positive-weight extension fails. [Argument and data](cycle-marking.md)
 
+Bernstein coefficient matrices of the shared-weight Bézoutian certify interlacing on the unit interval for 225 consecutive pairs through old size 34 and for $(n,k)=(48,21)$. An exact negative middle coefficient at $(5376,2560)$ and an infinite family show where that matrix certificate fails. [Proof and scope](bernstein-bezout.md) · [Exact checker](verify_bernstein_bezout.py)
+
 Giving consecutive rows independently chosen cycle weights causes the order of a fixed-rank root to reverse, even for arbitrarily small fixed increases of the weight. The obstruction identifies why adjacent rows need to share the parameter. [Proof and rational witness](independent-cycle-weights.md)
+
+Refining by the image of the largest letter rules out a termwise interlacing induction at every $n\ge2k$. Even the two extreme ranks combined fail the comparison at $n=2k$ for every $k\ge4$. [Terminal-rank identities and exact obstructions](terminal-rank.md)
