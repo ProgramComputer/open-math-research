@@ -92,3 +92,12 @@ jobs:
             tee "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/near-amplitude-kernel.txt \
             "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"
+      - name: Check the successive-size near-ray estimates
+        run: lake build CatalanStrictPeaksNearCovariance
+      - name: Audit the quantitative covariance bounds
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearCovarianceAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-near-covariance-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/near-covariance-kernel.txt \
+            "$RUNNER_TEMP/catalan-near-covariance-axioms.txt"

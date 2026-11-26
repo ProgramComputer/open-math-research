@@ -679,4 +679,148 @@ theorem nearTiltCovariance_sub_const {d : ℝ} {n : ℕ}
   rw [setIntegral_congr_fun measurableSet_Ioi (fun s _ => hpoint s),
     integral_sub hg (hv.const_mul a), integral_const_mul, hvInt, mul_zero, sub_zero]
 
+/-- The conjugate-near-point factor retained in the small-angle comparison. -/
+noncomputable def nearConjugateRatio (d s : ℝ) : ℂ :=
+  rootRatio (nearPoint d) (conj (nearPoint d)) s
+
+private theorem conjugateRatio_spec {d s : ℝ} (hd : 0 < d) (hD : d < 1) (hs : 0 ≤ s) :
+    nearConjugateRatio d s ^ 2 =
+      1 + nearPoint d / (nearPoint d - conj (nearPoint d)) * (s : ℂ) ∧
+      0 < (nearConjugateRatio d s).re :=
+  rootRatio_sq_re ((map_ne_zero (starRingEnd ℂ)).2 (near_ne_zero hd hD))
+    (Or.inl (near_div_conj_near_im hd hD).ne') hs
+
+private theorem conjugate_coefficient_re {d : ℝ} (hd : 0 < d) (hD : d < 1) :
+    (nearPoint d / (nearPoint d - conj (nearPoint d))).re = 1 / 2 := by
+  let z := nearPoint d
+  have hne : z - conj z ≠ 0 := by
+    intro hz
+    have hIm := congrArg Complex.im hz
+    change (z - conj z).im = 0 at hIm
+    simp only [sub_im, conj_im, sub_neg_eq_add] at hIm
+    exact (add_pos (nearPoint_im_pos hd hD) (nearPoint_im_pos hd hD)).ne' hIm
+  have hne' : conj z - z ≠ 0 := sub_ne_zero.mpr (sub_ne_zero.mp hne).symm
+  have heq : z / (z - conj z) + conj (z / (z - conj z)) = 1 := by
+    simp only [map_div₀, map_sub, conj_conj]
+    field_simp [hne, hne']
+    ring
+  have h := congrArg Complex.re heq
+  simp only [add_re, conj_re, one_re] at h
+  change (z / (z - conj z)).re = _
+  linarith
+
+/-- The positive real part of the actual conjugate factor is at least one. -/
+theorem nearConjugateRatio_one_le_re {d s : ℝ} (hd : 0 < d) (hD : d < 1) (hs : 0 ≤ s) :
+    1 ≤ (nearConjugateRatio d s).re := by
+  obtain ⟨hsq, hp⟩ := conjugateRatio_spec hd hD hs
+  have h := congrArg Complex.re hsq
+  simp only [pow_two, mul_re, add_re, one_re, ofReal_re, ofReal_im, mul_zero, sub_zero,
+    conjugate_coefficient_re hd hD] at h
+  apply (sq_le_sq₀ (by norm_num : 0 ≤ (1 : ℝ)) hp.le).mp
+  nlinarith only [h, hs, sq_nonneg (nearConjugateRatio d s).im]
+
+private theorem conjugate_coefficient_le {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hS : 2 ≤ (n : ℝ) * Real.sqrt (1 - d ^ 2)) :
+    ‖nearPoint d / (nearPoint d - conj (nearPoint d))‖ ≤ (n : ℝ) / 4 := by
+  have hk := sine_pos hd hD
+  rw [near_conjugate_coefficient hd hD, div_le_iff₀ (by positivity : 0 < 2 * Real.sqrt (1 - d ^ 2))]
+  linarith
+
+/-- A secant bound for the conjugate factor, using its positive real part. -/
+theorem nearConjugateRatio_lipschitz {d s t : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hS : 2 ≤ (n : ℝ) * Real.sqrt (1 - d ^ 2)) (hs : 0 ≤ s) (ht : 0 ≤ t) :
+    ‖nearConjugateRatio d s - nearConjugateRatio d t‖ ≤ (n : ℝ) / 8 * |s - t| := by
+  let b := nearPoint d / (nearPoint d - conj (nearPoint d))
+  let g := nearConjugateRatio d s
+  let h := nearConjugateRatio d t
+  have hSum : (2 : ℝ) ≤ ‖g + h‖ := by
+    have hr : (2 : ℝ) ≤ (g + h).re := by
+      rw [add_re]
+      exact (by norm_num : (2 : ℝ) = 1 + 1) ▸
+        add_le_add (nearConjugateRatio_one_le_re hd hD hs) (nearConjugateRatio_one_le_re hd hD ht)
+    exact hr.trans ((le_abs_self _).trans (Complex.abs_re_le_norm _))
+  have heq : (g - h) * (g + h) = b * ((s : ℂ) - (t : ℂ)) := by
+    calc
+      _ = g ^ 2 - h ^ 2 := by ring
+      _ = _ := by
+        rw [(conjugateRatio_spec hd hD hs).1, (conjugateRatio_spec hd hD ht).1]
+        dsimp only [b]
+        ring
+  have hnorm : ‖g - h‖ * ‖g + h‖ = ‖b‖ * |s - t| := by
+    simpa only [norm_mul, ← ofReal_sub, norm_real, Real.norm_eq_abs] using congrArg norm heq
+  have hbound := mul_le_mul_of_nonneg_right (conjugate_coefficient_le hd hD hS)
+    (abs_nonneg (s - t))
+  have hstep := mul_le_mul_of_nonneg_left hSum (norm_nonneg (g - h))
+  change ‖g - h‖ ≤ _
+  linarith
+
+/-- The modulus of the retained conjugate factor on the entire ray. -/
+theorem nearConjugateRatio_norm_le {d s : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hS : 2 ≤ (n : ℝ) * Real.sqrt (1 - d ^ 2)) (hs : 0 ≤ s) :
+    ‖nearConjugateRatio d s‖ ≤ 1 + (n : ℝ) * s / 8 := by
+  have h := CutBounds.factor_norm_bound hs (conjugateRatio_spec hd hD hs).1
+  have hmul := mul_le_mul_of_nonneg_right (conjugate_coefficient_le hd hD hS) hs
+  linarith
+
+/-- The local loss from the constant term in the broader covariance comparison. -/
+theorem nearAmplitude_sixth_error {d s : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hS : 2 ≤ (n : ℝ) * Real.sqrt (1 - d ^ 2)) (hL : 2 ≤ (n : ℝ) * d)
+    (hs : 0 ≤ s) (hs₆ : s ≤ 1 / 6) :
+    ‖nearAmplitude d s - 1‖ ≤ ((n : ℝ) / 2 + 11) * s + ((n : ℝ) / 2 + 1) * s ^ 2 := by
+  let R := CutBounds.shortReciprocal (denominatorCoefficient d) s
+  let K := otherRootRatios d s
+  obtain ⟨hR, hR'⟩ := CutBounds.sixth_reciprocal_bounds hs hs₆ (denominator_near_bound hd hD).le
+  have hK := (rootRatios_majorants hd hD hS hL hs).2
+  rw [nearAmplitude_factorization hd hD hs]
+  change ‖R * K - 1‖ ≤ _
+  calc
+    _ ≤ ‖R‖ * ‖K - 1‖ + ‖R - 1‖ := by
+      rw [← norm_mul, show R * K - 1 = R * (K - 1) + (R - 1) by ring]
+      exact norm_add_le _ _
+    _ ≤ 2 * (((n : ℝ) / 4 + 2) * s + ((n : ℝ) / 4 + 1 / 2) * s ^ 2) + 7 * s :=
+      add_le_add (mul_le_mul hR hK (norm_nonneg _) (by norm_num)) hR'
+    _ = _ := by ring
+
+/-- The local loss after retaining the conjugate factor, as in (9). -/
+theorem nearAmplitude_conjugate_error {d s : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hdHalf : 1 / 2 ≤ d) (hS : 2 ≤ (n : ℝ) * Real.sqrt (1 - d ^ 2))
+    (hs : 0 ≤ s) (hs₆ : s ≤ 1 / 6) :
+    ‖nearAmplitude d s - nearConjugateRatio d s‖ ≤
+      11 * s + (1 + 11 * (n : ℝ) / 8) * s ^ 2 + ((n : ℝ) / 8) * s ^ 3 := by
+  let z := nearPoint d
+  let w := farPoint d
+  let g := nearConjugateRatio d s
+  let P := rootRatio z w s * rootRatio z (conj w) s
+  let R := CutBounds.shortReciprocal (denominatorCoefficient d) s
+  have hw : ‖z / (z - w)‖ ≤ 1 := (near_to_far_bound hd hD).trans
+    ((div_le_one (by positivity : 0 < 2 * d)).mpr (by linarith))
+  have hcw : ‖z / (z - conj w)‖ ≤ 1 := (opposite_cross_bounds hd hD).1
+  obtain ⟨hgs, hgr⟩ := rootRatio_sq_re (far_ne_zero hd hD) (Or.inl (near_div_far_im hd hD).ne) hs
+  obtain ⟨hhs, hhr⟩ := rootRatio_sq_re ((map_ne_zero (starRingEnd ℂ)).2 (far_ne_zero hd hD))
+    (Or.inr (near_div_conj_far_re hd hD)) hs
+  have hP : ‖P - 1‖ ≤ 2 * s + s ^ 2 / 2 :=
+    (CutBounds.short_product hs hw hcw hgs hhs hgr.le hhr.le).2
+  obtain ⟨hR, hR'⟩ := CutBounds.sixth_reciprocal_bounds hs hs₆ (denominator_near_bound hd hD).le
+  have hRP : ‖R * P - 1‖ ≤ 11 * s + s ^ 2 := by
+    calc
+      _ ≤ ‖R‖ * ‖P - 1‖ + ‖R - 1‖ := by
+        rw [← norm_mul, show R * P - 1 = R * (P - 1) + (R - 1) by ring]
+        exact norm_add_le _ _
+      _ ≤ 2 * (2 * s + s ^ 2 / 2) + 7 * s :=
+        add_le_add (mul_le_mul hR hP (norm_nonneg _) (by norm_num)) hR'
+      _ = _ := by ring
+  rw [nearAmplitude_factorization hd hD hs]
+  change ‖R * (g * P) - g‖ ≤ _
+  rw [show R * (g * P) - g = g * (R * P - 1) by ring, norm_mul]
+  calc
+    _ ≤ (1 + (n : ℝ) * s / 8) * (11 * s + s ^ 2) :=
+      mul_le_mul (nearConjugateRatio_norm_le hd hD hS hs) hRP (norm_nonneg _) (by positivity)
+    _ = _ := by ring
+
+/-- The near amplitude is integrable against the radial weight at each positive size. -/
+theorem nearAmplitude_weighted_integrable {d : ℝ} {n : ℕ}
+    (hd : 0 < d) (hD : d < 1) (hn : 0 < n) :
+    IntegrableOn (fun s => (BetaMoments.rayWeight n s : ℂ) * nearAmplitude d s) (Ioi 0) :=
+  weightedNear_integrable hd hD hn
+
 end CatalanStrictPeaks.CutGeometry
