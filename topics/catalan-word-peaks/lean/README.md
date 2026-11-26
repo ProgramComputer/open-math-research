@@ -38,10 +38,10 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** Lean verifies the entire finite prefix and
-identifies the analytic branch and Cauchy coefficients. The written proof
-covers the deformation to the radial cuts and the full integral and endpoint
-comparisons.
+**Partial Lean verification.** Lean verifies the entire finite prefix,
+identifies the analytic branch and Cauchy coefficients, and checks the
+finite-radius deformation and the jumps at the radial cuts. The written proof
+covers the improper ray integrals and the full integral and endpoint comparisons.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -102,9 +102,8 @@ rational bound in (5) after inserting the stated beta moments, and the
 exponential comparisons in (6) and in the covariance tail. It uses exact
 arithmetic at the first four lengths and an inequality for each step of four.
 
-These statements check the pointwise estimates and numerical inequalities.
-The Cauchy deformation to the cuts, the beta moment identities, and the
-derivation of all checkpoint and old-root signs remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
+The beta moment identities and the derivation of all checkpoint and old-root
+signs remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
 
 ## Analytic branch and Cauchy coefficient
 
@@ -121,6 +120,31 @@ equation and uniqueness in formal power series.
 The theorem `analyticGenerating_cauchyCoeff` gives the coefficient as a
 Cauchy integral on any circle centered at zero with positive radius less than
 the distance to the nearest branch point. [Analytic branch kernel output](analytic-branch-kernel.txt)
+
+## Finite-radius contour deformation
+
+The [logarithmic strip module](CatalanStrictPeaksLogRoot.lean) extends the
+principal square root continuously to the two edges of a logarithmic strip.
+It checks the defining square on the closed strip, equality of the boundary
+values inward of the branch point, and the jump $-2i\sqrt{s}$ beyond it,
+where $s$ is the radial displacement divided by the branch point modulus.
+
+The [contour summation module](../../../shared/lean/OpenMathResearch/LogarithmicContour.lean)
+uses Cauchy–Goursat on rectangles and sums them so the two values at each
+internal angle enter as a difference. The
+[Catalan specialization](CatalanStrictPeaksRayTransfer.lean) constructs the
+five successive angular sectors from the exact four branch points.
+Its theorem `analyticGenerating_finiteDeformation` identifies
+$c^nC_n(1-c^{-2})$ with the sum of the five outer arcs and the four signed
+radial differences, with the Cauchy normalization $1/(2\pi i)$.
+The starting circle can be any positive radius below the nearer branch
+points and the outer logarithmic radius may take any larger value.
+The theorems `logSector_jump_zero` and `logSector_jump_sqrt` give the
+two cases of each signed radial difference with its exact rational factor.
+
+The outer-arc limit, the change of variables to the four improper integrals
+in (1), and the beta moment and sign estimates remain in the written proof.
+[Contour kernel output](ray-transfer-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45743833834)
 
 ## Exact isolating intervals through length 150
 
@@ -170,6 +194,8 @@ lake build CatalanStrictPeaksCutGeometry CatalanStrictPeaksCutParameter CatalanS
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/CutAxioms.lean
 lake build CatalanStrictPeaksAnalyticBranch
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/AnalyticBranchAxioms.lean
+lake build OpenMathResearch.LogarithmicContour CatalanStrictPeaksLogRoot CatalanStrictPeaksRayTransfer
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/RayTransferAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~

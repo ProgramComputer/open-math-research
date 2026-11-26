@@ -1,0 +1,14 @@
+'OpenMathResearch.LogarithmicContour.circleIntegral_eq_angular' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LogarithmicContour.deform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.logStripRoot_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.logStripRoot_eq_cutFactor_of_le_radius' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.logStripRoot_jump' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.analyticGenerating_finiteDeformation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.logSector_jump_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.logSector_jump_sqrt' depends on axioms: [propext, Classical.choice, Quot.sound]
