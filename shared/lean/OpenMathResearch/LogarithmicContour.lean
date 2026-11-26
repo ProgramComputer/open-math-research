@@ -19,7 +19,7 @@ open scoped Interval
 /-- The coefficient contour in logarithmic coordinates. -/
 theorem circleIntegral_eq_angular (f : ℂ → ℂ) (a : ℝ) (n : ℕ) :
     (∮ z in C(0, Real.exp a), (z⁻¹) ^ (n + 1) * f z) =
-      I • (∫ y : ℝ in 0..2 * Real.pi,
+      I • (∫ y : ℝ in (0)..2 * Real.pi,
         (exp ((a : ℂ) + (y : ℂ) * I))⁻¹ ^ n * f (exp ((a : ℂ) + (y : ℂ) * I))) := by
   rw [circleIntegral, ← intervalIntegral.integral_smul]
   apply intervalIntegral.integral_congr
@@ -68,7 +68,7 @@ theorem deform {m : ℕ} {a b : ℝ} (hab : a ≤ b)
     (hPeriod : ∀ x ∈ Icc a b,
       sector 0 ((x : ℂ) + (angle 0 : ℂ) * I) =
         sector m ((x : ℂ) + (angle (m + 1) : ℂ) * I)) :
-    I • (∫ y in angle 0..angle (m + 1), inner y) =
+    I • (∫ y in (angle 0)..angle (m + 1), inner y) =
       (∑ j ∈ Finset.range (m + 1),
         I • (∫ y in angle j..angle (j + 1), sector j ((b : ℂ) + (y : ℂ) * I))) +
       ∑ j ∈ Finset.range m, (
