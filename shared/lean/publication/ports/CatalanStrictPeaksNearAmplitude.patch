@@ -1,0 +1,20 @@
+--- CatalanStrictPeaksNearAmplitude.lean
++++ CatalanStrictPeaksNearAmplitude.lean
+@@ -280,7 +280,7 @@
+     calc
+       _ ≤ 3 / 2 * (1 + d) := by linarith
+       _ ≤ _ := mul_le_mul_of_nonneg_right (by linarith) (by positivity)
+-  apply (mul_le_mul_right (by positivity : 0 < 1 + 2 * d)).mp
++  apply (mul_le_mul_iff_left₀ (by positivity : 0 < 1 + 2 * d)).mp
+   calc
+     _ ≤ radius d * (6 * d ^ 2 * (1 + d)) :=
+       mul_le_mul_of_nonneg_left hnum (radius_pos hd.le).le
+@@ -294,7 +294,7 @@
+     calc
+       _ ≤ 2 * (1 + d) := mul_le_mul_of_nonneg_right (by linarith) (by positivity)
+       _ ≤ _ := by linarith
+-  apply (mul_le_mul_right (by positivity : 0 < 1 + 2 * d)).mp
++  apply (mul_le_mul_iff_left₀ (by positivity : 0 < 1 + 2 * d)).mp
+   rw [scale_mul_radius_factor hd]
+   calc
+     _ ≤ (2 * (1 + 2 * d)) * radius d := mul_le_mul_of_nonneg_right hnum (radius_pos hd.le).le

@@ -36,8 +36,8 @@ theorem prismFamily :
          let Q := q.map (Int.castRingHom ℝ)
          P.roots.card = P.natDegree ∧ Q.roots.card = Q.natDegree ∧ ∃ xs ys : List ℝ,
            (xs : Multiset ℝ) = P.roots ∧ (ys : Multiset ℝ) = Q.roots ∧ alternatingRoots xs ys) :=
-  by simpa only [WeakRealInterlaces, Polynomial.splits_iff_card_roots] using
-    PrismFamily.familyBoxSplitCounterexample
+  by simpa only [sliceNumerator, normalizedCountSeries, WeakRealInterlaces,
+    Polynomial.splits_iff_card_roots] using PrismFamily.familyBoxSplitCounterexample
 
 #print axioms prismSix
 #print axioms prismFamily

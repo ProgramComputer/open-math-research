@@ -4,6 +4,7 @@ on:
     branches: [research, main]
     paths:
       - 'shared/lean/publication/**'
+      - 'topics/*/lean/publication/**'
       - '.github/workflows/publication-lean.yml'
   workflow_dispatch:
 permissions:

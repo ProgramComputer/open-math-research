@@ -14,8 +14,8 @@ artifact_root="$(cd -- "$2" && pwd -P)"
 topic="$3"
 case "$topic" in
   prism)
-    modules=(PrismDimensions PrismFamilyInterlacing AuditPrismExportType)
-    theorems=(PrismSplit.finBoxSplitCounterexample PrismFamily.familyBoxSplitCounterexample AuditExportType.prismSix AuditExportType.prismFamily)
+    modules=(PrismDimensions PrismFamilyInterlacing AuditPrismExportType AuditPrismSourceBridge)
+    theorems=(PrismSplit.finBoxSplitCounterexample PrismFamily.familyBoxSplitCounterexample AuditExportType.prismSix AuditExportType.prismFamily AuditReference.prismSourcePublished AuditReference.prismSourceAdmissible)
     ;;
   catalan)
     modules=(CatalanStrictPeaksAllInterlacing AuditCatalanExportType AuditCatalanWordBridge AuditCatalanFullSource)
@@ -83,3 +83,11 @@ declaration_count="$(python3 -I -c 'import json,sys; print(json.load(open(sys.ar
 grep -Fxq "Checked $declaration_count declarations with no errors" "$artifact_dir/nanoda.log"
 printf '%s\n' 'PASS: exact export passed the official Lean kernel and independent Rust Nanoda.' \
   | tee "$artifact_dir/VERDICT.txt"
+python3 -I - "$artifact_dir/dependencies.json" <<'PYTHON'
+import json, sys
+with open(sys.argv[1]) as source:
+    report = json.load(source)
+for root in report["roots"].values():
+    root.pop("reachable_declarations")
+print(json.dumps(report, sort_keys=True))
+PYTHON

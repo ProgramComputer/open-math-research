@@ -255,7 +255,15 @@
     "OpenMathResearch.LogarithmicContour.integral_logRadius_substitution",
     "OpenMathResearch.OrientedNegativeInterlace.CompleteNegativeRoots.unique",
     "OpenMathResearch.OrientedNegativeInterlace.next_of_signs_at_all_old_roots",
-    "OpenMathResearch.OrientedNegativeInterlace.roots_of_signed_test_points"
+    "OpenMathResearch.OrientedNegativeInterlace.roots_of_signed_test_points",
+    "AuditExportType.catalan",
+    "AuditReference.wordConditionsAgree",
+    "AuditReference.peakCountsAgree",
+    "AuditReference.catalanPolynomial_eq",
+    "AuditReference.catalanPublished_of_successors",
+    "AuditReference.catalanOriginal_of_published",
+    "AuditReference.catalanSourcePublished",
+    "AuditReference.catalanSourceOriginal"
   ],
   "prism": [
     "PrismFamily.afterAffineDimension",
@@ -315,6 +323,12 @@
     "PrismSplit.unsplitFinEhrhartSeries",
     "PrismSplit.unsplitFirstCounts",
     "PrismSplit.unsplitRealSliceDilation",
-    "PrismSplit.unsplitSamplesAgree"
+    "PrismSplit.unsplitSamplesAgree",
+    "AuditExportType.prismSix",
+    "AuditExportType.prismFamily",
+    "AuditReference.prismCount_eq_integerPointCount",
+    "AuditReference.isPrismNumerator_of_slice",
+    "AuditReference.prismSourcePublished",
+    "AuditReference.prismSourceAdmissible"
   ]
 }

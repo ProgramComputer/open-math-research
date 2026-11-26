@@ -53,8 +53,7 @@ def main():
         topic = "catalan-word-peaks" if args.group == "catalan" else "prism-splitting"
         for path in (HERE.parents[2]/"topics"/topic/"lean"/"publication").glob("Audit*.lean"):
             additional[path.stem] = path
-        if args.group == "catalan":
-            additional["AuditReferenceSpecs"] = HERE/"reference"/"AuditReferenceSpecs.lean"
+        additional["AuditReferenceSpecs"] = HERE/"reference"/"AuditReferenceSpecs.lean"
         files.update({k: str(v.relative_to(HERE.parents[2])) for k,v in additional.items()})
     roots = GROUPS[args.group]+sorted(additional)
     pending = list(roots)

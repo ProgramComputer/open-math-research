@@ -1,0 +1,30 @@
+--- CatalanStrictPeaksNearCovariance.lean
++++ CatalanStrictPeaksNearCovariance.lean
+@@ -99,8 +99,7 @@
+   have hq' : 1 - tiltAverage n ≤ 3 / (2 * (n : ℝ)) := by
+     have heq : 1 - tiltAverage n = 3 / (2 * ((n : ℝ) + 1)) := by
+       unfold tiltAverage
+-      field_simp
+-      ring
++      field_simp <;> ring
+     rw [heq]
+     apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
+     linarith
+@@ -226,7 +225,7 @@
+   apply (div_le_div_of_nonneg_right (norm_integral_le_integral_norm _) hmass.le).trans_lt
+   exact (div_le_div_of_nonneg_right htotal hmass.le).trans_lt (by
+     rw [add_div, hpInt]
+-    exact add_lt_add_left (covariance_tail_integral_bound hn) _)
++    linarith only [covariance_tail_integral_bound hn])
+ 
+ /-- The successive-size bound (12) for the actual normalized near-ray mean.
+ The estimate holds throughout the interior parameter range. -/
+@@ -479,7 +478,7 @@
+         positivity) hloc htail
+     apply (div_le_div_of_nonneg_right hcInt hM.le).trans_lt
+     rw [add_div, hPint]
+-    exact (add_lt_add_left (covariance_tail_integral_bound hn) _).trans (small_real_part_numeric hn)
++    linarith only [covariance_tail_integral_bound hn, small_real_part_numeric hn]
+   have hr : IntegrableOn (fun s => (weighted n (nearAmplitude d) s).re) (Ioi 0) :=
+     hH.re
+   have hw : IntegrableOn (rayWeight n) (Ioi 0) := by

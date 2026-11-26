@@ -1,0 +1,16 @@
+--- CatalanStrictPeaksFarRay.lean
++++ CatalanStrictPeaksFarRay.lean
+@@ -106,9 +106,10 @@
+   have hdirect : ‖w / (w - z)‖ ≤ L := by
+     refine (far_to_near_bound hd hD).trans ?_
+     change 1 + 1 / (2 * d) ≤ 1 + (n : ℝ) / 4
+-    apply add_le_add_left
+-    apply (div_le_iff₀ (by positivity : 0 < 2 * d)).2
+-    nlinarith
++    have hsmall : 1 / (2 * d) ≤ (n : ℝ) / 4 := by
++      apply (div_le_iff₀ (by positivity : 0 < 2 * d)).2
++      nlinarith
++    linarith only [hsmall]
+   have hA : ‖cutFactor z x‖ ≤ ‖cutFactor z w‖ * (1 + L * s / 2) :=
+     (norm_cutFactor_radial hz hwz hs hL hdirect).trans
+       (mul_le_mul_of_nonneg_left (sqrt_affine_le hs hL) (norm_nonneg _))
