@@ -231,5 +231,63 @@
         "sha256": "7e6f5e98615f309a0cb545c23da235d4f1303d286540c224cbe5921030410032"
       }
     ]
+  },
+  "matroid_kl_direct_sums": {
+    "status": "passed",
+    "formal_coverage": "Partial. The positive-rank direct-sum correction vanishes for the actual finite Mathlib matroids.",
+    "scope": [
+      "The flat poset for the direct sum is the product of the two flat posets, with additive rank.",
+      "The Kazhdan–Lusztig polynomial of the finite direct sum is the product of its summand polynomials.",
+      "The top allowable coefficient for odd total rank vanishes when both ranks are positive. For even total rank the correction is zero by definition."
+    ],
+    "remaining": [
+      "The concrete matroid deletion identity with the vanishing side conditions.",
+      "Showing that the relevant polygon contractions decompose as these positive-rank direct sums.",
+      "The connected-ribbon graphic identification and simplification invariance, the circuit evaluation and Narayana real-rootedness."
+    ],
+    "workflow_checkout_commit": "1210b9748cfe545fe684cb7a5d634c980345a63f",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45836042217/job/139965058103",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45836042217/artifacts/15126845025",
+    "hosted_artifact_digest": "sha256:bed6cadca414c5bdc75f1ae16f8866fedeb956c1685e9e2adce587569a99ac5a",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2830,
+    "checked_declarations": 40,
+    "new_declarations": [
+      "OpenMathResearch.MatroidKL.IsKLFamily.product",
+      "OpenMathResearch.MatroidKL.IsKLFamily.twice_natDegree_lt",
+      "OpenMathResearch.MatroidKL.flatRank_sum",
+      "OpenMathResearch.MatroidKL.matroidKL_sum",
+      "OpenMathResearch.MatroidKL.rank_sum",
+      "OpenMathResearch.MatroidKL.shiftedSum_product",
+      "OpenMathResearch.MatroidKL.tau_sum_eq_zero"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "new_modules": [
+      {
+        "name": "OpenMathResearch.MatroidFlatSum",
+        "file": "shared/lean/OpenMathResearch/MatroidFlatSum.lean",
+        "sha256": "9e5ea7554bd6a2dbe36c8d869e326f5b2fa4df39d3f971f446696ae4c2495775"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLProduct",
+        "file": "shared/lean/OpenMathResearch/MatroidKLProduct.lean",
+        "sha256": "6e17881193a675e0005d8b7ba9c3f6872f678ee78ff586e5d88bdebc8b09c886"
+      }
+    ]
   }
 }
