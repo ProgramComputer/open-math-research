@@ -1,0 +1,3 @@
+Uniform middle comparison passes at k sin(theta) >= 2000.
+Scaled derivative exceeds 1/4 and the insertion lag is below 1/100.
+The combined sufficient height is 10^18 for every k.

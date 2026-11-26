@@ -1,0 +1,1 @@
+Exact finite-pole identity and angular derivative agree in all 40 degrees.
