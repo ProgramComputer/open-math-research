@@ -10,6 +10,8 @@ The logarithm is natural. With $`n=m^3`$, $`d=m^2`$ and $`m\ge10^6`$, the result
 
 The proof compares the capped polynomial with the unrestricted one on circles drawn between successive root moduli. At the $`i`$th midpoint, the variance of the tilted column sum is at most $`72(n-i)/d`$ in the comparison range. This controls the loss from the cap. Near the top quota, a single coefficient dominates on each of a second family of circles. The root counts themselves order the two families at their join. [Manuscript](paper.pdf) · [LaTeX source](paper.tex) · [Midpoint review](review.md) · [Review of the wider cap range](refinement-review.md) · [Sources and status](literature.md)
 
+At $d\asymp\sqrt n$, a positive-tilt obstruction rules out a uniform absolute comparison at upper midpoints and a global dilation of the degree-matched reference on two boundary circles. [Comparison obstruction and review](comparison/README.md)
+
 **Formal verification**　⬜ None. An independent agent reconstructed both versions of the argument, including the estimates at the joining index. The exact arithmetic script checks the numerical constants and the example degree.
 
 Run from this folder.
