@@ -1,0 +1,10 @@
+Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)
+'BalancedEventual.arrays_corank_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.mul_le_row_cap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.arrayCount_eq_zero_of_degree_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.cyclicArray_isBalanced' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.arrayCount_pos_of_le_degree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.coeff_arrayPolynomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.natDegree_arrayPolynomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.arrayCount_one_column' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.arrayPolynomial_one_column' depends on axioms: [propext, Classical.choice, Quot.sound]

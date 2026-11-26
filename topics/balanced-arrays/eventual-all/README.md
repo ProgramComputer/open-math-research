@@ -8,7 +8,7 @@ Per Alexandersson’s original conjecture asks for real-rootedness at every row 
 
 **Fixed-profile review.** An anonymous, agent-assisted independent referee checked the fixed-profile enumeration formula. [Fixed-profile referee report](fixed-profile-review.md) [Editorial follow-up to both reports](editorial.md)
 
-**Formal verification.** ⬜ None. There is no Lean or Rocq proof of the eventual theorem or the new counting estimate.
+**Formal verification**　🟨 Partial · Lean 4. The research build verifies the exact coefficient support and degree directly from labeled arrays, and the one-column identity. The eventual negative-root assertion and its uniform estimates remain open in Lean. [Checked components, pins and axiom reports](lean/README.md)
 
 ## Proof and supporting estimates
 
