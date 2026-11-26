@@ -1,0 +1,96 @@
+\section{An explicit cutoff at size 100,000}
+\label{sec:degree-block-cutoff}
+
+\textbf{Theorem.} For every \(n\ge100{,}000\) and \(3\le k\le n\), the
+\(n-2\) zeros of \(P_n=E_{n,k}/t\) are simple and negative. They strictly
+interlace those of \(P_{n+1}\), with the next row supplying both outer
+zeros. Zero is a simple common root of the unreduced rows.
+
+Write \(S=\sin\theta\), \(C=\cos\theta\), \(t=-e^{-\pi\cot\theta}\) and
+\(z_a=(C+iaS)^{-1}\) for odd \(a\), where \(0<\theta\le\pi/2\).
+Set \(F_j=(\pi/S)^j E_{j,k}(t)/(j!(1-t)^j)\), \(B_j=\sum_a z_a^j\)
+and \(m=n+1-k\). Let \(D(u)=\exp(\sum_{j\ge k}u^j/j)=\sum_r d_r u^r\).
+At any old zero the insertion identity gives
+\((n+1)F_{n+1}=SF'_n+B_kF_m\), with the prime denoting differentiation
+in \(\theta\). Define
+\[
+ V_\pm=k\left(F_n,\frac{F'_n}{n}\pm\frac{B_kF_m}{nS}\right),
+ \qquad U=2kd_n\bigl(\cos(n\theta),-\sin(n\theta)\bigr).
+\]
+If \(\|V_\pm-U\|_2<2kd_n\), then \(V_\pm\cdot U>0\) by Cauchy--Schwarz.
+Thus \(F_n\) has sign \((-1)^j\) at \(\theta=j\pi/n\). At an old root
+between phases \(j\pi\) and \((j+1)\pi\), both second coordinates have
+sign \((-1)^{j+1}\). Their average gives \(F'_n\ne0\), and the plus
+coordinate gives sign \((-1)^j\) for \(P_{n+1}\) because \(t<0\).
+
+To prove the disk inequalities, put \(b_s=[u^s](1-u)(D(u)-1)\). The signed
+pole expansion for \(M=n,m\) distinguishes one occupied pole \(a\)
+and writes \(F_M=\sum_a[u^M](D(z_a u)-1)Q_a(u)\), where
+\[
+ Q_a(u)=\prod_{q\ne a}\left(1+\sum_{s\ge k}
+     \frac{b_s z_q^{s-1}u^s}{i(q-a)S}\right).
+\]
+The constant term of \(Q_a\) gives \(d_M B_M\). In the old row, a mixed
+term \(z_a^r h\), where \(T\) is the degree from the other poles, \(r=n-T\), and
+\(h\) denotes the scalar from the other poles, enters the value and
+normalized derivative through a real two-by-two triangular matrix.
+Its diagonal entries are \(1\) and \((r/n)a|z_a|^2\). The absolute
+off-diagonal entry is at most \((r/n)(a^2-1)S|z_a|^2\).
+Writing \(\rho_a=|z_a|\), the latter cost times \(\rho_a^r\) is at
+most \(|a|\rho_a^{r/2}/\sqrt n\) and vanishes at the principal poles.
+The separate derivative of \(h\) is bounded by \(|h'|\rho_a^r/n\).
+This estimates the two coordinates jointly.
+
+Assign bin \(i=\lceil 4s/k\rceil\) to each primitive factor of degree
+\(s\). A nonempty product in bin \(b\) has total degree \(T\) with
+\(\max(1,b/5)\le T/k\le b/4\), since each factor has degree at least
+\(k\). The bounds on bin mass follow from the atom \(b_k=1/k\), the
+telescoping differences \(1/(s(s-1))\) for \(k<s<2k\), the jump of
+size at most \(1/(4k^2)\) at \(2k\), and the block bound
+\(|b_s|\le 1/(2j!k^2)\) for \(jk<s\le(j+1)k\), \(j\ge2\).
+For a slab \(\ell\le n/k\le X\), truncate the bin polynomials at
+\(5X\). Sum absolute primitive terms and their normalized angular
+derivatives into nonnegative majorants \(L(v)\) and \(J(v)\), using
+\(kS\ge A\), \(nS^2\ge 6/5\), and the positive kernels summed over signed odd indices
+\((1+c(p^2-1))^{-96}\) given by Bernoulli's inequality. Allowing
+repeated pole choices gives \(\exp L-1\) for the mixed terms and
+\(J\exp L\) for their differentiated factors. In each bin the
+remaining distinguished degree is bounded using the interval for
+\(T\). The cycle probability bounds \(kd_r\le4/7\) for \(r\ge2k\)
+and \(kd_n\ge547/1000\) for \(n\ge3k\) sharpen the comparison.
+The two rational replays enclose the pole sums and compare the
+resulting joint error, including the insertion term, against
+\(2kd_n\). The least certified margin exceeds \(65716/10^6\).
+\href{https://github.com/ProgramComputer/open-math-research/tree/main/topics/long-cycle-excedances/degree-blocks}{Detailed bounds and exact replays}
+
+\begin{center}
+\begin{tabular}{lll}
+Minimum \(n\) & Slabs for \(x=n/k\) & Sufficient \(A\)\\ \hline
+\(100{,}000\) & \([4,6], [6,10], [10,16], [16,25]\) & \(10\)\\
+\(100{,}000\) & \([25,34], [34,42], [42,50]\) & \(9,8,27/4\) respectively\\
+\(100{,}000\) & \([50,62], [62,75], [75,86]\) & \(7,7,27/4\) respectively\\
+\(120{,}000\) & \([86,96]\) & \(7\)
+\end{tabular}
+\end{center}
+
+The exterior theorem supplies the first \(\lfloor7\sqrt n/20\rfloor\)
+ranks at each end. Its last root precedes the first middle sample,
+where \(nS^2\ge6/5\). This inequality gives \(kS\ge
+\sqrt{(6/5)n}/X\) on each slab, enough for the table through \(x=50\).
+For the later slabs it gives \(kS\ge3\). When \(kS<A\) there,
+\(kS^2<A^2/k\le1/25\), so the differentiated common-residue comparison
+gives the same integer-phase signs and the same actual next-row
+signs at old roots. The comparisons may therefore be used at
+different points of one phase interval. Reciprocity and the degree
+give exactly one old root in each remaining gap, with the central
+root at \(-1\) for odd \(n\). The next-row signs and the endpoint
+coefficients give strict interlacing.
+
+The three-cycle theorem covers \(x<4\). For \(100{,}000\le n<120{,}000\)
+the table reaches \(x=86\), and for \(120{,}000\le n<4{,}062{,}720\)
+it reaches \(x=96\). At and above these respective joins
+\(0.89x>47+2.5\log n\). The lower-height common-circle comparison
+applies under this condition for \(k\ge400\), while its small-threshold
+part applies to \(4\le k<400\) from size \(55{,}000\). The fixed
+threshold theorem covers \(k=3\), and the preceding uniform cutoff
+covers \(n\ge4{,}062{,}720\).

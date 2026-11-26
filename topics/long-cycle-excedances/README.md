@@ -1,5 +1,7 @@
 # Excedance zeros for permutations with long cycles
 
+A proposed proof treats every old size $n\ge k$ for every cutoff $k\ge7$. It combines the earlier range theorems with 541,199 certified intermediate gaps. The independent finite checker uses a second sign criterion. The blind review and the separately credited small-cutoff Lean audits are tracked in the result folder. Formal verification of the $k\ge7$ theorem is ⬜ None. [Complete argument, scope and certificate](all-large-cutoffs/README.md) · [Updated manuscript](paper.pdf)
+
 For every $`7\le k\le n`$ with $`n/k\ge20`$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. Exact exterior certificates through size 1,000, an exterior estimate through size 9,999 and a common circle comparison fill the gap between the finite prefix and the uniform size 10,000 theorem. For $`k\ge7`$, the remaining range is $`251\le n<1{,}000`$ and $`4\le n/k<20`$. Formal verification is ⬜ None. [Combined proof, checks and independent reviews](aspect-20/README.md)
 
 For every $`n\ge1{,}000`$ and $`4\le n/k\le20`$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. Bounded-aspect exterior and middle estimates give the join through size 9,999. The same package gives a high-angle middle bound from size 251. Formal verification is ⬜ None. [Combined proof, exact checks and independent reviews](bounded-aspect/README.md)

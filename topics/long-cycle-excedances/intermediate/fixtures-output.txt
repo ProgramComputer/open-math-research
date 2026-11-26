@@ -1,0 +1,6 @@
+251 13 26
+421 67 7
+751 38 22
+999 99 5
+1000 51 20
+Exact rational arithmetic independently confirmed all 80 fixture gaps.

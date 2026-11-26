@@ -1,0 +1,92 @@
+\section{A proposed proof for all minimum cycle lengths at least seven}
+\label{sec:all-cutoffs}
+
+\textbf{Proposed theorem.}
+For every pair of integers $n\ge k\ge7$, the polynomials $P_n=E_{n,k}/t$
+and $P_{n+1}=E_{n+1,k}/t$ have respectively $n-2$ and $n-1$ simple,
+strictly negative roots, and they interlace strictly.
+The larger row supplies the two outer roots.
+
+For the parameter decomposition put $x=n/k$. The insertion argument
+already gives the theorem for $x<4$. At $x\ge4$ the two common-pole
+comparisons treat all old sizes $n\ge10{,}000$ (with overlapping
+aspect intervals $[4,48]$ and $[44,\infty)$). Through $n=250$, the
+remaining 7,021 old-size and threshold pairs in the finite-prefix
+certificate include every required pair.
+For $251\le n<10{,}000$ and $x\ge20$, use the phase
+$\Psi=(n+1)\theta-\Im G_s(s+i\pi)$ and the actual consecutive normalized
+rows $Y_n,Y_{n+1}$. In the angular range $n\sin^2\theta\ge1$ the
+bounds $|Y_n-\cos\Psi|<1/20$ and
+$|Y_{n+1}-\cos\theta\,Y_n+\sin\theta\sin\Psi|<3\sin\theta/25$
+give the next sign at an old zero. First hits of the phase levels give
+ordered gaps, while the exterior estimate places the innermost ranks
+before the first required hit. The precise contour, constants and
+first-hit comparison are in the
+\href{https://github.com/ProgramComputer/open-math-research/tree/research/topics/long-cycle-excedances/aspect-20}{large-aspect proof}.
+
+It remains to consider $4\le x<20$. Use the parametrization
+$t=-\exp(-\pi\cot\theta)$, $0<\theta\le\pi/2$, and set
+$H=\lfloor7\sqrt n/20\rfloor$. At $n\ge1000$, the bounded-aspect
+exterior estimate places $H$ simple roots of $P_n$ before the integer
+phase sample at $(H+1)\pi/n$, giving the sign $(-1)^h$ of the
+actual $P_{n+1}$ at each of these ranks $h$. The grouped pole estimates
+give alternating signs at consecutive integer samples and the prescribed
+next sign at each intervening old zero when $n\sin^2\theta\ge6/5$.
+This last condition holds at the sample $(H+1)\pi/n$ and persists to the
+midpoint. These two estimates therefore join without an unchecked gap.
+The joint value and derivative bounds and their finite rational
+majorants are in the
+\href{https://github.com/ProgramComputer/open-math-research/tree/research/topics/long-cycle-excedances/bounded-aspect}{bounded-aspect proof}.
+
+For $251\le n\le1000$, the finite exterior computation again supplies
+these $H$ ranks with their signs. Put $\theta_j=j\pi/n$ and
+$y_j=\exp(-\pi\cot\theta_j)$. Use the entrance threshold $A=7$
+at $x\le15/2$, and $A=5$ at $15/2<x\le10$. At $10<x<20$ take
+$A=5$ for $k\le100$ and $A=6$ for $k>100$. Choose an integer
+$J\ge H+1$ with $k\sin\theta_J\ge A$ and
+$n\sin^2\theta_J\ge6/5$. The high-angle estimate supplies the old and
+actual next signs from that sample to the midpoint.
+
+Here is the finite assertion needed at each $H+1\le j<J$: there
+are $y_j\le a<b\le y_{j+1}$ with
+\[
+ (-1)^{j-1}P_n(-a)>0,\qquad (-1)^j P_n(-b)>0,\qquad
+ (-1)^j P_{n+1}(-y)>0\quad(a\le y\le b).
+\]
+It follows for all the required gaps from the accompanying
+\href{https://github.com/ProgramComputer/open-math-research/tree/research/topics/long-cycle-excedances/intermediate}{finite sign certificate}.
+The coefficients used in the certificate are integer prefixes of the literal
+cycle enumerators. An omitted term in the reduced polynomial has
+absolute value at most $p^N y^{p-1}$ in row $N$. Indeed, cutting the
+permutation into $p$ decreasing cyclic runs and labeling those runs gives
+$p!$ encodings per permutation, among at most $p^N p!$ encodings.
+For an upper bound $B\ge y_{j+1}$ the omitted tail after $W$ terms
+is therefore bounded by
+\[
+ \frac{(W+1)^N B^W}{1-B((W+2)/(W+1))^N}.
+\]
+The denominator is checked positive. The ratio of successive majorants
+decreases with $p$, which proves this geometric bound. The first program
+evaluates $W=64$ terms with outward-rounded interval arithmetic on the
+entire next-row interval. The second uses $W=60$ and proves the specified
+next sign at both ends. In the latter method, the new signs at the adjacent
+endpoints of consecutive old-root brackets force zeros in their
+complementary gaps. Exhaustion of the new degree suffices for strict
+interlacing. The two checks each cover 93,902 pairs, of which 82,395
+require at least one intervening gap, and 541,199 such gaps in total.
+
+In increasing modulus the first half-axis has
+$H+(J-H-1)+(\lfloor n/2\rfloor-J)=\lfloor n/2\rfloor-1$
+selected old roots. Reflection supplies their reciprocals. In odd size the
+root $-1$ accounts for the remaining old degree and the high-angle
+comparison gives its next sign. Thus exactly $n-2$ old roots have been
+located, proving simplicity. The signs at zero and at the far negative
+end complete the $n-1$ complementary gaps of the next polynomial, counting
+both outer gaps. This concludes the proposed proof for $k\ge7$.
+
+The all-size result at threshold three is Theorem~1. Bowen Zuo's supplying
+releases separately state all-size interlacing for $k=4,5,6$, starting
+with the old sizes $4,5,6$, respectively. Those are external inputs; their
+pinned proof audits are recorded
+\href{https://github.com/ProgramComputer/open-math-research/pull/216}{separately}.
+There is no end-to-end Lean or Rocq formalization of the argument for $k\ge7$.
