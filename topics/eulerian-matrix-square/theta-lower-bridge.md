@@ -76,7 +76,7 @@ for a constant $K_d$ depending on $d$. Here $u-1-\log u\ge0$ for $u>0$, $\sqrt p
 
 ## Distance from a simple zero of a factor
 
-Let $Z_W$ be the real zeros of $W$ in $[-2\Lambda,2\Lambda]$, and put $d_W(w)=\min(1,\operatorname{dist}(w,Z_W)/\Lambda)$, with the empty-set convention. There are constants $c_9,c_{10}>0$ such that for sufficiently small fixed $c$ and large $n$
+Let $Z_W$ be the real zeros of $W$ in $[-2\Lambda,2\Lambda]$, and put $d_W(w)=\min(1,\mathrm{dist}(w,Z_W)/\Lambda)$, with the empty-set convention. There are constants $c_9,c_{10}>0$ such that for sufficiently small fixed $c$ and large $n$
 $$
  \begin{gathered}
  |W(w)|\ge c_9 E_W(w)d_W(w)

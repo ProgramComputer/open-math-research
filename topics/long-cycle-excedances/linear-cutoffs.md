@@ -25,7 +25,7 @@ Use $x-\log(1+x)\ge x^2/(2(1+x))$ and $\log(1-x)+x\le-x^2/2$. Both ratios are at
 
 ## A partial fraction expansion for cycles
 
-Let $t=-e^{-s}$, $s\ge0$, and set $\theta=\operatorname{arccot}(s/\pi)\in(0,\pi/2]$. An $a$-cycle has excedance polynomial $t A_{a-1}(t)$, where $A_{a-1}$ is the ordinary Eulerian polynomial. For $a\ge2$,
+Let $t=-e^{-s}$, $s\ge0$, and set $\theta=\mathrm{arccot}(s/\pi)\in(0,\pi/2]$. An $a$-cycle has excedance polynomial $t A_{a-1}(t)$, where $A_{a-1}$ is the ordinary Eulerian polynomial. For $a\ge2$,
 $$
  \frac{t A_{a-1}(t)}{(a-1)!(1-t)^a}=\sum_{p\in2\mathbb Z+1}(s+i p\pi)^{-a}.
 $$

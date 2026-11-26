@@ -37,7 +37,7 @@ V=1+z(\theta+1+qz)^{d-1}V .
 $$
 All series here are formal in $z$.
 
-For $n\ge1$, write $D_n=\operatorname{diag}(1,\ldots,n)$, and let $L_n$ and $U_n$ be the matrices with ones on the first subdiagonal and first superdiagonal, respectively, and zeros elsewhere. In the basis $1,z,\ldots,z^{n-1}$, the matrix of $\theta+1+qz$ modulo $z^n$ is $D_n+qL_n$. For $s=d-1$ put $A_n=(D_n+L_n)^s$. Every $(i,j)$ entry of $(D_n+qL_n)^s$ with $i\ge j$ equals $q^{i-j}(A_n)_{ij}$, since each subdiagonal step increases the row index by one. Equation (2) therefore reads
+For $n\ge1$, write $D_n=\mathrm{diag}(1,\ldots,n)$, and let $L_n$ and $U_n$ be the matrices with ones on the first subdiagonal and first superdiagonal, respectively, and zeros elsewhere. In the basis $1,z,\ldots,z^{n-1}$, the matrix of $\theta+1+qz$ modulo $z^n$ is $D_n+qL_n$. For $s=d-1$ put $A_n=(D_n+L_n)^s$. Every $(i,j)$ entry of $(D_n+qL_n)^s$ with $i\ge j$ equals $q^{i-j}(A_n)_{ij}$, since each subdiagonal step increases the row index by one. Equation (2) therefore reads
 $$
 v_n=\sum_{j=1}^n (A_n)_{nj}q^{n-j}v_{j-1}.
 \tag{3}

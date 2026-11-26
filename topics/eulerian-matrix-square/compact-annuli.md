@@ -4,11 +4,11 @@ Let $A$ be the shifted Eulerian matrix in Mao and Wang's conjecture, and let $xH
 
 ## Pole selection off the negative axis
 
-Use the factorial-weighted polynomial $F_n(w)=\sum_{k=1}^n A(n,k)k!w^k$ and $N=n+1$, $L=\log N$. On any compact subset of the slit plane $\mathbb C\setminus(-\infty,0]$, the pole expansion of the Eulerian polynomial has a single largest factor $w(x)=(x-1)/\operatorname{Log}x$, extended by $w(1)=1$. All other factors $(x-1)/(\operatorname{Log}x+2\pi i m)$ have moduli at most $\delta |w(x)|$ for a fixed $\delta<1$. Their squared ratios have uniformly bounded sum. At $x=1$ the nonleading factors vanish. Consequently
+Use the factorial-weighted polynomial $F_n(w)=\sum_{k=1}^n A(n,k)k!w^k$ and $N=n+1$, $L=\log N$. On any compact subset of the slit plane $\mathbb C\setminus(-\infty,0]$, the pole expansion of the Eulerian polynomial has a single largest factor $`w(x)=(x-1)/\mathrm{Log}\,x`$, extended by $w(1)=1$. All other factors $`(x-1)/(\mathrm{Log}\,x+2\pi i m)`$ have moduli at most $\delta |w(x)|$ for a fixed $\delta<1$. Their squared ratios have uniformly bounded sum. At $x=1$ the nonleading factors vanish. Consequently
 $$
  xH_n(x)=w(x) F_n(w(x))+O\big(|w(x)|F_n(\delta |w(x)|)\big).
 $$
-Indeed each exponent $k+1$ is at least two, permitting extraction of $\delta^{k-1}$ from the pole sum in the error. The logarithmic mean $w(x)=\int_0^1 e^{v\operatorname{Log}x}\,dv$ is nonzero and lies in the sector between $1$ and $x$. On the compact set its values stay in a closed annular sector avoiding the negative real axis. The uniform factorial saddle estimate therefore gives $F_n(\delta |w|)/|F_n(w)|\le\delta^N\exp(O(N/L))$. All sufficiently large rows have no zero on this compact set. [Eulerian pole expansion and saddle estimate](bulk-asymptotics.md#eulerian-poles-and-a-factorial-weighted-row)
+Indeed each exponent $k+1$ is at least two, permitting extraction of $\delta^{k-1}$ from the pole sum in the error. The logarithmic mean $`w(x)=\int_0^1 e^{v\,\mathrm{Log}\,x}\,dv`$ is nonzero and lies in the sector between $1$ and $x$. On the compact set its values stay in a closed annular sector avoiding the negative real axis. The uniform factorial saddle estimate therefore gives $F_n(\delta |w|)/|F_n(w)|\le\delta^N\exp(O(N/L))$. All sufficiently large rows have no zero on this compact set. [Eulerian pole expansion and saddle estimate](bulk-asymptotics.md#eulerian-poles-and-a-factorial-weighted-row)
 
 ## An analytic phase across the cut
 
@@ -23,15 +23,19 @@ $$
 with $c>0$. The approximation is between analytic functions and the bound is uniform.
 
 Take analytic logarithms $\ell_{n,\pm}=\log T_\pm$ that are conjugate on the real segment, using the explicit saddle expression. Put
+
 $$
  \Psi_n=\frac{\ell_{n,-}-\ell_{n,+}}{2i},\qquad
- \theta=\frac{\operatorname{Log}w_--\operatorname{Log}w_+}{2i}.
+ \theta=\frac{\mathrm{Log}\\,w_--\mathrm{Log}\\,w_+}{2i}.
 $$
+
 For real $z$, $\theta(z)=-\pi/2-\arctan(z/\pi)$. With an irrelevant common real constant omitted, the logarithm for $T=w F_n(w)$ is
+
 $$
- (N+1)\operatorname{Log}w+N\Phi_{N,w}(u_{N,w})
- -\tfrac12\operatorname{Log}(-\Phi_{N,w}''(u_{N,w}))+o(1).
+ (N+1)\\,\mathrm{Log}\\,w+N\Phi_{N,w}(u_{N,w})
+ -\tfrac12\\,\mathrm{Log}(-\Phi_{N,w}''(u_{N,w}))+o(1).
 $$
+
 Here $\Phi_{N,w}$ and its saddle $u_{N,w}$ are the functions in the factorial estimate. The simple saddle depends holomorphically on $w$ by its critical-point equation and uniqueness near $1$. The final $o(1)$ is the analytic logarithm near zero of the relative factor tending uniformly to $1$. Since $\Phi_{N,w}(u_{N,w})=-1-\log L+O(1/L)$ and $-\Phi''=1+O(1/L)$, the common real term cancels, giving $\Psi_n=(N+1)\theta+O(N/L)$ uniformly on the complex strip. Cauchy's derivative estimate gives the corresponding estimate for $\Psi_n'$ on a slightly smaller rectangle. Thinning it further, $\Re\theta'$ is bounded above by a strictly negative constant. Thus throughout this rectangle
 $$
  \Re\Psi_n'\le -c_0 N,\qquad |\Psi_n'|\le C_0 N

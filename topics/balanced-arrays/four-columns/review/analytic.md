@@ -45,10 +45,12 @@ The positive-half phase uses $S=6it^2L_+$. For $c=\sqrt2/3$, the ratio defining 
 ## Join of the estimates
 
 The general-purpose Gaussian estimate alone guarantees the join on $[1/5,38/7]$ for $n\ge2700$. The improved compact calculation in `four-columns/code/middle.py` proves the join already at $n\ge533$. It uses the central error before replacing $B_0$, $K_0$, $a_0$ by coarser uniform bounds. In the normalized tails it uses the exact three-dimensional radial expression
+
 $$
-\frac{\int_{|p|^2>1/4}e^{-nr|p|^2}\,dp}{(\pi/(n|\Lambda|))^{3/2}}
-=\left(\frac{|\Lambda|}{r}\right)^{3/2}\left[\operatorname{erfc}(\sqrt{x})+2\sqrt{x/\pi}\,e^{-x}\right],\qquad x=nr/4.
+\frac{\int_{|p|^2>1/4}e^{-nr|p|^2}\\,dp}{(\pi/(n|\Lambda|))^{3/2}}
+=\left(\frac{|\Lambda|}{r}\right)^{3/2}\left[\mathrm{erfc}(\sqrt{x})+2\sqrt{x/\pi}\\,e^{-x}\right],\qquad x=nr/4.
 $$
+
 This follows by substituting $s=\sqrt{nr}|p|$ and integrating $s^2e^{-s^2}$ by parts. The rates for the actual plus integral and comparison Gaussian are $a$ and $\Re\Lambda$, respectively. The minus term is $(2|\Lambda|/a)^{3/2}e^{-nb/4}$ with the exact lower relative squared-gap bound $b=(2\sqrt2t+12\sqrt2t^3)/|S|^2$. The constants preceding $1/n$, the two normalized tails, and the exponential depend only on $t$. The Gaussian exterior fraction is decreasing in its cutoff by its integral definition, and $b$ is positive. Each term thus decreases with $n$ for fixed $t$. The local prefactor $21/20$ is already valid for $n\ge450$. The rational endpoints in the script tile the entire closed interval and their Arb hulls contain both exact endpoints and all intermediate values. The interval denominator and rate enclosures are positive throughout the checked cells. With python-flint 0.9.0 and 128-bit precision the script reports all 2048 compact cells bounded by $33827/100000<1/2$.
 
 For the lower phase interface let $t_{40}=718/(16n-507)$, with $u=1/n\in(0,1/533]$. The script tiles the whole closed range $[0,1/533]$ in $64$ cells. It certifies $nt_{40}>40$ and $t_{40}<1/5$. With $h=(2\sqrt2+6t)/(1+2\sqrt2t)$ and $z=th$, one has $\arg S=\arctan z$ and $\arg (2\zeta t+4it^2)=\pi/4+\arctan(\sqrt2t/(1+\sqrt2t))$. Since $0\le z\le (2\sqrt2+6/5)/5<1$, the alternating arctangent expansion gives $\arctan z\le z(1-z^2/3+z^4/5)$. Therefore the expression checked in the code bounds $\Psi_n(t_{40})$ above. All 64 phase-join cells pass, giving $\Psi_n(t_{40})<41\pi$. The subscript 40 denotes the lower certificate endpoint. The phase inequality only locates that endpoint before node 41, which is the bound needed for the join.
