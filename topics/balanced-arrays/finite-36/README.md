@@ -33,7 +33,7 @@ The 28 distinct residual polynomials account for 617 simple negative roots. The 
 | [Defect-histogram package](../curvature-compensation/README.md) | $(7,11),(8,11),(8,12),(9,12),(10,12)$ |
 | New bucketwise column counts | $(5,12),(6,12),(7,12)$ |
 
-Every vector has positive coefficients, leading degree $D=\lfloor36r/d\rfloor$ and constant coefficient one. Exact rational Sturm chains give $D$ distinct real roots. The second check uses integer arithmetic only. At each internal quota $k$, it tests the sign at the negative dyadic of magnitude $2^{-144}\lfloor2^{144}\sqrt{a_{k-1}/a_{k+1}}\rfloor$. The magnitudes strictly increase and the signs alternate. With the signs at zero and negative infinity, this gives $D$ disjoint open intervals with a root in each. Both arguments certify simplicity and negativity.
+Every vector has positive coefficients, leading degree $D=\lfloor36r/d\rfloor$ and constant coefficient one. Exact rational Sturm chains give $D$ distinct real roots. The second check uses integer arithmetic only. At each internal quota $k$, it tests the sign at the negative dyadic of magnitude $2^{-144}\lfloor2^{144}\sqrt{a_{k-1}/a_{k+1}}\rfloor$. The magnitudes strictly increase and the signs alternate. With the signs at zero and negative infinity, this gives $D$ disjoint open intervals with a root in each. Both arguments certify simplicity and negativity. An [independent audit](independent-review.md) also matched the residual selection and source vectors, recounted quotas one and two and checked positive definite Bézout matrices for every exact case.
 
 ## Counting and replay
 
