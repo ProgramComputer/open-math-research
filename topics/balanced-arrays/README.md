@@ -67,3 +67,7 @@ The exact coefficient replay compares labeled row enumeration with the Bessel co
 set -o pipefail
 python -I -O topics/balanced-arrays/code/verify_singleton_slices.py | diff -u topics/balanced-arrays/results/singleton-slices.json -
 ~~~
+
+## A common weight on every pair row
+
+Giving every two-entry row the same positive weight can produce arbitrarily many nonreal conjugate pairs. At 32 rows, weight 216 yields fourteen simple negative roots and one nonreal pair. The original weight 1 gives sixteen simple negative roots. A Bessel expansion identifies the transition at weights of order $n^{5/2}$. **⬜ None.** [Theorem, proof and exact examples](symmetric-pair-weights.md)
