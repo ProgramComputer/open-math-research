@@ -1,0 +1,5 @@
+k times coefficient error < 0.001809105
+k times normalized coefficient derivative error < 0.009292503
+Relative old value error < 0.027875673
+Total normalized old derivative correction < 0.263653787
+Both insertion signs verified under the slab hypotheses. Crossover starts at 1,408,334.
