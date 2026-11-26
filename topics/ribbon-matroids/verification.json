@@ -579,5 +579,261 @@
         "sha256": "3a223f126a0d3a86d9d0de105bed49e23b4c45adec21d70710d89d58d4ccbcfd"
       }
     ]
+  },
+  "ribbon_full_verification": {
+    "status": "passed",
+    "scope": "Every nonempty connected ribbon lattice path matroid of rank r has the Narayana Z-polynomial of order r+1, with exactly r roots, all strictly negative, real and simple. For the degenerate rank-zero convention, Z is 1.",
+    "written_only": "The extension to arbitrary collections of noncrossing diagonals of a convex polygon has a written proof and a conditional graph reduction in Lean.",
+    "primary_source": "https://github.com/PerAlexandersson/symmetricfunctions.com/blob/b4a005205cfd78dd987facedf2e1916ef1e308fd/tex-source/realRootedOpenProblems.tex#L496-L506",
+    "formal_theorem": {
+      "declaration": "Ribbon.Source.IsRibbonPresentation.narayana",
+      "file": "topics/ribbon-matroids/lean/publication/RibbonNarayana.lean"
+    },
+    "statement_comparison": {
+      "specification_file": "topics/ribbon-matroids/lean/publication/RibbonNarayanaSpec.lean",
+      "comparison_file": "topics/ribbon-matroids/lean/publication/AuditRibbonSource.lean",
+      "original_source": {
+        "specification": "Ribbon.Source.NarayanaClaim",
+        "checked_declaration": "AuditRibbonSource.original"
+      },
+      "strengthened_written_result": {
+        "specification": "Ribbon.Source.PublishedNarayanaClaim",
+        "checked_declaration": "AuditRibbonSource.published"
+      },
+      "degenerate_rank_zero": {
+        "specification": "Ribbon.Source.RankZeroNarayanaClaim",
+        "checked_declaration": "AuditRibbonSource.rankZero"
+      },
+      "method": "The Lean kernel checks the theorem against separate types for the original claim, the stronger written claim, and the rank-zero convention. Both kernels replay those comparison declarations and their dependencies."
+    },
+    "toolchain": {
+      "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+      "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+      "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+      "lake_manifest": "shared/lean/publication/lake-manifest.json",
+      "independent_checker": "Nanoda (Rust)",
+      "nanoda_source_commit": "4c544ed4099c8227f07d5de77ad1e69fb0740a27",
+      "release_binaries_sha256": {
+        "lean": "db7f559d05795e7af52e42bc966c90240a39dcb9712161c54c97afa546e20c00",
+        "leanexport": "8298d4412a1f8986b5dbfd1d9925211778d8d320fc47b72040c8fdfdd5b603d5",
+        "leanchecker": "2b2ff08805ace61c935b023f8114ac3f7f1d3bc79cb4e8c47ef7801a5af58798",
+        "nanoda_bin": "8241c5e6baa29490aa118d382f97961b208ae730fdb96545c2abed74c9ece5a8"
+      }
+    },
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build",
+      "bash shared/lean/publication/replay-kernel.sh .publication-build \"$RUNNER_TEMP/kernel-audit\" ribbon-foundation"
+    ],
+    "workflow_checkout_commit": "6bde424aa1dec1062b4f94a93ee4990bb0a3bbef",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45845745191/job/139998824404",
+    "hosted_export_artifact": {
+      "url": "https://github.com/ProgramComputer/open-math-research/actions/runs/45845745191/artifacts/15132001974",
+      "digest": "sha256:e98cfb3eaef9a54c73d64baa01529879b5880220486a5a38615e1ea61a73ec82"
+    },
+    "hosted_reports_artifact": {
+      "url": "https://github.com/ProgramComputer/open-math-research/actions/runs/45845745191/artifacts/15131352120",
+      "digest": "sha256:ab951bdb47aeead7b3657e90970945d10ac77bc2531eb6fdd4c2f59cfefa2b2a"
+    },
+    "completed_lake_jobs": 4483,
+    "declaration_axioms": {
+      "checked_declarations": 97,
+      "report_sha256": "112c81fefe4a484f339050195c0d3e639d252453980cb599ea5cad1d83a43d7d",
+      "standard_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "declarations_using_fewer_axioms": {
+        "Ribbon.Source.IsChainPresentation.restricted": [
+          "propext"
+        ],
+        "OpenMathResearch.MatroidKL.circuitKLCoeff_high": [
+          "Quot.sound",
+          "propext"
+        ],
+        "OpenMathResearch.MatroidKL.circuitNarayana_clear": [
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "export_root_axioms": {
+        "Ribbon.Source.IsRibbonPresentation.narayana": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AuditRibbonSource.original": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AuditRibbonSource.published": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AuditRibbonSource.rankZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    "export": {
+      "additional_checked_groups": 0,
+      "declaration_count": 24717,
+      "export_sha256": "c2580b2970a3d6838d33728f53e433de32e7d63bffba3f0ec1e07435f285e7ec",
+      "expression_count": 2163464,
+      "meta": {
+        "exporter": {
+          "name": "lean4export",
+          "version": "3.1.0"
+        },
+        "format": {
+          "version": "3.1.0"
+        },
+        "lean": {
+          "githash": "611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9",
+          "version": "4.36.0"
+        }
+      },
+      "roots": {
+        "AuditRibbonSource.original": {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "declaration_count": 24709
+        },
+        "AuditRibbonSource.published": {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "declaration_count": 24710
+        },
+        "AuditRibbonSource.rankZero": {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "declaration_count": 8442
+        },
+        "Ribbon.Source.IsRibbonPresentation.narayana": {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "declaration_count": 24707
+        }
+      }
+    },
+    "official_kernel_verdict": "Lean default kernel accepts the solution",
+    "independent_kernel_verdict": "Checked 24717 declarations with no errors",
+    "staged_sources_report_sha256": "abecac4b5926be2070727bd7d65ed568ed21ffd1bbb570b554a2e3f2b2152013",
+    "modules": {
+      "RibbonNarayanaSpec": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonNarayanaSpec.lean",
+        "staged_sha256": "56856ddcf87ee7a1ebdc68c6b792c4de58975285e34f566c11e8e014f94a8fa8"
+      },
+      "RibbonNarayanaCoefficients": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonNarayanaCoefficients.lean",
+        "staged_sha256": "40791e0f5eaeaebb7aed07a615fc3a3b2235dbb0a557c04e25069d2fd3906589"
+      },
+      "CircuitNarayanaMatroid": {
+        "published_path": "topics/ribbon-matroids/lean/publication/CircuitNarayanaMatroid.lean",
+        "staged_sha256": "fa2e88a6880a4ddf406ebdc67e2e8efaba1c03bf59df3e9670b72812a11330e3"
+      },
+      "CircuitNarayanaCoefficients": {
+        "published_path": "topics/ribbon-matroids/lean/publication/CircuitNarayanaCoefficients.lean",
+        "staged_sha256": "3a223f126a0d3a86d9d0de105bed49e23b4c45adec21d70710d89d58d4ccbcfd"
+      },
+      "OpenMathResearch.MatroidFlatPolynomial": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidFlatPolynomial.lean",
+        "staged_sha256": "2ac875e9cf83be8b1553c42d9f09d49cc78080f7dc167044bd726d26094ef0ed"
+      },
+      "OpenMathResearch.MatroidKLRecurrence": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLRecurrence.lean",
+        "staged_sha256": "f5c97e1f5730b932b56776b4cf1b5a3eead202fd101ad035f03cf6ee4ec3fd50"
+      },
+      "OpenMathResearch.MatroidKL": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKL.lean",
+        "staged_sha256": "79322f9658858ef51a31e7567cb001dc4f6a40bc29c6600067890c92ad26cfef"
+      },
+      "RibbonChainBoundary": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonChainBoundary.lean",
+        "staged_sha256": "07aa4b4a26e0b217de562b717b7491d947f92292ec37092f0bcaf3c0ebbf43cd"
+      },
+      "RibbonChainDeletion": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonChainDeletion.lean",
+        "staged_sha256": "e062af91d0872a6fa924a88fd85e99bc29567abeb5f32c86a7f27b6851e5554d"
+      },
+      "OpenMathResearch.MatroidKLSplitDeletion": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLSplitDeletion.lean",
+        "staged_sha256": "fd77bc5c1ff763ef00e322a5cfd2e2177e71b641c28b76c6ce101d938d9e2484"
+      },
+      "OpenMathResearch.MatroidKLSeparation": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLSeparation.lean",
+        "staged_sha256": "916a7ac4580c2bbe747b49e9258f9e736b571ebf80e663ad33c370fae0cf0589"
+      },
+      "OpenMathResearch.MatroidKLMap": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLMap.lean",
+        "staged_sha256": "7c44886395e10383470e5e031dbb694df4a225098f6997c04bf4b7c3bc76572d"
+      },
+      "OpenMathResearch.MatroidFlatSum": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidFlatSum.lean",
+        "staged_sha256": "9e5ea7554bd6a2dbe36c8d869e326f5b2fa4df39d3f971f446696ae4c2495775"
+      },
+      "OpenMathResearch.MatroidKLProduct": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLProduct.lean",
+        "staged_sha256": "6e17881193a675e0005d8b7ba9c3f6872f678ee78ff586e5d88bdebc8b09c886"
+      },
+      "OpenMathResearch.MatroidFlatContract": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidFlatContract.lean",
+        "staged_sha256": "49b7ca6e9b66a22d05fcd13bfdc4df91740637843600a84a00c736f6fe7b63cc"
+      },
+      "OpenMathResearch.MatroidFlatDelete": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidFlatDelete.lean",
+        "staged_sha256": "e3aafe608e48fa956472d674aacd3ed8e7409c31fd09ebac45109a7e9455b5e8"
+      },
+      "OpenMathResearch.MatroidKLDeletionProfile": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLDeletionProfile.lean",
+        "staged_sha256": "f609ad564aff140eb7a15105588a0acd12d08bf2a804362430562961812e41aa"
+      },
+      "RibbonChainPresentation": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonChainPresentation.lean",
+        "staged_sha256": "122edc4759d1448de7007e84bd8732cfd48c9d14ea7da1a0c1fcae87156eb102"
+      },
+      "RibbonBoundaryProfile": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonBoundaryProfile.lean",
+        "staged_sha256": "a2e28adc6edc03e387d00811a8de6d4ea89dfc2f9a04876841c7a0f5c0413779"
+      },
+      "RibbonNarayana": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonNarayana.lean",
+        "staged_sha256": "36dac97f39fbd31eb9a463e461bb29eb9a509dae66483458da8763b4847d47c1"
+      },
+      "NarayanaRolle": {
+        "published_path": "topics/ribbon-matroids/lean/publication/NarayanaRolle.lean",
+        "staged_sha256": "b1e1500d4b88fa89a871ae6b02fc8d8772bc875f767ea4a1e8a0d3289999f9f1"
+      },
+      "AuditRibbonSource": {
+        "published_path": "topics/ribbon-matroids/lean/publication/AuditRibbonSource.lean",
+        "staged_sha256": "c26a565ab8facaaaf6000a19d405374ade3b517cd4c6622eaf0b83083abebe45"
+      }
+    },
+    "source_convention": {
+      "description": "The source describes a connected skew shape. The standard snake convention requires at least two ground elements, with a one-square ribbon as its smallest case. The empty-area singleton coloop lies outside this convention.",
+      "definition": "https://doi.org/10.1016/j.aam.2016.11.008",
+      "section": "Definition at the start of section 3.2"
+    }
   }
 }
