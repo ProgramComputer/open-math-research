@@ -1,0 +1,181 @@
+# All internal angular signs near the upper edge in growing dimension
+
+Let $`d\to\infty`$, $`1\le r<d`$, and $`n/d^2\to\infty`$. Put $`H(w)=\sum_{s=0}^r\binom ds w^s`$. For $`t>0`$, give the row size $`S`$ probabilities proportional to $`\binom ds t^s`$, and conditionally choose a uniform size-$`S`$ subset $`I`$. Write $`J=r-S`$, $`h=\mathbb E J`$, $`\mu=r-h`$, $`\phi=\pi/d`$, $`T=nr/d`$ and $`D=\lfloor T\rfloor`$. Define
+
+$$
+g(\tau)=\mathbb E e^{-i\tau J},\quad
+H_\tau=H(te^{i\tau})=H(t)e^{ir\tau}g(\tau),\quad
+a_s=\frac{s(d-s)}{d(d-1)},\quad
+a=\mathbb E a_S,\quad a_\tau=\frac{\mathbb E[a_S e^{-i\tau J}]}{g(\tau)}.
+$$
+
+There is an absolute $`h_0>0`$ such that the following holds eventually, uniformly for $`0<h\le h_0`$. Set
+
+$$
+\Psi=n\bigl(r\phi+\mathrm{Im}\log g(\phi)\bigr)
+-\frac{d-1}{2}\mathrm{Im}\log a_\phi .
+$$
+
+At every node $`\Psi=k\pi`$ with integer $`1\le k\le D-1`$,
+
+$$
+(-1)^kP_n^{(r,d)}(-t^d)>0.
+$$
+
+The logarithm of $`g`$ is the branch near one and that of $`a_\tau`$ is the branch in the right half-plane. The proof uses angular integrals throughout the near-full range, including $`1\le D-k=o(d)`$. It does not require asymptotic formulas for the upper coefficients.
+
+## Tilt parameters and diagonal phases
+
+The successive ratios of the deficit weights decrease. The first is $`q=\Pr(J=1)/\Pr(J=0)\le h/(1-h)`$. Hence $`\Pr(J=j)\le q^j`$, $`\mathbb E J^\ell=O_\ell(h)`$ for every fixed $`\ell\ge1`$, and $`h\le Cq`$. Consequently $`\Pr(J=0)\ge1-h`$, $`\Pr(J=1)\asymp h`$, and $`\mathrm{Var}(J)\asymp h`$. Also
+
+$$
+a_{r-j}/a_r\le1+j,\qquad a\asymp a_r\ge 1/d.
+$$
+
+In particular $`\mathbb E[a_S^q J^\ell]=O_{q,\ell}(a^q h)`$ for fixed positive integers $`q,\ell`$, and the same weighted estimate holds with $`\mathbf1_{\{J>0\}}`$ in place of $`J^\ell`$.
+
+Uniformly on $`[-\pi,\pi]`$, $`g=1+O(h)`$, so $`g`$ stays bounded away from zero. Its fixed positive order derivatives are $`O(h)`$. Taylor expansion of its logarithm at zero gives $`\mathrm{Im}\log g(\tau)=-h\tau+O(h|\tau|^3)`$ for small $`\tau`$. Its centered characteristic function has second log-modulus derivative $`-\mathrm{Var}(J)+O(h|\tau|)`$ near zero. For far phases, the pair of atoms zero and one gives $`|g(\tau)|\le\exp[-ch(1-\cos\tau)]`$ by the independent-copy formula. Comparing both ranges with the value at $`\phi`$ gives
+
+$$
+\log|H_\tau/H_\phi|\le -ch(\tau^2-\phi^2)\qquad(\phi\le|\tau|\le\pi),
+\qquad
+e^{-Ch\tau^2}\le |g(\tau)|\le1\quad (|\tau|\text{ small}).
+\tag{1}
+$$
+
+The bounds on the weighted moments of $`J`$ show that each of the first two derivatives of $`a_\tau`$ is $`O(ah)`$. Also $`a_\tau-a=O(ah)`$ uniformly in $`\tau`$, and its first derivative at zero is purely imaginary. Thus
+
+$$
+\frac{\mathrm{Re}\thinspace a_\tau}{a}=1+O(h\min(\tau^2,1)),\qquad
+\frac{|\mathrm{Im}\thinspace a_\tau|}{a}=O(h\min(|\tau|,1)),\qquad
+\frac{|a_\tau|}{a}=1+O(h\min(\tau^2,1)).
+\tag{2}
+$$
+
+The cap range is chosen small enough for $`\mathrm{Re}\,a_\tau`$ to be positive uniformly.
+
+## Global common-angle localization
+
+Use normalized Haar measure on $`|z_i|=1`$, $`\prod_i z_i=-1`$. With $`R=H(t)\mathbb E\prod_{i\in I}z_i`$, its integral after raising to the $`n`$th power equals $`P_n^{(r,d)}(-t^d)`$ by character orthogonality. Put $`\overline z=d^{-1}\sum_i z_i`$ and $`D_z=\sum_i|z_i-\overline z|^2`$.
+
+At size $`s`$ put $`m=\min(s,d-s)`$. Generate a uniform subset by making $`m`$ disjoint random pairs from a uniform permutation, independently choosing one element from each pair, and including the next $`s-m`$ elements. Given the permutation, the absolute response is bounded by $`e^{-X/8}`$, where $`X`$ is the sum of squared chords of the pairs. Each chord is at most four and $`\mathbb EX=2mD_z/(d-1)`$. For two disjoint pairs the expected product of their squared chords is at most $`d(d-1)/[(d-2)(d-3)]`$ times the squared mean chord of one pair, by allowing intersections in the numerator. Thus $`\mathbb EX^2\le C(\mathbb EX+(\mathbb EX)^2)`$. Cauchy–Schwarz gives $`\mathbb E[X/(1+X)]\ge(\mathbb EX)^2/\mathbb E[X+X^2]`$ when the latter denominator is positive. With $`1-e^{-x/8}\ge c x/(1+x)`$ this bounds the fixed-size modulus by $`1-c\min(mD_z/d,1)`$, also valid when $`m=0`$. On averaging, retain just the size $`r`$ in the modulus loss. Its mass is at least $`1-h`$, and $`\min(r,d-r)/d\ge (d-1)a_r/d`$ with $`a_r\asymp a`$. Therefore
+
+$$
+|R/H(t)|\le 1-c\min(aD_z,1).
+$$
+
+Choose a sufficiently small fixed $`\eta>0`$ for the local bounds below, and restrict to $`D_z\le c_1\eta^2`$ with a sufficiently small fixed $`c_1`$. The scale to compare against is $`|H_\phi|^n I_0`$, with
+
+$$
+I_0=\frac{(2\pi n a)^{-(d-1)/2}}{\sqrt d}.
+$$
+
+On the outside part with $`aD_z>1`$, the integral is at most $`H(t)^n e^{-cn}`$. This is negligible on the principal scale since $`n\gg d\log n`$ under $`n/d^2\to\infty`$, and the principal normalization loss relative to $`H(t)^n`$ is $`O(nh/d^2)`$ in the exponent.
+
+On the outside part with $`aD_z\le1`$, keep half the chord penalty for $`e^{-cna\eta^2}`$. Choose a pin $`j`$ minimizing $`\sum_i|z_i-z_j|^2\le2D_z`$ by averaging, and apply the other half of the penalty to the pinned squared chords. For a fixed pin, the map to the $`d-1`$ relative coordinates $`w_i=z_i/z_j`$, $`i\ne j`$, is onto, since one can choose $`z_j^d=-1/\prod_{i\ne j}w_i`$. This map is a translate of an onto homomorphism of compact tori, so it pushes normalized Haar measure to product Haar measure. Each chord factor integrates to at most $`C/\sqrt{na}`$ in one coordinate. A union bound over pins thus gives outside contribution at most $`H(t)^n d e^{-cna\eta^2}(C/\sqrt{na})^{d-1}`$. Compared to the principal scale, its logarithm is bounded by $`-cna\eta^2+O(d+\log d+nh/d^2)`$, tending to minus infinity because $`na\gg d`$ and $`nh/d^2=o(na)`$.
+
+In the retained domain choose a pin minimizing $`\sum_i|z_i-z_j|^2\le2D_z`$ and lift all angular differences around it. Subtract their average to write $`z_i=e^{i(\tau+y_i)}`$, $`\sum_i y_i=0`$, and $`\|y\|\le\eta`$. The common phase $`\tau`$ is an odd multiple of $`\phi`$, taken in $`(-\pi,\pi]`$. This representation is unique within the small-norm domain, since any two such angle lifts differ by the same integer multiple of $`2\pi`$ in every coordinate, as seen by taking differences. Each chart contains a full fixed-radius ball in the zero-sum hyperplane, since $`D_z\le\sum_i|e^{iy_i}-1|^2\le\|y\|^2`$. In the first $`d-1`$ deviation coordinates the measure is $`(2\pi)^{-(d-1)}dy_1\cdots dy_{d-1}`$, with $`y_d=-\sum_{i<d}y_i`$.
+
+## Transverse expansion and a uniform integral estimate
+
+Write $`Q_j=\sum_i y_i^j`$ and $`X=\sum_{i\in I}y_i`$. At a fixed size $`s`$, let $`m_j=(s)_j/(d)_j`$. Expanding the powers with $`Q_1=0`$ gives
+
+$$
+\begin{aligned}
+\mathbb E[X\mid S=s]&=0,\\
+\mathbb E[X^2\mid S=s]&=a_sQ_2,\\
+\mathbb E[X^3\mid S=s]&=a_s\frac{d-2s}{d-2}Q_3,\\
+\mathbb E[X^4\mid S=s]&=(m_1-7m_2+12m_3-6m_4)Q_4
++3(m_2-2m_3+m_4)Q_2^2.
+\end{aligned}
+$$
+
+For example, the sums of the quartic monomials with patterns $`3+1`$, $`2+2`$, $`2+1+1`$ and $`1+1+1+1`$, with repeated exponents unlabeled, are $`-Q_4`$, $`(Q_2^2-Q_4)/2`$, $`Q_4-Q_2^2/2`$, and $`Q_2^2/8-Q_4/4`$. The coefficient of $`Q_4`$ is $`O(a_s)`$ by writing it in terms of $`m_j-m_{j+1}=m_j(d-s)/(d-j)`$, while $`m_2-2m_3+m_4=(s)_2(d-s)_2/(d)_4=O(a_s^2)`$. Consequently the real fourth moment is bounded by $`C(a Q_4+a^2Q_2^2)`$, using $`\mathbb E a_S^2=O(a^2)`$.
+
+Tilt the size weights by $`e^{-i\tau J}/g(\tau)`$, whose absolute weights are bounded by a constant times the real probabilities. Since the linear term vanishes, Taylor through the cubic and the logarithm near one give
+
+$$
+\log(R/H_\tau)
+=-\tfrac12 a_\tau Q_2-\tfrac{i}{6}b_\tau Q_3
++O(a Q_4+a^2Q_2^2),
+\tag{3}
+$$
+
+where $`b_\tau`$ is the tilted mean of $`a_s(d-2s)/(d-2)`$. The real exponential Taylor remainder is bounded by the absolute fourth moment for every real value of $`X`$. Also $`|R/H_\tau-1|\le C a Q_2`$ by the second-order Taylor bound, so the logarithm is well defined on this chart and its quadratic error is included in (3). The weighted moment bounds give $`|b_\tau|=O(a)`$ and $`|\mathrm{Im}\,b_\tau|=O(ah\min(|\tau|,1))`$ by differentiating and by comparison with the $`J=0`$ term. Using $`\min(|\tau|,1)\sum_i|y_i|^3\le[\min(\tau^2,1)Q_2+Q_4]/2`$, the real part in (3) is at most
+
+$$
+-\tfrac12 a_{\rm low}Q_2+C(aQ_4+a^2Q_2^2),\qquad
+a_{\rm low}=a[1-C_0h\min(\tau^2,1)]\asymp a.
+\tag{4}
+$$
+
+Fix $`C_0`$ large enough, then $`h_0`$ small enough. The same upper bound applies to the real part of the comparison exponent $`-a_\tau Q_2/2`$.
+
+Here is a uniform bound for the positive exponential corrections. Put $`A=na_{\rm low}\asymp na`$. Under the normalized Gaussian on the hyperplane with density proportional to $`e^{-A Q_2/2}`$, the vector of deviations has the law of $`Y_i=X_i-\overline X`$ for independent $`X_i\sim N(0,A^{-1})`$. The vector $`Y`$ is independent of $`\overline X`$. On $`Q_2(Y)\le\eta^2`$, impose also $`|\overline X|\le\eta`$, which has probability at least $`1/2`$ independently. Then $`|X_i|\le2\eta`$, and $`Q_4(Y)\le16\sum_iX_i^4`$ by the fourth-power inequality and Jensen. For any fixed $`C_1`$, with $`\eta`$ sufficiently small, the one-dimensional Gaussian expectation of $`e^{C_1 A X_i^4}`$ restricted to this range is $`1+O(A^{-1})`$, by comparison with a Gaussian with half the original precision. The product is bounded since $`d/A=o(1)`$. This bounds the exponential moment of $`C_1 n a Q_4`$ on the localized ball, for any fixed constant needed below.
+
+For the radial correction, $`U=AQ_2`$ has a chi-square law with $`d-1`$ degrees of freedom. The exponent $`C_1na^2Q_2^2`$ is $`O(U^2/n)`$. On $`U\le Ld`$ with fixed large $`L`$ this is $`O(d^2/n)=o(1)`$. On $`Ld<U\le A\eta^2`$ it is at most $`\epsilon U`$ for a fixed $`\epsilon<1/8`$ by choosing $`\eta`$ small. The exponential moment at $`1/4`$ bounds the contribution of that range by $`e^{-c d}`$ for $`L`$ sufficiently large. Cauchy–Schwarz combines the two quartic exponential bounds, and the same proof works with doubled constants.
+
+The Gaussian for $`a_{\rm low}`$ has integral $`I_0\exp(O(dh\min(\tau^2,1)))`$, since the free-coordinate quadratic form has matrix $`I+\mathbf1\mathbf1^\top`$ and determinant $`d`$. From (4) and the exponential bounds, the absolute contribution of any localized cluster is at most
+
+$$
+C I_0|H_\tau|^n \exp(Cdh\min(\tau^2,1)).
+\tag{5}
+$$
+
+The exact complex Gaussian gives its leading term with an absolute error at most
+
+$$
+C I_0|H_\tau|^n \exp(Cdh\min(\tau^2,1))\thinspace
+\left(\sqrt{\frac d{na}}+\frac d{na}+\frac{d^2}{n}\right).
+\tag{6}
+$$
+
+To see (6), apply $`|e^A-e^B|\le|A-B|e^{\max(\mathrm{Re}\,A,\mathrm{Re}\,B)}`$ to the two exponents and Cauchy–Schwarz to the exponential correction. Under the real comparison Gaussian, the $`L^2`$ norms of $`Q_3,Q_4,Q_2^2`$ are $`O(\sqrt d\,A^{-3/2})`$, $`O(d A^{-2})`$, and $`O(d^2 A^{-2})`$. The first follows from Wick's formula $`\mathbb E Q_3^2=6A^{-3}(d-3+2/d)`$, since the covariance has row sums zero. The others follow from marginal eighth moments and the chi-square fourth moment. Multiplying by the coefficients in (3) gives (6). The Gaussian can be extended to the full hyperplane with an additional exponentially small error, since the chart contains a fixed-radius ball and $`na\gg d`$. Its integral after multiplying by the saddle value is
+
+$$
+\frac{H_\tau^n(2\pi n a_\tau)^{-(d-1)/2}}{\sqrt d}.
+\tag{7}
+$$
+
+The factor in parentheses in (6) is $`o(1)`$ since $`a\ge c/d`$ and $`n/d^2\to\infty`$.
+
+## Signs at all internal nodes
+
+At a node $`\Psi=k\pi`$, the tilted argument expansion and (2) give
+
+$$
+T-k=\frac{nh}{d}\left[1+O(d^{-2}+d/n)\right].
+\tag{8}
+$$
+
+Indeed $`\mathrm{Im}\log g(\phi)=-h\phi+O(h\phi^3)`$ and $`\arg a_\phi=O(h\phi)`$. The phase at $`\phi`$ uses $`r\phi+\mathrm{Im}\log g(\phi)`$ continuously, which is also the argument of $`H_\phi`$ between zero and $`r\phi`$. Since $`k\le D-1`$, (8) implies $`nh\ge(1-o(1))d`$. It also makes $`T-k=O(d)`$ equivalent to bounded $`nh/d^2`$.
+
+If $`nh/d^2\to\infty`$, (1) and (5) make all nonprincipal clusters negligible on the principal scale. Indeed for $`|\tau|\ge3\phi`$ the factor $`\exp(Cdh\tau^2)`$ is absorbed in half the diagonal gap, because $`n\gg d`$ and $`\tau^2\le(9/8)(\tau^2-\phi^2)`$. Summing the remaining bound over odd phase labels gives $`O(e^{-cnh/d^2})`$. The principal conjugate pair in (7) then gives the asserted sign by (6), since its two terms have phase $`\pm k\pi`$.
+
+It remains to consider a sequence on which $`nh/d^2`$ stays bounded. Put $`L=d/\sqrt{nh}`$. For a fixed large $`M`$ retain all odd phases $`|\tau|\le M/\sqrt{nh}`$. Take $`M`$ large enough that these include the principal phases and the discarded phases satisfy $`|\tau|\ge\sqrt2\,\phi`$. At a retained phase $`\tau=\ell\phi`$ with odd integer $`\ell`$, the argument of (7) can be taken as
+
+$$
+n\mu\tau+O(nh|\tau|^3)+O(dh|\tau|).
+$$
+
+Subtracting $`\ell`$ times the principal argument gives a difference of the same error order, since $`|\ell|\phi^3\le|\tau|^3`$. Uniformly over retained labels it is $`O_M((nh)^{-1/2}+d\sqrt{h/n})=o(1)`$ by (8) and $`n/d^2\to\infty`$. Their signed real parts thus have the sign $`(-1)^k`$, because $`\ell k`$ has the same parity as $`k`$. The local errors (6) are $`o(1)`$ relative to the sum of their absolute leading amplitudes. In fact $`dh\tau^2\le M^2d/n=o(1)`$ by the retention condition, and (2) compares the Gaussian factors uniformly to $`I_0`$.
+
+On the scale $`|H_\phi|^n I_0`$, that positive amplitude sum is at least $`c(1+L)`$. If $`L`$ is large, use the at least $`cL`$ odd phases $`|\tau|\le1/\sqrt{nh}`$ and the lower bound in (1). If $`L`$ is bounded, one principal phase suffices. For the discarded phases, (1) and (5) bound their total on the same scale by
+
+$$
+C(1+L)e^{-c'M^2}.
+$$
+
+This follows from $`\tau^2-\phi^2\ge\tau^2/2`$, absorption of $`dh\tau^2`$ by the diagonal gap, and the Gaussian tail sum over an equally spaced lattice of spacing $`2\pi\sqrt{nh}/d`$ in the variable $`\sqrt{nh}\,\tau`$. Choosing $`M`$ fixed and large makes the discarded contribution smaller than the signed retained contribution. The exponential global error is already $`o(1)`$ on the principal scale. This proves the sign in the bounded case. Any hypothetical sequence of failed signs has a subsequence in one of these two regimes, proving the uniform eventual assertion.
+
+## Ordering within the near-full interval
+
+The phase is strictly increasing with the real log-tilt $`\eta_t=\log t`$ in this interval for all sufficiently large parameters. Indeed
+
+$$
+\frac{d}{d\eta_t}\arg H_\phi
+=\mathrm{Im}\frac{\mathbb E[S e^{i\phi S}]}{\mathbb E e^{i\phi S}}
+=\phi\thinspace \mathrm{Var}(J)+O(h\phi^3).
+$$
+
+For the last equality center $`J`$, use its second and fourth moments in the numerator Taylor expansion, and the centered characteristic function $`1+O(h\phi^2)`$ in the denominator. Also $`\partial_{\eta_t}a_\tau=-\mathrm{Cov}_\tau(a_S,J)`$, where the covariance is under the complex size tilt. The weighted deficit moment estimates give $`\partial_\tau\partial_{\eta_t}\log a_\tau=O(h)`$, by differentiating this covariance and using $`|a_\tau|\asymp a`$. At $`\tau=0`$ the log-tilt derivative is real, so $`(d/d\eta_t)\arg a_\phi=O(h\phi)`$. Since $`\mathrm{Var}(J)\asymp h`$ and $`n\gg d`$, the derivative of $`\Psi`$ is positive. At $`t\to\infty`$ its limit is $`T\pi`$. Thus the near-full nodes are ordered and each target phase strictly between the initial phase on this interval and $`T\pi`$ is attained once.

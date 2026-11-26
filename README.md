@@ -7,6 +7,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟩 Full · Lean 4 |
 | [Simple negative zeros for four balanced columns with row cap two](topics/balanced-arrays/four-columns/README.md) | Proof for every row count | ⬜ None |
+| [Simple negative zeros for balanced arrays at logarithmic caps or above a quadratic row bound](topics/balanced-arrays/quadratic/README.md) | Every dimension at $r\le c\log n$ for large $n$, and every cap at $n\ge Cd^2$ | ⬜ None |
 | [An absolute row bound for balanced arrays in every dimension](topics/balanced-arrays/very-tall/README.md) | All caps have simple negative zeros for $n\ge Cd^4\log(d+1)$ with an existential absolute $C$ | ⬜ None |
 | [A dimension-uniform row threshold for balanced arrays at fixed cap](topics/balanced-arrays/fixed-cap/README.md) | At each fixed cap, all sufficiently large row counts give simple negative zeros in every dimension $d\ge\max(2,r)$ | ⬜ None |
 | [Simple negative zeros for balanced arrays in growing dimensions](topics/balanced-arrays/dense-regime/README.md) | All roots for $d\ge Cn/\log n$ at large $n$ and in a rank-dependent range, plus a uniform below-cap root count | ⬜ None |
