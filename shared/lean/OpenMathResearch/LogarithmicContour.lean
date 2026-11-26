@@ -1,4 +1,6 @@
 import Mathlib.Analysis.Complex.CauchyIntegral
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Ring
 
 /-!
 # Cauchy deformation through a finite chain of logarithmic sectors

@@ -223,7 +223,7 @@ private theorem exp_im_ne_zero_on_cut {d : ℝ} (hd : 0 < d) (hD : d < 1)
     conv_lhs => rw [← Complex.re_add_im z, exp_add, hExp]
     rw [← hPolar, ← Complex.ofReal_exp]
     push_cast
-    field_simp [hr]
+    field_simp [hr] <;> ring
   rw [hS, Complex.mul_im]
   simp only [Complex.ofReal_re, Complex.ofReal_im, zero_mul, add_zero]
   exact mul_ne_zero (div_pos (Real.exp_pos _) (cutPoint_norm_pos hd hD i)).ne'
@@ -423,7 +423,7 @@ private theorem logSector_eq_quotient {d : ℝ} (hd : 0 < d) (hD : d < 1)
   apply (div_eq_div_iff hDen (mul_ne_zero (mul_ne_zero (by norm_num) (exp_ne_zero z)) hSub)).mpr
   have hsq := logBranch_sq hd hD hj hz
   unfold quartic at hsq
-  linear_combination -hsq
+  linear_combination hsq
 
 private theorem logSector_cut_difference {d : ℝ} (hd : 0 < d) (hD : d < 1)
     (n : ℕ) (j : Fin 4) (x : ℝ) :

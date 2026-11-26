@@ -53,6 +53,7 @@ jobs:
           Mathlib.RingTheory.PowerSeries.Basic
           Mathlib.Tactic.FieldSimp
           Mathlib.Tactic.Linarith
+          Mathlib.Tactic.LinearCombination
           Mathlib.Tactic.Positivity
           Mathlib.Tactic.Ring
       - name: Check the logarithmic strips and contour summation
