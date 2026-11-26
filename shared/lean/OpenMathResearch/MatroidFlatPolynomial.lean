@@ -1,7 +1,7 @@
 import Mathlib.Algebra.Polynomial.Coeff
 import Mathlib.Combinatorics.Matroid.Rank.ENat
 import Mathlib.Data.Fintype.Powerset
-import OpenMathResearch.MatroidKL
+import OpenMathResearch.MatroidKLRecurrence
 
 /-!
 # Rank and polynomial coefficients on Mathlib matroid flats
@@ -12,6 +12,7 @@ flat in the recurrence can be any flat, so the same family also represents
 the upper intervals needed for contraction.
 -/
 
+open Finset Polynomial
 open scoped BigOperators Polynomial
 
 noncomputable section
@@ -36,6 +37,9 @@ instance instOrderBotFlat (M : Matroid α) : OrderBot (Flat M) where
 
 instance instFintypeFlat [Finite α] (M : Matroid α) : Fintype (Flat M) :=
   Fintype.ofFinite _
+
+instance instLocallyFiniteOrderFlat [Finite α] (M : Matroid α) : LocallyFiniteOrder (Flat M) :=
+  LocallyFiniteOrder.ofFiniteIcc fun _ _ => Set.toFinite _
 
 /-- The natural-valued rank of a flat of a finite matroid. -/
 def flatRank (M : Matroid α) (F : Flat M) : ℕ := (M.eRk F.val).toNat
@@ -85,23 +89,65 @@ theorem matroidZCoeff_eq_zero_of_rank_lt [Finite α] (M : Matroid α) {i : ℕ}
   apply (flatKLCoeff_isKLFamily M).zCoeff_eq_zero_of_height_lt (flatRank M) (strictMono_flatRank M)
   simpa [height] using hi
 
-/-- Package the finite coefficient family into an integer polynomial. -/
-def matroidZ [Finite α] (M : Matroid α) : ℤ[X] :=
-  ∑ i ∈ Finset.range (M.eRank.toNat + 1), Polynomial.monomial i (matroidZCoeff M i)
+private def polynomialFromCoeffs (bound : ℕ) (f : ℕ → ℤ) : ℤ[X] :=
+  ∑ i ∈ Finset.range (bound + 1), Polynomial.monomial i (f i)
 
-@[simp] theorem coeff_matroidZ [Finite α] (M : Matroid α) (i : ℕ) :
-    (matroidZ M).coeff i = matroidZCoeff M i := by
+private theorem coeff_polynomialFromCoeffs (bound : ℕ) (f : ℕ → ℤ)
+    (hSupp : ∀ i, bound < i → f i = 0) (i : ℕ) :
+    (polynomialFromCoeffs bound f).coeff i = f i := by
   classical
-  change (Polynomial.lcoeff ℤ i) (matroidZ M) = _
-  rw [matroidZ, map_sum, Finset.sum_eq_single i]
+  change (Polynomial.lcoeff ℤ i) (polynomialFromCoeffs bound f) = _
+  rw [polynomialFromCoeffs, map_sum, Finset.sum_eq_single i]
   · simp
   · intro j _ hj
     simp [Polynomial.coeff_monomial, hj]
   · intro hi
-    have h : M.eRank.toNat < i := by
+    have h : bound < i := by
       simp only [Finset.mem_range, not_lt] at hi
       omega
-    simp [matroidZCoeff_eq_zero_of_rank_lt M h]
+    simp [hSupp i h]
+
+/-- The integer polynomial family on the upper intervals of Mathlib matroid flats. -/
+def flatKL [Finite α] (M : Matroid α) (F : Flat M) : ℤ[X] :=
+  polynomialFromCoeffs (height (flatRank M) F) (flatKLCoeff M F)
+
+@[simp] theorem coeff_flatKL [Finite α] (M : Matroid α) (F : Flat M) (i : ℕ) :
+    (flatKL M F).coeff i = flatKLCoeff M F i := by
+  apply coeff_polynomialFromCoeffs
+  intro j hj
+  exact (flatKLCoeff_isKLFamily M).coeff_eq_zero_of_height_lt (flatRank M) F hj
+
+theorem flatKL_characteristicRecurrence [Finite α] (M : Matroid α) (F : Flat M) :
+    (flatKL M F).reflect (height (flatRank M) F) =
+      ∑ G ∈ Icc F ⊤, intervalCharacteristic (flatRank M) F G * flatKL M G := by
+  have hDegree (G : Flat M) : (flatKL M G).natDegree ≤ height (flatRank M) G := by
+    apply Polynomial.natDegree_le_iff_coeff_eq_zero.mpr
+    intro i hi
+    rw [coeff_flatKL]
+    exact (flatKLCoeff_isKLFamily M).coeff_eq_zero_of_height_lt (flatRank M) G hi
+  apply (palindrome_iff_characteristicRecurrence (flatRank M) (strictMono_flatRank M).monotone
+    (flatKL M) hDegree).mp _ F
+  apply shiftedSum_reflect_of_isKLFamily
+  simpa only [coeff_flatKL] using flatKLCoeff_isKLFamily M
+
+/-- Package the finite Z-coefficient family into an integer polynomial. -/
+def matroidZ [Finite α] (M : Matroid α) : ℤ[X] :=
+  polynomialFromCoeffs M.eRank.toNat (matroidZCoeff M)
+
+@[simp] theorem coeff_matroidZ [Finite α] (M : Matroid α) (i : ℕ) :
+    (matroidZ M).coeff i = matroidZCoeff M i :=
+  coeff_polynomialFromCoeffs _ _ (fun _ hi => matroidZCoeff_eq_zero_of_rank_lt M hi) i
+
+/-- The finite Z-polynomial agrees with the sum of the rank-shifted upper interval polynomials. -/
+theorem matroidZ_eq_sum [Finite α] (M : Matroid α) :
+    matroidZ M = ∑ F : Flat M, X ^ flatRank M F * flatKL M F := by
+  have h : matroidZ M = shiftedSum (flatRank M) (flatKL M) (⊥ : Flat M) := by
+    ext i
+    simp [coeff_shiftedSum, matroidZCoeff]
+  have hall : Icc (⊥ : Flat M) ⊤ = Finset.univ := by
+    ext F
+    simp
+  simpa [shiftedSum_apply, hall] using h
 
 theorem matroidZ_of_rank_zero [Finite α] (M : Matroid α) (hM : M.eRank.toNat = 0) :
     matroidZ M = 1 := by
@@ -115,7 +161,10 @@ theorem matroidZ_of_rank_zero [Finite α] (M : Matroid α) (hM : M.eRank.toNat =
 #print axioms strictMono_flatRank
 #print axioms flatKLCoeff_isKLFamily
 #print axioms matroidZCoeff_palindrome
+#print axioms coeff_flatKL
+#print axioms flatKL_characteristicRecurrence
 #print axioms coeff_matroidZ
+#print axioms matroidZ_eq_sum
 #print axioms matroidZ_of_rank_zero
 
 end OpenMathResearch.MatroidKL
