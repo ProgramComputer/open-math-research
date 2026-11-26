@@ -1,0 +1,406 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[hmargin=1in,vmargin=.85in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<->cmex10}{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\ii}{\mathrm i}
+\hypersetup{pdftitle={Real zeros and strict interlacing for strict peaks in Catalan words},pdfauthor={ProgramComputer}}
+\setlength{\emergencystretch}{1em}
+\widowpenalty=4000
+\clubpenalty=4000
+
+\title{Real zeros and strict interlacing\\ for strict peaks in Catalan words}
+\author{ProgramComputer}
+\date{November 25, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove Alexandersson's conjecture on strict peaks in Catalan words. Every row polynomial has simple negative zeros, and consecutive rows strictly interlace. Exact integrals along four branch cuts give uniform sign bounds at every required phase level. To compare consecutive rows, we express the change in the principal ray average as a covariance under a beta tilt. Separate estimates compare the first and last roots. The analytic argument applies to pairs beginning at size \(150\), and exact rational computations close the finite prefix.
+\end{abstract}
+
+\section{Statement and generating function}
+
+A Catalan word of length \(n\ge1\) is a word \(w_1\cdots w_n\) of nonnegative integers with \(w_1=0\) and \(w_{i+1}\le w_i+1\). A strict peak is an index \(1<i<n\) with \(w_{i-1}<w_i>w_{i+1}\). Write \(C_n(t)=\sum_w t^{\mathrm{pk}(w)}\), with \(C_0(t)=1\). Alexandersson conjectured real-rootedness and consecutive interlacing for these polynomials~\cite{original}.
+
+\begin{theorem}\label{thm:main}
+All zeros of \(C_n\) are simple and negative. The degree is \(m_n=\max(0,\lfloor(n-1)/2\rfloor)\). If the zeros of \(C_n\) are \(-q_{n,j}\), with \(0<q_{n,1}<\cdots<q_{n,m_n}\), then
+\[
+q_{n+1,j}<q_{n,j}<q_{n+1,j+1}
+\]
+The first inequality holds for \(1\le j\le m_n\). The second holds whenever \(j+1\le m_{n+1}\).
+\end{theorem}
+
+An earlier public argument gives real-rootedness and interlacing for all sufficiently large \(n\) with an existential cutoff~\cite{eventual}. We use its branch-point parametrization and contour setup. Here the bounds hold throughout the middle range at an explicit cutoff, and the two extreme roots are compared directly. The exact finite checks overlap the analytic range.
+
+Let \(F(X,t)=\sum_{n\ge0}C_n(t)X^n\). For a Catalan word the rise into a strict peak has size one, so these peaks are the short peaks of Baril et al.~\cite[Theorem~5.1, \(\ell=1\)]{baril}. Adding the empty word to their generating function gives the equivalent quadratic identity
+\begin{equation}\label{eq:quadratic}
+F=1+(1-t)X^2F+X(1+(t-1)X)F^2.
+\end{equation}
+For later use, its shifted coefficients are
+\begin{equation}\label{eq:coefficient}
+[u^k]C_n(1+u)=\frac1{n-k}\binom{n-k}{k}\binom{2n-3k}{n-2k-1},
+\qquad 0\le k\le \left\lfloor\frac{n-1}{2}\right\rfloor .
+\end{equation}
+Indeed, write \(F(X,1+u)-1=V\), so \(V=X(1+V)^2/[1-uX^2(1+V)]\). With independent variables \(Z,Y\) in place of \(X,uX^2\), Lagrange inversion gives
+\[
+[Z^jY^k]V=\frac1j\binom{j+k-1}{k}\binom{2j+k}{j-1},\qquad j\ge1.
+\]
+Set \(j=n-2k\) to get \eqref{eq:coefficient}. The support and leading term of this formula give the degree. The all-zero word gives \(C_n(0)>0\).
+
+For \(0<c\le1\), put \(t=1-c^{-2}\) and \(v_n(c)=c^n C_n(t)\). Solving \eqref{eq:quadratic} after \(X=cx\) gives
+\begin{equation}\label{eq:gf}
+G_c(x)=\sum_{n\ge0}v_n(c)x^n
+=\frac{1-x^2-\sqrt{D_c(x)}}{2x(c-x)},
+\qquad D_c(x)=(1+x^2)^2-4cx.
+\end{equation}
+The square root is one at the origin.
+
+\section{Four radial cuts and phase levels}\label{sec:rays}
+Use the angular parametrization of \cite[\S1]{eventual}. Write $d=\cos\theta$ for $0<\theta<\pi/2$ and put
+\[
+a=(1+2d)^{-1/2},\qquad
+c=\frac{2d^2(1+d)}{(1+2d)^{3/2}},\qquad t=1-c^{-2}.
+\]
+Increasing $\theta$ decreases $c$ and $t$. For this range \(0<c<c_*:=4/(3\sqrt3)\). The four roots of $D_c$ are $z,\bar z,w,\bar w$, where $z=ae^{i\theta}$ and $w=a^{-1}e^{i\theta'}$, with $\cos\theta'=-a^2d$ and $\pi/2<\theta'<\pi-\theta$. To check this, substitute $z$ into $z^3+2z+1/z=4c$. For $x\le0$, $D_c(x)>0$ directly. For $x>0$, the minimum of $(1+x^2)^2/(4x)$ is $4/(3\sqrt3)>c$, so the quartic has no real roots. The sum and product of its roots identify the other conjugate pair. The strict angle bound follows from $\cos\theta'>-d$.
+
+For each branch point $\zeta$ set
+\[
+B_\zeta(x)=-\frac{\prod_{\nu\ne\zeta}\sqrt{1-x/\nu}}{2x(c-x)}
+\]
+where the square roots are principal. Cauchy deformation to the four radial cuts gives the coefficient as the sum over the four roots of
+\[
+-\frac{\zeta^{-n}}{\pi}B_\zeta(\zeta)b(n) \mathbb E_n[H_\zeta(S)],\qquad
+b(n)=\int_0^\infty s^{1/2}(1+s)^{-n-1}\,ds,
+\]
+where $S$ has probability density $s^{1/2}(1+s)^{-n-1}/b(n)$ and
+\begin{equation}
+H_\zeta(s)=\frac{B_\zeta(\zeta(1+s))}{B_\zeta(\zeta)}
+=\frac{1}{(1+s)(1+b_0s)}
+ \prod_{\nu\ne\zeta}\sqrt{1+b_\nu s},
+\qquad b_0=\frac{\zeta}{\zeta-c},\quad b_\nu=\frac{\zeta}{\zeta-\nu}.
+\label{eq:radial}
+\end{equation}
+The remaining rational terms have no jump. The square-root factor $\sqrt{1-x/\zeta}$, has top-minus-bottom boundary value along $x=\zeta(1+s)$ is $-2i\sqrt{s}$. Continuing the branch along the positive real axis makes the apparent pole at $x=c$ removable, since the square root there equals $1-c^2$. The small arcs at the branch points vanish. The rationalized function is bounded on large circles. After multiplication by $x^{-n-1}$ the outer integral vanishes for $n\ge1$. Each square-root ratio in \eqref{eq:radial} is continued from its value one and is the principal square root along the indicated line.
+
+Let $\gamma=\arg(-B_z(z))$ be the continuous phase and $\Psi_n=n\theta-\gamma$. At a branch point, $c-z=(1-z^2)^2/(4z)$. The factors from the other conjugate pair have product
+\[
+(1-z/w)(1-z/\bar w)=1+2a^4d e^{i\theta}+a^4e^{2i\theta},
+\]
+whose argument is $\arctan(\sin\theta/(1+2d))$, by calculating its positive real and imaginary parts. The other factor is $1-e^{2i\theta}=2\sin\theta\,e^{i(\theta-\pi/2)}$. Also $1-z^2$ has positive real part. Thus
+\begin{equation}
+\gamma=\frac{\theta}{2}-\frac{\pi}{4}
+       +\frac12\arctan\frac{\sin\theta}{1+2d}
+       +2\arctan\frac{d\sin\theta}{1+d-d^2}.
+\label{eq:gamma}
+\end{equation}
+In particular
+\[
+-\frac{\pi}{4}\le\gamma\le \frac{\pi}{8}+1,\qquad
+\gamma(0)=-\frac{\pi}{4},\quad
+\gamma(\pi/2)=\frac{\pi}{8}.
+\]
+The upper bound uses $d\sin\theta\le1/2$ and $1+d-d^2\ge1$.
+
+Write $m=m_n$ and $n=2m+\delta$ with $\delta\in\{1,2\}$ and put $\Delta=\pi/2-\theta$. At every phase checkpoint $\Psi_n=k\pi$ with $1\le k\le m-1$,
+\begin{equation}
+n\theta\ge3\pi/4,\qquad
+n\Delta\ge(1+\delta/2)\pi-\pi/8-1 .
+\label{eq:node}
+\end{equation}
+In particular the second lower bound is $11\pi/8-1$ in odd rows and $15\pi/8-1$ in even rows.
+
+\section{Uniform sign bounds}
+For the ray at $z$ the three coefficients $b_\nu$ in \eqref{eq:radial} have moduli bounded respectively by
+\[
+(2\sin\theta)^{-1},\quad (2d)^{-1},\quad 1.
+\]
+The first is the conjugate coefficient. The second follows from $|w/z|=a^{-2}=1+2d$, and the third from $\cos(\theta+\theta')<0$. When $\theta\le\pi/4$, the second is less than one. When $\theta\ge\pi/4$, the first is less than one. The remaining coefficient has modulus $\ell\le n/4$ in either case. Indeed, $\sin x\ge(89/100)x$ on $0\le x\le\pi/4$ by Taylor's inequality, and $\pi>31/10$ in \eqref{eq:node} gives $n\sin\theta>2$ in the first range and $nd>29/10$ in the second.
+
+Let $K_z(s)$ denote the three square-root factors multiplied together, with one coefficient of modulus $\ell$ and the other two of modulus at most one. For a principal root $g=\sqrt{1+us}$ we have $|g|\le1+|u|s/2$ and $|g-1|=|u|s/|g+1|\le|u|s$. The product of the two bounded factors has modulus at most $1+s$, using the stronger bound $|g|\le\sqrt{1+s}$ for each. Their product differs from one by at most $2s+s^2/2$. It follows that
+\begin{equation}
+|K_z(s)|\le(1+s)(1+\ell s/2),\qquad
+|K_z(s)-1|\le(\ell+2)s+(\ell+1/2)s^2 .
+\label{eq:kproduct}
+\end{equation}
+
+Let $R_z(s)=1/((1+s)(1+b_0s))$ be the remaining factor. We have
+\[
+|b_0|=\frac{4a^2}{|1-z^2|^2}
+     =\frac{1+2d}{1+2d-2d^3}\le3 .
+\]
+Consequently for $s\le1/8$, $|R_z|\le8/5$ and $|R_z-1|\le(29/5)s$. For the latter use the telescoping difference of $(1+s)^{-1}$ and $(1+b_0s)^{-1}$ from one. Since $H_z=R_z K_z$, \eqref{eq:kproduct} bounds the expectation of $|H_z-1|$ restricted to this range by
+\begin{equation}
+\left(\frac{2n}{5}+9\right)\frac{3/2}{n-3/2}
++\left(\frac{2n}{5}+\frac45\right)
+  \frac{15/4}{(n-3/2)(n-5/2)}
+<\frac{71}{100}\quad(n\ge150).
+\label{eq:local}
+\end{equation}
+Here the two fractions are the first and second beta moments of $S$, and the bound at $n=150$ decreases thereafter.
+
+For every $s\ge0$ we have $|R_z(s)|\le 2n/(1+s)$ whenever the two angular bounds in \eqref{eq:node} hold. If $\theta\le\pi/4$, then $c>2/5$ by the formula for $c$ and $d\ge1/\sqrt2>7/10$. Thus
+\[
+\frac{|c-z|}{|c-(1+s)z|}
+\le\frac{c+a}{c\sin\theta}
+\le\frac{7}{2\sin\theta}<2n .
+\]
+If $\theta\ge\pi/4$, use instead the imaginary part of $(1+s)z$ to bound the first ratio by $(c+a)/(a\sin\theta)\le7\sqrt2/3<4$ because $c/a\le4/3$. By \eqref{eq:kproduct}, the full tail loss is bounded pointwise by $2n(1+ns/8)+1$. Put $N=\lceil n/4\rceil$. Since $(1+s)^{-(n-N)}\le(8/9)^{n-N}$ on this tail, and $b(N)/b(n)\le16$, its expectation is at most
+\begin{equation}
+16(8/9)^{n-N}\left(2n\left(1+\frac n8\frac{3/2}{N-3/2}\right)+1\right)
+<60n(8/9)^{n-\lceil n/4\rceil}<\frac1{50}.
+\label{eq:tail}
+\end{equation}
+For the beta ratio bound use $b(n)=\pi c_{n-1}/(2n)$ with $c_j=\binom{2j}{j}/4^j$, and $1/(2\sqrt j)\le c_j\le1/\sqrt{j+1}$ by induction. The last inequality in \eqref{eq:tail} is checked at $n=150,151,152,153$ by rational arithmetic and then improves stepwise in each residue class.
+
+For the ray at $w$ the coefficients from $\bar w,\bar z$ have modulus at most one, and the coefficient from $z$ has modulus at most $(1-a^2)^{-1}=1+(2d)^{-1}\le 1+n/4$. The first bound uses $\sin\theta'\ge \sqrt{8/9}$. The second uses $\cos(\theta+\theta')<0$, and the third is the reverse triangle inequality. Also $\Re(w/(w-c))>0$, so $|R_w(s)|\le1/(1+s)$. Therefore
+\[
+\mathbb E_n |H_w(S)|\le1+(1+n/4)\frac{3}{4(n-3/2)}<6/5
+\qquad(n\ge150).
+\]
+The ratio of amplitudes at the endpoints of the rays simplifies to
+\begin{equation}
+\frac{|B_w(w)|}{|B_z(z)|}
+=\sqrt{\frac{\sin\theta'}{\sin\theta}}\frac{|c-z|}{|c-w|}
+\le \frac1{\sqrt{\sin\theta}} .
+\label{eq:remote}
+\end{equation}
+For this identity the two cross-pair distances cancel, each contributing a factor $a^{-1}$ in the numerator that cancels with $a^2$ from the denominators. Also $|c-w|>|c-z|$ since $\Re w<0<\Re z$ and $|w|>|z|$.
+
+The $w$ pair after normalization by the leading $z$-pair amplitude is bounded by $(6/5)a^{2n}/\sqrt{\sin\theta}$. If $\theta\le\pi/4$, this is less than $(6/5)n2^{-n}$. If $\theta\ge\pi/4$, the prefactor is less than $36/25$. For $d\ge1/4$ the factor $a^{2n}$ is at most $(2/3)^n$. For $d<1/4$, \eqref{eq:node} gives $nd>29/10$ and hence
+\[
+a^{2n}=\exp(-n\log(1+2d))<e^{-58/15}<1/40
+\]
+using $\log(1+2d)\ge 2d/(1+2d)>4d/3$. In all cases the remote contribution has modulus less than $1/25$ in these units.
+
+Combining \eqref{eq:local}, \eqref{eq:tail}, and \eqref{eq:remote}, the absolute error relative to the leading $z$-pair amplitude is less than $71/100+1/50+1/25<1$. Since the leading cosine equals $(-1)^k$ at a checkpoint, the full value $C_n(t)$ has the same sign.
+
+\section{All real roots and the consecutive middle signs}\label{sec:middle}
+When $n\ge150$, choose the checkpoints for $k=1,\dots,m-1$ in strictly increasing order of $\theta$. Continuity suffices: the phase starts at $\pi/4$, ends at $n\pi/2-\pi/8>(m-1)\pi$, and after any hit of one level a later hit of the next level follows by the intermediate value theorem. The alternating signs give at least $m-2$ distinct roots in the intervals between these selected checkpoints.
+
+Since $C_n(0)>0$ and the first checkpoint has negative sign, a further root lies between $t=0$ and that checkpoint. At the last checkpoint the sign is $(-1)^{m-1}$, while sufficiently far down the negative axis it is $(-1)^m$ by the positive leading coefficient. This gives another root in a disjoint interval. The resulting $m$ roots exhaust the degree and are all simple. The calculation in Section~\ref{sec:finite} supplies the finite prefix.
+
+For the consecutive comparison, $\Psi_n$ is strictly increasing. In \eqref{eq:gamma} the absolute derivatives of $\sin\theta/(1+2d)$ and $d\sin\theta/(1+d-d^2)$ are bounded by $3$ and $3/2$, respectively. Thus $|\gamma'|\le5<n$. In particular the old root of rank $j=k+1$ in increasing absolute value is between the $k$th and $(k+1)$st phase levels, for $1\le k\le m-2$. The angular bounds \eqref{eq:node} therefore hold at every such middle root. For fixed $\theta$, all radial estimates obtained from those bounds continue to hold if $n$ is increased by one.
+
+\subsection{The two exact ray averages}
+Write $J_n=\mathbb E_n[H_z(S)]$. Positively rescale the original polynomial as
+\[
+Y_n=\operatorname{Re}(e^{-i\Psi_n}J_n)+r_n ,
+\]
+where $r_n$ is the contribution of the $w$ pair. Thus $Y_n=c^n C_n(t)/(2a^{-n}|B_z(z)|b(n)/\pi)$. In the middle range just identified, \eqref{eq:local}--\eqref{eq:remote} give $|J_n-1|<73/100$ and $|r_n|,|r_{n+1}|<1/25$. For $\theta\le\pi/4$ the sharper remote estimate in the proof of \eqref{eq:remote} gives $|r_n|,|r_{n+1}|<1/(100n)$.
+
+The size-$n+1$ probability measure is obtained from the size-$n$ measure by tilting by $u(S)=(1+S)^{-1}$. Thus
+\begin{equation}
+J_{n+1}-J_n=\frac{\operatorname{Cov}_n(H_z,u)}{\mathbb E_n u},\qquad
+\mathbb E_n u=\frac{n-1/2}{n+1}.
+\label{eq:covariance}
+\end{equation}
+The covariance here is $\mathbb E_n[(H_z-\mathbb E_n H_z)(u-\mathbb E_n u)]$. Put $M_j=\mathbb E_n S^j$ and $e=3/(2n)$. Then $|u-\mathbb E_n u|\le S+e$, and also $|u-\mathbb E_n u|\le1$. The beta moments are
+\[
+M_j=\frac{(3/2)_j}{(n-3/2)(n-5/2)\cdots(n-j-1/2)},\qquad
+\operatorname{Var}_n(S)=\frac{(3/2)n}{(n-3/2)^2(n-5/2)}.
+\]
+
+The tail $S>1/6$ has expected contribution less than $1/(20n)$ as long as its integrand is bounded by $(2n+1)(1+nS/8)$. Indeed the same tilt to $N=\lceil n/4\rceil$ used in \eqref{eq:tail} bounds this expectation by $60n(6/7)^{n-N}$. Multiplying by $n$ gives a function less than $1/20$ at each of $n=150,151,152,153$. It decreases thereafter in each residue class, since $((n+4)/n)^2(6/7)^3<1$.
+
+First consider $\theta\le\pi/4$. Let $g(s)=\sqrt{1+b_{\bar z}s}$ be the factor from the conjugate of the principal branch point. Then $\Re b_{\bar z}=1/2$, so $\Re g\ge1$ and $|g'|\le\ell/2$. On $s\le1/6$, $|R_z|\le2$ and $|R_z-1|\le7s$. Combining this with the bounds on the two short factors gives
+\begin{equation}
+|H_z(s)-g(s)|\le (1+\ell s/2)(11s+s^2)
+\le 11s+(1+11n/8)s^2+(n/8)s^3.
+\label{eq:near}
+\end{equation}
+The tail of $|H_z-g|$ satisfies the preceding pointwise bound by the global bounds on $H_z$ and $g$. Consequently
+\begin{equation}
+1-\Re J_n\le11M_1+(1+11n/8)M_2+(n/8)M_3+1/(20n)<3/20 .
+\label{eq:amp}
+\end{equation}
+
+For the covariance of $g$ with $u$, use independent copies $S,S'$ and the product difference identity
+\[
+2\operatorname{Cov}_n(g,u)=\mathbb E_n[(g(S)-g(S'))(u(S)-u(S'))].
+\]
+The two Lipschitz bounds $\ell/2$ and $1$ give $|\operatorname{Cov}_n(g,u)|\le(\ell/2)\operatorname{Var}_n(S)$. For the covariance of $H_z-g$ use \eqref{eq:near} multiplied by $S+e$ on the local interval, and the same tail bound because $|u-\mathbb E_n u|\le1$. Thus with $F_j=M_{j+1}+eM_j$,
+\begin{equation}
+|J_{n+1}-J_n|
+\le
+\frac{(n/8)\operatorname{Var}_n(S)+11F_1+(1+11n/8)F_2+(n/8)F_3+1/(20n)}
+     {(n-1/2)/(n+1)}
+<\frac1n.
+\label{eq:nearshift}
+\end{equation}
+
+For $\theta\ge\pi/4$, use all three factors in \eqref{eq:kproduct}. On the same local interval,
+\[
+|H_z(s)-1|\le2|K_z(s)-1|+7s
+\le (n/2+11)s+(n/2+1)s^2.
+\]
+Again the tail satisfies the global pointwise hypothesis. As a constant has zero covariance, \eqref{eq:covariance} gives
+\begin{equation}
+|J_{n+1}-J_n|
+\le\frac{(n/2+11)F_1+(n/2+1)F_2+1/(20n)}
+          {(n-1/2)/(n+1)}
+<\frac4n.
+\label{eq:farshift}
+\end{equation}
+
+The numerical inequalities \eqref{eq:amp}--\eqref{eq:farshift} are rational checks at $n=150$. For \eqref{eq:nearshift} and \eqref{eq:farshift} multiply both sides by $n$ before making the check. The resulting upper bounds decrease with $n$ because $n^jM_j$ decreases, all coefficients are sums of nonnegative multiples of nonpositive powers of $n$ after inserting the scaled moments, and $(n-1/2)/(n+1)$ increases. Likewise $n^2\operatorname{Var}_n(S)$ decreases. This proves the asserted bounds at all larger sizes.
+
+\subsection{The new signs at old middle roots}
+Let $t<0$ be an old middle root of rank $j=k+1$. Put $Z=e^{-i\Psi_n}J_n$. Then $\Re Z=-r_n$. Since $|J_n-1|<73/100<\sin(\pi/3)$, its argument has absolute value less than $\pi/3$. At the old root the corrected phase $\Psi_n-\arg J_n$ has cosine of absolute value less than $(1/25)/(27/100)<1/2$. The old phase itself is between $k\pi$ and $(k+1)\pi$. If the corrected phase fell outside that interval it could differ from an endpoint by at most $\pi/3$, contradicting the cosine bound. Hence $\Im Z$ has sign $(-1)^{k+1}$.
+
+At the same value of $t$, the next phase is $\Psi_n+\theta$, so
+\[
+Y_{n+1}=\sin\theta\,\Im Z-\cos\theta\,r_n+r_{n+1}
+       +\operatorname{Re}\bigl(e^{-i(\Psi_n+\theta)}(J_{n+1}-J_n)\bigr).
+\]
+For $\theta\le\pi/4$, \eqref{eq:amp} and the remote bound give $|\Im Z|>4/5$, and $\sin\theta>2/n$. The leading term dominates $1/n+2/(100n)$ from \eqref{eq:nearshift} and the two distant values. For $\theta\ge\pi/4$, $|\Im Z|>\sqrt{(27/100)^2-(1/25)^2}>1/4$ and $\sin\theta>7/10$. The leading term dominates $4/n+2/25$ from \eqref{eq:farshift} and the distant values. Thus in both ranges $Y_{n+1}$, hence $C_{n+1}(t)$, has sign $(-1)^j$.
+
+\section{The rightmost root}\label{sec:right}
+
+We use a vertical cut as in the earlier endpoint analysis~\cite[\S4]{eventual}. Take \(0\le\theta\le1/(4n)\), \(n\ge150\). In the notation of Section~\ref{sec:rays}, put \(x_0=a\cos\theta\), \(b=a\sin\theta\), and \(Q(x)=x^2+2x_0x+a^{-2}\). Thus
+\[
+D_c(x)=((x-x_0)^2+b^2)Q(x)
+\]
+and the cut joins \(x_0-\ii b\) to \(x_0+\ii b\). On this parameter interval, which is contained in \(0\le\theta\le1/20\), the bounds \(\cos\theta\ge799/800\) and \(a\ge1/\sqrt3\) give
+\begin{equation}\label{eq:right-params}
+\frac{57}{100}<x_0\le|x|\le a<\frac35,\qquad
+\frac{19}{25}<c<\frac{39}{50},\qquad
+\frac4{25}\le c-x_0,\qquad |c-x|\le1
+\end{equation}
+on the chord \(x=x_0+\ii by\) for \(|y|\le1\). For the last bound use \(c-x_0+b\) and \(b\le(3/5)\theta\). The distant pair has modulus \(a^{-1}>5/3\).
+
+Deform the coefficient contour to \(|x|=3/2\) around the chord and the pole \(x=c\). On the circle the numerator of \eqref{eq:gf} has absolute value at most \(1+(3/2)^2+\sqrt{(1+(3/2)^2)^2+6}<15/2\), and the denominator has absolute value at least \(3/2\). Hence the circle integral is \(E_n(c)\) with \(|E_n(c)|\le5(2/3)^n\). Inside the circle, \(\sqrt{Q}\) is analytic and positive on the real axis. Let \(h(x)\) be the branch of \(\sqrt{(x-x_0)^2+b^2}\) off the chord with \(h(x)\sim x-x_0\) at infinity. It is negative on the real axis to the left of the chord and positive to the right. Thus the germ at zero has square root \(-h(x)\sqrt{Q(x)}\), yielding \(\sqrt{D_c(c)}=-(1-c^2)\). The pole contribution is \(p(c)c^{-n}\), where \(p(c)=(1-c^2)/c^2\). On the west side of the chord the square root is \(+\sqrt{Q(x)}\sqrt{b^2-(\Im x)^2}\), and on the east side it is its negative. Subtracting the counterclockwise chord contour gives
+\begin{equation}\label{eq:vertical}
+v_n(c)=p(c)c^{-n}+E_n(c)-I_n,\qquad
+I_n=\frac{b^2}{2\pi}\int_{-1}^{1}
+\frac{\sqrt{Q(x)}\sqrt{1-y^2}}{x^{n+2}(c-x)}\,dy,\quad x=x_0+\ii by.
+\end{equation}
+The integral is real by conjugation. At \(\theta=0\) the slit shrinks to \(a_0=1/\sqrt3\) and the branch is explicitly \((a_0-x)\sqrt{x^2+2a_0x+3}\). The cut term is zero. The pole coefficient is \(p(c_*)=11/16\), so the pole term dominates \(E_n\). In particular \(v_n(c_*)>0\).
+
+On the chord, \(\Re Q(x)>29/10\) and \(|\Im Q(x)|=4x_0|by|\le(36/25)\theta\), giving \(|\arg\sqrt{Q(x)}|<\theta/4\). We also have \(|\arg x|\le\theta\) and \(|\arg(c-x)|\le4\theta\) by \eqref{eq:right-params}. Thus the integrands for both \(I_n\) and \(I_{n+1}\) have argument of absolute value at most \((n+29/4)\theta<2/5\) when their numerators are nonzero. Their real parts are at least \(9/10\) times their moduli. The multiplier \(c/x\) changes the integrand for \(I_n\) to that for \(c I_{n+1}\). Since \((19/15)(9/10)>11/10\), \eqref{eq:right-params} yields
+\begin{equation}\label{eq:vertical-compare}
+c I_{n+1}\ge(11/10) I_n.
+\end{equation}
+
+At \(\theta=1/(4n)\), \(b\ge\theta/4\). Using the real-part bound, \(|\sqrt{Q(x)}|>1\), \(|c-x|\le1\), and the integral \(\int_{-1}^1\sqrt{1-y^2}\,dy=\pi/2\), we obtain
+\[
+I_n\ge\frac9{40}b^2(5/3)^n>\frac{(5/3)^n}{1200n^2}.
+\]
+The pole term is at most \(2(25/19)^n\). For \(n\ge150\), \((19/15)^n/n^2>3600\) and \(5(2/3)^n<(25/19)^n\), so \(v_n(c)\) is negative at \(\theta=1/(4n)\). By \eqref{eq:node} this point and \(\theta=0\) both precede the first checkpoint. The unique zero before that checkpoint, already established by degree, therefore lies in \(0<\theta<1/(4n)\).
+
+At this old root multiply \eqref{eq:vertical} for row \(n\) by \(c^n\), and the next-row equation by \(c^{n+1}\). Put \(\widetilde E_j=c^j E_j(c)\), so \(|\widetilde E_j|\le5(13/25)^j\). From \eqref{eq:vertical-compare} the next value after rescaling is at most
+\[
+-\frac1{10}p(c)+|\widetilde E_{n+1}|+\frac{11}{10}|\widetilde E_n|<0,
+\]
+because \(p(c)>19/100\). This gives the required sign of \(C_{n+1}\) at the rightmost old root.
+
+\section{The farthest root}\label{sec:left}
+
+The reciprocal scaling in this argument is the finite-size counterpart of the far-edge limit in \cite[\S3]{eventual}. We use exact coefficient ratios.
+
+Write $n=2m+\delta$, $\delta\in\{1,2\}$. Let $a_{n,j}=[u^j]C_n(1+u)$, $u_j=a_{n,m-j}/a_{n,m}$, and use the coordinate $z=u_1/(1-t)$ for $m\ge1$. A nonzero multiple of the reciprocal polynomial in $z$ is
+\[
+F_{m,\delta}(z)=\sum_{j=0}^m (-1)^j r_j z^j,
+\qquad r_j=u_j/u_1^j.
+\]
+Here $r_0=r_1=1$. All zeros of $C_n$ correspond to nonzero zeros of $F_{m,\delta}$ since $t=1$ is not a zero and the constant term in $F_{m,\delta}$ is one.
+
+Formula \eqref{eq:coefficient} gives, for $1\le j\le m$ and
+$D_j=(\delta+2j)(\delta+2j-1)^2(\delta+2j-2)$,
+\begin{equation}
+\frac{u_j}{u_{j-1}}
+=(m-j+1)\prod_{i=1}^3(m+2\delta+3(j-1)+i)\,
+        \frac{m+\delta+j-1}{(m+\delta+j+1)D_j}.
+\label{eq:ratio}
+\end{equation}
+For $m\ge20$, the resulting bounds are
+\begin{equation}
+\begin{array}{c|cc}
+ & r_2 & r_j/r_{j-1} \ (j\ge3)\\
+\hline
+\delta=1 & <7/100 & <11/500\\
+\delta=2 & <4/25 & <1/15 .
+\end{array}
+\label{eq:ratio-table}
+\end{equation}
+
+For the first column of \eqref{eq:ratio-table}, the exact value of $r_2$ is $(D_1/D_2)N(m)/B(m)$ for the products
+\[
+\begin{aligned}
+N(m)&=(m-1)(m+\delta+1)(m+\delta+2)
+                \prod_{i=4}^6(m+2\delta+i),\\
+B(m)&=m(m+\delta)(m+\delta+3)\prod_{i=1}^3(m+2\delta+i).
+\end{aligned}
+\]
+For $\delta=1$ and $\delta=2$, respectively, $D_1/D_2$ is $1/20$ and $3/25$. The polynomial $140B(m)-100N(m)$ for $\delta=1$ has positive coefficients on substituting $m=20+s$, as does $4B(m)-3N(m)$ for $\delta=2$. This proves the first column. For the second, \eqref{eq:ratio} yields
+\[
+\frac{r_j}{r_{j-1}}\le
+  \left(1+\frac2{m+\delta}\right)\frac{D_1}{D_3}
+  \left(1+\frac{3(j-1)}{m+2\delta+1}\right)^3
+  \left(\frac{\delta+6}{\delta+2j}\right)^4.
+\]
+In deriving this inequality use $m-j+1\le m$ and $D_j/D_3\ge[(\delta+2j)/(\delta+6)]^4$. The last two factors together decrease for real $j\ge3$: their logarithmic derivative is
+\[
+\frac9{m+2\delta+3j-2}-\frac8{\delta+2j}<0.
+\]
+The resulting bound at $j=3$ decreases in $m$, and substitution of $m=20$ gives the stated rational bounds.
+On $|z|=8$ for the odd row, \eqref{eq:ratio-table} bounds the difference between $F_{m,1}(z)$ and $1-z$ in absolute value by
+\[
+\frac{(7/100)8^2}{1-(11/500)8}<7\le |1-z|.
+\]
+On $|z|=3/2$ for the even row the analogous bound is
+\[
+\frac{(4/25)(3/2)^2}{1-(1/15)(3/2)}<1/2\le |1-z|.
+\]
+Rouché's theorem gives one simple real zero inside the respective circle. The root lies in $(1,5/4)$ in both cases. Indeed, at $z=1$ the tail starting at $j=2$ alternates with strictly decreasing magnitudes and starts positive. At $z=5/4$ the same tail is at most $r_2(5/4)^2<1/4$, so the polynomial is negative there.
+
+Denote $u_1$ in the two parities by $U_{\mathrm o}(m),U_{\mathrm e}(m)$. Formula \eqref{eq:ratio} gives
+\[
+U_{\mathrm o}(m)=\frac{m(m+1)(m+4)(m+5)}{12},\qquad
+U_{\mathrm e}(m)=\frac{m(m+2)(m+5)(m+6)(m+7)}{72(m+4)}.
+\]
+Every root is already known to be negative. In the reciprocal coordinate each isolated root has \(4U/5<|1-t|<U\). Every other odd-row zero has \(|1-t|<U_{\rm o}/8\).
+
+The two comparisons with a fixed even row follow from
+\[
+\frac{U_{\mathrm o}(m)}{U_{\mathrm e}(m)}
+ =6\,\frac{m+1}{m+2}\frac{m+4}{m+6}\frac{m+4}{m+7},
+\qquad
+\frac{U_{\mathrm o}(m+1)}{U_{\mathrm e}(m)}
+ =6\,\frac{(m+1)(m+4)}{m(m+7)}.
+\]
+Both lie in $(4,6)$ for $m\ge20$. In the first expression the factors increase in $m$ and are less than one. For the second, use $(m+1)(m+4)<m(m+7)$ for $m>2$ and the lower bound $6(m+4)/(m+7)$.
+Consequently the even extreme has smaller \(|1-t|\) than each odd extreme and larger \(|1-t|\) than every other zero in both odd rows. Indeed the two comparisons use \(4U_{\rm o}/5>U_{\rm e}\) and \(U_{\rm o}/8<3U_{\rm e}/4<4U_{\rm e}/5\). For negative roots the order of \(|1-t|\) is the order of \(|t|\). This proves the required far-left order for the analytic range, where \(m\ge20\).
+
+\section{Completion and exact finite verification}\label{sec:finite}
+
+For the old rightmost root, the vertical-slit comparison in Section~\ref{sec:right} gives $C_{n+1}(t)<0$, the sign for rank one. For the old farthest root the order proved in Section~\ref{sec:left} gives the sign $(-1)^m$. When the old row is odd, its farthest root lies to the left of all roots of the next even row of degree $m$. When the old row is even, its farthest root is between the two farthest roots of the next odd row of degree $m+1$.
+
+We now have sign $(-1)^j$ at every old root of rank $j$. Starting at $t=0$, where $C_{n+1}(0)>0$, this forces one new root before the first old root in increasing modulus and one between each consecutive old pair. If the degree increases, the leading sign also forces a new root beyond the last old root. These roots exhaust the degree and give strict consecutive interlacing in the indicated orientation for $n\ge150$. The remaining pairs are covered by the following exact check.
+
+\paragraph{Finite check.}
+The companion verifier reconstructs all \(151\) rows from \(0\) through \(150\) independently using \eqref{eq:coefficient} and the coefficient recurrence of \eqref{eq:quadratic}. Both agree with the archived coefficient lists. It counts all roots as simple and negative by rational Sturm division. For each consecutive pair the signed Euclidean chain starts with the new row and either the old row, if its degree is lower, or the ordinary remainder of the old row modulo the new row, if their degrees coincide. All degrees then drop by one, all leading coefficients are positive, and the chain ends in a nonzero constant. Constant pairs have no roots. The signed remainder identities certify the prescribed orientation. In particular, at zeros of the new row the old row has the sign of the second chain member. That member is positive at the rightmost new zero and alternates at the others.
+
+With Python and \texttt{python-flint==0.9.0} installed, run the companion files in the same directory.
+\begin{verbatim}
+python -I -O verify_catalan.py
+\end{verbatim}
+The program checks the rational margins. The 150 consecutive pairs complete the finite prefix, with row \(150\) in both ranges.
+
+\begin{samepage}
+\paragraph{Independent check.}
+An agent-assisted review checked the analytic bounds and reproduced the finite result by a different enumeration and a different pair test. Its Catalan-word recurrence retains the last letter and whether the last step was an ascent. Extending a word ending at height \(h\) by \(k<h\) adds one peak precisely when its last step was an ascent. The count agrees with the shifted coefficient formula for all 5,777 entries through row \(151\). Rational Sturm root counts and signed Sturm--Tarski tests verify the prescribed signs for all 151 adjacent pairs in this larger prefix.
+
+\end{samepage}
+
+\begin{thebibliography}{9}
+\bibitem{original} P. Alexandersson, \emph{Real-rooted polynomials: open problems}, The Symmetric Functions Catalog, section on words, parking functions and Catalan words. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjCatalanWordPeaks}{Conjecture on Catalan-word peaks}.
+\bibitem{baril} J.-L. Baril, P. E. Harris, K. J. Harry, M. McClinton, and J. L. Ram\'irez, Enumerating runs, valleys, and peaks in Catalan words, \emph{Art Discrete Appl. Math.} \textbf{8} (2025), no.~2, article P2.07. \href{https://doi.org/10.26493/2590-9770.1794.fc5}{doi:10.26493/2590-9770.1794.fc5}.
+\bibitem{eventual} 1337isnot1337, \emph{Eventual real-rootedness and interlacing for Alexandersson's Catalan-word peak polynomials}, research note announced November 24, 2026. \href{https://github.com/1337isnot1337/solved-conjectures/blob/research/research/alexandersson-catalan-peaks/EVENTUAL-ZEROS.md}{Proof note} and \href{https://github.com/1337isnot1337/solved-conjectures/issues/59\#issuecomment-7134751818}{dated announcement}.
+\end{thebibliography}
+\end{document}
