@@ -353,5 +353,65 @@
         "sha256": "f609ad564aff140eb7a15105588a0acd12d08bf2a804362430562961812e41aa"
       }
     ]
+  },
+  "ribbon_source_chain": {
+    "status": "passed",
+    "formal_coverage": "Partial. The original nonempty connected source-facing ribbon presentation now implies the interval-transversal basis description.",
+    "scope": [
+      "The cell test agrees with the two boundary north-prefix counts. No two-by-two block forces gap at most one.",
+      "A circuit across an interior cut forces strictly positive gap by giving a basis exchange across the cut.",
+      "The paths have the same interior steps and opposite endpoint steps. The union of their north positions gives a separator chain.",
+      "A set is a basis exactly when it is the range of distinct representatives chosen from the successive closed intervals."
+    ],
+    "remaining": [
+      "Show from these bases and overlaps that each required contraction splits into two positive-rank sides.",
+      "Use the checked deletion theorem to reach the boundary circuit, then verify its Narayana evaluation and the root conclusion."
+    ],
+    "workflow_checkout_commit": "4e2c7fc84d360ac494dd7e1d4de88626a8bf5790",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45839967570/job/139978732737",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45839967570/artifacts/15127529023",
+    "hosted_artifact_digest": "sha256:8a369309c983d27c7b25342661fc93ca9b78a4e51d62bf191e165a2431683bbf",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2842,
+    "checked_declarations": 63,
+    "new_declarations": [
+      "Ribbon.Source.IsRibbonPresentation.exists_chain",
+      "Ribbon.Source.IsRibbonPresentation.first_steps",
+      "Ribbon.Source.IsRibbonPresentation.inner_step_eq",
+      "Ribbon.Source.IsRibbonPresentation.last_steps",
+      "Ribbon.Source.IsRibbonPresentation.length_ge_two",
+      "Ribbon.Source.IsRibbonPresentation.prefix_gap_eq_one",
+      "Ribbon.Source.IsRibbonPresentation.prefix_gap_le_one",
+      "Ribbon.Source.IsRibbonPresentation.prefix_gap_pos",
+      "Ribbon.Source.cell_iff_prefix_counts"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "new_modules": [
+      {
+        "name": "RibbonBoundaryProfile",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonBoundaryProfile.lean",
+        "sha256": "a2e28adc6edc03e387d00811a8de6d4ea89dfc2f9a04876841c7a0f5c0413779"
+      },
+      {
+        "name": "RibbonChainPresentation",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonChainPresentation.lean",
+        "sha256": "122edc4759d1448de7007e84bd8732cfd48c9d14ea7da1a0c1fcae87156eb102"
+      }
+    ]
   }
 }
