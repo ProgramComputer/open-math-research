@@ -1,0 +1,85 @@
+# Angular signs from a zero-free transverse expansion
+
+Let $`d\to\infty`$, $`1\le r<d`$, and use the capped-binomial row tilt $`S`$ with masses proportional to $`\binom ds v^s`$ for $`v>0`$. Write $`\mu=\mathbb ES`$, $`h=r-\mu`$, $`V=\mathrm{Var}(S)`$, $`a_s=s(d-s)/[d(d-1)]`$ and $`a=\mathbb E a_S`$. Assume $`\mu\ge1/10`$ and $`na/d\to\infty`$ (in particular $`n/d\to\infty`$). Set $`\phi(t)=\mathbb E e^{it S}`$, $`a(t)=\mathbb E[a_S e^{itS}]/\phi(t)`$, $`t_*=\pi/d`$, $`\nu=(d-1)/2`$, and $`D=\lfloor nr/d\rfloor`$. At every internal node
+
+$$
+n\arg\phi(t_{\ast})-\nu\arg a(t_{\ast})=k\pi,\qquad 1\le k\le D-1,
+$$
+
+the original balanced-array polynomial satisfies $`(-1)^kP_n^{(r,d)}(-v^d)>0`$ eventually along every such parameter sequence. The arguments and first hitting points are those in [the earlier phase-combination proof](https://github.com/ProgramComputer/open-math-research/blob/78e9ef2c0c0b7a5daed126efbe12a46d030d8200/topics/balanced-arrays/fifth-thirds/subquadratic-angular-nodes.md). In particular this result includes first hitting points satisfying the stated mass condition. It allows arbitrary $`nV/d^2`$ and imposes no separate polynomial lower bound on $`n`$.
+
+## Fixed-size analytic expansion
+
+Let $`y\in\mathbf1^\perp`$, $`M=\|y\|_\infty`$, $`Q_j=\sum_i y_i^j`$, $`L_s=\sum_{i\in I}y_i`$ for a uniform $`s`$-subset, and $`K_s(z)=\log\mathbb E e^{zL_s}`$ with its branch zero at $`z=0`$. The case $`M=0`$ is trivial. For $`|z|M<c_0`$ with absolute $`c_0<\pi/2`$, the arguments of $`x_i=e^{zy_i}`$ are in $`(-\pi/2,\pi/2)`$. Then $`e_s(x)\ne0`$: the polynomial $`\prod_i(w+x_i)`$ has all roots in the open left half-plane, so all roots of its derivatives stay there by Gauss–Lucas, and its derivative of order $`d-s`$ at zero is $`(d-s)!e_s(x)`$. Thus the specified analytic logarithm exists on that disk.
+
+For real $`u`$ with $`|u|M\le c_0`$, Hoeffding's convex comparison for sampling without replacement, with $`\exp(uL_s)`$, bounds the mgf by that for $`m=\min(s,d-s)`$ iid population draws, reversing sign by complement when needed. Since $`\sum_i y_i=0`$, the one-draw mgf is at most $`1+C u^2Q_2/d`$, using the second-order exponential Taylor bound on this interval. As $`m/d\asymp a_s`$ for $`1\le s<d`$,
+
+$$
+\mathrm{Re}K_s(z)=\log|\mathbb E e^{zL_s}|
+\le \log\mathbb E e^{(\mathrm{Re}z)L_s}
+\le C a_s |z|^2Q_2.
+$$
+
+The size zero contributes zero. Hoeffding's comparison and an elementary coupling proof are also recorded in [the fifth-moment note](https://github.com/ProgramComputer/open-math-research/blob/78e9ef2c0c0b7a5daed126efbe12a46d030d8200/topics/balanced-arrays/fifth-thirds/subquadratic-interior-saddle.md). [Hoeffding Theorem 4](https://doi.org/10.1080/01621459.1963.10500830).
+
+For $`R_0=c_0/(2M)`$, Borel–Carathéodory, using the real-part bound and $`K_s(0)=0`$, bounds $`|K_s|`$ on $`|z|\le R_0/2`$ by $`C a_s Q_2R_0^2`$. Cauchy's coefficient bound there and summing a geometric series show that the Taylor tail at $`z=i`$ from degree five on is at most $`C a_s Q_2M^3`$, provided $`M\le\eta`$ for a sufficiently small absolute $`\eta`$. The quadratic and cubic coefficients at $`i`$ are $`-a_sQ_2/2`$ and $`-i\gamma_s Q_3/6`$, with $`\gamma_s=a_s(d-2s)/(d-2)`$. The fourth coefficient obeys $`O(a_sQ_4+a_sQ_2^2/d)`$: the $`Q_2^2`$ moment term divided by 3 is $`(s)_2(d-s)_2/(d)_4=a_s^2+O(a_s/d)`$, and the logarithm subtracts the $`a_s^2`$ term. Hence on a fixed small ball $`\|y\|\le\eta`$,
+
+$$
+K_s(i)=-a_sQ_2/2-i\gamma_sQ_3/6+E_s(y),\qquad
+|E_s(y)|\le C a_s(Q_4+Q_2M^3),
+$$
+
+using $`Q_2^2/d\le Q_4`$.
+
+## Complex mixture and Gaussian integration
+
+As in [the quadratic interior note](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/very-tall-quadratic-interior-saddle.md), if $`h\ge h_0>0`$ keep near charts $`|t|\le c/\sqrt{1+V}`$; if $`0<h\le h_0`$ for sufficiently small fixed $`h_0`$, keep every chart, using [the near-full estimates](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/near-full-all-angular-signs.md). In both settings $`|\phi(t)|`$ is bounded below uniformly. Put $`\mathbb E_t X=\mathbb E[Xe^{itS}]/\phi(t)`$, $`\gamma(t)=\mathbb E_t\gamma_S`$ and write $`R(t\mathbf1+y)=\mathbb E e^{itS+iL_S}`$. To average the fixed-size expansion factor out $`\exp(-a(t)Q_2/2-i\gamma(t)Q_3/6)`$ and let $`D_s=-(a_s-a(t))Q_2/2-i(\gamma_s-\gamma(t))Q_3/6`$. Then $`\mathbb E_t D_S=0`$. The functions $`a_s,\gamma_s`$ are $`O(1/d)`$-Lipschitz, and the complex $`t`$ weights are dominated by a constant times their radial weights. Centering each function first at its value at $`\mu`$ gives
+$`\mathbb E|a_S-a(t)|^2+\mathbb E|\gamma_S-\gamma(t)|^2\le C V/d^2\le Ca/d`$ because $`a\ge V/d`$.
+On a small fixed ball, $`D_s,E_s`$ are uniformly small. Thus expanding $`\mathbb E_t e^{D_S+E_S}`$ about one and using the vanished linear $`D_S`$ term bounds its logarithm by $`C(\mathbb E|D_S|^2+\mathbb E|E_S|)`$. Since $`|Q_3|\le M Q_2`$, the $`D_S`$ bound is $`CaQ_2^2/d\le CaQ_4`$. We obtain
+
+$$
+\log(R(t\mathbf1+y)/\phi(t))
+=-a(t)Q_2/2-i\gamma(t)Q_3/6+O\negthinspace \left(aQ_4+aQ_2M^3\right).
+$$
+
+Let $`A=n\Re a(t)\asymp na`$ and put $`B_t=(1+V)t^2`$ in the near interior charts, and $`B_t=h\min(t^2,1)`$ in the near-full charts. The earlier coefficient bounds give $`\Re a(t)/a=1+O(B_t)`$ and $`|\mathrm{Im}\gamma(t)|\le Ca\sqrt{B_t}`$. For the last bound in the near-full regime one can use the stronger $`Ca h\min(|t|,1)`$ from its weighted deficit moments. The positive correction to the real Gaussian exponent is bounded by
+
+$$
+Cna\left(\sqrt{B_t}\sum_i |y_i|^3+Q_4+Q_2M^3\right).
+$$
+
+The coordinate terms have bounded exponential expectation up to $`\exp(O(d B_t+d/A))`$ on the ball, also with any fixed multiplier. To see this, write $`Y_i=Z_i-\bar Z`$ for iid $`N(0,1/A)`$, impose $`|\bar Z|\le\eta`$ independently of $`Y`$, and use $`|Z_i|\le2\eta`$ and $`\sum |Y_i|^j\le2^j\sum|Z_i|^j`$. In the resulting one-dimensional factors the correction is absorbed by half the Gaussian quadratic on the fixed truncated interval. Integrating $`e^x-1\le x e^x`$ bounds each factor by $`1+C(\sqrt{B_t/A}+1/A)`$; the product bound follows by Young's inequality.
+
+For the remaining $`A Q_2M^3`$ term, $`U=A Q_2`$ is $`\chi^2_{d-1}`$. On $`U\le Ld`$ for fixed large $`L`$, the exponent is at most $`CLd M^3`$. When $`M\le x_0=\sqrt{K\log(d+1)/A}`$, it is $`O_L(d(\log(d+1)/A)^{3/2})=o(1)`$ since $`A/d\to\infty`$. For $`x_0<M\le\eta`$, it is at most $`A M^2/8`$ for large $`d`$ by $`A/d\to\infty`$. The Gaussian union bound $`\mathbb P(M>x)\le2d e^{-A x^2/2}`$ and integration of that tail show that the expected exponential on this exceptional part is $`O(d e^{-3A x_0^2/8})=o(1)`$ for large fixed $`K`$. Finally on $`U>Ld`$ inside the chart, absorb $`CU M^3`$ by a fixed small weakening of the Gaussian precision. The $`\chi^2`$ exponential moment bounds this tail by $`e^{-cd}`$ for large $`L`$ and small $`\eta`$. This argument holds with any fixed multiplier, so Cauchy–Schwarz combines it with the coordinate bounds.
+
+With $`I_0=(2\pi n a)^{-\nu}/\sqrt d`$, the absolute chart integral is thus at most $`C I_0|\phi(t)|^n e^{Cd B_t}`$. Its difference from $`G_t=I_0\phi(t)^n(a/a(t))^\nu`$ is at most the same bound times
+
+$$
+O\negthinspace \left(\sqrt{\frac d{na}}+\frac d{na}
++d\left(\frac{\log(d+1)}{na}\right)^{3/2}\right)=o(1).
+$$
+
+Indeed under the real Gaussian $`\|Q_3\|_2=O(\sqrt d A^{-3/2})`$ by Wick's zero-sum cancellation, and $`\|Q_4\|_2=O(d A^{-2})`$. Also $`\|Q_2 M^3\|_2\le \|Q_2\|_4\|M^3\|_4=O((d/A)(\log(d+1)/A)^{3/2})`$ by the chi-square and maximum moment bounds. Multiplying by $`na`$ and using Cauchy–Schwarz for the difference of exponentials proves the error claim. Gaussian tails outside the fixed-radius chart are negligible since $`A/d\to\infty`$. The factor $`1/\sqrt d`$ is the normalized Haar covolume correction, as in the prior angular notes.
+
+## Global localization with no $`\log d`$ loss
+
+Here is the additional modulus estimate needed when $`n/d`$ grows arbitrarily slowly. Put $`z_i=e^{i\theta_i}`$, $`\bar z=d^{-1}\sum_i z_i`$, $`D_z=\sum_i |z_i-\bar z|^2=d(1-|\bar z|^2)`$. At fixed size $`s\ge1`$, express its Fourier response as the Fourier coefficient for iid Bernoulli variables of parameter $`p=s/d`$, conditional on total $`s`$. The probability of that total is bounded below by $`c/\sqrt{1+d p(1-p)}`$ by the binomial mass and Stirling bounds. In the numerator bound the product of Bernoulli Fourier factors by
+
+$$
+\exp\negthinspace \big[-c p(1-p)d(1-|\bar z|)-c p(1-p)d|\bar z|(1-\cos u)\big],
+$$
+
+after rotating the common integration variable $`u`$ by $`\arg\bar z`$. This follows from $`|1-p+pe^{i\psi}|^2=1-p(1-p)|1-e^{i\psi}|^2`$. If $`|\bar z|\ge1/2`$, integrating the $`u`$ factor costs $`O(1/\sqrt{1+d p(1-p)})`$, canceling the conditioning factor. If $`|\bar z|<1/2`$, then $`D_z\asymp d`$ and the prefactor $`\sqrt{1+d p(1-p)}`$ is absorbed for sufficiently large $`a_sD_z`$. Since $`a_s\asymp p(1-p)`$, for large $`a_sD_z`$ this proves $`|f_s|\le e^{-c a_sD_z}`$. For bounded $`a_sD_z`$, use the [disjoint-pair bound](https://github.com/ProgramComputer/open-math-research/blob/04564a728c21eab6ce511b98a48ccaac754648ff/topics/balanced-arrays/very-tall/very-tall-interior-saddle.md) $`|f_s|\le1-c\min(a_sD_z,1)`$ and adjust constants. Hence the exponential bound holds for all sizes, including $`s=0`$.
+
+To average, $`a`$ is comparable to $`\mu(d-\mu)/d^2`$ because $`V\le\mu(1-\mu/d)`$. The same variance inequality at every exponential tilt implies
+$`\mathbb P(S<\mu/2)\le e^{-c\mu}`$ and $`\mathbb P(d-S<(d-\mu)/2)\le e^{-c(d-\mu)}`$. For example, for the first inequality the tilted mean $`m(t)`$ obeys $`0\le m'(t)\le m(t)`$, so $`m(-t)\ge\mu e^{-t}`$ for $`t\ge0`$. Integrating gives $`\log\mathbb E e^{-tS}\le-\mu(1-e^{-t})`$, and Chernoff with $`t=\log2`$ works. The same argument applies to $`d-S`$ by the variance bound at every tilt. On the complement of these events $`a_S\ge c a`$. Since $`\min(\mu,d-\mu)\asymp da`$ and $`D_z\le d`$, averaging the fixed-size bound gives $`|R|\le3e^{-c'aD_z}`$. For bounded $`aD_z`$, the earlier weighted disjoint-pair bound removes the prefactor: $`\mathbb E a_S^2\le C a^2`$ by Lipschitz continuity, $`a\ge c/d`$ and $`a\ge V/d`$, so $`\mathbb P(a_S\ge a/2)\ge c`$ by Cauchy–Schwarz. Consequently for all phases $`|R|\le e^{-c'' aD_z}`$.
+
+Outside the fixed-radius charts $`D_z\ge c\eta^2`$. Retain half the penalty $`e^{-cna\eta^2}`$ and integrate the remainder by partitioning over closest anchors. Relative angle coordinates push forward normalized Haar measure to product Haar, by the onto torus homomorphism explained in the quadratic proof. Chord bounds give an integral at most $`d(C/\sqrt{na})^{d-1}e^{-cna\eta^2}`$. Relative to $`I_0|\phi(t_*)|^n`$, the logarithm is at most $`O(d)-cna\eta^2+O(nV/d^2)`$, tending to minus infinity since $`V/d^2\le a/d`$ and $`na/d\to\infty`$.
+
+For $`h\ge h_0`$, far diagonal charts have a fixed modulus gap by the earlier diagonal comparison and $`|R-\phi(t)|\le aQ_2/2`$. Their aggregate measure is at most $`d(C/\sqrt d)^{d-1}`$: the Euclidean volume of each $`(d-1)`$-ball of fixed radius has this bound by Stirling, and Haar probability density is $`1/[\sqrt d(2\pi)^{d-1}]`$. Thus their relative contribution is at most $`\exp[-cn+O(d(1+\log(na/d)))+O(nV/d^2)]`$, which tends to zero since $`n/d\to\infty`$, $`a\le1`$, and $`V/d^2=O(1/d)`$.
+
+## Diagonal reinforcement and sign
+
+The chart bounds and global tails now match those used in [the all-angular sign proof](https://github.com/ProgramComputer/open-math-research/blob/78e9ef2c0c0b7a5daed126efbe12a46d030d8200/topics/balanced-arrays/fifth-thirds/subquadratic-angular-nodes.md) with a different $`o(1)`$ local error and no height assumption. For $`h\ge h_0`$, $`V\ge c_{h_0}`$, so $`nV\gg d(1+V)`$. When $`nV/d^2\to\infty`$, the nonprincipal near charts are suppressed by the diagonal gap $`\exp[-c n V(t^2-t_*^2)]`$, which absorbs $`e^{Cd B_t}`$. When $`nV/d^2`$ is bounded retain odd labels $`|t|\le L/\sqrt{nV}`$ for large fixed $`L`$. Subtracting $`t/t_*`$ times the principal phase cancels the linear terms in both arguments and leaves $`O_L(\sqrt{(1+V)/(nV)}+d(1+V)/(nV))=o(1)`$. Their real parts have the prescribed common sign because $`t/t_*`$ is odd. The discarded Gaussian lattice tail can be made arbitrarily small relative to the retained mass by taking $`L`$ large.
+
+For $`0<h\le h_0`$, use the near-full gap with $`h`$ replacing $`V`$, valid at all labels, and $`nh\gtrsim d`$ at internal nodes by the near-full phase calculation. In the bounded $`nh/d^2`$ case the same retained phases at width $`L/\sqrt{nh}`$ have alignment error $`O_L((nh)^{-1/2}+d/n)=o(1)`$; when $`nh/d^2\to\infty`$ only the principal pair matters. The lattice tail estimate again uses only $`n/d\to\infty`$. These comparisons exhaust subsequences and give the sign asserted above.

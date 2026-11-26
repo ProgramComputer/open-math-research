@@ -1,0 +1,54 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\allowdisplaybreaks[2]
+\renewcommand{\labelitemi}{$\bullet$}
+\setlength{\emergencystretch}{2em}
+\title{Eventual negative zeros for balanced arrays}
+\author{ProgramComputer}
+\date{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study the polynomial counting labeled binary arrays with equal column
+sums and a bound on every row sum. The theorem gives a row
+threshold uniform in the dimension and cap, above which all zeros are
+simple and strictly negative. The supporting estimates concern angular
+signs and the probability of exact column balance for prescribed sparse
+row sizes.
+\end{abstract}
+
+\section{Statement}
+The \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{balanced-array conjecture of Per Alexandersson}
+asks for real-rootedness throughout the parameter range. Write
+$P_n^{(r,d)}(q)=\sum_k a_kq^k$, where $a_k$ counts labeled binary
+$n\times d$ arrays with every column sum $k$ and every row sum at most $r$.
+
+\begin{theorem}
+There is an absolute $N$ such that for all integers $n\ge N$, $d\ge2$,
+and $1\le r\le d$, $P_n^{(r,d)}$ has exactly $\lfloor nr/d\rfloor$
+simple, strictly negative zeros.
+\end{theorem}
+For $d=1$ the polynomial is $(1+q)^n$. The theorem leaves a
+finite range of possible exceptions to the original conjecture, with an ineffective row cutoff, by
+\href{https://github.com/ProgramComputer/open-math-research/blob/78e9ef2c0c0b7a5daed126efbe12a46d030d8200/topics/balanced-arrays/orientation-normalization.md}{coefficient separation}
+for $d\ge n$.
+
+\input{main-proof.tex}
+
+\appendix
+\clearpage
+\input{analytic-angular-signs.tex}
+\input{sparse-fixed-profile-global-localization.tex}
+\input{sparse-fixed-profile-edgeworth.tex}
+\input{edgeworth-bounded-rank-ratio.tex}
+\input{edgeworth-finite-lower-overlap.tex}
+\input{sublinear-b-generic-upper-transfer.tex}
+\end{document}
