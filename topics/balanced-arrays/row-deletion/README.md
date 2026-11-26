@@ -90,6 +90,10 @@ The inequality follows because the central coefficient is at most $p^2(3B+pC)$, 
 
 Independent optional-row retention therefore cannot supply a transfer through real-rootedness along this homotopy. [Independent review](review-thinning.md)
 
+## Remote and doubled sources
+
+At $(r,d)=(2,4)$, the backward coefficient map from $2n$ fails its binomial test for every target $n\ge11$. For each fixed target $n\ge16$, the map from a sufficiently late source also fails on inputs with the source polynomial's root mesh. [Proof and exact replay](remote-transfer.md)
+
 ## Exact replay
 
 From the repository root, reconstruct both witnesses. The archive command regenerates the exact symbols and Sturm reports and requires python-flint.
