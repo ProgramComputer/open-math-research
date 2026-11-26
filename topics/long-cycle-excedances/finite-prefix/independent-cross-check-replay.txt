@@ -1,0 +1,1 @@
+Ordinary and gamma routes agree on 1925 whole vectors through row size 101 in 2.731s.

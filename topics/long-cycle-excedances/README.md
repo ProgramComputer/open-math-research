@@ -2,6 +2,8 @@
 
 For every $n\ge10{,}000$ and $3\le k\le n$, the nonzero roots of consecutive fixed-threshold excedance rows are simple, negative and strictly interlace. For $n/k<4$ use the three-cycle theorem. Keeping the principal residues handles $4\le n/k\le48$, and two integrations of the common contour handle $n/k\ge44$. The ranges overlap. Formal verification is ⬜ None. [Principal residues and independent replay](paired-residues/README.md) · [Fourier comparison and independent replay](fourier-circle/README.md)
 
+For every $3\le k\le n\le250$, the nonzero roots of consecutive fixed-threshold excedance rows are simple, negative and strictly interlace. An exact certificate covers the remaining 7,021 pairs with $4\le k\le\lfloor n/4\rfloor$. [Finite prefix, replay and independent review](finite-prefix/README.md)
+
 For every $n\ge100{,}000$ and $3\le k\le n$, the nonzero roots of the two consecutive rows are simple, negative and strictly interlace. A joint bound on the polynomial and its angular derivative certifies the required signs. The proof covers eleven intervals in $n/k$ and joins to the differentiated-residue and common-circle estimates. [Theorem, independent review and exact checks](degree-blocks/README.md)
 
 For every $k\ge3$ and $k\le n\le4k-1$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. This includes the first transition permitting four cycles. [Complete three-cycle range, proof and verification](three-cycle-complete.md) · [Manuscript, Section 12](paper.pdf)
