@@ -1,0 +1,4 @@
+MPFR 4.2.0, GMP 6.3.0, 1024 bits
+d=3..7: 2491 certified cases; maximum final term index 1066 at d=7 k=699
+d=8..127: 13260 certified cases; maximum final term index 184 at d=8 k=127
+Total: 15751 signs certified

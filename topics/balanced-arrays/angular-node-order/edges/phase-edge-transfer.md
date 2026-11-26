@@ -2,7 +2,7 @@
 
 Fix $d\ge2$, $1\le r<d$ and $\theta=\pi/d$. Write $D=\lfloor nr/d\rfloor$, and let $w_k$ be the unique positive tilt at which the principal phase equals $k\pi$, so the test radius is $w_k^d$. These are the ordered nodes of the finite monotonicity theorem, which applies once $n\ge d$. [Angular node ordering](https://github.com/ProgramComputer/open-math-research/blob/b37c6be08b892ba4d2bd8a58fb6b2c491438d37a/topics/balanced-arrays/angular-node-order/README.md)
 
-For each fixed positive integer $j$, the upper node $k=D-j$ has $(-1)^kP(-w_k^d)>0$ for all sufficiently large $n$. This uses the exact sign lemma for the root-of-unity section all the way down to $j=1$, at the actual phase node. At every fixed positive lower quota $k$ the corresponding limiting sign question reduces to the explicit hyper-Bessel value in the lower-edge section.
+For each fixed positive integer $j$, the upper node $k=D-j$ has $(-1)^kP(-w_k^d)>0$ for all sufficiently large $n$. This uses the exact sign lemma for the root-of-unity section all the way down to $j=1$, at the actual phase node. At every fixed positive lower quota $k$ the signed polynomial value tends to the hyper-Bessel value in the lower-edge section.
 
 ## Upper edge
 
@@ -44,4 +44,4 @@ $$
 (-1)^k\sum_{m\ge0}\frac{(-1)^m U_{d,k}^{dm}}{(m!)^d}.
 $$
 
-A positive limit would prove the required lower sign at that $(d,k)$. This formula alone leaves the sign open.
+The limit is positive for every $d\ge2$ and $k\ge1$ by the [gamma-mixture reduction](lower-gamma-mixture.md) and the [finite certificate](lower-finite-certificate.md). This proves the required lower sign for every fixed $(d,r,k)$ at sufficiently large height.

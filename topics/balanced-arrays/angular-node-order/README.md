@@ -47,12 +47,13 @@ The [sample ledger](screen-angular-signs.jsonl.gz) records exact coefficient vec
 python3 -IB screen-angular-signs.py verify screen-angular-signs.jsonl.gz --finite-vectors ../finite-36/exact-vectors.jsonl
 ~~~
 
-## Signs near the two quota edges
+## Eventual signs at every quota in fixed dimension
 
-For fixed dimension and proper cap, every fixed positive deficit from the
-top quota has the prescribed sign at its exact angular radius once the
-height is large enough. At a fixed bottom quota the signed value converges
-to a hyper-Bessel evaluation. Only finitely many dimension–quota pairs
-can fail strict positivity of that limit, with no explicit cutoff.
-The all-height sign problem remains open. **⬜ None.**
-[Edge proofs and independent reviews](edges/README.md)
+For each fixed $d\ge2$, every sufficiently large height has the
+prescribed signs at all exact internal angular radii, simultaneously
+over the proper caps. The fixed upper deficits transfer from factorial
+sections. The lower hyper-Bessel signs follow from a positive gamma
+mixture and two independent checks of 15,751 finite cases. The
+height cutoff is existential. The all-height sign problem remains
+open. **⬜ None.**
+[Proofs, certificates and reviews](edges/README.md)

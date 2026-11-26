@@ -23,16 +23,23 @@ $$
 (-1)^k F_d(-U_{d,k}^d),\qquad F_d(q)=\sum_{m\ge0}\frac{q^m}{(m!)^d}.
 $$
 
-Only finitely many pairs $(d,k)$ can fail strict positivity of this
-limiting value. The proof gives no explicit finite cutoff and leaves
-open whether any exceptional pairs exist.
-[Lower limit](phase-edge-transfer.md#lower-edge) · [Finiteness proof](phase-edge-review.md#positive-lower-signs-for-growing-dimension)
+The limiting value is strictly positive for every integer $d\ge2$
+and $k\ge1$. The gamma-mixture proof reduces the question to
+15,751 pairs, which both independent checkers certify. Thus for
+each fixed lower quota the actual polynomial has the prescribed sign
+once the row count is sufficiently large with $d,r,k$ fixed.
+[Lower limit](phase-edge-transfer.md#lower-edge) · [Gamma-mixture proof](lower-gamma-mixture.md) · [Finite certificate and replay](lower-finite-certificate.md)
 
-**Formal verification**　⬜ None. The upper sign and both transfer
-arguments underwent one independent agent-assisted review. A second
-agent independently reviewed the lower limiting sign finiteness proof.
-[Upper and transfer review](phase-edge-review.md#upper-sign-and-transfer) · [Lower finiteness review](phase-lower-review.md)
+**All internal quotas at fixed dimension.** For every $d\ge2$ there
+is an $N(d)$ such that for $n\ge N(d)$, simultaneously for all
+$1\le r<d$, the prescribed signs hold at every internal angular
+test radius. The cutoff is existential. For $d=2$ the signs hold
+at every admissible height. The all-height sign problem
+remains open.
+[All-quota proof](all-quota-signs.md)
 
-These are fixed-edge results as the height grows. Establishing the
-prescribed signs at every angular test radius for every admissible
-height remains open.
+**Formal verification**　⬜ None. The upper sign and both transfers
+had an independent agent-assisted review, as did the earlier lower
+finiteness proof. The gamma-mixture reduction and all-quota result
+have separate agent-assisted reviews.
+[Upper and transfer review](phase-edge-review.md#upper-sign-and-transfer) · [Earlier lower finiteness review](phase-lower-review.md) · [Gamma-mixture review](lower-gamma-review.md) · [All-quota review](lower-all-quota-review.md)
