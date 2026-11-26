@@ -1,0 +1,8 @@
+import CatalanStrictPeaksAnalyticBranch
+
+#print axioms CatalanStrictPeaks.CutGeometry.branch_sq
+#print axioms CatalanStrictPeaks.CutGeometry.branch_at_scale
+#print axioms CatalanStrictPeaks.CutGeometry.analyticGenerating_analyticAt
+#print axioms CatalanStrictPeaks.CutGeometry.analyticGenerating_eq_quotient
+#print axioms CatalanStrictPeaks.CutGeometry.analyticGenerating_hasFPowerSeriesAt
+#print axioms CatalanStrictPeaks.CutGeometry.analyticGenerating_cauchyCoeff
