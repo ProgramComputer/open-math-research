@@ -27,6 +27,8 @@ The first-cycle-lag theorem gives strict interlacing between rows $2k-1$ and $2k
 
 The insertion recurrence suggests an all-size induction at the old roots. Its sufficient inequality passes all 946 consecutive pairs ending by size 46. [Finite induction test](insertion-lag.md) The central root has a sharp all-size bound of $35/68$. A sum of squares tests the remaining reciprocal pairs. [Central-root proof](central-insertion.md) · [Rational traces](residue-traces.md)
 
+Positive interlacing weights alone allow an insertion ratio greater than four in a synthetic chain with genuine earlier rows. In the genuine rows for $k=3$, a Jacobi compression isolates a small component of the insertion ratio and leaves a signed difference of two weight measures to estimate. [Argument and scope](jacobi-defect.md) · [Exact checks](verify_jacobi_defect.py)
+
 Every consecutive pair before three cycles can occur strictly interlaces, at every admissible threshold. The proof treats both lag signs for $2k\le n\le3k-2$ using 16 rational bounds above the analytic cutoff and exactly 3,007 smaller pairs. [Two-cycle theorem](two-cycle-band.md) · [Independent review](review-two-cycle-band.md)
 
 For arbitrary cycle counts, every old real root in a specified central interval is simple and meets the strict insertion inequality. There is an explicit lower bound for the number of such roots at every $n\ge k\ge8$. [Central interval and root count](central-interval.md) · [Independent review](review-central-interval.md)
