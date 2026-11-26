@@ -46,6 +46,22 @@
     "RibbonExamples.doubledDiamond_narayana",
     "RibbonExamples.quadrilateral_kl"
   ],
+  "ribbon-foundation": [
+    "OpenMathResearch.MatroidKL.IsKLFamily.coeff_eq_zero_of_height_lt",
+    "OpenMathResearch.MatroidKL.IsKLFamily.eq_klCoeff",
+    "OpenMathResearch.MatroidKL.IsKLFamily.zCoeff_eq_zero_of_height_lt",
+    "OpenMathResearch.MatroidKL.IsKLFamily.zCoeff_of_rank_zero",
+    "OpenMathResearch.MatroidKL.IsKLFamily.zCoeff_palindrome",
+    "OpenMathResearch.MatroidKL.coeff_matroidZ",
+    "OpenMathResearch.MatroidKL.flatKLCoeff_isKLFamily",
+    "OpenMathResearch.MatroidKL.klCoeff_isKLFamily",
+    "OpenMathResearch.MatroidKL.matroidZCoeff_eq_zero_of_rank_lt",
+    "OpenMathResearch.MatroidKL.matroidZCoeff_palindrome",
+    "OpenMathResearch.MatroidKL.matroidZ_of_rank_zero",
+    "OpenMathResearch.MatroidKL.strictMono_flatRank",
+    "Ribbon.Source.IsRibbonPresentation",
+    "Ribbon.Source.NarayanaClaim"
+  ],
   "ordered": [
     "OrderedGlobalAngular.abs_sin_nat_multiple_le",
     "OrderedGlobalAngular.angle_lt_of_sin_sub_neg",
