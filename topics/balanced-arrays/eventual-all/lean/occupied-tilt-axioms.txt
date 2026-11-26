@@ -1,0 +1,5 @@
+'BalancedEventual.OccupiedPhase.rowSum_arg_sub_mean_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.OccupiedPhase.phase_deviation_le_variance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.OccupiedPhase.phase_deviation_le_min_mean_deficit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
