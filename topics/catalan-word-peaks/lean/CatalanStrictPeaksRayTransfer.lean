@@ -113,8 +113,11 @@ private theorem liftedAngle_within_strip {d : ℝ} (hd : 0 < d) (hD : d < 1)
     · linarith [hy.1]
     · simpa using hmono (show j + 1 ≤ i.val + 1 by omega)
 
+private noncomputable def sectorFactor (d : ℝ) (j : ℕ) (i : Fin 4) (z : ℂ) : ℂ :=
+  logStripRoot ‖cutPoint d i‖ (z - (liftedAngle d j i : ℂ) * I)
+
 private noncomputable def logBranch (d : ℝ) (j : ℕ) (z : ℂ) : ℂ :=
-  ∏ i : Fin 4, logStripRoot ‖cutPoint d i‖ (z - (liftedAngle d j i : ℂ) * I)
+  ∏ i : Fin 4, sectorFactor d j i z
 
 private theorem cutPoint_norm_pos {d : ℝ} (hd : 0 < d) (hD : d < 1) (i : Fin 4) :
     0 < ‖cutPoint d i‖ := by
@@ -132,7 +135,7 @@ private theorem cutFactor_product (d : ℝ) (z : ℂ) :
 
 private theorem logBranch_continuous {d : ℝ} (hd : 0 < d) (hD : d < 1) (j : ℕ) :
     Continuous (logBranch d j) := by
-  unfold logBranch
+  unfold logBranch sectorFactor
   apply continuous_finset_prod Finset.univ
   intro i _
   exact (logStripRoot_continuous (cutPoint_norm_pos hd hD i)).comp (by fun_prop)
@@ -144,7 +147,7 @@ private theorem logBranch_sq {d : ℝ} (hd : 0 < d) (hD : d < 1) {j : ℕ} (hj :
   apply Finset.prod_congr rfl
   intro i _
   obtain ⟨h₁, h₂⟩ := liftedAngle_within_strip hd hD hj i hz
-  rw [logStripRoot_sq (cutPoint_norm_pos hd hD i), cutFactor, principalRoot_sq, Complex.exp_sub,
+  rw [sectorFactor, logStripRoot_sq (cutPoint_norm_pos hd hD i), cutFactor, principalRoot_sq, Complex.exp_sub,
     div_div, mul_comm (exp _), liftedAngle_polar hd hD]
   · simp [Complex.mul_im]; linarith
   · simp [Complex.mul_im]; linarith
@@ -156,7 +159,7 @@ private theorem logBranch_eq_branch_of_lifts {d : ℝ} (hd : 0 < d) (hD : d < 1)
   rw [← cutFactor_product, logBranch]
   apply Finset.prod_congr rfl
   intro i _
-  rw [logStripRoot_eq_cutFactor (cutPoint_norm_pos hd hD i) (hz i).1 (hz i).2,
+  rw [sectorFactor, logStripRoot_eq_cutFactor (cutPoint_norm_pos hd hD i) (hz i).1 (hz i).2,
     liftedAngle_polar hd hD]
 
 private theorem logBranch_eq_branch_inside {d : ℝ} (hd : 0 < d) (hD : d < 1)
@@ -191,7 +194,7 @@ private theorem logBranch_eq_branch_inner {d : ℝ} (hd : 0 < d) (hD : d < 1)
     · simpa [cutPoint] using h
     · simpa [cutPoint] using (nearPoint_norm hd hD).ge
   obtain ⟨h₁, h₂⟩ := liftedAngle_within_strip hd hD hj i hz
-  rw [logStripRoot_eq_cutFactor_of_le_radius (cutPoint_norm_pos hd hD i) h₁ h₂
+  rw [sectorFactor, logStripRoot_eq_cutFactor_of_le_radius (cutPoint_norm_pos hd hD i) h₁ h₂
     (hr.trans hRadius), liftedAngle_polar hd hD]
 
 private theorem cutPoint_im_ne_zero {d : ℝ} (hd : 0 < d) (hD : d < 1) (i : Fin 4) :
@@ -310,7 +313,7 @@ private theorem logSector_periodic_boundary (d : ℝ) (n : ℕ) (x : ℝ) :
     unfold logBranch
     apply Finset.prod_congr rfl
     intro i _
-    simp only [liftedAngle, Nat.not_lt_zero, if_false, i.isLt, if_true]
+    simp only [sectorFactor, liftedAngle, Nat.not_lt_zero, if_false, i.isLt, if_true]
     congr 1
     push_cast
     ring
@@ -369,5 +372,106 @@ theorem analyticGenerating_finiteDeformation {d : ℝ} (hd : 0 < d) (hD : d < 1)
   rw [Real.exp_log h₀R] at hAngular
   rw [analyticGenerating_cauchyCoeff hd hD h₀ hr n, hAngular]
   exact congrArg ((2 * (Real.pi : ℂ) * I)⁻¹ * ·) hTransport
+
+private noncomputable def onCut (d : ℝ) (j : Fin 4) (x : ℝ) : ℂ :=
+  (x : ℂ) + (sectorAngle d (j.val + 1) : ℂ) * I
+
+private noncomputable def otherFactors (d : ℝ) (j : Fin 4) (x : ℝ) : ℂ :=
+  ∏ i ∈ Finset.univ.erase j, sectorFactor d j.val i (onCut d j x)
+
+private theorem sectorFactor_forward (d : ℝ) (j : Fin 4) (x : ℝ) :
+    sectorFactor d (j.val + 1) j (onCut d j x) = logStripRoot ‖cutPoint d j‖ (x : ℂ) := by
+  simp only [sectorFactor, onCut, liftedAngle, Nat.lt_succ_self, if_true, add_sub_cancel_right]
+
+private theorem sectorFactor_backward (d : ℝ) (j : Fin 4) (x : ℝ) :
+    sectorFactor d j.val j (onCut d j x) =
+      logStripRoot ‖cutPoint d j‖ ((x : ℂ) + (2 * Real.pi : ℝ) * I) := by
+  simp only [sectorFactor, onCut, liftedAngle, lt_irrefl, if_false]
+  congr 1
+  push_cast
+  ring
+
+private theorem logBranch_cut_difference (d : ℝ) (j : Fin 4) (x : ℝ) :
+    logBranch d (j.val + 1) (onCut d j x) - logBranch d j.val (onCut d j x) =
+      (logStripRoot ‖cutPoint d j‖ (x : ℂ) -
+        logStripRoot ‖cutPoint d j‖ ((x : ℂ) + (2 * Real.pi : ℝ) * I)) * otherFactors d j x := by
+  have hprod :
+      (∏ i ∈ Finset.univ.erase j, sectorFactor d (j.val + 1) i (onCut d j x)) =
+        otherFactors d j x := by
+    unfold otherFactors
+    apply Finset.prod_congr rfl
+    intro i hi
+    have hij : i.val ≠ j.val := fun h => (Finset.mem_erase.mp hi).1 (Fin.ext h)
+    have h : (i.val < j.val + 1) ↔ i.val < j.val := by omega
+    simp only [sectorFactor, liftedAngle, h]
+  have hSplit (k : ℕ) :
+      logBranch d k (onCut d j x) = sectorFactor d k j (onCut d j x) *
+        ∏ i ∈ Finset.univ.erase j, sectorFactor d k i (onCut d j x) :=
+    (Finset.mul_prod_erase Finset.univ _ (Finset.mem_univ j)).symm
+  rw [hSplit, hSplit, hprod, sectorFactor_forward, sectorFactor_backward, sub_mul]
+
+private theorem logSector_eq_quotient {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    (n : ℕ) {j : ℕ} (hj : j ≤ 4) {z : ℂ}
+    (hz : z.im ∈ Icc (sectorAngle d j) (sectorAngle d (j + 1)))
+    (hzc : exp z ≠ (scale d : ℂ)) :
+    logSector d n j z = (exp z)⁻¹ ^ n *
+      ((1 - (exp z) ^ 2 - logBranch d j z) / (2 * exp z * ((scale d : ℂ) - exp z))) := by
+  unfold logSector
+  congr 1
+  have hDen := logGenerating_denominator_ne_zero hd hD hj hz
+  have hSub := sub_ne_zero.mpr hzc.symm
+  apply (div_eq_div_iff hDen (mul_ne_zero (mul_ne_zero (by norm_num) (exp_ne_zero z)) hSub)).mpr
+  have hsq := logBranch_sq hd hD hj hz
+  unfold quartic at hsq
+  linear_combination -hsq
+
+private theorem logSector_cut_difference {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    (n : ℕ) (j : Fin 4) (x : ℝ) :
+    logSector d n (j.val + 1) (onCut d j x) - logSector d n j.val (onCut d j x) =
+      (exp (onCut d j x))⁻¹ ^ n *
+        ((logStripRoot ‖cutPoint d j‖ (x : ℂ) -
+          logStripRoot ‖cutPoint d j‖ ((x : ℂ) + (2 * Real.pi : ℝ) * I)) *
+          (-otherFactors d j x / (2 * exp (onCut d j x) *
+            ((scale d : ℂ) - exp (onCut d j x))))) := by
+  let z := onCut d j x
+  have hy : z.im = sectorAngle d (j.val + 1) := by simp [z, onCut, Complex.mul_im]
+  have h₁ : j.val ≤ 4 := j.isLt.le
+  have h₂ : j.val + 1 ≤ 4 := Nat.succ_le_of_lt j.isLt
+  have hz₁ : z.im ∈ Icc (sectorAngle d j.val) (sectorAngle d (j.val + 1)) :=
+    hy.symm ▸ ⟨(sectorAngle_step hd hD h₁).le, le_rfl⟩
+  have hz₂ : z.im ∈ Icc (sectorAngle d (j.val + 1)) (sectorAngle d (j.val + 1 + 1)) :=
+    hy.symm ▸ ⟨le_rfl, (sectorAngle_step hd hD h₂).le⟩
+  have hzc : exp z ≠ (scale d : ℂ) := by
+    intro he
+    apply exp_im_ne_zero_on_cut hd hD j.val j z
+    · right
+      simp [hy, liftedAngle]
+    · simp [he]
+  change logSector d n (j.val + 1) z - logSector d n j.val z = _
+  rw [logSector_eq_quotient hd hD n h₂ hz₂ hzc, logSector_eq_quotient hd hD n h₁ hz₁ hzc,
+    ← mul_sub, ← sub_div]
+  rw [show 1 - (exp z) ^ 2 - logBranch d (j.val + 1) z -
+      (1 - (exp z) ^ 2 - logBranch d j.val z) =
+        -(logBranch d (j.val + 1) z - logBranch d j.val z) by ring]
+  dsimp [z]
+  rw [logBranch_cut_difference]
+  ring
+
+/-- The inward part of each shared radial edge has no jump. -/
+theorem logSector_jump_zero {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    (n : ℕ) (j : Fin 4) (x : ℝ) (hx : Real.exp x / ‖cutPoint d j‖ ≤ 1) :
+    logSector d n (j.val + 1) (onCut d j x) - logSector d n j.val (onCut d j x) = 0 := by
+  rw [logSector_cut_difference hd hD, logStripRoot_boundary_eq _ _ hx, sub_self,
+    zero_mul, mul_zero]
+
+/-- The outward part of each radial edge has the signed square-root jump. -/
+theorem logSector_jump_sqrt {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    (n : ℕ) (j : Fin 4) (x : ℝ) (hx : 1 ≤ Real.exp x / ‖cutPoint d j‖) :
+    logSector d n (j.val + 1) (onCut d j x) - logSector d n j.val (onCut d j x) =
+      (exp (onCut d j x))⁻¹ ^ n *
+        ((-2 * I * (Real.sqrt (Real.exp x / ‖cutPoint d j‖ - 1) : ℂ)) *
+          (-otherFactors d j x / (2 * exp (onCut d j x) *
+            ((scale d : ℂ) - exp (onCut d j x))))) := by
+  rw [logSector_cut_difference hd hD, logStripRoot_jump _ _ hx]
 
 end CatalanStrictPeaks.CutGeometry
