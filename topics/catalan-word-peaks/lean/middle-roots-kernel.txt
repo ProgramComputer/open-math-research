@@ -1,0 +1,7 @@
+'CatalanStrictPeaks.CutGeometry.eval_sign_at_oldRoot_of_phaseSign' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.eval_sign_at_oldRoot_in_phaseBand' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.middleRoot_signs_from_150' depends on axioms: [propext, Classical.choice, Quot.sound]

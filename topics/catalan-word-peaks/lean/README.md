@@ -48,8 +48,9 @@ for the near mean. It proves the small-angle lower bound for its real part.
 
 Lean pairs the conjugate rays and proves the alternating checkpoint signs
 for the explicit phase. The analytic proof from length $150$ and the exact
-finite prefix give simple negative roots at every length. The signs at
-the old middle and extreme roots remain separate formal work.
+finite prefix give simple negative roots at every length. Lean proves the
+strict next-row sign at all old middle roots from length $150$. Strict
+interlacing at these lengths also requires the two extreme-root signs.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -282,6 +283,22 @@ an angle realizing the actual root modulus and locates its phase between
 the two adjacent checkpoint levels. It gives the corresponding sign of
 the imaginary part of $U_n$. [Checkpoint phase kernel output](checkpoint-phase-kernel.txt)
 
+## Signs at the old middle roots
+
+The [middle-root module](CatalanStrictPeaksMiddleRoots.lean) proves
+`middleRoot_signs_from_150`. For every $n\ge150$ it gives a complete
+simple-negative root list in increasing modulus and proves
+$(-1)^{i+1}C_{n+1}(-r_i)>0$ at each zero-based rank $i$ with
+$0<i$ and $i+1<\operatorname{rowDegree}(n)$.
+
+At the old root the real part of $U_nJ_n$ is the negative of the old far-ray
+error. The squared-distance bound shows that its imaginary part has the
+same sign as that of $U_n$. The exact rotation multiplies that imaginary part by
+$\sin\theta$. The real-part and covariance bounds in (10)–(12) and the two
+far-ray bounds make this term dominate the remaining terms. The resulting
+sign is for the actual next-row Catalan polynomial.
+[Middle-root kernel output](middle-roots-kernel.txt)
+
 ## Exact isolating intervals through length 150
 
 The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
@@ -345,6 +362,8 @@ lake build CatalanStrictPeaksNormalizedRays
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/NormalizedRaysAxioms.lean
 lake build CatalanStrictPeaksPhaseOrder CatalanStrictPeaksAllRoots
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/CheckpointPhaseAxioms.lean
+lake build CatalanStrictPeaksMiddleRoots
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/MiddleRootsAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~
