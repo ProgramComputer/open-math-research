@@ -1,6 +1,6 @@
 name = "open_math_research"
 version = "0.1.0"
-defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns", "BalancedThreeColumnCounting", "CatalanStrictPeaksInterlacing", "CatalanStrictPeaksRecurrence"]
+defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns", "BalancedThreeColumnCounting", "CatalanStrictPeaksInterlacing", "CatalanStrictPeaksRecurrence", "CatalanStrictPeaksDiscriminant"]
 
 [[require]]
 name = "mathlib"
@@ -133,4 +133,16 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
 name = "CatalanStrictPeaksRecurrence"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFirstReturn"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksGeneratingFunction"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksDiscriminant"
 srcDir = "../../topics/catalan-word-peaks/lean"

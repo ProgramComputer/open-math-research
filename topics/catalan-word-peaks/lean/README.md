@@ -38,10 +38,9 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** The generating function identity, analytic
-ray and endpoint comparisons yielding the checkpoint and old-root sign
-hypotheses, and finite prefix Sturm certificates remain outside this kernel
-check.
+**Partial Lean verification.** Analytic convergence and branch continuation,
+the ray and endpoint comparisons, and the finite prefix Sturm certificates
+remain outside the kernel check.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -63,9 +62,26 @@ contains two counts per height, and each step examines a quadratic number of
 state pairs. The algorithm avoids enumerating the words.
 
 The recurrence and coefficient recovery are kernel-checked at every length.
-The generating-function identity, analytic sign estimates and finite Sturm
-certificates remain separate from this formalization.
 [Recurrence kernel output](recurrence-kernel.txt)
+
+## First-return generating function and scaled discriminant
+
+The [first-return module](CatalanStrictPeaksFirstReturn.lean) proves the
+bijection $w=0(u+1)v$, with the suffix beginning at the first later zero
+when present. Its exact peak-count formula includes the possible boundary
+peak when the suffix is nonempty and the positive block is a singleton or
+ends in a strict ascent. A peak-preserving final rise counts these blocks
+by the shorter word family. The resulting coefficient convolution gives
+`generatingFunction_eq` for the
+[formal series](CatalanStrictPeaksGeneratingFunction.lean) of the original
+polynomials. [Published generating-function identity](https://doi.org/10.26493/2590-9770.1794.fc5)
+
+The [discriminant module](CatalanStrictPeaksDiscriminant.lean) checks that
+the scaled series has coefficients $c^nC_n(1-c^{-2})$. It proves its quadratic
+equation and constructs a formal square root, with constant term one, of
+$(1+x^2)^2-4cx$ for $c\ne0$. Convergence, analytic branch continuation and
+the sign estimates remain in the analytic proof.
+[Generating-function kernel output](generating-function-kernel.txt)
 
 [Written proof](../proof.md)
 
@@ -79,6 +95,8 @@ lake build OpenMathResearch.OrientedNegativeInterlace CatalanStrictPeaks Catalan
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/Axioms.lean
 lake build CatalanStrictPeaksRecurrence
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/RecurrenceAxioms.lean
+lake build CatalanStrictPeaksFirstReturn CatalanStrictPeaksGeneratingFunction CatalanStrictPeaksDiscriminant
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/GeneratingFunctionAxioms.lean
 ~~~
 
 [Kernel output](kernel.txt)
