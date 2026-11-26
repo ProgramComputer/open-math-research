@@ -185,6 +185,43 @@ theorem logStripRoot_sq {R : ℝ} (hR : 0 < R) {z : ℂ}
   rw [logStripRoot_eq_principal hR hlo hhi, principalRoot_sq]
   rfl
 
+private theorem principalRoot_real_nonneg {a : ℝ} (ha : 0 ≤ a) :
+    principalRoot (a : ℂ) = (Real.sqrt a : ℂ) := by
+  rw [← sidedRoot_above (u := (a : ℂ)) (by simp), sidedRoot_real_nonneg _ _ ha]
+
+/-- On circles inside the branch point, the same principal root also gives
+both boundary values of the logarithmic strip. -/
+theorem logStripRoot_eq_principal_of_le_radius {R : ℝ} (hR : 0 < R) {z : ℂ}
+    (h₁ : 0 ≤ z.im) (h₂ : z.im ≤ 2 * Real.pi) (hRz : ‖exp z‖ ≤ R) :
+    logStripRoot R z = principalRoot (1 - exp z / (R : ℂ)) := by
+  have h₃ : 0 ≤ 1 - Real.exp z.re / R := sub_nonneg.mpr
+    ((div_le_one hR).mpr (by simpa only [norm_exp] using hRz))
+  change logStripRoot R z = principalRoot (logRootArgument R z)
+  rcases h₁.eq_or_lt with hbot | hlo
+  · have hz : z = (z.re : ℂ) := by apply Complex.ext <;> simp [← hbot]
+    rw [hz, logStripRoot_lower_boundary, logRootArgument_real,
+      sidedRoot_real_nonneg _ _ h₃, principalRoot_real_nonneg h₃]
+  rcases h₂.eq_or_lt with htop | hhi
+  · have hz : z = (z.re : ℂ) + (2 * Real.pi : ℝ) * I := by
+      apply Complex.ext <;> simp [htop, Complex.mul_re, Complex.mul_im]
+    rw [hz, logStripRoot_upper_boundary, logRootArgument_at _ _ Real.cos_two_pi Real.sin_two_pi,
+      sidedRoot_real_nonneg _ _ h₃, principalRoot_real_nonneg h₃]
+  exact logStripRoot_eq_principal hR hlo hhi
+
+private theorem logRootArgument_shift (R θ : ℝ) (z : ℂ) :
+    logRootArgument R (z - (θ : ℂ) * I) =
+      1 - exp z / ((R : ℂ) * exp ((θ : ℂ) * I)) := by
+  rw [logRootArgument, Complex.exp_sub, div_div, mul_comm (exp _)]
+
+/-- Rotating the open strip avoids the radial cut of the rotated factor. -/
+theorem exp_div_mem_slitPlane_shift {R θ : ℝ} (hR : 0 < R) {z : ℂ}
+    (h₁ : θ < z.im) (h₂ : z.im < θ + 2 * Real.pi) :
+    1 - exp z / ((R : ℂ) * exp ((θ : ℂ) * I)) ∈ slitPlane := by
+  rw [← logRootArgument_shift]
+  apply exp_div_mem_slitPlane hR
+  · simp [Complex.mul_im]; linarith
+  · simp [Complex.mul_im]; linarith
+
 /-- Rotating the strip handles the radial cut in the direction of a branch point. -/
 theorem logStripRoot_eq_cutFactor {R θ : ℝ} (hR : 0 < R) {z : ℂ}
     (h₁ : θ < z.im) (h₂ : z.im < θ + 2 * Real.pi) :
@@ -194,5 +231,17 @@ theorem logStripRoot_eq_cutFactor {R θ : ℝ} (hR : 0 < R) {z : ℂ}
     linarith
   · simp [Complex.mul_im]
     linarith
+
+/-- The rotated strip branch agrees with the principal factor up to both
+edges on a circle inside its branch point. -/
+theorem logStripRoot_eq_cutFactor_of_le_radius {R θ : ℝ} (hR : 0 < R) {z : ℂ}
+    (h₁ : θ ≤ z.im) (h₂ : z.im ≤ θ + 2 * Real.pi) (hz : ‖exp z‖ ≤ R) :
+    logStripRoot R (z - (θ : ℂ) * I) = cutFactor ((R : ℂ) * exp ((θ : ℂ) * I)) (exp z) := by
+  rw [logStripRoot_eq_principal_of_le_radius hR]
+  · change principalRoot (logRootArgument R (z - (θ : ℂ) * I)) = _
+    rw [logRootArgument_shift, cutFactor]
+  · simp [Complex.mul_im]; linarith
+  · simp [Complex.mul_im]; linarith
+  · simpa [norm_exp, Complex.mul_re] using hz
 
 end CatalanStrictPeaks.CutGeometry

@@ -182,3 +182,14 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 [[lean_lib]]
 name = "CatalanStrictPeaksFastCoefficients"
 srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "OpenMathResearch.LogarithmicContour"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksLogRoot"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksRayTransfer"
+srcDir = "../../topics/catalan-word-peaks/lean"
