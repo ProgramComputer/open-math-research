@@ -1,0 +1,62 @@
+name: Balanced marked-row stable Lean audit
+
+on:
+  pull_request:
+    branches: [research, main]
+    paths:
+      - '.github/workflows/balanced-marked-row-stable.yml'
+      - 'topics/balanced-arrays/marked-row-likelihood/lean/*.lean'
+      - 'topics/balanced-arrays/marked-row-likelihood/lean/stable/**'
+      - 'shared/lean/publication/lean-toolchain'
+      - 'shared/lean/publication/lake-manifest.json'
+      - 'shared/lean/publication/audit_axioms.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recheck:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      AUDIT_SCRIPT: topics/balanced-arrays/marked-row-likelihood/lean/stable/audit.py
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Stage the two research modules
+        run: python3 "$AUDIT_SCRIPT" stage .marked-row-stable
+      - name: Install the pinned toolchain
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          lake-package-directory: .marked-row-stable
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+      - name: Fetch the pinned imports and build both modules
+        working-directory: .marked-row-stable
+        shell: bash
+        run: |
+          lean --version | tee lean-version.txt
+          grep -E '^Lean \(version 4\.36\.0,' lean-version.txt
+          lake --version
+          mapfile -t imports < cache-imports.txt
+          lake exe cache get "${imports[@]}"
+          git -C .lake/packages/mathlib rev-parse HEAD | tee mathlib-revision.txt
+          test "$(cat mathlib-revision.txt)" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842
+          lake build MarkedPairing ArrayOrientation
+      - name: Audit the named declarations
+        run: python3 "$AUDIT_SCRIPT" audit .marked-row-stable
+      - name: Preserve versioned audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: balanced-marked-row-stable
+          retention-days: 30
+          include-hidden-files: true
+          path: |
+            .marked-row-stable/lean-version.txt
+            .marked-row-stable/mathlib-revision.txt
+            .marked-row-stable/sources.json
+            .marked-row-stable/axioms.json
