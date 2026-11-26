@@ -55,39 +55,77 @@
       "propext"
     ],
     "machine_verification": {
-      "status": "pending",
-      "workflow_checkout_commit": null,
-      "hosted_job": null,
-      "hosted_artifact": null,
-      "lean_version_output": null,
-      "lake_version_output": null,
+      "status": "passed",
+      "workflow_checkout_commit": "84c6449058d45fbcb52608838dbd16da75f18efa",
+      "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45767591098/job/139732148456",
+      "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45767591098/artifacts/15093426289",
+      "lean_version_output": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+      "lake_version_output": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
       "build": {
-        "status": "pending",
-        "staged_sources_report_sha256": null
+        "status": "passed",
+        "lean_binary_sha256": "db7f559d05795e7af52e42bc966c90240a39dcb9712161c54c97afa546e20c00",
+        "staged_sources_report_sha256": "a128e47a7902c674ae30c97017f95eda4d57492c035d9a2cffbe5f3e4ee1cccb"
       },
       "declaration_axioms": {
-        "status": "pending",
-        "checked_declarations": null,
-        "report_sha256": null,
-        "export_root_axioms": null
+        "status": "passed",
+        "checked_declarations": 178,
+        "report_sha256": "2a55ec4d76e0c37ef69e16deca2768db30633606824585da2929bc40ff3603ac",
+        "export_root_axioms": {
+          "CatalanStrictPeaks.strict_peaks_all_lengths": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "AuditExportType.catalan": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "AuditReference.catalanPolynomial_eq": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "AuditReference.catalanSourcePublished": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "AuditReference.catalanSourceOriginal": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        "per_declaration": "topics/catalan-word-peaks/lean/publication/axioms-4.36.json"
       },
       "export": {
-        "status": "pending",
-        "sha256": null,
-        "declaration_count": null,
-        "dependency_report_sha256": null,
-        "root_closure_counts": null
+        "status": "passed",
+        "sha256": "b8000fc8469b2d6d16bfe813c022eb7ad3ac08a5a8cadb5f6dba8e8c9b4c7685",
+        "exporter_binary_sha256": "8298d4412a1f8986b5dbfd1d9925211778d8d320fc47b72040c8fdfdd5b603d5",
+        "declaration_count": 55664,
+        "dependency_report_sha256": "f5c6db2d31f09a914f4aadad57daffbb901724978fe750d1e51f30e901a94240",
+        "root_closure_counts": {
+          "CatalanStrictPeaks.strict_peaks_all_lengths": 55558,
+          "AuditExportType.catalan": 55561,
+          "AuditReference.catalanPolynomial_eq": 8103,
+          "AuditReference.catalanSourcePublished": 55657,
+          "AuditReference.catalanSourceOriginal": 55661
+        }
       },
       "official_kernel": {
-        "status": "pending",
-        "binary_sha256": null,
-        "verdict": null
+        "status": "passed",
+        "binary_sha256": "2b2ff08805ace61c935b023f8114ac3f7f1d3bc79cb4e8c47ef7801a5af58798",
+        "verdict": "Lean default kernel accepts the solution"
       },
       "independent_kernel": {
-        "status": "pending",
-        "binary_sha256": null,
-        "verdict": null
-      }
+        "status": "passed",
+        "binary_sha256": "8241c5e6baa29490aa118d382f97961b208ae730fdb96545c2abed74c9ece5a8",
+        "verdict": "Checked 55664 declarations with no errors"
+      },
+      "hosted_artifact_digest": "sha256:0b31aa5907de77d380166b17218a4be8d738a533f2c1aad852d0fca96bf1bc6d",
+      "hosted_reports_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45767591098/artifacts/15092833592",
+      "hosted_reports_artifact_digest": "sha256:aed9d3aa7e2667ed64b9018569fbf70969a52902780b804fb270240988128a03"
     },
     "upstream_source_rebuild": {
       "status": "passed",

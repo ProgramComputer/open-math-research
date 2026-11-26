@@ -1,33 +1,4 @@
 {
-  "AuditExportType.prismFamily": [
-    "Classical.choice",
-    "Quot.sound",
-    "propext"
-  ],
-  "AuditExportType.prismSix": [
-    "Classical.choice",
-    "Quot.sound",
-    "propext"
-  ],
-  "AuditReference.isPrismNumerator_of_slice": [
-    "Classical.choice",
-    "Quot.sound",
-    "propext"
-  ],
-  "AuditReference.prismCount_eq_integerPointCount": [
-    "Classical.choice",
-    "Quot.sound",
-    "propext"
-  ],
-  "AuditReference.prismSourceAdmissible": [
-    "Quot.sound",
-    "propext"
-  ],
-  "AuditReference.prismSourcePublished": [
-    "Classical.choice",
-    "Quot.sound",
-    "propext"
-  ],
   "PrismFamily.afterAffineDimension": [
     "Classical.choice",
     "Quot.sound",
@@ -303,6 +274,35 @@
     "propext"
   ],
   "PrismSplit.unsplitSamplesAgree": [
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditExportType.prismSix": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditExportType.prismFamily": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.prismCount_eq_integerPointCount": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.isPrismNumerator_of_slice": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.prismSourcePublished": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.prismSourceAdmissible": [
     "Quot.sound",
     "propext"
   ]
