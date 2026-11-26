@@ -1,8 +1,8 @@
 # Excedance zeros for permutations with long cycles
 
-For every $n\ge100{,}000$ and $3\le k\le n$, the nonzero roots of the minimum-cycle-length excedance polynomial are simple, negative and strictly interlace those of the next row at the same $k$. Together with the three-cycle and threshold-three theorems, this leaves $k\ge4$ and $4k\le n<100{,}000$ as necessary conditions for a counterexample. [Proof and exact replay](degree-blocks/README.md) · [Manuscript](paper.pdf)
+For every $n\ge10{,}000$ and $3\le k\le n$, the nonzero roots of the minimum-cycle-length excedance polynomial are simple, negative and strictly interlace those of the next row at the same $k$. Together with the three-cycle and threshold-three theorems, this leaves $k\ge4$ and $4k\le n<10{,}000$ as necessary conditions for a counterexample. [Manuscript](paper.pdf) · [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances)
 
-The proof bounds the old value and angular derivative jointly, keeping track of degree in the signed pole expansion. It uses differentiated residues and a common contour at larger ratios $n/k$. The exact scalar checks and independent agent-assisted reviews accompany the arguments. Formal verification is ⬜ None. [Differentiated residues](differentiated-residues/README.md) · [Lower-height circle bounds](lower-circle/README.md) · [Earlier uniform cutoff](adaptive-poles/README.md)
+A paired-residue estimate covers $4\le n/k\le48$. A common-circle Fourier estimate covers $n/k\ge44$, and the three-cycle theorem covers $n/k<4$. The two analytic comparisons have exact scalar replays and independent agent-assisted reviews. Formal verification is ⬜ None. [Paired residues](paired-residues/README.md) · [Fourier contrast](fourier-circle/README.md) · [Earlier degree-block cutoff](degree-blocks/README.md)
 
 For every $k\ge3$ and $k\le n\le4k-1$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. This includes the first transition permitting four cycles. [Complete three-cycle range, proof and verification](three-cycle-complete.md) · [Manuscript](paper.pdf)
 

@@ -1,0 +1,84 @@
+\section{An explicit cutoff at size 10,000}
+\label{sec:paired-fourier-cutoff}
+
+\textbf{Theorem.} For every \(n\ge10{,}000\) and \(3\le k\le n\), the
+nonzero roots of \(E_{n,k}\) and \(E_{n+1,k}\) are simple, negative and
+strictly interlace, with the next row supplying both outer nonzero roots.
+Zero is a simple common root.
+
+\paragraph{Paired residues for \(4\le n/k\le48\).}
+Use the notation of Section~\ref{sec:degree-block-cutoff} and assume
+\(nS^2\ge6/5\). For \(kS\ge10\) the joint value-and-derivative argument
+applies with \(k\ge208\), using exponent 48 in the Bernoulli bound for
+the half-powered off-diagonal term and 96 in the ordinary kernel.
+For \(kS\le10\), retain the whole principal residue multiplier
+\[
+ M_1=d_\infty Q_1(z_1^{-1})
+     =z_1(S/\pi)e^{-H(s+i\pi)},\qquad
+ d_\infty=\exp\!\left(-\sum_{j=1}^{k-1}\frac1j\right),\quad
+ s=\pi\cot\theta ,
+\]
+where \(H(w)=\sum_{b\ge1}b^{-1}e^{-bw}\sum_{j=0}^{k-1}(bw)^j/j!\).
+In each bin of complementary degree \(T\), subtracting that
+continuation replaces \(d_{n-T}\) by \(d_{n-T}-d_\infty\),
+with the coefficient of \(D-1\) interpreted as zero below degree
+\(k\). The same subtraction applies in the insertion's residual row.
+The difference decays factorially in the number of full degree blocks.
+Absolute convergence, including that of the angular derivative, allows
+the tail after bin 240 to be bounded by evaluating the nonnegative
+majorants at \(9/8\). The differentiated term uses the signed
+frequency \(n-T\) and the separate multiplier derivative \(M_1'\).
+
+The gamma-density bound on the vertical pole segment gives
+\(\pi|H'|<0.18\). A harmonic sum and a Poisson lower-tail estimate
+give \(2k|M_1|>0.47\), and its phase has cosine greater than \(0.97\).
+The rational replay bounds both insertion vectors within
+\(0.97(2k|M_1|)\) of
+\(2k(\Re(M_1 z_1^n),\Re(-iM_1 z_1^n))\). Projection onto the
+unrotated phase vector gives the integer sample signs and the
+consecutive signs at old roots. The exterior ranks, reciprocity and
+degree count then give strict interlacing in this range.
+\href{https://github.com/ProgramComputer/open-math-research/tree/main/topics/long-cycle-excedances/paired-residues}{Proof and exact replay}
+
+\paragraph{A Fourier contrast for \(n/k\ge44\).}
+On a common pole-free circle \(w=Re^{i\varphi}\), put
+\(f=e^G/(1+e^{w-s})\), where \(G\) is the truncated logarithm from
+the common-contour proof. Write \(f_j\) for its \(j\)-th angular Fourier
+coefficient, \(w_p=s+ip\pi\), \(r=|w_1|\) and
+\(a_p=R^k/w_p^{k-1}\). The exact Taylor remainder gives
+\[
+ \partial_\varphi f
+ =i e^{ik\varphi} f \sum_p\frac{a_p}{w_p-w}.
+\]
+Two integrations by parts give the factor \(1/(j(j-k))\) in
+the circle error. For the consecutive contrast \((r/R) f_{n+1}-C f_n\),
+first split each kernel as
+\[
+ \frac{r/w-C}{w_p-w}
+   =\frac{z_p-C}{w_p-w}+\frac{z_p}{w},\qquad z_p=r/w_p .
+\]
+The first term retains the factor \(S\) through
+\(|z_p-C|\le |p|S\). The second gives a lower Fourier coefficient
+and is bounded by the same two integrations.
+
+For \(k\ge100\), the radial separation and the contraction of the
+Taylor numerator bound the normalized errors in terms of \(x=n/k\),
+uniformly in the row size. The factor \(n(n-k)\) in the integrations
+absorbs the two factors of \(k\) from the contour and kernel estimates.
+The thresholds \(4\le k<100\) use direct common-circle bounds.
+The earlier all-size theorem covers \(k=3\). For \(k\ge4\),
+combining the circle and enclosed-pole errors gives
+\[
+ |Y_n-\cos\Psi|<0.20,\qquad
+ |Y_{n+1}-CY_n+S\sin\Psi|<0.77S,
+\]
+where \(Y_j\) denotes the common positive normalization and
+\(\Psi=(n+1)\theta-\Im G(w_1)\).
+At an old zero, \(|\sin\Psi|\ge\sqrt{1-0.20^2}>0.77\).
+The exterior join and the first hits of the integer phase levels
+give the root count and the actual next-row signs.
+\href{https://github.com/ProgramComputer/open-math-research/tree/main/topics/long-cycle-excedances/fourier-circle}{Proof and exact replay}
+
+The two aspect intervals overlap on \([44,48]\). For \(n/k<4\)
+the three-cycle theorem applies. Together these cover all admissible
+thresholds at every old size from \(10{,}000\).

@@ -1,0 +1,1 @@
+Independent rational exponential and pi enclosures verified the outer join, Taylor contractions, denominator and pole bounds, Fourier endpoint arithmetic and small-threshold endpoints.
