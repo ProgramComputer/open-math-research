@@ -79,3 +79,7 @@ Giving every two-entry row the same positive weight can produce arbitrarily many
 ## The column-addition multiplier can fail
 
 With seven rows, cap $6t$, and $7t$ columns, adding one column induces a diagonal map whose finite multiplier symbol has a nonreal pair exactly when $t\ge15$. This limits a possible proof method for the conjecture. [Proof, exact records and verification](column-extension-multiplier.md)
+
+## The geometric-center sign test at fixed dimension
+
+At every fixed $d\ge2$ and row cap, the geometric-center signs reverse at asymptotically half of the internal quotas. This limits a sufficient test for real-rootedness. [Obstruction, proof and exact endpoint checks](geometric-centers/README.md)
