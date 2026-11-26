@@ -33,6 +33,8 @@ The insertion recurrence suggests an all-size induction at the old roots. Its su
 
 Positive interlacing weights alone allow an insertion ratio greater than four in a synthetic chain with genuine earlier rows. In the genuine rows for $k=3$, a Jacobi compression isolates a small component of the insertion ratio and leaves a signed difference of two weight measures to estimate. [Argument and scope](jacobi-defect.md) · [Exact checks](verify_jacobi_defect.py)
 
+For the quotient of two consecutive transformed rows, the Hankel moment form is positive through degree $\lfloor7k/12\rfloor$ for every $k\ge150$ and $n\ge k$. At $k\ge750$, the associated finite Jacobi compression has spectrum in $(0,1)$. These estimates concern the leading compression. [Uniform moment blocks and exact checks](jacobi-moment-blocks.md) · [Independent review](review-jacobi-moment-blocks.md)
+
 Every consecutive pair before three cycles can occur strictly interlaces, at every admissible threshold. The proof treats both lag signs for $2k\le n\le3k-2$ using 16 rational bounds above the analytic cutoff and exactly 3,007 smaller pairs. [Two-cycle theorem](two-cycle-band.md) · [Independent review](review-two-cycle-band.md)
 
 For $n\ge2{,}200$ and $3k-1\le n<4k$, all nonzero roots of the consecutive rows are simple, negative and strictly interlace. The argument combines separate exterior bounds with a middle estimate over subsets of at most three occupied poles. It includes the pair from $4k-1$ to $4k$. [Three-cycle-band theorem and rational checker](three-cycle-2200.md) · [Independent review](review-three-cycle-2200.md) · [Earlier cutoff at $10{,}000$](three-cycle-poles.md)
