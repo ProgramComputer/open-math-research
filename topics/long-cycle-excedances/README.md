@@ -1,8 +1,13 @@
 # Excedance zeros for permutations with long cycles
 
-There is a single $N$ such that for every $n\ge N$ and every $3\le k\le n$, the nonzero roots of $E_{n,k}$ are simple, negative and strictly interlace the nonzero roots in the next row at the same $k$. Here $E_{n,k}$ enumerates permutations of $n$ letters by excedances with minimum cycle length at least $k$. The result reduces Alexandersson’s two-parameter conjecture to finitely many pairs. The proof gives no numerical $N$, so the finite set has yet to be certified. [Uniform proof](uniform-interlacing.md) · [Independent review](review-uniform-interlacing.md)
+For every $n\ge10^{20}$ and every $3\le k\le n$, the nonzero zeros of the excedance polynomial for permutations with minimum cycle length $k$ are simple, negative and strictly interlace those of the next row. Hence any counterexample to Alexandersson’s conjecture occurs below an explicit cutoff. The finite complement remains too large for exhaustive verification. [Proof](effective-uniform.md) · [Independent review](review-uniform-effective.md) · [Manuscript](paper.tex)
 
-At $k=3$, the polynomial $E_{n,k}(t)/t$ has $n-2$ simple negative zeros at every $n\ge3$, and they strictly interlace the zeros in the next row. Both conclusions also hold for every $k\ge3$ when $n\ge Bk^2$ for one absolute constant $B$. The zero at the origin is simple. The remaining cases have $k\ge4$ and $n<N$. [Original statement](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Sources and prior work](LITERATURE.md)
+Two estimates also apply below the uniform cutoff. For $n\ge10^6$, the contour argument applies whenever $n/(200k)>30\log n+20$. For $n\ge10{,}000$, strict interlacing holds when $k\ge2000\sqrt n(3+\log(3\sqrt{n/k}))$. The proof of the latter estimate also gives strict consecutive order for the $\lfloor7\sqrt n/20\rfloor$ smallest roots and their reciprocals at every threshold. [Large-threshold proof](effective-threshold.md) · [Exterior roots](effective-front.md) · [Independent review](review-effective-front.md)
+
+For arbitrary cycle counts, a separate estimate bounds both insertion signs at all old roots with $k\sin^2\theta\ge8$, using $t=-\exp(-\pi\cot\theta)$. [Central interval](central-interval.md) · [Independent review](review-central-interval.md)
+
+
+At $k=3$, the polynomial $E_{n,k}(t)/t$ has $n-2$ simple negative zeros at every $n\ge3$, and they strictly interlace the zeros in the next row. Both conclusions also hold for every $k\ge3$ when $n\ge Bk^2$ for one absolute constant $B$. The zero at the origin is simple. Any remaining case has $k\ge4$ and $3k-1\le n<10^{20}$. [Original statement](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Sources and prior work](LITERATURE.md)
 
 The [proof at minimum length three](fixed-threshold.md) compares consecutive rows through their generating function. A [decreasing-run count](small-ranks.md) determines the signs at roots near zero. The [uniform estimate](quadratic-cutoff.md) bounds the dependence on $k$. At $k=3$ the estimates apply from row 400. The proof of existence of the general constant $B$ gives no numerical value. [Manuscript, including the uniform theorem](paper.tex)
 
@@ -20,4 +25,11 @@ Run the threshold-three checks from the repository root with Python 3.10 or late
 python3 -I -O topics/long-cycle-excedances/verify_threshold_three.py
 python3 -I -O topics/long-cycle-excedances/verify_cycle_deletions.py
 python3 -I topics/long-cycle-excedances/verify_endpoints.py topics/long-cycle-excedances/threshold-three-prefix.jsonl.gz
+~~~
+
+Run the exact scalar checks for the effective bounds from the repository root.
+
+~~~sh
+python3 -I topics/long-cycle-excedances/verify_front_constants.py
+python3 -I topics/long-cycle-excedances/verify_uniform_effective_constants.py
 ~~~

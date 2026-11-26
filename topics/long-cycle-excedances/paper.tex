@@ -11,7 +11,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We study the excedance enumerator for permutations whose cycles all have at least $k$ letters. After removing the common zero, consecutive rows strictly interlace at every size when $k=3$, and whenever $n\ge Bk^2$ for a single absolute constant $B$. A comparison of consecutive coefficients of the exponential generating function controls the middle zeros. A decreasing-run model controls the outer zeros. For $k=3$ the analytic estimates meet at size 400, and an integer certificate handles the finite prefix. For every sufficiently large row, we prove strict interlacing simultaneously at every admissible minimum cycle length. This leaves finitely many pairs in the full conjecture; the uniform cutoff is existential.
+We study the excedance enumerator for permutations whose cycles all have at least $k$ letters. After removing the common zero, consecutive rows strictly interlace at every size when $k=3$, and whenever $n\ge Bk^2$ for a single absolute constant $B$. A comparison of consecutive coefficients of the exponential generating function controls the middle zeros. A decreasing-run model controls the outer zeros. For $k=3$ the analytic estimates meet at size 400, and an integer certificate handles the finite prefix. For $n\ge10^{20}$ the nonzero roots strictly interlace at every admissible minimum cycle length. The proof combines a discrete partial-fraction estimate with a contour comparison of adjacent rows. The remaining finite range is too large for exhaustive verification.
 We also prove strict interlacing in every size for which the new permutation can have at most two cycles. An explicit analytic cutoff of 192 and an exact finite replay cover this range.
 \end{abstract}
 \textbf{Theorem 1.} Let $E_{n,k}(t)$ count permutations of $[n]$ with all cycles of length at least $k$, by their number of excedances. For $k=3$ and every $n\ge3$, the $n-2$ nonzero zeros of $E_{n,3}$ are simple and negative. They strictly interlace the nonzero zeros of $E_{n+1,3}$, with the next row supplying both outer roots. More generally, for every fixed $k\ge3$ the same assertions hold for all sufficiently large $n$. Theorem 2 gives these conclusions for all $n\ge Bk^2$ with one absolute constant $B$. In all these rows zero itself is simple. This treats the first conjectured threshold in Alexandersson’s statement and reduces every other fixed threshold to finitely many rows. The proof gives an explicit analytic cutoff of 400 at $k=3$. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjLongCycleExcedances}{Original conjecture} · \href{https://github.com/PerAlexandersson/RealRooted/issues/2590\#issuecomment-7059794955}{Author’s derivation and computations}
@@ -498,6 +498,7 @@ This argument uses the established exact run encoding, the labelled-cycle Euleri
 
 
 \input{two-cycle-insertion}
+\input{effective-interlacing}
 
 \section*{Reproducibility and scope}
 The complete dyadic certificate and three independently usable checkers are in the

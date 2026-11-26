@@ -6,7 +6,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟨 Partial · Lean 4 (all rows through length 150) |
-| [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Strict interlacing at $k=3$, throughout the two-cycle range, and uniformly in all sufficiently large rows | ⬜ None |
+| [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Strict interlacing for all $k$ at $n\ge10^{20}$, all sizes at $k=3$, and throughout the two-cycle range | ⬜ None |
 | [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | Strict interlacing at every fixed threshold for sufficiently large rows, and at every size for thresholds two through four | 🟨 Partial · Lean 4 |
 | [Eventual real-rootedness of the Eulerian matrix square](topics/eulerian-matrix-square/README.md) | Partial theorem covering every sufficiently large row | 🟨 Partial · Lean 4 |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | All row counts for $U(2,3)$, with partial theorems at general rank and dimension | 🟨 Partial · Lean 4 |
@@ -19,7 +19,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 - For [balanced arrays](topics/balanced-arrays/README.md), the conjecture holds in [every degree through fourteen](topics/balanced-arrays/low-degree.md) and for every rank and dimension through 24 rows. For arbitrary row counts, $d\ge(n+1)\log(2)/2$ suffices.
 - Every sufficiently large [Eulerian-square row](topics/eulerian-matrix-square/README.md) has only simple real roots. At every row from $n=3$, the two extreme roots at each end strictly alternate with the next row. The all-root cutoff is unknown.
-- For [long-cycle excedances](topics/long-cycle-excedances/README.md), every consecutive pair up through size $3k-1$ strictly interlaces at minimum cycle length $k$. A finite set of pairs with $k\ge4$ and new size at least $3k$ remains open.
+- For [long-cycle excedances](topics/long-cycle-excedances/README.md), every consecutive pair up through size $3k-1$ strictly interlaces at minimum cycle length $k$. Any counterexample has $k\ge4$ and old size $3k-1\le n<10^{20}$.
 - For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.
 
 ## Citation
