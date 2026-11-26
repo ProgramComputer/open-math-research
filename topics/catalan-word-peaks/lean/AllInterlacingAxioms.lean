@@ -1,0 +1,4 @@
+import CatalanStrictPeaksAllInterlacing
+
+#print axioms CatalanStrictPeaks.interlacing_all
+#print axioms CatalanStrictPeaks.strict_peaks_all_lengths

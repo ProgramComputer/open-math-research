@@ -1,0 +1,2 @@
+'CatalanStrictPeaks.interlacing_all' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.strict_peaks_all_lengths' depends on axioms: [propext, Classical.choice, Quot.sound]
