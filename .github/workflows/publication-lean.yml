@@ -50,6 +50,20 @@ jobs:
       - name: Replay the full exported proof with both kernels
         if: matrix.topic == 'catalan' || matrix.topic == 'prism'
         run: bash shared/lean/publication/replay-kernel.sh .publication-build "$RUNNER_TEMP/kernel-audit" ${{ matrix.topic }}
+      - name: Preserve small kernel reports separately from the proof export
+        if: always() && (matrix.topic == 'catalan' || matrix.topic == 'prism')
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: kernel-reports-${{ matrix.topic }}
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            ${{ runner.temp }}/kernel-audit/${{ matrix.topic }}/*.txt
+            ${{ runner.temp }}/kernel-audit/${{ matrix.topic }}/*.log
+            ${{ runner.temp }}/kernel-audit/${{ matrix.topic }}/summary.json
+            .publication-build/axioms.json
+            .publication-build/sources.json
+          include-hidden-files: true
       - name: Preserve versioned audit evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

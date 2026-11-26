@@ -138,5 +138,101 @@
         "'PrismFamily.familyBoxSplitCounterexample' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
     }
-  ]
+  ],
+  "stable_recheck": {
+    "topic": "prism-splitting",
+    "scope": "For every integer a >= 6, the actual lattice slices at level a with capacities (1^(2a-2),2) and (1^(2a)) have Ehrhart numerators that fail to weakly interlace. The endpoint and the infinite family are covered. The separate universal real-rootedness assertion is outside this claim.",
+    "published_source_commit": "312293aa850010e9d9509d6850a482b9c7b7966f",
+    "published_declarations": {
+      "PrismSplit.finBoxSplitCounterexample": {
+        "file": "topics/prism-splitting/lean/PrismDimensions.lean",
+        "published_sha256": "1ba0a0455a8a13ba2739afc7da173ecc5d44c8d5fc7137929e253dc79615df59"
+      },
+      "PrismFamily.familyBoxSplitCounterexample": {
+        "file": "topics/prism-splitting/lean/PrismFamilyInterlacing.lean",
+        "published_sha256": "e69bc99d8bb81c13476620e505f5a2a8fa57c909fdd8f692fe72ffdfa1637379"
+      }
+    },
+    "source_comparison": {
+      "status": "complete",
+      "review_type": "independent agent-assisted statement review",
+      "date": "2026-11-25",
+      "source_statement": "topics/prism-splitting/review/stable-lean-source-statement.md",
+      "review": "topics/prism-splitting/review/stable-lean-source-review.md",
+      "reference_definitions": "shared/lean/publication/reference/AuditReferenceSpecs.lean",
+      "reference_properties": [
+        "AuditReference.PrismPublished"
+      ]
+    },
+    "pinned_toolchain": {
+      "lean": "4.36.0",
+      "lean_commit": "611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9",
+      "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+      "lake_dependency_manifest": "shared/lean/publication/lake-manifest.json",
+      "export_format": "lean4export NDJSON 3.1.0",
+      "official_kernel": "leanchecker --from-export",
+      "independent_kernel": "Nanoda",
+      "independent_kernel_commit": "4c544ed4099c8227f07d5de77ad1e69fb0740a27"
+    },
+    "commands": [
+      "audit_build=$(mktemp -d)",
+      "audit_artifacts=$(mktemp -d)",
+      "python3 shared/lean/publication/prepare.py prism \"$audit_build\"",
+      "(cd \"$audit_build\" && lean --version && lake --version)",
+      "(cd \"$audit_build\" && lake exe cache get $(cat cache-imports.txt))",
+      "(cd \"$audit_build\" && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd \"$audit_build\" && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py prism \"$audit_build\"",
+      "bash shared/lean/publication/replay-kernel.sh \"$audit_build\" \"$audit_artifacts\" prism"
+    ],
+    "export_roots": [
+      "PrismSplit.finBoxSplitCounterexample",
+      "PrismFamily.familyBoxSplitCounterexample",
+      "AuditExportType.prismSix",
+      "AuditExportType.prismFamily",
+      "AuditReference.prismSourcePublished",
+      "AuditReference.prismSourceAdmissible",
+      "AuditReference.prismSourceAdmissible"
+    ],
+    "allowed_axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "machine_verification": {
+      "status": "pending",
+      "workflow_checkout_commit": null,
+      "hosted_job": null,
+      "hosted_artifact": null,
+      "lean_version_output": null,
+      "lake_version_output": null,
+      "build": {
+        "status": "pending",
+        "staged_sources_report_sha256": null
+      },
+      "declaration_axioms": {
+        "status": "pending",
+        "checked_declarations": null,
+        "report_sha256": null,
+        "export_root_axioms": null
+      },
+      "export": {
+        "status": "pending",
+        "sha256": null,
+        "declaration_count": null,
+        "dependency_report_sha256": null,
+        "root_closure_counts": null
+      },
+      "official_kernel": {
+        "status": "pending",
+        "binary_sha256": null,
+        "verdict": null
+      },
+      "independent_kernel": {
+        "status": "pending",
+        "binary_sha256": null,
+        "verdict": null
+      }
+    }
+  }
 }

@@ -116,10 +116,12 @@ theorem prismSourcePublished : PrismPublished := by
   · subst a
     obtain ⟨p, q, hp, hq, hps, hqs, hal⟩ := AuditExportType.prismSix
     refine ⟨asReal p, asReal q, ?_, ?_, noInterleaves_six hp hq hal⟩
-    · simpa only [unsplitFinCaps_list] using isPrismNumerator_of_slice
-        (by rw [unsplitAffineDimension, List.length_ofFn]) hps
-    · simpa only [splitFinCaps_list] using isPrismNumerator_of_slice
-        (by rw [splitAffineDimension, List.length_ofFn]) hqs
+    · have hcaps : List.ofFn unsplitFinCaps = originalBounds 6 := by decide
+      rw [← hcaps]
+      exact isPrismNumerator_of_slice (by rw [unsplitAffineDimension, List.length_ofFn]) hps
+    · have hcaps : List.ofFn splitFinCaps = splitBounds 6 := by decide
+      rw [← hcaps]
+      exact isPrismNumerator_of_slice (by rw [splitAffineDimension, List.length_ofFn]) hqs
   · let b := a - 1
     have hb : 6 ≤ b := by omega
     have hab : b+1 = a := by omega

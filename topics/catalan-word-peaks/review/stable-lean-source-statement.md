@@ -1,0 +1,7 @@
+# Alexandersson’s Catalan-word peak conjecture
+
+Source statement recorded by an independent agent on 2026-11-25 before reading the project’s proof or Lean statements.
+
+For each positive integer $n$, sum $t^{p(w)}$ over all $n$-tuples of nonnegative integers $w$ that start with zero and satisfy $w_{i+1}\leq w_i+1$. Here $p(w)$ counts centers $1<i<n$ where $w_{i-1}<w_i$ and $w_{i+1}<w_i$. Every resulting polynomial $C_n(t)$ has only real roots, and $C_n$ interleaves $C_{n+1}$ for every $n\geq 1$. The empty word naturally extends the family with $C_0=1$ from the stated generating series. The displayed data through $n=9$ and computational evidence through $n=40$ impose no endpoint on the conjecture. [Per Alexandersson, SymCat, “Words, parking functions and Catalan words”](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjCatalanWordPeaks).
+
+The author specifies a directed weak order. In nondecreasing order, using roots with multiplicity, write $a_1,\dots,a_r$ for $C_n$ and $b_1,\dots,b_s$ for $C_{n+1}$. When $s=r+1$, the pattern is $b_1\leq a_1\leq b_2\leq\cdots\leq a_r\leq b_{r+1}$. When $s=r$, it is $a_1\leq b_1\leq a_2\leq\cdots\leq a_r\leq b_r$. Positive constants have empty lists. For example, $C_3=4+t$, $C_4=9+5t$, so the equal-degree order is $-4\leq -9/5$. The source permits repeated roots. The conjunction fails if either the real-rootedness assertion or the directed consecutive assertion fails once. [SymCat interleaving convention](https://www.symmetricfunctions.com/realRootedInterlacing.htm#interlacing-and-interleaving-roots).

@@ -83,7 +83,7 @@ declaration_count="$(python3 -I -c 'import json,sys; print(json.load(open(sys.ar
 grep -Fxq "Checked $declaration_count declarations with no errors" "$artifact_dir/nanoda.log"
 printf '%s\n' 'PASS: exact export passed the official Lean kernel and independent Rust Nanoda.' \
   | tee "$artifact_dir/VERDICT.txt"
-python3 -I - "$artifact_dir/dependencies.json" <<'PYTHON'
+python3 -I - "$artifact_dir/dependencies.json" <<'PYTHON' | tee "$artifact_dir/summary.json"
 import json, sys
 with open(sys.argv[1]) as source:
     report = json.load(source)

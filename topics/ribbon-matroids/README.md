@@ -6,6 +6,8 @@ For every connected ribbon lattice path matroid of rank $r$, the $Z$-polynomial 
 
 **🟨 Partial · Lean 4.** Lean verifies the polygon reduction with the general matroid identities as hypotheses, together with concrete rank-three flat recurrences. [Formal scope](lean/README.md) · [Kernel record](verification.json)
 
+[Stable Lean recheck and per-theorem axiom reports](verification.json) · [Reproduce the audit](../../shared/lean/publication/README.md)
+
 ## Reproduce the finite checks
 
 The flat-lattice computation covers every inner word through ground-set size 12 and four larger examples, for 2,051 ribbons. Run from this topic folder with Python 3.10 or later.
