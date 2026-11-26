@@ -1,0 +1,5 @@
+import BalancedNoFullRowCounting
+
+#print axioms BalancedNoFullRowCounting.covering_card
+#print axioms BalancedNoFullRowCounting.arrays_card
+#print axioms BalancedNoFullRowCounting.array_inclusion_exclusion

@@ -40,3 +40,15 @@ Run from the shared Lean project with its pinned dependencies.
 lake build BalancedThreeColumnCounting
 lake env lean -j1 ../../topics/balanced-arrays/lean/ThreeColumnPrefixAudit.lean
 ~~~
+
+## Arrays with no full row
+
+For every $d>0$ and $k\le n$, Lean proves the inclusion–exclusion formula for arrays defined as functions $\mathrm{Fin}(n)\to\mathrm{Fin}(d)\to\mathrm{Bool}$ with the original sum constraints. The proof identifies the sets of zeros in each column and counts the sets of simultaneously full rows. The analytic conclusion about roots and the matrix determinant remain outside this formalization. [Theorem](BalancedNoFullRowCounting.lean) · [Axiom report](corank-one-count-kernel.txt) · [Mathematical proof](../no-full-row.md)
+
+From the repository root, use the pinned Lean project.
+
+~~~sh
+cd shared/lean
+lake build BalancedNoFullRowCounting
+lake env lean ../../topics/balanced-arrays/lean/CorankOneCountingAxioms.lean
+~~~
