@@ -137,6 +137,42 @@ private theorem momentEnvelope_data {n j : ℕ} (hn : 150 ≤ n) (hj : j ≤ 3) 
     field_simp [hmass.ne']
     ring
 
+private theorem piecewise_upper_bound {f p q : ℝ → ℝ}
+    (hf : IntegrableOn f (Ioi 0)) (hp : IntegrableOn p (Ioi 0))
+    (hq : IntegrableOn q (Ioi (1 / 6)))
+    (hp0 : ∀ s : ℝ, 0 < s → 0 ≤ p s)
+    (hlocal : ∀ s ∈ Ioc 0 (1 / 6), f s ≤ p s)
+    (htail : ∀ s ∈ Ioi (1 / 6), f s ≤ q s) :
+    (∫ s in Ioi (0 : ℝ), f s) ≤
+      (∫ s in Ioi (0 : ℝ), p s) + ∫ s in Ioi (1 / 6 : ℝ), q s := by
+  let L : Set ℝ := Ioc 0 (1 / 6)
+  let T : Set ℝ := Ioi (1 / 6)
+  have hr : 0 ≤ (1 / 6 : ℝ) := by norm_num
+  have hfL := hf.mono_set (show L ⊆ Ioi 0 from Ioc_subset_Ioi_self)
+  have hfT := hf.mono_set (show T ⊆ Ioi 0 from Ioi_subset_Ioi hr)
+  calc
+    _ = ∫ s in L ∪ T, f s := by rw [show L ∪ T = Ioi 0 from Ioc_union_Ioi_eq_Ioi hr]
+    _ = (∫ s in L, f s) + ∫ s in T, f s :=
+      setIntegral_union (Set.disjoint_left.mpr fun _ hs ht => (not_lt_of_ge hs.2) ht)
+        measurableSet_Ioi hfL hfT
+    _ ≤ (∫ s in L, p s) + ∫ s in T, q s := add_le_add
+      (setIntegral_mono_on hfL (hp.mono_set Ioc_subset_Ioi_self) measurableSet_Ioc hlocal)
+      (setIntegral_mono_on hfT hq measurableSet_Ioi htail)
+    _ ≤ _ := add_le_add_right (setIntegral_mono_set hp
+      (Filter.Eventually.mono (ae_restrict_mem measurableSet_Ioi) hp0)
+      (Filter.Eventually.of_forall Ioc_subset_Ioi_self)) _
+
+private noncomputable def affineTail (n : ℕ) (s : ℝ) : ℝ :=
+  ((2 * (n : ℝ) + 1) * (1 + (n : ℝ) * s / 8)) * rayWeight n s
+
+private theorem affineTail_integrable {n : ℕ} (hn : 150 ≤ n) :
+    IntegrableOn (affineTail n) (Ioi (1 / 6)) := by
+  have hnR : (150 : ℝ) ≤ n := by exact_mod_cast hn
+  have hfull := (affine_moment (n := n) (by linarith)
+    (2 * (n : ℝ) + 1) ((2 * (n : ℝ) + 1) * (n : ℝ) / 8)).1
+  exact (hfull.mono_set (Ioi_subset_Ioi (by norm_num))).congr_fun
+    (fun s _ => by unfold affineTail; ring) measurableSet_Ioi
+
 private theorem signed_integral_envelope {n : ℕ} (hn : 150 ≤ n) {f : ℝ → ℂ}
     (hf : IntegrableOn (signedIntegrand n f) (Ioi 0)) {A B C : ℝ}
     (hA : 0 ≤ A) (hB : 0 ≤ B) (hC : 0 ≤ C)
@@ -144,16 +180,10 @@ private theorem signed_integral_envelope {n : ℕ} (hn : 150 ≤ n) {f : ℝ →
     (htail : ∀ s ∈ Ioi (1 / 6), ‖f s‖ ≤ (2 * (n : ℝ) + 1) * (1 + (n : ℝ) * s / 8)) :
     ‖∫ s in Ioi (0 : ℝ), signedIntegrand n f s‖ / mass n <
       A * tiltedMoment n 1 + B * tiltedMoment n 2 + C * tiltedMoment n 3 + 1 / (20 * (n : ℝ)) := by
-  let L : Set ℝ := Ioc 0 (1 / 6)
-  let T : Set ℝ := Ioi (1 / 6)
   let g := fun s => ‖signedIntegrand n f s‖
   let p := fun s => A * momentEnvelope n 1 s + B * momentEnvelope n 2 s + C * momentEnvelope n 3 s
-  let q := fun s => ((2 * (n : ℝ) + 1) * (1 + (n : ℝ) * s / 8)) * rayWeight n s
-  have hnR : (150 : ℝ) ≤ n := by exact_mod_cast hn
   have hmass := mass_pos (n := n) (by omega)
   have hthreshold : 0 ≤ (1 / 6 : ℝ) := by norm_num
-  have hgL := IntegrableOn.mono_set hf.norm (show L ⊆ Ioi 0 from Ioc_subset_Ioi_self)
-  have hgT := IntegrableOn.mono_set hf.norm (show T ⊆ Ioi 0 from Ioi_subset_Ioi hthreshold)
   obtain ⟨h1, h1i⟩ := momentEnvelope_data (j := 1) hn (by decide)
   obtain ⟨h2, h2i⟩ := momentEnvelope_data (j := 2) hn (by decide)
   obtain ⟨h3, h3i⟩ := momentEnvelope_data (j := 3) hn (by decide)
@@ -171,46 +201,32 @@ private theorem signed_integral_envelope {n : ℕ} (hn : 150 ≤ n) {f : ℝ →
       integral_const_mul, integral_const_mul, integral_const_mul, h1i, h2i, h3i]
     field_simp [hmass.ne']
     ring
-  have hqFull := (affine_moment (n := n) (by linarith)
-    (2 * (n : ℝ) + 1) ((2 * (n : ℝ) + 1) * (n : ℝ) / 8)).1
-  have hq : IntegrableOn q T :=
-    (hqFull.mono_set (Ioi_subset_Ioi hthreshold)).congr_fun (fun s _ => by dsimp [q]; ring)
-      measurableSet_Ioi
-  have hloc : (∫ s in L, g s) ≤ ∫ s in Ioi (0 : ℝ), p s := by
+  have hg : IntegrableOn g (Ioi 0) := hf.norm
+  have hp0 (s : ℝ) (hs : 0 < s) : 0 ≤ p s := by
+    have hw := rayWeight_nonneg n hs.le
+    simp only [p, momentEnvelope]
+    positivity
+  have hloc (s : ℝ) (hs : s ∈ Ioc 0 (1 / 6)) : g s ≤ p s := by
+    dsimp only [g]
+    rw [norm_signedIntegrand hs.1.le]
     calc
-      _ ≤ ∫ s in L, p s := by
-        apply setIntegral_mono_on hgL (hp.mono_set Ioc_subset_Ioi_self) measurableSet_Ioc
-        intro s hs
-        rw [norm_signedIntegrand hs.1.le]
-        calc
-          _ ≤ (A * s + B * s ^ 2 + C * s ^ 3) * (s + 3 / (2 * (n : ℝ))) * rayWeight n s :=
-            mul_le_mul_of_nonneg_right (mul_le_mul (hlocal s hs) (centered_tilt_bounds hn hs.1.le).2
-              (abs_nonneg _) (by have := hs.1; positivity)) (rayWeight_nonneg n hs.1.le)
-          _ = p s := by simp only [p, momentEnvelope, pow_one]; ring
-      _ ≤ _ := setIntegral_mono_set hp (Filter.Eventually.mono (ae_restrict_mem measurableSet_Ioi)
-        (fun s (hs : 0 < s) => by
-          have hw := rayWeight_nonneg n hs.le
-          change 0 ≤ p s
-          simp only [p, momentEnvelope]
-          positivity)) (Filter.Eventually.of_forall Ioc_subset_Ioi_self)
-  have htailInt : (∫ s in T, g s) ≤ ∫ s in T, q s := by
-    apply setIntegral_mono_on hgT hq measurableSet_Ioi
+      _ ≤ (A * s + B * s ^ 2 + C * s ^ 3) * (s + 3 / (2 * (n : ℝ))) * rayWeight n s :=
+        mul_le_mul_of_nonneg_right (mul_le_mul (hlocal s hs) (centered_tilt_bounds hn hs.1.le).2
+          (abs_nonneg _) (by have := hs.1; positivity)) (rayWeight_nonneg n hs.1.le)
+      _ = p s := by simp only [p, momentEnvelope, pow_one]; ring
+  have htail' : ∀ s ∈ Ioi (1 / 6), g s ≤ affineTail n s := by
     intro s hs
     have hs0 : 0 ≤ s := hthreshold.trans hs.le
-    rw [norm_signedIntegrand hs0]
+    dsimp only [g]
+    rw [norm_signedIntegrand hs0, affineTail]
     exact mul_le_mul_of_nonneg_right
       (mul_le_mul (htail s hs) (centered_tilt_bounds hn hs0).1 (abs_nonneg _)
         (by positivity) |>.trans_eq (mul_one _)) (rayWeight_nonneg n hs0)
-  have hsplit : (∫ s in Ioi (0 : ℝ), g s) = (∫ s in L, g s) + ∫ s in T, g s := by
-    calc
-      _ = ∫ s in L ∪ T, g s := by rw [show L ∪ T = Ioi 0 from Ioc_union_Ioi_eq_Ioi hthreshold]
-      _ = _ := setIntegral_union (Set.disjoint_left.mpr fun _ hs ht => (not_lt_of_ge hs.2) ht)
-        measurableSet_Ioi hgL hgT
+  have htotal := piecewise_upper_bound hg hp (affineTail_integrable hn) hp0 hloc htail'
   apply (div_le_div_of_nonneg_right (norm_integral_le_integral_norm _) hmass.le).trans_lt
-  change (∫ s in Ioi (0 : ℝ), g s) / mass n < _
-  rw [hsplit, add_div, ← hpInt]
-  exact add_lt_add_of_le_of_lt (div_le_div_of_nonneg_right hloc hmass.le)
-    ((div_le_div_of_nonneg_right htailInt hmass.le).trans_lt (covariance_tail_integral_bound hn))
+  exact (div_le_div_of_nonneg_right htotal hmass.le).trans_lt (by
+    rw [add_div, hpInt]
+    exact add_lt_add_left (covariance_tail_integral_bound hn) _)
 
 /-- The successive-size bound (12) for the actual normalized near-ray mean.
 The estimate holds throughout the interior parameter range. -/
@@ -349,6 +365,17 @@ private theorem conjugate_signed_integral {d : ℝ} {n : ℕ} (hd : 0 < d) (hD :
     ((n : ℝ) / 8 * (moment n 1 - moment (n + 1) 1)) * (mass n * tiltAverage n) by ring]
   exact mul_le_mul_of_nonneg_right (conjugate_moment_gap_bound hn) hmass.le
 
+private theorem nearConjugate_error_global {d s : ℝ} {n : ℕ}
+    (hd : 0 < d) (hD : d < 1) (hn : 150 ≤ n)
+    (hS : 2 ≤ (n : ℝ) * Real.sqrt (1 - d ^ 2)) (hL : 2 ≤ (n : ℝ) * d) (hs : 0 ≤ s) :
+    ‖nearAmplitude d s - nearConjugateRatio d s‖ ≤
+      (2 * (n : ℝ) + 1) * (1 + (n : ℝ) * s / 8) := by
+  calc
+    _ ≤ ‖nearAmplitude d s‖ + ‖nearConjugateRatio d s‖ := norm_sub_le _ _
+    _ ≤ 2 * (n : ℝ) * (1 + (n : ℝ) * s / 8) + (1 + (n : ℝ) * s / 8) :=
+      add_le_add (nearAmplitude_global hd hD hn hS hL hs) (nearConjugateRatio_norm_le hd hD hS hs)
+    _ = _ := by ring
+
 /-- The successive-size bound (11) for the actual normalized near-ray mean.
 The condition 1 / 2 ≤ d covers the entire small-angle sector. -/
 theorem nearMean_step_lt_one_div {d : ℝ} {n : ℕ}
@@ -376,14 +403,9 @@ theorem nearMean_step_lt_one_div {d : ℝ} {n : ℕ}
   have hF := signed_integral_envelope hn hf
     (A := 11) (B := 1 + 11 * (n : ℝ) / 8) (C := (n : ℝ) / 8)
     (by norm_num) (by positivity) (by positivity)
-    (fun s hs => nearAmplitude_conjugate_error hd hD hdHalf hS hs.1.le hs.2) (by
-      intro s hs
-      have hs' : 0 ≤ s := (by norm_num : (0 : ℝ) ≤ 1 / 6).trans hs.le
-      calc
-        ‖f s‖ ≤ ‖nearAmplitude d s‖ + ‖g s‖ := norm_sub_le _ _
-        _ ≤ 2 * (n : ℝ) * (1 + (n : ℝ) * s / 8) + (1 + (n : ℝ) * s / 8) :=
-          add_le_add (nearAmplitude_global hd hD hn hS hL hs') (nearConjugateRatio_norm_le hd hD hS hs')
-        _ = _ := by ring)
+    (fun s hs => nearAmplitude_conjugate_error hd hD hdHalf hS hs.1.le hs.2)
+    (fun s hs => nearConjugate_error_global hd hD hn hS hL
+      ((by norm_num : (0 : ℝ) ≤ 1 / 6).trans hs.le))
   have hF' : ‖∫ s in Ioi (0 : ℝ), signedIntegrand n f s‖ / (mass n * tiltAverage n) <
       3 / (4 * (n : ℝ)) := by
     rw [← div_div]
@@ -400,5 +422,89 @@ theorem nearMean_step_lt_one_div {d : ℝ} {n : ℕ}
   apply (div_le_div_of_nonneg_right (norm_add_le _ _) hmass.le).trans_lt
   rw [add_div]
   exact (add_lt_add_of_lt_of_le hF' hC).trans_le (by ring_nf; linarith)
+
+/-- The lower bound (10) on the actual near-ray mean in the small-angle sector. -/
+theorem nearMean_re_gt_seventeen_twentieths {d : ℝ} {n : ℕ}
+    (hd : 0 < d) (hD : d < 1) (hn : 150 ≤ n) (hdHalf : 1 / 2 ≤ d)
+    (hS : 2 ≤ (n : ℝ) * Real.sqrt (1 - d ^ 2)) :
+    17 / 20 < (nearMean d n).re := by
+  let A : ℝ := 11
+  let B : ℝ := 1 + 11 * (n : ℝ) / 8
+  let C : ℝ := (n : ℝ) / 8
+  let p (s : ℝ) := A * (s ^ (1 : ℕ) * rayWeight n s) +
+    B * (s ^ (2 : ℕ) * rayWeight n s) + C * (s ^ (3 : ℕ) * rayWeight n s)
+  let f := fun s => nearAmplitude d s - nearConjugateRatio d s
+  let g := fun s => ‖weighted n f s‖
+  have hn0 : 0 < n := by omega
+  have hnR : (150 : ℝ) ≤ n := by exact_mod_cast hn
+  have hL : 2 ≤ (n : ℝ) * d :=
+    (by norm_num : (2 : ℝ) ≤ 150 * (1 / 2)).trans (mul_le_mul hnR hdHalf (by norm_num) (by positivity))
+  have hM := mass_pos hn0
+  have hH : IntegrableOn (weighted n (nearAmplitude d)) (Ioi 0) :=
+    nearAmplitude_weighted_integrable hd hD hn0
+  have hc := conjugate_weighted_integrable hd hD hn hS
+  have hf : IntegrableOn g (Ioi 0) := (weighted_sub hH hc).norm
+  have h1 := (integrableOn_moment (n := n) (j := 1) (by norm_num; linarith)).const_mul A
+  have h2 := (integrableOn_moment (n := n) (j := 2) (by norm_num; linarith)).const_mul B
+  have h3 := (integrableOn_moment (n := n) (j := 3) (by norm_num; linarith)).const_mul C
+  have h12 : IntegrableOn (fun s => A * (s ^ (1 : ℕ) * rayWeight n s) +
+      B * (s ^ (2 : ℕ) * rayWeight n s)) (Ioi 0) := h1.add h2
+  have hP : IntegrableOn p (Ioi 0) := h12.add h3
+  have hPint : (∫ s in Ioi (0 : ℝ), p s) / mass n =
+      A * moment n 1 + B * moment n 2 + C * moment n 3 := by
+    change (∫ s in Ioi (0 : ℝ),
+      (fun t => A * (t ^ (1 : ℕ) * rayWeight n t) + B * (t ^ (2 : ℕ) * rayWeight n t)) s +
+      C * (s ^ (3 : ℕ) * rayWeight n s)) / mass n = _
+    rw [integral_add h12 h3, integral_add h1 h2, integral_const_mul, integral_const_mul,
+      integral_const_mul, ← rawMoment, ← rawMoment, ← rawMoment]
+    simp only [add_div, mul_div_assoc, moment]
+  have hloc (s : ℝ) (hs : s ∈ Ioc 0 (1 / 6)) : g s ≤ p s := by
+    simp only [g, weighted, norm_mul, norm_real, Real.norm_eq_abs,
+      abs_of_nonneg (rayWeight_nonneg n hs.1.le)]
+    calc
+      _ ≤ rayWeight n s * (A * s + B * s ^ 2 + C * s ^ 3) :=
+        mul_le_mul_of_nonneg_left
+          (nearAmplitude_conjugate_error hd hD hdHalf hS hs.1.le hs.2) (rayWeight_nonneg n hs.1.le)
+      _ = p s := by simp only [p, pow_one]; ring
+  have htail (s : ℝ) (hs : s ∈ Ioi (1 / 6)) : g s ≤ affineTail n s := by
+    have hs' : 0 ≤ s := (by norm_num : (0 : ℝ) ≤ 1 / 6).trans hs.le
+    simp only [g, weighted, norm_mul, norm_real, Real.norm_eq_abs, abs_of_nonneg (rayWeight_nonneg n hs')]
+    exact (mul_le_mul_of_nonneg_left (nearConjugate_error_global hd hD hn hS hL hs')
+      (rayWeight_nonneg n hs')).trans_eq (mul_comm _ _)
+  have hgInt : (∫ s in Ioi (0 : ℝ), g s) / mass n < 3 / 20 := by
+    have hcInt := piecewise_upper_bound hf hP (affineTail_integrable hn)
+      (fun s hs => by
+        have hw := rayWeight_nonneg n hs.le
+        dsimp [p, A, B, C]
+        positivity) hloc htail
+    apply (div_le_div_of_nonneg_right hcInt hM.le).trans_lt
+    rw [add_div, hPint]
+    exact (add_lt_add_left (covariance_tail_integral_bound hn) _).trans (small_real_part_numeric hn)
+  have hr : IntegrableOn (fun s => (weighted n (nearAmplitude d) s).re) (Ioi 0) :=
+    hH.re
+  have hw : IntegrableOn (rayWeight n) (Ioi 0) := by
+    simpa using integrableOn_moment (n := n) (j := 0) (by norm_num; linarith)
+  have hloss : (∫ s in Ioi (0 : ℝ), rayWeight n s - (weighted n (nearAmplitude d) s).re) ≤
+      ∫ s in Ioi (0 : ℝ), g s := by
+    apply setIntegral_mono_on (hw.sub hr) hf measurableSet_Ioi
+    intro s hs
+    have hgs := nearConjugateRatio_one_le_re hd hD hs.le
+    rw [Pi.sub_apply]
+    simp only [g, weighted, mul_re, ofReal_re, ofReal_im, zero_mul, sub_zero, norm_mul,
+      norm_real, Real.norm_eq_abs, abs_of_nonneg (rayWeight_nonneg n hs.le), mul_one]
+    rw [show rayWeight n s - rayWeight n s * (nearAmplitude d s).re =
+      rayWeight n s * (1 - (nearAmplitude d s).re) by ring]
+    refine mul_le_mul_of_nonneg_left (le_trans ?_ (abs_re_le_norm (f s))) (rayWeight_nonneg n hs.le)
+    apply le_trans ?_ (neg_le_abs ((f s).re))
+    simp only [f, sub_re]
+    linarith
+  have hri : (∫ s in Ioi (0 : ℝ), (weighted n (nearAmplitude d) s).re) =
+      (∫ s in Ioi (0 : ℝ), weighted n (nearAmplitude d) s).re := integral_re hH
+  rw [integral_sub hw hr, hri, ← mass] at hloss
+  have hnormalized := (div_le_div_of_nonneg_right hloss hM.le).trans_lt hgInt
+  change 17 / 20 < ((∫ s in Ioi (0 : ℝ), weighted n (nearAmplitude d) s) / (mass n : ℂ)).re
+  rw [div_ofReal_re]
+  rw [sub_div, div_self hM.ne'] at hnormalized
+  linarith only [hnormalized]
 
 end CatalanStrictPeaks.CutGeometry

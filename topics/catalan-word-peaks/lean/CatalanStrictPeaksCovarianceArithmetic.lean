@@ -199,4 +199,30 @@ theorem broad_covariance_numeric {n : ℕ} (hn : 150 ≤ n) :
   apply (div_lt_div_iff₀ hq hx).mpr
   nlinarith only [hEq, hbound]
 
+/-- The cubic loss in the real-part estimate (10) is below three twentieths. -/
+theorem small_real_part_numeric {n : ℕ} (hn : 150 ≤ n) :
+    11 * moment n 1 + (1 + 11 * (n : ℝ) / 8) * moment n 2 +
+      (n : ℝ) / 8 * moment n 3 + 1 / (20 * (n : ℝ)) < 3 / 20 := by
+  have hnR : (150 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
+  have hx : 0 < (n : ℝ) := by linarith
+  let y : ℝ := (n : ℝ)⁻¹
+  have hy : 0 ≤ y := by dsimp [y]; positivity
+  have hy' : y ≤ 1 / 150 := by
+    simpa only [y, one_div] using (inv_le_inv₀ hx (by norm_num)).mpr hnR
+  obtain ⟨b1, b2, b3, _⟩ := scaled_bounds hn
+  have heq :
+      11 * moment n 1 + (1 + 11 * (n : ℝ) / 8) * moment n 2 +
+        (n : ℝ) / 8 * moment n 3 + 1 / (20 * (n : ℝ)) =
+        (11 * y) * scaledMoment n 1 + (y ^ 2 + 11 * y / 8) * scaledMoment n 2 +
+          (y ^ 2 / 8) * scaledMoment n 3 + y / 20 := by
+    dsimp [y, scaledMoment]
+    field_simp [hx.ne']
+    ring
+  rw [heq]
+  have hA := mul_le_mul_of_nonneg_left b1 (show 0 ≤ 11 * y by positivity)
+  have hB := mul_le_mul_of_nonneg_left b2 (show 0 ≤ y ^ 2 + 11 * y / 8 by positivity)
+  have hC := mul_le_mul_of_nonneg_left b3 (show 0 ≤ y ^ 2 / 8 by positivity)
+  have hyy : y ^ 2 ≤ (1 / 150 : ℝ) ^ 2 := pow_le_pow_left₀ hy hy' 2
+  nlinarith only [hA, hB, hC, hy', hyy]
+
 end CatalanStrictPeaks.BetaMoments

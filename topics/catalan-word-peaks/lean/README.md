@@ -44,7 +44,7 @@ sum of the four improper ray integrals. It verifies radial moments and
 integrated envelopes and applies them to the normalized near-ray mean under
 the stated interior angle bounds. It bounds the actual normalized far-ray
 contribution in both angular ranges and proves the successive-size bounds
-for the near mean.
+for the near mean. It proves the small-angle lower bound for its real part.
 
 Lean pairs the conjugate rays and proves the alternating checkpoint signs
 for the explicit phase. The analytic proof from length $150$ and the exact
@@ -213,6 +213,11 @@ density changes sign at that point, so the conjugate root's secant
 bound integrates to the difference of two exact first moments. The
 local cubic and quadratic estimates and the affine tail bound cover
 the rest of the covariance.
+
+The theorem `nearMean_re_gt_seventeen_twentieths` verifies (10) under the
+same assumptions as the $1/n$ bound. The conjugate factor has real part
+at least one. Lean integrates the cubic loss up to displacement $1/6$
+and the affine tail beyond it to bound $1-\Re J_n$ by $3/20$.
 [Kernel audit](near-covariance-kernel.txt)
 
 ## Far-ray contribution
