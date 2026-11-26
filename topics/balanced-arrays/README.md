@@ -30,6 +30,8 @@ For every $d\ge2$ and $n\ge0$, the balanced-array polynomial for $U(d-1,d)$ has 
 
 For arbitrary hereditary row supports the balanced-array algebra is strongly Koszul. Every specialized ribbon Schur function is a formal multigraded character with nonnegative cell-weight coefficients. A uniform cap gives a nonnegative binomial-basis expansion in the row count. **⬜ None** for Lean or Rocq. [Proof and independent reviews](koszul-ribbons/README.md)
 
+A fixed skew shape has an exact decision procedure for nonnegativity of its quota minor across all array sizes, both at unit weights and coefficientwise. At unit weights, every shape through 18 cells has a nonnegative binomial-basis expansion in the row count. **⬜ None** for Lean or Rocq. [Proof and certificate replay](fixed-shapes/README.md)
+
 ## Three columns with row cap two
 
 For every $n\ge0$, the polynomial for $U(2,3)$ has $\lfloor2n/3\rfloor$ distinct negative zeros. The proof uses explicit sign bounds for $n\ge20$ and exact Sturm counts below that cutoff. One binomial normalization gives an algebraic generating function with four branch points. Estimates for its coefficients at selected phases locate all the zeros, and a finite multiplier transfers the result back to the array polynomial. Agent-assisted independent review checked the argument and ran a separate exact calculation through $n=20$, including the overlap row. [Proof and review](three-column-all-rows.md) · [Prefix verifier](code/verify_three_column_prefix.py) · [Exact prefix records](results/three_column_prefix.jsonl)

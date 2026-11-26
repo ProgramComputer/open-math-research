@@ -1,0 +1,8 @@
+cutoffs 1596 {'order_two': 99, 'ribbon': 136, 'cutoff_1': 95, 'cutoff_2': 291, 'cutoff_3': 427, 'cutoff_4': 384, 'cutoff_5': 151, 'cutoff_6': 13}
+small labeled-row count checks 225
+residuals 5581 {(1, 1): 1266, (2, 1): 975, (2, 2): 975, (3, 1): 548, (3, 2): 548, (3, 3): 548, (4, 1): 164, (4, 2): 164, (4, 3): 164, (4, 4): 164, (5, 1): 13, (5, 2): 13, (5, 3): 13, (5, 4): 13, (5, 5): 13}
+direct determinant spot checks 4152
+canonical residual SHA-256 b2abe93e21960f134fa08ef1b43aaca68c4bde669867267bc8cdf226c71c36b7
+cutoffs.jsonl 2c728248ea57bd8c181684b8886a1b56e80260624fbcfa5db19d520f3467952e
+residuals.jsonl.gz 6949f12ea6f44af104a91f6b73642264a4fa10994fee8fd8bb11ae305fce8f8b
+column-capacity cache CacheInfo(hits=747250, misses=15360, maxsize=None, currsize=15360)
