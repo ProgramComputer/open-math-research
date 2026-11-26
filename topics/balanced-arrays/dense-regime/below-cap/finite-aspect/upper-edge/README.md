@@ -28,4 +28,4 @@ python3 -IB verify-profiles.py
 tectonic paper.tex
 ~~~
 
-The [marked-row comparison](../marked-row/README.md) now certifies the first 506,470 simple negative roots in this example. Together with the last 95 from row switching, this leaves 1,435 roots in the intervening annulus.
+The marked-row comparison certifies the first 506,470 roots and row switching certifies the last 95. The centered and phase-order estimates certify the intervening 1,435 roots, so all 508,000 roots of this fixed instance are simple and negative. [Proof and independent review of the complete instance](../marked-row/complete-instance/README.md)

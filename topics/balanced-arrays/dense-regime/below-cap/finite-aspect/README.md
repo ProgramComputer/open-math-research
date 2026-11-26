@@ -22,4 +22,4 @@ tectonic paper.tex
 
 The general real-rootedness conjecture remains open. The earlier below-cap comparison supplies an absolute-constant estimate on a broader range of dimensions. The theorem here gives an explicit error and height for every dimension at least one quarter of the height. The original tail comparison leaves a transition where the expected number of overflowing rows grows. [Earlier comparison](../proof.md) · [Transition family and review](https://github.com/ProgramComputer/open-math-research/pull/169) · [Source and prior-work checks](../../../root-distributions/literature.md)
 
-The [marked-row comparison](marked-row/README.md) now certifies the first 506,470 simple negative roots in this example. Together with the last 95 from row switching, this leaves 1,435 roots in the intervening annulus.
+The marked-row comparison certifies the first 506,470 roots and row switching certifies the last 95. The centered and phase-order estimates certify the intervening 1,435 roots, so all 508,000 roots of this fixed instance are simple and negative. [Proof and independent review of the complete instance](marked-row/complete-instance/README.md)
