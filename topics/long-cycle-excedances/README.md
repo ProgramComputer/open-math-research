@@ -41,3 +41,5 @@ python3 -I topics/long-cycle-excedances/verify_uniform_effective_constants.py
 ~~~
 
 Marking the cycles gives a continuous deformation from Eulerian rows to the conjectured rows. A resultant detects collisions. In 91 exact cases strict interlacing holds throughout the unit interval, and a symbolic example shows why the unrestricted positive-weight extension fails. [Argument and data](cycle-marking.md)
+
+Giving consecutive rows independently chosen cycle weights causes the order of a fixed-rank root to reverse, even for arbitrarily small fixed increases of the weight. The obstruction identifies why adjacent rows need to share the parameter. [Proof and rational witness](independent-cycle-weights.md)
