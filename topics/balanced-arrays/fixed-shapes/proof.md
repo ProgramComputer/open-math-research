@@ -1,0 +1,65 @@
+# A terminating test for each skew minor of the balanced-array coefficients
+
+Let $`a_k(n,r,d;\mathbf w)`$ enumerate the labeled binary arrays with common column sum $`k`$ and row sums at most $`r`$, marking every occupied cell independently. Write $`a_k=0`$ for $`k<0`$ and $`a_0=1`$. For partitions $`\mu\subseteq\lambda`$, padded to length $`h`$, put
+
+$$
+J_{\lambda/\mu}=\det\big[a_{\lambda_i-\mu_j-i+j}\big]_{1\le i,j\le h}.
+$$
+
+For each fixed skew shape, nonnegativity at unit weights simultaneously for all $`n,d,r`$ is decidable. Coefficientwise nonnegativity simultaneously for all triples is also decidable. For every skew shape with at most 18 boxes and every $`d,r`$, the unit-weight minor is a nonnegative integer linear combination of $`\binom ns`$.
+
+## A rational dimension bound
+
+Set $`x_i=\lambda_i-i`$, $`y_i=\mu_i-i`$. Both sequences strictly decrease. For a permutation $`\sigma`$ set $`q_i(\sigma)=x_i-y_{\sigma(i)}`$. Discard permutations with a negative quota. The identity survives by containment. Define
+
+$$
+\rho_\sigma=\frac{\prod_i(\lambda_i-\mu_i)!}{\prod_i q_i(\sigma)!}.
+$$
+
+The cellwise balancing theorem for two copies with the same row intervals implies that, for integers $`0<t<b-a`$, moving quotas $`(b,a)`$ to $`(b-t,a+t)`$ increases their product coefficientwise by at least $`\big[b!a!/((b-t)!(a+t)!)\big]^d`$. The proof pairs exclusive cells and applies Kahn and Neiman's graph-orientation comparison at each common cell monomial. [Cellwise balancing proof](cellwise-balancing.md) · [Independent review](cellwise-balancing-review.md) · [Original contribution #109](https://github.com/ProgramComputer/open-math-research/pull/109)
+
+Sort $`\sigma`$ into the identity by swapping adjacent inverted images. For an inversion at $`i,j=i+1`$, put $`t=y_{\sigma(j)}-y_{\sigma(i)}>0`$, $`b=q_i(\sigma)`$ and $`a=q_j(\sigma)`$. Since $`b-a=x_i-x_j+t>t`$, the new quotas $`b-t,a+t`$ remain nonnegative. The factorial quotient exceeds one, as
+
+$$
+\frac{b!a!}{(b-t)!(a+t)!}=\prod_{s=1}^{t}\frac{b-t+s}{a+s}>1.
+$$
+
+Consequently $`0<\rho_\sigma<1`$ for every retained nonidentity term. The factorial ratios telescope and all other factors have nonnegative coefficients. Thus
+
+$$
+\prod_i a_{q_i(\sigma)}\ \preceq\ \rho_\sigma^d\prod_i a_{\lambda_i-\mu_i}
+$$
+
+in coefficientwise order. This inequality also covers vanishing products. Retaining the identity and discarding the other even terms proves $`J_{\lambda/\mu}\succeq0`$ whenever
+
+$$
+\sum_{\sigma\ \mathrm{odd}:\ q_i(\sigma)\ge0\ \forall i}\rho_\sigma^d\le1.
+$$
+
+The sum tends to zero. Its first successful positive integer dimension $`D`$ can be found by exact doubling and binary search. Let $`B_{ij}=1/((x_i-y_j)!)^d`$ when $`x_i\ge y_j`$ and zero otherwise. The sum is $`(\mathrm{per}(B)-\det(B))/(2\prod_i B_{ii})`$. Multiplying each row by the factorial of its largest quota raised to the $`d`$th power makes all entries integral.
+
+In the uncapped case with one alphabet per column, replace every quota entry $`a_k`$ by $`(k!)^s a_k`$. The permutation-to-identity multiplier contributed by these factorials is $`(\prod_i q_i(\sigma)!/\prod_i(\lambda_i-\mu_i)!)^s=\rho_\sigma^{-s}`$, so the same sufficient bound uses $`\rho_\sigma^{d-s}`$. Thus for a fixed shape and the integer exponents in Conjecture 5.1, the requested monomial positivity holds whenever $`d-s\ge D`$. [Angarone–Kim–Oh–Soskin, Conjecture 5.1](https://arxiv.org/html/2511.08969v1#S5.Thmthm1).
+
+## The two finite reductions
+
+Fix $`d<D`$, $`1\le r\le d`$, and let $`S=|\lambda|-|\mu|`$. Every surviving determinant term has total quota $`S`$, hence uses $`dS`$ cells counted with multiplicity. At unit weights group its arrays by the exact set of occupied row labels across all factors. Deleting unused rows and relabeling the rest identifies the signed contribution of a given support of size $`s`$ with an integer $`c_s`$ independent of $`n`$. Thus
+
+$$
+J_{\lambda/\mu}(n,r,d;\mathbf1)=\sum_{s=0}^{dS}c_s\binom ns.
+$$
+
+This identity holds also for $`d\ge D`$, where summing the nonnegative cell coefficients of exact support $`[s]`$ gives $`c_s\ge0`$. In each lower dimension the evaluations at $`0,\ldots,dS`$ recover all $`c_s`$ by forward differences. If their signs do not decide nonnegativity immediately, convert the polynomial to the ordinary power basis over the rationals. A constant is immediate. For positive degree $`m`$ every real root has modulus at most $`1+\max_{i<m}|p_i/p_m|`$, where the $`p_i`$ are the power coefficients. Testing the integers up to an integer beyond this bound and the leading sign decides nonnegativity over all nonnegative integers.
+
+For the coefficientwise question expand the determinants on at most $`dS`$ rows and inspect every coefficient in these remaining dimensions and caps. Each negative coefficient would persist upon deleting all rows absent from its cell monomial. This gives a second finite algorithm. A positive unit-weight result alone does not certify this stronger property.
+
+## Universal positivity through 18 boxes
+
+Of the 1,596 nonempty straight partitions through size 18, the 99 of length at most two have nonnegative cell coefficients by two-copy balancing or direct counting. The 136 other hooks have this property by the balanced-array ribbon theorem. Both arguments also give nonnegative binomial-basis coefficients $`c_s`$ by exact row support. [Ribbon theorem and independent reviews](../koszul-ribbons/README.md)
+
+Of the remaining 1,361 partitions, respectively 95, 291, 427, 384, 151 and 13 have first sufficient dimensions $`D=1,2,3,4,5,6`$. Below these cutoffs 5,581 shape-dimension-cap polynomials were reconstructed. Every binomial-basis coefficient was nonnegative. The primary implementation adds labeled rows while identifying column permutations and uses closed formulas at cap one, full cap and corank one. Its determinants use straight Jacobi–Trudi. The independent replay adds whole columns while tracking row capacities, applies dual Jacobi–Trudi to the conjugate shape, and checks every integer in every archived vector. It also checks coverage and both sides of each cutoff. [Independent replay and verdict](fixed-minor-review/review-w18.md).
+
+The specialization $`h_j\mapsto a_j`$ is a ring homomorphism from the symmetric functions because the $`h_j`$, $`j\ge1`$, freely generate them over the integers. The Littlewood–Richardson expansion expresses $`s_{\lambda/\mu}`$ as a nonnegative integer combination of straight Schur functions of the same size. Its coefficients are independent of $`n,d,r`$. This proves the same binomial-basis conclusion for every skew shape through size 18. The empty shape gives one.
+
+The finite Aissen–Schoenberg–Whitney criterion requires nonnegativity of all the Toeplitz minors, including unbounded shapes. The original real-rootedness question stays open. At $`r=d=2`$ the stronger cellwise question contains Sokal's monomial-positivity conjecture for a Hadamard product of elementary Toeplitz matrices. Angarone, Kim, Oh and Soskin establish the uncapped three-by-two-avoiding case and discuss the multi-alphabet question. [Conjecture 1.1, Theorem 1.3 and Section 5](https://arxiv.org/html/2511.08969v1)
+
+**Formal verification.** ⬜ None.
