@@ -49,3 +49,5 @@ python -I -O topics/ordered-large-blocks/code/threshold_four_independent.py topi
 ~~~
 
 In the [shared Lean project](../../shared/lean/README.md), run `lake build OrderedThresholdTwoSigns OrderedThresholdTwoPhase OrderedThresholdThreeSigns OrderedGlobalAngular OrderedThresholdFourSigns`.
+
+[Production matrices and Toeplitz kernels](production-obstructions.md) records exact obstructions to a fixed transition, its canonical Riordan lift, and component-kernel total positivity.
