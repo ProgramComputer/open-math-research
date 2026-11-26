@@ -52,7 +52,10 @@ private theorem cutFactor_argument_ne_pi {d t : ℝ} (hd : 0 < d) (hD : d < 1)
   obtain ⟨hr, hi⟩ := Complex.arg_eq_pi_iff.1 ha
   simp only [Complex.sub_re, Complex.sub_im, Complex.one_re, Complex.one_im] at hr hi
   have hq : q = (q.re : ℂ) := by
-    ext <;> simp <;> linarith
+    apply Complex.ext
+    · rfl
+    · simp only [Complex.ofReal_im]
+      linarith
   have he := (div_eq_iff (cutPoint_ne_zero hd hD i)).mp hq
   exact cutPoint_pos_scale_ne hd hD hij ht (show 0 < q.re by linarith)
     (by simpa only [mul_comm] using he)
@@ -61,7 +64,7 @@ private theorem cutFactor_conj {z x : ℂ} (h : (1 - x / z).arg ≠ Real.pi) :
     cutFactor (conj z) (conj x) = conj (cutFactor z x) := by
   simp only [cutFactor, principalRoot]
   rw [show 1 - conj x / conj z = conj (1 - x / z) by simp, Complex.conj_cpow _ _ h]
-  simp
+  rw [map_ofNat]
 
 private theorem rayPrefactor_rev {d t : ℝ} (hd : 0 < d) (hD : d < 1)
     (j : Fin 4) (ht : 0 < t) :
@@ -122,14 +125,21 @@ private theorem nearCoefficientTerm_normalization {d : ℝ} {n : ℕ} (hd : 0 < 
     (hD : d < 1) (hn : 0 < n) :
     2 * (rayCoefficientTerm d n 0).re / rayLeadingScale d n =
       (nearPhaseUnit d n * nearMean d n).re := by
+  let A := (radius d)⁻¹ ^ n * ‖rayPrefactor d 0 (nearPoint d)‖
+  have hA : 0 < A := mul_pos (pow_pos (inv_pos.2 (radius_pos hd.le)) _)
+    (norm_pos_iff.mpr (rayPrefactor_near_ne_zero hd hD))
+  have hscale : rayLeadingScale d n = (2 / Real.pi) * BetaMoments.mass n * A := by
+    dsimp [rayLeadingScale, A]
+    ring
   have hreal : (2 : ℂ) * rayCoefficientTerm d n 0 =
       (rayLeadingScale d n : ℂ) * (nearPhaseUnit d n * nearMean d n) := by
-    rw [rayCoefficientTerm, nearRay_integral_eq_mean hd hD hn, nearPhaseUnit, rayLeadingScale]
-    change (2 : ℂ) * ((-((nearPoint d)⁻¹ ^ n) / (Real.pi : ℂ)) * _) = _
+    rw [rayCoefficientTerm, nearRay_integral_eq_mean hd hD hn, nearPhaseUnit, hscale]
+    change (2 : ℂ) * ((-((nearPoint d)⁻¹ ^ n) / (Real.pi : ℂ)) * _) =
+      (((2 / Real.pi) * BetaMoments.mass n * A : ℝ) : ℂ) *
+        (-(nearPoint d)⁻¹ ^ n * rayPrefactor d 0 (nearPoint d) / (A : ℂ) * nearMean d n)
     push_cast
-    field_simp [Complex.ofReal_ne_zero.mpr Real.pi_ne_zero,
-      Complex.ofReal_ne_zero.mpr (radius_pos hd.le).ne',
-      Complex.ofReal_ne_zero.mpr (norm_pos_iff.mpr (rayPrefactor_near_ne_zero hd hD)).ne'] <;> ring
+    field_simp [Complex.ofReal_ne_zero.mpr Real.pi_ne_zero, Complex.ofReal_ne_zero.mpr hA.ne']
+    ring
   have hre := congrArg Complex.re hreal
   have hre2 : (2 : ℂ).re = 2 := by norm_num
   have him2 : (2 : ℂ).im = 0 := by norm_num

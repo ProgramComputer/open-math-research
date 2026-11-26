@@ -43,8 +43,9 @@ identifies the analytic branch, and proves the coefficient formula as the
 sum of the four improper ray integrals. It verifies radial moments and
 integrated envelopes and applies them to the normalized near-ray mean under
 the stated interior angle bounds. It bounds the actual normalized far-ray
-contribution in both angular ranges. The phase connection, quantitative
-covariance bounds and strict sign comparisons remain in the written proof.
+contribution in both angular ranges and proves the checkpoint sign criterion
+under the stated phase and radial premises. The explicit phase connection,
+quantitative covariance bounds and old-root signs remain in the written proof.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -218,6 +219,26 @@ power estimate uses six blocks in the binomial lower bound. The theorem
 `farRayError_interior` gives the uniform $1/25$ bound when $nd\ge29/10$
 and $n\sin\theta\ge2$. [Far-ray kernel output](far-ray-kernel.txt)
 
+## Real normalization of the four-ray coefficient
+
+The [normalization module](CatalanStrictPeaksNormalizedRays.lean) proves that
+the ray terms at opposite cuts are exact complex conjugates. The other
+factors of each outward ray avoid the negative real axis because the cuts
+lie in distinct quadrants. This justifies the conjugation of each principal
+square root on the integration path.
+
+The theorem `normalizedCoefficient_eq_near_add_far` gives
+$Y_n=\Re(U_nJ_n)+r_n$ for the actual scaled polynomial divided by the positive
+leading amplitude. Here $U_n=-z^{-n}B_z(z)/(a^{-n}|B_z(z)|)$ has unit modulus,
+$J_n$ is the checked near mean, and $r_n$ is the checked far-pair contribution.
+The theorem `normalizedCoefficient_close_to_phase` gives
+$|Y_n-\Re(U_n)|<77/100$ when $n\ge150$, $nd\ge29/10$, and
+$n\sin\theta\ge2$. Under these premises `eval_sign_of_nearPhaseUnit`
+gives the original polynomial the sign $(-1)^k$ whenever
+$\Re(U_n)=(-1)^k$. Identifying the explicit angle in $U_n$ and establishing
+the radial premises from the phase levels are subsequent steps.
+[Normalization kernel output](normalized-rays-kernel.txt)
+
 ## Exact isolating intervals through length 150
 
 The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
@@ -275,6 +296,8 @@ lake build CatalanStrictPeaksNearAmplitude
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearAmplitudeAxioms.lean
 lake build CatalanStrictPeaksFarRay
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarRayAxioms.lean
+lake build CatalanStrictPeaksNormalizedRays
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/NormalizedRaysAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~
