@@ -1,10 +1,8 @@
 # Signs of balanced arrays from one marked row
 
-With one million rows, 250,000 columns and row cap 127,000, **506,565 of the 508,000 roots are simple and negative**. In order of absolute value these are the first 506,470 and the last 95. The intervening annulus has exactly 1,435 roots, counted with multiplicity. Their types remain open. [Marked-row proof](paper.pdf) · [Extension through quota 506,470](mixed-phase/README.md) · [LaTeX source](paper.tex) · [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)
+With one million rows, 250,000 columns and row cap 127,000, **all 508,000 roots are simple and negative**. The marked-row and outer-root bounds below isolate the first 506,470 and last 95 roots by absolute value. The centered and phase-order arguments certify the remaining 1,435 roots. [Proof and independent review of the complete instance](complete-instance/README.md) · [Marked-row proof](paper.pdf) · [Extension through quota 506,470](mixed-phase/README.md) · [LaTeX source](paper.tex) · [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)
 
 ## Finite sign test
-
-A [proposed proof for all 508,000 roots of this instance](complete-instance/README.md) bridges the remaining interval using two further estimates. Independent review of the extension is pending.
 
 At equal column sums $`K`$ in $`n`$ rows, let $`e(n,K)`$ be the probability that a row is saturated, conditional on a zero in a specified column. The marked row has a size distribution that can be bounded by ordinary binomial distributions truncated at the cap. Removing the marked row gives a recursion, so all the certificate calculations use one-dimensional probabilities.
 
