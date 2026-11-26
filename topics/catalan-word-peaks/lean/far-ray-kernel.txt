@@ -1,0 +1,2 @@
+'CatalanStrictPeaks.CutGeometry.farRay_prefactor_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.farRay_integral_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]

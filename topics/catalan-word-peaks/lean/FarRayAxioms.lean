@@ -1,0 +1,4 @@
+import CatalanStrictPeaksFarRay
+
+#print axioms CatalanStrictPeaks.CutGeometry.farRay_prefactor_norm_le
+#print axioms CatalanStrictPeaks.CutGeometry.farRay_integral_norm_le

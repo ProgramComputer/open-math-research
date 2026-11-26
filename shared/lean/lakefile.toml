@@ -1,6 +1,6 @@
 name = "open_math_research"
 version = "0.1.0"
-defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns", "BalancedThreeColumnCounting", "CatalanStrictPeaksInterlacing", "CatalanStrictPeaksRecurrence", "CatalanStrictPeaksDiscriminant", "CatalanStrictPeaksCutParameter", "CatalanStrictPeaksCutBounds", "CatalanStrictPeaksMomentArithmetic", "CatalanStrictPeaksBetaMoments", "CatalanStrictPeaksAnalyticBranch", "CatalanStrictPeaksRayTransfer", "CatalanStrictPeaksNearAmplitude"]
+defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns", "BalancedThreeColumnCounting", "CatalanStrictPeaksInterlacing", "CatalanStrictPeaksRecurrence", "CatalanStrictPeaksDiscriminant", "CatalanStrictPeaksCutParameter", "CatalanStrictPeaksCutBounds", "CatalanStrictPeaksMomentArithmetic", "CatalanStrictPeaksBetaMoments", "CatalanStrictPeaksAnalyticBranch", "CatalanStrictPeaksRayTransfer", "CatalanStrictPeaksNearAmplitude", "CatalanStrictPeaksFarRay"]
 
 [[require]]
 name = "mathlib"
@@ -200,4 +200,8 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
 name = "CatalanStrictPeaksNearAmplitude"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFarRay"
 srcDir = "../../topics/catalan-word-peaks/lean"
