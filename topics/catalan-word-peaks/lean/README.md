@@ -304,7 +304,7 @@ The [middle-root module](CatalanStrictPeaksMiddleRoots.lean) proves
 `middleRoot_signs_from_150`. For every $n\ge150$ it gives a complete
 simple-negative root list in increasing modulus and proves
 $(-1)^{i+1}C_{n+1}(-r_i)>0$ at each zero-based rank $i$ with
-$0<i$ and $i+1<\operatorname{rowDegree}(n)$.
+$0<i$ and $i+1<\mathrm{rowDegree}(n)$.
 
 At the old root the real part of $U_nJ_n$ is the negative of the old far-ray
 error. The squared-distance bound shows that its imaginary part has the

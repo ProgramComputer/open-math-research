@@ -69,6 +69,6 @@ $$
 \left(u-\frac1{12}\right)R
 =\frac1{12}+\frac1{3R}-\frac1{4-R}.
 $$
-The right side lies strictly in the lower half-plane. The imaginary part of each term $(u-1/12)/(a_\ell-u)$ on the left is $(a_\ell-1/12)\operatorname{Im}(u)/|a_\ell-u|^2>0$. Indeed $F(-u)\ge1-u>0$ on $[0,1/12]$ by its alternating series. Thus $U(-u)$ has no upper-half-plane zeros.
+The right side lies strictly in the lower half-plane. The imaginary part of each term $(u-1/12)/(a_\ell-u)$ on the left is $(a_\ell-1/12)\,\mathrm{Im}(u)/|a_\ell-u|^2>0$. Indeed $F(-u)\ge1-u>0$ on $[0,1/12]$ by its alternating series. Thus $U(-u)$ has no upper-half-plane zeros.
 
 For both aggregate series, conjugation excludes lower-half-plane zeros. Nonnegative coefficients and a positive constant term exclude zeros for $u\le0$. Each derivative series $F^{(d)}(-u)$ is bounded by $\exp(2\sqrt{|u|})$, so the reduced aggregate is entire of order at most $1/2$. Its genus-zero Hadamard product has only positive real zeros, and infinitely many because the series is nonpolynomial. Replacing $u$ by $z^2$ gives the even product required by the strictness argument. For the two- and four-singleton slices the common factors are $q(n)_L$, with $L=3$ and $L=4$. The reduced multiplier is $(n-L)_{2t}$. Thus the nonzero roots of each slice are simple negative and strictly interlace across consecutive nonconstant reduced rows.

@@ -81,7 +81,7 @@ Indeed, on $|i|\le n^{1/20}$ the cubic remainder in the logarithm of the $U$ wei
 
 For $q=e^{-2\lambda}$ and $p=e^{t-\lambda}$, Jacobi's product gives $\Theta_\lambda(t)=(q,p,q/p;q)_\infty$. The zero set consists of the simple zeros $t=(2j+1)\lambda+2\pi i k$, $j,k\in\mathbb Z$. [Jacobi's triple product](https://dlmf.nist.gov/17.8.E1)
 
-We record the uniform consequences needed below. For either $W=U$ or $V$, let $Z_W$ be its real zeros in $[-1,1]$, and on $|\Re w|\le1/2$, $|\Im w|\le\pi$ write $d_W(w)=\min(1,\operatorname{dist}(w,Z_W))$, taking the distance to the empty set to be $+\infty$. There are constants $d_0,c_0,M>0$ independent of the anchor and $n$ such that for large $n$
+We record the uniform consequences needed below. For either $W=U$ or $V$, let $Z_W$ be its real zeros in $[-1,1]$, and on $|\Re w|\le1/2$, $|\Im w|\le\pi$ write $d_W(w)=\min(1,\mathrm{dist}(w,Z_W))$, taking the distance to the empty set to be $+\infty$. There are constants $d_0,c_0,M>0$ independent of the anchor and $n$ such that for large $n$
 $$
  \begin{gathered}
  |W(w)|\ge c_0 d_W(w),\qquad

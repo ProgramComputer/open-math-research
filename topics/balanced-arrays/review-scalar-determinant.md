@@ -35,7 +35,7 @@ $$
 \Delta c_n=\Delta b_n\,b_{n-2}.
 $$
 
-For fixed $k$ draw the occupied rows uniformly and independently in each column. A specified row has occupancy distributed as $\operatorname{Binomial}(d,k/n)$. Its forbidden probability gives
+For fixed $k$ draw the occupied rows uniformly and independently in each column. A specified row has occupancy distributed as $\mathrm{Binomial}(d,k/n)$. Its forbidden probability gives
 
 $$
 \Pr(\mathrm{valid})=1-Ck^{r+1}n^{-r}+Dk^{r+2}n^{-r-1}+O(n^{-r-2}),

@@ -16,7 +16,7 @@ Consider $p$ in any fixed range $c\sqrt{n/\log n}\le p\le b\sqrt n$ with $c,b>0$
 $$
 D=B\left(1+\frac{p\sqrt{k\log n}}n\right),
 $$
-where $B$ is a sufficiently large absolute constant. Given a cycle of $j$ colors, its word count has distribution $\operatorname{Bin}(n,j/p)$ with mean $\mu=nj/p$. If $j<a-D$, the probability of meeting the threshold is at most $n^{-12}$. If $j>a+D$, the probability of failing it is at most $n^{-12}$. Indeed, set $d=Dn/p$. The Chernoff exponents are at least $d^2/(2k)$ on the low side and $d^2/[2(k+d)]$ on the high side, the latter by monotonicity in $\mu$. The lower bound $d\ge B\sqrt{k\log n}$ controls the quadratic term, and $d\ge Bn/p\gg\log n$ controls the case $d>k$. Increasing $B$ also gives the same bound for the point mass at $k-1$ when $|j-a|>D$.
+where $B$ is a sufficiently large absolute constant. Given a cycle of $j$ colors, its word count has distribution $\mathrm{Bin}(n,j/p)$ with mean $\mu=nj/p$. If $j<a-D$, the probability of meeting the threshold is at most $n^{-12}$. If $j>a+D$, the probability of failing it is at most $n^{-12}$. Indeed, set $d=Dn/p$. The Chernoff exponents are at least $d^2/(2k)$ on the low side and $d^2/[2(k+d)]$ on the high side, the latter by monotonicity in $\mu$. The lower bound $d\ge B\sqrt{k\log n}$ controls the quadratic term, and $d\ge Bn/p\gg\log n$ controls the case $d>k$. Increasing $B$ also gives the same bound for the point mass at $k-1$ when $|j-a|>D$.
 
 Let $d(p,L)$ be the probability that a uniform permutation of $p$ labels has all cycle lengths at least the positive integer $L$, with $d(0,L)=1$. A cycle-containing-one decomposition gives
 $$
@@ -62,7 +62,7 @@ $$
 For the size-only probability append an independent uniform color. If acceptance changes, there is a cycle previously containing exactly $k-1$ labels that receives the new label. A marked cycle of size $j$ has expected count $1/j$ in the run permutation, and it receives the new label with probability $j/p$. Conditional on its existing label count $k-1$, the other labels are uniform over the other colors and the other run cycles are uniform. Therefore
 $$
 0\le f(n+1,p,k)-f(n,p,k)\le
-\frac1p\sum_{j=1}^{p-1}\Pr\{\operatorname{Bin}(n,j/p)=k-1\}
+\frac1p\sum_{j=1}^{p-1}\Pr\{\mathrm{Bin}(n,j/p)=k-1\}
                  f(n-k+1,p-j,k).
 \tag{8}
 $$
@@ -212,7 +212,7 @@ At an old root the maximum-insertion recurrence gives the exact identity
 $$
  (n+1)F_{n+1,k}=S F'_{n,k}+\left(\sum_p z_p^k\right)F_{n+1-k,k}.
 $$
-This uses $t\,d\theta/dt=\pi/r^2$; differentiating the normalization produces only multiples of the vanishing old polynomial. If $1\le m=n+1-k<k$, the last term vanishes. For $m\ge k$ the absolute cycle expansion gives $|F_{m,k}|\le (P/k)\exp(2\sqrt{PD})$. In fact, with $\ell$ slots the first $\ell-1$ lengths have at most $n^{\ell-1}/(\ell-1)!$ choices, the last is determined, and each slot costs at most $P/k$. Summing after division by $\ell!$ gives the bound. Thus the lag has size at most $P^2\exp(2\sqrt{PD})/k=n^{-1+o(1)}=o(n S d_n)$. At the old root, $|\cos(n\theta)|<1/4$; the derivative has magnitude greater than $n d_n$ and sign $-\operatorname{sgn}\sin(n\theta)$. This proves the asserted next-row sign. The estimate supplies the entire middle together with the front ranks already treated above.
+This uses $t\,d\theta/dt=\pi/r^2$; differentiating the normalization produces only multiples of the vanishing old polynomial. If $1\le m=n+1-k<k$, the last term vanishes. For $m\ge k$ the absolute cycle expansion gives $|F_{m,k}|\le (P/k)\exp(2\sqrt{PD})$. In fact, with $\ell$ slots the first $\ell-1$ lengths have at most $n^{\ell-1}/(\ell-1)!$ choices, the last is determined, and each slot costs at most $P/k$. Summing after division by $\ell!$ gives the bound. Thus the lag has size at most $P^2\exp(2\sqrt{PD})/k=n^{-1+o(1)}=o(n S d_n)$. At the old root, $|\cos(n\theta)|<1/4$; the derivative has magnitude greater than $n d_n$ and sign $-\mathrm{sgn}\,\sin(n\theta)$. This proves the asserted next-row sign. The estimate supplies the entire middle together with the front ranks already treated above.
 
 
 ## Completion for all minimum cycle lengths

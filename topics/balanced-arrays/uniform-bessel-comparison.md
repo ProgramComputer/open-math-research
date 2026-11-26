@@ -28,7 +28,7 @@ For $s\ge1$,
 $$
 P_s(A,B)=\prod_{\ell=1}^s\left(A-\cot^2\!\left(\frac{(2\ell-1)\pi}{4s}\right)B\right).
 $$
-Indeed $P_s(1,x)=\operatorname{Re}(1+i\sqrt{x})^{2s}$ for $x\ge0$. Its $s$ positive zeros are the squares of the corresponding tangents. The cotangent squares occur in reciprocal pairs, with an extra one for odd $s$.
+Indeed $P_s(1,x)=\mathrm{Re}(1+i\sqrt{x})^{2s}$ for $x\ge0$. Its $s$ positive zeros are the squares of the corresponding tangents. The cotangent squares occur in reciprocal pairs, with an extra one for odd $s$.
 
 The operator needs properties of the Bessel input. For $s=2$, its action on the real-stable product $z_1z_2z_3$, restricted to the diagonal, is $(z-i)^3-6z^3+(z+i)^3=-4z^3-6z$, which has nonreal zeros.
 
@@ -49,12 +49,12 @@ B(z)\bigl(3A(z)^2-B(z)^2\bigr),&s\text{ odd}.
 $$
 As $|z|\to\infty$ in the closed right half-plane,
 $$
-W_s(z)=\kappa_s L_s(z)+O_s\left(|z|^{-5/2}e^{6|\operatorname{Im}z|}\right).
+W_s(z)=\kappa_s L_s(z)+O_s\left(|z|^{-5/2}e^{6|\mathrm{Im}\,z|}\right).
 $$
 
-To check the leading term, put $\phi=2z-\pi/4$. For fixed integer $d$, the leading term of $\sqrt{\pi z}J_d(2z)$ is $\cos(\phi-d\pi/2)$, with uniform error $O_d(e^{2|\operatorname{Im}z|}/|z|)$ on this sector. If $o$ is the number of odd $\delta$'s, the combined sign from the three leading cosines and the coefficient is $(-1)^{k_0-h+(D-o)/2}$. For even $s$, the two possibilities $o=0,2$ give $+\cos^3\phi$ and $-\cos\phi\sin^2\phi$. For odd $s$, $o=1,3$ give $+\cos^2\phi\sin\phi$ and $-\sin^3\phi$. The weights of the four admissible parity triples are equal. To see this, assign $2s$ independent uniform colors and consider $(-1)^{\delta_{12}},(-1)^{\delta_{13}},(-1)^{\delta_{14}}$. Their product is fixed. Each of the three nontrivial characters on the four-element parity set has mean zero because the one-draw mean of the corresponding two-color parity sign is zero. The leading trigonometric polynomial for $W_s$ is therefore $\kappa_s\cos3\phi$ or $\kappa_s\sin3\phi$ after the common factor $(\pi z)^{-3/2}$ is removed. The comparator has the same leading term with $\kappa_s$ removed. [Uniform Bessel asymptotics, DLMF 10.17.3](https://dlmf.nist.gov/10.17.E3)
+To check the leading term, put $\phi=2z-\pi/4$. For fixed integer $d$, the leading term of $\sqrt{\pi z}J_d(2z)$ is $\cos(\phi-d\pi/2)$, with uniform error $O_d(e^{2|\mathrm{Im}\,z|}/|z|)$ on this sector. If $o$ is the number of odd $\delta$'s, the combined sign from the three leading cosines and the coefficient is $(-1)^{k_0-h+(D-o)/2}$. For even $s$, the two possibilities $o=0,2$ give $+\cos^3\phi$ and $-\cos\phi\sin^2\phi$. For odd $s$, $o=1,3$ give $+\cos^2\phi\sin\phi$ and $-\sin^3\phi$. The weights of the four admissible parity triples are equal. To see this, assign $2s$ independent uniform colors and consider $(-1)^{\delta_{12}},(-1)^{\delta_{13}},(-1)^{\delta_{14}}$. Their product is fixed. Each of the three nontrivial characters on the four-element parity set has mean zero because the one-draw mean of the corresponding two-color parity sign is zero. The leading trigonometric polynomial for $W_s$ is therefore $\kappa_s\cos3\phi$ or $\kappa_s\sin3\phi$ after the common factor $(\pi z)^{-3/2}$ is removed. The comparator has the same leading term with $\kappa_s$ removed. [Uniform Bessel asymptotics, DLMF 10.17.3](https://dlmf.nist.gov/10.17.E3)
 
-For odd $s$ choose circles centered at zero with radii the sufficiently large positive zeros of $A$. At the positive real radius, $|\sin3\phi|$ is bounded below because $\cos\phi=O(1/|z|)$ there. For even $s$ use the positive zeros of $B$ and the corresponding lower bound for $|\cos3\phi|$. On the right semicircle the trigonometric lower bound is a constant times $e^{6|\operatorname{Im}z|}$. When $|\operatorname{Im}z|\le1$, the real part differs from the positive radius by $O(1/|z|)$. When $|\operatorname{Im}z|>1$, the hyperbolic-sine part of the modulus gives the bound. Parity handles the left semicircle. Thus for large comparison radii the asymptotic error is smaller than $\kappa_s|L_s|$ on the entire circle. Rouché gives the same zero counts for $W_s$ and $L_s$.
+For odd $s$ choose circles centered at zero with radii the sufficiently large positive zeros of $A$. At the positive real radius, $|\sin3\phi|$ is bounded below because $\cos\phi=O(1/|z|)$ there. For even $s$ use the positive zeros of $B$ and the corresponding lower bound for $|\cos3\phi|$. On the right semicircle the trigonometric lower bound is a constant times $e^{6|\mathrm{Im}\,z|}$. When $|\mathrm{Im}\,z|\le1$, the real part differs from the positive radius by $O(1/|z|)$. When $|\mathrm{Im}\,z|>1$, the hyperbolic-sine part of the modulus gives the bound. Parity handles the left semicircle. Thus for large comparison radii the asymptotic error is smaller than $\kappa_s|L_s|$ on the entire circle. Rouché gives the same zero counts for $W_s$ and $L_s$.
 
 The comparator zeros are all real. The ratio
 $$

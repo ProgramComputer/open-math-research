@@ -1,6 +1,6 @@
 # Why the two consecutive rows need the same cycle weight
 
-Write $Q_{N,k}(t,u)=\sum_\pi u^{c(\pi)-1}t^{\operatorname{exc}(\pi)-1}$, over permutations of $N$ letters with all cycles of size at least $k$. Here $0^0=1$. The [cycle-weight deformation](cycle-marking.md) uses the same $u$ in both rows. One possible route to a proof is to allow two independently chosen weights in $[0,1]$ and establish that every new row interlaces every old row. This stronger assertion fails for arbitrarily small positive differences of the weights.
+Write $Q_{N,k}(t,u)=\sum_\pi u^{c(\pi)-1}t^{\mathrm{exc}(\pi)-1}$, over permutations of $N$ letters with all cycles of size at least $k$. Here $0^0=1$. The [cycle-weight deformation](cycle-marking.md) uses the same $u$ in both rows. One possible route to a proof is to allow two independently chosen weights in $[0,1]$ and establish that every new row interlaces every old row. This stronger assertion fails for arbitrarily small positive differences of the weights.
 
 **Theorem.** Fix $0\le u<v\le1$. For every sufficiently large integer $m$, choose any real $m<\rho<m+1$ and any sequence with $N\to\infty$, $N/k\to\rho$. For all sufficiently large $N$ the $m$th nonzero-root modulus of the new row at weight $v$ is strictly *larger* than the $m$th modulus of the old row at weight $u$. Both roots are negative and simple. If the two rows strictly interlaced with all roots real, the new row would have the smaller modulus at this rank. For $(u,v)=(0,1)$ the obstruction holds for every $m\ge2$.
 

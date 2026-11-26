@@ -4,7 +4,7 @@ Reviewed 2026-11-25. This is an agent-assisted review of the written proofs.
 
 **Passed.** The uniform four-singleton and six-singleton slices have simple negative nonzero zeros and strictly oriented consecutive interlacing after the forced powers of $q$ are removed. The all-positive weighted two-singleton proof also passes. The separate proposed sum of the two- and four-singleton slices was pending at this stage.
 
-I independently tabulated the singleton profiles by enumerating ordered quadruples of total $2s$, grouping them by $(k_0,\operatorname{sort}(|\delta|))$, and accumulating $1/\prod_i s_i!$ with rational arithmetic. The resulting coefficients agree for $s=1,2,3$. I also substituted the derivative ratios in the normalized four- and six-singleton expressions and checked the displayed polynomial identities at 24 exact rational pairs $(u,R)$.
+I independently tabulated the singleton profiles by enumerating ordered quadruples of total $2s$, grouping them by $(k_0,\mathrm{sort}(|\delta|))$, and accumulating $1/\prod_i s_i!$ with rational arithmetic. The resulting coefficients agree for $s=1,2,3$. I also substituted the derivative ratios in the normalized four- and six-singleton expressions and checked the displayed polynomial identities at 24 exact rational pairs $(u,R)$.
 
 ## Root transfer and powers at zero
 

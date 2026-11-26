@@ -23,7 +23,7 @@ A direct row-by-row column-margin dynamic program agrees with every coefficient 
 
 ## Exact signs and root count
 
-For a row of degree $m\ge1$, the recorded positive dyadics $t_j$ increase strictly and give $\operatorname{sgn}P_n(-t_j^4)=(-1)^j$ for $1\le j<m$. The value at $t=0$ is positive and the sign for sufficiently large $t$ is $(-1)^m$, by the positive leading coefficient. Continuity supplies one root per consecutive open interval, starting at zero and ending with the interval to infinity. The map $t\mapsto-t^4$ is injective on $t>0$, so there are $m$ distinct negative roots. Degree $m$ then forces all to be simple. The same argument works without interior nodes when $m=1$. Degree zero gives no roots.
+For a row of degree $m\ge1$, the recorded positive dyadics $t_j$ increase strictly and give $\mathrm{sgn}\,P_n(-t_j^4)=(-1)^j$ for $1\le j<m$. The value at $t=0$ is positive and the sign for sufficiently large $t$ is $(-1)^m$, by the positive leading coefficient. Continuity supplies one root per consecutive open interval, starting at zero and ending with the interval to infinity. The map $t\mapsto-t^4$ is injective on $t>0$, so there are $m$ distinct negative roots. Degree $m$ then forces all to be simple. The same argument works without interior nodes when $m=1$. Degree zero gives no roots.
 
 The producer's floating-point phase is only a way to propose dyadic nodes. Its replay uses Arb enclosures to establish the strict signs. The independent checker evaluates every sign by exact integer Horner evaluation, with no floating-point phase or interval arithmetic. For a node $q=A/B$ in reduced form with $B>0$, the evaluated integer is $B^mP_n(A/B)$, which has the same sign.
 

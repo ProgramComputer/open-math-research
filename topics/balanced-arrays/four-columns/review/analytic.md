@@ -47,7 +47,7 @@ The positive-half phase uses $S=6it^2L_+$. For $c=\sqrt2/3$, the ratio defining 
 The general-purpose Gaussian estimate alone guarantees the join on $[1/5,38/7]$ for $n\ge2700$. The improved compact calculation in `four-columns/code/middle.py` proves the join already at $n\ge533$. It uses the central error before replacing $B_0$, $K_0$, $a_0$ by coarser uniform bounds. In the normalized tails it uses the exact three-dimensional radial expression
 $$
 \frac{\int_{|p|^2>1/4}e^{-nr|p|^2}\,dp}{(\pi/(n|\Lambda|))^{3/2}}
-=\left(\frac{|\Lambda|}{r}\right)^{3/2}\left[\operatorname{erfc}(\sqrt{x})+2\sqrt{x/\pi}\,e^{-x}\right],\qquad x=nr/4.
+=\left(\frac{|\Lambda|}{r}\right)^{3/2}\left[\mathrm{erfc}(\sqrt{x})+2\sqrt{x/\pi}\,e^{-x}\right],\qquad x=nr/4.
 $$
 This follows by substituting $s=\sqrt{nr}|p|$ and integrating $s^2e^{-s^2}$ by parts. The rates for the actual plus integral and comparison Gaussian are $a$ and $\Re\Lambda$, respectively. The minus term is $(2|\Lambda|/a)^{3/2}e^{-nb/4}$ with the exact lower relative squared-gap bound $b=(2\sqrt2t+12\sqrt2t^3)/|S|^2$. The constants preceding $1/n$, the two normalized tails, and the exponential depend only on $t$. The Gaussian exterior fraction is decreasing in its cutoff by its integral definition, and $b$ is positive. Each term thus decreases with $n$ for fixed $t$. The local prefactor $21/20$ is already valid for $n\ge450$. The rational endpoints in the script tile the entire closed interval and their Arb hulls contain both exact endpoints and all intermediate values. The interval denominator and rate enclosures are positive throughout the checked cells. With python-flint 0.9.0 and 128-bit precision the script reports all 2048 compact cells bounded by $33827/100000<1/2$.
 

@@ -11,7 +11,7 @@ $$
 n\ge200,\quad t\ge\frac{38}{7},\quad
 \Psi_n(t)=j\pi,\quad 0\le j\le\lfloor n/2\rfloor-1
 \quad\Longrightarrow\quad
-\operatorname{sgn}P_n(-t^4)=(-1)^j.
+\,\mathrm{sgn}\,P_n(-t^4)=(-1)^j.
 $$
 The sign at the far endpoint is $(-1)^{\lfloor n/2\rfloor}$ from the leading term. The top quota is attained by taking $\lfloor n/2\rfloor$ rows of each of the two types $1100$ and $0011$. The finite-node condition includes every other needed upper sign node.
 

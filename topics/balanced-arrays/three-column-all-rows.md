@@ -108,7 +108,7 @@ $$
 The real branch point contribution will use $A_1(u)$, defined by replacing $+$ with $1$ in this formula for $\kappa<u\leq1$, where $\kappa=\sigma/\tau$. All factors use principal square roots. The Cauchy coefficient formula deformed to the cuts gives
 $$
 G_n(-a)=
-  2\operatorname{Re}\frac{\lambda_+^n}{\pi}
+  2\,\mathrm{Re}\,\frac{\lambda_+^n}{\pi}
        \int_0^1\frac{u^{n-1/2}}{\sqrt{1-u}} A_+(u)\,du
  +\frac{\lambda_1^n}{\pi}
        \int_\kappa^1\frac{u^{n-1/2}}{\sqrt{1-u}} A_1(u)\,du .
@@ -122,7 +122,7 @@ $$
 \frac{|A_+(u)-A|}{|A|}\leq u^{-3}-1.
 \tag{9}
 $$
-Indeed the first bound gives $|A_+(u)|\leq |A|u^{-3}$, and integrating the resulting bound on $|A_+'|$ gives the second. Dividing by $c_n|\lambda_+|^n|A|$, the error when replacing the first integral with $c_n \lambda_+^n A$, before taking $2\operatorname{Re}$, is at most
+Indeed the first bound gives $|A_+(u)|\leq |A|u^{-3}$, and integrating the resulting bound on $|A_+'|$ gives the second. Dividing by $c_n|\lambda_+|^n|A|$, the error when replacing the first integral with $c_n \lambda_+^n A$, before taking $2\,\mathrm{Re}$, is at most
 $$
 \frac{n(n-1)(n-2)}{(n-\frac12)(n-\frac32)(n-\frac52)}-1<\frac1{10},
 \qquad n\geq20.
