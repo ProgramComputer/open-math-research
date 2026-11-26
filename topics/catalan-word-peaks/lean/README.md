@@ -324,3 +324,15 @@ lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~
 
 [Kernel output](kernel.txt)
+
+## Sign at the farthest old root
+
+For $n\ge150$, Lean checks the top three coefficients of $C_n(1+u)$ in both parities directly from the generating function of Catalan words. The sum and sum of squares of the translated root moduli then bound the farthest zero and separate it from every competitor in the neighboring odd row. The theorem `CatalanStrictPeaks.FarEdge.farthest_root_sign` takes complete lists of the old and new simple negative roots and gives the strict next-row sign at the last old root. This component supplies the far endpoint of the consecutive interlacing proof. [Six coefficient identities](CatalanStrictPeaksTopThree.lean) · [Vieta bounds and parity comparison](CatalanStrictPeaksFarVieta.lean) · [Formal endpoint theorem](CatalanStrictPeaksFarthestSign.lean) · [Axiom transcript](farthest-sign-kernel.txt)
+
+From the repository root, using the pinned Lean toolchain, run
+
+~~~sh
+cd shared/lean
+lake build CatalanStrictPeaksFarthestSign
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarthestSignAxioms.lean
+~~~

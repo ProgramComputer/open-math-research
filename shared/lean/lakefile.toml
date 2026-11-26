@@ -144,6 +144,18 @@ name = "CatalanStrictPeaksGeneratingFunction"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
+name = "CatalanStrictPeaksTopThree"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFarVieta"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFarthestSign"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
 name = "CatalanStrictPeaksDiscriminant"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
