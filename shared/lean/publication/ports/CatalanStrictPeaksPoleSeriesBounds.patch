@@ -70,7 +70,7 @@
    cases n with
    | zero => norm_num
    | succ n =>
-@@ -107,13 +107,13 @@
+@@ -107,21 +107,22 @@
      nlinarith [pow_pos (by norm_num : (0:ℝ)<5/4) n]
  
  lemma coeff_Ri_bound (n : ℕ) :
@@ -88,16 +88,17 @@
    have he : R = Ri + PowerSeries.C ℝ (1/2)*(X^1*Ri) + PowerSeries.C ℝ (9/16)*(X^2*Ri) := by
      unfold R Q
      ring
-@@ -121,7 +121,7 @@
+   rw [he]
    simp only [map_add, coeff_C_mul, coeff_X_pow_mul']
  
++set_option maxHeartbeats 2000000 in
  lemma coeff_R_bound (n : ℕ) :
 -    |coeff ℝ n R| ≤ 2*(5/4:ℝ)^n := by
 +    |PowerSeries.coeff (R := ℝ) n R| ≤ 2*(5/4:ℝ)^n := by
    rw [coeff_R_expansion]
    obtain _ | _ | n := n
    · norm_num
-@@ -130,8 +130,8 @@
+@@ -130,8 +131,8 @@
        if_pos (show 2 ≤ n.succ.succ by omega), Nat.succ_sub_one,
        show n.succ.succ-2=n by omega]
      calc
@@ -108,7 +109,7 @@
            (abs_add_le _ _).trans (add_le_add_right (abs_add_le _ _) _)
        _ ≤ (5/4:ℝ)^(n+2) + (1/2)*(5/4)^(n+1) + (9/16)*(5/4)^n := by
          rw [abs_mul, abs_mul]
-@@ -143,16 +143,16 @@
+@@ -143,16 +144,16 @@
          nlinarith [pow_pos (by norm_num : (0:ℝ)<5/4) n]
  
  private lemma absSummable_at {f : PowerSeries ℝ} {A t : ℝ}

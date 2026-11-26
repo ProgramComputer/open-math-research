@@ -30,6 +30,29 @@ def git(*args):
     return subprocess.check_output(["git", *args], cwd=HERE.parents[2], text=True)
 
 
+def split_certificate_rows(source):
+    """Keep the published literals in order, elaborating each array row separately."""
+    for name, row_type in (("prefixCoefficients", "List ℕ"), ("prefixBoxes", "Boxes")):
+        heading = f"def {name} : Array {row_type if row_type == 'Boxes' else '(List ℕ)'} := #["
+        start = source.index(heading)
+        end = source.index("\n]", start)
+        literal = source[start + len(heading):end]
+        # The generator indents the start of each row by two spaces and the
+        # continuation of each tuple list by four. Retain the literal text.
+        rows = [r.strip() for r in re.split(r"(?m)(?=^  #?\[)", literal) if r.strip()]
+        if len(rows) != 151 or any(not row.endswith("],") for row in rows):
+            raise ValueError(f"invalid published certificate array {name}")
+        definitions = []
+        names = []
+        for i, row in enumerate(rows):
+            row_name = f"{name}Row{i}"
+            definitions.append(f"private def {row_name} : {row_type} := {row[:-1]}")
+            names.append(row_name)
+        replacement = "\n\n".join(definitions) + "\n\n" + heading + ", ".join(names) + "]"
+        source = source[:start] + replacement + source[end + 2:]
+    return source
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("group", choices=GROUPS)
@@ -75,6 +98,8 @@ def main():
             subprocess.run(["patch", "--fuzz=0", "-s", str(path), str(patch)], check=True)
             source = path.read_text()
         if args.group == "catalan":
+            if name == "CatalanStrictPeaksIntervalData":
+                source = split_certificate_rows(source)
             # Mathlib 4.36 makes the coefficient ring implicit in these maps.
             source = re.sub(r"PowerSeries\.(coeff|C|constantCoeff) (ℝ|ℂ|P|R|S)(?![\w'])",
                             r"PowerSeries.\1 («R» := \2)", source)
