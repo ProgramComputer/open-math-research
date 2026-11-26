@@ -1,0 +1,102 @@
+\documentclass[11pt]{article}
+\usepackage[hmargin=.92in,vmargin=.77in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\title{Geometric disk counts for every coefficient curvature}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a positive-coefficient polynomial whose adjacent second quotients are at least $e^\lambda>1$, the open and closed root counts at the $k$th geometric radius differ from $k$ by at most $e\pi^2/(8\lambda)$. This has optimal order in $\lambda$ as $\lambda\downarrow0$. At fixed curvature one can also bound the error by an integer $m$ using a sharp threshold for positivity of higher derivatives of a cosine polynomial. The results give an explicit bound proportional to the number of rows per column for balanced arrays with arbitrary caps, including in ranges where the signs and root types remain unknown.
+\end{abstract}
+
+Let $P(z)=\sum_{i=0}^D a_i z^i$ with strictly positive coefficients and assume $G_i=a_i^2/(a_{i-1}a_{i+1})\ge Q>1$ for each internal index. At $0<k<D$ write $v=\sqrt{a_{k-1}/a_{k+1}}$ and $F_u(z)=P(uz)/(a_k(uz)^k)$ for $u>0$. Denote the interior and closed disk counts by $N_{<}(u)$ and $N_{\le}(u)$, with multiplicity. The real part of $F_u(e^{i\theta})$ is $A_u(\cos\theta)$, where $A_u(x)=1+\sum_{j\ge1}c_j(u)T_j(x)$, $T_j(\cos\theta)=\cos(j\theta)$, and $c_j(u)$ sums the magnitudes of both terms at distance $j$, omitting absent terms. Set $J=\max(k,D-k)$.
+
+At the geometric radius $u=v$ suppress the argument in $c_j$. Each side starts at magnitude $G_k^{-1/2}\le Q^{-1/2}$, and subsequent outward ratios shrink by at least a factor $Q$. Thus $c_1\le2Q^{-1/2}$ and $c_{j+1}\le Q^{-j-1/2}c_j$ for $j\ge1$. The use of Chebyshev projections to read winding numbers has classical antecedents~\cite{schelin,iserles}. We use the outward ratios to control the projection uniformly in the polynomial degree.
+
+\section{A degree-independent bound of optimal order}
+\begin{theorem}\label{jensen}
+Put $\lambda=\log Q$. Then
+\[
+  k-\frac{e\pi^2}{8\lambda}\ \le\ N_{<}(v)\ \le\ N_{\le}(v)
+     \ \le\ k+\frac{e\pi^2}{8\lambda}.
+\]
+The order $1/\lambda$ is necessary as $\lambda\downarrow0$.
+\end{theorem}
+\begin{proof}
+Let $b_0=1$ and $b_j=2e^{-\lambda j^2/2}$ for $j\ge1$, and put $c_0=1$. By the outward ratios, $c_j/b_j$ decreases weakly with $j$. Hence for any increasing nonnegative sequence $H_j$ for which the sums converge,
+\[
+ \frac{\sum c_jH_j}{\sum c_j}\le\frac{\sum b_jH_j}{\sum b_j}.
+\]
+This follows by cross multiplication and pairing the terms indexed by $(i,j)$ and $(j,i)$.
+
+Set $H_j=\cosh(jy)$ for real $y$. If $X$ has mass proportional to $e^{-\lambda j^2/2}$ on all integers, the upper ratio is $\mathbb E e^{yX}$ by symmetry. The centered discrete Gaussian has the standard moment bound~\cite{mp}. Completing the square gives
+\[
+ \mathbb E e^{yX}=e^{y^2/(2\lambda)}
+  \frac{\sum_{j\in\mathbb Z}e^{-\lambda(j-y/\lambda)^2/2}}
+       {\sum_{j\in\mathbb Z}e^{-\lambda j^2/2}}
+ \le e^{y^2/(2\lambda)} .
+\]
+Indeed by Gaussian Poisson summation the numerator as a function of its shift has cosine coefficients proportional to $e^{-2\pi^2h^2/\lambda}$, all positive, so its maximum occurs at zero. For the entire even function $f(w)=A_v(\cos w)/A_v(1)$, it follows from $|\cos(j(x+iy))|\le\cosh(jy)$ that $f(0)=1$ and $|f(x+iy)|\le e^{y^2/(2\lambda)}$.
+
+For nearby boundary-free radii $u$, define $f_u(w)=A_u(\cos w)/A_u(1)$. On the upper semicircle lift the argument of $F_u(e^{i\theta})$ continuously starting at zero, since $P(u)>0$. The terminal argument is $p\pi$ with $p$ an integer, and by conjugation the full winding number is $p=N_{<}(u)-k$. Reaching each successive half-integer multiple of $\pi$ on the way to $p\pi$ forces a distinct zero of the real projection at some $0<\theta<\pi$. Use each crossing angle $\theta$ once. Evenness and $2\pi$-periodicity supply four distinct zeros at $\pm\theta$ and $\pm(2\pi-\theta)$. Different angles in $(0,\pi)$ have disjoint orbits.
+
+On any fixed circle $|w|=R>\pi$, $f_u\to f$ uniformly as $u\to v$. The preceding exponential majorant is at least one, so the uniform upper bound for $\log|f_u|$ on this circle is $R^2\sin^2\phi/(2\lambda)+o(1)$. For each four-point orbit its contribution to Jensen's sum over zeros in $|w|<R$ is at least
+\[
+ 2\log(R/\theta)+2\max\{0,\log(R/(2\pi-\theta))\}\ge4\log(R/\pi),
+\]
+because $\theta(2\pi-\theta)\le\pi^2$. Jensen's formula, with $f_u(0)=1$, yields
+\[
+ 4|p|\log(R/\pi)\le R^2/(4\lambda)+o(1).
+\]
+Jensen's inequality here also holds with zeros on the outer integration circle by a limit in $R$. Approaching $v$ through root-free radii from either side gives the open and closed counts at $v$. Taking $R=\pi\sqrt e$ proves the bound. For $P=(1+z)^{2m}$, its minimum quotient is $(1+1/m)^2$ and $v=1$ at $k=m$. All $2m$ roots lie on the boundary, so the error on either side is $m$ and $m\log Q\to2$. This proves the order assertion without claiming optimality of the universal constant.
+\end{proof}
+
+\section{A sharp hierarchy for higher derivatives}
+\begin{theorem}\label{der}
+Let $m\ge1$ and $Q_m=[2(m+1)]^{2/(2m+1)}$. If every $G_i\ge Q_m$ and $J\ge m$, then $A_v^{(m)}(x)>0$ on $-1<x<1$. In fact every Taylor coefficient of $A_v$ at $-1$ of order at least $m$ is nonnegative. The threshold is sharp for positivity of the $m$th derivative.
+\end{theorem}
+\begin{proof}
+At $j\ge1$, $T_{j+\ell}^{(j)}(1)=2^{j-1}(j-1)!(j+\ell)\binom{2j+\ell-1}{\ell}$. For example the formula follows by writing $\sum_{n\ge0}T_n(x)t^n=(1-xt)/(1-2xt+t^2)$, differentiating $j$ times in $x$ and evaluating at $1$. Parity gives the sign $(-1)^\ell$ at $-1$. Thus $A_v^{(j)}(-1)$ is an alternating sum. Its successive ratios of absolute summands are bounded by
+\[
+ \frac{j+\ell+1}{j+\ell}\frac{2j+\ell}{\ell+1}Q_m^{-j-\ell-1/2}
+ \le 2(j+1)Q_m^{-j-1/2}\le1\qquad(j\ge m).
+\]
+The first inequality is strict for $\ell>0$. For the second one the last expression is one at $j=m$ and decreases thereafter because $Q_m>1+1/(m+1)$. The latter follows from $\log(2m+2)>1$ and $e^x>1+x$. Pairing successive terms proves nonnegativity. If $J\ge m$ the Taylor coefficient at order $J$ is strictly positive. Taylor expansion now gives $A_v^{(m)}(x)>0$ for $x>-1$.
+
+Ruscheweyh's positivity theorem for normalized Gegenbauer sums~\cite{rusch} gives another route to interior positivity once the derivative weights are shown to decrease. The endpoint comparison above also tracks every higher Taylor coefficient.
+
+For a sharp example take degree $2m+2$, center $k=m+1$, and coefficients $a_{k+j}=b^{-j^2/2}$ for $|j|\le m+1$. All quotients are $b$. The geometric radius is one. Only the distance-$m$ and distance-$(m+1)$ terms survive $m$ derivatives. Up to a positive scalar the derivative is $1+2(m+1)b^{-m-1/2}x$, which is negative on part of $(-1,1)$ for $1<b<Q_m$.
+\end{proof}
+
+\begin{corollary}\label{integer}
+If all $G_i\ge Q_m$ then $k-m\le N_{<}(v)\le N_{\le}(v)\le k+m$.
+\end{corollary}
+\begin{proof}
+If $J<m$, the bounds follow from $0\le N_{<}\le N_{\le}\le D$. If $A_v^{(m)}(-1)>0$, positivity on $[-1,1]$ persists at all sufficiently nearby radii. Rolle's theorem bounds the number of distinct real-projection zeros in $(-1,1)$ by $m$. The half-integer argument levels in the proof of Theorem~\ref{jensen} therefore bound the winding discrepancy at every nearby root-free radius by $m$. Take radii on either side of $v$.
+
+In the endpoint exception $A_v^{(m)}(-1)=0$, the first pair in the alternating sum must tie and all later terms must be absent, since successive ratios after the first are strictly below one. Thus $J=m+1$, and $A_v^{(m)}$ is linear with sole zero $-1$. If a sequence $u\to v$ had $J$ distinct projection zeros in $(-1,1)$ at every $u$, their ordered lists would have a convergent subsequence. The leading coefficient stays positive. Passing to the polynomial factorization places all $J$ roots of $A_v$ in $[-1,1]$, counted with multiplicity. Their mean, the root of the $(J-1)$st derivative, is $-1$. Hence $A_v$ is proportional to $(1+x)^J$. In its cosine expansion the ratio of the first cosine coefficient to the constant is $2J/(J+1)$ by expanding $(1+\cos\theta)^J$. But $c_1\le2Q_m^{-1/2}<2J/(J+1)$. For the strict inequality use $(1+1/J)^{2J-1}<2J$: for $J=2,3$ this is direct and for $J\ge4$ the left side is below $e^2<8$. This contradiction gives at most $m$ distinct interior projection zeros also on sufficiently close radii in the exception. The same winding argument finishes the proof.
+\end{proof}
+The sharp thresholds in Theorem~\ref{der} concern derivatives. For $m=1$ the disk-count threshold itself is $9/4$, strictly lower than $Q_1=\sqrt[3]{16}$~\cite{single}.
+
+\section*{Balanced binary arrays}
+Here $a_k$ counts the labeled $n\times d$ zero-one arrays with row sums at most $r$ and each column of sum $k$, and $D=\lfloor nr/d\rfloor$. The orientation comparison gives $\log G_i>4d/(n+2)$ at every internal $i$ and every cap $1\le r\le d$~\cite{orientation}. Thus at every internal geometric radius the two discrepancies are at most
+\[
+ \frac{e\pi^2(n+2)}{32d}.
+\]
+For integer $m\ge1$, the independent sufficient test $2d(2m+1)\ge(n+2)\log(2m+2)$ bounds both discrepancies by $m$. One may take the better of the two estimates and the earlier sharp one-root test. This controls counts in any intervening annulus by subtracting the two disk bounds. At one million rows, $100{,}000$ columns gives error at most seven and $125{,}000$ columns gives error at most five by the derivative test. At only $1{,}000$ columns, the Gaussian bound gives error at most 838. The bounds apply to every cap. They locate roots relative to geometric radii determined by the actual coefficients and leave their reality in general open~\cite{alex}.
+
+\small
+\begin{thebibliography}{9}
+\bibitem{alex} P. Alexandersson. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Balanced arrays of uniform matroids}. The symmetric functions catalog.
+\bibitem{schelin} C. W. Schelin. \href{https://doi.org/10.1137/0720072}{Counting zeros of real polynomials within the unit disk}. SIAM J. Numer. Anal. (1983).
+\bibitem{iserles} A. Iserles and E. B. Saff. \href{https://doi.org/10.1216/rmjm/1181073012}{On transformations and zeros of polynomials}, p. 351, Eq. (5.4).
+\bibitem{mp} D. Micciancio and C. Peikert. \href{https://web.eecs.umich.edu/~cpeikert/pubs/efftrap.pdf}{Trapdoors for lattices: simpler, tighter, faster, smaller}. Lemma 2.8.
+\bibitem{rusch} S. Ruscheweyh. \href{https://doi.org/10.1137/0509049}{On the Kakeya--Enestr\"om theorem and Gegenbauer polynomial sums}, SIAM J. Math. Anal. (1978).
+\bibitem{orientation} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/blob/5ce46103459332036ee2cf01b67e8567b9034c33/topics/balanced-arrays/orientation-normalization.md}{An orientation proof of normalized log-concavity for balanced arrays}, 2026.
+\bibitem{single} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/pull/175}{Sharp coefficient thresholds for counting zeros on geometric circles}, 2026.
+\end{thebibliography}
+\end{document}

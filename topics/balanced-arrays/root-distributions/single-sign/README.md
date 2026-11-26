@@ -25,3 +25,5 @@ python3 -IB verify.py
 python3 -IB verify.py --sign 1 3 68 108 63
 tectonic paper.tex
 ~~~
+
+For every positive logarithmic quotient bound, a [degree-independent disk-count theorem](higher-derivatives/README.md) gives an error of optimal order as the bound tends to zero. It applies to balanced arrays of every size and cap.
