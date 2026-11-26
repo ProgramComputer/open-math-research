@@ -1,0 +1,13 @@
+import CatalanStrictPeaksDiscriminant
+
+#print axioms CatalanStrictPeaks.FirstReturn.join_valid
+#print axioms CatalanStrictPeaks.FirstReturn.join_firstReturn
+#print axioms CatalanStrictPeaks.FirstReturn.returnIndex_join
+#print axioms CatalanStrictPeaks.FirstReturn.peaks_card_join
+#print axioms CatalanStrictPeaks.FirstReturn.A_succ
+#print axioms CatalanStrictPeaks.FirstReturn.C_succ_split
+#print axioms CatalanStrictPeaks.FirstReturn.generatingFunction_eq
+#print axioms CatalanStrictPeaks.FirstReturn.coeff_scaled
+#print axioms CatalanStrictPeaks.FirstReturn.scaled_eq
+#print axioms CatalanStrictPeaks.FirstReturn.discriminantBranch_constant
+#print axioms CatalanStrictPeaks.FirstReturn.discriminantBranch_square
