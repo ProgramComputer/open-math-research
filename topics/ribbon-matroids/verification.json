@@ -128,5 +128,108 @@
       "uncompressed_olean_manifest_sha256": "fb30abd6e41cfc3f2152a4771136b99b42c371b32a79031d9c22b7999e69aaa4",
       "build_log_sha256": "0c3e8ec191f2631823a31cbcb7e90c126dc05dfdf9874f741cfe1a3df1325111"
     }
+  },
+  "matroid_kl_foundation": {
+    "status": "passed",
+    "formal_coverage": "Partial. This check covers the finite-matroid Kazhdan–Lusztig and Z-polynomial definitions and the independently specified ribbon conjecture.",
+    "scope": [
+      "Existence and uniqueness of the integer coefficient family with the rank-zero value, degree bound and palindromicity.",
+      "Equivalence of Z-palindromicity and the original characteristic-polynomial recurrence on the ranked flat intervals.",
+      "The ranked upper flat intervals agree with the flat posets of the actual Mathlib contractions.",
+      "The matroid-level characteristic recurrence and rank-shifted contraction definition of Z hold, including rank zero.",
+      "The source-facing statement is well typed and its boundary height equals the matroid rank."
+    ],
+    "source_statement": "topics/ribbon-matroids/lean/publication/RibbonNarayanaSpec.lean#Ribbon.Source.NarayanaClaim",
+    "remaining": [
+      "The connected-ribbon graphic identification and invariance under simplification.",
+      "The Braden–Vysogorets deletion identity and direct-sum vanishing on the relevant contractions.",
+      "The circuit evaluation and the conclusion that all Narayana zeros are real."
+    ],
+    "independent_kernel": "A replay and comparison with the separately specified original statement are pending an end-to-end proof.",
+    "workflow_checkout_commit": "3391178481972789c43d70ad23e79c5f2dec98d7",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45834249362/job/139958779059",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45834249362/artifacts/15123182145",
+    "hosted_artifact_digest": "sha256:3d312ce65cbf9b0813bddcd4aca76545900a3b8aaf215666fecbee1474695eb7",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2820,
+    "checked_declarations": 33,
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "declarations": [
+      "OpenMathResearch.MatroidKL.IsKLFamily.coeff_eq_zero_of_height_lt",
+      "OpenMathResearch.MatroidKL.IsKLFamily.comp_orderEmbedding",
+      "OpenMathResearch.MatroidKL.IsKLFamily.eq_klCoeff",
+      "OpenMathResearch.MatroidKL.IsKLFamily.zCoeff_eq_zero_of_height_lt",
+      "OpenMathResearch.MatroidKL.IsKLFamily.zCoeff_of_rank_zero",
+      "OpenMathResearch.MatroidKL.IsKLFamily.zCoeff_palindrome",
+      "OpenMathResearch.MatroidKL.coeff_flatKL",
+      "OpenMathResearch.MatroidKL.coeff_matroidZ",
+      "OpenMathResearch.MatroidKL.coeff_shiftedSum",
+      "OpenMathResearch.MatroidKL.contractFlatEmbedding_bot",
+      "OpenMathResearch.MatroidKL.contractFlatEmbedding_exists",
+      "OpenMathResearch.MatroidKL.contractFlatEmbedding_top",
+      "OpenMathResearch.MatroidKL.flatKLCoeff_isKLFamily",
+      "OpenMathResearch.MatroidKL.flatKL_characteristicRecurrence",
+      "OpenMathResearch.MatroidKL.flatKL_contract",
+      "OpenMathResearch.MatroidKL.flatRank_contractFlatEmbedding",
+      "OpenMathResearch.MatroidKL.intervalCharacteristic_apply",
+      "OpenMathResearch.MatroidKL.klCoeff_isKLFamily",
+      "OpenMathResearch.MatroidKL.matroidKL_characteristicRecurrence",
+      "OpenMathResearch.MatroidKL.matroidKL_coeff_eq_zero_of_high",
+      "OpenMathResearch.MatroidKL.matroidKL_of_rank_zero",
+      "OpenMathResearch.MatroidKL.matroidZCoeff_eq_zero_of_rank_lt",
+      "OpenMathResearch.MatroidKL.matroidZCoeff_palindrome",
+      "OpenMathResearch.MatroidKL.matroidZ_eq_sum",
+      "OpenMathResearch.MatroidKL.matroidZ_eq_sum_contract",
+      "OpenMathResearch.MatroidKL.matroidZ_of_rank_zero",
+      "OpenMathResearch.MatroidKL.palindrome_iff_characteristicRecurrence",
+      "OpenMathResearch.MatroidKL.shiftedSum_reflect_of_isKLFamily",
+      "OpenMathResearch.MatroidKL.strictMono_flatRank",
+      "Ribbon.Source.IsRibbonPresentation",
+      "Ribbon.Source.IsRibbonPresentation.rank_eq",
+      "Ribbon.Source.NarayanaClaim",
+      "Ribbon.Source.prefixBase_length"
+    ],
+    "modules": [
+      {
+        "name": "OpenMathResearch.MatroidFlatContract",
+        "file": "shared/lean/OpenMathResearch/MatroidFlatContract.lean",
+        "sha256": "49b7ca6e9b66a22d05fcd13bfdc4df91740637843600a84a00c736f6fe7b63cc"
+      },
+      {
+        "name": "OpenMathResearch.MatroidFlatPolynomial",
+        "file": "shared/lean/OpenMathResearch/MatroidFlatPolynomial.lean",
+        "sha256": "2ac875e9cf83be8b1553c42d9f09d49cc78080f7dc167044bd726d26094ef0ed"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKL",
+        "file": "shared/lean/OpenMathResearch/MatroidKL.lean",
+        "sha256": "79322f9658858ef51a31e7567cb001dc4f6a40bc29c6600067890c92ad26cfef"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLRecurrence",
+        "file": "shared/lean/OpenMathResearch/MatroidKLRecurrence.lean",
+        "sha256": "f5c97e1f5730b932b56776b4cf1b5a3eead202fd101ad035f03cf6ee4ec3fd50"
+      },
+      {
+        "name": "RibbonNarayanaSpec",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonNarayanaSpec.lean",
+        "sha256": "7e6f5e98615f309a0cb545c23da235d4f1303d286540c224cbe5921030410032"
+      }
+    ]
   }
 }

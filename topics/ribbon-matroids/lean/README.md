@@ -10,6 +10,31 @@ These are conditional statements about the invariant. Instantiating them for mat
 
 The finite computations use Lean’s kernel-checked `decide`. They do not establish a generic identification between the finite graph rank algorithm and Mathlib’s abstract matroid rank. The mathematical interpretation uses the graphic rank formula and the usual uniqueness of the Kazhdan–Lusztig recurrence.
 
+## Kazhdan–Lusztig and Z-polynomial definitions
+
+The stable Lean sources construct the integer Kazhdan–Lusztig coefficient family on the ranked poset of actual Mathlib matroid flats. The construction recurses on interval rank. Lean checks its uniqueness under the degree bound and palindromicity, and uses incidence-algebra convolution to prove the equivalence with the characteristic-polynomial recurrence. [Coefficient construction](../../../shared/lean/OpenMathResearch/MatroidKL.lean) · [Recurrence comparison](../../../shared/lean/OpenMathResearch/MatroidKLRecurrence.lean) · [Proudfoot–Xu–Young, §2](https://doi.org/10.37236/7105)
+
+Adjoining a contracted flat identifies the flat poset of the actual Mathlib contraction with the corresponding upper interval and shifts rank by the rank of that flat. Lean checks the original characteristic-polynomial recurrence for `matroidKL` and the definition of `matroidZ` as the rank-shifted sum of the Kazhdan–Lusztig polynomials of all the contractions. The rank-zero value is $1$. [Matroid-flat model](../../../shared/lean/OpenMathResearch/MatroidFlatPolynomial.lean) · [Contraction and matroid-level recurrence](../../../shared/lean/OpenMathResearch/MatroidFlatContract.lean)
+
+The separate statement `Ribbon.Source.NarayanaClaim` specifies the nonempty connected ribbons by boundary-step words, bases between their north-prefix bounds and exclusion of a $2\times2$ block of cells. It asks for every Narayana coefficient and for every complex zero of $Z$ to have zero imaginary part. Lean proves that the north-step count in the boundary is the matroid rank. If the empty rank-zero convention is admitted, `matroidZ_of_rank_zero` gives its value $N_1=1$. [Source-facing Lean statement](publication/RibbonNarayanaSpec.lean) · [SymCat statement](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsGraphs)
+
+Coverage remains 🟨 Partial. The outstanding applications are the graphic multi-fan representation and simplification, the concrete deletion identity and its correction-term vanishing, the circuit evaluation and the Narayana root theorem. The existing polygon reduction still takes the deletion equality and circuit evaluation as inputs. [Verification record](../verification.json) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/133)
+
+To build and audit this foundation, use Lean 4.36.0 and the [shared manifest](../../../shared/lean/publication/lake-manifest.json) with mathlib at `fc4f59e577feb1a4956671bc04ac18aaaf8cd842`. Run from the repository root.
+
+~~~sh
+build_dir=$(mktemp -d)
+python3 shared/lean/publication/prepare.py ribbon-foundation "$build_dir"
+(
+  cd "$build_dir"
+  lean --version
+  lake exe cache get $(cat cache-imports.txt)
+  test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842
+  lake build $(cat targets.txt)
+)
+python3 shared/lean/publication/audit_axioms.py ribbon-foundation "$build_dir"
+~~~
+
 ## Library coverage and reproduction
 
 Mathlib 4.19.0 provides abstract matroids, ranks, flats and minors. Its searched source had no matroid Kazhdan–Lusztig or $Z$-polynomial theory. The inspected RealRooted revision provides Narayana root theorems and extensive interlacing theory. Its cited uniform-matroid module concerns Hodge–Poincaré polynomials, and the searched paths did not locate ribbon or Kazhdan–Lusztig results. That revision targets Lean 4.36.0. The two local files use Mathlib 4.19.0. [RealRooted toolchain](https://github.com/PerAlexandersson/RealRooted/blob/3db7e3e484309666adfaa7dcc9b340387c156aa9/lean-toolchain) · [Narayana roots](https://github.com/PerAlexandersson/RealRooted/blob/3db7e3e484309666adfaa7dcc9b340387c156aa9/RealRooted/CombinatorialExamples/Narayana.lean) · [Uniform-matroid module](https://github.com/PerAlexandersson/RealRooted/blob/3db7e3e484309666adfaa7dcc9b340387c156aa9/RealRooted/Applications/BinderVecchi/UniformMatroid.lean)

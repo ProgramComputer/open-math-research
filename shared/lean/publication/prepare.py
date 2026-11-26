@@ -19,6 +19,7 @@ GROUPS = {
                 "OrderedThresholdThreeSigns", "OrderedGlobalAngular", "OrderedThresholdFourSigns"],
     "eulerian": ["EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness"],
     "ribbon": ["Ribbon", "RibbonExamples"],
+    "ribbon-foundation": [],
 }
 NEW_IMPORTS = {
     "Mathlib.Combinatorics.Enumerative.Catalan": "Mathlib.Combinatorics.Enumerative.Catalan.Basic",
@@ -77,7 +78,13 @@ def main():
         for path in (HERE.parents[2]/"topics"/topic/"lean"/"publication").glob("Audit*.lean"):
             additional[path.stem] = path
         additional["AuditReferenceSpecs"] = HERE/"reference"/"AuditReferenceSpecs.lean"
-        files.update({k: str(v.relative_to(HERE.parents[2])) for k,v in additional.items()})
+    elif args.group == "ribbon-foundation":
+        for name in ("MatroidKL", "MatroidKLRecurrence", "MatroidFlatPolynomial",
+                     "MatroidFlatContract"):
+            additional["OpenMathResearch." + name] = HERE.parent / "OpenMathResearch" / (name + ".lean")
+        additional["RibbonNarayanaSpec"] = (HERE.parents[2] / "topics" / "ribbon-matroids" /
+                                            "lean" / "publication" / "RibbonNarayanaSpec.lean")
+    files.update({k: str(v.relative_to(HERE.parents[2])) for k, v in additional.items()})
     roots = GROUPS[args.group]+sorted(additional)
     pending = list(roots)
     modules = {}
