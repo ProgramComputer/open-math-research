@@ -83,8 +83,9 @@ def main():
                      "MatroidFlatContract", "MatroidKLProduct", "MatroidFlatSum",
                      "MatroidKLDeletionProfile", "MatroidFlatDelete"):
             additional["OpenMathResearch." + name] = HERE.parent / "OpenMathResearch" / (name + ".lean")
-        additional["RibbonNarayanaSpec"] = (HERE.parents[2] / "topics" / "ribbon-matroids" /
-                                            "lean" / "publication" / "RibbonNarayanaSpec.lean")
+        for name in ("RibbonNarayanaSpec", "RibbonBoundaryProfile"):
+            additional[name] = (HERE.parents[2] / "topics" / "ribbon-matroids" / "lean" /
+                                "publication" / (name + ".lean"))
     files.update({k: str(v.relative_to(HERE.parents[2])) for k, v in additional.items()})
     roots = GROUPS[args.group]+sorted(additional)
     pending = list(roots)

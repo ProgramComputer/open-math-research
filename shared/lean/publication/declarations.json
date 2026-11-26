@@ -98,8 +98,16 @@
     "OpenMathResearch.MatroidKL.tau_sum_eq_zero",
     "OpenMathResearch.MatroidKL.translatedSum_pushProfile",
     "Ribbon.Source.IsRibbonPresentation",
+    "Ribbon.Source.IsRibbonPresentation.first_steps",
+    "Ribbon.Source.IsRibbonPresentation.inner_step_eq",
+    "Ribbon.Source.IsRibbonPresentation.last_steps",
+    "Ribbon.Source.IsRibbonPresentation.length_ge_two",
+    "Ribbon.Source.IsRibbonPresentation.prefix_gap_eq_one",
+    "Ribbon.Source.IsRibbonPresentation.prefix_gap_le_one",
+    "Ribbon.Source.IsRibbonPresentation.prefix_gap_pos",
     "Ribbon.Source.IsRibbonPresentation.rank_eq",
     "Ribbon.Source.NarayanaClaim",
+    "Ribbon.Source.cell_iff_prefix_counts",
     "Ribbon.Source.prefixBase_length"
   ],
   "ordered": [
