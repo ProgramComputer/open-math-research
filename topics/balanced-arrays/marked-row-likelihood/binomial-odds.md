@@ -1,12 +1,12 @@
 # Exact binomial odds for exchangeable unmarked rows
 
-Let the unmarked rows have a common interval of allowed sizes and identical weights within each column. The marked row may have its own cell weights, including zeros. For two column-margin vectors $`\boldsymbol a\le\boldsymbol b`$, write $`F_{\boldsymbol a}(j)`$ for the marked size weight. In a column with $`a_i<b_i`$, define
+Consider an array with $`n\ge1`$ rows and $`d\ge1`$ columns. Let the unmarked rows have a common interval of allowed sizes and identical nonnegative weights within each column. The marked row may have its own nonnegative cell weights, including zeros. For integer column margins $`0\le a_i\le b_i\le n`$, write $`F_{\boldsymbol a}(j)`$ for the marked size weight. In a column with $`a_i<b_i`$, define
 
 $$
 \rho_i=\frac{a_i(n-b_i)}{b_i(n-a_i)} .
 $$
 
-In a column with $`a_i=b_i`$ put $`\rho_i=1`$. Set $`\rho=\max_i\rho_i`$. For every $`s<t`$,
+In a column with $`a_i=b_i`$ put $`\rho_i=1`$. Set $`\rho=\max_i\rho_i`$. For all integers $`0\le s<t\le d`$,
 
 $$
 F_{\boldsymbol a}(t)F_{\boldsymbol b}(s)
@@ -23,7 +23,7 @@ Independently pair opposite-colored exclusive cells **within the marked row**, l
 
 Forbid a column auxiliary cell from being paired with the unpaired marked cell. This restriction depends only on the two uncolored pairings. In the source the unpaired mark is red and all auxiliaries are red, so every refinement is retained. Fix both pairings. In the orientation graph replace the marked vertex by one degree-two vertex for each row pair and one degree-one vertex for the unpaired mark. The degree-two vertices require one edge in each direction. The degree-one marked vertex points out in the source and in in the target. All column auxiliaries point out in both. Other vertices have symmetric degree constraints. Therefore Kahn and Neiman’s Lemma 8 bounds the source count above by the target count for every allowed refinement. [Orientation inequality](https://arxiv.org/pdf/1001.0610#page=9)
 
-Divide the resulting counts for each cell monomial by $`\prod_i(h_i+\delta_i)!(t-c)!`$ before summing these data. The source becomes its full product count. The target becomes its product count times the conditional probability of retaining random pairings. This remains true with cell weights, since the pair weight is fixed on a cell monomial. It remains to bound that retention probability.
+Divide the resulting counts for each cell monomial by $`\prod_i(h_i+\delta_i)!(t-c)!`$ before summing these data. The source becomes its full product count. The target becomes its weighted count with each array pair multiplied by its fraction of retained refinements. The pair weight is fixed on a cell monomial. If the target product count is zero, this comparison forces the source product count to be zero as well. Otherwise the weighted target count is its full product count times the retention probability under the target product law.
 
 Under the target product law first fix both marked masks. The two arrays are independent and permutation of the $`N=n-1`$ unmarked rows preserves each of their laws separately. Choose the unpaired blue mark uniformly among the blue-only marks. This choice is independent of the unmarked parts, since the row pairing acts on labeled marked cells. Suppose the chosen column is $`i`$. If $`\delta_i=0`$ it is always retained. Otherwise put $`a=a_i`$, $`b=b_i`$, $`\delta=b-a`$. Among the unmarked rows the red column is a uniform $`a`$-subset and the blue column is an independent uniform $`(b-1)`$-subset. Their red-only count $`H`$ is hypergeometric. The retained fraction of column pairings is $`H/(H+\delta)`$. With the falling-outside-range convention for binomial coefficients, Vandermonde’s identity gives
 
@@ -35,7 +35,7 @@ $$
 =\frac{\delta n}{b(n-a)} .
 $$
 
-For the middle equality use $`\binom{b-1}{a-h}/(h+\delta)=\binom{b}{a-h}/b`$. The retained fraction averages to exactly $`\rho_i`$. Averaging over unpaired columns and marked masks gives at most $`\rho`$, as required. Cases with zero product can be treated directly by the same unnormalized counting.
+For the middle equality use $`\binom{b-1}{a-h}/(h+\delta)=\binom{b}{a-h}/b`$. The retained fraction averages to exactly $`\rho_i`$. Averaging over unpaired columns and marked masks gives at most $`\rho`$, as required.
 
 ## All size gaps
 
