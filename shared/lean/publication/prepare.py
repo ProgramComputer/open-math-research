@@ -80,7 +80,8 @@ def main():
         additional["AuditReferenceSpecs"] = HERE/"reference"/"AuditReferenceSpecs.lean"
     elif args.group == "ribbon-foundation":
         for name in ("MatroidKL", "MatroidKLRecurrence", "MatroidFlatPolynomial",
-                     "MatroidFlatContract", "MatroidKLProduct", "MatroidFlatSum"):
+                     "MatroidFlatContract", "MatroidKLProduct", "MatroidFlatSum",
+                     "MatroidKLDeletionProfile", "MatroidFlatDelete"):
             additional["OpenMathResearch." + name] = HERE.parent / "OpenMathResearch" / (name + ".lean")
         additional["RibbonNarayanaSpec"] = (HERE.parents[2] / "topics" / "ribbon-matroids" /
                                             "lean" / "publication" / "RibbonNarayanaSpec.lean")
