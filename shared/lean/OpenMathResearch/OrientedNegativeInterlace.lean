@@ -17,6 +17,21 @@ def CompleteNegativeRoots {d : ℕ} (P : ℝ[X]) (r : Fin d → ℝ) : Prop :=
   P.natDegree = d ∧ StrictMono r ∧ (∀ i, 0 < r i) ∧
     P.roots = (Finset.univ.image (fun i => -r i)).val
 
+/-- The strictly increasing complete enumeration of the negative root moduli
+is determined by the polynomial. -/
+theorem CompleteNegativeRoots.unique {P : Polynomial ℝ} {d : ℕ} {r s : Fin d → ℝ}
+    (hr : CompleteNegativeRoots P r) (hs : CompleteNegativeRoots P s) : r = s := by
+  classical
+  apply (hr.2.1.range_inj hs.2.1).mp
+  have hroots : (Finset.univ.image (fun i => -r i)).val =
+      (Finset.univ.image (fun i => -s i)).val := hr.2.2.2.symm.trans hs.2.2.2
+  have hfin : Finset.univ.image (fun i => -r i) = Finset.univ.image (fun i => -s i) :=
+    Finset.val_inj.mp hroots
+  ext x
+  have hmem : -x ∈ Finset.univ.image (fun i => -r i) ↔
+      -x ∈ Finset.univ.image (fun i => -s i) := by rw [hfin]
+  simpa only [Finset.mem_image, Finset.mem_univ, true_and, neg_inj, Set.mem_range] using hmem
+
 /-- The inequalities encoding the orientation in increasing modulus order. -/
 def Oriented {m d : ℕ} (old : Fin m → ℝ) (new : Fin d → ℝ) : Prop :=
   (∀ i j, j.val = i.val → new j < old i) ∧

@@ -41,28 +41,42 @@ jobs:
           lake exe cache get
           Mathlib.Algebra.BigOperators.Group.Finset.Sigma
           Mathlib.Algebra.BigOperators.NatAntidiagonal
+          Mathlib.Algebra.Polynomial.Derivative
           Mathlib.Algebra.Polynomial.Roots
           Mathlib.Analysis.Analytic.OfScalars
           Mathlib.Analysis.Analytic.Uniqueness
           Mathlib.Analysis.Complex.Basic
           Mathlib.Analysis.Complex.CauchyIntegral
           Mathlib.Analysis.Polynomial.Basic
+          Mathlib.Analysis.SpecificLimits.Normed
           Mathlib.Analysis.SpecialFunctions.Complex.Analytic
+          Mathlib.Analysis.SpecialFunctions.Gamma.Beta
           Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
           Mathlib.Analysis.SpecialFunctions.Log.Deriv
           Mathlib.Analysis.SpecialFunctions.Pow.Real
+          Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+          Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+          Mathlib.Combinatorics.Enumerative.Catalan
+          Mathlib.Data.Fin.Rev
           Mathlib.Data.Fin.Tuple.Basic
           Mathlib.Data.Finset.Prod
           Mathlib.Data.Finset.Sigma
           Mathlib.Data.Fintype.Pi
+          Mathlib.Data.Nat.Choose.Bounds
+          Mathlib.Data.Real.Pi.Bounds
+          Mathlib.MeasureTheory.Function.Jacobian
           Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+          Mathlib.Order.Fin.Basic
           Mathlib.RingTheory.PowerSeries.Basic
           Mathlib.Tactic.FieldSimp
           Mathlib.Tactic.Linarith
           Mathlib.Tactic.LinearCombination
           Mathlib.Tactic.Positivity
           Mathlib.Tactic.Ring
+          Mathlib.Topology.Algebra.Polynomial
+          Mathlib.Topology.Instances.Real.Lemmas
+          Mathlib.Topology.Order.IntermediateValue
       - name: Check the logarithmic strips and contour summation
         run: lake build CatalanStrictPeaksLogRoot OpenMathResearch.LogarithmicContour
       - name: Check the finite-radius deformation
@@ -81,3 +95,82 @@ jobs:
             tee "$RUNNER_TEMP/catalan-improper-ray-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/improper-ray-kernel.txt \
             "$RUNNER_TEMP/catalan-improper-ray-axioms.txt"
+      - name: Check the normalized near-ray mean
+        run: lake build CatalanStrictPeaksNearAmplitude
+      - name: Audit the near-ray mean and covariance
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearAmplitudeAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/near-amplitude-kernel.txt \
+            "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"
+      - name: Check the successive-size near-ray estimates
+        run: lake build CatalanStrictPeaksNearCovariance
+      - name: Audit the quantitative covariance bounds
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearCovarianceAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-near-covariance-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/near-covariance-kernel.txt \
+            "$RUNNER_TEMP/catalan-near-covariance-axioms.txt"
+      - name: Check the far-ray bounds
+        run: lake build CatalanStrictPeaksFarRay
+      - name: Audit the far-ray bounds
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarRayAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-far-ray-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/far-ray-kernel.txt \
+            "$RUNNER_TEMP/catalan-far-ray-axioms.txt"
+      - name: Check the normalized coefficient identity
+        run: lake build CatalanStrictPeaksNormalizedRays
+      - name: Audit the normalized coefficient and sign criterion
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/NormalizedRaysAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/normalized-rays-kernel.txt \
+            "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
+      - name: Check the right-edge checkpoint gap
+        run: lake build CatalanStrictPeaksRightCheckpoint
+      - name: Audit the right-edge checkpoint gap
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightCheckpointAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-right-checkpoint-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/right-checkpoint-kernel.txt \
+            "$RUNNER_TEMP/catalan-right-checkpoint-axioms.txt"
+      - name: Check the explicit checkpoint phase and all-length root count
+        run: lake build CatalanStrictPeaksPhaseOrder CatalanStrictPeaksAllRoots
+      - name: Audit the checkpoint phase and root count
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/CheckpointPhaseAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-checkpoint-phase-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/checkpoint-phase-kernel.txt \
+            "$RUNNER_TEMP/catalan-checkpoint-phase-axioms.txt"
+      - name: Check the old middle-root signs
+        run: lake build CatalanStrictPeaksMiddleRoots
+      - name: Audit the old middle-root signs
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/MiddleRootsAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-middle-roots-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/middle-roots-kernel.txt \
+            "$RUNNER_TEMP/catalan-middle-roots-axioms.txt"
+      - name: Check the rightmost root and all-length strict interlacing
+        run: lake build CatalanStrictPeaksAllInterlacing
+      - name: Audit the rightmost-root sign
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightmostRootAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-rightmost-root-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/rightmost-root-kernel.txt \
+            "$RUNNER_TEMP/catalan-rightmost-root-axioms.txt"
+      - name: Audit the all-length Catalan theorem
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/AllInterlacingAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-all-interlacing-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/all-interlacing-kernel.txt \
+            "$RUNNER_TEMP/catalan-all-interlacing-axioms.txt"

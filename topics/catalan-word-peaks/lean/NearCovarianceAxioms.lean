@@ -1,0 +1,9 @@
+import CatalanStrictPeaksNearCovariance
+
+#print axioms CatalanStrictPeaks.CutGeometry.nearConjugateRatio_one_le_re
+#print axioms CatalanStrictPeaks.CutGeometry.nearConjugateRatio_lipschitz
+#print axioms CatalanStrictPeaks.CutGeometry.nearAmplitude_conjugate_error
+#print axioms CatalanStrictPeaks.CutGeometry.nearAmplitude_sixth_error
+#print axioms CatalanStrictPeaks.CutGeometry.nearMean_step_lt_one_div
+#print axioms CatalanStrictPeaks.CutGeometry.nearMean_step_lt_four_div
+#print axioms CatalanStrictPeaks.CutGeometry.nearMean_re_gt_seventeen_twentieths

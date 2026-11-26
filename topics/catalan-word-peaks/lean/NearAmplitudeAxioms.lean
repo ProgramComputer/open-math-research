@@ -1,0 +1,10 @@
+import CatalanStrictPeaksNearAmplitude
+
+#print axioms CatalanStrictPeaks.CutGeometry.rayPrefactor_near_ne_zero
+#print axioms CatalanStrictPeaks.CutGeometry.nearAmplitude_local_error
+#print axioms CatalanStrictPeaks.CutGeometry.nearAmplitude_global
+#print axioms CatalanStrictPeaks.CutGeometry.nearAmplitude_tail_error
+#print axioms CatalanStrictPeaks.CutGeometry.nearRay_integral_eq_mean
+#print axioms CatalanStrictPeaks.CutGeometry.nearMean_close_to_one
+#print axioms CatalanStrictPeaks.CutGeometry.nearMean_step_covariance
+#print axioms CatalanStrictPeaks.CutGeometry.nearTiltCovariance_sub_const

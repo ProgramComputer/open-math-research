@@ -5,7 +5,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | Result | Outcome | Formal verification |
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
-| [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟨 Partial · Lean 4 (all rows through length 150 and the four-ray coefficient formula) |
+| [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟩 Full · Lean 4 |
 | [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Strict interlacing for all $k$ at $n\ge10^{20}$, all sizes at $k=3$, and throughout the two-cycle range | ⬜ None |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Strict interlacing for every row count and dimension at $r=d-1$ | 🟨 Partial · Lean 4 (labeled-array coefficient formula) |
 | [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | Strict interlacing at every fixed threshold for sufficiently large rows, and at every size for thresholds two through four | 🟨 Partial · Lean 4 |

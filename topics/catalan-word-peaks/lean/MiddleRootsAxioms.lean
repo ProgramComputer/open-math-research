@@ -1,0 +1,5 @@
+import CatalanStrictPeaksMiddleRoots
+
+#print axioms CatalanStrictPeaks.CutGeometry.eval_sign_at_oldRoot_of_phaseSign
+#print axioms CatalanStrictPeaks.CutGeometry.eval_sign_at_oldRoot_in_phaseBand
+#print axioms CatalanStrictPeaks.CutGeometry.middleRoot_signs_from_150

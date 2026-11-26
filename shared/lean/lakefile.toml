@@ -193,3 +193,95 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 [[lean_lib]]
 name = "BalancedNoFullRowCounting"
 srcDir = "../../topics/balanced-arrays/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksNearPoleSeries"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksPoleRadical"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksPoleSeriesBounds"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksPoleValues"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksTopThree"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFarVieta"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFarthestSign"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksRightCheckpoint"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksCovarianceArithmetic"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksNearCovariance"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksNearAmplitude"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFarRay"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksNormalizedRays"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksCheckpointPhase"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksPhaseBridge"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksMiddleRoots"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksPhaseOrder"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksAllRoots"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksRightPoleArithmetic"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksRightPoleCoefficients"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksRightRootComparison"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksRightmostRoot"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksAllInterlacing"
+srcDir = "../../topics/catalan-word-peaks/lean"

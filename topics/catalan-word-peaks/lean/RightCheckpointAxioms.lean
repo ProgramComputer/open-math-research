@@ -1,0 +1,6 @@
+import CatalanStrictPeaksRightCheckpoint
+
+#print axioms OpenMathResearch.OrientedNegativeInterlace.CompleteNegativeRoots.unique
+#print axioms CatalanStrictPeaks.CutGeometry.modulus_sub_transition_ge_one_sub_cos
+#print axioms CatalanStrictPeaks.CutGeometry.first_checkpoint_modulus_gap
+#print axioms CatalanStrictPeaks.CutGeometry.roots_after_first_modulus_gap

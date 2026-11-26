@@ -1,4 +1,4 @@
-# Lean check of the strict Catalan peak sign transfer
+# Lean verification of strict peaks in Catalan words
 
 Lean defines the strict-peak counting polynomial directly by enumerating
 Catalan words. Words have zero first letter and adjacent increases at most
@@ -38,11 +38,22 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** Lean verifies the entire finite prefix,
-identifies the analytic branch, and proves the coefficient formula as the
-sum of the four improper ray integrals. It verifies radial moments and
-integrated envelopes. The branch-amplitude normalization and the full
-checkpoint and old-root sign comparisons remain in the written proof.
+**🟩 Full · Lean 4.** The declaration `CatalanStrictPeaks.strict_peaks_all_lengths` has two conclusions. For every $n$ it gives a complete list of the simple negative roots of $C_n$. For every $n$ it gives strictly alternating root lists for $C_n$ and $C_{n+1}$. Its only quantifier over input data is the word length. The proof uses exact finite certificates for $n<150$ and proves the signs at the closest, middle and farthest old roots for $n\ge150$. [All-length theorem](CatalanStrictPeaksAllInterlacing.lean) · [Axiom audit](AllInterlacingAxioms.lean)
+
+## Evaluation at the right endpoint
+
+At $t=-11/16$ the discriminant factors as $(1-9x/4)^2 Q(x)$, where
+$Q(x)=1+x/2+9x^2/16$. Lean differentiates the generating function of the
+word-counting polynomials before specializing. It identifies both resulting
+series using the square root $R(0)=1$ and its inverse $I$.
+[Formal identities](CatalanStrictPeaksNearPoleSeries.lean) · [Radical recurrence](CatalanStrictPeaksPoleRadical.lean)
+
+The coefficients satisfy $|[x^{k+1}]I|\le (5/4)^k/4$. This makes the tails
+absolutely summable at $x=16/27$ and $x=4/9$, and their sum in absolute
+value is less than the constant term of $I$. Thus $I$ takes the positive
+branch at both evaluation points. The numerator values entering the two
+residues are $H(16/27)=11/16$ and $B(4/9)=4\sqrt{3}/27$.
+[Exact pole values](CatalanStrictPeaksPoleValues.lean) · [Coefficient and convergence bounds](CatalanStrictPeaksPoleSeriesBounds.lean)
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -116,9 +127,7 @@ $n^2b(n)$ for integer $n$.
 
 The module integrates the quadratic envelope in (5) and verifies the
 $1/50$ and $1/(20n)$ tail bounds for the affine envelope in (6) and (11).
-Applying the envelopes to the loss of the actual ray amplitude requires
-its pointwise bounds and weighted integrability. The covariance comparisons
-and strict signs also remain in the written proof. [Radial moment kernel output](beta-moments-kernel.txt)
+[Radial moment kernel output](beta-moments-kernel.txt)
 
 ## Analytic branch and Cauchy coefficient
 
@@ -178,8 +187,165 @@ The proof bounds the generating function uniformly at outer radii at least
 two and sends the outer arcs to zero. Its substitution $s=e^x/|\zeta|-1$
 for logarithmic radius $x$ supplies the Jacobian $(1+s)^{-1}$, giving the
 factor $(1+s)^{-n-1}$ and the signed prefactor $-\zeta^{-n}/\pi$.
-Factoring the amplitudes for the covariance and sign comparisons remains in
-the written proof. [Improper ray kernel output](improper-ray-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45746699648)
+[Improper ray kernel output](improper-ray-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45746699648)
+
+## Normalized near-ray mean and tilt covariance
+
+The [near-amplitude module](CatalanStrictPeaksNearAmplitude.lean) uses the
+actual index-zero prefactor $B_z$ from the improper coefficient formula.
+It proves the squares and positive real parts of the principal cut-factor
+ratios and identifies the normalized integrand with the reciprocal and
+three-factor product used in (4)–(6). Its theorem
+`nearRay_integral_eq_mean` factors the integral into $B_z(z)b(n)J_n$.
+
+The theorem `nearMean_close_to_one` proves $|J_n-1|<73/100$ for $n\ge150$,
+$0<d<1$, $nd\ge2$, and $n\sqrt{1-d^2}\ge2$. The checked ray integrability
+and the actual pointwise bounds supply the hypotheses for the integrated
+envelopes. The theorem `nearMean_step_covariance` verifies (8) for every
+positive $n$. `nearTiltCovariance_sub_const` proves that the amplitude
+factor can be centered at its mean or at one.
+[Near-amplitude kernel output](near-amplitude-kernel.txt)
+
+The [near covariance module](CatalanStrictPeaksNearCovariance.lean) proves
+`nearMean_step_lt_one_div`, the quantitative conclusion of (11), for
+$n\ge150$, $1/2\le d<1$, and $n\sqrt{1-d^2}\ge2$. The bound $d\ge1/2$
+includes the paper's small-angle sector. It also proves
+`nearMean_step_lt_four_div`, the conclusion of (12), for $n\ge150$,
+$0<d<1$, $nd\ge2$, and $n\sqrt{1-d^2}\ge2$. The proof centers the actual
+conjugate root where $(1+s)^{-1}$ equals its radial mean. The signed
+density changes sign at that point, so the conjugate root's secant
+bound integrates to the difference of two exact first moments. The
+local cubic and quadratic estimates and the affine tail bound cover
+the rest of the covariance.
+
+The theorem `nearMean_re_gt_seventeen_twentieths` verifies (10) under the
+same assumptions as the $1/n$ bound. The conjugate factor has real part
+at least one. Lean integrates the cubic loss up to displacement $1/6$
+and the affine tail beyond it to bound $1-\Re J_n$ by $3/20$.
+[Kernel audit](near-covariance-kernel.txt)
+
+## Far-ray contribution
+
+The [far-ray module](CatalanStrictPeaksFarRay.lean) bounds each of the actual
+far-ray integrals by $(6/5)b(n)|B_w(w)|$ for $n\ge150$ and $nd\ge2$. The
+pointwise comparison uses the three cut-factor norms and the increasing
+distance from $c$ along the far ray. The endpoint calculation squares the
+amplitudes and cancels the two shared cross-pair distances to bound
+$|B_w(w)|\sqrt{\sin\theta}$ by $|B_z(z)|$.
+
+The theorem `farRayError_abs_le` bounds the real contribution of the two
+far-ray terms divided by $2a^{-n}b(n)|B_z(z)|/\pi$ by
+$(6/5)a^{2n}/\sqrt{\sin\theta}$. The theorem `farRayError_smallAngle`
+obtains the sharper $1/(100n)$ bound when $d\ge1/2$ and
+$n\sin\theta\ge2$. The theorem `farRayError_largeAngle` obtains the
+$1/25$ bound when $nd\ge29/10$ and $\sin\theta\ge7/10$. Its radial
+power estimate uses six blocks in the binomial lower bound. The theorem
+`farRayError_interior` gives the uniform $1/25$ bound when $nd\ge29/10$
+and $n\sin\theta\ge2$. [Far-ray kernel output](far-ray-kernel.txt)
+
+## Real normalization of the four-ray coefficient
+
+The [normalization module](CatalanStrictPeaksNormalizedRays.lean) proves that
+the ray terms at opposite cuts are exact complex conjugates. The other
+factors of each outward ray avoid the negative real axis because the cuts
+lie in distinct quadrants. This justifies the conjugation of each principal
+square root on the integration path.
+
+The theorem `normalizedCoefficient_eq_near_add_far` gives
+$Y_n=\Re(U_nJ_n)+r_n$ for the actual scaled polynomial divided by the positive
+leading amplitude. Here $U_n=-z^{-n}B_z(z)/(a^{-n}|B_z(z)|)$ has unit modulus,
+$J_n$ is the checked near mean, and $r_n$ is the checked far-pair contribution.
+The theorem `normalizedCoefficient_close_to_phase` gives
+$|Y_n-\Re(U_n)|<77/100$ when $n\ge150$, $nd\ge29/10$, and
+$n\sin\theta\ge2$. Under these premises `eval_sign_of_nearPhaseUnit`
+gives the original polynomial the sign $(-1)^k$ whenever
+$\Re(U_n)=(-1)^k$. [Normalization kernel output](normalized-rays-kernel.txt)
+
+## Explicit checkpoint phase and simple negative roots
+
+The [phase module](CatalanStrictPeaksCheckpointPhase.lean) defines the
+correction in (2), proves its continuity and exact endpoint values, and
+verifies the lower and upper bounds used in (3). Every point between the
+first and last interior phase levels satisfies $nd\ge29/10$ and
+$n\sin\theta\ge2$. The proof uses monotonicity of sine and its cubic lower
+bound at the two required angle thresholds, scaled by $1/n$.
+
+The [phase bridge](CatalanStrictPeaksPhaseBridge.lean) identifies the actual
+leading factor as $U_n=e^{-i\Psi_n}$ by evaluating the principal-root
+directions and using the quartic equation at $z$. The theorem
+`eval_sign_at_checkpoint` proves the alternating signs for the original
+polynomial. The theorem `roots_from_150` discharges every premise of the
+ordered checkpoint theorem and proves the complete simple-negative root
+count from length $150$. The [all-length theorem](CatalanStrictPeaksAllRoots.lean)
+combines this with the exact prefix in `roots_all`.
+
+The [phase order module](CatalanStrictPeaksPhaseOrder.lean) proves that
+$\Psi_n$ is strictly increasing on the closed checkpoint interval using
+the derivative bound for its correction. For each middle rank it gives
+an angle realizing the actual root modulus and locates its phase between
+the two adjacent checkpoint levels. It gives the corresponding sign of
+the imaginary part of $U_n$. [Checkpoint phase kernel output](checkpoint-phase-kernel.txt)
+
+## Signs at the old middle roots
+
+The [middle-root module](CatalanStrictPeaksMiddleRoots.lean) proves
+`middleRoot_signs_from_150`. For every $n\ge150$ it gives a complete
+simple-negative root list in increasing modulus and proves
+$(-1)^{i+1}C_{n+1}(-r_i)>0$ at each zero-based rank $i$ with
+$0<i$ and $i+1<\operatorname{rowDegree}(n)$.
+
+At the old root the real part of $U_nJ_n$ is the negative of the old far-ray
+error. The squared-distance bound shows that its imaginary part has the
+same sign as that of $U_n$. The exact rotation multiplies that imaginary part by
+$\sin\theta$. The real-part and covariance bounds in (10)–(12) and the two
+far-ray bounds make this term dominate the remaining terms. The resulting
+sign is for the actual next-row Catalan polynomial.
+[Middle-root kernel output](middle-roots-kernel.txt)
+
+## First-checkpoint separation at the right edge
+
+The [right-checkpoint module](CatalanStrictPeaksRightCheckpoint.lean) bounds
+the positive modulus at the first phase level. Theorem
+`first_checkpoint_modulus_gap` gives modulus at least $11/16+1/n^2$.
+Theorem `roots_after_first_modulus_gap` places every root after the
+rightmost one strictly beyond that separation for $n\ge150$. It uses the
+middle-rank angle theorem at the second root. The shared theorem
+`CompleteNegativeRoots.unique` identifies the ordered lists obtained
+from separate comparisons. [Right-checkpoint kernel output](right-checkpoint-kernel.txt)
+
+## Sign at the farthest old root
+
+For $n\ge150$, Lean checks the top three coefficients of $C_n(1+u)$ in both parities directly from the generating function of Catalan words. The sum and sum of squares of the translated root moduli then bound the farthest zero and separate it from every competitor in the neighboring odd row. The theorem `CatalanStrictPeaks.FarEdge.farthest_root_sign` takes complete lists of the old and new simple negative roots and gives the strict next-row sign at the last old root. This component supplies the far endpoint of the consecutive interlacing proof. [Six coefficient identities](CatalanStrictPeaksTopThree.lean) · [Vieta bounds and parity comparison](CatalanStrictPeaksFarVieta.lean) · [Formal endpoint theorem](CatalanStrictPeaksFarthestSign.lean) · [Axiom transcript](farthest-sign-kernel.txt)
+
+From the repository root, using the pinned Lean toolchain, run
+
+~~~sh
+cd shared/lean
+lake build CatalanStrictPeaksFarthestSign
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarthestSignAxioms.lean
+~~~
+
+## Rightmost-root sign and the all-length theorem
+
+The [rightmost-root module](CatalanStrictPeaksRightmostRoot.lean) uses
+$\tau=-11/16$. The value $C_n(\tau)$ has a leading term
+$(11/16)(27/16)^n$ with error at most $24(3/2)^n$. Its derivative has
+leading term $(16\sqrt{3}/27)(9/4)^n$ with error at most
+$20n(27/16)^n$. The exact pole coefficients come from the formal
+generating function. Geometric convolution bounds the coefficient
+tails using the absolute Taylor estimates for the radical and its
+inverse. The resulting logarithmic derivative grows by more than
+$100n^3$ at the next length. The checkpoint separation bounds the
+contribution from all roots except the rightmost, and the product of
+the actual root factors gives the negative next-row value at the old
+rightmost root. [Rightmost-root kernel output](rightmost-root-kernel.txt)
+
+The [all-length module](CatalanStrictPeaksAllInterlacing.lean) has
+`interlacing_all` for every consecutive pair and
+`strict_peaks_all_lengths` for the conjunction of simple negative
+zeros and directed strict interlacing. It applies the checked signs
+at every old root from length $150$ and uses the exact prefix for
+the lower lengths. [All-length kernel audit](all-interlacing-kernel.txt)
 
 ## Exact isolating intervals through length 150
 
@@ -221,6 +387,8 @@ Lean and mathlib.
 ~~~sh
 lake build OpenMathResearch.OrientedNegativeInterlace CatalanStrictPeaks CatalanStrictPeaksInterlacing
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/Axioms.lean
+lake build CatalanStrictPeaksPoleValues
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/PoleValuesAxioms.lean
 lake build CatalanStrictPeaksRecurrence
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/RecurrenceAxioms.lean
 lake build CatalanStrictPeaksFirstReturn CatalanStrictPeaksGeneratingFunction CatalanStrictPeaksDiscriminant
@@ -234,8 +402,25 @@ lake env lean -j1 ../../topics/catalan-word-peaks/lean/AnalyticBranchAxioms.lean
 lake build OpenMathResearch.LogarithmicContour CatalanStrictPeaksLogRoot CatalanStrictPeaksRayTransfer
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/RayTransferAxioms.lean
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean
+lake build CatalanStrictPeaksNearAmplitude
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearAmplitudeAxioms.lean
+lake build CatalanStrictPeaksNearCovariance
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearCovarianceAxioms.lean
+lake build CatalanStrictPeaksFarRay
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarRayAxioms.lean
+lake build CatalanStrictPeaksNormalizedRays
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/NormalizedRaysAxioms.lean
+lake build CatalanStrictPeaksPhaseOrder CatalanStrictPeaksAllRoots
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/CheckpointPhaseAxioms.lean
+lake build CatalanStrictPeaksMiddleRoots
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/MiddleRootsAxioms.lean
+lake build CatalanStrictPeaksRightCheckpoint
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightCheckpointAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
+lake build CatalanStrictPeaksAllInterlacing
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightmostRootAxioms.lean
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/AllInterlacingAxioms.lean
 ~~~
 
 [Kernel output](kernel.txt)

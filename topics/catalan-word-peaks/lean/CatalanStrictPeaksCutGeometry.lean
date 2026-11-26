@@ -252,7 +252,8 @@ theorem opposite_cross_bounds {d : ℝ} (h₀ : 0 < d) (h₁ : d < 1) :
   · rw [norm_div]
     exact (div_le_one ((norm_nonneg _).trans_lt hfar)).mpr hfar.le
 
-private theorem norm_sub_conjugate (z : ℂ) (h : 0 ≤ z.im) :
+/-- The distance of a point in the upper half-plane from its conjugate. -/
+theorem norm_sub_conjugate (z : ℂ) (h : 0 ≤ z.im) :
     ‖z - conj z‖ = 2 * z.im := by
   have heq : z - conj z = ((2 * z.im : ℝ) : ℂ) * Complex.I := by
     apply Complex.ext
@@ -262,7 +263,8 @@ private theorem norm_sub_conjugate (z : ℂ) (h : 0 ≤ z.im) :
   rw [heq, norm_mul, Complex.norm_I, mul_one, Complex.norm_real, Real.norm_eq_abs,
     abs_of_nonneg (mul_nonneg (by norm_num) h)]
 
-private theorem nearPoint_im_eq {d : ℝ} (h₀ : 0 < d) :
+/-- The height of the near point in terms of its radius and cosine parameter. -/
+theorem nearPoint_im_eq {d : ℝ} (h₀ : 0 < d) :
     (nearPoint d).im = radius d * Real.sqrt (1 - d ^ 2) := by
   change Real.sqrt (radius d ^ 2 - (radius d * d) ^ 2) = _
   rw [show radius d ^ 2 - (radius d * d) ^ 2 = radius d ^ 2 * (1 - d ^ 2) by ring,

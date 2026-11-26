@@ -13,7 +13,8 @@ namespace CatalanStrictPeaks.CutGeometry
 
 open Set
 
-private theorem scale_eq_product {d : ℝ} (hd : 0 < d) :
+/-- The product form used to compare the scale with its transition value. -/
+theorem scale_eq_product {d : ℝ} (hd : 0 < d) :
     scale d = 2 * (d / (1 + 2 * d)) ^ 2 * (1 + d) * Real.sqrt (1 + 2 * d) := by
   let r := Real.sqrt (1 + 2 * d)
   have hr : 0 < r := Real.sqrt_pos.2 (by linarith)
@@ -45,13 +46,16 @@ theorem strictMonoOn_scale : StrictMonoOn scale (Ioi (0 : ℝ)) := by
   exact hpre.trans_le (mul_le_mul (mul_le_mul_of_nonneg_left (by linarith) (by positivity))
     hsqrt (Real.sqrt_nonneg _) (by positivity))
 
-theorem scale_sq_lt_one {d : ℝ} (h₀ : 0 < d) (h₁ : d < 1) : (scale d) ^ 2 < 1 := by
+/-- The square of the scale at the coalescing near pair. -/
+theorem scale_one_sq : scale 1 ^ 2 = 16 / 27 := by
   have hr := radius_relation (d := 1) (by norm_num)
   norm_num at hr
-  have hscale : (scale 1) ^ 2 = 16 / 27 := by
-    calc
-      _ = 16 * (radius 1 ^ 2) ^ 3 := by unfold scale; ring
-      _ = _ := by rw [show radius 1 ^ 2 = 1 / 3 by linarith]; norm_num
+  calc
+    _ = 16 * (radius 1 ^ 2) ^ 3 := by unfold scale; ring
+    _ = _ := by rw [show radius 1 ^ 2 = 1 / 3 by linarith]; norm_num
+
+theorem scale_sq_lt_one {d : ℝ} (h₀ : 0 < d) (h₁ : d < 1) : (scale d) ^ 2 < 1 := by
+  have hscale := scale_one_sq
   have hx : scale d < scale 1 := strictMonoOn_scale h₀ (by norm_num : (1 : ℝ) ∈ Ioi 0) h₁
   have hy := (sq_lt_sq₀ (scale_pos h₀).le (scale_pos (by norm_num : (0 : ℝ) < 1)).le).mpr hx
   linarith
