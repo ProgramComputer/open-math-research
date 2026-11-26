@@ -30,7 +30,7 @@ $$
  \qquad U_n=2kd_n(\cos(n\theta),-\sin(n\theta)).
 $$
 
-It suffices to show $\Vert V_{\pm}-U_n\Vert_2<2kd_n$ for both signs. The strict disk inequality gives $V_{\pm}\cdot U_n>0$. At $\theta=j\pi/n$ this gives the sign of $F_n$. At an old zero the second coordinates have the sign of $-\sin(n\theta)$. This also gives simplicity there, since the average of the two second coordinates is $kF'_n/n$. At an old root between the integer phases $j\pi$ and $(j+1)\pi$, the sign of $P_{n+1}$ is $(-1)^j$ after division by $t<0$.
+It suffices to show $`\Vert V_{\pm}-U_n\Vert_2<2kd_n`$ for both signs. The strict disk inequality gives $`V_{\pm}\cdot U_n>0`$. At $`\theta=j\pi/n`$ this gives the sign of $`F_n`$. At an old zero the second coordinates have the sign of $`-\sin(n\theta)`$. This also gives simplicity there, since the average of the two second coordinates is $`kF'_n/n`$. At an old root between the integer phases $`j\pi`$ and $`(j+1)\pi`$, the sign of $`P_{n+1}`$ is $`(-1)^j`$ after division by $`t<0`$.
 
 Use the partial-fraction identity
 
