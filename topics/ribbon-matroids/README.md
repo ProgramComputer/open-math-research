@@ -4,7 +4,7 @@ For every connected ribbon lattice path matroid of rank $r$, the $Z$-polynomial 
 
 [Proof](proof.md) · [Manuscript](paper.pdf) · [TeX source](paper.tex) · [Independent flat computations](results/ribbons.jsonl)
 
-**🟨 Partial · Lean 4.** Lean verifies the polygon reduction with the general matroid identities as hypotheses, together with concrete rank-three flat recurrences. [Formal scope](lean/README.md) · [Kernel record](verification.json)
+**🟨 Partial · Lean 4.** Lean verifies the Kazhdan–Lusztig and $Z$-polynomial definitions on finite matroids, a conditional polygon reduction and concrete rank-three flat recurrences. [Formal scope](lean/README.md) · [Kernel record](verification.json)
 
 [Stable Lean recheck and per-theorem axiom reports](verification.json) · [Reproduce the audit](../../shared/lean/publication/README.md)
 
