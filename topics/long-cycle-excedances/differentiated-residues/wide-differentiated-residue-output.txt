@@ -1,0 +1,2 @@
+Wide differentiated-residue slab passes, with normalized derivative > 71/100 and lag < 12/100.
+The exterior and middle comparisons give all-threshold cutoff 1,408,334.

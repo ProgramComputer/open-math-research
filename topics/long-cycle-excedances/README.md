@@ -2,6 +2,8 @@
 
 For every $k\ge3$ and $k\le n\le4k-1$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. This includes the first transition permitting four cycles. [Complete three-cycle range, proof and verification](three-cycle-complete.md) · [Manuscript, Section 12](paper.pdf)
 
+For every $n\ge1{,}408{,}334$ and $3\le k\le n$, the consecutive nonzero roots are simple, negative and strictly interlace. Differentiating the common residues gives the insertion sign where the adaptive angular bounds do not yet apply. [Proof and independent checks](differentiated-residues/README.md)
+
 For every $n\ge4{,}062{,}720$ and $3\le k\le n$, the consecutive nonzero roots are simple, negative and strictly interlace. Adaptive pole bounds for bounded $n/k$, the wider-circle comparison for larger $n/k$, and a separate treatment of thresholds below 400 give this cutoff. [Combined proof and verification](adaptive-poles/README.md)
 
 The earlier uniform estimate covered every $n\ge 250000^2=62{,}500{,}000{,}000$ and every threshold $3\le k\le n$. It compares a truncated logarithm with its value at a smaller radius, then combines two threshold ranges. [Wider-circle proof](radial-taylor.md) · [Independent audit](review-radial-taylor.md) · [Exact scalar checks](verify_radial_taylor.py)
