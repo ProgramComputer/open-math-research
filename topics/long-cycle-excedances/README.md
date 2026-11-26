@@ -1,5 +1,7 @@
 # Excedance zeros for permutations with long cycles
 
+For every $n\ge100{,}000$ and $3\le k\le n$, the nonzero roots of the two consecutive rows are simple, negative and strictly interlace. A joint bound on the polynomial and its angular derivative certifies the required signs. The proof covers eleven intervals in $n/k$ and joins to the differentiated-residue and common-circle estimates. [Theorem, independent review and exact checks](degree-blocks/README.md)
+
 For every $k\ge3$ and $k\le n\le4k-1$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. This includes the first transition permitting four cycles. [Complete three-cycle range, proof and verification](three-cycle-complete.md) · [Manuscript, Section 12](paper.pdf)
 
 For every $n\ge972{,}000$ and $3\le k\le n$, the consecutive nonzero roots are simple, negative and strictly interlace. The proof differentiates common residues and extends both circle comparisons to the lower phase entrance. [Proof and independent checks](differentiated-residues/README.md)

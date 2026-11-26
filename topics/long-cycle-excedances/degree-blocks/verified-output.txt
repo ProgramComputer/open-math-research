@@ -1,0 +1,12 @@
+n >= 100000,  4 <= n/k <=  6, A >= 10, joint margin > 470186/1000000
+n >= 100000,  6 <= n/k <= 10, A >= 10, joint margin > 550071/1000000
+n >= 100000, 10 <= n/k <= 16, A >= 10, joint margin > 575278/1000000
+n >= 100000, 16 <= n/k <= 25, A >= 10, joint margin > 553465/1000000
+n >= 100000, 25 <= n/k <= 34, A >= 9, joint margin > 479069/1000000
+n >= 100000, 34 <= n/k <= 42, A >= 8, joint margin > 375913/1000000
+n >= 100000, 42 <= n/k <= 50, A >= 27/4, joint margin > 185152/1000000
+n >= 100000, 50 <= n/k <= 62, A >= 7, joint margin > 174227/1000000
+n >= 100000, 62 <= n/k <= 75, A >= 7, joint margin > 136473/1000000
+n >= 100000, 75 <= n/k <= 86, A >= 27/4, joint margin > 65716/1000000
+n >= 120000, 86 <= n/k <= 96, A >= 7, joint margin > 90667/1000000
+All joint margins and both outer aspect joins pass.
