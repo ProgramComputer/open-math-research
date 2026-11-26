@@ -1,9 +1,15 @@
-# Simple negative zeros for balanced arrays with at least linearly many columns
+# Simple negative zeros for balanced arrays with a logarithmic dimension bound
 
-**Theorem.** Fix any $\epsilon>0$. For all sufficiently large $n$, for every $d\ge\epsilon n$ and every cap $1\le r\le d$, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ distinct negative zeros. The row threshold depends only on $\epsilon$. Its value is unknown.
+**Theorem.** There are absolute constants $C>0$ and $N$ such that, for every integer $n\ge N$, every $d\ge Cn/\log n$, and every cap $1\le r\le d$, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. The constants are unspecified.
 
-An array here is a labeled binary $n\times d$ matrix whose row sums are at most $r$. The coefficient of $q^k$ counts arrays in which every column sums to $k$. The theorem allows the cap and dimension to change at every row count. Together with the fixed-dimension eventual theorem, it confines any infinite sequence of distinct counterexamples to dimensions tending to infinity with $d/n\to0$. The conjecture for every finite triple remains open. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays) · [Related work and search record](literature.md)
+The coefficient of $q^k$ counts labeled binary $n\times d$ matrices with every column sum $k$ and every row sum at most $r$. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. The general all-row conjecture and consecutive interlacing are outside the theorem's scope. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays) · [Prior literature record](literature.md) · [Literature check for the logarithmic range](sublinear-literature.md)
 
-The [proof](proof.md) passes from exact labeled column margins to a scalar coefficient via the dense binary-matrix enumeration theorem. Away from saturation the normalized alternating sum converges to a positive Gaussian theta sum. Near saturation the neighboring coefficients are strongly separated. [Central estimate](central.md) · [Saturated endpoint](saturated.md) · [Manuscript](paper.pdf) · [LaTeX source](paper.tex) · [Independent blind review](review.md)
+## Proof and verification
 
-**⬜ None.** The theorem has a written proof. It has no checked Lean or Rocq formalization.
+- [Logarithmic-dimension proof](logarithmic-window.md) gives the quantitative sign argument.
+- [Summation over row margins](quantitative-margins.md), [fixed-margin enumeration](sparse-enumeration.md), and the [uniform lattice local limit estimate](uniform-lattice-lemma.md) provide the quantitative estimates.
+- [Earlier linear-dimension proof](proof.md), [central estimate](central.md), [saturated endpoint](saturated.md), and its [independent blind review](review.md) record the preceding theorem and its verification.
+- [Independent blind review of the logarithmic bound](logarithmic-review.md) records the agent-assisted check and the corrections to the source attribution and full-cap corollary.
+- [Manuscript](paper.pdf) · [LaTeX source](paper.tex). Build from this folder with `tectonic paper.tex`.
+
+**⬜ None.** The theorem has no checked Lean or Rocq proof.

@@ -1,0 +1,50 @@
+# Fixed-margin enumeration at a weak center
+
+Let $x=k/n$, $v=x(1-x)$, $p=\min(x,1-x)$, $\delta=d/n$, and $\mu=dx$. Suppose $\delta\to0$, $\delta\log n\to\infty$, and $v\ge c\delta$ for a fixed $c>0$. Set $R=\sum_{i=1}^n(s_i-\mu)^2$ for a profile with row margins $s_i$ and with all $d$ column margins equal to $k$. For sufficiently small fixed $\eta>0$ and some fixed $\gamma>0$, uniformly on $\max_i|s_i-\mu|\le d^{1/2+\eta}$,
+
+$$
+B(\mathbf s,(k^d))
+=\frac{\binom nk^d}{\binom{nd}{dk}}\prod_{i=1}^n\binom d{s_i}
+\exp\left(-\frac12+\frac{R}{2ndv}+O(n^{-\gamma})\right).
+$$
+
+
+
+## Low densities
+
+Theorem 1.1 of Liebenau–Wormald in the published version gives the fixed-total degree-sequence probability. Equation (1) gives the exact conditioned independent-binomial probability, equation (2) gives the correction, equations (3)–(4) state growth hypotheses, and equation (5) gives the uniform relative error. Remark 1.2 multiplies the probability by $\binom{\ell N}{m}$ to obtain the number of labeled graphs. Use $(\ell,N,m)=(n,d,pnd)$ and degree averages $(s,t)=(pd,pn)$. For $x>1/2$, complement the matrix before applying the theorem. This preserves $R$, and replaces each binomial argument by its complement, so the displayed count retains the original $k,s_i$. Column variance is zero in either description. The normalized row variance in their correction is $\sigma^2(\mathbf s)=R/n$, so the factor is exactly $\exp(-1/2+R/(2ndv))$. [Liebenau–Wormald, *Random Structures & Algorithms* 62 (2023), §1.1, Theorem 1.1 and Remark 1.2](https://onlinelibrary.wiley.com/doi/full/10.1002/rsa.21105#rsa21105-mthst-0001)
+
+Fix $\kappa=1/20$ and choose $0<\eta<\kappa$. Whenever $p<\mu_0$, where $\mu_0>0$ is the fixed small constant in the theorem, its density hypothesis holds. This includes all sufficiently small $p$ along a sequence tending to zero and any fixed $p<\mu_0$. As $p\ge v\ge c\delta$, we have
+
+$$
+d\gg n/\log n,\qquad p\gg1/\log n,\qquad m\gg n^2/\log^2 n .
+$$
+
+Both average degrees tend to infinity. Uniformly on the admitted profiles,
+$d^{1/2+\eta}=o((pd)^{1/2+\kappa})$, and the deviation of each column degree from its mean is zero. This gives the required maximum deviations. To check equation (3), multiply by $p^{5\kappa-1/2}$ and set
+
+$$
+A_{\mathrm{LW}}=
+\left(\frac{n}{d^{5/4}}+\frac{d}{n^{5/4}}\right)p^{-1/4}
+=O(n^{-1/4}\log^{3/2}n)=o(1).
+$$
+
+For each fixed $K>0$, equation (4) follows since
+
+$$
+\frac{\log^K d/d+\log^K n/n}{p}
+=O\left(\frac{\log^{K+2}n}{n}\right)=o(1).
+$$
+
+The relative error in equation (5) is
+
+$$
+O\left(\frac{\log^2 n}{\sqrt n}+\frac{\log^2 d}{\sqrt d}+A_{\mathrm{LW}}\right)
+=O(n^{-1/4}\log^{3/2}n)=O(n^{-1/5}).
+$$
+
+These bounds only use the stated lower bounds on $p$ and $d$, so also cover fixed small positive $p$.
+
+## Densities bounded away from zero
+
+For $p\ge \mu_0/2$, use Canfield–Greenhill–McKay, with their dimensions $(m_{\mathrm{CGM}},n_{\mathrm{CGM}})=(n,d)$ and $A=v/2$ bounded below. Every admitted row margin is positive for all large $n$, and the column margins are positive and constant. Both aspect restrictions follow from $d\gg n/\log n$ for any fixed positive permitted deviation exponent. Their logarithmic density condition has left side $O(1+n/d)=o(\log d)$ under $\delta\log n\to\infty$. One can fix the two positive constants $a,b$ in their theorem with $a+b<1/2$, then choose $\eta$ small enough for both theorems. Their error is $O(d^{-b})=O(n^{-b/2})$ and the binomial normalization and variance correction coincide with those above. The two density ranges overlap. Take $\gamma=\min(1/5,b/2)$. [Canfield–Greenhill–McKay, Theorem 1, §1](https://web.maths.unsw.edu.au/~csg/papers/CGM.pdf#page=2) · [Journal version](https://doi.org/10.1016/j.jcta.2007.03.009)

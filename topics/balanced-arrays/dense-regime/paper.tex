@@ -9,23 +9,35 @@
 \newcommand{\Prob}{\mathbb P}
 \newcommand{\Var}{\operatorname{Var}}
 \setlength{\emergencystretch}{2em}
-\title{Real zeros of balanced arrays when the number of columns grows at least linearly}
+\title{Real zeros of balanced arrays with a logarithmic dimension bound}
 \author{ProgramComputer}
 \date{November 26, 2026}
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Let $a_k$ count labeled binary $n\times d$ arrays with column sums
-all equal to $k$ and row sums at most $r$. We prove that for every
-$\epsilon>0$, all sufficiently large $n$, every $d\ge\epsilon n$, and every
-$1\le r\le d$, the polynomial $\sum_k a_kq^k$ has
-$\lfloor nr/d\rfloor$ simple negative zeros. The threshold is
-existential. A uniform margin enumeration reduces the local coefficient
-ratios to those of a scalar capped-binomial polynomial. Near saturation
-the ratios give direct term separation. Elsewhere the alternating
-evaluation tends to a positive Jacobi theta value.
+Let $a_k$ count labeled binary $n\times d$ arrays whose column sums
+all equal $k$ and whose row sums are at most $r$. We prove that there
+are absolute constants $C>0$ and $N$ such that, for every $n\ge N$,
+$d\ge Cn/\log n$, and $1\le r\le d$, the polynomial $\sum_k a_k q^k$
+has $\lfloor nr/d\rfloor$ simple negative zeros. The constants are
+unspecified. This extends the linear-dimension theorem to a sublinear
+range. Quantitative margin enumeration and a uniform local limit
+estimate reduce the local coefficient ratios to scalar capped-binomial
+saddles. Near saturation the ratios give direct term separation.
+Elsewhere an alternating Gaussian sum gives the required sign.
 \end{abstract}
+
+Theorem~\ref{thm:logarithmic} gives a growing-dimension range of Alexandersson's
+balanced-array conjecture for uniform matroids \cite{Alex}. The
+argument supplies no numerical values for $C$ or $N$ and gives no
+claim of interlacing between consecutive row counts.
+
+\part{The linear-dimension argument}
+
+We first give the earlier linear-dimension theorem and its sign
+argument. Part~\ref{part:logarithmic} makes the needed local estimates
+quantitative when $d/n$ can tend to zero.
 
 \begin{theorem}\label{thm:main}
 For every $\epsilon>0$ there is an integer $N(\epsilon)$ such that,
@@ -33,12 +45,6 @@ whenever $n\ge N(\epsilon)$, $d\ge\epsilon n$, and $1\le r\le d$ are
 integers, the balanced-array polynomial $P(q)=\sum_k a_kq^k$ has exactly
 $\lfloor nr/d\rfloor$ distinct, strictly negative zeros.
 \end{theorem}
-
-This proves a growing-dimension range of Alexandersson's balanced-array
-conjecture for uniform matroids \cite{Alex}. The theorem concerns a
-single row count and gives no assertion about interlacing between
-consecutive counts. Its argument supplies no numerical value of
-$N(\epsilon)$.
 
 \section{Normalized log-concavity and test points}
 
@@ -446,6 +452,15 @@ This contradicts the failure of the node in the other possible
 regime as well. The sign test and the degree argument finish the
 proof of Theorem~\ref{thm:main}.
 
+\part{The logarithmic-dimension extension}\label{part:logarithmic}
+
+\input{logarithmic-window.tex}
+
+\appendix
+\input{quantitative-margins.tex}
+\input{sparse-enumeration.tex}
+\input{uniform-lattice-lemma.tex}
+
 \begin{thebibliography}{9}
 \raggedright
 \bibitem{Alex}
@@ -470,6 +485,12 @@ J.~Kahn and M.~Neiman,
 \href{https://doi.org/10.1002/rsa.20395}{doi:10.1002/rsa.20395}.
 The orientation inequality is Lemma~8 in
 \href{https://arxiv.org/abs/1001.0610}{arXiv:1001.0610}.
+
+\bibitem{LW}
+A.~Liebenau and N.~Wormald,
+Asymptotic enumeration of digraphs and bipartite graphs by degree sequence,
+\emph{Random Structures Algorithms} \textbf{62} (2023), 259--286.
+\href{https://doi.org/10.1002/rsa.21105}{doi:10.1002/rsa.21105}.
 
 \bibitem{Orient}
 ProgramComputer,

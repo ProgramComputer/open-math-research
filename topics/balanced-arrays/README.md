@@ -1,12 +1,12 @@
 # Real zeros of balanced binary arrays
 
-For every $\epsilon>0$, all sufficiently large rows have simple negative zeros for every $d\ge\epsilon n$ and every row cap. The cutoff depends only on $\epsilon$. **⬜ None** for Lean or Rocq. [Theorem and proof](dense-regime/README.md)
+There are absolute constants $C>0$ and $N$ such that, for every $n\ge N$, $d\ge Cn/\log n$, and every row cap, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. The constants are unspecified. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. **⬜ None** for Lean or Rocq. [Theorem and proof](dense-regime/README.md)
 
 For four columns with row cap two, the balanced-array polynomial has only simple negative zeros at every row count. The computer-assisted proof combines forty lower sign changes, uniform analytic phase estimates, and exact checks through 532 rows. A blind agent-assisted review checked the full argument against the original conjecture. **⬜ None** for Lean or Rocq. [Four-column theorem and verification](four-columns/README.md)
 
 Fix a column count $d\ge2$ and a row cap $1\le r<d$. Let $a_{n,k}$ count labeled $n\times d$ binary arrays with $k$ ones in each column and at most $r$ ones in each row. Define $P_n(q)=\sum_k a_{n,k}q^k$.
 
-**Theorem.** For every fixed pair $(r,d)$ and all sufficiently large $n$, all $\lfloor nr/d\rfloor$ zeros of $P_n$ are simple and negative. They strictly interlace the zeros of $P_{n+1}$, whose rightmost zero is further right. The proof gives an existential threshold $N(d,r)$. The all-row conjecture for general caps remains open. [Proof](fixed-rank-eventual.pdf) · [Manuscript source](fixed-rank-eventual.tex)
+**Theorem.** For every fixed pair $(r,d)$ with $1\le r<d$ and all sufficiently large $n$, all $\lfloor nr/d\rfloor$ zeros of $P_n$ are simple and negative. They strictly interlace the zeros of $P_{n+1}$, whose rightmost zero is further right. The proof gives an existential threshold $N(d,r)$. The all-row conjecture for general caps remains open. [Proof](fixed-rank-eventual.pdf) · [Manuscript source](fixed-rank-eventual.tex)
 
 The dominant terms in a torus integral come from the two points at which all coordinates have angle $\pi/d$ or all have angle $-\pi/d$. The resulting sign changes locate the central roots. Two limits of the coefficient sequence identify the remaining roots at either end and account for the full degree. The author’s public issue had already described a preliminary eventual argument for $(r,d)=(2,4)$. The manuscript credits this overlap. The project proof has received independent internal review. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsGraphs) · [Prior four-column claim](https://github.com/PerAlexandersson/RealRooted/issues/2005)
 
