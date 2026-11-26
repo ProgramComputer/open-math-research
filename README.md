@@ -8,6 +8,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟩 Full · Lean 4 |
 | [Eventual simple negative zeros for balanced arrays in every dimension](topics/balanced-arrays/eventual-all/README.md) | One eventual row threshold works for every dimension $d\ge2$ and every cap | ⬜ None |
 | [Simple negative zeros for four balanced columns with row cap two](topics/balanced-arrays/four-columns/README.md) | Proof for every row count | ⬜ None |
+| [Ribbon Schur positivity for balanced arrays](topics/balanced-arrays/koszul-ribbons/README.md) | Partial theorem giving strong Koszulness and positivity for every ribbon specialization | ⬜ None |
 | [Simple negative zeros for balanced arrays in growing dimensions](topics/balanced-arrays/dense-regime/README.md) | All roots for $d\ge Cn/\log n$ at large $n$ and in a rank-dependent range, plus a uniform below-cap root count | ⬜ None |
 | [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Strict interlacing for all $k$ at $n\ge10^{20}$, all sizes at $k=3$, and throughout the two-cycle range | ⬜ None |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Strict interlacing for every row count and dimension at $r=d-1$ | 🟨 Partial · Lean 4 (labeled-array coefficient formula) |
