@@ -1,5 +1,6 @@
 import CatalanStrictPeaksNormalizedRays
 
+
 #print axioms CatalanStrictPeaks.CutGeometry.rayCoefficientTerm_rev
 #print axioms CatalanStrictPeaks.CutGeometry.norm_nearPhaseUnit
 #print axioms CatalanStrictPeaks.CutGeometry.normalizedCoefficient_eq_near_add_far
