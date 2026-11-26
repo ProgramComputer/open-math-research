@@ -4,6 +4,8 @@ For every row count and every dimension $`d\ge2`$ with $`4d\ge n`$, the balanced
 
 A bound uniform over every row cap holds for $n\ge10^{200}$ and $200d\ge59n$. [Adjacent-quota proof and independent checks](../adjacent-quotas/README.md)
 
+Every cap also satisfies the conjecture when $\log n\ge10^6$ and $d\ge100n/\log n$. [Explicit sublinear dimension proof and reviews](../effective-sublinear/README.md)
+
 Two further effective guarantees hold.
 
 - For rational $`1/2<\rho<1`$ and $`c>\rho(1-\rho)\log4`$, a computable row cutoff suffices when $`d\ge cn`$ and $`r\ge\rho d`$.

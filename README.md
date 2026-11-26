@@ -7,7 +7,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟩 Full · Lean 4 |
 | [Eventual simple negative zeros for balanced arrays in every dimension](topics/balanced-arrays/eventual-all/README.md) | One eventual row threshold works for every dimension $d\ge2$ and every cap | ⬜ None |
-| [Effective real-rootedness sectors for balanced arrays](topics/balanced-arrays/effective-sectors/README.md) | Every cap if $n\ge10^{200}$ and $200d\ge59n$, and every height if $4d\ge n$ and $10r\ge9d$ | ⬜ None |
+| [Effective real-rootedness sectors for balanced arrays](topics/balanced-arrays/effective-sectors/README.md) | Every cap for $d\ge100n/\log n$ at $\log n\ge10^6$, plus explicit linear and high-cap sectors | ⬜ None |
 | [Simple negative zeros for four balanced columns with row cap two](topics/balanced-arrays/four-columns/README.md) | Proof for every row count | ⬜ None |
 | [Ribbon Schur positivity for balanced arrays](topics/balanced-arrays/koszul-ribbons/README.md) | Partial theorem giving strong Koszulness and positivity for every ribbon specialization | ⬜ None |
 | [Fixed balanced-array minors and positivity through 18 cells](topics/balanced-arrays/fixed-shapes/README.md) | Exact decision for each skew shape and universal binomial-basis positivity through 18 cells at unit weights | ⬜ None |
