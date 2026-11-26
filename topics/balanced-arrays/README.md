@@ -42,6 +42,8 @@ For every $n\ge0$, the polynomial for $U(2,3)$ has $\lfloor2n/3\rfloor$ distinct
 
 For every $n\ge1$ and every $1\le r\le d$, the normalized sequence $a_{n,k}/\binom nk^d$ is log-concave. It follows that $P_n$ has simple negative roots whenever $d\ge (n+1)\log(2)/2$, or whenever $d\ge\sqrt{nr\log 4}$. The proof applies Kahn and Neiman’s inequality for orientations of multigraphs to pairs of arrays. This conclusion has an independently reviewed written proof. Its orientation argument has no checked Lean or Rocq proof. [Counting argument and full hypotheses](orientation-normalization.md)
 
+[Binomial normalization thresholds](normalization-threshold/README.md) gives upper and lower bounds on the retained exponent that works for every cap and dimension, with exact witnesses against stronger divisions. Removing one source binomial factor remains a sufficient route in the proved cases and an open question in general.
+
 An effective coefficient inequality gives distinct negative roots beyond a terminal geometric radius in modulus, with a stronger test certifying simplicity and separating them by a circle. The criterion applies directly to the finite balanced-array polynomial. [Upper-edge inequality, exact examples and independent reviews](effective-upper-curvature/README.md)
 
 Cellwise balancing proves coefficientwise quota minors of order two and a nonnegative shifted Wronskian on the positive axis. A dimension bound covers specified higher unnormalized minors. [Proofs, independent reviews, and exact screens](quota-minors/README.md)
