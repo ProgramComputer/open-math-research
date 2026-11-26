@@ -4,11 +4,11 @@
 
 Per Alexandersson’s original conjecture asks for real-rootedness at every row count. The eventual theorem leaves a finite range of possible exceptions, since $d\ge n$ is covered by coefficient separation. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)
 
-**Status.** The overall independent review is pending. The proposed row threshold is ineffective.
+**Status.** An independent, agent-assisted blind referee accepted the written uniform eventual theorem, taking the cited fixed-quadratic and large-dimension theorems as inputs. The row threshold is ineffective, and the verdict leaves the original all-row conjecture open. [Uniform theorem referee report](review.md)
 
-**Fixed-profile review.** An anonymous, agent-assisted independent referee checked the fixed-profile enumeration formula. [Unchanged referee report](fixed-profile-review.md)
+**Fixed-profile review.** An anonymous, agent-assisted independent referee checked the fixed-profile enumeration formula. [Fixed-profile referee report](fixed-profile-review.md) [Editorial follow-up to both reports](editorial.md)
 
-**Formal verification.** ⬜ None. There is no Lean or Rocq proof of the eventual theorem or the new counting estimate. [Editorial follow-up to the reports](editorial.md)
+**Formal verification.** ⬜ None. There is no Lean or Rocq proof of the eventual theorem or the new counting estimate.
 
 ## Proof and supporting estimates
 
