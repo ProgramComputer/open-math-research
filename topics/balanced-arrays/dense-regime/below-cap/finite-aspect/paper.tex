@@ -10,11 +10,11 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-At height at least one million and between three and four rows per column, we isolate all but at most $\lceil n\sqrt{\log(100n)/(2d)}\rceil+4$ roots as simple negative real roots, for every row cap. The proof gives exact disk counts on circles centered at the origin. On each central circle a rotated seven-term approximation has uniformly positive real part. A monomial supplies the comparison near the two ends. In a million-row example, at least 501,926 of 508,000 roots are simple and negative.
+At height at least one million and dimension at least one quarter of the height, we isolate all but at most $\lceil n\sqrt{\log(100n)/(2d)}\rceil+4$ roots as simple negative real roots, for every row cap. The proof gives exact disk counts on circles centered at the origin. On each central circle a rotated seven-term approximation has uniformly positive real part. A monomial supplies the comparison near the two ends. In a million-row example, at least 501,926 of 508,000 roots are simple and negative.
 \end{abstract}
 Write $a_j$ for the number of labeled $n\times d$ binary matrices with all column sums $j$ and every row sum at most $r$, where $1\le r\le d$. Let $P(q)=\sum a_jq^j$. Its degree is $D=\lfloor nr/d\rfloor$ and each quota through $D$ is feasible: allocate the $d$ columns in consecutive blocks of $j$ cyclic row positions. Let $S(P)$ count its simple negative real zeros. Alexandersson asks whether all roots are real~\cite{original}.
 \begin{theorem}\label{main}
-If $n\ge10^6$ and $n/4\le d\le n/3$, then for every row cap,
+If $n\ge10^6$ and $d\ge n/4$, then for every row cap,
 \[
  D-S(P)\le \left\lceil n\sqrt{\frac{\log(100n)}{2d}}\right\rceil+4.
 \]
@@ -28,7 +28,7 @@ Fix an internal quota $k$ with $x=k/n\in[1/8,7/8]$. Define
  \eta=n\Pr\{\mathrm{Bin}(d,(k+3)/n)>r\}.
 \]
 \begin{theorem}\label{disk}
-If $n,d$ satisfy Theorem~\ref{main} and $\eta\le1/100$, then $|q|<w_c^d$ contains exactly $k$ roots of $P$, counting multiplicity. The boundary contains no roots, and $(-1)^k P(-w_c^d)>0$.
+If $n\ge10^6$, $n/4\le d\le n/2$ and $\eta\le1/100$, then $|q|<w_c^d$ contains exactly $k$ roots of $P$, counting multiplicity. The boundary contains no roots, and $(-1)^k P(-w_c^d)>0$.
 \end{theorem}
 \begin{proof}
 Put $F_j=\binom nj^d$, $v=x(1-x)$ and $a=d/(2nv)\ge1/2$. For $|j|\le3$, write
@@ -47,7 +47,7 @@ Now $p_c-x=(1/2-x)/(n+1)$, $L'(x)=1/v<10$ and $|L''(p)|\le162$ between $x$ and $
 \[
  \left|L(p_c)-L(x)-(1/2-x)/(nv)\right|\le86/n^2 .
 \]
-Multiplying the binomial and tilt errors by $d\le n/3$ gives $(1216+3\cdot86)/(3n)<.001$, proving the estimate.
+Multiplying the binomial and tilt errors by $d\le n/2$ gives $(1216+3\cdot86)/(2n)<.001$, proving the estimate.
 
 For fixed quota $k+j$, choose columns independently as uniform $(k+j)$-subsets. Any one row has binomial load with parameters $d,(k+j)/n$. Monotonicity in this parameter and the union bound imply $1-\eta\le a_{k+j}/F_{k+j}\le1$. Consequently the seven capped terms, divided by the unrestricted central magnitude $F_kw_c^{dk}$, deviate in magnitude from $e^{-aj^2}$ by less than $.011e^{-aj^2}$. Here $.99e^{-.001}>.989$ and $e^{.001}<1.002$.
 
@@ -76,6 +76,8 @@ When $\min(k,n-k)\le n/8$, it yields
  \ge \frac{n/4}{n/8+1}+\frac{n/4}{n+1}>2.2>\log9 .
 \]
 At the radius $u_k=\sqrt{a_{k-1}/a_{k+1}}$ the two immediate neighbors of the central term have relative magnitude $\tau=G_k^{-1/2}<1/3$. Log-concavity bounds all successive outward ratios by $\tau$. The total noncentral magnitude is below $2\tau/(1-\tau)<1$ times the central magnitude. The circle has no boundary roots, has count $k$, and has sign $(-1)^k$ on the negative ray.
+
+For $d>n/2$, the harmonic mean bound gives $\log G_k\ge4d/(n+2)>\log4$ at every internal index. On the negative ray at $u_k$ the alternating tail on either side can subtract at most its first term, by log-concavity. As $\tau<1/2$, the sign equals $(-1)^k$. These radii are strictly increasing since $a_{k-1}/a_k$ increases strictly with $k$. Together with the endpoint signs, all $D$ roots are simple and negative (also immediate for $D\le1$). Thus it suffices to consider $d\le n/2$.
 
 Put $g=\sqrt{\log(100n)/(2d)}$. Whenever $k+3\le n(r/d-g)$, Hoeffding's binomial inequality gives $\eta\le n e^{-2dg^2}=1/100$. Use these central tests and the edge tests just proved. The uncovered internal indices belong to one consecutive block, with $k>nr/d-ng-3$. Because $D\le nr/d$, the block contains at most $\lceil ng\rceil+3$ indices. We use just the guaranteed tests for this assertion. If additional tests happen to pass they can only help.
 

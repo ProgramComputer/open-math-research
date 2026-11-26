@@ -2,7 +2,7 @@
 
 ## Logarithmic dimension bound
 
-At three to four rows per column and every $`n\ge10^6`$, explicit disk counts isolate all but at most $`\lceil n\sqrt{\log(100n)/(2d)}\rceil+4`$ roots as simple and negative for every row cap. [Finite theorem and independent verification](below-cap/finite-aspect/README.md)
+At dimension at least one quarter of the height and every $`n\ge10^6`$, explicit disk counts isolate all but at most $`\lceil n\sqrt{\log(100n)/(2d)}\rceil+4`$ roots as simple and negative for every row cap. [Finite theorem and independent verification](below-cap/finite-aspect/README.md)
 
 **Theorem.** There are absolute constants $C>0$ and $N$ such that, for every integer $n\ge N$, every $d\ge Cn/\log n$, and every cap $1\le r\le d$, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. The constants are unspecified.
 
