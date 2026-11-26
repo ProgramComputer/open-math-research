@@ -1,0 +1,20 @@
+ x interval    A    row cutoff     estimate
+  4..5     17        10,000     full powers
+  5..6     20        12,000     full powers
+  6..7     23        21,601     full powers
+  7..8     26        36,054     full powers
+  8..9     29        56,768     full powers
+  9..10    32        85,334     full powers
+ 10..12    39       182,520     full powers
+ 12..15    49       450,188     full powers
+ 15..20    54       972,000     degree split
+ 20..25    43       963,021     degree split
+ 25..32    37     1,168,214     degree split
+ 32..40    30     1,200,000     degree split
+ 40..50    26     1,408,334     degree split
+ 50..64    24     1,966,080     degree split
+ 64..80    23     2,821,334     degree split
+ 80..96    23     4,062,720     degree split
+ 96..100   23     4,408,334     degree split
+100..125   24     7,500,000     degree split
+Uniform bounded-aspect row cutoff: 7,500,000.

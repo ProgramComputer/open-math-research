@@ -1,0 +1,148 @@
+\section{Two complementary uniform estimates}
+Write $E_{n,k}(t)$ for the minimum-cycle-length excedance enumerator and put
+$P_n=E_{n,k}/t$ at fixed $k$.  We give sufficient conditions for all the
+zeros of $P_n$ and $P_{n+1}$ to be simple and negative and to interlace strictly.
+In the middle of the root range use
+$t=-\exp(-\pi\cot\theta)$, $S=\sin\theta$, and
+$z_p=(\cos\theta+ipS)^{-1}$ for odd integers $p$.
+
+\paragraph{Large thresholds.}
+For $n\ge10{,}000$ it is sufficient that $k\ge2000\sqrt n$.
+The earlier estimate had an additional factor growing logarithmically with
+$n/k$. To remove it, let
+$D(u)=\exp(\sum_{j\ge k}u^j/j)$ and
+$b_j=[u^j](1-u)(D(u)-1)$.  The permutation cycle recurrence gives
+$j b_j=-\sum_{i=j-k+1}^{j-1}b_i$ for $j>k$.
+Hence on the block $hk<j\le(h+1)k$ we have
+$|b_j|\le1/(h!k^2)$ for $h\ge1$.
+This gives a summable exponential majorant for the coefficients.
+
+Expand the product $\prod_p D(z_pu)$ by partial fractions, distinguishing
+one pole $a$ at a time. Each other occupied pole contributes a numerator
+term $b_jz_q^{j-1}u^j/(i(q-a)S)$. For $kS^2\le1/4$ we sum the linear terms in the logarithm
+of the product with their signs. Indeed, for any sequence
+$f_q=\int e^{-iqv}\,d\mu(v)$ with convergent absolute sum after division by
+$q-a$, we have
+\[
+\left|\sum_{q\ne a}\frac{f_q}{q-a}\right|\le
+\frac{\pi}{2}\|\mu\|_{\rm TV}.
+\]
+This follows by Abel summation of the odd lattice's paired sine series.
+The gamma integral supplies the required Fourier measures for both powers
+of $z_q$ and their angular derivatives. The higher terms of the logarithm
+are bounded absolutely by the square-summable lattice kernel. Together with
+the block estimate this controls all occupied-pole counts in this region.
+For $kS^2\ge1/4$, reserve powers at the occupied poles and sum the resulting
+absolutely convergent majorants. The two estimates give both insertion
+signs when $n\ge3k-1$, $nS^2\ge6/5$ and $kS\ge2000$. The exterior-root
+theorem supplies the remaining ranks, and the two-cycle theorem covers
+$n\le3k-2$.
+\href{https://github.com/ProgramComputer/open-math-research/tree/main/topics/long-cycle-excedances/uniform-hilbert}{Full inequalities, exact checks and independent review.}
+
+\paragraph{Shorter thresholds.}
+For $n\ge10^6$ and $k\ge400$ it is sufficient that
+\[
+0.89n/k>47+(5/2)\log n .
+\]
+Write $w_p=s+ip\pi$, $s=\pi\cot\theta$, $r=|w_1|$, and
+$L(w)=\log((1+e^{w-s})/(1+e^{-s}))$ with $L(0)=0$.
+The numerator in the coefficient formula is $T_s=e^G$, where $G$ is the
+Taylor polynomial of $L$ through degree $k-1$. Compare $G(w)$ on
+$r\le|w|\le(1+1/k)r$ with $L(\widehat w)$ at
+$\widehat w=(1-1/k)rw/|w|$.  The sum of the two errors at $w$ and $w_1$
+is below $34$ in absolute value. For $s\le4\sqrt k$, the absolute Taylor
+coefficients of degree $j\ge2$, multiplied by $jr^j$, are at most
+$2+9/(4S\sqrt{j})$. Integrating the radial displacement cancels the
+harmonic factor. For $s>4\sqrt k$ expand $L$ in exponential frequencies,
+bound the first $5k/(4s)$ frequencies directly, and sum a Poisson lower
+tail for the remaining ones. The contracted Taylor tail is controlled by
+the complementary Poisson upper tail and a geometric series.
+Since $|1-\exp(-(s+i\pi)/k)|\ge2/k$, it follows that
+$|T_s(w)/T_s(w_1)|<13ke^{34}$.
+
+Choose a common contour with radius between $r(1+0.9/k)$ and $r(1+1/k)$
+and at distance at least $\min(r/(40k),1/r)$ from every pole. In the
+normalization of the phase-crossing proof the two coefficient errors are at
+most $1300n^2\exp(34-0.89n/k)<S/100$. In the normalized difference $Y_{n+1}-(\cos\theta)Y_n$,
+the common residue acquires the multiplier $z_p-\cos\theta$, of modulus at most $|p|S$.
+The neighboring-residue estimate and exterior-root join then give all the
+required next-row signs. These two threshold estimates already cover every
+$3\le k\le n$ for $n\ge250000^2$, using the earlier fixed small-threshold
+bound for $k<400$.
+\href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/long-cycle-excedances/radial-taylor.md}{Proof, independent review and exact constants.}
+
+\subsection{A uniform cutoff of 4,062,720}
+
+\textbf{Theorem.}
+For every $n\ge4{,}062{,}720$ and $3\le k\le n$, the two reduced
+excedance rows have only simple negative roots and strictly interlace.
+
+\emph{Proof.}
+Write $x=n/k$. For $x<4$, use the three-cycle theorem. In the range
+$4\le x\le125$, bound the middle angular region $nS^2\ge6/5$ using
+the exact pole expansion. For $x\in[\ell,X]$ and $k\ge1000$,
+each additional pole $q$ retains at least $k-1$ powers, with
+\[
+ |z_q|^{k-1}\le w_q=
+ \left(1+\frac{999}{160000X}(q^2-1)\right)^{-96}.
+\]
+For small $X$, marking the two-pole contribution separately controls the
+derivative by the larger absolute pole index. For larger $X$, take $M=n$
+or $M=n+1-k$ and split according to the total extra numerator degree $T$.
+At $T\le M/2$ the distinguished pole retains at least $M/2$ powers.
+At $T>M/2$, exponential weighting of the numerator coefficients supplies
+$\exp[-(\ell-1)/8]$. In these two sums the available first absolute
+moments of $b_j$ are bounded by $6$ and $11$, respectively, so
+differentiating an additional pole still gives a convergent positive
+majorant. Absolute summation over all subsequent pole choices reduces
+the angular estimates to explicit lattice sums. Rational upper bounds on
+the tails and the finite sums are sufficient.
+
+More precisely, put $B_j=\sum_p z_p^j$ and
+$F_j=r^jE_{j,k}(t)/(j!(1-t)^j)$. At an old zero $t$ the derivative
+term $t(1-t)P_n'(t)$ and the insertion lag have the common factor
+$n!(1-t)^{n+1}/(t r^{n+1})$ multiplying $SF'_n$ and
+$B_k F_{n+1-k}$, respectively. Here primes on $F_n,B_n$ denote angular
+derivatives. The quantities $k|F_n-d_nB_n|$,
+$k|F'_n-d_nB'_n|/n$, and $k|B_k F_{n+1-k}|/(nS)$ have respective
+bounds $V,\Delta,I$ in the
+\href{https://github.com/ProgramComputer/open-math-research/tree/main/topics/long-cycle-excedances/adaptive-poles}{proof and exact certificate}.
+The single-pole value and derivative tails cost at most $1/50$ and $1/16$.
+In each stated parameter interval the certificate proves
+\[
+(V+1/50)^2+(\Delta+I+1/16+1/100)^2<1.
+\]
+The principal amplitude is $2kd_n>1$, where $d_n=[u^n]D(u)$ in the
+cycle series above. At every old zero the cosine error bound therefore
+forces the sine to dominate both the derivative error and the lag.
+The old integer-phase samples alternate, and the exterior theorem and
+reciprocity give all $n-2$ old roots and the correct next-row signs.
+
+On an aspect interval with upper endpoint $X$ and certified angular
+threshold $A_0$ for $kS$, it suffices that
+$n\ge\max(10000,1000X,\lceil5(XA_0)^2/6\rceil)$. The complete
+18-interval table covers $4\le x\le96$ once $n\ge4{,}062{,}720$,
+through $x=100$ at $n\ge4{,}408{,}334$, and through $x=125$ at
+$n\ge7{,}500{,}000$. For $400\le k$ the wider-circle criterion covers
+the complementary larger $x$ in each of these ranges up to $250000^2$.
+Indeed $0.89x>47+2.5\log n$ at the respective joining values
+$x=96,100,125$ at their upper row endpoints, using
+$\log(4{,}408{,}334)<15.3$, $\log(7{,}500{,}000)<16$, and
+$\log(250000^2)<25$. Above $250000^2$ the two complementary uniform
+estimates already apply.
+
+For $3\le k<400$ a separate short-circle argument covers every $n\ge10^6$.
+For $k\le10$ this follows from the earlier criterion.
+For $11\le k<400$ the maximum principle for the reversed Taylor
+polynomial bounds $|G|$ on radius $r(1+1/(5k))$ by
+$e^{1/5}(6+10\log k)<82$. A contour beyond $r(1+0.15/k)$ gives both
+row errors below $S/100$. If $s\le9\sqrt k$ only two poles enter.
+Otherwise the gamma-density derivative bound is below $12/(25\pi)$
+on the required pole segments, using its Poisson lower tail for
+$11\le k\le20$. The same phase comparison and exterior join apply.
+This completes the proof.
+\href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/long-cycle-excedances/small-threshold-circle.md}{Small-threshold estimates and checks.}
+
+In particular any counterexample must satisfy $k\ge4$ and
+$4k\le n<4{,}062{,}720$. The interval estimates exclude additional
+pairs inside this region. They do not certify the full finite remainder.

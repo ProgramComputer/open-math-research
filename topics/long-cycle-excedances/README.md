@@ -1,15 +1,19 @@
 # Excedance zeros for permutations with long cycles
 
+For every $n\ge4{,}062{,}720$ and $3\le k\le n$, the nonzero roots of the minimum-cycle-length excedance polynomial are simple, negative and strictly interlace those of the next row at the same $k$. Together with the three-cycle and threshold-three theorems, this leaves $k\ge4$ and $4k\le n<4{,}062{,}720$ as necessary conditions for a counterexample. The proof gives stronger bounds at individual ratios $n/k$. [Uniform proof and interval table](adaptive-poles/README.md) · [Manuscript](paper.pdf)
+
+The proof uses three estimates. A signed sum over the poles handles $k\ge2000\sqrt n$, a common coefficient contour handles smaller thresholds, and exact rational bounds overlap the two ranges at moderate sizes. The checks and independent agent-assisted reviews are linked with each argument. Formal verification of this result is ⬜ None. [Signed-pole argument](uniform-hilbert/README.md) · [Wider-circle proof and audit](radial-taylor.md) · [Small thresholds](small-threshold-circle.md)
+
 For every $k\ge3$ and $k\le n\le4k-1$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. This includes the first transition permitting four cycles. [Complete three-cycle range, proof and verification](three-cycle-complete.md) · [Manuscript](paper.pdf)
 
-For every $n\ge10^{20}$ and every $3\le k\le n$, the nonzero zeros of the excedance polynomial for permutations with minimum cycle length $k$ are simple, negative and strictly interlace those of the next row. Hence any counterexample to Alexandersson’s conjecture occurs below an explicit cutoff. The finite complement remains too large for exhaustive verification. [Proof](effective-uniform.md) · [Independent review](review-uniform-effective.md) · [Manuscript](paper.tex)
+The first explicit cutoff for all thresholds was $10^{20}$. Its phase-crossing proof supplies the root count used in the sharper criterion. [Proof](effective-uniform.md) · [Independent review](review-uniform-effective.md) · [Manuscript](paper.tex)
 
 Two estimates also apply below the uniform cutoff. For $n\ge10^6$, the contour argument applies whenever $n/(200k)>30\log n+20$. For $n\ge10{,}000$, strict interlacing holds when $k\ge2000\sqrt n(3+\log(3\sqrt{n/k}))$. The proof of the latter estimate also gives strict consecutive order for the $\lfloor7\sqrt n/20\rfloor$ smallest roots and their reciprocals at every threshold. [Large-threshold proof](effective-threshold.md) · [Exterior roots](effective-front.md) · [Independent review](review-effective-front.md)
 
 For arbitrary cycle counts, a separate estimate bounds both insertion signs at all old roots with $k\sin^2\theta\ge8$, using $t=-\exp(-\pi\cot\theta)$. [Central interval](central-interval.md) · [Independent review](review-central-interval.md)
 
 
-At $k=3$, the polynomial $E_{n,k}(t)/t$ has $n-2$ simple negative zeros at every $n\ge3$, and they strictly interlace the zeros in the next row. Both conclusions also hold for every $k\ge3$ when $n\ge Bk^2$ for one absolute constant $B$. The zero at the origin is simple. Any remaining case has $k\ge4$ and $3k-1\le n<10^{20}$. [Original statement](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Sources and prior work](LITERATURE.md)
+At $k=3$, the polynomial $E_{n,k}(t)/t$ has $n-2$ simple negative zeros at every $n\ge3$, and they strictly interlace the zeros in the next row. Both conclusions also hold for every $k\ge3$ when $n\ge Bk^2$ for one absolute constant $B$. The zero at the origin is simple. [Original statement](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Sources and prior work](LITERATURE.md)
 
 The [proof at minimum length three](fixed-threshold.md) compares consecutive rows through their generating function. A [decreasing-run count](small-ranks.md) determines the signs at roots near zero. The [uniform estimate](quadratic-cutoff.md) bounds the dependence on $k$. At $k=3$ the estimates apply from row 400. The proof of existence of the general constant $B$ gives no numerical value. [Manuscript, including the uniform theorem](paper.tex)
 
