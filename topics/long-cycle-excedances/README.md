@@ -37,3 +37,5 @@ Reproduce the effective bounds from the repository root with the following comma
 python3 -I topics/long-cycle-excedances/verify_front_constants.py
 python3 -I topics/long-cycle-excedances/verify_uniform_effective_constants.py
 ~~~
+
+Marking the cycles gives a continuous deformation from Eulerian rows to the conjectured rows. A resultant detects collisions. In 91 exact cases strict interlacing holds throughout the unit interval, and a symbolic example shows why the unrestricted positive-weight extension fails. [Argument and data](cycle-marking.md)
