@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\title{Simple negative zeros for very tall balanced arrays}
+\author{ProgramComputer}
+\date{}
+\newtheorem{theorem}{Theorem}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $P_n^{(r,d)}$ enumerate labeled binary $n\times d$ arrays with row sums
+at most $r$ by their common column sum. The theorem gives a single existential
+constant $C$ for which every $P_n^{(r,d)}$ with $d\ge2$, $1\le r\le d$
+and $n\ge Cd^4\log(d+1)$ has only simple, strictly negative zeros.
+The proof combines adjacent coefficient estimates near the two ends
+with an evaluation of the balance integral at a pair of dominant phases.
+\end{abstract}
+
+\section{Statement}
+The \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{balanced-array conjecture of Per Alexandersson}
+asks for real-rootedness throughout the parameter range.
+For the labeled arrays in the abstract let $a_k$ count those with
+each column sum equal to $k$, and write
+\[
+P_n^{(r,d)}(q)=\sum_{k=0}^{\lfloor nr/d\rfloor}a_kq^k.
+\]
+\begin{theorem}
+There exists $C>0$ such that for every integer $d\ge2$, every $1\le r\le d$,
+and every integer $n\ge Cd^4\log(d+1)$, the polynomial $P_n^{(r,d)}$
+has $\lfloor nr/d\rfloor$ simple, strictly negative zeros.
+\end{theorem}
+
+Thus a counterexample to the all-parameter real-rootedness conjecture must have $n<Cd^4\log(d+1)$ for the existential absolute constant $C$ in the theorem. The original conjecture remains open.
+
+\input{main-proof.tex}
+
+\appendix
+\clearpage
+\input{very-tall-upper-quota.tex}
+\input{very-tall-nearly-empty.tex}
+\input{very-tall-interior-saddle.tex}
+\input{growing-cap-upper-saddle.tex}
+\end{document}

@@ -1,5 +1,7 @@
 # Real zeros of balanced binary arrays
 
+For all dimensions $d\ge2$ and all row caps, there is one absolute constant $C$ such that $n\ge Cd^4\log(d+1)$ gives all $\lfloor nr/d\rfloor$ zeros simple and negative. The constant is existential. **⬜ None** for Lean or Rocq. [Proof and independent review](very-tall/README.md)
+
 For each fixed cap $r$, there is a row threshold $N_r$ such that for $n\ge N_r$ and every $d\ge\max(2,r)$, all $\lfloor nr/d\rfloor$ zeros are simple and negative. The threshold is existential. **⬜ None** for Lean or Rocq. [Proof and independent review](fixed-cap/README.md)
 
 There are absolute constants $C>0$ and $N$ such that, for every $n\ge N$, $d\ge Cn/\log n$, and every row cap, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. The constants are unspecified. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. **⬜ None** for Lean or Rocq. [Theorem, proof and independent review](dense-regime/README.md)

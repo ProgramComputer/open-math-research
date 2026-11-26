@@ -1,0 +1,93 @@
+# Upper quotas with a growing row cap in very tall arrays
+
+Let $`d\to\infty`$, $`n\ge C_*d^4\log(d+1)`$ for a sufficiently large absolute constant $`C_*`$ and $`1\le r<d`$, allowing $`r`$ to vary. Write $`T=nr/d`$, $`D=\lfloor T\rfloor`$, $`H(w)=\sum_{s=0}^r\binom ds w^s`$, and $`A_i=[w^{di}]H(w)^n`$. Let $`a_i`$ count binary arrays with all column sums $`i`$ and all row sums at most $`r`$. Uniformly for $`0\le D-i\le Cd`$ at any fixed $`C`$, we have
+
+$$
+a_i=A_i\sqrt d\thinspace (2\pi\Lambda_{\ast}(i))^{-(d-1)/2}(1+o(1)),
+\qquad
+\Lambda_{\ast}(i)=\frac{i(d-r)}{d-1}.
+$$
+
+At internal quotas set $`\Gamma_k=a_k^2/(a_{k-1}a_{k+1})`$ and $`t_k=(a_{k-1}/a_{k+1})^{1/2}`$. If $`(D-k)/d\to c\in(0,\infty)`$, then $`\log\Gamma_{k+j}\to1/c`$ for any fixed integer $`j`$ and $`\log t_k=d\log w_k+o(1)`$, where $`w_k`$ gives the size law of mean $`dk/n`$. If $`(D-k)/d\to0`$, then $`\Gamma_k\to\infty`$.
+
+## Fourier balance uniform over upper profiles
+
+Fix a profile $`(s_1,\ldots,s_n)`$ with $`0\le s_j\le r`$ and total $`di`$, and set $`e=nr-di=O(d^2)`$. At least $`n-e`$ rows have size $`r`$. For each size $`s`$, let $`f_s(\theta)=\mathbb E e^{i\sum_{a\in U}\theta_a}`$ for a uniformly chosen $`s`$-subset $`U`$ of the columns. The balance probability is the pinned $`(d-1)`$-torus integral of $`\prod_jf_{s_j}(\theta)e^{-\mathrm{i}\,i\sum_a\theta_a}`$, with $`\theta_d=0`$ and normalized Haar measure. Common shifts leave the integrand unchanged because the prescribed total is $`di`$.
+
+Set $`V=\mathbf1^\perp\subset\mathbb R^d`$ and $`R=d^{-1}`$. Project onto $`V`$ along the common angle. The Euclidean ball $`\|y\|\le R`$ in $`V`$ is injective on the resulting quotient: its pinned inverse is $`\theta_a=y_a-y_d`$ modulo $`2\pi`$, with all lifts of magnitude at most $`2R`$. The Jacobian from pinned coordinates to Euclidean hyperplane volume is $`1/\sqrt d`$, since the projection of their basis has Gram matrix $`I_{d-1}-\mathbf1\mathbf1^\top/d`$. Normalized Haar measure on the ball is therefore $`\sqrt d\,(2\pi)^{-(d-1)}dy`$.
+
+Put $`z_j=e^{\mathrm{i}\theta_j}`$ and $`D_z=\sum_j|z_j-\bar z|^2`$. Generate a uniform $`s`$-subset by placing a uniform permutation into slots, tossing a fair coin to select one member from each of the first $`m=\min(s,d-s)`$ disjoint pairs, and taking $`s-m`$ fixed unused slots. Conditional Fourier modulus is at most $`e^{-X/8}`$, where $`X`$ sums the squared chords of the pairs, since each fair choice has modulus $`\sqrt{1-|z_i-z_j|^2/4}`$. A random distinct pair has mean square chord $`2D_z/(d-1)`$, hence $`\mathbb E X=2mD_z/(d-1)`$. Each chord square is at most four. For two disjoint ordered pairs the expected product is at most $`d(d-1)/[(d-2)(d-3)]`$ times the square of the one-pair mean, by allowing intersections in the numerator. Thus $`\mathbb E X^2\le C(\mathbb E X+(\mathbb E X)^2)`$. The inequality $`1-e^{-X/8}\ge cX/(1+X)`$ and Cauchy--Schwarz give a modulus loss at least $`c\min(mD_z/d,1)`$, hence at least $`ca_s\min(D_z,1)`$ with $`a_s=s(d-s)/[d(d-1)]`$.
+
+Outside the projected ball $`D_z\ge c_0R^2`$. Indeed anchor at an index minimizing $`|z_j-\bar z|`$. The sum of squared chords to that anchor is at most $`2D_z`$, so the phases relative to it in $`[-\pi,\pi]`$ have squared Euclidean norm at most $`C D_z`$ by the chord-angle inequality. Removing their average can only decrease that norm. If $`D_z<c_0R^2`$ for small enough $`c_0`$, the centered representative lies inside the ball. Applying the modulus bound to the $`n-e`$ size-$`r`$ rows, with $`a_r\ge1/d`$, bounds the exterior integral by $`\exp(-c'n/d^3)`$.
+
+On the ball let $`L=\sum_{a\in U}y_a`$ for a row of size $`s`$. By exchangeability $`\mathbb E L=0`$ and $`\mathbb E L^2=a_s\|y\|^2`$. For the fourth moment replace the subset by its complement if $`s>d/2`$, which negates $`L`$. Set $`p_j=(m)_j/(d)_j`$ and $`Q_j=\sum_a y_a^j`$. Expansion using $`Q_1=0`$ gives
+
+$$
+\mathbb E L^4=(p_1-7p_2+12p_3-6p_4)Q_4+(3p_2-6p_3+3p_4)Q_2^2.
+$$
+
+The index patterns $`4,3+1,2+2,2+1+1`$ give $`p_1Q_4`$, $`-4p_2Q_4`$, $`3p_2(Q_2^2-Q_4)`$ and $`6p_3(2Q_4-Q_2^2)`$. Subtracting these from $`(\sum_a y_a)^4=0`$ with all $`p_j`$ set to one gives the distinct-index term $`p_4(3Q_2^2-6Q_4)`$. Since $`p_j\le p_1\le2a_s`$, the fourth moment is at most $`Ca_s\|y\|^4`$. Cauchy--Schwarz yields $`\mathbb E|L|^3\le Ca_s\|y\|^3`$. Taylor's inequality and the logarithm series therefore give
+
+$$
+\log f_s(y)=-\frac{a_s}{2}\Vert y\Vert ^2+O(a_s\Vert y\Vert ^3).
+$$
+
+The branch passes through zero at $`y=0`$. The extra series error $`O(a_s^2\|y\|^4)`$ is absorbed since $`a_s\le1`$ and $`\|y\|\le R`$. Thus the centered integrand is $`\exp(-\Lambda\|y\|^2/2+B(y))`$, with
+
+$$
+\Lambda=\sum_j a_{s_j},\qquad |B(y)|\le C\Lambda\Vert y\Vert ^3,\qquad
+(n-e)/d\le\Lambda\le n.
+$$
+
+Use $`|e^B-1|\le |B|e^{|B|}`$ and $`\|y\|\le1/d`$. The relative error integrated over the ball, normalized by the full target Gaussian integral, is at most
+
+$$
+C\Lambda(1-2C/d)^{-(d-1)/2}\mathbb E\Vert Y\Vert ^3
+=O(d^{3/2}/\sqrt\Lambda)=O(d^2/\sqrt n)=o(1),
+$$
+
+where $`Y`$ is Gaussian on $`V`$ of precision $`\Lambda(1-2C/d)`$. The normalization ratio is bounded and the moment bound follows from the Gaussian fourth moment. The target Gaussian mass outside the ball is $`O(d/(\Lambda R^2))=O(d^4/n)=o(1)`$ by Markov's inequality. Its full torus-density-normalized integral is $`\sqrt d(2\pi\Lambda)^{-(d-1)/2}\ge e^{-C_1d\log n}`$ for fixed $`C_1`$. As $`n/\log n`$ increases for $`n>e`$, the ratio $`n/(d^4\log n)`$ has lower limit at least $`C_*/4`$ in the stated range. Choose $`C_*`$ large enough that $`c'n/d^3\ge 2C_1 d\log n`$ there for all large $`d`$. The exterior is then negligible relative to the Gaussian. All estimates are uniform in the profile and in $`r`$.
+
+The profile dependence in the determinant can now be discarded, since
+
+$$
+0\le \Lambda-\Lambda_{\ast}(i)
+=\frac{\sum_j s_j(r-s_j)}{d(d-1)}\le\frac{re}{d(d-1)},
+\qquad
+d\log(\Lambda/\Lambda_{\ast}(i))
+\le\frac{dre}{di(d-r)}
+=O(d^3/n).
+$$
+
+In the last estimate use $`di=nr-e\sim nr`$ and $`d-r\ge1`$. Averaging over profiles in $`A_i`$ with weights proportional to $`\prod_j\binom d{s_j}`$ gives the asserted count, including $`e=0`$. The profile event describes exactly the balanced arrays conditional on the row sizes. The logarithmic first differences of the determinant factor at these quotas are $`O(d/i)=O(d^2/(nr))=o(1)`$, so the same is true of its second differences. Together with the uniform relative error, this means all required fixed-offset logarithmic differences may be taken on $`A_i`$.
+
+## Scalar quota differences
+
+Put $`b=d^2/n`$. At a real $`x\in(0,T)`$, let the size law with positive tilt $`w_x`$ have mean $`dx/n`$. The mean is strictly increasing in $`\log w_x`$ since its derivative is the positive variance $`V_x`$. As $`w_x`$ spans the positive axis the mean spans $`(0,r)`$. The deficit $`J=r-S`$ has mean $`h_x=d(T-x)/n`$ and weights $`B_j z^j`$ for $`B_j=\binom d{r-j}`$ and $`z=1/w_x`$. Write $`\ell=B_1z/B_0`$. The forward weight ratios decrease in $`j`$, so $`B_j z^j/B_0\le\ell^j`$. If $`h_x=o(1)`$, the mass at zero is at least $`1-h_x`$ while the mass at one is at most $`h_x`$, so $`\ell\le h_x/(1-h_x)`$. Summing the resulting geometric majorant and retaining the first two masses gives, uniformly in the cap,
+
+$$
+h_x=\ell+O(\ell^2),\qquad
+V_x=h_x+O(h_x^2),\qquad
+\mathbb E|J-h_x|^3=O(h_x),\qquad
+\mathbb P(J=0)\mathbb P(J=1)\asymp h_x.
+$$
+
+Here all raw moments up to order three from $`J\ge2`$ are $`O(\ell^2)`$, since $`\sum_{j\ge2}j^m\ell^j=O(\ell^2)`$ for $`\ell\le1/2`$. The derivative of $`V_x`$ with respect to the size mean is the signed third centered size moment divided by variance, hence is uniformly $`O(1)`$ in this regime.
+
+Suppose $`(D-k)/d\to c\in(0,\infty)`$. On any bounded real window around $`k`$, $`h_x\sim cb`$ and $`nh_x\sim cd^2`$. At integer $`i`$ in that window, the sum of $`n`$ tilted deficits has integral mean $`e=nr-di`$. The two-mass product estimate implies that the modulus of the deficit characteristic function is at most $`\exp(-c_2h_i t^2)`$ for $`|t|\le\pi`$ by comparing two independent copies and retaining their differences $`\pm1`$. Rescale Fourier inversion at the mean by $`t=v/\sqrt{nV_i}`$. The centered expansion of the logarithm on bounded $`v`$ gives $`-v^2/2+O(|v|^3/\sqrt{nh_i}+v^4/n)`$ after multiplication by $`n`$. The modulus bound supplies an integrable Gaussian majorant independent of the parameters. Thus the central probability is $`(2\pi nV_i)^{-1/2}(1+o(1))`$ at each fixed integer shift.
+
+For $`E(x)=n\log H(w_x)-dx\log w_x`$, one has $`E'=-d\log w_x`$ and $`E''=-b/V_x\to-1/c`$ uniformly on the window. Also $`E'''=O(b(d/n)/h_x^2)=O(1/d)`$ by the derivative bound just proved. The tilt identity yields $`\log A_i=E(i)-\tfrac12\log(2\pi nV_i)+o(1)`$, and neighboring $`V_i`$ have ratio tending to one. The central second difference of $`E`$ gives $`\log\Gamma_{k+j}\to1/c`$, and $`(E(k-1)-E(k+1))/2=-E'(k)+O(1/d)`$ gives the claimed logarithm of $`t_k`$. The determinant factor has already been accounted for.
+
+## The last $`o(d)`$ quotas
+
+Use scalar deficit counts $`U_e=[z^e](\sum_j B_j z^j)^n`$. They are log-concave relative to $`\binom{n+e-1}e`$. To see this, let $`C_m`$ be the analogous totals for $`n-1`$ rows, extended by zero. They are log-concave with interval support by convolution. For increasing $`e`$, the law on $`j`$ with weights $`(j+1)B_j C_{e-j}`$ increases in likelihood ratio order: the common-support ratio is proportional to $`C_{e+1-j}/C_{e-j}`$, increasing with $`j`$, and the support endpoints both increase weakly. Under this law the expectation of the decreasing sequence $`B_{j+1}/B_j`$, extended by zero at $`r`$, equals $`(e+1)U_{e+1}/[(n+e)U_e]`$. The numerator comes from differentiating the row polynomial power, and the denominator from exchangeability of the rows conditional on their sum. Thus the normalized forward ratio decreases, proving the assertion.
+
+At an internal quota with $`(D-k)/d\to0`$, $`e=d(T-k)\ge d`$ and $`e=o(d^2)`$. The log curvature of $`A_k=U_e`$ at quota step one is at least the log curvature of its negative-binomial normalizer at deficit step $`d`$. Writing the binomial forward logarithmic increment as $`g(v)=\log[(n+v-1)/v]`$, this gives
+
+$$
+\log\frac{A_k^2}{A_{k-1}A_{k+1}}
+\ge\sum_{j=1}^d \big(g(e-d+j)-g(e+j)\big)
+\ge\frac{d^2(n-1)}{(e+d)(n+e+d)}\longrightarrow\infty .
+$$
+
+Indeed $`-g'(v)=(n-1)/[v(n+v-1)]`$ and each difference integrates over length $`d`$. This argument includes the case $`e=d`$, where its upper-quotient neighbor has exact saturation. The determinant comparison transfers the divergence to $`\log\Gamma_k`$.
