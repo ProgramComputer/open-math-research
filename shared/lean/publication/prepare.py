@@ -81,9 +81,11 @@ def main():
     elif args.group == "ribbon-foundation":
         for name in ("MatroidKL", "MatroidKLRecurrence", "MatroidFlatPolynomial",
                      "MatroidFlatContract", "MatroidKLProduct", "MatroidFlatSum",
-                     "MatroidKLDeletionProfile", "MatroidFlatDelete"):
+                     "MatroidKLDeletionProfile", "MatroidFlatDelete", "MatroidKLMap",
+                     "MatroidKLSeparation", "MatroidKLSplitDeletion"):
             additional["OpenMathResearch." + name] = HERE.parent / "OpenMathResearch" / (name + ".lean")
-        for name in ("RibbonNarayanaSpec", "RibbonBoundaryProfile", "RibbonChainPresentation"):
+        for name in ("RibbonNarayanaSpec", "RibbonBoundaryProfile", "RibbonChainPresentation",
+                     "RibbonChainDeletion", "RibbonChainBoundary"):
             additional[name] = (HERE.parents[2] / "topics" / "ribbon-matroids" / "lean" /
                                 "publication" / (name + ".lean"))
     files.update({k: str(v.relative_to(HERE.parents[2])) for k, v in additional.items()})

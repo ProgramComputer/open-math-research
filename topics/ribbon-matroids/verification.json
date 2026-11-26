@@ -413,5 +413,94 @@
         "sha256": "122edc4759d1448de7007e84bd8732cfd48c9d14ea7da1a0c1fcae87156eb102"
       }
     ]
+  },
+  "ribbon_circuit_boundary": {
+    "status": "passed",
+    "formal_coverage": "Partial. Lean reduces the actual finite matroid of an arbitrary nonempty connected ribbon to a rank-preserving circuit matroid with the same Z-polynomial.",
+    "scope": [
+      "A splice of two bases of the contraction at an interior interval element is again a basis. The splice splits the matroid across the cut.",
+      "For each required flat pair, explicit independent chains prove that both sides of the further contraction have positive rank.",
+      "Each interior deletion preserves Z. Finite induction leaves exactly the separators, and each boundary basis omits exactly one separator.",
+      "Relabeling the two sides preserves the flat ranks and the Kazhdan–Lusztig coefficients used in the direct-sum vanishing theorem."
+    ],
+    "remaining": [
+      "Evaluate the actual circuit Z-polynomial as Narayana and check the real-rootedness and simple-negative-root conclusions."
+    ],
+    "workflow_checkout_commit": "030174141132d8bfd0031236428e1dd5737ef9a3",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45842864905/job/139988838720",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45842864905/artifacts/15130210739",
+    "hosted_artifact_digest": "sha256:197fec6cb291c354d42a62dc0d0d0efca477350fd438d5fcebde746ea84e5f9d",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2857,
+    "checked_declarations": 82,
+    "new_declarations": [
+      "OpenMathResearch.MatroidKL.SplitsAt.contract",
+      "OpenMathResearch.MatroidKL.SplitsAt.tau_eq_zero",
+      "OpenMathResearch.MatroidKL.eq_map_sum_of_splitsAt",
+      "OpenMathResearch.MatroidKL.flatRank_map",
+      "OpenMathResearch.MatroidKL.matroidKL_map",
+      "OpenMathResearch.MatroidKL.matroidZ_delete_of_split",
+      "OpenMathResearch.MatroidKL.rank_map",
+      "OpenMathResearch.MatroidKL.splitsAt_of_baseSplice",
+      "OpenMathResearch.MatroidKL.tau_map",
+      "Ribbon.Source.IsChainPresentation.restricted",
+      "Ribbon.Source.IsRestrictedChain.contract_splitsAt",
+      "Ribbon.Source.IsRestrictedChain.delete_nonseparator",
+      "Ribbon.Source.IsRestrictedChain.isBase_iff_of_ground_sep",
+      "Ribbon.Source.IsRestrictedChain.lower_base",
+      "Ribbon.Source.IsRestrictedChain.matroidZ_delete_of_inside",
+      "Ribbon.Source.IsRestrictedChain.reduce_to_separators",
+      "Ribbon.Source.IsRestrictedChain.spans_without_nonseparator",
+      "Ribbon.Source.IsRestrictedChain.upper_base",
+      "Ribbon.Source.IsRibbonPresentation.exists_circuitBoundary"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "declarations_using_fewer_axioms": {
+      "Ribbon.Source.IsChainPresentation.restricted": [
+        "propext"
+      ]
+    },
+    "new_modules": [
+      {
+        "name": "OpenMathResearch.MatroidKLMap",
+        "file": "shared/lean/OpenMathResearch/MatroidKLMap.lean",
+        "sha256": "7c44886395e10383470e5e031dbb694df4a225098f6997c04bf4b7c3bc76572d"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLSeparation",
+        "file": "shared/lean/OpenMathResearch/MatroidKLSeparation.lean",
+        "sha256": "916a7ac4580c2bbe747b49e9258f9e736b571ebf80e663ad33c370fae0cf0589"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLSplitDeletion",
+        "file": "shared/lean/OpenMathResearch/MatroidKLSplitDeletion.lean",
+        "sha256": "fd77bc5c1ff763ef00e322a5cfd2e2177e71b641c28b76c6ce101d938d9e2484"
+      },
+      {
+        "name": "RibbonChainBoundary",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonChainBoundary.lean",
+        "sha256": "07aa4b4a26e0b217de562b717b7491d947f92292ec37092f0bcaf3c0ebbf43cd"
+      },
+      {
+        "name": "RibbonChainDeletion",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonChainDeletion.lean",
+        "sha256": "e062af91d0872a6fa924a88fd85e99bc29567abeb5f32c86a7f27b6851e5554d"
+      }
+    ]
   }
 }
