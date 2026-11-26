@@ -1,4 +1,6 @@
-# Formal verification of the torus reduction
+# Formal verification for balanced arrays
+
+## Torus reduction
 
 The [Lean 4 source](BalancedPairCompression.lean) proves that a distinct pair $x,y$ of complex unit numbers has a sum strictly inside the segment between the two equal-pair sums with the same product. For an objective $|a+b(x+y)|^2$ with $b\ne0$, one of those equal-pair endpoints strictly improves the objective. Thus a distinct maximizing pair forces $b=0$. This is the pair comparison in the proof of torus dominance. The checked statements include the case $x+y=0$.
 
@@ -15,3 +17,15 @@ lake build BalancedTorusComponents
 ## The first zero at every row count
 
 Lean checks injectivity on a closed complex disk under linear-coefficient dominance, nonvanishing of the formal derivative there, and the geometric comparison giving the bound $36/37$. The layer-count inequalities and the comparison of consecutive balanced-array rows have written proofs. Rebuild these supporting lemmas with `lake build OpenMathResearch.DiskUniqueness`. [Shared Lean source](../../../shared/lean/OpenMathResearch/DiskUniqueness.lean) · [All-row theorem](../first-root.md)
+
+## Three columns with row cap two
+
+The shared theorem `OpenMathResearch.IntegerLevelNodes.increasing_integer_level_nodes` orders witnesses to successive positive integer levels of a continuous phase on a closed interval using its endpoint values. For the three-column phase with terminal value $2n/3$, `BalancedThreeColumnSigns.positive_roots_of_phase_signs` applies the shared alternating-sign root count to the reflected, once-normalized polynomial. Its hypotheses are the degree $\lfloor2n/3\rfloor$, the initial phase below one, the terminal phase $2n/3$, the increasing root-modulus parametrization, the strict signs at integer phase levels, the constant sign, and the leading sign. Lean handles both possible counts of finite samples and proves that the positive simple roots exhaust the reflected root multiset. [Balanced sign-count theorem](BalancedThreeColumnSigns.lean) · [Integer-level selection](../../../shared/lean/OpenMathResearch/IntegerLevelNodes.lean) · [Alternating-sign root count](../../../shared/lean/OpenMathResearch/AlternatingSignRoots.lean)
+
+The proof of those analytic hypotheses, the binomial multiplier transfer, and the finite Sturm prefix are covered by the written argument and exact Python verification. [Three-column proof](../three-column-all-rows.md) · [Kernel report](../verification.json)
+
+From the shared Lean project with pinned dependencies, run
+
+~~~sh
+lake build BalancedThreeColumnSigns
+~~~
