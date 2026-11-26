@@ -299,6 +299,17 @@ far-ray bounds make this term dominate the remaining terms. The resulting
 sign is for the actual next-row Catalan polynomial.
 [Middle-root kernel output](middle-roots-kernel.txt)
 
+## First-checkpoint separation at the right edge
+
+The [right-checkpoint module](CatalanStrictPeaksRightCheckpoint.lean) bounds
+the positive modulus at the first phase level. Theorem
+`first_checkpoint_modulus_gap` gives modulus at least $11/16+1/n^2$.
+Theorem `roots_after_first_modulus_gap` places every root after the
+rightmost one strictly beyond that separation for $n\ge150$. It uses the
+middle-rank angle theorem at the second root. The shared theorem
+`CompleteNegativeRoots.unique` identifies the ordered lists obtained
+from separate comparisons. [Right-checkpoint kernel output](right-checkpoint-kernel.txt)
+
 ## Exact isolating intervals through length 150
 
 The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
@@ -364,6 +375,8 @@ lake build CatalanStrictPeaksPhaseOrder CatalanStrictPeaksAllRoots
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/CheckpointPhaseAxioms.lean
 lake build CatalanStrictPeaksMiddleRoots
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/MiddleRootsAxioms.lean
+lake build CatalanStrictPeaksRightCheckpoint
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightCheckpointAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~

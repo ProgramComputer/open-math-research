@@ -129,6 +129,15 @@ jobs:
             tee "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/normalized-rays-kernel.txt \
             "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
+      - name: Check the right-edge checkpoint gap
+        run: lake build CatalanStrictPeaksRightCheckpoint
+      - name: Audit the right-edge checkpoint gap
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightCheckpointAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-right-checkpoint-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/right-checkpoint-kernel.txt \
+            "$RUNNER_TEMP/catalan-right-checkpoint-axioms.txt"
       - name: Check the explicit checkpoint phase and all-length root count
         run: lake build CatalanStrictPeaksPhaseOrder CatalanStrictPeaksAllRoots
       - name: Audit the checkpoint phase and root count
