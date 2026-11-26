@@ -1,0 +1,5 @@
+'CatalanStrictPeaks.CutGeometry.rayCoefficientTerm_rev' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.norm_nearPhaseUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.normalizedCoefficient_eq_near_add_far' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.normalizedCoefficient_close_to_phase' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.eval_sign_of_nearPhaseUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
