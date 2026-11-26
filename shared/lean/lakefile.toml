@@ -178,3 +178,7 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 [[lean_lib]]
 name = "CatalanStrictPeaksAnalyticBranch"
 srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFastCoefficients"
+srcDir = "../../topics/catalan-word-peaks/lean"

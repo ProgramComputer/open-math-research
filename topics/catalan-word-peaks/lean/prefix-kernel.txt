@@ -1,4 +1,6 @@
+'CatalanStrictPeaks.FastCoefficients.row_eq_coefficients' depends on axioms: [propext, Classical.choice, Quot.sound]
 'CatalanStrictPeaks.Finite.checkRow_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'CatalanStrictPeaks.Finite.checkPair_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
-'CatalanStrictPeaks.Finite.roots_through_20' depends on axioms: [propext, Classical.choice, Quot.sound]
-'CatalanStrictPeaks.Finite.interlacing_before_20' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Finite.roots_through_150' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Finite.interlacing_before_150' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Finite.interlacing_from_analytic_signs' depends on axioms: [propext, Classical.choice, Quot.sound]
