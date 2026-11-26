@@ -1,0 +1,126 @@
+\documentclass[11pt]{article}
+\usepackage[hmargin=.9in,vmargin=.8in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\mathrm{Var}}
+\title{Row deficits and the outer roots of balanced binary arrays}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We estimate adjacent quota ratios for capped binary matrices by counting rows that still admit a new entry. Transferring deficit between two rows controls this count even after imposing all column margins. A dummy row reduces the needed comparisons to regular column margins. If $d\le n$, $d\to\infty$ and the relative cap stays away from zero and one, the method isolates at least a constant times $\min(d,(n^2/d)^{1/3})$ of the largest roots as simple and negative. The criterion is finite and explicit. For one million rows, 250,000 columns and cap 127,000, it certifies 95 outer roots. Together with an interior test, 5,518 of the 508,000 roots remain unclassified.
+\end{abstract}
+
+Fix $n,d\ge2$ and a proper cap $1\le r<d$. Let $a_k$ be the number of labeled $n\times d$ binary matrices with each column sum $k$ and all row sums at most $r$. Set $P(z)=\sum_{k=0}^D a_kz^k$, where $D=\lfloor nr/d\rfloor$. Every quota through $D$ is feasible by allocating consecutive cyclic row positions to the ones in successive columns. Alexandersson asks whether all zeros of $P$ are real~\cite{original}.
+
+Put $c=d-r$, $R=rc/d$. For nonnegative integers $s$, define
+\begin{equation}\label{delta}
+ \delta(s)=\min\left\{\frac{s(s-1)}{R n(n-1)}+\frac{s}{nR}+\frac{2s}{nr}, \left(\frac2R+\frac2r\right)\frac{s(s-1)}{n(n-1)}\right\}.
+\end{equation}
+At an internal quota $k$, put $e=nr-dk$ and
+\[
+ X=\delta(e)\frac{n+e+d-1}{d},\qquad
+ H=\frac{c n(n-1)(1-X)}{(n+e-1)(n+e+d-1)} .
+\]
+Write $B=\min(n-k,(c+1)e/d+1)$.
+
+\begin{theorem}\label{edge}
+If $X<1$, then
+\[
+ \frac{a_k^2}{a_{k-1}a_{k+1}}\ge
+ \left[\frac{k+1}{k}\left(1+\frac{H}{B}\right)\right]^d .
+\]
+In particular, if $X<1$ and $dH/(B+H)>\log 9$, the $D-k$ largest roots by modulus are all simple and negative.
+\end{theorem}
+
+\section{A switching inequality for fixed row sizes}
+We recall a regular-margin comparison and include the reasoning to identify the symmetry it requires~\cite{regular}. Suppose all $d$ columns have the same sum and all row degrees are prescribed. For two rows of degrees $b\ge a$, let $W$ be the number of matrices and $W'$ the count after changing the two degrees to $b+1,a-1$. In the baseline uniform ensemble let $Y$ count columns containing a one in the smaller row and a zero in the larger. Then, for $W>0$,
+\begin{equation}\label{switch}
+ \frac{W'}W=\E\frac{Y}{Y+b-a+1}\ \ge \frac{m}{m+b-a+2},\qquad m=a(1-b/d).
+\end{equation}
+In particular the ratio is at most one. Fixing the other rows leaves columns requiring zero, one, or two entries. The singletons are apportioned between the two rows, so the exact ratio on a baseline fiber is the binomial ratio in \eqref{switch}. Every fiber feasible after the move was feasible before it.
+
+For the lower bound, the occupied indicators of two distinct rows in a single marked column are negatively correlated. Indeed, if the regular column degree is $K$ and row degrees are $t_i$, the probability generating polynomial of the missing positions in the marked column is, up to scaling,
+\[
+ [\mathbf z^{\mathbf t}]\,e_K(\mathbf z)^{d-1}\prod_i(x_i+z_i).
+\]
+The total degree constraint fixes the marked column size. Elementary symmetric polynomials are stable, and products, coefficient extraction and real specialization preserve stability or give zero. The multiaffine Rayleigh inequality gives the stated covariance bound, also after taking complements~\cite{bbl}. Column symmetry now implies $\E Y\ge m$.
+
+Condition on the set $I$ of columns occupied by the larger row. Writing $a_0,b_0$ for the two row labels, mark the holes of the smaller row using the stable polynomial
+\[
+ [\mathbf z^{K\mathbf 1-\mathbf 1_I}]\,
+ \prod_{i\notin\{a_0,b_0\}} e_{t_i}(\mathbf z)
+ \prod_{h=1}^d(x_h+z_h).
+\]
+Specialize $x_h$ to one on $I$ and a common variable off $I$. The resulting generating polynomial has nonnegative coefficients and real nonpositive roots, so the number of marked holes is distributed as a sum of independent Bernoulli variables, including deterministic ones. Taking its complement off $I$ gives the same representation for $Y$. By symmetry its law is independent of the choice of $I$, and $\Var Y\le\E Y$. Cauchy--Schwarz gives $\E[Y/(Y+b-a+1)]\ge(\E Y)^2/\E[Y(Y+b-a+1)]$ when $\E Y>0$, proving \eqref{switch}. The zero-mean case is immediate.
+
+The comparison also applies to the row-profile counts when exactly $\ell$ columns have sum $q+1$ and the rest have sum $q$. Allow the set of higher columns to range over its $\binom d\ell$ possible choices. Add one distinguished row with ones in precisely the lower columns. All augmented columns now have sum $q+1$. Fixing its row degree $d-\ell$ preserves the count bijectively. The new row-profile count is $\binom d\ell$ times the count for any specified higher set, by relabeling columns. This factor cancels when transferring a unit between two original rows.
+
+\section{How many rows can accept an entry?}
+Under any feasible fixed margins of this nearly equal form, use the uniform measure on capped matrices. Write $u_i=r-t_i$ for the slack of row $i$, $s=\sum_i u_i$ for the total slack and $M=\#\{i:u_i>0\}$. Then
+\begin{equation}\label{active}
+ 0\le \E M-\frac{ns}{n+s-1}\le
+ \frac{n(n-1)}{n+s-1}\delta(s).
+\end{equation}
+To prove this, fix all row degrees except those of two labeled rows. Denote these other degrees by $T$. Write the two slacks as $u,v$ with fixed total $t=u+v$. The conditional masses of $(j,t-j)$ are proportional to symmetric weights $W_j$ for $0\le j\le t$, with zero outside the feasible range. By balancing the row sizes, these weights increase toward the middle. The same monotonicity follows directly on each fiber of fixed entries outside the two rows. Hence $\gamma=1-(t+1)\Pr(u=0\mid T)\ge0$.
+
+Suppose $t<r$. All splits are feasible: in the augmented regular matrix any row degrees within $[0,d]$ of the prescribed total can be realized by putting their ones in successive cyclic blocks of columns. For $j\le t/2$ compare $W_j$ to the most unequal split $W_0$. Each step $i\to i-1$ for $1\le i\le j$ is a move as in \eqref{switch}, with degree difference $t-2i$ and $m\ge(r-t)(1-r/d)=R(1-t/r)$. Thus
+\[
+ \log(W_j/W_0)\le\frac{j(t+1-j)}{R(1-t/r)}.
+\]
+For a realized split use $j=\min(u,v)$, so $j(t+1-j)=uv+\min(u,v)$. The inequalities $1-e^{-x}\le\min(1,x)$ and $\min(1,A/(1-B))\le A+B$ for $A\ge0$, $0\le B<1$ give
+\[
+ 1-W_0/W_j\le (uv+\min(u,v))/R+t/r .
+\]
+For $t\ge r$ the right-hand side is at least one, so the same bound holds on every realized split. Conditional expectation of the left-hand side gives $\gamma$: when $W_0>0$ all splits have positive weight by balancing, and when $W_0=0$ this expectation equals one. Row exchangeability gives $\E\min(u,v)\le s/n$, $\E t=2s/n$, and $\E uv\le s(s-1)/(n(n-1))$, the last bound by expanding $s(s-1)$. When $uv=0$ the realized split is an endpoint, and its loss is zero. On $uv>0$ we have $u+v\le2uv$ and $\min(u,v)\le uv$. This gives the second alternative in \eqref{delta} and proves $0\le\E\gamma\le\delta(s)$.
+
+Finally for a fixed row $i$ sum $1-(u_i+u_j+1)\mathbf1_{u_i=0}$ over all $j\ne i$. Its expectation is $(n-1)\E\gamma$, while the sum itself is $(n-1)-(s+n-1)\mathbf1_{u_i=0}$. The identity $\E M/n=1-\Pr(u_i=0)$ proves \eqref{active}.
+
+\section{Consecutive column extensions}
+A row available to column $h$ has positive slack and a zero in that column. Write $A_h$ for the number of such rows. Averaging over columns gives the exact identity $d^{-1}\sum_h A_h=(cM+s)/d$. The expected availability in a specified lower column differs from this average in expectation by between zero and $\ell/d$. To check this, compare one low and one high column, fixing all row sums and entries outside the pair. Of the singleton rows one more is assigned to the high column. If there are $b$ singleton rows, uniform assignment gives the conditional availability difference as the number of active singleton rows divided by $b$, in $[0,1]$. Symmetry within each group gives the claim. When all columns agree the difference is zero.
+
+Let $L(s)=(cns/(n+s-1)+s)/d$. By \eqref{active} the expected availability in a low column at slack $s$ lies between $L(s)$ and
+\[
+ L(s)+\frac{c n(n-1)}{d(n+s-1)}\delta(s)+\frac\ell d.
+\]
+Adding one to that column multiplies the matrix count by $\E A_h/(q+1)$: insertion counts all available positions and the reverse deletion has $q+1$ choices. Compare the two paths which increment all columns from $k-1$ to $k$ and from $k$ to $k+1$ in the same order. At step $\ell$ the second path has slack $s=e-\ell$ and the first has slack $s+d$. Both paths are feasible, for example by the cyclic row construction with variable column sizes. The telescoped ratio has a factor $(k+1)/k$ per step. For the two expected availabilities subtract the upper bound at $s$ from the lower bound at $s+d$. Using
+\[
+ L(s+d)-L(s)=1+\frac{c n(n-1)}{(n+s-1)(n+s+d-1)}
+\]
+and $\ell/d\le1$, the difference is at least $H$: indeed the relative error term $\delta(s)(n+s+d-1)/d$ is at most $X$, and $s\le e$. The second availability is positive and at most $n-k$. As $M\le s$, it is also at most $(c+1)s/d+\ell/d\le(c+1)e/d+1$. Taking the product proves Theorem~\ref{edge}'s curvature inequality.
+
+For its root conclusion, the stated test gives $d\log(1+H/B)\ge dH/(B+H)>\log9$. It persists as $k$ increases, since $e$ decreases while $H$ increases and $B$ decreases on $X<1$. At each certified geometric radius $v_i=\sqrt{a_{i-1}/a_{i+1}}$, the immediate neighboring terms have relative magnitude $\tau<1/3$. All further outward ratios are at most $\tau$ by ordinary log-concavity of the array coefficients~\cite{orient}. Their total relative magnitude is at most $2\tau/(1-\tau)<1$. The central monomial therefore gives exactly $i$ roots inside, no boundary root and sign $(-1)^i$ at $-v_i$. The counts order the radii strictly. Adjacent signs and the leading sign isolate the largest $D-k$ roots, one per interval on the negative ray; the counts imply simplicity.
+
+\section{Scope and a finite example}
+For a simple dimension-uniform consequence, suppose $n\ge d\ge4$, put $\beta=\min(r,c)/d$, $t=e/n$, and $A=d^2/n$. If
+\begin{equation}\label{uniform}
+ 256e(1+e/n)^2\le d\min(r,c),
+\end{equation}
+the $D-k$ largest roots are simple and negative. Indeed $R\ge\beta d/2$ and $\delta(e)\le4t(1+t)/(\beta d)$, so $X\le8t(1+t)^2/(\beta A)\le1/32$. This gives $H\ge\beta d/[8(1+t)^2]$; here $n-1\ge n/2$ and $d\le n$. Since $B\le 2e+1\le3nt$, we have $B/(dH)+1/d\le24/256+1/d<1/\log9$. Theorem~\ref{edge} applies.
+
+If $\beta$ is bounded below and $d\to\infty$ with $d\le n$, this isolates at least a constant times
+\[
+ \min\{d,(n^2/d)^{1/3}\}
+\]
+of the largest roots, uniformly in the aspect ratio and without a divisibility assumption. Indeed put $j=\lfloor\epsilon d/(1+A)^{2/3}\rfloor$, $k=D-j$. Then $e/n\le(j+1)d/n\le 2\epsilon A/(1+A)^{2/3}$ eventually, since $d/(1+A)^{2/3}\to\infty$ uniformly for $A\le d$. For $\epsilon\le1/2$, $1+t\le 2(1+A)^{1/3}$. Hence $t(1+t)^2\le8\epsilon A$ and \eqref{uniform} holds for $\epsilon\le\beta/2048$. The resulting $k$ is internal eventually upon making $\epsilon$ smaller if needed.
+
+There is a sharper finite guarantee when $n\ge d^2$, $d\ge16$, and $d/4\le r\le3d/4$. Every internal $k$ with $e\le d^2/16$ passes the test. To see this, use the second bound in \eqref{delta}. Here $R\ge3d/16$, $t\le 1/16$, $d/n\le1/16$, and $n/(n-1)\le256/255$. Thus $X\le (19)(256/255)(9/8)\,t^2/A<1/10$, because $t\le A/16$ and $A\le1$. In particular
+\[
+ H/c\ge (9/10)(255/256)/[(17/16)(9/8)]>1/2 .
+\]
+As $c\ge4$ and $B\le(c+1)d/16+1$, we have $B/(dH)+1/d<2(1+1/c)/16+2/(dc)+1/d\le1/4<1/\log 9$. When $n=d^2$ this gives at least $\lfloor d/16\rfloor$ simple outer roots.
+
+At $n=10^6,d=250000,r=127000$, $D=508000$. At $k=D-95$ the exact rational test gives $X<1$ and $dH/(n-k+H)>11/5>\log9$. Thus the 95 largest roots are simple and negative. In the other direction, the interior theorem~\cite{finite} and its lower-quota geometric tests give consecutive certified radii through $k=502387$. Indeed $n\Pr\{\mathrm{Bin}(d,(k+3)/n)>r\}$ is at most $1/100$ there and increases in $k$. The included integer interval computation sums binomial masses relative to their mode in both directions with outward rounding; omitted masses are bounded by the last upper weight times $d$ because subsequent ratios are at most one. It also certifies that the next quota fails this particular binomial-tail test. The two root counts delimit disjoint simple-root intervals. The intervening annulus has exactly $507905-502387=5518$ roots counted with multiplicity. The argument leaves their types open.
+
+\begin{thebibliography}{9}
+\bibitem{original} P. Alexandersson. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Balanced arrays of uniform matroids}. The symmetric functions catalog, accessed November 26, 2026.
+\bibitem{regular} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/blob/14a7c082563830be7b42e5353c2269944a4260b5/topics/balanced-arrays/effective-upper-curvature/proof.md}{An effective upper-edge coefficient inequality for actual balanced arrays}, section on regular rows and two column margins, 2026.
+\bibitem{bbl} J. Borcea, P. Br\"and\'en and T. M. Liggett. \href{https://doi.org/10.1090/S0894-0347-08-00618-8}{Negative dependence and the geometry of polynomials}. J. Amer. Math. Soc. 22 (2009), 521--567.
+\bibitem{orient} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/blob/14a7c082563830be7b42e5353c2269944a4260b5/topics/balanced-arrays/orientation-normalization.md}{An orientation proof of normalized log-concavity for balanced arrays}, 2026.
+\bibitem{finite} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/tree/17e640e165d419c3e628cb0141a5db1523d7f6be/topics/balanced-arrays/dense-regime/below-cap/finite-aspect}{A finite bound for the number of unlocated balanced-array roots}, 2026.
+\end{thebibliography}
+\end{document}

@@ -18,6 +18,10 @@ The coefficient of $q^k$ counts labeled binary $n\times d$ matrices with every c
 
 **⬜ None.** The theorem has no checked Lean or Rocq proof.
 
+## Largest roots by absolute value
+
+A row-switching theorem gives a lower bound on the number of simple negative outer roots whenever the cap is a fixed proportion of the dimension, uniformly for at least as many rows as columns. In the million-row example the lower and upper tests together isolate 502,482 of 508,000 roots. [Theorem and exact counts](below-cap/finite-aspect/upper-edge/README.md)
+
 ## Roots below the row cap
 
 A uniform bound leaves at most $CD\sqrt{n\log(n+1)}/d$ zeros uncertified as simple and negative for $2\le d\le n$ and every cap, with $D=\lfloor nr/d\rfloor$ and an unspecified absolute constant $C$. Thus the certified fraction tends to one when $d\gg\sqrt{n\log(n+1)}$. The comparison isolates individual roots using disks about the unrestricted binomial-power roots. **⬜ None** for Lean or Rocq. [Below-cap theorem, proof and verification](below-cap/README.md)
