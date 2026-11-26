@@ -1,0 +1,3 @@
+Independent replay: 84 k groups, 79380 continuous boxes, all normalized errors < S/4000.
+Checked n=251 separately for k=4..12 in 1350 count-height boxes.
+Maximum recorded log bound [-8.48888531130701898045114773562 +/- 3.34e-30]. Runtime 6.02s.

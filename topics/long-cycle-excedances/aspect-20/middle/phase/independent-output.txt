@@ -1,0 +1,1 @@
+64962 active angular boxes of width at most 2; weighted error < 9/100

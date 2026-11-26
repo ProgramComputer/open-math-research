@@ -1,0 +1,1 @@
+Independent insertion recurrence matched 15685 width-15 prefixes through row 1001 at 17 thresholds in 77.40s.

@@ -1,0 +1,1 @@
+All circle errors below S/100, x >= 20 k groups: 61 height intervals: 630 largest exploratory log upper: (-6.600427377752528, (0, 2, 443, 478))

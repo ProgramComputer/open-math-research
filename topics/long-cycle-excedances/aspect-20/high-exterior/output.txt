@@ -1,0 +1,1 @@
+All scalar bounds pass for 1001 <= n < 10000, n/k >= 20.

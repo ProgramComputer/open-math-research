@@ -1,0 +1,4 @@
+Continuous residue envelope < 1/10 for aspect >= 20.
+Checked 32859 integer-height boxes and 170560 pole bounds. Largest upper endpoint below [0.09791619979807550449500295578 +/- 3.24e-30].
+Exterior phase join and n sin^2(theta*) > 1 also pass.
+Elapsed 3.835s.

@@ -1,0 +1,1 @@
+Independent scalar bounds, signed-error budget, and all 8,999 integer phase endpoints passed.
