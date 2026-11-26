@@ -1,0 +1,161 @@
+{"stage": "doubling", "n": 36, "r": 6, "d": 12, "node": 17, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 36, "r": 6, "d": 12, "node": 17, "tilt_lower": 4, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 36, "r": 6, "d": 12, "node": 17, "tilt_lower": 3, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 36, "r": 6, "d": 12, "node": 17, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 36, "r": 6, "d": 12, "node": 17, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 36, "r": 6, "d": 12, "node": 17, "tilt_lower": 3, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 36, "r": 6, "d": 12, "node": 16, "tilt_lower": 2, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 36, "r": 6, "d": 12, "node": 16, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 36, "r": 6, "d": 12, "node": 16, "tilt_lower": 2, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 36, "r": 6, "d": 12, "node": 14, "tilt_lower": 2, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 36, "r": 6, "d": 12, "node": 14, "tilt_lower": 1, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 36, "r": 6, "d": 12, "node": 14, "tilt_lower": 2, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 100, "r": 10, "d": 20, "node": 49, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 100, "r": 10, "d": 20, "node": 49, "tilt_lower": 4, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 100, "r": 10, "d": 20, "node": 49, "tilt_lower": 8, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 100, "r": 10, "d": 20, "node": 49, "tilt_lower": 6, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 100, "r": 10, "d": 20, "node": 49, "tilt_lower": 5, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "archive", "n": 100, "r": 10, "d": 20, "node": 49, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 100, "r": 10, "d": 20, "node": 49, "tilt_lower": 5, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "archive", "n": 100, "r": 10, "d": 20, "node": 49, "tilt_lower": 6, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 100, "r": 10, "d": 20, "node": 48, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 100, "r": 10, "d": 20, "node": 48, "tilt_lower": 4, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 100, "r": 10, "d": 20, "node": 48, "tilt_lower": 3, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 100, "r": 10, "d": 20, "node": 48, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 100, "r": 10, "d": 20, "node": 48, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 100, "r": 10, "d": 20, "node": 48, "tilt_lower": 3, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 100, "r": 10, "d": 20, "node": 46, "tilt_lower": 2, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 100, "r": 10, "d": 20, "node": 46, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 100, "r": 10, "d": 20, "node": 46, "tilt_lower": 2, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "doubling", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 8, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "doubling", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 16, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 12, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 10, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "bisection", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 11, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 10, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "archive", "n": 400, "r": 20, "d": 40, "node": 199, "tilt_lower": 11, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 400, "r": 20, "d": 40, "node": 198, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 400, "r": 20, "d": 40, "node": 198, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "doubling", "n": 400, "r": 20, "d": 40, "node": 198, "tilt_lower": 8, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 400, "r": 20, "d": 40, "node": 198, "tilt_lower": 6, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 400, "r": 20, "d": 40, "node": 198, "tilt_lower": 5, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "archive", "n": 400, "r": 20, "d": 40, "node": 198, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 400, "r": 20, "d": 40, "node": 198, "tilt_lower": 5, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "archive", "n": 400, "r": 20, "d": 40, "node": 198, "tilt_lower": 6, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 400, "r": 20, "d": 40, "node": 196, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 400, "r": 20, "d": 40, "node": 196, "tilt_lower": 4, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 400, "r": 20, "d": 40, "node": 196, "tilt_lower": 3, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 400, "r": 20, "d": 40, "node": 196, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 400, "r": 20, "d": 40, "node": 196, "tilt_lower": 3, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 400, "r": 20, "d": 40, "node": 196, "tilt_lower": 4, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 8, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 16, "crossing": true, "odd_labels": [1, 3, 5, 7, 9]}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 32, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 24, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 20, "crossing": true, "odd_labels": [1, 3, 5, 7, 9]}
+{"stage": "bisection", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 22, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 21, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 20, "crossing": true, "odd_labels": [1, 3, 5, 7, 9]}
+{"stage": "archive", "n": 1600, "r": 40, "d": 80, "node": 799, "tilt_lower": 21, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 8, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 16, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 12, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 10, "crossing": true, "odd_labels": [1, 3, 5, 7]}
+{"stage": "bisection", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 11, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 10, "crossing": true, "odd_labels": [1, 3, 5, 7]}
+{"stage": "archive", "n": 1600, "r": 40, "d": 80, "node": 798, "tilt_lower": 11, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 796, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 796, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "doubling", "n": 1600, "r": 40, "d": 80, "node": 796, "tilt_lower": 8, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 1600, "r": 40, "d": 80, "node": 796, "tilt_lower": 6, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 1600, "r": 40, "d": 80, "node": 796, "tilt_lower": 5, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "archive", "n": 1600, "r": 40, "d": 80, "node": 796, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 1600, "r": 40, "d": 80, "node": 796, "tilt_lower": 5, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "archive", "n": 1600, "r": 40, "d": 80, "node": 796, "tilt_lower": 6, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 8, "crossing": true, "odd_labels": [1, 3, 5, 7]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 16, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 32, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 64, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 48, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 40, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17]}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 44, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 42, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 41, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 40, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17]}
+{"stage": "archive", "n": 6400, "r": 80, "d": 160, "node": 3199, "tilt_lower": 41, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 8, "crossing": true, "odd_labels": [1, 3, 5, 7]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 16, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 32, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 24, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 20, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13]}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 22, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 21, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 20, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13]}
+{"stage": "archive", "n": 6400, "r": 80, "d": 160, "node": 3198, "tilt_lower": 21, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 2, "crossing": true, "odd_labels": [1]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 8, "crossing": true, "odd_labels": [1, 3, 5, 7]}
+{"stage": "doubling", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 16, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 12, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 10, "crossing": true, "odd_labels": [1, 3, 5, 7, 9]}
+{"stage": "bisection", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 11, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 10, "crossing": true, "odd_labels": [1, 3, 5, 7, 9]}
+{"stage": "archive", "n": 6400, "r": 80, "d": 160, "node": 3196, "tilt_lower": 11, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 2, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 8, "crossing": true, "odd_labels": [1, 3, 5, 7, 9]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 16, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 32, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 64, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 128, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 96, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 80, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29]}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 88, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 84, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 82, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 81, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 80, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29]}
+{"stage": "archive", "n": 25600, "r": 160, "d": 320, "node": 12799, "tilt_lower": 81, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 2, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 8, "crossing": true, "odd_labels": [1, 3, 5, 7, 9]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 16, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 32, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 64, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 48, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 40, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 44, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 42, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 41, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 40, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23]}
+{"stage": "archive", "n": 25600, "r": 160, "d": 320, "node": 12798, "tilt_lower": 41, "crossing": false, "odd_labels": []}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 2, "crossing": true, "odd_labels": [1, 3]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 4, "crossing": true, "odd_labels": [1, 3, 5]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 8, "crossing": true, "odd_labels": [1, 3, 5, 7, 9]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 16, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15]}
+{"stage": "doubling", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 32, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 24, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 20, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17]}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 22, "crossing": false, "odd_labels": []}
+{"stage": "bisection", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 21, "crossing": false, "odd_labels": []}
+{"stage": "archive", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 1, "crossing": true, "odd_labels": [1]}
+{"stage": "archive", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 20, "crossing": true, "odd_labels": [1, 3, 5, 7, 9, 11, 13, 15, 17]}
+{"stage": "archive", "n": 25600, "r": 160, "d": 320, "node": 12796, "tilt_lower": 21, "crossing": false, "odd_labels": []}
