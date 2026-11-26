@@ -1,5 +1,7 @@
 # Real zeros of balanced binary arrays
 
+For the open four-column cap-two case, the paired-margin polynomial is stable exactly through five rows. At six rows the bivariate method fails although the original diagonal still has three negative zeros. [Exact classification and replay](paired-stability.md)
+
 Fix a column count $d\ge2$ and a row cap $1\le r<d$. Let $a_{n,k}$ count labeled $n\times d$ binary arrays with $k$ ones in each column and at most $r$ ones in each row. Define $P_n(q)=\sum_k a_{n,k}q^k$.
 
 **Theorem.** For every fixed pair $(r,d)$ and all sufficiently large $n$, all $\lfloor nr/d\rfloor$ zeros of $P_n$ are simple and negative. They strictly interlace the zeros of $P_{n+1}$, whose rightmost zero is further right. The proof gives an existential threshold $N(d,r)$. The all-row conjecture for general caps remains open. [Proof](fixed-rank-eventual.pdf) · [Manuscript source](fixed-rank-eventual.tex)
