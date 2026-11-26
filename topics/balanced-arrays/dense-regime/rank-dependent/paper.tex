@@ -1,0 +1,426 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\setlength{\emergencystretch}{2em}
+\title{Simple negative zeros at a rank-dependent dimension bound}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We consider labeled binary $n\times d$ arrays with equal column
+sums and row cap $r$. For each fixed $0<\varepsilon<1/5$, the
+theorem gives exactly $\lfloor nr/d\rfloor$ simple negative
+zeros for all sufficiently large $n$ when
+$d\ge C_\varepsilon\sqrt{nr/\log n}$ and either
+$r\le n^{1/5-\varepsilon}$ or $d\ge n^{3/4+\varepsilon}$.
+For fixed caps this reaches dimensions of order
+$\sqrt{n/\log n}$. The constants are existential.
+The proof transfers the coefficient curvature from scalar
+capped-binomial tilts using two prescribed-margin enumeration
+formulas. A lattice local limit estimate and a positive
+alternating Gaussian sum give the signs.
+\end{abstract}
+
+This result concerns the original labeled arrays in Per Alexandersson's balanced-array conjecture for uniform matroids \cite{Alex}. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Original conjecture}
+
+\textbf{Theorem.} For each fixed $0<\varepsilon<1/5$ there are constants $C_\varepsilon>0$ and $N_\varepsilon\ge3$ with the following property. Let $n\ge N_\varepsilon$ and $1\le r\le d$ be integers. Suppose
+
+\[
+d\ge C_\varepsilon\sqrt{\frac{nr}{\log n}}
+\quad\text{and}\quad
+\left(r\le n^{1/5-\varepsilon}\ \text{or}\ d\ge n^{3/4+\varepsilon}\right).
+\]
+
+Then the balanced-array polynomial has precisely $D=\lfloor nr/d\rfloor$ simple negative zeros. In particular, for every fixed cap $r$, all sufficiently large $n$ and all $d\ge C_r\sqrt{n/\log n}$ have this property. The constants are existential. The conclusion concerns the polynomial that counts labeled binary matrices by their common column sum, for the original row cap. The remaining parameters of \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Alexandersson's conjecture} are open.
+
+Here is one family covered by the first alternative. Take $r=2$ and $d=\lceil\sqrt n/(\log n)^{1/4}\rceil$. For large $n$ the ratio of the displayed dimension to $\sqrt{nr/\log n}$ tends to infinity. For an example covered by the second alternative, take $d=\lceil n^{4/5}\rceil$ and $r=\lfloor n^{3/5}\sqrt{\log n}\rfloor$, with $\varepsilon=1/40$.
+
+\section{A weak coefficient ratio and its neighborhood}
+
+Write $P(q)=\sum_{i=0}^D a_iq^i$. All its coefficients through $D$ are positive: assign the $i$ ones in each column cyclically along consecutively repeated row labels. Every row then has at most $\lceil di/n\rceil$ ones. For $1\le i<D$ set $t_i=\sqrt{a_{i-1}/a_{i+1}}$ and $\Gamma_i=a_i^2/(a_{i-1}a_{i+1})$. The repository's \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/orientation-normalization.md}{orientation reduction} of Kahn and Neiman's inequality \cite{KN} gives
+
+\[
+\Gamma_i\ge (1+1/i)^d(1+1/(n-i))^d>1.
+\]
+
+The $t_i$ increase strictly. If $(-1)^iP(-t_i)>0$ throughout, the signs at zero, at these nodes and at large negative argument give $D$ distinct negative roots. Further, $\Gamma_i>4$ forces the sign at $i$: each adjacent term has magnitude $1/\sqrt{\Gamma_i}$ relative to the central term, and the remaining outward alternating tails start positive with decreasing magnitudes. Degrees zero and one are immediate.
+
+Suppose there were no uniform constants. Choose a sequence of exceptions with $n\to\infty$ and $d/\sqrt{nr/\log n}\to\infty$. Retain a subsequence lying in one of the two alternatives. The \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/dense-regime/logarithmic-window.md}{logarithmic dimension theorem} implies $d\log n/n$ is bounded on the exceptions. Put $\delta=d/n$, $b=d^2/n$ and $J=\lceil(\log n)^2\rceil$. We have
+
+\[
+\frac{b\log n}{r}\longrightarrow\infty,\qquad
+\frac rd=\frac{r}{b\log n}\delta\log n\longrightarrow0.
+\]
+
+Choose a failed internal node $k$ for each exception. The necessary inequality $\Gamma_k\le4$ implies $k\ge d/\log4-1$. As $k\le nr/d$, we get $b=O(r)$. We also have $b\ge1/\log n$ and $d\ge\sqrt{n/\log n}$ eventually. At every feasible real quota $u$ with $|u-k|\le J+2$, write $p=u/n$ and $\mu=du/n$. Throughout this window $u\ge c d$, $\mu\ge cb$ and $p\le r/d=o(1)$, with an absolute $c>0$. At every internal index, including those outside the window,
+
+\[
+\log\Gamma_i\ge \frac{d}{i+1}\ge\frac{d}{D+1}\ge c_0\frac br
+\]
+
+for a fixed $c_0>0$ and large $n$. The last bound uses $D+1\le nr/d+1$ and $nr/d\ge k\to\infty$.
+
+\section{The cost of fixing the column sums}
+
+Set $H(z)=\sum_{s=0}^r\binom ds z^s$. At a real quota $0<u<nr/d$, let $S$ have probabilities proportional to $\binom ds z^s$ on $0,\ldots,r$, with its mean fixed at $\mu$. The unique $z>0$ exists since the derivative of the mean in $\log z$ is its positive variance $V(u)$. At the endpoints take deterministic laws. We have $V\le \mu(1-p)\le r$ by comparison with a binomial of mean $\mu$. Define $E(u)=n\log H(z)-du\log z$. It extends continuously to the endpoints by the entropy identity for the tilted row and satisfies $E''(u)=-b/V(u)$ in the open interval.
+
+For an integer $i$ in the window let $L_i$ be the probability that $n$ independent such rows at quota $i$ have total size $di$. The scalar coefficient $[z^{di}]H(z)^n$ is $e^{E(i)}L_i$. Its conditional row profiles have weights proportional to $\prod_j\binom d{s_j}$. Applying the \hyperref[app:gmw]{Greenhill--McKay--Wang estimate} in the first alternative and the \hyperref[app:lw]{Liebenau--Wormald estimate} in the second gives, uniformly on feasible integer quotas in the window,
+
+\[
+\log a_i=\log K_i+E(i)+\log L_i-\tfrac12+B_i+O(n^{-\beta}),\qquad
+K_i=\frac{\binom ni^d}{\binom{nd}{di}},\qquad
+B_i=\frac{V(i)}{2\mu(1-p)}
+\]
+
+for some $\beta>0$. Both estimates include exact saturation. Also $0\le B_i\le1/2$ and $1/(nr+1)\le L_i\le1$. For the lower bound, interpolate the logarithm of the log-concave lattice mass of the sum linearly, then apply Jensen at its integer mean. Its entropy is at most $\log(nr+1)$.
+
+Put $\mathcal D f(i)=2f(i)-f(i-1)-f(i+1)$. For neighboring feasible quotas in the window we have $|\mathcal D\log K_i|=O(d/i^2+d/(n-i)^2)=O(1/d)$. In the denominator's adjacent binomial ratio, the $d$ factors $1+d/(di-d+h)$, $1\le h\le d$, each have logarithm differing from $\log(1+1/i)$ by $O(i^{-2})$. The other $d$ factors have the corresponding estimate with $n-i$ in place of $i$. The numerator contributes exactly $d$ copies of each limiting logarithm.
+
+\section{Near and away from zero variance}
+
+The \hyperref[app:small-var]{lattice estimates} give $|dV/d\mu|\le C(1+\sqrt V)$ and, when $n\min(1,V)\ge1$,
+
+\[
+L_i=(2\pi nV(i))^{-1/2}
+\left(1+O\bigl((n\min(1,V(i)))^{-1/2}\bigr)\right).
+\]
+
+In particular $\sqrt{1+V}$ is Lipschitz in $\mu$ with absolute constant. This extends up to the deterministic endpoints by continuity. Writing $V_k=V(k)$, we obtain on any feasible interval $|u-k|\le h$,
+
+\[
+|V(u)-V_k|\le C\left(\sqrt{1+V_k}\,\delta h+\delta^2h^2\right).
+\]
+
+Choose $\eta=1/16$. If $V_k<b n^{-\eta}$, the last inequality implies $V(u)\le Cb n^{-\eta}$ at $|u-k|\le1$. Indeed $\delta=\sqrt{b/n}$, $b\ge1/\log n$, and each of $\delta$, $\sqrt{b n^{-\eta}}\,\delta$ and $\delta^2$ is $O(b n^{-\eta})$. On the central half of the unit window, the entropy curvature is at least $c_1n^\eta$ in magnitude. Concavity gives $\mathcal D E(k)\ge c_2 n^\eta$ by the triangular second-difference integral. If an outer endpoint is exactly saturated, retain the central half of the integral and use concavity and continuity on the rest. The probability terms cost at most $2\log(nr+1)$ and all other contributions to $\log\Gamma_k$ are bounded. This contradicts $\Gamma_k\le4$.
+
+Now suppose $V_k\ge b n^{-\eta}$. On the whole feasible part of the window $h=J+2$, the relative variation of $V$ is bounded by
+
+\[
+C\left[\left(n^{\eta-1/2}/\sqrt b+n^{(\eta-1)/2}\right)h
++n^{\eta-1}h^2\right].
+\]
+
+It is smaller than a fixed negative power of $n$. In fact this estimate, multiplied by $n^\eta$, is still smaller than a fixed negative power, since $b\ge1/\log n$. Neither deterministic endpoint $u=0$ nor the real upper endpoint $u=nr/d$ can lie in this window, since each has variance zero. This excludes the upper endpoint even when it is nonintegral. Thus all integer offsets through $J+1$ exist on both sides. Write $g=b/V_k\le n^\eta$. The resulting bound on $|E''(u)+g|$ is $O(n^{-\gamma})$ throughout for some $\gamma>0$. We also have $nV(u)\ge c n^{1-\eta}/\log n$. The local limit estimate shows that $\log L_i$ differs from $-\tfrac12\log(2\pi n V_k)$ by a negative power of $n$ uniformly.
+
+For the correction $B(u)=V(u)/(2\mu(1-p))$, write $v=\mu(1-p)$. Its derivative satisfies $|dv/du|\le\delta$. The variance derivative bound and $V\le v$ give $|B'(u)|\le C\delta(1+\sqrt v)/v$. Since $v\ge c b$ in the window, its total variation is $O(h(1+b^{-1/2})/\sqrt n)$. Integrating $-E''$ against the triangular weight of mass one and using the remaining estimates gives, with a fixed $\kappa>0$,
+
+\[
+\log\Gamma_{k+j}=g+O(n^{-\kappa})\qquad(|j|\le J).
+\]
+
+In particular $b/r\le g\le\log4+O(n^{-\kappa})<2$.
+
+\section{Recovering all signs}
+
+For $j\ge1$ the magnitude of the term at offset $j$ or $-j$ at $-t_k$, divided by $a_k t_k^k$, is exactly $\Gamma_k^{-j/2}\prod_{\ell=1}^{j-1}\Gamma_{k\pm\ell}^{-(j-\ell)}$ when that term exists. Missing terms have magnitude zero. The global lower bound on curvature bounds every magnitude by $\exp(-c_0bj^2/(2r))$. On $|j|\le J$ the magnitude is $\exp(-gj^2/2+O(j^2n^{-\kappa}))$. Thus the normalized signed polynomial differs from $\sum_{j\in\mathbb Z}(-1)^j e^{-g j^2/2}$ by at most
+
+\[
+O(J^3n^{-\kappa})+
+O\left((r/b)^{1/2}\exp(-c_3 bJ^2/r)\right)=O(n^{-\kappa'})
+\]
+
+with $\kappa'>0$. Indeed $b/r$ is bounded above on the failed sequence and $b\log n/r\to\infty$. Poisson summation gives
+
+\[
+\sum_{j\in\mathbb Z}(-1)^j e^{-g j^2/2}
+=\sqrt{\frac{2\pi}{g}}\sum_{m\in\mathbb Z}
+\exp\left(-\frac{2\pi^2(m+1/2)^2}{g}\right)
+\ge\sqrt\pi\exp\left(-\frac{\pi^2r}{2b}\right).
+\]
+
+Because $r/b=o(\log n)$, this lower bound eventually exceeds the comparison error. The node succeeds, a contradiction. This proves the uniform theorem and hence the fixed-rank assertion.
+
+\appendix
+\section{Small-rank margins}
+\label{app:gmw}
+
+Let $a_k$ count binary $n\times d$ matrices with all column sums $k$ and row sums at most $r$. Write $S=dk$, $\mu=S/n$, $p=k/n=\mu/d$, $b=d^2/n$, and $U_S=[z^S]H(z)^n$ for $H(z)=\sum_{j=0}^r\binom dj z^j$. Fix $\varepsilon,C,c>0$. Suppose $r\le n^{1/5-\varepsilon}$, $b\le Cr$, and $b\log n/r\to\infty$. Uniformly for integer $cd\le k\le nr/d$,
+
+\[
+a_k=\frac{\binom nk^d}{\binom{nd}{dk}}U_S
+\exp\left(-\frac12+\frac{\sigma^2}{2\mu(1-p)}
++O(n^{-\varepsilon/2})\right).
+\]
+
+Here $\sigma^2$ is the variance of the capped-binomial tilt with mean $\mu$, and is zero at saturation. Any feasible shift of such a quota by $O((\log n)^A)$ for fixed $A$ also satisfies the bound with $c/2$, since $d\gg\sqrt{n/\log n}$. This is a coefficient comparison.
+
+\subsection{Fixed row profiles}
+
+Greenhill, McKay and Wang \cite{GMW}, *Asymptotic enumeration of sparse 0--1 matrices with irregular row and column sums*, JCTA 113 (2006), 291--324, Theorem 1.3 and \S~5, Corollary 5.2, require $S\to\infty$, $1\le st=o(S^{2/3})$ for maximum degrees $s,t$ on the two sides, and $(1+\mu_2)(1+\nu_2)=O(S^{1/3})$. With equal columns $k$, $\nu_2=0$ and $\mu_2=\sum_i(s_i-\mu)^2/[n\mu(1-p)]$. The count is $\binom nk^d\prod_i\binom d{s_i}/\binom{nd}{dk}$ times $\exp(-1/2+\mu_2/2+O(st/S^{2/3}))$. The error is uniform and neither aspect ratio has a separate lower bound. \href{https://doi.org/10.1016/j.jcta.2005.03.005}{Journal DOI}, \href{https://web.maths.unsw.edu.au/~csg/papers/irregular-final.pdf\#page=33}{authors' final text, Corollary 5.2}.
+
+In the small-rank regime, $s\le r$, $t=k$, $S\ge cd^2$, $d=o(n)$, $p\le r/d=o(1)$, $\mu\ge cb$, and $r/\mu=O(\log n)$. Also
+
+\[
+\frac{rk}{(dk)^{2/3}}\le \left(\frac{nr^4}{d^3}\right)^{1/3}
+=n^{-1/6}r^{5/6}(r/b)^{1/2}
+=O(n^{-5\varepsilon/6}\sqrt{\log n}).
+\]
+
+Because $s_i^2\le r s_i$, one has $\mu_2\le(r-\mu)/(1-p)\le2r$. Also $S\gg nr/\log n$ and $r^3/S=O(r^2\log n/n)=o(1)$. These checks cover every capped row profile.
+
+\subsection{Summing weighted profiles}
+
+Assume first $0<\mu<r$. Choose the unique $z>0$ such that $X$ has mean $\mu$ under probabilities $\binom dj z^j/H(z)$ at $0\le j\le r$. The mean increases continuously in $\log z$ from 0 to $r$, with strictly positive derivative equal to its variance. Independent copies $X_i$, conditioned on $T=\sum_iX_i=S$, give the profile weights $\prod_i\binom d{s_i}/U_S$.
+
+The bound $\sigma^2\le\mu(1-p)$ follows by size biasing. Weighting by $X$ and then subtracting 1 gives the $(d-1)$-trial binomial tilt truncated at $r-1$. Weighting by $d-X$ gives the same tilt truncated at $r$. The first law is stochastically dominated by the second. The mean inequality $\mathbb E[X^2]/\mu-1\le(d\mu-\mathbb E[X^2])/(d-\mu)$ gives the bound. Here $r<d$ eventually.
+
+Set $Y_i=(X_i-\mu)^2/[\mu(1-p)]$, $\overline Y=n^{-1}\sum_iY_i$, and $M=2r^2/\mu=O(r\log n)$. Then $0\le Y_i\le M$ and $m=\mathbb EY_i\le1$. For $M/n\le1$, the chord bound on $e^x$ gives $\mathbb E e^{Y_i/n}\le1+2/n$ and $\mathbb E e^{\overline Y}\le e^2$.
+
+The row mass function is log-concave with interval support, and convolution preserves these properties. For the mass $\pi$ of $T$, linearly interpolate $\log\pi$ over $[0,nr]$. Jensen's inequality and the entropy bound yield $\log\pi(\mathbb ET)\ge\mathbb E\log\pi(T)\ge-\log(nr+1)$. Thus $\mathbb P(T=S)\ge1/(nr+1)$.
+
+Hoeffding's inequality gives $\mathbb P(|\overline Y-m|>n^{-1/5})\le2\exp(-2n^{3/5}/M^2)$, smaller than every negative power of $n$ because $M=O(n^{1/5-\varepsilon}\log n)$. By Cauchy--Schwarz and the exponential-moment bound, the exceptional contribution to $\mathbb E[e^{\overline Y/2}\mid T=S]$ is also smaller than every negative power after paying at most $nr+1$. On the complement $e^{\overline Y/2}=e^{m/2}(1+O(n^{-1/5}))$. Thus the conditional average is $e^{m/2}(1+O(n^{-1/5}))$. The uniform fixed-profile error carries through the positive sum multiplicatively. Both errors are $O(n^{-\varepsilon/2})$ for the nonempty range $0<\varepsilon\le1/5$.
+
+At $\mu=r$, there is only the constant profile. Take $X_i=r$ deterministically, $Y_i=0$, and $U_S=\binom dr^n$. The same margin comparison applies. When $nr/d$ is nonintegral, the highest quota belongs to the finite-tilt case.
+
+\section{Large-dimension margins}
+\label{app:lw}
+
+Let $\epsilon>0$ and $c>0$ be fixed. Suppose that
+$d\ge n^{3/4+\epsilon}$, $d\le n$, and the quota $i$ satisfies
+$p=i/n\to0$ and $p\ge c\,d/n$. Write $\mu=dp$, and allow any cap
+$r\ge\mu$. Put
+\[
+H(z)=\sum_{s=0}^r\binom ds z^s,\qquad
+A_i=[z^{di}]H(z)^n,\qquad
+K_i=\frac{\binom ni^d}{\binom{nd}{di}}.
+\]
+For $\mu<r$ let $S$ be the scalar tilted law proportional to
+$\binom ds z^s$ on $0\le s\le r$ with mean $\mu$, and write
+$V=\mathrm{Var}(S)$. At $\mu=r$ take the deterministic law. Then
+for some fixed $\beta>0$ the capped labeled count satisfies
+\[
+a_i=K_i A_i\exp\left(-\frac12+\frac{V}{2\mu(1-p)}
++O(n^{-\beta})\right).
+\tag{1}
+\]
+The estimate is uniform under the stated bounds along sequences,
+including exactly saturated quotas. No upper bound on $r/\mu$
+is used.
+
+\subsection{Actual and scalar row tails}
+
+Fix one labeled row of an actual uniformly chosen capped array. If
+its occupied set is any $s$-subset of the columns, let $B_s$ count
+completions on the remaining $n-1$ rows. These are precisely the
+arrays with $s$ designated quotas $i-1$ and all other quotas $i$,
+and the count depends only on $s$. Deletions give interval positive
+support in $s$, and the mixed orientation inequality applied at
+the vector with $s+2$ reduced quotas gives $B_sB_{s+2}\le B_{s+1}^2$.
+The actual mass at $s$ for $0\le s\le r$ is
+\[
+\mathbb P(S_{\mathrm{actual}}=s)=\frac{\binom ds B_s}{a_i},
+\]
+and it is zero for $s>r$. This mass has log-concave likelihood ratio relative to
+$\mathrm{Bin}(d,p)$. Its mean is $\mu$ by row symmetry. The scalar
+tilted law has a geometric likelihood ratio through the cap and
+the same mean. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/orientation-normalization.md\#extension-across-two-coordinates}{Mixed orientation inequality}
+
+An interval superlevel set at one for the likelihood ratio and equal
+means imply convex domination by the reference binomial. Indeed,
+subtract from a convex function the affine secant across that
+interval, choosing endpoints between lattice sites. The residual
+is nonpositive inside and nonnegative outside, so its sum against
+the signed difference of the masses is nonpositive. The affine
+part cancels. A point mass is covered directly by Jensen.
+In particular $V\le\mu(1-p)$, and binomial exponential moment
+bounds imply, in either row law, the Bernstein tail
+\[
+\mathbb P(|S-\mu|>y)\le 2\exp(-c_1 y^2/(\mu+y)).
+\tag{2}
+\]
+For a fixed sufficiently small $\eta>0$ put $W=\mu^{1/2+\eta}$,
+which is $o(\mu)$. The exceptional row profiles have relative
+mass at most $2n\exp(-c_2\mu^{2\eta})$ in the actual counting
+measure by the union bound, and the same bound under independent
+scalar rows, before conditioning. Since
+$\mu\ge c d^2/n\ge c n^{1/2+2\epsilon}$, these bounds decay faster
+than any inverse power of $n$.
+
+\subsection{Published fixed-margin hypotheses}
+
+Apply Theorem 1.1 of the published Liebenau--Wormald paper \cite{LW} with
+part sizes $n,d$, edge count $pnd$, row average $\mu$, and column
+average $i$. Its small-density condition holds since $p\to0$.
+Take $0<\eta<\kappa<1/10$ with $\kappa$ sufficiently small in
+terms of $\epsilon$. The regular row deviations are
+$W=o(\mu^{1/2+\kappa})$, and the column deviations vanish.
+The left-hand growth term divided by the right-hand scale in
+their equation (3) is
+\[
+\mathcal A=
+\left(\frac{n}{d^{3/2-5\kappa}}+\frac{d}{n^{3/2-5\kappa}}\right)
+p^{5\kappa-1/2}
+\le C\frac{n^{3/2-5\kappa}}{d^{2-10\kappa}}
+=O(n^{-\gamma})
+\]
+for some $\gamma>0$. Here $p\ge cd/n$ and $5\kappa-1/2<0$,
+and the exponent at $d=n^{3/4+\epsilon}$ is
+$-2\epsilon+\kappa(5/2+10\epsilon)<0$. Equation (4) follows
+from $(\log^K d/d+\log^K n/n)/p=O(n\log^K n/d^2)$ for every
+fixed $K$. The error in equation (5) is
+$O(\log^2 n/\sqrt n+\log^2 d/\sqrt d+\mathcal A)$, giving a
+polynomial saving. With zero column variance, Remark 1.2
+then gives the regular profile count
+\[
+K_i\prod_j\binom d{s_j}
+\exp\left(-\frac12+\frac{\sum_j(s_j-\mu)^2}{2n\mu(1-p)}
++O(n^{-\beta_0})\right)
+\tag{3}
+\]
+for some $\beta_0>0$. \href{https://onlinelibrary.wiley.com/doi/full/10.1002/rsa.21105\#rsa21105-mthst-0001}{Published Theorem 1.1, equations (3)--(5) and Remark 1.2}
+
+\subsection{Averaging the exponential correction without a global Gaussian tail}
+
+Let $Y=(S-\mu)^2/\mu$. Rare large deviations cannot be controlled
+by asserting a uniform exponential moment at a fixed positive
+argument. The actual required small arguments can be controlled
+directly from (2). Indeed
+\[
+\mathbb P(Y>v)\le 2\exp\left(-\frac{c_1v}{1+\sqrt{v/\mu}}\right).
+\tag{4}
+\]
+On the support $v\le d^2/\mu$, so
+$1+\sqrt{v/\mu}\le1+1/p\le2/p$. For $0\le t\le c_1p/4$, the factor
+$e^{tv}$ consumes at most half the exponent in (4). Moreover
+\[
+\frac{v}{1+\sqrt{v/\mu}}\ge \frac12\min(v,\sqrt v)
+\]
+since $\mu\ge1$ for large $n$. Integrating (4) against the derivative
+of $v^2 e^{tv}$ now gives a numerical bound for
+$\mathbb E[Y^2 e^{tY}]$ on that range. The bound at $t=0$ also suffices
+for negative $t$. Hence
+\[
+\log\mathbb E e^{tY}=t\mathbb E Y+O(t^2)
+\qquad (|t|\le c_1p/4)
+\tag{5}
+\]
+uniformly. This argument uses only the universal row support bound
+$|S-\mu|\le d$.
+
+Let $Q=n^{-1}\sum_{j=1}^nY_j$ for independent tilted rows.
+Because $p\ge c\,n^{-1/4+\epsilon}$, the arguments of order
+$n^{-1/3}$ needed in exponential Markov fall in (5). With
+$c_p=1/[2(1-p)]$ it follows that
+\[
+\mathbb P(|Q-\mathbb EY|>n^{-1/3})\le2e^{-c_3 n^{1/3}},
+\qquad
+\mathbb E e^{2c_p Q}=\exp(2c_p \mathbb E Y+O(n^{-1}))=O(1).
+\]
+For the second bound use independence and (5) at $2c_p/n$,
+and $\mathbb E Y=V/\mu\le1-p$.
+
+The profile weights proportional to $\prod_j\binom d{s_j}$ at total
+$di$ are exactly the independent scalar row law conditioned on that
+total. Its probability is at least $1/(nd+1)$, since the sum is
+log-concave on an integer interval, and Jensen on the interpolated
+log mass at the mean bounds it below by the exponential of minus
+the entropy. The entropy is at most $\log(nd+1)$. Cauchy--Schwarz with
+the bounded weighted moment above makes both the exceptional row
+event and the exceptional $Q$ event negligible to every power of
+$n$ in the weighted conditional average. On the complement
+$e^{c_p Q}=e^{V/[2\mu(1-p)]}(1+O(n^{-1/3}))$. Sum (3) and use
+the actual relative row tail bound. This proves (1).
+
+\section{Small-variance lattice estimates}
+\label{app:small-var}
+
+Let $X$ have a log-concave probability mass function on an interval of integers, with mean $\mu$ and variance $V>0$. Let $L$ be the probability that the sum of $n\ge2$ independent copies of $X$ equals $n\mu$, assumed integral. The \hyperref[app:large-var]{large-variance lattice bound} proves that for $V\ge1$ the relative error in $L\sim(2\pi nV)^{-1/2}$ is $O(n^{-1/2})$, with an absolute constant. It also proves $\mathbb E|X-\mu|^3\le C V^{3/2}$ in this range. Here we give the complementary bounds for $0<V\le1$. The distribution in the application has finite support.
+
+Write $p_j=\mathbb P(X=j)$, choose a mode $m$, and let $b=p_m$. Chebyshev puts mass at least $3/4$ on $[\mu-2,\mu+2]$, which contains at most five integers. Hence $b\ge3/20$. On each side let $h$ be the first positive distance from the mode where the probability is at most $b/2$, setting missing probabilities to zero. Since every preceding mass on that side is greater than $b/2$, $h$ is bounded by a numerical constant. Up to distance $h$ the mass is at most the adjacent probability on that side. Beyond $h$ log-concavity gives $p_{m+j}\le p_{m+1}2^{-(j-h)/h}$ on the right, with the corresponding left estimate. If the support ends at or before $h$ the tail is zero. For $s=2,3$ we deduce
+
+\[
+\mathbb E|X-m|^s\le C_s(p_{m-1}+p_{m+1})\le C_s(1-b).
+\]
+
+For independent copies $X,X'$, the identity $V=\mathbb E(X-X')^2/2$ implies $V\ge b(1-b)$ by retaining the pairs with just one coordinate at the mode. Jensen and the triangle inequality give $\mathbb E|X-\mu|^3\le C V$. Conversely $V\le\mathbb E|X-m|^2$ shows that $p_{m-1}+p_{m+1}\ge cV$. If $\phi(t)=\mathbb E e^{it(X-\mu)}$, the mode and its two neighbors in the cosine expansion of $1-|\phi(t)|^2$ give $|\phi(t)|\le e^{-c Vt^2}$ for $|t|\le\pi$. Taylor's formula and $V\le1$ give
+
+\[
+|\phi(t)-e^{-Vt^2/2}|\le C V|t|^3\qquad (|t|\le\pi).
+\]
+
+Telescoping the powers of order $n$ gives an integrated error $O(1/(nV))$ on this interval using the Gaussian bound for each of the remaining $n-1$ factors. If $nV\ge1$, the omitted Gaussian tails outside the interval have at most this same order. Fourier inversion at the integer mean then yields
+
+\[
+L=(2\pi nV)^{-1/2}\left(1+O((nV)^{-1/2})\right).
+\]
+
+Finally, in an interior exponential tilt with parameter $\lambda$, $d\mu/d\lambda=V$ and $dV/d\lambda=\mathbb E(X-\mu)^3$. The two third-moment bounds, for $V$ on either side of one, show $|dV/d\mu|\le C(1+\sqrt V)$. This applies to the capped-binomial family throughout the open feasible interval.
+
+\section{Large-variance lattice estimates}
+\label{app:large-var}
+
+\textbf{Lemma.} Let $X$ have a log-concave probability mass function with interval support in $\mathbb Z$, mean $\mu$, and finite variance $\sigma^2=\mathrm{Var}(X)\ge1$. If $X_1,\ldots,X_n$ are independent copies and $n\mu\in\mathbb Z$, then
+
+\[
+\mathbb P(X_1+\cdots+X_n=n\mu)
+=\frac{1+O(n^{-1/2})}{\sqrt{2\pi n} \sigma},
+\]
+
+with a numerical implied constant and no upper bound on $\sigma$. If the law belongs to an exponential tilt family, then $|d\sigma/d\mu|\le C$ wherever $\sigma\ge1$ and the tilt is interior.
+
+\textbf{Modal mass and moments.} Write $p_j=\mathbb P(X=j)$, choose a mode $m$ and put $b=p_m$. Chebyshev's inequality gives $b\ge c/\sigma$ by placing at least $3/4$ of the mass in an interval containing at most $4\sigma+2$ integers. On either side of the mode let $J$ be the first distance where the mass is at most $b/2$, extending by zero off the support. Since the total mass is at most one, $J\le 2/b+1\le3/b$. Concavity of the log mass gives $p_{m\pm j}\le b 2^{-j/J}$ for $j\ge J$ (immediate if the support ends at $J$), and the modal bound gives $p_{m\pm j}\le2b 2^{-j/J}$ for $0\le j<J$. Thus $p_{m\pm j}\le2b 2^{-bj/3}$. Summing $j^2$ against this bound gives $\sigma^2\le C/b^2$ and hence $b\le C/\sigma$. The same sum with $j^3$ gives $\mathbb E|X-m|^3\le C\sigma^3$, and centering preserves this bound by Jensen's inequality and the triangle inequality. In an interior exponential tilt with parameter $\eta$, the cumulant identities
+
+\[
+\frac{d\mu}{d\eta}=\sigma^2,\qquad
+\frac{d\sigma^2}{d\eta}=\mathbb E(X-\mu)^3
+\]
+
+give $|d\sigma/d\mu|\le C$.
+
+\textbf{Fourier bounds.} Let $\phi(t)=\mathbb E e^{it(X-\mu)}$ for $|t|\le\pi$. For $\sigma$ above a fixed numerical threshold, consider the sites in $[\mu-2\sigma,\mu+2\sigma]$ of mass at least $1/(24\sigma)$. At most $6\sigma$ sites are in this interval, so the retained sites have mass at least $1/2$. Since $b\le C/\sigma$, there are at least $c\sigma$ retained sites, and they are contiguous by log-concavity. They give a block of length $M\asymp\sigma$, with $M\ge16$ and mass at least $c/M$ at each site. Restricting
+
+\[
+1-|\phi(t)|^2=\sum_{i,j}p_ip_j\bigl(1-\cos((i-j)t)\bigr)
+\]
+
+to this block bounds it below by a numerical multiple of $1-|U_M(t)|^2$, where $U_M(t)=M^{-1}\sum_{j=0}^{M-1}e^{ijt}$. If $2\pi/M\le|t|\le\pi$, the sine quotient gives $|U_M(t)|\le\pi/(M|t|)\le1/2$. If $|t|\le2\pi/M$, retain the pairs whose distances lie between $M/8$ and $M/4$. There are at least $cM^2$ such pairs, and $1-\cos((i-j)t)\ge cM^2t^2$ on them. This gives
+
+\[
+|\phi(t)|\le \exp\bigl(-c\min(\sigma^2t^2,1)\bigr).
+\]
+
+For $1\le\sigma$ below the fixed threshold, the modal lower bound makes $b$ bounded away from zero and the crossing distances $J$ bounded. On either side of the mode, up to distance $J$ the masses are at most that of the immediate neighbor on that side. Beyond $J$, the same neighbor mass bounds the tail after multiplication by $2^{-(j-J)/J}$. Thus $\mathbb E(X-m)^2\le C(p_{m-1}+p_{m+1})$. Since this expectation is at least $\sigma^2\ge1$, one neighboring mass is bounded below. Pairing it with the modal mass in the cosine sum proves the same Fourier bound for bounded $\sigma$. Finally, padded unimodality gives total variation $2b$, so summation by parts yields
+
+\[
+|\phi(t)|\le \frac{2b}{|1-e^{it}|}\le\frac{C}{\sigma|t|}
+\qquad(0<|t|\le\pi).
+\]
+
+\textbf{Inversion.} Fix a numerical $0<a<1$. For $|t|\le a/\sigma$, Taylor's formula and the third-moment bound give $|\phi(t)-e^{-\sigma^2t^2/2}|\le C\sigma^3|t|^3$. The Fourier bound above gives Gaussian decay on this interval. Telescoping the powers of order $n$ therefore bounds their difference by $C n\sigma^3|t|^3 e^{-c(n-1)\sigma^2t^2}$, whose integral is $O((n\sigma)^{-1})$ for $n\ge2$. The Gaussian integral outside this interval is exponentially small relative to $(\sqrt n \sigma)^{-1}$. On $a/\sigma\le |t|\le A/\sigma$, with $A$ a fixed large constant, the original Fourier bound gives an integral $O(e^{-cn}/\sigma)$. On the rest, integrate $(C/(\sigma |t|))^n$ from $A/\sigma$ to infinity, choosing $A>2C$. This gives at most $2A(C/A)^n/(\sigma(n-1))$. The intervals are intersected with $[-\pi,\pi]$ and empty parts are omitted. Since $n\mu$ is integral, Fourier inversion gives the central mass as $(2\pi)^{-1}\int_{-\pi}^{\pi}\phi(t)^n dt$. Comparison with the full Gaussian integral proves the lemma.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{Alex}
+P.~Alexandersson, \emph{Balanced arrays of uniform matroids},
+in \emph{Real-rooted polynomials: open problems}, SymCat, 2026.
+\href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}
+{Conjecture statement}.
+
+\bibitem{GMW}
+C.~Greenhill, B.~D. McKay, and X.~Wang,
+Asymptotic enumeration of sparse $0$--$1$ matrices with irregular
+row and column sums,
+\emph{J. Combin. Theory Ser. A} \textbf{113} (2006), 291--324.
+\href{https://doi.org/10.1016/j.jcta.2005.03.005}{doi:10.1016/j.jcta.2005.03.005}.
+Theorem~1.3 and Corollary~5.2.
+
+\bibitem{LW}
+A.~Liebenau and N.~Wormald,
+Asymptotic enumeration of digraphs and bipartite graphs by degree sequence,
+\emph{Random Structures Algorithms} \textbf{62} (2023), 259--286.
+\href{https://doi.org/10.1002/rsa.21105}{doi:10.1002/rsa.21105}.
+Theorem~1.1 and Remark~1.2.
+
+\bibitem{KN}
+J.~Kahn and M.~Neiman,
+Conditional negative association for competing urns,
+\emph{Random Structures Algorithms} \textbf{41} (2012), 262--281.
+\href{https://doi.org/10.1002/rsa.20395}{doi:10.1002/rsa.20395}.
+The orientation inequality is Lemma~8 of
+\href{https://arxiv.org/abs/1001.0610}{arXiv:1001.0610}.
+\end{thebibliography}
+\end{document}

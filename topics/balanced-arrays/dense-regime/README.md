@@ -19,3 +19,7 @@ The coefficient of $q^k$ counts labeled binary $n\times d$ matrices with every c
 ## Roots below the row cap
 
 A uniform bound leaves at most $CD\sqrt{n\log(n+1)}/d$ zeros uncertified as simple and negative for $2\le d\le n$ and every cap, with $D=\lfloor nr/d\rfloor$ and an unspecified absolute constant $C$. Thus the certified fraction tends to one when $d\gg\sqrt{n\log(n+1)}$. The comparison isolates individual roots using disks about the unrestricted binomial-power roots. **⬜ None** for Lean or Rocq. [Below-cap theorem, proof and verification](below-cap/README.md)
+
+## Rank-dependent dimension bound
+
+A reviewed all-root theorem applies when $d\ge C_\varepsilon\sqrt{nr/\log n}$ and either $r\le n^{1/5-\varepsilon}$ or $d\ge n^{3/4+\varepsilon}$, for each fixed $0<\varepsilon<1/5$ and all sufficiently large $n$. It gives all simple negative zeros down to order $\sqrt{n/\log n}$ for fixed caps. **⬜ None** for Lean or Rocq. [Rank-dependent theorem, proof and verification](rank-dependent/README.md)

@@ -2,7 +2,9 @@
 
 There are absolute constants $C>0$ and $N$ such that, for every $n\ge N$, $d\ge Cn/\log n$, and every row cap, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. **⬜ None** for Lean or Rocq. [Theorem and proof](dense-regime/README.md)
 
-For $2\le d\le n$ and every cap, a reviewed comparison with the unrestricted polynomial leaves at most $CD\sqrt{n\log(n+1)}/d$ of the $D=\lfloor nr/d\rfloor$ roots uncertified as simple and negative. It identifies individual roots below the cap by disjoint disks. Both growing-dimension results use unspecified absolute constants. **⬜ None** for Lean or Rocq. [Below-cap comparison](dense-regime/below-cap/README.md)
+For $2\le d\le n$ and every cap, a reviewed comparison with the unrestricted polynomial leaves at most $CD\sqrt{n\log(n+1)}/d$ of the $D=\lfloor nr/d\rfloor$ roots uncertified as simple and negative. It identifies individual roots below the cap by disjoint disks. The logarithmic and below-cap bounds use unspecified absolute constants. **⬜ None** for Lean or Rocq. [Below-cap comparison](dense-regime/below-cap/README.md)
+
+The rank-dependent theorem gives all simple negative zeros for $d\ge C_\varepsilon\sqrt{nr/\log n}$ when $r\le n^{1/5-\varepsilon}$ or $d\ge n^{3/4+\varepsilon}$, for each fixed $0<\varepsilon<1/5$ and all sufficiently large $n$. The constants are existential. **⬜ None** for Lean or Rocq. [Rank-dependent theorem](dense-regime/rank-dependent/README.md)
 
 For four columns with row cap two, the balanced-array polynomial has only simple negative zeros at every row count. The computer-assisted proof combines forty lower sign changes, uniform analytic phase estimates, and exact checks through 532 rows. A blind agent-assisted review checked the full argument against the original conjecture. **⬜ None** for Lean or Rocq. [Four-column theorem and verification](four-columns/README.md)
 
