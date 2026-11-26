@@ -1,4 +1,5 @@
 import Mathlib.Algebra.Polynomial.Eval.Defs
+import Mathlib.Algebra.Polynomial.Roots
 import Mathlib.Combinatorics.Matroid.Circuit
 import Mathlib.Combinatorics.Matroid.Rank.ENat
 import Mathlib.Basic.Complex.Basic
@@ -76,6 +77,21 @@ def NarayanaClaim (Z : ∀ n, Matroid (Fin n) → ℤ[X]) : Prop :=
       (∀ k : ℕ, ((r + 1 : ℕ) : ℤ) * (Z n M).coeff k =
         ((r + 1).choose k : ℤ) * ((r + 1).choose (k + 1) : ℤ)) ∧
       (∀ z : ℂ, (Z n M).eval₂ (Int.castRingHom ℂ) z = 0 → z.im = 0)
+
+/-- The strengthened root conclusion as stated in the written ribbon theorem. -/
+def PublishedNarayanaClaim (Z : ∀ n, Matroid (Fin n) → ℤ[X]) : Prop :=
+  ∀ (n r : ℕ) (M : Matroid (Fin n)) (lower upper : Path n),
+    IsRibbonPresentation M r lower upper →
+      (∀ k : ℕ, ((r + 1 : ℕ) : ℤ) * (Z n M).coeff k =
+        ((r + 1).choose k : ℤ) * ((r + 1).choose (k + 1) : ℤ)) ∧
+      (let q := (Z n M).map (Int.castRingHom ℂ)
+       q.roots.card = r ∧
+         ∀ z : ℂ, (Z n M).eval₂ (Int.castRingHom ℂ) z = 0 →
+           z.im = 0 ∧ z.re < 0 ∧ q.rootMultiplicity z = 1)
+
+/-- The written proof's rank-zero convention when degenerate ribbons are admitted. -/
+def RankZeroNarayanaClaim (Z : ∀ n, Matroid (Fin n) → ℤ[X]) : Prop :=
+  ∀ (n : ℕ) (M : Matroid (Fin n)), M.eRank.toNat = 0 → Z n M = 1
 
 #print axioms IsRibbonPresentation.rank_eq
 

@@ -11,13 +11,13 @@ The baseline is the public research release at commit `312293aa850010e9d9509d685
 | [Balanced binary arrays](../../../topics/balanced-arrays/verification.json) | Passed, 30 declarations | Outside the Partial audit |
 | [Ordered partitions with large blocks](../../../topics/ordered-large-blocks/verification.json) | Passed, 30 declarations | Outside the Partial audit |
 | [Eulerian matrix square](../../../topics/eulerian-matrix-square/verification.json) | Passed, 5 declarations | Outside the Partial audit |
-| [Ribbon matroids](../../../topics/ribbon-matroids/verification.json) | Passed, 13 declarations | Outside the Partial audit |
+| [Ribbon matroids](../../../topics/ribbon-matroids/verification.json) | Passed, 97 declarations | Passed, 24,717 declarations |
 
-The axiom audits cover 320 named declarations across the six topics. The four Partial rows cover the components identified in their topic records. A separate [upstream source rebuild](https://github.com/ProgramComputer/open-math-research/actions/runs/45762866977/job/139716713982) completed all 5,930 Lake jobs for the 75 distinct direct mathlib imports and their prerequisites. The manifest records 2,671 rebuilt mathlib objects. [Import list](upstream/roots.txt) · [Object hashes](upstream/olean-sha256.txt.gz)
+The baseline audit covered 320 named declarations across the six topics, including 13 supporting ribbon-graph declarations. The later ribbon audit checks 97 declarations for the end-to-end theorem. The three Partial rows cover the components identified in their topic records. A separate [upstream source rebuild](https://github.com/ProgramComputer/open-math-research/actions/runs/45762866977/job/139716713982) completed all 5,930 Lake jobs for the 75 distinct direct mathlib imports and their prerequisites. The manifest records 2,671 rebuilt mathlib objects. [Import list](upstream/roots.txt) · [Object hashes](upstream/olean-sha256.txt.gz)
 
 ## Reproduction
 
-Use a checkout containing the baseline Git object, Python 3, Git, GNU patch and the pinned Lean toolchain. From the repository root, choose one of `catalan`, `prism`, `balanced`, `ordered`, `eulerian` or `ribbon`. Start with an empty build directory.
+Use a checkout containing the baseline Git object, Python 3, Git, GNU patch and the pinned Lean toolchain. From the repository root, choose `catalan`, `prism`, `balanced`, `ordered`, `eulerian`, or `ribbon-foundation`. The historical `ribbon` group checks the conditional polygon reduction and the small graph examples. Start with an empty build directory.
 
 ~~~sh
 topic=catalan
@@ -37,7 +37,7 @@ The staging script reads published sources from Git, applies the stable-version 
 
 Each named declaration has a fresh `#print axioms` report. The check fails on a missing report or an axiom outside `propext`, `Classical.choice` and `Quot.sound`. A narrower axiom set is recorded verbatim. [Declaration inventory](declarations.json)
 
-For the two Full entries, use the Linux release's exporter and both checkers. Use a fresh artifact directory. The exported roots include the original public theorem and the separate statement-comparison declarations.
+For the three Full entries, use the Linux release's exporter and both checkers. Use a fresh artifact directory. The exported roots include the original public theorem and the separate statement-comparison declarations.
 
 ~~~sh
 artifact_dir=$(mktemp -d)

@@ -3,6 +3,7 @@ on:
   pull_request:
     branches: [research, main]
     paths:
+      - 'shared/lean/OpenMathResearch/Matroid*.lean'
       - 'shared/lean/publication/**'
       - 'topics/*/lean/publication/**'
       - '.github/workflows/publication-lean.yml'
@@ -54,10 +55,10 @@ jobs:
       - name: Audit the axioms of every named declaration
         run: python3 shared/lean/publication/audit_axioms.py ${{ matrix.topic }} .publication-build
       - name: Replay the full exported proof with both kernels
-        if: matrix.topic == 'catalan' || matrix.topic == 'prism'
+        if: matrix.topic == 'catalan' || matrix.topic == 'prism' || matrix.topic == 'ribbon-foundation'
         run: bash shared/lean/publication/replay-kernel.sh .publication-build "$RUNNER_TEMP/kernel-audit" ${{ matrix.topic }}
       - name: Preserve small kernel reports separately from the proof export
-        if: always() && (matrix.topic == 'catalan' || matrix.topic == 'prism')
+        if: always() && (matrix.topic == 'catalan' || matrix.topic == 'prism' || matrix.topic == 'ribbon-foundation')
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: kernel-reports-${{ matrix.topic }}
