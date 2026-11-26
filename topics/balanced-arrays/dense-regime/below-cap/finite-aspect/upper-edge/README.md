@@ -27,3 +27,5 @@ python3 -IB verify.py
 python3 -IB verify-profiles.py
 tectonic paper.tex
 ~~~
+
+A subsequent [research note on row-deficit monotonicity](monotonicity/README.md) gives an exact obstruction to extending the switching bound by global monotonicity of the excess number of available rows.
