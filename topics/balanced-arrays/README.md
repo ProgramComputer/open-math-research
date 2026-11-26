@@ -51,4 +51,4 @@ When $d\ge2$ and $nr\ge d$, the unique closest zero is $-b_n$. In the next row e
 python -I -O topics/balanced-arrays/verify_first_root.py
 ~~~
 
-For four columns at row cap two, a Hermite-polynomial expansion reduces the problem to a stronger integer sequence. Two constructions and exact root checks agree in all 121 rows through $n=120$. An all-row proof for four columns remains open. [Reduction and replay](four-column-mehler.md) · [Obstruction to the corank-one construction](scalar-normalization-obstruction.md)
+For four columns at row cap two, a Hermite-polynomial expansion reduces the problem to a stronger integer sequence. Two constructions and exact root checks agree in all 121 rows through $n=120$. An all-row proof for four columns remains open. [Reduction and replay](four-column-mehler.md) · [Exact scope of the scalar determinant method](scalar-determinant-boundary.md)
