@@ -8,7 +8,7 @@ Baril, Harris, Harry, McClinton and Ramírez derived the generating function for
 
 **🟩 Full · Lean 4.** The theorem `CatalanStrictPeaks.strict_peaks_all_lengths` proves both assertions for the polynomial defined by counting words. It gives the entire root multiset at each length and the strict order of the roots of consecutive rows. The finite and analytic arguments meet at $n=150$. The kernel audit reports only `propext`, `Classical.choice`, and `Quot.sound`. [Formal theorem](lean/CatalanStrictPeaksAllInterlacing.lean) · [Build instructions](lean/README.md#build) · [Kernel output](lean/all-interlacing-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45755815982)
 
-[Stable Lean recheck](verification.json) · [Per-declaration axiom reports](lean/publication/axioms-4.36.json) · [Reproduce the audit](../../shared/lean/publication/README.md)
+[Stable Lean recheck](verification.json) · [Per-declaration axiom reports](lean/publication/axioms-4.36.json) · [Reproduce the audit](../../shared/lean/publication/README.md) · [Archived Lean proof sources (Zenodo)](https://doi.org/10.5281/zenodo.24552076)
 
 The written proof includes the finite certificates. The independent review checked the orientations of the radial cuts, the phase, both ranges of integral estimates, the covariance comparison between consecutive sizes and the degree count. The finite verifier compares the algebraic generating function with a binomial coefficient formula, then checks signed polynomial remainder chains over the rationals. [Finite verifier](code/verify_catalan.py) · [Far-left verifier](code/far_left.py) · [Independent word enumeration and Sturm–Tarski check through length 151](code/independent_tarski.py)
 
