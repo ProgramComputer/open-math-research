@@ -1,0 +1,11 @@
+import CatalanStrictPeaksPhaseBridge
+
+#print axioms CatalanStrictPeaks.CutGeometry.phaseCorrection_bounds
+#print axioms CatalanStrictPeaks.CutGeometry.phaseCorrection_zero
+#print axioms CatalanStrictPeaks.CutGeometry.phaseCorrection_pi_div_two
+#print axioms CatalanStrictPeaks.CutGeometry.continuousOn_checkpointPhase
+#print axioms CatalanStrictPeaks.CutGeometry.checkpointPhase_interior
+#print axioms CatalanStrictPeaks.CutGeometry.nearPhaseUnit_eq_exp
+#print axioms CatalanStrictPeaks.CutGeometry.nearPhaseUnit_re_at_level
+#print axioms CatalanStrictPeaks.CutGeometry.eval_sign_at_checkpoint
+#print axioms CatalanStrictPeaks.CutGeometry.roots_from_150
