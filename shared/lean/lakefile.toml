@@ -162,3 +162,15 @@ srcDir = "../../topics/catalan-word-peaks/lean"
 [[lean_lib]]
 name = "CatalanStrictPeaksMomentArithmetic"
 srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksFinite"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksIntervalData"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksPrefix"
+srcDir = "../../topics/catalan-word-peaks/lean"

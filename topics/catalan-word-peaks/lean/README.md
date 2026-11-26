@@ -38,9 +38,9 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** Analytic convergence, branch continuation,
-the Cauchy deformation to the cuts, the complete integral and endpoint
-comparisons, and the finite Sturm certificates remain outside the kernel check.
+**Partial Lean verification.** The written proof covers analytic convergence,
+branch continuation, the Cauchy deformation to the cuts, the complete integral
+and endpoint comparisons, and finite lengths $21$ through $150$.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -107,6 +107,29 @@ The identification of the continued branches, the Cauchy cuts, the beta
 moment identities, and the derivation of all checkpoint and old-root signs
 remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
 
+## Exact isolating intervals through length 20
+
+[The interval checker](CatalanStrictPeaksFinite.lean) evaluates the actual
+word-count coefficients at the two endpoints of each dyadic interval. It
+checks the signs using integer arithmetic, verifies the within-row and
+consecutive-row interval order, and uses the intermediate value theorem
+and the exact degree to exhaust each root multiset.
+
+[The prefix theorems](CatalanStrictPeaksPrefix.lean) prove that rows $0$
+through $20$ have only simple negative zeros (`roots_through_20`) and
+strictly interlace in the specified orientation for old row lengths
+$0\le n<20$ (`interlacing_before_20`). The assertions about constant rows
+are vacuous. The kernel checks the interval data against the executable
+word recurrence. [Prefix kernel output](prefix-kernel.txt)
+
+To regenerate the candidate interval data from the repository root, run
+
+~~~sh
+python -I -O topics/catalan-word-peaks/code/make_lean_intervals.py \
+  topics/catalan-word-peaks/results/family-rows.jsonl --last 20 \
+  > topics/catalan-word-peaks/lean/CatalanStrictPeaksIntervalData.lean
+~~~
+
 [Written proof](../proof.md)
 
 ## Build
@@ -123,6 +146,8 @@ lake build CatalanStrictPeaksFirstReturn CatalanStrictPeaksGeneratingFunction Ca
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/GeneratingFunctionAxioms.lean
 lake build CatalanStrictPeaksCutGeometry CatalanStrictPeaksCutParameter CatalanStrictPeaksCutBounds CatalanStrictPeaksMomentArithmetic
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/CutAxioms.lean
+lake build CatalanStrictPeaksPrefix
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~
 
 [Kernel output](kernel.txt)
