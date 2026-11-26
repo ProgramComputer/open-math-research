@@ -10,7 +10,7 @@ The dominant terms in a torus integral come from the two points at which all coo
 
 ## All row counts with row cap one less than the column count
 
-For every $d\ge2$ and $n\ge0$, the balanced-array polynomial for $U(d-1,d)$ has its full degree $\lfloor n(d-1)/d\rfloor$ of distinct negative zeros. Consecutive rows strictly alternate, with the new row supplying the rightmost zero when both rows have zeros. Inclusion–exclusion gives a determinant of totally nonnegative leading matrix sections after a coefficient normalization. A factorial multiplier transfers strict alternation to the original rows. A fresh agent-assisted referee checked the proof against the original conjecture. The exact replay independently verifies 275 rows and 242 adjacent pairs with a nonconstant old row. **⬜ None.** This all-dimension result has no checked Lean or Rocq proof. [Proof](no-full-row.md) · [Independent review](review-no-full-row.md) · [Verifier](verify_corank_one.py) · [Exact archive](results/corank-one.jsonl.gz)
+For every $d\ge2$ and $n\ge0$, the balanced-array polynomial for $U(d-1,d)$ has its full degree $\lfloor n(d-1)/d\rfloor$ of distinct negative zeros. Consecutive rows strictly alternate, with the new row supplying the rightmost zero when both rows have zeros. Inclusion–exclusion gives a determinant of totally nonnegative leading matrix sections after a coefficient normalization. A factorial multiplier transfers strict alternation to the original rows. A fresh agent-assisted referee checked the proof against the original conjecture. The exact replay independently verifies 275 rows and 242 adjacent pairs with a nonconstant old row. **🟨 Partial · Lean 4.** Lean checks the coefficient identity from the labeled matrices. The determinant and root arguments remain on paper. [Lean theorem](lean/BalancedNoFullRowCounting.lean) · [Manuscript](no-full-row.pdf) [Proof](no-full-row.md) · [Independent review](review-no-full-row.md) · [Verifier](verify_corank_one.py) · [Exact archive](results/corank-one.jsonl.gz)
 
 ## Three columns with row cap two
 
@@ -49,4 +49,4 @@ When $d\ge2$ and $nr\ge d$, the unique closest zero is $-b_n$. In the next row e
 python -I -O topics/balanced-arrays/verify_first_root.py
 ~~~
 
-For four columns at row cap two, a Hermite-polynomial expansion reduces the problem to a stronger integer sequence. Two constructions and exact root checks agree in all 121 rows through $n=120$. An all-row proof for four columns remains open. [Reduction and replay](four-column-mehler.md)
+For four columns at row cap two, a Hermite-polynomial expansion reduces the problem to a stronger integer sequence. Two constructions and exact root checks agree in all 121 rows through $n=120$. An all-row proof for four columns remains open. [Reduction and replay](four-column-mehler.md) · [Obstruction to the corank-one construction](scalar-normalization-obstruction.md)

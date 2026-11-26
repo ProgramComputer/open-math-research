@@ -1,0 +1,48 @@
+name: Balanced arrays, corank one
+
+on:
+  pull_request:
+    branches: [main, research]
+    paths:
+      - .github/workflows/balanced-corank-one.yml
+      - shared/lean/lakefile.toml
+      - shared/lean/lake-manifest.json
+      - shared/lean/lean-toolchain
+      - topics/balanced-arrays/lean/BalancedNoFullRowCounting.lean
+      - topics/balanced-arrays/lean/CorankOneCountingAxioms.lean
+      - topics/balanced-arrays/lean/corank-one-count-kernel.txt
+
+concurrency:
+  group: balanced-corank-one-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  kernel-replay:
+    name: Kernel replay and axiom audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: shared/lean
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
+        with:
+          lake-package-directory: shared/lean
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+      - name: Fetch the finite combinatorics imports
+        run: lake exe cache get Mathlib.Data.Nat.Choose.Sum Mathlib.Data.Fintype.BigOperators Mathlib.Data.Fintype.Pi
+      - name: Build the labeled-array counting theorem
+        run: lake build BalancedNoFullRowCounting
+      - name: Compare the kernel axiom report
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/balanced-arrays/lean/CorankOneCountingAxioms.lean > "$RUNNER_TEMP/corank-one.txt"
+          diff -u ../../topics/balanced-arrays/lean/corank-one-count-kernel.txt "$RUNNER_TEMP/corank-one.txt"

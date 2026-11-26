@@ -199,13 +199,17 @@ name = "CatalanStrictPeaksBetaMoments"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
-name = "CatalanStrictPeaksNearAmplitude"
-srcDir = "../../topics/catalan-word-peaks/lean"
-
-[[lean_lib]]
 name = "CatalanStrictPeaksCovarianceArithmetic"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
 name = "CatalanStrictPeaksNearCovariance"
 srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksNearAmplitude"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "BalancedNoFullRowCounting"
+srcDir = "../../topics/balanced-arrays/lean"
