@@ -11,6 +11,10 @@ on:
       - 'shared/lean/OpenMathResearch/**'
       - 'topics/catalan-word-peaks/lean/**'
 
+concurrency:
+  group: catalan-ray-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
 

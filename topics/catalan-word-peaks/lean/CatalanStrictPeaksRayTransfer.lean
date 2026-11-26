@@ -131,7 +131,8 @@ private theorem cutPoint_norm_pos {d : ℝ} (hd : 0 < d) (hD : d < 1) (i : Fin 4
 
 private theorem cutFactor_product (d : ℝ) (z : ℂ) :
     (∏ i : Fin 4, cutFactor (cutPoint d i) z) = branch d z := by
-  simp [Fin.prod_univ_succ, cutPoint, branch] <;> ring
+  simp [Fin.prod_univ_succ, cutPoint, branch]
+  ring
 
 private theorem logBranch_continuous {d : ℝ} (hd : 0 < d) (hD : d < 1) (j : ℕ) :
     Continuous (logBranch d j) := by
@@ -223,7 +224,8 @@ private theorem exp_im_ne_zero_on_cut {d : ℝ} (hd : 0 < d) (hD : d < 1)
     conv_lhs => rw [← Complex.re_add_im z, exp_add, hExp]
     rw [← hPolar, ← Complex.ofReal_exp]
     push_cast
-    field_simp [hr] <;> ring
+    field_simp [hr]
+    ring
   rw [hS, Complex.mul_im]
   simp only [Complex.ofReal_re, Complex.ofReal_im, zero_mul, add_zero]
   exact mul_ne_zero (div_pos (Real.exp_pos _) (cutPoint_norm_pos hd hD i)).ne'
@@ -296,7 +298,8 @@ private theorem logSector_differentiableOn {d : ℝ} (hd : 0 < d) (hD : d < 1)
   have hDiff : DifferentiableOn ℂ (logIntegrand d n)
       (im ⁻¹' Ioo (sectorAngle d j) (sectorAngle d (j + 1))) := by
     intro z hz
-    have hInv := (differentiable_exp z).inv (exp_ne_zero z)
+    have hInv : DifferentiableAt ℂ (fun u : ℂ => (exp u)⁻¹) z :=
+      (differentiable_exp z).inv (exp_ne_zero z)
     have hGen := (analyticGenerating_analyticAt hd hD
       (exp_mem_slitDomain hd hD hj hz)).differentiableAt.comp z (differentiable_exp z)
     exact ((hInv.pow n).mul hGen).differentiableWithinAt
@@ -409,6 +412,7 @@ private theorem logBranch_cut_difference (d : ℝ) (j : Fin 4) (x : ℝ) :
         ∏ i ∈ Finset.univ.erase j, sectorFactor d k i (onCut d j x) :=
     (Finset.mul_prod_erase Finset.univ _ (Finset.mem_univ j)).symm
   rw [hSplit, hSplit, hprod, sectorFactor_forward, sectorFactor_backward, sub_mul]
+  rfl
 
 private theorem logSector_eq_quotient {d : ℝ} (hd : 0 < d) (hD : d < 1)
     (n : ℕ) {j : ℕ} (hj : j ≤ 4) {z : ℂ}
