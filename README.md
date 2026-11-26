@@ -5,7 +5,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | Result | Outcome | Formal verification |
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
-| [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | ⬜ None |
+| [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟨 Partial · Lean 4 |
 | [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | All sizes for thresholds two through four, strict eventual interlacing at each fixed threshold, and a positive proportion of the roots when both threshold and size-to-threshold ratio grow | 🟨 Partial · Lean 4 |
 | [Eventual real-rootedness of the Eulerian matrix square](topics/eulerian-matrix-square/README.md) | Partial theorem covering every sufficiently large row | 🟨 Partial · Lean 4 |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | All row counts for $U(2,3)$, with partial theorems at general rank and dimension | 🟨 Partial · Lean 4 |

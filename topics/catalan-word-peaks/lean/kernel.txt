@@ -1,0 +1,19 @@
+'OpenMathResearch.OrientedNegativeInterlace.roots_of_signed_test_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.OrientedNegativeInterlace.next_of_signs_at_all_old_roots' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.entry_le_index' depends on axioms: [propext, Quot.sound]
+'CatalanStrictPeaks.peaks_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.coeff_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.eval_zero_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.natDegree_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.leadingCoeff_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.roots_from_checkpoints' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.next_from_old_root_signs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.odd_step_degree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.positive_even_step_degree' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.interlacing_from_finite_and_analytic_signs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

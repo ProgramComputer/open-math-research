@@ -1,0 +1,15 @@
+import CatalanStrictPeaksInterlacing
+
+#print axioms OpenMathResearch.OrientedNegativeInterlace.roots_of_signed_test_points
+#print axioms OpenMathResearch.OrientedNegativeInterlace.next_of_signs_at_all_old_roots
+#print axioms CatalanStrictPeaks.entry_le_index
+#print axioms CatalanStrictPeaks.peaks_card_le
+#print axioms CatalanStrictPeaks.coeff_C
+#print axioms CatalanStrictPeaks.eval_zero_pos
+#print axioms CatalanStrictPeaks.natDegree_C
+#print axioms CatalanStrictPeaks.leadingCoeff_pos
+#print axioms CatalanStrictPeaks.roots_from_checkpoints
+#print axioms CatalanStrictPeaks.next_from_old_root_signs
+#print axioms CatalanStrictPeaks.odd_step_degree
+#print axioms CatalanStrictPeaks.positive_even_step_degree
+#print axioms CatalanStrictPeaks.interlacing_from_finite_and_analytic_signs
