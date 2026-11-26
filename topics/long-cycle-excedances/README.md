@@ -2,6 +2,8 @@
 
 For every $k\ge3$ and $k\le n\le4k-1$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. This includes the first transition permitting four cycles. [Complete three-cycle range, proof and verification](three-cycle-complete.md) · [Manuscript, Section 12](paper.pdf)
 
+For every $n\ge 250000^2=62{,}500{,}000{,}000$ and $3\le k\le n$, the consecutive nonzero roots are simple, negative and strictly interlace. The proof compares a truncated logarithm with its value at a smaller radius, then combines the two threshold ranges. [Wider-circle proof](radial-taylor.md) · [Independent audit](review-radial-taylor.md) · [Exact scalar checks](verify_radial_taylor.py)
+
 For $n\ge10^{18}$ and every $3\le k\le n$, the consecutive nonzero roots are simple, negative and strictly interlace. A signed pole sum also proves the explicit range $n\ge10{,}000$ and $k\ge2000\sqrt n$. [Uniform pole estimate, proof and checks](uniform-hilbert/README.md)
 
 For every minimum cycle length $k\ge3$, the pair from $3k-1$ to $3k$ has simple negative nonzero roots and strictly interlaces. It is the first pair whose next row can contain three cycles. [All-size transition theorem and exact replay](first-three-cycle-boundary.md) · [Independent review](review-first-three-cycle-boundary.md)
