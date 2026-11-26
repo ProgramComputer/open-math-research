@@ -1,7 +1,7 @@
 {
   "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
   "mathlib": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
-  "method": "The shared Lake project independently built the modules with pinned Lean and mathlib. Separate processes imported the built modules and printed the kernel axiom dependencies of the named theorems.",
+  "method": "Lake built these modules using pinned Lean and mathlib. A separate Lean process imported the built modules and printed the kernel axiom dependencies of the named declarations.",
   "modules": [
     {
       "file": "topics/balanced-arrays/lean/BalancedPairCompression.lean",
@@ -50,6 +50,33 @@
         "'OpenMathResearch.DiskUniqueness.injective_on_disk' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'OpenMathResearch.DiskUniqueness.geometric_tail_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
         "'OpenMathResearch.DiskUniqueness.extended_disk_budget' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "shared/lean/OpenMathResearch/AlternatingSignRoots.lean",
+      "sha256": "31dc756a1647137e1bf2bb2a13dcb941c6b47bc1e7f2257736a6aaa44df22842",
+      "exit_code": 0,
+      "kernel_output": [
+        "'OpenMathResearch.AlternatingSignRoots.roots_of_complete_list' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OpenMathResearch.AlternatingSignRoots.roots_of_alternating_sign_mesh' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OpenMathResearch.AlternatingSignRoots.transfer_same_degree' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'OpenMathResearch.AlternatingSignRoots.transfer_extra_root' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "shared/lean/OpenMathResearch/IntegerLevelNodes.lean",
+      "sha256": "ac3a5ecad50609a0bb0d5e0153d27ef001ebf87792cffe244f6087449076825e",
+      "exit_code": 0,
+      "kernel_output": [
+        "'OpenMathResearch.IntegerLevelNodes.increasing_integer_level_nodes' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/balanced-arrays/lean/BalancedThreeColumnSigns.lean",
+      "sha256": "59c8fc468e4f55d758e1f9865c90eb23aeea6edf0157a14322de6b7222794a66",
+      "exit_code": 0,
+      "kernel_output": [
+        "'BalancedThreeColumnSigns.positive_roots_of_phase_signs' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
     }
   ]

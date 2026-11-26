@@ -7,9 +7,10 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
 | [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | Strict interlacing at every fixed threshold for sufficiently large rows, and at every size for thresholds two through four | 🟨 Partial · Lean 4 |
 | [Eventual real-rootedness of the Eulerian matrix square](topics/eulerian-matrix-square/README.md) | Partial theorem covering every sufficiently large row | 🟨 Partial · Lean 4 |
-| [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Partial theorems, including the closest zero in every nonconstant row with $d\ge2$ | 🟨 Partial · Lean 4 |
+| [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | All row counts for $U(2,3)$, with partial theorems at general rank and dimension | 🟨 Partial · Lean 4 |
 | [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
 | [Ribbon matroids have the Narayana polynomial](topics/ribbon-matroids/README.md) | Proof | 🟨 Partial · Lean 4 |
+| [Extreme excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Partial theorem for every closest and largest nonzero root, and for a growing number of extreme ranks in large rows | ⬜ None |
 | [Largest real zero for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Partial theorem for every length from three, with a zero-free interval at every length | ⬜ None |
 
 **Lean or Rocq key**　🟩 Full (entire statement) · 🟨 Partial (named components) · ⬜ None (no checked proof)
