@@ -121,3 +121,5 @@ The direct backward coefficient map can fail on the binomial test polynomial. In
 An exact screen checks the individual rays and their coordinate adjacencies. Two abstract examples delimit the row-update argument. [Experiment and obstructions](shifted-rays/README.md)
 
 [Universal finite coverage through 36 rows](finite-36/README.md) reconciles all dimensions and caps at row 36, including 28 distinct exact residual cases.
+
+[Carried-load curvature and finite extensions](engset-curvature/README.md) proves strict extension concavity in three fixed-shape asymptotic regimes and gives a conditional linear dimension bound.
