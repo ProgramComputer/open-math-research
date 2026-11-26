@@ -1,0 +1,7 @@
+{"dimension": 2, "first_exception_weight": 5, "exceptions": [[[1, 1, 1, 1, 1], "293/288"]]}
+{"d": 2, "r": 1, "shape": [1, 1, 1, 1, 1], "first_positive_height": 2, "first_positive_value": 32, "positive_Newton_coefficients": 9, "leading_Newton_coefficient": 920052}
+{"d": 2, "r": 2, "shape": [1, 1, 1, 1, 1], "first_positive_height": 1, "first_positive_value": 1, "positive_Newton_coefficients": 10, "leading_Newton_coefficient": 920052}
+{"dimension": 3, "first_exception_weight": 9, "exceptions": [[[1, 1, 1, 1, 1, 1, 1, 1, 1], "935292579533443/884902330368000"]]}
+{"d": 3, "r": 1, "shape": [1, 1, 1, 1, 1, 1, 1, 1, 1], "first_positive_height": 3, "first_positive_value": 10077696, "positive_Newton_coefficients": 25, "leading_Newton_coefficient": 3346991452715097314551924500}
+{"d": 3, "r": 2, "shape": [1, 1, 1, 1, 1, 1, 1, 1, 1], "first_positive_height": 2, "first_positive_value": 10077696, "positive_Newton_coefficients": 26, "leading_Newton_coefficient": 3346991452715097314551924500}
+{"d": 3, "r": 3, "shape": [1, 1, 1, 1, 1, 1, 1, 1, 1], "first_positive_height": 1, "first_positive_value": 1, "positive_Newton_coefficients": 27, "leading_Newton_coefficient": 3346991452715097314551924500}
