@@ -38,7 +38,7 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** Lean verifies the entire finite prefix,
+**Full Lean verification.** Lean verifies the entire finite prefix,
 identifies the analytic branch, and proves the coefficient formula as the
 sum of the four improper ray integrals. It verifies radial moments and
 integrated envelopes and applies them to the normalized near-ray mean under
@@ -328,9 +328,9 @@ from separate comparisons. [Right-checkpoint kernel output](right-checkpoint-ker
 ## Rightmost-root sign and the all-length theorem
 
 The [rightmost-root module](CatalanStrictPeaksRightmostRoot.lean) uses
-$	au=-11/16$. The value $C_n(	au)$ has a leading term
+$\tau=-11/16$. The value $C_n(\tau)$ has a leading term
 $(11/16)(27/16)^n$ with error at most $24(3/2)^n$. Its derivative has
-leading term $(16sqrt3/27)(9/4)^n$ with error at most
+leading term $(16\sqrt{3}/27)(9/4)^n$ with error at most
 $20n(27/16)^n$. The exact pole coefficients come from the formal
 generating function. Geometric convolution bounds the coefficient
 tails using the absolute Taylor estimates for the radical and its
