@@ -27,6 +27,9 @@ theorem circleIntegral_eq_angular (f : ℂ → ℂ) (a : ℝ) (n : ℕ) :
   let z := exp ((a : ℂ) + (y : ℂ) * I)
   have hz : z ≠ 0 := exp_ne_zero _
   have hy : circleMap 0 (Real.exp a) y = z := by simp [z, circleMap, exp_add, ofReal_exp]
+  change deriv (circleMap 0 (Real.exp a)) y •
+    ((circleMap 0 (Real.exp a) y)⁻¹ ^ (n + 1) * f (circleMap 0 (Real.exp a) y)) =
+      I • (z⁻¹ ^ n * f z)
   rw [deriv_circleMap, hy]
   change (z * I) * (z⁻¹ ^ (n + 1) * f z) = I * (z⁻¹ ^ n * f z)
   rw [pow_succ]
