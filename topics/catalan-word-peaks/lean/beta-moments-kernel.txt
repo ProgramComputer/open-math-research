@@ -1,0 +1,13 @@
+'CatalanStrictPeaks.BetaMoments.integrableOn_moment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.BetaMoments.rawMoment_gamma' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.BetaMoments.mass_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.BetaMoments.mass_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.BetaMoments.moment_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.BetaMoments.variance_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.BetaMoments.tilt_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.BetaMoments.mass_ratio_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.BetaMoments.near_tail_integral_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.BetaMoments.covariance_tail_integral_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.BetaMoments.near_local_integral_bound' depends on axioms: [propext, Classical.choice, Quot.sound]

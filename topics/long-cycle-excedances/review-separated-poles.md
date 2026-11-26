@@ -1,0 +1,19 @@
+# Independent review of the occupied-pole estimate
+
+I checked [separated-poles.md](separated-poles.md) as an independent research agent. The argument gives the stated integer-phase signs and strict insertion comparison for $nS^2\ge1$ and $kS\ge2000(3+\log(3\sqrt{n/k}))$. Its residual comparison applies through $k\le(n+3)/3$. I found no substantive gap.
+
+- For each occupied set of size $h$, the numerator expansion uses the discrete difference weights from the separate variation lemma. Partial fractions assign all unused degree to one pivot $a$. Every resulting exponent is at least $k$, and at least one exponent is at least $m/h$. I checked the power budget when the pivot and the maximal-exponent pole coincide. At that pole reserving $k/3$, $m/(3h)$ and $e_p/3$ uses at most $e_p$. At all other poles the two reserved terms also fit. This allows the maximal-exponent damping and the derivative damping to be used simultaneously.
+- A differentiated power at $p$ costs $(e_p/n)|p|\rho_p^{1+e_p/3}$ after the reserved power is used. Bernoulli's inequality bounds this by $6|p|/[n(p^2-1)S^2]\le9/4$ for $|p|\ge3$. Principal poles cost at most one each. Differentiating the exact inverse denominator $(\cot\theta+iq)/(i(q-a))$ costs $\rho_q/S$ relatively, giving less than $h/10$ after division by $n$. These prove the claimed $5h/2$ bound. The finite-degree coefficient sums and their derivatives converge locally absolutely at positive angles, including at $\pi/2$.
+- The power-series envelope in the pole index follows by summing the decreasing bound $(1+(2\lambda/9)S^2p^2)^{-2}$ on the spacing-two lattice. For the separated sum, the half spacing cancels the two signs in the harmonic estimate, so the near part costs at most $1+\log(3D_0)$ and the far part at most $3/2$. When the maximal-exponent pole is the pivot, the other $h-1$ poles are unordered and give the factorial $(h-1)!$. When it is another pole, the fixed maximal pole and pivot bring the reciprocal distance factor $1/|a-b|$, and precisely $h-2$ unmarked poles remain unordered. Summing first over pivots then over maximal poles gives the other factorial. With $V_h\le6h$ the geometric bounds in (C) follow. I checked the stated numerical margins with rational arithmetic.
+- For the insertion term, $m=n+1-k\ge2n/3$ when $k\le(n+3)/3$, so the residual row satisfies $mS^2\ge2/3$. The common normalization is valid for every residual cycle count. At an old root it gives $(n+1)F_{n+1}=S F_n'+B_kF_m$, with $F'_n$ having sign $-\operatorname{sgn}\sin(n\theta)$. The absolute bound on $B_k F_m$ is smaller than $S|F'_n|$. The principal sign at all samples follows from the value error of $7/(60k)$ and the principal amplitude $2d_n>1/k$.
+
+## Join and scope
+
+Together with [the effective front argument](effective-front.md), independently reviewed in a [separate report](review-effective-front.md), the two arguments give strict interlacing for $n\ge10{,}000$ and
+$$
+k\le(n+3)/3,\qquad
+k\ge2000\sqrt n\,(3+\log(3\sqrt{n/k})).
+$$
+The sample with index $H+1$ lies after the $H$ old front roots and has $nS^2>6/5$. The displayed threshold therefore ensures the separated-pole hypotheses at that sample and thereafter toward $\pi/2$. Reflection gives the samples on the other half. The $n-2H-2$ sample gaps and $2H$ outside roots exhaust the old degree. At each old root the front or middle estimate preserves the derivative sign under both insertions. The next polynomial's constant and leading coefficients give the two outer signs and exhaust its degree. For $k>(n+3)/3$ the independently reviewed [one- and two-cycle argument](two-cycle-band.md) supplies the comparison by itself.
+
+The separated threshold is conservative. For instance at $k=n/3$ its sufficient condition begins at about $7.78\cdot10^8$ in $n$. Thresholds between this sufficient range and the other known regimes remain for further work. There is no checked Lean or Rocq proof.

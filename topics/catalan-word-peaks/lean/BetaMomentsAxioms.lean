@@ -1,0 +1,13 @@
+import CatalanStrictPeaksBetaMoments
+
+#print axioms CatalanStrictPeaks.BetaMoments.integrableOn_moment
+#print axioms CatalanStrictPeaks.BetaMoments.rawMoment_gamma
+#print axioms CatalanStrictPeaks.BetaMoments.mass_pos
+#print axioms CatalanStrictPeaks.BetaMoments.mass_succ
+#print axioms CatalanStrictPeaks.BetaMoments.moment_product
+#print axioms CatalanStrictPeaks.BetaMoments.variance_formula
+#print axioms CatalanStrictPeaks.BetaMoments.tilt_mean
+#print axioms CatalanStrictPeaks.BetaMoments.mass_ratio_le
+#print axioms CatalanStrictPeaks.BetaMoments.near_tail_integral_bound
+#print axioms CatalanStrictPeaks.BetaMoments.covariance_tail_integral_bound
+#print axioms CatalanStrictPeaks.BetaMoments.near_local_integral_bound
