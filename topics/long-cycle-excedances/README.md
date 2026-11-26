@@ -1,6 +1,8 @@
 # Excedance zeros for permutations with long cycles
 
-For every $7\le k\le n$ with $n/k\ge20$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. Exact exterior certificates through size 1,000, an exterior estimate through size 9,999 and a common circle comparison fill the gap between the finite prefix and the uniform size 10,000 theorem. For $k\ge7$, the remaining range is $251\le n<10{,}000$ and $4\le n/k<20$. Formal verification is ⬜ None. [Combined proof, checks and independent reviews](aspect-20/README.md)
+For every $`7\le k\le n`$ with $`n/k\ge20`$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. Exact exterior certificates through size 1,000, an exterior estimate through size 9,999 and a common circle comparison fill the gap between the finite prefix and the uniform size 10,000 theorem. For $`k\ge7`$, the remaining range is $`251\le n<1{,}000`$ and $`4\le n/k<20`$. Formal verification is ⬜ None. [Combined proof, checks and independent reviews](aspect-20/README.md)
+
+For every $`n\ge1{,}000`$ and $`4\le n/k\le20`$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. Bounded-aspect exterior and middle estimates give the join through size 9,999. The same package gives a high-angle middle bound from size 251. Formal verification is ⬜ None. [Combined proof, exact checks and independent reviews](bounded-aspect/README.md)
 
 Bowen Zuo reports all-size results at $k=4,5,6$. Repository verification of those claims is pending. [Zuo’s release](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/releases/tag/v1.2.0)
 
