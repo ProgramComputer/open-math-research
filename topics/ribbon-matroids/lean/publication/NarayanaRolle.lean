@@ -168,7 +168,6 @@ private theorem diff_eval_narayana {r : ℕ} {p : ℝ[X]}
     rw [div_pow, pow_succ, show x ^ (r + 1) = x ^ (r + 1 - k) * x ^ k by
       rw [← pow_add, ← hExp]]
     field_simp
-    ring
   rw [Nat.descFactorial_eq_factorial_mul_choose, Nat.descFactorial_eq_factorial_mul_choose,
     hSym, hA]
   push_cast
