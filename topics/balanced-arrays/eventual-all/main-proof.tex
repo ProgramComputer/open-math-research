@@ -1,0 +1,65 @@
+\section{Reduction}
+
+Suppose the theorem fails for arbitrarily large row counts and choose a sequence of failures with $n\to\infty$. We use two previously established bounds. For every fixed $\alpha>0$, once $n$ is sufficiently large in terms of $\alpha$, all caps are covered at $n\ge\alpha d^2$. Also an absolute $B$ covers every cap at $d\ge B n/\log n$ for all large $n$. Full rank has simple negative roots in every dimension $d\ge2$. Passing to subsequences as necessary, the remaining parameters satisfy
+
+\begin{equation*}
+d\to\infty,\qquad 1\le r<d,\qquad
+b=d^2/n\to\infty,\qquad b/d=d/n\to0 .
+\end{equation*}
+
+In particular $n/d\to\infty$, $n<d^2$ eventually, and $\log n=o(d)$. We will exclude every such sequence using only these relations. \href{https://github.com/ProgramComputer/open-math-research/tree/605cc467a5be93a8408519da331e46f1008df96e/topics/balanced-arrays/critical-aspect}{Fixed quadratic aspect} \enspace \href{https://github.com/ProgramComputer/open-math-research/tree/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/dense-regime}{Large-dimension bound} \enspace \href{https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/finite-linear-reduction.md}{Full rank}
+
+Every coefficient in the displayed support is positive: assign $dk$ slots in row groups of size at most $r$ and fill them consecutively with the repeated column cycle $1,\ldots,d$. Each group then has distinct columns. Write $T=nr/d$, $t_k=\sqrt{a_{k-1}/a_{k+1}}$ and $\Gamma_k=a_k^2/(a_{k-1}a_{k+1})$ for internal $k$.
+
+\section{Counting at bounded column quota divided by dimension}
+
+Pass to a subsequence along which $r/b$ converges in $[0,\infty]$. If $r/b$ is bounded, $D/d$ is bounded, and every internal geometric radius $t_k$ gives $(-1)^kP(-t_k)>0$ eventually. This is the bounded-rank-ratio lemma, whose coefficient comparison now holds throughout $b=o(d)$. It conditions on real row sizes and uses the fixed-profile balance estimate
+
+\begin{equation*}
+\mathbb P(\mathrm{balance}\mid s_1,\ldots,s_n)
+=\sqrt d\,(2\pi\Lambda)^{-(d-1)/2}
+\exp\left(-\frac1{12\beta}\right)(1+o(1)),\qquad
+\Lambda=\sum_i \frac{s_i(d-s_i)}{d(d-1)} .
+\end{equation*}
+
+Its hypotheses are $\sum_i s_i=dk$, $k/d\to\beta\in(0,\infty)$ and $\max_i s_i=o(d)$. The written proof of this estimate includes its global localization and the Gaussian cubic and quartic corrections. To average over rows at fixed total, the dependence of the determinant on their empirical variance is retained. The tilted row law has a Poisson exponential-moment bound, which controls that variance even when the largest permissible degree grows almost linearly in $d$. These estimates are also used at the two ends in the remaining cases. \hyperref[sec:sparse-fixed-profile-edgeworth]{Balance estimate} \enspace \hyperref[sec:sparse-fixed-profile-global-localization]{Localization for fixed sizes} \enspace \hyperref[sec:edgeworth-bounded-rank-ratio]{Conditional averaging and bounded-rank signs}
+
+The orientation inequality gives strict log-concavity of $a_k$ at internal quotas and $\Gamma_k\ge(1+1/k)^d(1+1/(n-k))^d$. Thus the geometric radii are strictly ordered. If $D\le1$ the conclusion is immediate. Otherwise the bounded-rank signs and the endpoint signs give $D$ distinct roots, excluding this case. \href{https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/orientation-normalization.md}{Orientation inequality}
+
+\section{The phase radii}
+
+We may now assume $r/b\to\infty$ and thus $D/d\to\infty$. Given $w>0$ let $S$ have the positive size law with weights $\binom ds w^s$, $0\le s\le r$, and let $H(w)$ be their sum. Define $\mu=\mathbb ES$, $h=r-\mu$, $y=n\mu/d$, $G(s)=s(d-s)/(d(d-1))$, $a=\mathbb E G(S)$, $\phi=\pi/d$ and $\nu=(d-1)/2$. The occupied-cell phase is
+
+\begin{equation*}
+\Psi(w)=n\arg H(we^{i\phi})-
+\nu\arg\frac{\mathbb E[G(S)e^{i\phi S}]}{\mathbb E e^{i\phi S}} .
+\end{equation*}
+
+The arguments are obtained by continuity from zero angle since both sums have positive weights and angles in a sector of width $r\phi<\pi$. The limits at radii zero and infinity are $-\nu\phi$ and $T\pi$. For each $1\le k<D$ the first value $v_k>0$ where $\Psi(v_k)=k\pi$ exists and these first hitting points strictly increase. The tilt inequality
+
+\begin{equation*}
+|\Psi(w)/\pi-y|\le C d+C\min(y,T-y)/\sqrt d
+\end{equation*}
+
+holds throughout, with an absolute $C$. Therefore at $w=v_k$, $k/d\to\infty$ implies $\mu/b=y/d\to\infty$, and $(D-k)/d\to\infty$ implies $h/b=(T-y)/d\to\infty$. The variance inequality $\mathrm{Var}(S)\le\mu(1-\mu/d)$ gives
+
+\begin{equation*}
+\frac{na}{d}\ge\frac{\mu(d-\mu)}{bd}
+\ge\frac{\min(\mu,d-\mu)}{2b}.
+\end{equation*}
+
+\href{https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/proof.md}{Phase and variance bounds}
+
+At any internal first hitting point with $\mu\ge1/10$ and $na/d\to\infty$ the angular lemma gives $(-1)^kP(-v_k^d)>0$. The negatively evaluated polynomial is the torus integral over coordinate product $-1$ of the $n$th power of the row generating function. Uniformly controlling its angular logarithm uses a zero-free disk for each fixed-size row, a consequence of stability of the elementary symmetric polynomial. Averaging the fixed-size logarithmic estimates after subtracting their common quadratic and cubic parts controls the fluctuations due to the random row size. This removes a previous restriction on the relative growth of $n$ and $d$. Near the last internal level, more than two angular regions can contribute. Their significant odd phases have the same sign. \hyperref[sec:analytic-angular-signs]{Angular sign theorem}
+
+\section{The overlap and the full degree}
+
+At $k/d\to0$, the orientation lower bound gives $\Gamma_k\to\infty$. The sign at $t_k$ is $(-1)^k$, since after accounting for the two neighboring terms the signed central sum is at least $1-2/\sqrt{\Gamma_k}$ by alternation of the decreasing tails. At $k/d\to\beta\in(0,\infty)$ the lower-quota overlap lemma gives $\log\Gamma_{k+j}\to1/\beta$ at every fixed offset and $d\log v_k=\log t_k+o(1)$. The signed sum at both radii tends after normalization by its central term to $\sum_{j\in\mathbb Z}(-1)^j e^{-j^2/(2\beta)}>0$ by Gaussian Poisson summation. Log-concavity controls the tails from the ratios at any fixed large offset. \hyperref[sec:edgeworth-finite-lower-overlap]{Lower-quota overlap}
+
+Pass to a further subsequence on which the corank ratio $(d-r)/b$ tends to infinity or to $\gamma\in[0,\infty)$. In the first case use the radii $t_k$ for $k\le d$ and $v_k^d$ for $k>d$. For $k/d\to\infty$, we have $\mu/b\to\infty$ and $(d-\mu)/b\ge(d-r)/b\to\infty$. Therefore $na/d\to\infty$ at the first hitting point and its sign follows from the angular lemma. This covers the entire upper end regardless of the slack.
+
+In the second case use $t_k$ also when $D-k\le d$. The two geometric end ranges are disjoint for large $d$. Whenever both $k/d$ and $(D-k)/d$ tend to infinity, the angular lemma again applies since $\mu/b\to\infty$ and $(d-\mu)/b\ge h/b\to\infty$. For $(D-k)/d$ bounded, apply the complementary quota lemma to the holes: the hole column sum is $n-k$ and each row must have at least $d-r$ holes. This gives the strict sign at the geometric radius even when $(D-k)/d\to0$, including an exactly saturated last coefficient as neighbor. When $(D-k)/d\to\beta\in(0,\infty)$ it gives $\log\Gamma_{k+j}\to1/(\gamma+\beta)$ and $d\log v_k=\log t_k+o(1)$, so either radius has the required sign. A switch moving a single hole bounds the upper tail of row sizes under the actual balanced count. This permits use of the fixed-profile estimate for typical sizes even though the hole rows have no prescribed small maximum. \hyperref[sec:sublinear-b-generic-upper-transfer]{Complementary quota lemma}
+
+All radii increase strictly inside their respective geometric and angular ranges. At the lower join the angular substitution is at $d+1$. When there is an upper geometric block, the substitution is at $D-d-1$, immediately before the first geometric point at $D-d$. At either join the adjacent geometric log radii differ by $(\log\Gamma_k+\log\Gamma_{k+1})/2$. The limit is $1$ at $k$ near $d$, and $1/(\gamma+1)>0$ near $D-d$ when this second join is used. Replacing a geometric radius by its first hitting radius there changes its log by $o(1)$. Thus the full family is ordered. If a sign failed infinitely often, a subsequence would have both $k/d$ and $(D-k)/d$ convergent in $[0,\infty]$. Their sum tends to infinity. The cases above contradict every possible failure. With the signs $1$ at zero and $(-1)^D$ at positive infinity, the $D-1$ internal alternating signs give $D$ distinct negative zeros. This contradiction proves that a single integer $N$ works for every dimension and cap.
+
+For each of the finitely many $n<N$, all $d\ge n$, $d\ge2$ are already covered by coefficient separation and $d=1$ by the explicit formula. Hence only finitely many triples can fail the original conjecture. This proof gives no numerical bound on their row counts. \href{https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/finite-linear-reduction.md}{Coefficient separation in large dimensions}
