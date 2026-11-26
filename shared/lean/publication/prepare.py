@@ -83,7 +83,7 @@ def main():
                      "MatroidFlatContract", "MatroidKLProduct", "MatroidFlatSum",
                      "MatroidKLDeletionProfile", "MatroidFlatDelete"):
             additional["OpenMathResearch." + name] = HERE.parent / "OpenMathResearch" / (name + ".lean")
-        for name in ("RibbonNarayanaSpec", "RibbonBoundaryProfile"):
+        for name in ("RibbonNarayanaSpec", "RibbonBoundaryProfile", "RibbonChainPresentation"):
             additional[name] = (HERE.parents[2] / "topics" / "ribbon-matroids" / "lean" /
                                 "publication" / (name + ".lean"))
     files.update({k: str(v.relative_to(HERE.parents[2])) for k, v in additional.items()})

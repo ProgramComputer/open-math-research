@@ -98,6 +98,7 @@
     "OpenMathResearch.MatroidKL.tau_sum_eq_zero",
     "OpenMathResearch.MatroidKL.translatedSum_pushProfile",
     "Ribbon.Source.IsRibbonPresentation",
+    "Ribbon.Source.IsRibbonPresentation.exists_chain",
     "Ribbon.Source.IsRibbonPresentation.first_steps",
     "Ribbon.Source.IsRibbonPresentation.inner_step_eq",
     "Ribbon.Source.IsRibbonPresentation.last_steps",
