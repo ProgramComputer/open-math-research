@@ -1,0 +1,6 @@
+251 13 120 matching coefficients
+251 33 120 matching coefficients
+252 63 120 matching coefficients
+401 100 120 matching coefficients
+421 67 120 matching coefficients
+999 249 120 matching coefficients
