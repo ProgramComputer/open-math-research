@@ -22,7 +22,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Strict interlacing for every row count and dimension at $r=d-1$ | 🟨 Partial · Lean 4 (labeled-array coefficient formula) |
 | [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | Strict interlacing at every fixed threshold for sufficiently large rows, and at every size for thresholds two through four | 🟨 Partial · Lean 4 |
 | [Eventual real-rootedness of the Eulerian matrix square](topics/eulerian-matrix-square/README.md) | Partial theorem covering every sufficiently large row | 🟨 Partial · Lean 4 |
-| [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
+| [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Repository partial theorem for single cycles and large-cutoff cycle-type mixtures | ⬜ None |
 | [Ribbon matroids have the Narayana polynomial](topics/ribbon-matroids/README.md) | Proof of the identity and simple negative roots for every nonempty connected ribbon | 🟩 Full · Lean 4 |
 
 **Lean or Rocq key**　🟩 Full (entire statement) · 🟨 Partial (named components) · ⬜ None (no checked proof)
@@ -36,7 +36,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 - For [balanced arrays](topics/balanced-arrays/README.md), the corank-one theorem covers every dimension. Other caps are settled [through 36 rows](topics/balanced-arrays/finite-36/README.md) and [through degree fourteen](topics/balanced-arrays/low-degree.md).
 - Every sufficiently large [Eulerian-square row](topics/eulerian-matrix-square/README.md) has only simple real roots. At every row from $n=3$, the two extreme roots at each end strictly alternate with the next row. The all-root cutoff is unknown.
 - For [long-cycle excedances](topics/long-cycle-excedances/README.md), every consecutive pair up through size $3k-1$ strictly interlaces at minimum cycle length $k$. Any counterexample has $k\ge4$ and old size $3k-1\le n<10^{20}$.
-- For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.
+- Bowen Zuo proved Alexandersson’s ordinary-descent conjecture for every minimum cycle length. The repository’s earlier partial theorem also covers arbitrary allowed cycle-type mixtures in its large-cutoff range. [Long-cycle descents](topics/long-cycle-descents/README.md)
 
 ## Citation
 
