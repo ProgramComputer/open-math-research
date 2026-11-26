@@ -33,3 +33,5 @@ python3 -B topics/long-cycle-excedances/verify_small_threshold_circle.py
 [Full-powers independent review](review-full-powers.md) · [Refinement and small-threshold independent review](review-degree-split.md) · [Earlier radial review](../review-radial-taylor.md)
 
 The unrestricted finite region below this cutoff remains open where other sufficient results do not apply.
+
+On November 26, 2026, an agent-assisted reviewer compared the [manuscript section](../uniform-crossover.tex) with the three proofs. The review checked the angular normalization, common insertion multiplier, threshold ranges, and all three crossover endpoints. The reviewed TeX source has SHA-256 `74976812e6e4ef4ddfdd2e48b3eb0222c2af3d3a27da46af3ae9f348b2b5abad`.

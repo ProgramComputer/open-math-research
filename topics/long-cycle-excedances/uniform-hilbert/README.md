@@ -21,7 +21,7 @@ D(u)=\sum_{j\ge0}d_j u^j
 =\exp\left(\sum_{j\ge k}u^j/j\right).
 $$
 
-The cycle probabilities obey $1/(2k-1)\le d_j\le1/k$ for $j\ge k$. Put $b_s=[u^s](1-u)(D(u)-1)$, so $\sum_s|b_s|<2/k$. Let $R_j=F_j-d_jB_j$. Put $m=n+1-k$. Either output index $M=n,m$ has $M\ge2n/3$, hence $MS^2\ge4/5$. Below $A=kS\ge2000$. [Pole and variation inputs][poles] · [Variation proof][var]
+The cycle probabilities obey $1/(2k-1)\le d_j\le1/k$ for $j\ge k$. Put $`b_s=[u^s](1-u)(D(u)-1)`$, so $\sum_s|b_s|<2/k$. Let $R_j=F_j-d_jB_j$. Put $m=n+1-k$. Either output index $M=n,m$ has $M\ge2n/3$, hence $MS^2\ge4/5$. Below $A=kS\ge2000$. [Pole and variation inputs][poles] · [Variation proof][var]
 
 For any real $\ell\ge4$, write $\lambda=\ell S^2$. Bernoulli's inequality gives $\rho_p^\ell\le (1+(2/9)\lambda p^2)^{-2}$ for $|p|\ge3$. Integrating the decreasing unweighted envelope and the unimodal weighted envelope along the positive odd lattice gives
 
@@ -67,26 +67,26 @@ $$
 
 For a fixed occupied set, partial fractions select $a$ and contribute $(1-z_q/z_a)^{-1}$ for each other $q$. Since $(1-z_q/z_a)^{-1}=z_q^{-1}/[i(q-a)S]$, this is exactly the displayed product for that $a$. All calculations can take place in series modulo $u^{M+1}$. Each coefficient and its angular derivative has locally absolutely convergent pole sums because $k\ge2000$ here.
 
-Use the norm $\|f\|=\sum_{s=0}^M |[u^s]f|e^{s/(4k)}$ in that truncated algebra. To estimate the linear term in $\log Q_a$, the following signed kernel bound is important. For any complex finite measure representing a sequence as $f_q=\int e^{-iqx}d\mu(x)$, if its signed sum converges absolutely then
+Use the norm $\Vert f\Vert =\sum_{s=0}^M |[u^s]f|e^{s/(4k)}$ in that truncated algebra. To estimate the linear term in $\log Q_a$, the following signed kernel bound is important. For any complex finite measure representing a sequence as $f_q=\int e^{-iqx}d\mu(x)$, if its signed sum converges absolutely then
 
 $$
 \left|\sum_{q\ne a}\frac{f_q}{q-a}\right|
-\le\frac\pi2\|\mu\|_{\mathrm{TV}}.
+\le\frac\pi2\Vert \mu\Vert _{\mathrm{TV}}.
 $$
 
-To prove it write $q=a+2j$ and insert a factor $\eta^{|j|}$ with $0<\eta<1$. The paired sum is $-i\sum_{j\ge1}\eta^j\sin(2jx)/j$. Its magnitude is at most $\pi/2$ by the imaginary part of $-\log(1-\eta e^{2ix})$. Integrate and let $\eta$ increase to one. For $f_q=z_q^s$, the Laplace formula represents it by a measure of total variation at most $C^{-s}$, namely the Fourier image of the gamma density of shape $s$ and unit scale under $x\mapsto Sx/C$, multiplied by $C^{-s}$. Therefore $\|\sum_{q\ne a}A_{a,q}\|\le(\pi/2)(9/A)<15/A$. Here $e^{s/(4k)}C^{1-s}\le e^{s/(2k)}$. An absolute sum at this linear step would introduce a factor growing as $\log(n/k)$.
+To prove it write $q=a+2j$ and insert a factor $\eta^{|j|}$ with $0<\eta<1$. The paired sum is $-i\sum_{j\ge1}\eta^j\sin(2jx)/j$. Its magnitude is at most $\pi/2$ by the imaginary part of $-\log(1-\eta e^{2ix})$. Integrate and let $\eta$ increase to one. For $f_q=z_q^s$, the Laplace formula represents it by a measure of total variation at most $C^{-s}$, namely the Fourier image of the gamma density of shape $s$ and unit scale under $x\mapsto Sx/C$, multiplied by $C^{-s}$. Therefore $\Vert \sum_{q\ne a}A_{a,q}\Vert \le(\pi/2)(9/A)<15/A$. Here $e^{s/(4k)}C^{1-s}\le e^{s/(2k)}$. An absolute sum at this linear step would introduce a factor growing as $\log(n/k)$.
 
-The individual norms satisfy $\|A_{a,q}\|\le9/(A|q-a|)$, and $\sum_{q\ne a}|q-a|^{-2}<1$. With $\delta=9/(2A)$, the total higher terms in the logarithm have norm at most $81/(2A^2(1-\delta))<41/A^2$. Thus $\|\log Q_a\|<16/A$ and $\|Q_a-1\|<17/A$.
+The individual norms satisfy $\Vert A_{a,q}\Vert \le9/(A|q-a|)$, and $\sum_{q\ne a}|q-a|^{-2}<1$. With $\delta=9/(2A)$, the total higher terms in the logarithm have norm at most $81/(2A^2(1-\delta))<41/A^2$. Thus $\Vert \log Q_a\Vert <16/A$ and $\Vert Q_a-1\Vert <17/A$.
 
 For the derivative, $z_q'/z_q=(z_q-C)/S$. The sequence $z_q^{s+1}-Cz_q^s$ has a Fourier measure with variation bounded by $C^{-s-1}(S^2+1/\sqrt s)$. Indeed in the common gamma density of shape $s$, the difference of the two measures is the density times $x/s-C^2$, with the overall factor $C^{-s-1}$. If $X$ is gamma with shape $s$ and unit scale, $\mathbb E|X/s-1|\le1/\sqrt s$. Thus the derivative of $z_q^s$ has a representing measure of norm at most $C^{-s-1}(sS+\sqrt s/S)$.
 
 The derivative norm of the linear logarithm, divided by $M$, is therefore at most
 
 $$
-\frac\pi2\left(\frac{27}{M}+\frac{16}{\sqrt k\,MS^2}+\frac9{kMS^2}\right)<16/A .
+\frac\pi2\left(\frac{27}{M}+\frac{16}{\sqrt{k}MS^2}+\frac9{kMS^2}\right)<16/A .
 $$
 
-This includes differentiation of $1/S$. For each individual derivative, bound the Fourier integral by the variation of the representing measure before summing over $s$. This gives the same parenthetical expression with $1/|q-a|$ in place of $\pi/2$. Since $MS^2\ge4/5$, $M\ge k$, and $\sqrt k\ge2A$, the expression is at most $10/A+(27/4+45/16)/A^2<11/A$. Thus each individual normalized derivative has norm below $11/(A|q-a|)$. The derivative of the higher logarithm terms has norm, after division by $M$, at most $99/(A^2(1-\delta))<100/A^2$. The derivative of the exponential now gives $\|Q'_a\|/M<17/A$.
+This includes differentiation of $1/S$. For each individual derivative, bound the Fourier integral by the variation of the representing measure before summing over $s$. This gives the same parenthetical expression with $1/|q-a|$ in place of $\pi/2$. Since $MS^2\ge4/5$, $M\ge k$, and $\sqrt k\ge2A$, the expression is at most $10/A+(27/4+45/16)/A^2<11/A$. Thus each individual normalized derivative has norm below $11/(A|q-a|)$. The derivative of the higher logarithm terms has norm, after division by $M$, at most $99/(A^2(1-\delta))<100/A^2$. The derivative of the exponential now gives $\Vert Q'_a\Vert /M<17/A$.
 
 To sum over $a$, split at total non-distinguished numerator degree $T=M/2$. When $T\le M/2$, the degree of $D(z_a u)-1$ is at least $M/2$, retaining $\rho_a^{M/2}$ and $|a|\rho_a^{M/2}$ for the derivative of that factor. The two pole moments are below six and thirteen. When $T>M/2$, retain $\rho_a^k$ and $|a|\rho_a^k$ and use the norm weight penalty $e^{-M/(8k)}$. With $x=M/k\ge1$, the unweighted pole moments are bounded by $(9/2)\sqrt x$ and $(33/4)x$. Multiplying by $e^{-x/8}$ and adding the short-degree bounds gives respective bounds below twelve and thirty-eight. The short and long coefficient restrictions occur only after the product norm, which preserves the signed cancellation when the coefficients are collected at each fixed $T$. As $d_j\le1/k$, we conclude
 
