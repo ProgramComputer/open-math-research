@@ -62,19 +62,44 @@ def has_spacing(coefficients, ratio):
     return interlaces(coefficients, scaled)
 
 
+def geometric_symbol(left, right, ratio):
+    # Homogenize each factor to keep the product integral as it is constructed.
+    geometric = [1]
+    for i in range(len(left)-1):
+        leading, constant = ratio.numerator**i, ratio.denominator**i
+        geometric = [a*constant + b*leading for a, b in zip(geometric+[0], [0]+geometric)]
+    tilted = [c*Fraction(b,a) for c,a,b in zip(geometric,left,right)]
+    denominator = lcm(*(x.denominator for x in tilted))
+    return [int(denominator*x) for x in tilted]
+
+
 def check_spacing_witness(left, right):
-    """Test the actual input and the symbol on geometrically spaced negative roots."""
     for ratio in map(Fraction, ('6/5', '5/4', '4/3', '3/2', '5/3', '7/4', '2')):
-        geometric = [1]
-        for i in range(len(left)-1):
-            weight = ratio**i
-            geometric = [a + weight*b for a, b in zip(geometric+[0], [0]+geometric)]
-        tilted = [c*Fraction(b,a) for c,a,b in zip(geometric,left,right)]
-        den = lcm(*(x.denominator for x in tilted))
-        integer = [int(den*x) for x in tilted]
-        require(root_report(integer)['real_rooted'] and has_spacing(integer, ratio),
+        tilted = geometric_symbol(left, right, ratio)
+        require(root_report(tilted)['real_rooted'] and has_spacing(tilted, ratio),
                 'modified symbol does not have the specified spacing')
         require(has_spacing(left, ratio) == (ratio < 2), 'unexpected input spacing')
+
+
+def check_spacing_pilot():
+    directory = Path(__file__).resolve().parents[1] / 'results'
+    tested = 0
+    for name in ('column-extension-screen.jsonl.gz', 'column-extension-corank-two.jsonl.gz'):
+        with gzip.open(directory / name, 'rt') as stream:
+            for record in map(json.loads, stream):
+                n, r = record['n'], record['r']
+                if r < 2 or n > 36:
+                    continue
+                ratio = 1 + Fraction(2*r,n)
+                left = record['left']
+                tilted = geometric_symbol(left, record['right'], ratio)
+                for polynomial in (left, tilted):
+                    require(root_report(polynomial)['real_rooted'] and has_spacing(polynomial, ratio),
+                            f'spacing failure at {(n,r,record["d"])}')
+                tested += 1
+    require(tested == 337, 'unexpected number of geometric symbols')
+    print('Verified the input and modified symbol spacing at all 337 pilot parameters.')
+
 
 def check(record, recount):
     n, r, d = (record[key] for key in ('n', 'r', 'd'))
@@ -107,7 +132,11 @@ def check(record, recount):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--recount', action='store_true', help='recompute all coefficients from the formula')
+    parser.add_argument('--spacing-pilot', action='store_true', help='replay only the 337 geometric-symbol tests')
     args = parser.parse_args()
+    if args.spacing_pilot:
+        check_spacing_pilot()
+        raise SystemExit(0)
     archive = Path(__file__).resolve().parents[1] / 'results/column-extension-corank-two.jsonl.gz'
     with gzip.open(archive, 'rt') as stream:
         rows = list(map(json.loads, stream))
