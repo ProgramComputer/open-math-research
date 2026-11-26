@@ -49,6 +49,8 @@ Outward-rounded phase comparisons now isolate the true angular nodes at every sa
 python3 -IB screen-angular-signs.py verify screen-angular-signs.jsonl.gz --finite-vectors ../finite-36/exact-vectors.jsonl
 ~~~
 
+For interior quota densities and bounded $n/d$, the prescribed signs at the exact nodes hold eventually, uniformly over the proper caps. An explicit finite bound also applies to quotas with a specified overflow gap. [Bounded-aspect theorem and rare-overflow lemma](bounded-aspect/README.md)
+
 ## Eventual signs at every quota in fixed dimension
 
 For each fixed $d\ge2$, every sufficiently large height has the
