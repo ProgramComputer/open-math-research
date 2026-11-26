@@ -1,0 +1,2 @@
+Front contours, derivative > 63/100, lag < 58/100, and overlap > 149/100.
+Center derivative > 19/100 and lag < 16/100.

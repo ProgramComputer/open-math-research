@@ -4,6 +4,8 @@ Let $E_{n,k}$ count excedances of permutations whose cycles all have length at l
 
 This extends the two-cycle theorem from the first three-cycle transition. It reaches the $10{,}000$ cutoff of the existing general exterior proof throughout this band. For instance, at $(n,k)=(10000,3000)$ the theorem applies. Neither the two-cycle theorem nor either hypothesis in the existing effective-uniform route applies to that pair. The old and new rows in that example have degrees $9998$ and $9999$. [Two-cycle theorem][two] · [Effective uniform theorem][uniform] · [Tracking issue][issue]
 
+The stronger cutoff $n\ge2{,}200$ uses the pole expansion below, sharper middle estimates and a separate exterior argument. [Stronger theorem and independent review](three-cycle-2200.md)
+
 ## Occupied poles
 
 For $t=-\exp(-\pi\cot\theta)$ with $0<\theta\le\pi/2$, put $S=\sin\theta$, $r=\pi/S$, $z_p=(\cos\theta+ipS)^{-1}$, and $\rho_p=|z_p|$ for odd integers $p$. Define $B_j=\sum_p z_p^j$ and $F_j=r^j E_{j,k}(t)/(j!(1-t)^j)$. The exact Eulerian pole expansion gives

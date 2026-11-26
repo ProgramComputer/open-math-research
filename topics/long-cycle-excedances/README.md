@@ -31,7 +31,7 @@ Positive interlacing weights alone allow an insertion ratio greater than four in
 
 Every consecutive pair before three cycles can occur strictly interlaces, at every admissible threshold. The proof treats both lag signs for $2k\le n\le3k-2$ using 16 rational bounds above the analytic cutoff and exactly 3,007 smaller pairs. [Two-cycle theorem](two-cycle-band.md) · [Independent review](review-two-cycle-band.md)
 
-For $n\ge10{,}000$ and $3k-1\le n<4k$, all nonzero roots of the consecutive rows are simple, negative and strictly interlace. The proof joins the existing exterior estimates to a middle estimate using at most three occupied poles. It includes the pair from $4k-1$ to $4k$. [Three-cycle-band theorem and rational checker](three-cycle-poles.md) · [Independent review](review-three-cycle-poles.md)
+For $n\ge2{,}200$ and $3k-1\le n<4k$, all nonzero roots of the consecutive rows are simple, negative and strictly interlace. The argument combines separate exterior bounds with a middle estimate over subsets of at most three occupied poles. It includes the pair from $4k-1$ to $4k$. [Three-cycle-band theorem and rational checker](three-cycle-2200.md) · [Independent review](review-three-cycle-2200.md) · [Earlier cutoff at $10{,}000$](three-cycle-poles.md)
 
 For arbitrary cycle counts, every old real root in a specified central interval is simple and meets the strict insertion inequality. There is an explicit lower bound for the number of such roots at every $n\ge k\ge8$. [Central interval and root count](central-interval.md) · [Independent review](review-central-interval.md)
 
