@@ -10,8 +10,8 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [Eventual real-rootedness of the Eulerian matrix square](topics/eulerian-matrix-square/README.md) | Partial theorem covering every sufficiently large row | 🟨 Partial · Lean 4 |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | All row counts for $U(2,3)$, with partial theorems at general rank and dimension | 🟨 Partial · Lean 4 |
 | [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
+| [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Proposed all-root theorem for $k\ge100n/\log n$ in large rows, with interlacing of the extreme ranks uniformly in $k$ | ⬜ None |
 | [Ribbon matroids have the Narayana polynomial](topics/ribbon-matroids/README.md) | Proof | 🟨 Partial · Lean 4 |
-| [Extreme excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Partial theorem for every closest and largest nonzero root, and for a growing number of extreme ranks in large rows | ⬜ None |
 
 **Lean or Rocq key**　🟩 Full (entire statement) · 🟨 Partial (named components) · ⬜ None (no checked proof)
 
@@ -19,6 +19,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 - For [balanced arrays](topics/balanced-arrays/README.md), the conjecture holds in [every degree through fourteen](topics/balanced-arrays/low-degree.md) and for every rank and dimension through 24 rows. For arbitrary row counts, $d\ge(n+1)\log(2)/2$ suffices.
 - Every sufficiently large [Eulerian-square row](topics/eulerian-matrix-square/README.md) has only simple real roots. At every row from $n=3$, the two extreme roots at each end strictly alternate with the next row. The all-root cutoff is unknown.
+- For [long-cycle excedances](topics/long-cycle-excedances/README.md), the full conjecture at fixed minimum cycle length remains open.
 - For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.
 
 ## Citation
