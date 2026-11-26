@@ -52,5 +52,10 @@ jobs:
           Mathlib.Topology.Order.IntermediateValue
       - name: Check the finite prefix
         run: lake build CatalanStrictPeaksPrefix
-      - name: Print the theorem axioms
-        run: lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
+      - name: Audit the theorem axioms
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-prefix-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/prefix-kernel.txt \
+            "$RUNNER_TEMP/catalan-prefix-axioms.txt"

@@ -38,9 +38,9 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** The written proof covers analytic convergence,
-branch continuation, the Cauchy deformation to the cuts, the complete integral
-and endpoint comparisons, and finite lengths $21$ through $150$.
+**Partial Lean verification.** Lean verifies the entire finite prefix. The
+written proof covers analytic convergence, branch continuation, the Cauchy
+deformation to the cuts, and the complete integral and endpoint comparisons.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -107,7 +107,7 @@ The identification of the continued branches, the Cauchy cuts, the beta
 moment identities, and the derivation of all checkpoint and old-root signs
 remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
 
-## Exact isolating interval certificates for length 150
+## Exact isolating intervals through length 150
 
 The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
 uses the proved first-return convolution to certify the evaluation of every
@@ -121,13 +121,13 @@ negative terms with exact natural-number arithmetic. It checks the
 within-row and consecutive-row interval order and uses the intermediate
 value theorem and the exact degree to exhaust each root multiset.
 
-The [extended prefix statements](CatalanStrictPeaksPrefix.lean) cover only
-simple negative zeros for rows $0$ through $150$ (`roots_through_150`) and
+The [prefix theorems](CatalanStrictPeaksPrefix.lean) prove that rows $0$
+through $150$ have only simple negative zeros (`roots_through_150`) and
 strictly interlace in the specified orientation for old row lengths
 $0\le n<150$ (`interlacing_before_150`). The assertions about constant rows
-are vacuous. `interlacing_from_analytic_signs` connects this prefix to the
-analytic checkpoint and old-root sign hypotheses from length $150$ onward.
-The extended build is awaiting a complete kernel replay. [Prior prefix kernel output](prefix-kernel.txt)
+are vacuous. `interlacing_from_analytic_signs` combines the checked prefix
+with the analytic checkpoint and old-root sign hypotheses from length $150$
+onward. [Prefix kernel output](prefix-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45741075005)
 
 To regenerate the candidate data from the repository root, run
 
