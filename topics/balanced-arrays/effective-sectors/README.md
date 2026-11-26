@@ -2,6 +2,8 @@
 
 For every row count and every dimension $`d\ge2`$ with $`4d\ge n`$, the balanced-array polynomial has all simple negative roots if the cap satisfies $`10r\ge9d`$. Its degree is $`\lfloor nr/d\rfloor`$. The coefficient sequence is the one in [Per Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays).
 
+A near-full cap satisfying $`50n(d-r)\le29d^2`$ gives simple negative roots when $`d^2\ge16384n\log(n+1)`$. This reaches dimension of order $`\sqrt{n\log n}`$ with an explicit constant. [Square-root dimension theorem, manuscript and independent review](square-root/README.md)
+
 A bound uniform over every row cap holds for $n\ge10^{200}$ and $200d\ge59n$. [Adjacent-quota proof and independent checks](../adjacent-quotas/README.md)
 
 Every cap also satisfies the conjecture when $\log n\ge10^6$ and $d\ge100n/\log n$. [Explicit sublinear dimension proof and reviews](../effective-sublinear/README.md)
