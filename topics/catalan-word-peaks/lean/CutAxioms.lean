@@ -1,0 +1,23 @@
+import CatalanStrictPeaksCutParameter
+import CatalanStrictPeaksCutBounds
+import CatalanStrictPeaksMomentArithmetic
+
+#print axioms CatalanStrictPeaks.CutGeometry.quartic_factor
+#print axioms CatalanStrictPeaks.CutGeometry.quartic_zero_iff
+#print axioms CatalanStrictPeaks.CutGeometry.quartic_real_ne_zero
+#print axioms CatalanStrictPeaks.CutGeometry.norm_order
+#print axioms CatalanStrictPeaks.CutGeometry.near_to_far_bound
+#print axioms CatalanStrictPeaks.CutGeometry.far_to_near_bound
+#print axioms CatalanStrictPeaks.CutGeometry.opposite_cross_bounds
+#print axioms CatalanStrictPeaks.CutGeometry.near_conjugate_coefficient
+#print axioms CatalanStrictPeaks.CutGeometry.far_conjugate_bound
+#print axioms CatalanStrictPeaks.CutGeometry.denominator_near_bound
+#print axioms CatalanStrictPeaks.CutGeometry.strictMonoOn_scale
+#print axioms CatalanStrictPeaks.CutGeometry.modulus_pos
+#print axioms CatalanStrictPeaks.CutGeometry.strictMonoOn_modulus
+#print axioms CatalanStrictPeaks.CutBounds.three_factor_majorants
+#print axioms CatalanStrictPeaks.CutBounds.short_reciprocal_bounds
+#print axioms CatalanStrictPeaks.CutBounds.near_local_error
+#print axioms CatalanStrictPeaks.CutBounds.near_moment_bound
+#print axioms CatalanStrictPeaks.CutBounds.near_tail_bound
+#print axioms CatalanStrictPeaks.CutBounds.covariance_tail_bound

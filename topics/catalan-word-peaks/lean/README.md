@@ -38,9 +38,9 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** Analytic convergence and branch continuation,
-the ray and endpoint comparisons, and the finite prefix Sturm certificates
-remain outside the kernel check.
+**Partial Lean verification.** Analytic convergence, branch continuation,
+the Cauchy deformation to the cuts, the complete integral and endpoint
+comparisons, and the finite Sturm certificates remain outside the kernel check.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -79,9 +79,33 @@ polynomials. [Published generating-function identity](https://doi.org/10.26493/2
 The [discriminant module](CatalanStrictPeaksDiscriminant.lean) checks that
 the scaled series has coefficients $c^nC_n(1-c^{-2})$. It proves its quadratic
 equation and constructs a formal square root, with constant term one, of
-$(1+x^2)^2-4cx$ for $c\ne0$. Convergence, analytic branch continuation and
-the sign estimates remain in the analytic proof.
+$(1+x^2)^2-4cx$ for $c\ne0$. Convergence and analytic branch continuation remain
+in the analytic proof.
 [Generating-function kernel output](generating-function-kernel.txt)
+
+## Cut geometry and explicit majorants
+
+The [geometry module](CatalanStrictPeaksCutGeometry.lean) factors the quartic
+into its two conjugate pairs for $0<d<1$, shows that the near pair has strictly
+smaller modulus, and rules out real branch points. It verifies the direct,
+conjugate and opposite cross-pair coefficient bounds, including the strict
+near denominator bound $|b_0|<3$. The
+[parameter module](CatalanStrictPeaksCutParameter.lean) proves positivity
+and strict angular ordering of $-t$ on the checkpoint interval.
+
+The [pointwise bounds](CatalanStrictPeaksCutBounds.lean) verify the short
+reciprocal and the three square-root product estimates in (4). They also
+give the local integrand bound used in (5). The square-root factors are inputs
+with their defining squares and nonnegative real parts. The
+[moment arithmetic](CatalanStrictPeaksMomentArithmetic.lean) verifies the
+rational bound in (5) after inserting the stated beta moments, and the
+exponential comparisons in (6) and in the covariance tail. It uses exact
+arithmetic at the first four lengths and an inequality for each step of four.
+
+These statements check the pointwise estimates and numerical inequalities.
+The identification of the continued branches, the Cauchy cuts, the beta
+moment identities, and the derivation of all checkpoint and old-root signs
+remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
 
 [Written proof](../proof.md)
 
@@ -97,6 +121,8 @@ lake build CatalanStrictPeaksRecurrence
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/RecurrenceAxioms.lean
 lake build CatalanStrictPeaksFirstReturn CatalanStrictPeaksGeneratingFunction CatalanStrictPeaksDiscriminant
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/GeneratingFunctionAxioms.lean
+lake build CatalanStrictPeaksCutGeometry CatalanStrictPeaksCutParameter CatalanStrictPeaksCutBounds CatalanStrictPeaksMomentArithmetic
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/CutAxioms.lean
 ~~~
 
 [Kernel output](kernel.txt)
