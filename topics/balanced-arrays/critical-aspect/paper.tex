@@ -1,0 +1,56 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\title{Simple negative zeros at every fixed quadratic aspect}
+\author{ProgramComputer}
+\date{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For each fixed positive $\alpha$, the theorem places all zeros
+of the balanced-array polynomial on the strictly negative real axis,
+with multiplicity one, whenever $n\ge\alpha d^2$ and $n$ is sufficiently
+large depending on $\alpha$. The dimension and the row cap may vary.
+Combined with the complementary rank-dependent dimension bound, the
+result covers every fixed logarithmic cap constant in every dimension
+at large row counts.
+\end{abstract}
+
+\section{Statement}
+The \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{balanced-array conjecture of Per Alexandersson}
+asks for real-rootedness throughout the parameter range. Write
+$P_n^{(r,d)}(q)=\sum_k a_kq^k$, where $a_k$ counts labeled binary
+$n\times d$ arrays with every column sum $k$ and every row sum at most $r$.
+
+\begin{theorem}
+For every $\alpha>0$ there is $N_\alpha$ such that for every $n\ge N_\alpha$,
+every $d\ge2$ with $n\ge\alpha d^2$, and every $1\le r\le d$, the polynomial
+$P_n^{(r,d)}$ has exactly $\lfloor nr/d\rfloor$ simple, strictly negative zeros.
+\end{theorem}
+\begin{corollary}
+For every $M>0$ there is $N_M$ such that for every $n\ge N_M$, the same
+conclusion holds in every dimension $d\ge2$ for $1\le r\le\min(d,M\log n)$.
+\end{corollary}
+The thresholds are existential. At $d=1$, the polynomial is $(1+q)^n$.
+The general conjecture remains open. In any infinite sequence of distinct
+counterexamples to real-rootedness, $d/\sqrt n$ and $r/\log n$ both tend to
+infinity. The row counts must tend to infinity by
+\href{https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/proof.md}{the bounded-row reduction in the quadratic proof}.
+
+\input{main-proof.tex}
+
+\appendix
+\clearpage
+\input{critical-aspect-angular-nodes.tex}
+\input{fourth-transverse-cumulant.tex}
+\input{fixed-corank-critical-upper.tex}
+\end{document}
