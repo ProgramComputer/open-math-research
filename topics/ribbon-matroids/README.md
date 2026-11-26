@@ -6,6 +6,8 @@ For every connected lattice path matroid with a nonempty ribbon diagram and rank
 
 **🟩 Full · Lean 4.** Lean proves the Narayana coefficient identity and all $r$ simple negative roots from the boundary paths of the original ribbon matroid. The official Lean kernel and Rust Nanoda replayed the same export, including the comparisons with the separate source and publication statements. [Lean theorem](lean/publication/RibbonNarayana.lean) · [Reproduce the check](lean/README.md) · [Verification record](verification.json)
 
+Archived Lean proof sources · [![Zenodo DOI 10.5281/zenodo.24564954](https://zenodo.org/badge/DOI/10.5281/zenodo.24564954.svg)](https://doi.org/10.5281/zenodo.24564954)
+
 The theorem uses the standard nonempty ribbon convention. Lean also checks $Z=1$ under the optional rank-zero convention. The singleton coloop with an empty-area diagram belongs to the written rank-one argument. The extension to arbitrary noncrossing polygon diagonals has a written proof and a conditional Lean reduction. [Formal scope](lean/README.md) · [Proof](proof.md)
 
 The repository proof was public on 25 November 2026. On 26 November, SymCat credited the same ribbon theorem to Steve Raj’s working draft *Outerplanarity from the Z-polynomial of a graphic matroid*, dated 25 November. The relationship between the arguments is unknown. This verification concerns the repository proof. [Repository proof commit](https://github.com/ProgramComputer/open-math-research/commit/d27bf1897bff2f426d57bea5efdbc9fca6f17d4f) · [SymCat theorem](https://www.symmetricfunctions.com/schubertMatroidZ.htm#ribbonMatroidZNarayana) · [SymCat source history](https://github.com/PerAlexandersson/symmetricfunctions.com/commit/c697a84b47c36a53e3b63b3dcb4cd6305905a19d)

@@ -582,6 +582,13 @@
   },
   "ribbon_full_verification": {
     "status": "passed",
+    "source_archive": {
+      "doi": "10.5281/zenodo.24564954",
+      "url": "https://doi.org/10.5281/zenodo.24564954",
+      "verified_public_commit": "9ea221483266c8d73431e6033fffa7872b9aace6",
+      "file": "open-math-ribbon-matroids-9ea22148.zip",
+      "sha256": "6f617706b55c6831098c8d635df26a011bc55fc30a1444a5fe6500ef08433e92"
+    },
     "scope": "Every nonempty connected ribbon lattice path matroid of rank r has the Narayana Z-polynomial of order r+1, with exactly r roots, all strictly negative, real and simple. For the degenerate rank-zero convention, Z is 1.",
     "written_only": "The extension to arbitrary collections of noncrossing diagonals of a convex polygon has a written proof and a conditional graph reduction in Lean.",
     "primary_source": "https://github.com/PerAlexandersson/symmetricfunctions.com/blob/b4a005205cfd78dd987facedf2e1916ef1e308fd/tex-source/realRootedOpenProblems.tex#L496-L506",
