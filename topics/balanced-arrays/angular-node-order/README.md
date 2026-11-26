@@ -41,7 +41,9 @@ Both checks certify 26,775 positive coefficients and 1,190 zero endpoints. The f
 
 ## Polynomial signs at sampled radii
 
-The [sample ledger](screen-angular-signs.jsonl.gz) records exact coefficient vectors and 9,162 dyadic samples over 745 parameter triples. The samples were selected by binary64 bisection for the angular phase. At every stored rational tilt the exact polynomial evaluation had the prescribed sign. This experiment leaves the signs at the exact phase radii unresolved. All internal quotas were sampled for ranks one and corank one, with $2\le n\le48$ and $2\le d\le\min(n,10)$, and for the additional vectors in the 36-row ledger. [Screen and exact replay](screen-angular-signs.py) · [36-row coefficient source](../finite-36/exact-vectors.jsonl)
+The [original sample ledger](screen-angular-signs.jsonl.gz) records coefficient vectors and the prescribed signs at 9,162 rational tilts selected by binary64 phase bisection over 745 parameter triples. All internal quotas were sampled for ranks one and corank one, with $2\le n\le48$ and $2\le d\le\min(n,10)$, and for the additional vectors in the 36-row ledger. [Sample screen and replay](screen-angular-signs.py) · [36-row coefficient source](../finite-36/exact-vectors.jsonl)
+
+Outward-rounded phase comparisons now isolate the true angular nodes at every sampled quota. MPFR Horner bounds certify the prescribed polynomial sign on each bracket, and a separate exact-integer evaluation confirms the whole-bracket sign in every original case. Targeted rank-one and corank-one extensions add 4,297 distinct nodes outside the original ledger. All 13,459 distinct nodes have the prescribed sign. [Exact-node certificates and reproduction](exact-node-signs/README.md)
 
 ~~~sh
 python3 -IB screen-angular-signs.py verify screen-angular-signs.jsonl.gz --finite-vectors ../finite-36/exact-vectors.jsonl
