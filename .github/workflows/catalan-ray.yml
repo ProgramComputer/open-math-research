@@ -1,0 +1,83 @@
+name: Catalan finite ray deformation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/catalan-ray.yml
+      - shared/lean/lakefile.toml
+      - shared/lean/lake-manifest.json
+      - shared/lean/lean-toolchain
+      - 'shared/lean/OpenMathResearch/**'
+      - 'topics/catalan-word-peaks/lean/**'
+
+concurrency:
+  group: catalan-ray-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  kernel-replay:
+    name: Kernel replay and axiom audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: shared/lean
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
+        with:
+          lake-package-directory: shared/lean
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+      - name: Fetch the upstream imports
+        run: >-
+          lake exe cache get
+          Mathlib.Algebra.BigOperators.Group.Finset.Sigma
+          Mathlib.Algebra.BigOperators.NatAntidiagonal
+          Mathlib.Algebra.Polynomial.Roots
+          Mathlib.Analysis.Analytic.OfScalars
+          Mathlib.Analysis.Analytic.Uniqueness
+          Mathlib.Analysis.Complex.Basic
+          Mathlib.Analysis.Complex.CauchyIntegral
+          Mathlib.Analysis.Polynomial.Basic
+          Mathlib.Analysis.SpecialFunctions.Complex.Analytic
+          Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
+          Mathlib.Analysis.SpecialFunctions.Log.Deriv
+          Mathlib.Analysis.SpecialFunctions.Pow.Real
+          Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+          Mathlib.Data.Fin.Tuple.Basic
+          Mathlib.Data.Finset.Prod
+          Mathlib.Data.Finset.Sigma
+          Mathlib.Data.Fintype.Pi
+          Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+          Mathlib.RingTheory.PowerSeries.Basic
+          Mathlib.Tactic.FieldSimp
+          Mathlib.Tactic.Linarith
+          Mathlib.Tactic.LinearCombination
+          Mathlib.Tactic.Positivity
+          Mathlib.Tactic.Ring
+      - name: Check the logarithmic strips and contour summation
+        run: lake build CatalanStrictPeaksLogRoot OpenMathResearch.LogarithmicContour
+      - name: Check the finite-radius deformation
+        run: lake build CatalanStrictPeaksRayTransfer
+      - name: Audit the theorem axioms
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/RayTransferAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-ray-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/ray-transfer-kernel.txt \
+            "$RUNNER_TEMP/catalan-ray-axioms.txt"
+      - name: Audit the improper ray coefficient formula
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-improper-ray-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/improper-ray-kernel.txt \
+            "$RUNNER_TEMP/catalan-improper-ray-axioms.txt"

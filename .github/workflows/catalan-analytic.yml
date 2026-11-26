@@ -43,18 +43,20 @@ jobs:
           Mathlib.Analysis.Complex.Basic
           Mathlib.Analysis.Polynomial.Basic
           Mathlib.Analysis.SpecialFunctions.Complex.Analytic
+          Mathlib.Analysis.SpecialFunctions.Gamma.Beta
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
           Mathlib.Data.Fin.Tuple.Basic
           Mathlib.Data.Finset.Prod
           Mathlib.Data.Finset.Sigma
           Mathlib.Data.Fintype.Pi
+          Mathlib.MeasureTheory.Function.Jacobian
           Mathlib.RingTheory.PowerSeries.Basic
           Mathlib.Tactic.FieldSimp
           Mathlib.Tactic.Linarith
           Mathlib.Tactic.Positivity
           Mathlib.Tactic.Ring
-      - name: Check the analytic branch and cut estimates
-        run: lake build CatalanStrictPeaksAnalyticBranch CatalanStrictPeaksCutBounds CatalanStrictPeaksMomentArithmetic
+      - name: Check the analytic branch, cut estimates and radial moments
+        run: lake build CatalanStrictPeaksAnalyticBranch CatalanStrictPeaksCutBounds CatalanStrictPeaksMomentArithmetic CatalanStrictPeaksBetaMoments
       - name: Audit the theorem axioms
         shell: bash
         run: |
@@ -69,3 +71,10 @@ jobs:
             tee "$RUNNER_TEMP/catalan-cut-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/cut-kernel.txt \
             "$RUNNER_TEMP/catalan-cut-axioms.txt"
+      - name: Audit the radial moment axioms
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/BetaMomentsAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-beta-moments-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/beta-moments-kernel.txt \
+            "$RUNNER_TEMP/catalan-beta-moments-axioms.txt"

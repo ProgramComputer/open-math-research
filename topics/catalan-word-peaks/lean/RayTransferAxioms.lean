@@ -1,0 +1,10 @@
+import CatalanStrictPeaksRayTransfer
+
+#print axioms OpenMathResearch.LogarithmicContour.circleIntegral_eq_angular
+#print axioms OpenMathResearch.LogarithmicContour.deform
+#print axioms CatalanStrictPeaks.CutGeometry.logStripRoot_sq
+#print axioms CatalanStrictPeaks.CutGeometry.logStripRoot_eq_cutFactor_of_le_radius
+#print axioms CatalanStrictPeaks.CutGeometry.logStripRoot_jump
+#print axioms CatalanStrictPeaks.CutGeometry.analyticGenerating_finiteDeformation
+#print axioms CatalanStrictPeaks.CutGeometry.logSector_jump_zero
+#print axioms CatalanStrictPeaks.CutGeometry.logSector_jump_sqrt

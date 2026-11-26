@@ -1,0 +1,14 @@
+'CatalanStrictPeaks.CutGeometry.logSector_norm_le_large' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.logRayJump_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.analyticGenerating_logarithmicRays' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LogarithmicContour.integral_logRadius_substitution' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LogarithmicContour.integral_logRadius_improper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.logRayJump_eq_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.rayIntegrand_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.analyticGenerating_fourRays' depends on axioms: [propext, Classical.choice, Quot.sound]

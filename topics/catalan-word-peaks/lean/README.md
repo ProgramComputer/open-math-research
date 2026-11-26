@@ -38,10 +38,11 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** Lean verifies the entire finite prefix and
-identifies the analytic branch and Cauchy coefficients. The written proof
-covers the deformation to the radial cuts and the full integral and endpoint
-comparisons.
+**Partial Lean verification.** Lean verifies the entire finite prefix,
+identifies the analytic branch, and proves the coefficient formula as the
+sum of the four improper ray integrals. It verifies radial moments and
+integrated envelopes. The branch-amplitude normalization and the full
+checkpoint and old-root sign comparisons remain in the written proof.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -102,9 +103,22 @@ rational bound in (5) after inserting the stated beta moments, and the
 exponential comparisons in (6) and in the covariance tail. It uses exact
 arithmetic at the first four lengths and an inequality for each step of four.
 
-These statements check the pointwise estimates and numerical inequalities.
-The Cauchy deformation to the cuts, the beta moment identities, and the
-derivation of all checkpoint and old-root signs remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
+[Cut kernel output](cut-kernel.txt)
+
+## Radial density and normalized moments
+
+The [radial moment module](CatalanStrictPeaksBetaMoments.lean) uses the
+substitution $s=x^{-1}-1$ in the integrals with weight
+$\sqrt{s}/(1+s)^{n+1}$. It proves integrability and the product formula for
+$M_j$ when $j+1/2<n$, the variance formula, and the tilt mean in (8).
+The normalization ratio bound in (6) follows from monotonicity of
+$n^2b(n)$ for integer $n$.
+
+The module integrates the quadratic envelope in (5) and verifies the
+$1/50$ and $1/(20n)$ tail bounds for the affine envelope in (6) and (11).
+Applying the envelopes to the loss of the actual ray amplitude requires
+its pointwise bounds and weighted integrability. The covariance comparisons
+and strict signs also remain in the written proof. [Radial moment kernel output](beta-moments-kernel.txt)
 
 ## Analytic branch and Cauchy coefficient
 
@@ -121,6 +135,51 @@ equation and uniqueness in formal power series.
 The theorem `analyticGenerating_cauchyCoeff` gives the coefficient as a
 Cauchy integral on any circle centered at zero with positive radius less than
 the distance to the nearest branch point. [Analytic branch kernel output](analytic-branch-kernel.txt)
+
+## Finite-radius contour deformation
+
+The [logarithmic strip module](CatalanStrictPeaksLogRoot.lean) extends the
+principal square root continuously to the two edges of a logarithmic strip.
+It checks the defining square on the closed strip, equality of the boundary
+values inward of the branch point, and the jump $-2i\sqrt{s}$ beyond it,
+where $s$ is the radial displacement divided by the branch point modulus.
+
+The [contour summation module](../../../shared/lean/OpenMathResearch/LogarithmicContour.lean)
+uses Cauchy–Goursat on rectangles and sums them so the two values at each
+internal angle enter as a difference. The
+[Catalan specialization](CatalanStrictPeaksRayTransfer.lean) constructs the
+five successive angular sectors from the exact four branch points.
+Its theorem `analyticGenerating_finiteDeformation` identifies
+$c^nC_n(1-c^{-2})$ with the sum of the five outer arcs and the four signed
+radial differences, with the Cauchy normalization $1/(2\pi i)$.
+The starting radius can be any positive radius below the nearer branch
+points and the outer radius can be at least as large as the starting radius.
+The theorems `logSector_jump_zero` and `logSector_jump_sqrt` give the
+two cases of each signed radial difference with its exact rational factor.
+
+[Contour kernel output](ray-transfer-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45743833834)
+
+## Improper ray coefficient formula
+
+For $0<d<1$, let $c=\mathrm{scale}(d)$ and let $\mathcal Z$ be the four cut
+points. The theorem `analyticGenerating_fourRays` proves that for each
+positive coefficient index $n$,
+$$
+c^n C_n(1-c^{-2}) =
+-\frac{1}{\pi}\sum_{\zeta\in\mathcal Z}\zeta^{-n}
+\int_0^\infty \sqrt{s}(1+s)^{-n-1}B_\zeta(\zeta(1+s))\,ds,
+\qquad
+B_\zeta(x)=-\frac{\prod_{\nu\in\mathcal Z,\ \nu\ne\zeta}\sqrt{1-x/\nu}}{2x(c-x)}.
+$$
+Each square root in $B_\zeta$ is principal. The theorem
+`rayIntegrand_integrable` checks absolute integrability on all four rays.
+
+The proof bounds the generating function uniformly at outer radii at least
+two and sends the outer arcs to zero. Its substitution $s=e^x/|\zeta|-1$
+for logarithmic radius $x$ supplies the Jacobian $(1+s)^{-1}$, giving the
+factor $(1+s)^{-n-1}$ and the signed prefactor $-\zeta^{-n}/\pi$.
+Factoring the amplitudes for the covariance and sign comparisons remains in
+the written proof. [Improper ray kernel output](improper-ray-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45746699648)
 
 ## Exact isolating intervals through length 150
 
@@ -168,8 +227,13 @@ lake build CatalanStrictPeaksFirstReturn CatalanStrictPeaksGeneratingFunction Ca
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/GeneratingFunctionAxioms.lean
 lake build CatalanStrictPeaksCutGeometry CatalanStrictPeaksCutParameter CatalanStrictPeaksCutBounds CatalanStrictPeaksMomentArithmetic
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/CutAxioms.lean
+lake build CatalanStrictPeaksBetaMoments
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/BetaMomentsAxioms.lean
 lake build CatalanStrictPeaksAnalyticBranch
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/AnalyticBranchAxioms.lean
+lake build OpenMathResearch.LogarithmicContour CatalanStrictPeaksLogRoot CatalanStrictPeaksRayTransfer
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/RayTransferAxioms.lean
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~
