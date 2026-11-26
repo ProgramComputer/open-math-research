@@ -1,4 +1,16 @@
-# An explicit logarithmic dimension bound for balanced arrays
+# Explicit dimension bounds for balanced arrays
+
+Every row cap $`1\le r\le d`$ gives exactly $`\lfloor nr/d\rfloor`$ simple negative zeros under either of the following bounds. The height is $`n`$, the dimension is $`d`$, and $`\log`$ denotes the natural logarithm.
+
+| Dimension | Height | Written proof |
+|---|---|---|
+| $`d\ge n^{99/100}`$ | $`\log n\ge10^6`$ | [Geometric signs from the two principal Fourier contributions](angular-theorem.md) |
+| $`d\ge100n/\log n`$ | $`\log n\ge10^6`$ | [Logarithmic dimension bound](#logarithmic-dimension-bound) |
+
+The first bound includes $`d=\lceil n^{99/100}\rceil`$, where $`d\log n/n`$ tends to zero. At the displayed height threshold, the first bound covers the entire second range. The logarithmic proof gives a shorter argument in that range. Obtaining the geometric signs at polynomially sublinear dimension requires controlling cancellation in the Fourier integral. Two independent agent-assisted reviews cover the neighboring coefficient calculation, the phase of the leading conjugate pair and the error in the rest of the integral. **Formal verification**　⬜ None for both written theorems. [Power-law manuscript](angular.pdf) · [TeX source](angular.tex) · [Phase review](angular-phase-review.md) · [Integral review](angular-chart-review.md) · [Principal estimate at the stated cutoff](angular-lower-review.md)
+
+## Logarithmic dimension bound
+
 
 **Theorem.** Let $`n,d,r`$ be integers with $`\log n\ge10^6`$, $`d\ge100n/\log n`$, and $`1\le r\le d`$. Write $`a_k`$ for the number of labeled $`n\times d`$ binary matrices with all column sums $`k`$ and every row sum at most $`r`$. Then $`P(q)=\sum_{k=0}^{\lfloor nr/d\rfloor} a_k q^k`$ has exactly $`\lfloor nr/d\rfloor`$ simple negative zeros. Here $`\log`$ is the natural logarithm. [Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays) · [Author’s issue](https://github.com/PerAlexandersson/RealRooted/issues/2005)
 
@@ -49,3 +61,13 @@ The geometric nodes strictly increase because all internal curvatures exceed one
 Run `python3 -B verify.py` from this directory. It checks the second through fourth subset cumulants by exact enumeration and replays rational inequalities used at the lower cutoff. The theorem quantifies over all inputs in its stated range by the preceding argument.
 
 Canfield, Greenhill and McKay give an asymptotic formula for dense prescribed margins. The repository’s earlier eventual proof develops a related row-subset cumulant expansion. Here the exact fourth-cumulant decomposition, uniform error bounds and adjacent-quota coupling make the height and dimension constants explicit. The recent source search for the original conjecture and its limitations are recorded with the linear-sector proof. [Canfield–Greenhill–McKay](https://doi.org/10.1016/j.jcta.2007.03.009) · [Earlier row-subset expansion](../eventual-all/sparse-fixed-profile-edgeworth.md) · [Dated search record](../adjacent-quotas/README.md) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/2)
+
+## Verification of the angular argument
+
+Run `python3 -IB verify-angular.py` from this directory. The replay checks the cancellation identity on rational row laws, compares finite cyclic character sums to direct counts of labeled arrays modulo primes, and tests numerical inequalities from the proof with rational arithmetic. The replay also checks wrong geometric signs at $(n,d,r,k)=(100,5,4,25)$ and $(144,6,5,36)$ using rational arithmetic and the exact corank-one counting formula. [Coefficient vectors and finite checks](angular-replay.json)
+
+## Limits of the geometric sign test
+
+At $`n=4d^2`$ and $`k=d^2`$ the geometric node eventually gives the wrong sign for every $`\lceil d/2\rceil\le r<d`$. The polynomial still has simple negative roots. More generally the limiting sign below the cap at quadratic aspect is governed by an explicit cosine. [Proof of the sign limit](square-phase.md) · [Independent calculation](square-phase-review.md)
+
+On 26 November 2026, searches for “balanced arrays” with “uniform matroids”, real-rootedness and Fourier signs in the public literature, GitHub issues and repositories, and web-indexed X results did not locate a separate proof of these growing-dimension sign statements. The journal literature includes fixed-exponent binomial polynomials. GitHub and X indexing are incomplete, and this search establishes no priority claim. [Primary statement](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays) · [Author’s issue](https://github.com/PerAlexandersson/RealRooted/issues/2005) · [Binomial polynomials](https://doras.dcu.ie/31197/1/Binomialpolynomials.pdf)

@@ -7,7 +7,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟩 Full · Lean 4 |
 | [Eventual simple negative zeros for balanced arrays in every dimension](topics/balanced-arrays/eventual-all/README.md) | One eventual row threshold works for every dimension $d\ge2$ and every cap | ⬜ None |
-| [An explicit logarithmic dimension bound for every balanced-array row cap](topics/balanced-arrays/effective-sublinear/README.md) | Simple negative zeros for $d\ge100n/\log n$ when $\log n\ge10^6$ | ⬜ None |
+| [Explicit dimension bounds for every balanced-array row cap](topics/balanced-arrays/effective-sublinear/README.md) | Simple negative zeros above explicit thresholds for $d\ge n^{99/100}$ or $d\ge100n/\log n$, with respective height cutoffs | ⬜ None |
 | [Effective high-cap sectors for balanced arrays](topics/balanced-arrays/effective-sectors/README.md) | Every height when $4d\ge n$ and $10r\ge9d$, plus a near-full-cap range at logarithmic dimension | ⬜ None |
 | [Simple negative zeros for four balanced columns with row cap two](topics/balanced-arrays/four-columns/README.md) | Proof for every row count | ⬜ None |
 | [Ribbon Schur positivity for balanced arrays](topics/balanced-arrays/koszul-ribbons/README.md) | Partial theorem giving strong Koszulness and positivity for every ribbon specialization | ⬜ None |
