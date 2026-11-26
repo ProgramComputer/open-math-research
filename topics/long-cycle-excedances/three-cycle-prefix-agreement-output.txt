@@ -1,0 +1,2 @@
+Independent prefix agreement: 201485 rows for 200800 consecutive pairs.
+Checked 502 new rows with four cycles allowed.

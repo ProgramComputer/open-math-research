@@ -1,0 +1,1 @@
+200800 consecutive pairs, 3815200 one-sided old brackets, 21809970 bisections.

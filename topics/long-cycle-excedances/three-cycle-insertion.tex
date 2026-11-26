@@ -1,0 +1,85 @@
+\section{Strict interlacing through the first four-cycle transition}
+\label{sec:three-cycle}
+Fix $k\ge3$ and write $P_n=E_{n,k}/t$. The two-cycle theorem of
+Section~\ref{sec:two-cycle-insertion} treats $k\le n\le 3k-2$.
+We extend the range to $k\le n\le4k-1$. In particular the last new
+row, at size $4k$, includes configurations with four cycles.
+
+\paragraph{Theorem.}
+For $3k-1\le n<4k$, at every zero $x$ of $P_n$ one has
+\[
+\left|\binom n{k-1}A_{k-1}(x) E_{n+1-k,k}(x)\right|
+  < |x(1-x)P_n'(x)|.
+\]
+The $n-2$ zeros of $P_n$ and the $n-1$ zeros of $P_{n+1}$ are
+simple and negative, and strictly alternate. The new row contributes
+both outermost zeros.
+
+\paragraph{Large sizes.}
+The generating function in the separated-pole argument is a product
+over odd poles. Write $t=-\exp(-\pi\cot\theta)$,
+$S=\sin\theta$, $z_p=(\cos\theta+ip S)^{-1}$ for $p$ odd, and
+$F_j=(\pi/S)^j E_{j,k}(t)/(j!(1-t)^j)$. A pole contributes either
+its constant term or at least $k$ units of degree. In the old and
+residual rows the nonconstant terms can consequently occupy at most
+three poles, even at $n=4k-1$. Partial fractions give the single-pole
+main term $d_n\sum_p z_p^n$, where
+$d_j=[u^j]\exp(\sum_{s\ge k}u^s/s)$.
+Integer phase samples $\theta=j\pi/n$ have sign $(-1)^j$
+on the middle interval. The bounds on the differentiated remainder
+and on the insertion term are given with a rational checker in the
+\href{https://github.com/ProgramComputer/open-math-research/blob/research/topics/long-cycle-excedances/three-cycle-2200.md}{three-cycle estimates}.
+Their middle comparison holds for $n\ge192$, $kS\ge14$ and
+$nS^2\ge149/100$. Writing $B_k=\sum_p z_p^k$ and $m=n+1-k$,
+at every middle zero the two comparable magnitudes satisfy
+\[
+ k|F_n'|/n>19/100, \qquad k|B_k F_m|/(n S)<16/100 .
+\]
+The common normalization gives the claimed strict inequality. For
+$n\ge2200$ the first $\lfloor .39\sqrt{n-1}\rfloor$ ranks on each
+side are covered by a two-term Rouch\'e comparison. Its derivative
+contribution exceeds $.63$ and its lag is below $.58$ in the same
+scaling. The first middle sample beyond these ranks lies inside
+the middle interval. Thus the sample signs and reciprocal reflection
+exhaust the old degree.
+
+\paragraph{Intermediate sizes.}
+For $192\le n\le2199$ take $\theta_*=20\pi/n$. On this range
+$k>n/4$ and $\sin u\ge u(1-u^2/6)$ up to $20\pi/192$ give
+$k\sin\theta_*>14$ and $n\sin^2\theta_*>149/100$. There are
+$n-40$ sample gaps between integer phases $20$ and $n-20$.
+It remains to certify nineteen old roots on either side.
+
+Let $I=t(1-t)E'_{n,k}+ntE_{n,k}$ and
+$J=\binom n{k-1}t A_{k-1}E_{m,k}$. Their coefficients are
+nonnegative, so the absolute coefficients of $I-J$ are bounded by
+those of $I+J=E_{n+1,k}$. The decreasing-run encoding bounds
+$[t^p]E_{N,k}$ by $p^N$. For $t=-x$, $x>0$, discarding powers
+of degree $48$ and higher from $P_n$ or either next pencil
+$(I\pm J)/t$ therefore costs at most
+\[
+ \frac{49^{n+1} x^{48}}{1-x(50/49)^{n+1}}
+\]
+when the denominator is positive. The verifier bounds both the
+prefix evaluation and this remainder with outward-rounded real
+balls. It accepts only strict signs. Between zero and phase~20
+it isolates nineteen sign changes and refines the brackets until
+both next pencils have the required signs at both ends. Each
+middle zero has the required sign by the analytic inequality.
+The intervening gaps, reflection, and the two outer intervals
+account for all $n-1$ new zeros. Hence no pencil zero lies inside
+an old bracket. This argument also proves the strict lag inequality
+at the exterior old roots.
+
+\paragraph{Small sizes and reproduction.}
+For the $1{,}595$ pairs below size $192$, whole-polynomial
+reconstructions and dyadic endpoint signs give the two strict signs
+at $198{,}819$ old roots. In the intermediate range the calculation
+uses $200{,}800$ pairs and $3{,}815{,}200$ exterior brackets before
+reflection. The coefficient reconstruction, interval checks and
+coverage records are available with the
+\href{https://github.com/ProgramComputer/open-math-research/blob/research/topics/long-cycle-excedances/three-cycle-complete.md}{proof and reproduction instructions}.
+The statement at all sizes follows by combining the three ranges.
+Together with the known uniform upper cutoff and the all-size result
+at $k=3$, a remaining counterexample must have $k\ge4$ and
+$4k\le n<10^{20}$.

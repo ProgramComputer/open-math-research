@@ -1,0 +1,4 @@
+h=2: U_h < 53/25, V_h < 457/100
+h=3: U_h < 43/100, V_h < 7/5
+Principal and residual pole bounds pass.
+Uniform central derivative margin > 4/25 and insertion upper bound < 9/100.

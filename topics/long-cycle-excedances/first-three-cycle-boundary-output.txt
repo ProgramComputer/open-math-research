@@ -1,0 +1,2 @@
+First-boundary analytic constants pass for all k >= 65.
+First boundaries k=3..64: 62 transitions, 6045 old roots, digest 73480a52a708847902d9ff3a37b4a40654bf121525e253b0f2bba734b4b69122.

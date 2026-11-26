@@ -1,5 +1,7 @@
 # Excedance zeros for permutations with long cycles
 
+For every $k\ge3$ and $k\le n\le4k-1$, the nonzero roots of the consecutive rows are simple, negative and strictly interlace. This includes the first transition permitting four cycles. [Complete three-cycle range, proof and verification](three-cycle-complete.md) · [Manuscript](paper.pdf)
+
 For every $n\ge10^{20}$ and every $3\le k\le n$, the nonzero zeros of the excedance polynomial for permutations with minimum cycle length $k$ are simple, negative and strictly interlace those of the next row. Hence any counterexample to Alexandersson’s conjecture occurs below an explicit cutoff. The finite complement remains too large for exhaustive verification. [Proof](effective-uniform.md) · [Independent review](review-uniform-effective.md) · [Manuscript](paper.tex)
 
 Two estimates also apply below the uniform cutoff. For $n\ge10^6$, the contour argument applies whenever $n/(200k)>30\log n+20$. For $n\ge10{,}000$, strict interlacing holds when $k\ge2000\sqrt n(3+\log(3\sqrt{n/k}))$. The proof of the latter estimate also gives strict consecutive order for the $\lfloor7\sqrt n/20\rfloor$ smallest roots and their reciprocals at every threshold. [Large-threshold proof](effective-threshold.md) · [Exterior roots](effective-front.md) · [Independent review](review-effective-front.md)
