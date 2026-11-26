@@ -1,0 +1,481 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Var}{\operatorname{Var}}
+\setlength{\emergencystretch}{2em}
+\title{Real zeros of balanced arrays when the number of columns grows at least linearly}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $a_k$ count labeled binary $n\times d$ arrays with column sums
+all equal to $k$ and row sums at most $r$. We prove that for every
+$\epsilon>0$, all sufficiently large $n$, every $d\ge\epsilon n$, and every
+$1\le r\le d$, the polynomial $\sum_k a_kq^k$ has
+$\lfloor nr/d\rfloor$ simple negative zeros. The threshold is
+existential. A uniform margin enumeration reduces the local coefficient
+ratios to those of a scalar capped-binomial polynomial. Near saturation
+the ratios give direct term separation. Elsewhere the alternating
+evaluation tends to a positive Jacobi theta value.
+\end{abstract}
+
+\begin{theorem}\label{thm:main}
+For every $\epsilon>0$ there is an integer $N(\epsilon)$ such that,
+whenever $n\ge N(\epsilon)$, $d\ge\epsilon n$, and $1\le r\le d$ are
+integers, the balanced-array polynomial $P(q)=\sum_k a_kq^k$ has exactly
+$\lfloor nr/d\rfloor$ distinct, strictly negative zeros.
+\end{theorem}
+
+This proves a growing-dimension range of Alexandersson's balanced-array
+conjecture for uniform matroids \cite{Alex}. The theorem concerns a
+single row count and gives no assertion about interlacing between
+consecutive counts. Its argument supplies no numerical value of
+$N(\epsilon)$.
+
+\section{Normalized log-concavity and test points}
+
+Write $D=\lfloor nr/d\rfloor$. Capacity gives $a_k=0$ for $k>D$, and
+every quota $0\le k\le D$ is realized by taking $dk$ consecutive
+labels from a cyclic list of the $n$ rows and using successive groups
+of $k$ labels as columns. Each group has distinct labels and each row
+is used at most $\lceil dk/n\rceil$ times. In particular $a_0=1$.
+
+We recall the repository's normalized log-concavity reduction
+\cite{Orient}, based on an orientation inequality of Kahn and
+Neiman \cite[Lemma~8]{KN}. It gives
+\begin{equation}\label{eq:gamma}
+\Gamma_k:=\frac{a_k^2}{a_{k-1}a_{k+1}}
+\ \ge\ \left(1+\frac1k\right)^d
+          \left(1+\frac1{n-k}\right)^d
+\ \ge\ (1+2/n)^{2d}\qquad(1\le k<D).
+\end{equation}
+Here are the details needed for this reduction. For a quota vector
+$\mathbf{k}$, let $A(\mathbf{k})$ be the capped count and
+$p(\mathbf{k})=A(\mathbf{k})/\prod_j\binom n{k_j}$ the cap probability
+under independent uniform columns. The orientation inequality states
+that the number of orientations with vertexwise lower bounds
+$(\mathbf a,\mathbf b)$ on out- and indegrees is at most the number with
+bounds $(\mathbf c,\mathbf e)$ if
+$\mathbf a\ge\mathbf c,\mathbf e$ and
+$\mathbf a+\mathbf b\ge\mathbf c+\mathbf e$.
+
+For a pair of arrays, color their entries red and blue. Fix the common
+and exclusive rows in every column. If the quotas agree, each column
+has $m_j$ red-only and $m_j$ blue-only rows. Pair those rows in that
+column and orient every pair from red to blue. This gives a multigraph
+on row labels. Each array pair has $\prod_j m_j!$ pairings, a factor
+depending only on the fixed common and exclusive data. At a row with
+common count $c$ and exclusive degree $H$, upper caps $U_R,U_B$ give
+out- and indegree lower bounds $\max(0,H+c-U_B)$ and
+$\max(0,H+c-U_R)$. Therefore when $U_R\ge U_B$ at each row, swapping
+the caps at any subset of rows can only increase the orientation
+count. This compares the original array counts after summing over the
+fixed data.
+
+For the own-coordinate comparison, fix a column $i$ and let $F(S)$
+count the other columns with cap $r-1$ on $S$ and cap $r$ elsewhere.
+The cap comparison gives
+$F(S\cap T)F(S\cup T)\le F(S)F(T)$, taking red lowered on $S\cap T$
+and blue lowered on $S\cup T$ and swapping on $S\setminus T$.
+By row symmetry $F(S)$ depends only on $|S|$. Taking $S,T$ of size
+$q+1$ with intersection of size $q$ gives the adjacent log-concavity
+inequality after conditioning on the occupied set in column $i$.
+
+For distinct $i,j$, compare
+$A(\mathbf{k}) A(\mathbf{k}+\mathbf e_i+\mathbf e_j)$ with
+$A(\mathbf{k}+\mathbf e_i)A(\mathbf{k}+\mathbf e_j)$.
+Make the two copies' quotas agree by adding a distinct dummy row to
+each of these two columns and filling its cell in the lower-quota copy
+only. In the first product the red copy has both dummy entries. In the
+second the dummy in column $i$ changes to blue while the one in column
+$j$ stays red. Every real row has equal degree bounds and the changed
+dummy swaps $(1,0)$ to $(0,1)$. The same orientation comparison proves
+that the first product is at most the second. The products of the
+normalizing binomials agree. Thus each extension ratio
+$p(\mathbf{k}+\mathbf e_i)/p(\mathbf{k})$ is nonincreasing in every
+coordinate wherever the ratios are positive. Comparing the successive
+extensions from $(k-1,\ldots,k-1)$ to $(k,\ldots,k)$ with the same
+extensions from $(k,\ldots,k)$ to $(k+1,\ldots,k+1)$ proves log-concavity
+of $a_k/\binom nk^d$. Equation \eqref{eq:gamma} follows by taking the
+binomial ratios and using $k(n-k)\le n^2/4$.
+
+Set $t_k=\sqrt{a_{k-1}/a_{k+1}}$. The strict decrease of adjacent
+coefficient ratios makes the internal $t_k$ strictly increasing.
+At $-t_k$ both neighboring terms have magnitude
+$a_kt_k^k/\sqrt{\Gamma_k}$, and moving farther out on either side
+decreases the magnitudes. In the sign of the central term, each
+alternating tail starting at distance two is nonnegative by pairing
+successive terms. In particular $\Gamma_k>4$ implies
+$(-1)^kP(-t_k)>0$. If that sign holds at every internal node, the
+positive constant term and the sign $(-1)^D$ for sufficiently large
+$t$ give $D$ disjoint sign-change intervals. The degree then forces
+exactly $D$ simple negative roots. Degrees zero and one follow directly.
+
+\section{Reduction to a scalar coefficient}\label{sec:counting}
+
+If Theorem~\ref{thm:main} failed, there would be a sequence with
+$n\to\infty$, $d/n\ge\epsilon$, and an internal node $k$ in each row
+with $(-1)^kP(-t_k)\le0$. In particular $\Gamma_k\le4$.
+Equation \eqref{eq:gamma} bounds $d/n$ from above.
+After passing to a subsequence write
+\[
+d/n\to\delta\in(0,\infty),\qquad r/d\to\rho,\qquad x=k/n\to x_0.
+\]
+The bounds $\log(1+1/k)\ge 1/(k+1)$ and the corresponding bounds
+at $n-k$ show that $0<x_0<1$. Capacity gives $x_0\le\rho$.
+We work throughout at comparable dimensions and densities in a compact
+subset of $(0,1)$. The next estimate holds at all feasible quotas in
+this range, including the maximum.
+
+Put $\mu=dx$, $H(z)=\sum_{s=0}^r\binom ds z^s$,
+$A_k=[z^{dk}]H(z)^n$, and $K_k=\binom nk^d/\binom{nd}{dk}$.
+For $0<\mu<r$, tilt a row size $S$ by weights $\binom ds z^s$,
+using the unique $z>0$ with mean $\mu$. The mean has derivative
+$\Var(S)>0$ with respect to $\log z$ and ranges from 0 to $r$.
+At $\mu=r$, take $S=r$ deterministically. Set $V=\Var(S)$.
+
+\begin{lemma}\label{lem:enum}
+In the stated compact range,
+\begin{equation}\label{eq:enum}
+a_k=K_kA_k\exp\left(-\tfrac12+\frac{V}{2d x(1-x)}+o(1)\right).
+\end{equation}
+\end{lemma}
+\begin{proof}
+First choose uniformly from the actual arrays and condition on all
+rows except a pair. In a column requiring two ones from that pair,
+the two rows receive one each. If $b$ columns require just one one,
+their allocation gives a row-size difference $2Y-b$, where $Y$ is
+binomial $(b,1/2)$ conditioned to the central symmetric interval
+imposed by the two caps. This conditioning can only decrease the
+absolute gap in stochastic order. The binomial tail bound gives
+$\Prob(|2Y-b|>L)\le2e^{-L^2/(2d)}$, with zero gap when $b=0$.
+A row more than $L$ from the average $\mu$ requires a pair with gap
+larger than $L$. Therefore the fraction of actual arrays having a row
+deviation larger than $d^{1/2+\eta}$ is $o(1)$ for any fixed $\eta>0$.
+
+For each remaining row profile $(s_i)_{i=1}^n$, the column margins
+are all $k$ and the row deviations have sum zero. Theorem~1 of
+Canfield, Greenhill and McKay \cite{CGM}, with its small deviation
+exponent chosen to be $\eta$, gives the number of arrays with this
+profile as
+\begin{equation}\label{eq:cgm}
+K_k \prod_{i=1}^n\binom d{s_i}
+ \exp\left(-\tfrac12+\frac{W}{2x(1-x)}+o(1)\right),
+\qquad
+W=\frac1{nd}\sum_{i=1}^n(s_i-\mu)^2 .
+\end{equation}
+Indeed the margins are positive for large $n$, the column deviations
+vanish, and the row deviations are at most $d^{1/2+\eta}$. The two
+dimension-growth conditions in that theorem hold because $n\asymp d$
+and $x(1-x)$ is bounded below. Its logarithmic density condition has
+bounded left side for the same reasons. The error is uniform over
+these profiles.
+
+For independent tilted sizes $S_i$ conditioned on total $dk$, the
+profile has probability $\prod_i\binom d{s_i}/A_k$. Let us justify
+the conditioning and averaging in \eqref{eq:cgm}. First, a
+log-concave probability mass function with interval support has
+$\log\Prob(X=\E X)\ge-\operatorname{Ent}(X)$ at an integer mean.
+Apply Jensen's inequality to the piecewise linear interpolation of
+the log mass. Convolution preserves such log-concavity. One proof
+notes that the Toeplitz matrix of the sequence, padded by zeros,
+has nonnegative order-two minors: comparing two terms of a fixed
+sum of indices reduces this to the decreasing successive ratios.
+Matrix multiplication represents convolution, so Cauchy--Binet
+proves the assertion. Thus the conditioning event has probability
+at least $1/(nd+1)$, since the tilted sum has interval support in
+$[0,nd]$ and entropy at most $\log(nd+1)$. It is certain in the
+deterministic case.
+
+Next, $S$ is dominated in convex order by a binomial with the same
+mean. The ratio of their masses is geometric up to $r$ and zero
+beyond it, so the set where the first mass is at least the second
+is an interval. For a convex test function subtract the affine
+secant between the two endpoints of that interval, chosen between
+lattice sites. The remaining function is nonpositive inside and
+nonnegative outside. Since the laws have equal mass and mean,
+the secant cancels and the stated comparison follows. Identical
+or deterministic laws satisfy the comparison directly.
+Comparison of exponential moments and the binomial Hoeffding
+bound now give $\Prob(|S-\mu|>y)\le2e^{-2y^2/d}$.
+
+Consequently $Y_i=(S_i-\mu)^2/d$ have a bounded exponential
+moment at a fixed positive argument. Here $W=n^{-1}\sum_iY_i$
+has mean $V/d$. For every fixed $u>0$, the centered exponential
+moment has logarithm $O(t^2)$ on a fixed neighborhood of zero,
+uniformly in the parameters. Exponential Markov then gives
+$\Prob(|W-V/d|>u)\le 2e^{-c_u n}$. For each fixed $C>0$,
+$\E e^{CW}=(\E e^{CY_1/n})^n$ is bounded. Also the probability
+of an irregular row is at most $2n e^{-2d^{2\eta}}$.
+Cauchy--Schwarz shows that either exceptional event contributes
+$o(1)$ to the exponentially weighted conditional expectation,
+even after division by the conditioning probability. On the
+complement $W$ is within $u$ of $V/d$. Letting $u$ decrease to zero
+gives conditional average $\exp(V/[2d x(1-x)])+o(1)$ over the
+regular profiles. Summing \eqref{eq:cgm} and using the relative
+tail bound in the actual counting measure proves \eqref{eq:enum}.
+\end{proof}
+
+At any bounded integer shift of quota from $k$, the centered
+log-curvature $2\log K_k-\log K_{k-1}-\log K_{k+1}$ tends to zero.
+For the numerator $\binom nk^d$ its value tends to
+$\delta/[x_0(1-x_0)]$ by the adjacent-binomial ratios. The curvature
+ratio of the denominator $\binom{nd}{dk}$ is
+\[
+\prod_{j=1}^d
+\left(1+\frac{d}{dk-d+j}\right)
+\left(1+\frac{d}{nd-dk-d+j}\right).
+\]
+Taking logarithms and summing gives the same limit.
+
+\section{Vanishing scaled slack}\label{sec:endpoint}
+
+Put $\lambda=d/n$ and $h=r-\mu$. Consider $h=o(\sqrt d)$, so that
+$r/d\to x_0\in(0,1)$. We will show
+\begin{equation}\label{eq:edge-curv}
+\log\frac{A_k^2}{A_{k-1}A_{k+1}}\longrightarrow+\infty,
+\qquad V/d\longrightarrow0
+\end{equation}
+at the three quotas in the curvature comparison. The statement about
+curvature is for an internal $k$, so $h-\lambda\ge0$.
+
+Set $a=r/(d-r+1)$ and $H(z)=\binom dr z^r B(a/z)$, where
+\[
+B(q)=\sum_{j=0}^r c_jq^j,\qquad
+c_j=\prod_{i=0}^{j-1}\frac{1-i/r}{1+i/(d-r+1)}.
+\]
+Extend the coefficients by zero. They decrease, $c_0=c_1=1$, and
+$0\le1-c_j\le Cj(j-1)/d$: for $j\le r$, sum the deficits of the
+factors, and for $j>r$ enlarge $C$ if necessary. A tilted deficit
+$J=r-S$ has mass proportional to $c_jq^j$. Compare it for $q<1$
+with a geometric law of mean $w=q/(1-q)$. Under that law the
+normalization of the density factor $c_J$ is $1+O(w^2/d)$.
+For $p=1,2$ and $w=o(\sqrt d)$, the tilted moment differs from the
+geometric moment by $O(w(1+w)^{p+1}/d)$. This follows from the
+coefficient bound and the geometric factorial moments
+$\E(J)_b=b!w^b$. Also the tilted mean is at most $w$ by the
+nonpositive covariance of the increasing function $J$ and the
+decreasing function $c_J$. Trial geometric means $h,2h$ therefore
+bracket the desired tilt $q_h$ for positive slack, uniformly in the
+stated range. Applying the same moment comparisons at that tilt gives
+\begin{equation}\label{eq:edge-var}
+w=h\bigl(1+O((1+h)^2/d)\bigr),\qquad
+V=h(1+h)\bigl(1+O((1+h)^2/d)\bigr).
+\end{equation}
+In the variance estimate use the geometric variance $w(1+w)$ and
+subtract the square of the expectation. At zero slack the tilt is
+$q_h=0$ and $V=0$.
+
+We need a central probability estimate that works even for bounded
+total deficit. For a log-concave law on consecutive integers with
+variance $\sigma^2$ and integer mean, the mass at its mean is
+comparable to $(1+\sigma)^{-1}$ with numerical constants. For the
+lower bound, the entropy inequality used in Lemma~\ref{lem:enum}
+applies. Adding an independent uniform variable on $[-1/2,1/2]$
+preserves entropy, now in its differential version, and gives variance
+$\sigma^2+1/12$. The Gaussian upper bound for differential entropy
+follows by nonnegativity of relative entropy to the Gaussian of the
+same mean and variance. For the upper bound let $b$ be the modal
+mass. On each side of the mode the first distance $L$ with mass at
+most $b/2$ satisfies $L\le 2/b+1\le3/b$, extending by zero off the
+support. Log-concavity bounds the mass at distance $j\ge L$ by
+$b\,2^{-j/L}$. At smaller distances use the modal bound. Taken
+together the masses on each side are bounded by
+$2b\, 2^{-bj/3}$. Summing $j^2$ times this majorant gives
+$\sigma^2\le C/b^2$, and $b\le1$ yields the upper bound.
+
+Write $\ell=nh$ and $G(h)=\log B(q_h)-h\log q_h$, with $G(0)=0$.
+The exact coefficient expression is
+\[
+A_k=\binom dr^{\,n}a^\ell e^{nG(h)}
+       \Prob(J_1+\cdots+J_n=\ell).
+\]
+The deficit law is log-concave by its successive ratios, as is its
+convolution. The central probability estimate and \eqref{eq:edge-var}
+give
+\begin{equation}\label{eq:edge-log}
+\log A_k=n\log\binom dr+\ell\log a+nG(h)
+   -\tfrac12\log(1+n h(1+h))+O(1).
+\end{equation}
+At zero slack the probability is one and $A_k=\binom dr^n$
+exactly. This covers the possibility that the maximum feasible quota
+is saturated, without presuming a diverging total variance.
+
+For $h>0$, differentiation gives $G'(h)=-\log q_h$ and
+$G''(h)=-1/V(h)$. The entropy is continuous at zero because
+$q_h\sim h$ there. When $h\to\infty$, the logarithmic prefactors in
+\eqref{eq:edge-log} contribute $O(1)$ to curvature since the
+neighboring variance scales are comparable. Meanwhile
+\[
+2G(h)-G(h-\lambda)-G(h+\lambda)
+  =\int_{-\lambda}^{\lambda}\frac{\lambda-|u|}{V(h+u)}\,du
+  \sim \frac{\lambda^2}{h(1+h)}.
+\]
+Multiplication by $n$ gives a diverging curvature. For bounded $h$,
+the integral is bounded below by a positive constant on its central
+subinterval $|u|\le\lambda/2$, by \eqref{eq:edge-var} and
+$\lambda\asymp1$. The bound extends to $h-\lambda=0$ by continuity
+of $G$, taking a limit from positive slack. The remaining terms in
+\eqref{eq:edge-log} contribute $O(\log n)$ to curvature. This proves
+\eqref{eq:edge-curv}, including bounded or vanishing slack at the
+higher adjacent quota.
+
+\section{Positive scaled slack}\label{sec:central}
+
+Assume now that $(r-\mu)/\sqrt d\to H_*\in(0,\infty]$.
+We show that $V/d\to v>0$ and that the tilted central mass is
+asymptotic to $(2\pi n d v)^{-1/2}$. The same variance limit holds
+under any bounded real quota shift.
+
+Write the row tilt as $z=e^\eta$. The capped law is a
+binomial of parameter $e^\eta/(1+e^\eta)$, conditioned at the cap.
+At the trial values $\eta=\log(x/(1-x))+\tau/\sqrt d$, with $\tau$
+bounded, the standardized unrestricted row size $(S-\mu)/\sqrt d$
+tends to a normal of mean $\tau v_0$ and variance $v_0$ when
+$\tau$ converges, where $v_0=x_0(1-x_0)$. The binomial central
+limit theorem and Hoeffding bounds give convergence of the
+capped variable and all its fixed moments to that normal
+conditioned to be at most $H_*$. The cap probability is bounded
+away from zero for $\tau$ in compact sets, by the positive
+limiting normal left tail and a subsequence argument. If
+$H_*=\infty$, the conditioning disappears.
+
+For finite $H_*>0$, the limiting capped law has density proportional
+to $\exp(\tau y-y^2/(2v_0))$ on $y\le H_*$. Its mean increases
+strictly and continuously from $-\infty$ to $H_*$ as $\tau$ increases.
+For $\tau\to-\infty$ center at the unrestricted mean, where truncation
+is negligible. For $\tau\to+\infty$ the distance $H_*-y$ has density
+proportional to
+$\exp(-(\tau-H_*/v_0)(H_*-y)-(H_*-y)^2/(2v_0))$, and rescaling by
+$\tau-H_*/v_0$ shows its expectation tends to zero. In the infinite
+case the normal mean increases through zero at $\tau=0$.
+In either case choose two finite trials with opposite mean signs.
+They bracket the actual tilt for large $n$, and its $\tau$ tends to
+the unique zero of the limiting mean. The limiting variance $v$
+is strictly positive. Bounded shifts of quota alter the scaled
+cap position by $O(\sqrt d/n)=o(1)$ and preserve $x_0$, so the
+same sequential argument gives the asserted uniformity in such
+shifts. The number of available quota steps above and below
+$k$ tends to infinity, using
+$D-k=\lfloor n(r-\mu)/d\rfloor$ above and $k/n\to x_0>0$ below.
+
+For the local estimate let $\phi(t)=\E e^{it(S-\mu)}$. At an
+integer total $n\mu=dk$, Fourier inversion gives the central
+probability as $(2\pi)^{-1}\int_{-\pi}^{\pi}\phi(t)^n\,dt$.
+With an independent copy $S'$, the identity
+$1-|\phi(t)|^2=\E(1-\cos(t(S-S')))$ and the variance lower and
+fourth moment upper bounds give $|\phi(t)|\le e^{-c d t^2}$
+for $|t|\le a_0/\sqrt d$ and some fixed $a_0>0$. Taylor expansion
+using the bounded standardized third moment gives
+$\phi(u/\sqrt{nd})^n\to e^{-v u^2/2}$ for fixed $u$.
+On $a_0\le\sqrt d|t|\le M$ the limiting centered continuous
+law has characteristic function of modulus strictly less than
+one. Convergence is uniform on this compact frequency interval
+by the uniform first-moment bound. On $M/\sqrt d\le |t|\le\pi$,
+summation by parts gives
+\[
+|\phi(t)|\le \frac{2\max_s\Prob(S=s)}{|1-e^{it}|}
+            \le\frac{C}{\sqrt d\,|t|}.
+\]
+Here unimodality of the capped binomial gives total variation
+twice the maximum mass after padding with zeros. Stirling's bounds
+and the cap probability bound give maximum mass $O(d^{-1/2})$.
+Take $M$ large. Both outer intervals are negligible after multiplication
+by $\sqrt{nd}$, and Gaussian domination on the first interval gives
+\begin{equation}\label{eq:lclt}
+\Prob(S_1+\cdots+S_n=dk)\sim(2\pi nd v)^{-1/2}.
+\end{equation}
+The same equivalent holds at each fixed integer quota shift.
+
+\section{The limiting alternating sign}
+
+Return to the failed nodes. Pass to a subsequence on which the
+scaled slack converges in $[0,\infty]$. If its limit is zero,
+\eqref{eq:edge-curv}, \eqref{eq:enum} and the cancellation of
+the $K_k$ curvature give $\Gamma_k\to\infty$, contradicting
+$\Gamma_k\le4$.
+
+For a positive or infinite limit, define
+$E(k)=n\log H(z)-dk\log z$ at the row tilt, allowing real quota
+shifts locally. Differentiation gives $E''(k)=-d^2/(nV)$,
+which tends uniformly on bounded shifts to $-\delta/v$.
+For integers $k$, the tilted representation is
+$A_k=e^{E(k)}\Prob(\sum_i S_i=dk)$. Equation \eqref{eq:lclt}
+gives a common asymptotic prefactor at bounded shifts. The
+variance correction in \eqref{eq:enum} also has a common limit,
+and the $K_k$ curvature tends to zero. Integrating $E''$ against
+the triangular second-difference kernel therefore gives, for
+each fixed integer $j$,
+\[
+\log\Gamma_{k+j}\longrightarrow g=\delta/v>0.
+\]
+
+At $-t_k$, divide the magnitude of every term by $a_kt_k^k$.
+The magnitudes at distance $j\ge1$ on the right and left are,
+respectively,
+\[
+\Gamma_k^{-j/2}\prod_{i=1}^{j-1}\Gamma_{k+i}^{-(j-i)},
+\qquad
+\Gamma_k^{-j/2}\prod_{i=1}^{j-1}\Gamma_{k-i}^{-(j-i)},
+\]
+with absent terms assigned zero. These identities follow by
+multiplying the successive adjacent ratios. For fixed $j$ they
+converge to $e^{-g j^2/2}$. Equation \eqref{eq:gamma} also gives
+$\log\Gamma_i\ge c_0>0$ uniformly in all internal $i$ along the
+sequence for large $n$. The magnitudes are thus dominated by
+$e^{-c_0j^2/2}$, a summable bound. Dominated convergence gives
+\[
+\lim\frac{(-1)^kP(-t_k)}{a_kt_k^k}
+=\sum_{j\in\mathbb Z}(-1)^j e^{-g j^2/2}
+=\prod_{m=1}^{\infty}(1-e^{-gm})
+                        (1-e^{-g(m-1/2)})^2>0.
+\]
+The identity is the Jacobi triple product. Its factors are positive
+and their deficits are summable. Equivalently, Poisson summation
+expresses the value as
+$\sqrt{2\pi/g}\sum_{m\in\mathbb Z}e^{-2\pi^2(m+1/2)^2/g}$.
+This contradicts the failure of the node in the other possible
+regime as well. The sign test and the degree argument finish the
+proof of Theorem~\ref{thm:main}.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{Alex}
+P.~Alexandersson,
+\emph{Balanced arrays of uniform matroids},
+in \emph{Real-rooted polynomials: open problems},
+The Symmetric Functions Catalog, 2026.
+\href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}
+{Original conjecture}.
+
+\bibitem{CGM}
+E.~R. Canfield, C.~Greenhill, and B.~D. McKay,
+Asymptotic enumeration of dense $0$--$1$ matrices with specified line sums,
+\emph{J. Combin. Theory Ser. A} \textbf{115} (2008), 32--66.
+\href{https://doi.org/10.1016/j.jcta.2007.03.009}
+{doi:10.1016/j.jcta.2007.03.009}.
+
+\bibitem{KN}
+J.~Kahn and M.~Neiman,
+\emph{Conditional negative association for competing urns},
+\emph{Random Structures Algorithms} \textbf{41} (2012), 262--281.
+\href{https://doi.org/10.1002/rsa.20395}{doi:10.1002/rsa.20395}.
+The orientation inequality is Lemma~8 in
+\href{https://arxiv.org/abs/1001.0610}{arXiv:1001.0610}.
+
+\bibitem{Orient}
+ProgramComputer,
+\emph{An orientation proof of normalized log-concavity for balanced arrays},
+Open Math Research, 2026.
+\href{https://github.com/ProgramComputer/open-math-research/blob/research/topics/balanced-arrays/orientation-normalization.md}
+{Repository proof}.
+\end{thebibliography}
+\end{document}

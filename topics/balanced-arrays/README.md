@@ -1,5 +1,7 @@
 # Real zeros of balanced binary arrays
 
+For every $\epsilon>0$, all sufficiently large rows have simple negative zeros for every $d\ge\epsilon n$ and every row cap. The cutoff depends only on $\epsilon$. **⬜ None** for Lean or Rocq. [Theorem and proof](dense-regime/README.md)
+
 For four columns with row cap two, the balanced-array polynomial has only simple negative zeros at every row count. The computer-assisted proof combines forty lower sign changes, uniform analytic phase estimates, and exact checks through 532 rows. A blind agent-assisted review checked the full argument against the original conjecture. **⬜ None** for Lean or Rocq. [Four-column theorem and verification](four-columns/README.md)
 
 Fix a column count $d\ge2$ and a row cap $1\le r<d$. Let $a_{n,k}$ count labeled $n\times d$ binary arrays with $k$ ones in each column and at most $r$ ones in each row. Define $P_n(q)=\sum_k a_{n,k}q^k$.
