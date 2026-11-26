@@ -1,0 +1,72 @@
+\section{Uniform interior saddle for very tall capped arrays}\label{sec:interior-saddle}
+
+Let $d\to\infty$, $1\le r<d$, $v>0$, and let $S$ have probabilities proportional to $\binom ds v^s$ on $0\le s\le r$. Write $\mu=\mathbb ES$, $h=r-\mu$, $V=\mathrm{Var}(S)$ and $H=\sum_{s\le r}\binom ds v^s$. Assume $\mu\ge 1/10$ and $n\ge C_* d^6\log(d+1)$ with $h\ge d^{-3}$, for a sufficiently large absolute constant $C_*$. Alternatively, fix any $\eta>0$ and assume $h\ge\eta$ and $n\ge C_\eta d^4\log(d+1)$, for a sufficiently large $C_\eta$. Given $S$, choose a uniform $S$-subset $I$. Put $R(\theta)=\mathbb E\exp(i\sum_{i\in I}\theta_i)$, $\phi(t)=\mathbb E e^{itS}$, $a_s=s(d-s)/(d(d-1))$ and
+
+\begin{equation*}
+a(t)=\frac{\mathbb E[a_S e^{itS}]}{\phi(t)}.
+\end{equation*}
+
+Then $\mathcal I=P_n^{(r,d)}(-v^d)/H^n$ is the Haar integral of $R(\theta)^n$ on the translated torus $\sum_j\theta_j=\pi\pmod{2\pi}$. With $t_*=\pi/d$,
+
+\begin{equation*}
+\mathcal I=\frac{2}{\sqrt d}\,(2\pi n)^{-(d-1)/2}
+   \mathrm{Re}\!\left[\phi(t_*)^n a(t_*)^{-(d-1)/2}\right]
+   +o\!\left(\frac{|\phi(t_*)|^n}{\sqrt d}(2\pi n|a(t_*)|)^{-(d-1)/2}\right).
+\end{equation*}
+
+The error is absolute on the scale of one saddle, so the statement remains meaningful if the sum almost cancels. The square root and powers use the branch near positive real $a$. The conclusion is uniform in the cap and tilt within the displayed range. It is a pointwise saddle formula; using it to count roots requires control of the phase as the tilt varies.
+
+\subsection{Tilt estimates and diagonal gap}
+
+Success bias followed by subtracting one gives the $(d-1)$-trial tilt truncated at $r-1$. Failure bias gives the same tilt truncated at $r$. The stochastic comparison of their means gives $V\le\mu(1-\mu/d)\le d/4$. This holds also after any real exponential change of tilt. Integrating the bound for the second derivative of the log moment generating function yields $\mathbb E e^{u(S-\mu)}\le e^{du^2/8}$ for real $u$.
+
+The matching lower bound needed here is $V\ge c\min(1,\mu,h)$. If $V\ge1/100$ this follows immediately. Otherwise the interval of radius $1/3$ about $\mu$ has probability at least $1-9V>0.91$ by Chebyshev and contains at most one integer. Hence an atom at the mode has mass above $0.91$. At an interior mode $m$, the product of adjacent ratios is $p_{m-1}p_{m+1}/p_m^2=m(d-m)/[(m+1)(d-m+1)]\ge 1/4$. Both ratios are at most one, so each is at least $1/4$, contradicting this mass. At mode zero, put $q=p_1/p_0$. Then $q<1/9$, and log-concavity gives $p_j\le p_0 q^j$. Thus $\mu\le p_0 q/(1-q)^2\le Cq$, whereas $V\ge p_0p_1\ge c q$ by the independent-pair variance identity. At mode $r$, apply the same argument to $r-S$. This proves $V\ge c d^{-3}$ in the first regime and $V\ge c\min(1/10,\eta)$ in the second.
+
+Also $\bar a=\mathbb E a_S\ge V/d$ by $dV\le\mu(d-\mu)$. Independently, $a_s\ge1/d$ for every $1\le s\le r<d$, and Cauchy--Schwarz gives $\mathbb P(S\ge1)\ge\mu^2/(\mu^2+V)\ge\mu/(\mu+1)\ge1/11$. Consequently $\bar a\ge1/(11d)$.
+
+To compare diagonal phases, let $\Delta=S-S'$ with independent copy $S'$. Its distribution is symmetric and log-concave, by preservation of discrete log-concavity under convolution. Its masses decrease with $|j|$. Such a law is a mixture of the uniform laws on integer intervals $[-L,L]$: if the mass at $j$ is $g(j)$, the mixing mass at $L$ is $(2L+1)(g(L)-g(L+1))$. Pick $L_0=C\sqrt{d\log d}$ with $C$ an adequately large fixed constant. The sub-Gaussian bound and $|\Delta|\le d$ give $\mathbb E[\Delta^2;|\Delta|>L_0]=o(V)$ uniformly. The part of the mixture at $L>2L_0$ contributes $o(V)$ to the second moment, because under each such uniform law a fixed fraction of its second moment lies above $L_0$ in absolute value.
+
+For the uniform law on $[-L,L]$, $L\ge1$, $1-\mathbb E\cos(t\Delta)\ge c\min(L^2t^2,1)$ for $|t|\le\pi$. If $L|t|\le1$, use the quadratic lower bound for $1-\cos$. If $1<L|t|\le 10$, the same bound on the subinterval of integers of size $\lfloor1/|t|\rfloor$ suffices when $|t|\le1/2$. For $|t|>1/2$ in that case, $L$ is bounded and the $j=1$ term suffices. If $L|t|>10$, the Dirichlet sum bound $|\mathbb E e^{it\Delta}|\le 1/[(2L+1)\sin(|t|/2)]$ suffices. The mixture and Taylor at low frequency now give
+
+\begin{equation*}
+1-|\phi(t)|^2\ge c V\min(t^2,L_0^{-2}),\qquad
+1-|\phi(t)|^2=Vt^2(1+O(L_0^2t^2)+o(1))\quad (|t|\le c_0/L_0).
+\end{equation*}
+
+For the second claim apply Taylor on $|\Delta|\le L_0$ and use $1-\cos x\le x^2/2$ on the tail. In particular the loss at $t_*$ is $(1+o(1))V\pi^2/d^2$. Choosing $c_0$ small makes the low-frequency relative error less than $1/4$, so every diagonal phase $|t|\ge 3\pi/d$ has modulus gap at least $cV/d^2$ from principal. For $|t|\ge K\pi/d$, the lower bound on the loss in squared modulus exceeds any prescribed constant times $V/d^2$ by taking $K$ fixed sufficiently large.
+
+\subsection{Localization relative to the principal modulus}
+
+Write $z_j=e^{i\theta_j}$, $\bar z=d^{-1}\sum z_j$, and $D_z=\sum|z_j-\bar z|^2$. For fixed size $s$, generate a uniform subset by drawing a uniform permutation, putting $m=\min(s,d-s)$ disjoint pairs first, tossing a fair coin independently in each pair to pick one member, and including $s-m$ further predetermined positions of the permutation. By permutation symmetry this is uniform. Conditional on the permutation the modulus of its Fourier response is at most $e^{-X/8}$ where $X$ is the sum of the within-pair squared chord lengths, because each fair choice has modulus $\sqrt{1-|z_i-z_j|^2/4}$.
+
+A uniform ordered pair of distinct indices has expected squared chord $2D_z/(d-1)$, so $\mathbb EX=2mD_z/(d-1)$. Each squared chord is at most four. For two disjoint pairs the expectation of the product of squared chords is at most $[d(d-1)/( (d-2)(d-3))]$ times the squared mean of a single chord, by allowing intersections in the numerator. Therefore $\mathbb E X^2\le C(\mathbb EX+(\mathbb EX)^2)$. The bound $1-e^{-x/8}\ge c x/(1+x)$ and Cauchy--Schwarz, in the form $\mathbb E[X/(1+X)]\ge(\mathbb EX)^2/\mathbb E[X(1+X)]$, give the fixed-size modulus loss $c\min(mD_z/d,1)$.
+
+Since $s(d-s)/d\le m\le d$ and $\mathbb E[S(d-S)/d]=(d-1)\bar a$, averaging the fixed-size losses gives
+
+\begin{equation*}
+|R(\theta)|\le 1-c\bar a\min(D_z,1).
+\end{equation*}
+
+Indeed $\min(mD_z/d,1)\ge (m/d)\min(D_z,1)$. As $\bar a\ge V/d$, all points with $D_z\ge B V/(\bar a d^2)$ have modulus gap at least $cV/d^2$ from principal, for fixed sufficiently large $B$. At the remaining points, $D_z=O(1/d)$. Anchor at an index minimizing its distance to $\bar z$, so $\sum_j|z_j-z_a|^2\le2D_z$. Take the principal angles relative to that anchor, and subtract their mean to write $\theta=t\mathbf1+y$ with $\sum_jy_j=0$ and $\|y\|^2\le C D_z$. The sum constraint forces $dt=\pi\bmod 2\pi$. For all these points one has
+
+\begin{equation*}
+|R(t\mathbf1+y)-\phi(t)|\le \tfrac12\bar a\|y\|^2\le C B V/d^2.
+\end{equation*}
+
+This follows by centering the conditional linear term and using the exact conditional second moment $a_s\|y\|^2$. The strong radial comparison therefore excludes every $|t|\ge K\pi/d$ for fixed $K$ depending on $B$.
+
+To handle the finitely many remaining diagonal phases, set $L=\sum_{i\in I}y_i$. If $s>d/2$, replace the subset by its complement and reverse the sign of $L$. For a uniform $m$-subset, let $p_j=(m)_j/(d)_j$ and $Q_j=\sum y_i^j$. Expansion using $Q_1=0$ gives
+$\mathbb E[L^4\mid S=s]=(p_1-7p_2+12p_3-6p_4)Q_4+(3p_2-6p_3+3p_4)Q_2^2$.
+Because $p_j\le p_1$ and $p_1\le C a_s$, this is at most $Ca_s\|y\|^4$. Cauchy--Schwarz against the second moment shows $\mathbb E[|L|^3\mid S=s]\le Ca_s\|y\|^3$. Moreover $s\mapsto a_s$ is $O(1/d)$-Lipschitz even when evaluated at real $s$. Thus
+$\mathbb E[a_S|S-\mu|]\le a_\mu\sqrt V+CV/d\le C\bar a(\sqrt V+1)$,
+using $a_\mu=\bar a+V/[d(d-1)]$ and $\bar a\ge V/d$. It follows that $a(t)/\bar a=1+O(|t|(\sqrt V+1))$ for $|t|\le K\pi/d$, by centering phase at $\mu$ and $|e^{ix}-1|\le |x|$. In this range $|\phi(t)|=1-o(1)$ and the logarithmic expansion is
+
+\begin{equation*}
+\log[R(t\mathbf1+y)/\phi(t)]=-\tfrac12 a(t)\|y\|^2+O(\bar a\|y\|^3).
+\end{equation*}
+
+The bound holds uniformly for $\|y\|=O(d^{-1/2})$, by Taylor and $\bar a\le1$. Consequently the local real part is at most $-c\bar a\|y\|^2$. Together the estimates give a relative modulus gap at least $c\min(V/d^2,\bar a/d^2)$ outside the principal balls $\|y\|\le d^{-1}$. This is at least $c d^{-5}$ in the first regime and $c_\eta d^{-3}$ in the second, by the variance bounds and $\bar a\ge1/(11d)$.
+
+\subsection{Integrating the two principal balls}
+
+The translated torus has period lattice $2\pi\{m\in\mathbb Z^d:\sum_jm_j=0\}$ in $\mathbf1^\perp$. The basis $2\pi(e_j-e_d)$ has Gram determinant $d$ after removal of the $2\pi$ factors, so the Euclidean covolume is $\sqrt d(2\pi)^{d-1}$. The two balls are disjoint and inject into the torus for large $d$. Normalizing the full Euclidean complex Gaussian gives one contribution $\phi(t_*)^n(2\pi n)^{-(d-1)/2}a(t_*)^{-(d-1)/2}/\sqrt d$ and its conjugate. The correction in the logarithm is $O(n\bar a \|y\|^3)$. On the ball this is absorbed by weakening the real quadratic by a relative $O(d^{-1})$, which changes the Gaussian normalization by a bounded factor. Also $(|a|/\mathrm{Re}\,a)^{(d-1)/2}=\exp(O(1))$ since $a/\bar a=1+O(d^{-1/2})$. The Gaussian third moment shows the relative integration error is $O(d^{3/2}/\sqrt{n\bar a})=o(1)$, via $|e^z-1|\le |z|e^{(\mathrm{Re}\,z)_+}$. The discarded Gaussian mass outside $d^{-1}$ is exponentially small since $n\bar a d^{-2}\gg d$. The local error is $O(d^2/\sqrt n)$ by $\bar a\ge1/(11d)$. In the first regime the relative global tail is at most $\exp(C_1d\log n-c_1 n d^{-5})$. In the second it is at most $\exp(C_1d\log n-c_\eta n d^{-3})$. For either regime, write $\ell=5$ or $3$, respectively. At $n=C d^{\ell+1}\log(d+1)$ the ratio $n/(d^{\ell+1}\log n)$ tends to $C/(\ell+1)$. Since $x/\log x$ increases for $x>e$, a sufficiently large fixed $C$ makes the global exponent tend to $-\infty$ uniformly throughout the corresponding region. This completes the absolute error estimate in both regimes.

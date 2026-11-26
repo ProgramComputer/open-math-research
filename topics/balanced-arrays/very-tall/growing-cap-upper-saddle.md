@@ -1,0 +1,133 @@
+# Upper-edge two-saddle approximation with growing cap
+
+2026-11-26 · Private research note
+
+There are absolute constants $`h_0>0`$ and $`C_*>0`$ with the following property. Let $`d\to\infty`$, $`1\le r<d`$, and $`n\ge C_*d^4\log(d+1)`$. Take $`t>0`$ and let $`S`$ have probabilities proportional to $`\binom ds t^s`$ for $`0\le s\le r`$. With $`J=r-S`$, assume
+
+$$
+h=\mathbb E J\le h_0,\qquad nh/d^2\longrightarrow\infty.
+$$
+
+Let $`H(w)=\sum_{s\le r}\binom ds w^s`$, $`\phi=\pi/d`$, $`H_\tau=H(te^{i\tau})`$, and
+
+$$
+\lambda_s=\frac{s(d-s)}{d(d-1)},\qquad
+\Lambda_\tau=\frac{\mathbb E(\lambda_S e^{-i\tau J})}{\mathbb E e^{-i\tau J}},
+\qquad \Lambda_0=\mathbb E\lambda_S.
+$$
+
+For the balanced-array polynomial $`P_n`$, the uniform approximation in this regime is
+
+$$
+P_n(-t^d)=2\mathrm{Re}\left(
+\frac{H_\phi^n \Lambda_\phi^{-(d-1)/2}}{\sqrt d(2\pi n)^{(d-1)/2}}
+\right)
++o\left(\frac{|H_\phi|^n|\Lambda_\phi|^{-(d-1)/2}}{\sqrt d(2\pi n)^{(d-1)/2}}\right).
+\tag{1}
+$$
+
+The power uses the logarithm in the right half-plane. The error is absolute relative to the magnitude of one saddle, including when the main real part is small. The condition $`nh/d^2\to\infty`$ may hold arbitrarily slowly.
+
+## Tilt and diagonal gaps
+
+The ratio of successive unnormalized deficit weights at $`j,j+1`$ is $`(r-j)/[(d-r+j+1)t]`$, decreasing in $`j`$. The first ratio $`q`$ satisfies $`q=\Pr(J=1)/\Pr(J=0)\le h/(1-h)`$. Thus $`\Pr(J=j)\le q^j`$ and $`\mathbb E J^\ell=O_\ell(h)`$ for every fixed positive integer $`\ell`$, uniformly once $`h_0`$ is sufficiently small. Also $`h\le Cq`$ by the same bound, so $`\Pr(J=1)\asymp h`$ and $`\mathrm{Var}(J)\asymp h`$. For $`j\le r`$,
+
+$$
+\frac{\lambda_{r-j}}{\lambda_r}
+=\frac{r-j}{r}\frac{d-r+j}{d-r}\le1+j.
+$$
+
+As $`\Pr(J=0)\ge1-h`$, this implies $`\Lambda_0\asymp\lambda_r`$, $`c/d\le\Lambda_0\le C`$, and $`\mathbb E[\lambda_S^a J^\ell]=O_{a,\ell}(\Lambda_0^a h)`$ for fixed $`a,\ell\ge1`$. The same bound holds for the expectation of $`\lambda_S^a\mathbf1_{J>0}`$.
+
+Write $`g(\tau)=\mathbb E e^{-i\tau J}`$, so $`H_\tau/H(t)=e^{ir\tau}g(\tau)`$. Uniformly on $`[-\pi,\pi]`$, $`g(\tau)=1+O(h)`$ and $`|g(\tau)|\le\exp[-ch(1-\cos\tau)]`$, the latter by retaining the $`J=0,1`$ terms in the independent-copy formula for $`1-|g|^2`$. Centering $`J`$ and differentiating its characteristic function gives $`(\log|g(\tau)|)''=-\mathrm{Var}(J)+O(h|\tau|)`$ near zero by the centered third-moment bound. Evenness gives $`\log|g(\tau)/g(\phi)|\le-ch(\tau^2-\phi^2)`$ for $`\phi\le|\tau|\le\eta_0`$ with fixed sufficiently small $`\eta_0`$, and $`|g(\phi)|\ge e^{-Ch/d^2}`$. Beyond $`\eta_0`$, the global diagonal gap and the lower bound at $`\phi`$ give the same comparison with another constant. Thus
+
+$$
+\log|H_\tau/H_\phi|\le-ch(\tau^2-\phi^2)
+\qquad(\phi\le|\tau|\le\pi).
+\tag{2}
+$$
+
+For later volume comparisons, differentiating the numerator and denominator of $`\Lambda_\tau`$ once or twice costs $`O(\Lambda_0h)`$ and $`O(h)`$, respectively. This uses the $`J`$-moment bounds and $`|g(\tau)|\ge1-O(h)`$. Uniformly, $`\Lambda_\tau=\Lambda_0(1+O(h))`$, as follows by separating the $`J=0`$ term in numerator and denominator. Conjugation makes the first derivative at zero purely imaginary. Hence
+
+$$
+\mathrm{Re}\Lambda_\tau/\Lambda_0=1+O(h\min(\tau^2,1)),\qquad
+|\mathrm{Im}\Lambda_\tau|/\Lambda_0=O(h\min(|\tau|,1)).
+\tag{3}
+$$
+
+In particular $`|\Lambda_\phi|/\Lambda_0=1+O(h/d^2)`$.
+
+## Localization relative to the principal modulus
+
+Let $`R(\mathbf z)=\sum_{|A|\le r}t^{|A|}\prod_{i\in A}z_i`$ on the torus with $`\prod_i z_i=-1`$, with normalized Haar measure. The integral of $`R^n`$ is $`P_n(-t^d)`$ by character orthogonality. Put $`\overline z=d^{-1}\sum_i z_i`$ and $`D_z=\sum_i|z_i-\overline z|^2`$.
+
+For fixed size $`s`$ let $`m=\min(s,d-s)`$. Generate a uniform subset by putting $`m`$ disjoint random pairs in the first $`2m`$ positions of a uniform permutation, choosing one element from each pair by independent fair coins, and including the next $`s-m`$ positions. By symmetry the subset is uniform. Conditional on the permutation the modulus of its Fourier response is at most $`e^{-X/8}`$ where $`X`$ is the sum of the squared chords within the pairs. Indeed the squared modulus of the mean of the two points of a pair is one minus one fourth of the squared chord. For one ordered random pair the mean squared chord is $`2D_z/(d-1)`$, so $`\mathbb E X=2mD_z/(d-1)`$. Each squared chord is at most four. For two disjoint pairs their product expectation is at most $`d(d-1)/[(d-2)(d-3)]`$ times the squared one-pair expectation, by discarding the disjointness restriction in the numerator before dividing by the number of disjoint pairs. Thus $`\mathbb E X^2\le C(\mathbb EX+(\mathbb EX)^2)`$. From Cauchy–Schwarz,
+
+$$
+\mathbb E\frac{X}{1+X}\ge
+\frac{(\mathbb E X)^2}{\mathbb E(X+X^2)}.
+$$
+
+Since $`1-e^{-x/8}\ge c x/(1+x)`$, the fixed-size response has modulus at most $`1-c\min(mD_z/d,1)`$. This also holds for $`m=0`$. Averaging over $`S`$ and using $`m\ge s(d-s)/d`$ gives
+
+$$
+|R/H(t)|\le1-c\Lambda_0\min(D_z,1).
+\tag{4}
+$$
+
+Here $`\min(mD_z/d,1)\ge(m/d)\min(D_z,1)`$ and $`\mathbb E[S(d-S)/d]=(d-1)\Lambda_0`$.
+
+For $`D_z\ge1/d`$, (4) gives modulus at most $`H(t)(1-c/d^2)`$. By reducing $`h_0`$ this is at most $`|H_\phi|(1-c'/d^2)`$, since $`|H_\phi|/H(t)\ge e^{-Ch/d^2}`$. Its absolute integral, divided by the principal scale
+
+$$
+|H_\phi|^n I_0,\qquad I_0=(2\pi n\Lambda_0)^{-(d-1)/2}/\sqrt d,
+$$
+
+is bounded by $`\exp(-c'n/d^2+O(d\log n))`$, which is negligible in the asserted range.
+
+For $`D_z<1/d`$, choose a pin minimizing $`\sum_i|z_i-z_j|^2`$, which is at most $`2D_z`$ by averaging. Lift the angles relative to this pin, take their average $`\tau`$ modulo $`2\pi`$ in $`(-\pi,\pi]`$, and write $`z_i=e^{i(\tau+y_i)}`$ with $`\sum_i y_i=0`$ and $`\|y\|^2=O(1/d)`$. The norm bound follows from the small-chord bound and subtracting the mean of the lifted differences. The common phase is an odd multiple of $`\phi`$ modulo $`2\pi`$. The representation is unique within this small norm domain: if two lifts give the same point, their relative shifts by integer multiples of $`2\pi`$ agree at all coordinates because the pairwise angular differences are small, and averaging fixes the canonical phase. In free coordinates the measure is $`(2\pi)^{-(d-1)}dy_1\cdots dy_{d-1}`$, with $`y_d=-\sum_{i<d}y_i`$. Each such chart contains the full ball $`\|y\|\le d^{-1}`$, because $`D_z\le\sum_i|z_i-e^{i\tau}|^2\le \|y\|^2`$.
+
+## Transverse expansion at all common phases
+
+For $`L=\sum_{i\in A}y_i`$ with $`A`$ a uniform size-$`s`$ subset, write $`P_j=\sum_i y_i^j`$ and $`m_j=(s)_j/(d)_j`$. Conditional means vanish. Expansion using $`P_1=0`$ gives
+
+$$
+\begin{aligned}
+\mathbb E(L^2\mid S=s)&=\lambda_s P_2,\\
+\mathbb E(L^3\mid S=s)&=\lambda_s\frac{d-2s}{d-2}P_3,\\
+\mathbb E(L^4\mid S=s)&=(m_1-7m_2+12m_3-6m_4)P_4
++3(m_2-2m_3+m_4)P_2^2.
+\end{aligned}
+$$
+
+For the cubic, the mixed sum $`\sum_{i\ne j}y_i^2y_j`$ is $`-P_3`$ and $`e_3(\mathbf y)=P_3/3`$. For the quartic the sums with respective patterns $`3+1`$, $`2+2`$, $`2+1+1`$, and $`1+1+1+1`$, with equal exponents unlabeled, are $`-P_4`$, $`(P_2^2-P_4)/2`$, $`P_4-P_2^2/2`$, and $`P_2^2/8-P_4/4`$. The coefficient of $`P_4`$ is $`O(\lambda_s)`$ by writing it in terms of $`m_j-m_{j+1}=m_j(d-s)/(d-j)=O(\lambda_s)`$. The coefficient of $`P_2^2`$ is $`O(\lambda_s^2)`$ by $`m_2-2m_3+m_4=(s)_2(d-s)_2/(d)_4`$. In particular $`\mathbb E(L^4\mid S=s)\le C\lambda_s\|y\|^4`$. Cauchy–Schwarz against the conditional second moment gives $`\mathbb E(|L|^3\mid S=s)\le C\lambda_s\|y\|^3`$.
+
+Normalize the complex size weights by $`g(\tau)`$ and tilt by $`e^{-i\tau J}`$. Its absolute weights are bounded by a constant times the underlying real probabilities, uniformly on the entire circle. The conditional linear mean vanishes. Taylor's bound for the real exponential through degree two gives
+
+$$
+\log(R/H_\tau)=-\tfrac12\Lambda_\tau\Vert y\Vert ^2+O(\Lambda_0\Vert y\Vert ^3)
+\tag{5}
+$$
+
+throughout the localized region. In detail, the exponential remainder is bounded by the conditional third absolute moment, and $`|R/H_\tau-1|=O(\Lambda_0\|y\|^2)`$ there by the vanishing linear term. The error from taking the logarithm is thus absorbed in (5), with the branch near one. By (3), $`\mathrm{Re}\Lambda_\tau\ge(1-Ch_0)\Lambda_0`$ for all phases. For small fixed $`h_0`$, (5) gives real transverse decay at least $`c\Lambda_0\|y\|^2`$. Thus, in the retained region but outside the balls of radius $`d^{-1}`$ about all common phases, $`|R|\le|H_\phi| e^{-c/d^3}`$ by (2). The absolute integral there relative to $`|H_\phi|^n I_0`$ is at most $`\exp[-cn/d^3+O(d\log n)]`$. At $`n=C_* d^4\log(d+1)`$, the ratio $`n/(d^4\log n)`$ tends to $`C_*/4`$. This ratio increases with $`n`$ in the stated region. Taking $`C_*`$ sufficiently large makes the last error negligible uniformly. The same choice also covers the earlier global tail.
+
+## Summing the phase balls and evaluating the principal integrals
+
+Inside a ball $`\|y\|\le d^{-1}`$, (3) and (5) bound the absolute integrand by a Gaussian with quadratic coefficient $`\Lambda_0[1-O(d^{-1}+h\min(\tau^2,1))]`$. Its integral relative to $`I_0`$ is at most $`\exp[O(1+dh\min(\tau^2,1))]`$. The zero-sum Gaussian determinant in the free coordinates is $`d`$, since the quadratic form matrix is $`I+\mathbf1\mathbf1^\top`$. For every nonprincipal phase $`|\tau|\ge3\phi`$ the factor involving $`dh\tau^2`$ is absorbed by half the gap in (2), because $`\tau^2\le(9/8)(\tau^2-\phi^2)`$ and $`n\gg d`$. Summing the odd phase labels gives relative error at most
+
+$$
+C\sum_{j\ge1}\exp[-c(nh/d^2)((2j+1)^2-1)]
+=O(e^{-c'nh/d^2})=o(1).
+$$
+
+There is no prefactor growing with $`d`$. This is the reason the condition $`nh/d^2\to\infty`$ can be arbitrarily slow.
+
+At $`\tau=\phi`$, compare $`\exp(n\log(R/H_\phi))`$ with $`\exp(-n\Lambda_\phi\|y\|^2/2)`$ by $`|e^A-e^B|\le |A-B|e^{\max(\mathrm{Re} A,\mathrm{Re} B)}`$. The weakened Gaussian just used has normalization $`O(I_0)`$ at $`\phi`$. Its normalized third norm moment is $`O(d^{3/2}/(n\Lambda_0)^{3/2})`$. Consequently the integrated absolute error of (5) is at most
+
+$$
+O(I_0\thinspace d^{3/2}/\sqrt{n\Lambda_0})
+=O(I_0\thinspace d^2/\sqrt n)
+=o(I_0).
+$$
+
+The comparison Gaussian extends to the full hyperplane at cost $`o(I_0)`$, since its absolute tail outside $`d^{-1}`$ is bounded relative to $`I_0`$ by $`C2^{d/2}\exp(-c n\Lambda_0/d^2)`$ using the Gaussian quadratic exponential moment. Its complex integral is $`(2\pi n\Lambda_\phi)^{-(d-1)/2}/\sqrt d`$ and its modulus is $`(1+o(1))I_0`$ by (3). The ball at $`-\phi`$ gives the conjugate integral. This completes (1).
