@@ -1,0 +1,29 @@
+--- CatalanStrictPeaks.lean
++++ CatalanStrictPeaks.lean
+@@ -111,7 +111,7 @@
+   simp [words, IsCatalan, zeroWord]
+ 
+ private theorem zeroWord_no_peaks (n : ℕ) : peaks (zeroWord n) = ∅ := by
+-  rw [eq_empty_iff_forall_not_mem]
++  rw [eq_empty_iff_forall_notMem]
+   intro j hj
+   have hp := (mem_filter.mp hj).2
+   simp [HasPeakAt, letter, zeroWord] at hp
+@@ -154,7 +154,7 @@
+ /-- Coefficients count Catalan words with precisely the corresponding number of peaks. -/
+ theorem coeff_C (n k : ℕ) :
+     (C n).coeff k = ((words n).filter (fun w => (peaks w).card = k)).card := by
+-  simp only [C, finset_sum_coeff, coeff_X_pow]
++  simp only [C, finsetSum_coeff, coeff_X_pow]
+   rw [← sum_filter]
+   simp [eq_comm]
+ 
+@@ -176,7 +176,7 @@
+   intro k hk
+   rw [coeff_C]
+   have hEmpty : (words n).filter (fun w => (peaks w).card = k) = ∅ := by
+-    rw [eq_empty_iff_forall_not_mem]
++    rw [eq_empty_iff_forall_notMem]
+     intro w hw
+     have heq := (mem_filter.mp hw).2
+     have hle := peaks_card_le w

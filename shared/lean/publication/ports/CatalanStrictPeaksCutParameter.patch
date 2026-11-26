@@ -1,0 +1,12 @@
+--- CatalanStrictPeaksCutParameter.lean
++++ CatalanStrictPeaksCutParameter.lean
+@@ -21,8 +21,7 @@
+   have hsq : r ^ 2 = 1 + 2 * d := Real.sq_sqrt (by linarith)
+   change 2 * d ^ 2 * (1 + d) * (r⁻¹) ^ 3 = 2 * (d / (1 + 2 * d)) ^ 2 * (1 + d) * r
+   rw [← hsq]
+-  field_simp
+-  ring
++  field_simp <;> ring
+ 
+ /-- The length parameter increases with the cosine. -/
+ theorem strictMonoOn_scale : StrictMonoOn scale (Ioi (0 : ℝ)) := by

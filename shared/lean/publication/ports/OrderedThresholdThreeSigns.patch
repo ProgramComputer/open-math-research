@@ -1,0 +1,21 @@
+--- a/OrderedThresholdThreeSigns.lean
++++ b/OrderedThresholdThreeSigns.lean
+@@ -73,8 +73,7 @@
+     have heq : ((2 : ℕ) : ℝ) * (-R/24) + R/12 = 0 := by norm_num; ring
+     rw [heq, Real.exp_zero]
+   apply (sq_le_sq₀ (div_pos hrho hR).le (Real.exp_pos _).le).mp
+-  apply (mul_le_mul_right (Real.exp_pos (R/12))).mp
+-  exact hprod'.trans_eq hunit.symm
++  exact le_of_mul_le_mul_right (hprod'.trans_eq hunit.symm) (Real.exp_pos (R/12))
+ 
+ /-- Combining the radius ratio and the amplitude factor absorbs the real pole
+ into the exponentially smaller cosine budget for the analytic range. -/
+@@ -182,7 +181,7 @@
+           (Real.exp_pos _).le
+       _ = 1 := by rw [← Real.exp_add, neg_add_cancel, Real.exp_zero]
+   have hexp' : Real.exp (-R) ≤ 1-R/3 := by
+-    apply (mul_le_mul_right (by linarith : 0 < 1+R)).mp
++    apply le_of_mul_le_mul_right _ (by linarith : 0 < 1+R)
+     apply hexp.trans
+     nlinarith only [mul_nonneg hR.le (by linarith only [hupper] : 0 ≤ 2-R)]
+   have hreal' : |realPole| ≤ B*(1-R/3) := hReal.trans (mul_le_mul_of_nonneg_left hexp' hB0)

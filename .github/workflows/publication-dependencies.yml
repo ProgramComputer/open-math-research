@@ -1,0 +1,53 @@
+name: Rebuild published upstream Lean dependencies
+on:
+  push:
+    branches: [review/published-lean-4-36-audit]
+    paths: [.github/workflows/publication-dependencies.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  dependency-sources:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    env:
+      MATHLIB_NO_CACHE_ON_UPDATE: 1
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Stage the published dependency roots
+        shell: bash
+        run: |
+          for topic in catalan prism balanced ordered eulerian ribbon; do
+            python3 shared/lean/publication/prepare.py "$topic" ".upstream-$topic"
+          done
+          cat .upstream-*/cache-imports.txt | sort -u > "$RUNNER_TEMP/upstream-roots.txt"
+      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          lake-package-directory: .upstream-catalan
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+      - name: Build the exact mathlib import closure from source
+        shell: bash
+        run: |
+          cd .upstream-catalan
+          lean --version
+          lake --version
+          mapfile -t roots < "$RUNNER_TEMP/upstream-roots.txt"
+          targets=()
+          for module in "${roots[@]}"; do targets+=("+$module:olean"); done
+          lake build "${targets[@]}" | tee "$RUNNER_TEMP/upstream-build.log"
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842
+          find .lake/packages/mathlib/.lake/build/lib/lean/Mathlib -name '*.olean' -print0 | sort -z | xargs -0 sha256sum > "$RUNNER_TEMP/upstream-oleans.sha256"
+          test -s "$RUNNER_TEMP/upstream-oleans.sha256"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: stable-upstream-source-rebuild
+          path: |
+            ${{ runner.temp }}/upstream-roots.txt
+            ${{ runner.temp }}/upstream-build.log
+            ${{ runner.temp }}/upstream-oleans.sha256

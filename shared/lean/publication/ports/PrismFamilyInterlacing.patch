@@ -1,0 +1,61 @@
+--- a/PrismFamilyInterlacing.lean
++++ b/PrismFamilyInterlacing.lean
+@@ -21,7 +21,7 @@
+         rw [hInv, mul_one]
+       _ = _ := by ring
+   have hP : (p : PowerSeries Int) =
+-      ∑ j ∈ Finset.range (d + 1), PowerSeries.C Int (p.coeff j) * PowerSeries.X ^ j := by
++      ∑ j ∈ Finset.range (d + 1), PowerSeries.C (R := Int) (p.coeff j) * PowerSeries.X ^ j := by
+     have hs := congrArg (Polynomial.coeToPowerSeries.ringHom (R := Int))
+       (p.as_sum_range' (d + 1) (by omega))
+     simpa only [map_sum, Polynomial.coeToPowerSeries.ringHom_apply,
+@@ -87,7 +87,8 @@
+   exact (div_pos_iff_of_pos_right (pow_pos (sub_pos.mpr h1) _)).mp hsum
+ 
+ private theorem afterCounts_zero (b : Nat) : afterCounts b 0 = 1 := by
+-  simp only [afterCounts, integerPointCount, cardinality_eq_boundedCount, afterCaps, dilatedCaps,
++  rw [afterCounts, integerPointCount, cardinality_eq_boundedCount]
++  simp only [afterCaps, dilatedCaps,
+     List.map_replicate, zero_mul]
+   rw [← boxSeries_coeff, boxSeries_replicate]
+   simp [capSeries]
+@@ -99,7 +100,7 @@
+ 
+ 
+ private theorem coeff_normalized_sum (d k : Nat) (f : Nat → Int) (hk : k ≤ d + 1) :
+-    PowerSeries.coeff Int k (normalizedCountSeries d f) =
++    PowerSeries.coeff (R := Int) k (normalizedCountSeries d f) =
+       ∑ i ∈ Finset.range (k + 1), ((-1 : Int) ^ i * ((d + 1).choose i : Int)) * f (k - i) := by
+   have h := one_sub_X_pow_expansion 1 (d + 1)
+   simp only [pow_one, one_mul] at h
+@@ -178,8 +179,8 @@
+         linarith
+ 
+ theorem familyNumeratorsDoNotInterlace (b : Nat) (hb : 6 ≤ b)
+-    (sp : ((beforeNumerator b).map (Int.castRingHom ℝ)).Splits (RingHom.id ℝ))
+-    (sq : ((afterNumerator b).map (Int.castRingHom ℝ)).Splits (RingHom.id ℝ)) :
++    (sp : ((beforeNumerator b).map (Int.castRingHom ℝ)).Splits)
++    (sq : ((afterNumerator b).map (Int.castRingHom ℝ)).Splits) :
+     ¬ ∃ xs ys : List ℝ,
+       (xs : Multiset ℝ) = ((beforeNumerator b).map (Int.castRingHom ℝ)).roots ∧
+       (ys : Multiset ℝ) = ((afterNumerator b).map (Int.castRingHom ℝ)).roots ∧
+@@ -198,8 +199,8 @@
+     have hr := (Polynomial.mem_roots hqMonic.ne_zero).mp hm
+     exact afterNumerator_no_root_gt_one b (by omega) hgt (by
+       simpa only [Polynomial.IsRoot, Polynomial.eval_map] using hr)
+-  have hvp := Polynomial.sum_roots_eq_nextCoeff_of_monic_of_split hpMonic sp
+-  have hvq := Polynomial.sum_roots_eq_nextCoeff_of_monic_of_split hqMonic sq
++  have hvp := sp.nextCoeff_eq_neg_sum_roots_of_monic hpMonic
++  have hvq := sq.nextCoeff_eq_neg_sum_roots_of_monic hqMonic
+   rw [← hxs, nextCoeff_map_int_real, hpc] at hvp
+   rw [← hys, nextCoeff_map_int_real, hqc] at hvq
+   have hxp : -xs.sum = (before b : ℝ) := by simpa using hvp.symm
+@@ -214,7 +215,7 @@
+ def WeakRealInterlaces (p q : Polynomial Int) : Prop :=
+   let P := p.map (Int.castRingHom ℝ)
+   let Q := q.map (Int.castRingHom ℝ)
+-  P.Splits (RingHom.id ℝ) ∧ Q.Splits (RingHom.id ℝ) ∧
++  P.Splits ∧ Q.Splits ∧
+     ∃ xs ys : List ℝ, (xs : Multiset ℝ) = P.roots ∧ (ys : Multiset ℝ) = Q.roots ∧
+       alternatingRoots xs ys
+ 

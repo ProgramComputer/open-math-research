@@ -1,0 +1,33 @@
+--- CatalanStrictPeaksCheckpointPhase.lean
++++ CatalanStrictPeaksCheckpointPhase.lean
+@@ -48,13 +48,13 @@
+ theorem phaseCorrection_bounds {θ : ℝ} (hθ : θ ∈ Set.Icc (0 : ℝ) (π / 2)) :
+     -(π / 4) ≤ phaseCorrection θ ∧ phaseCorrection θ ≤ π / 8 + 1 := by
+   obtain ⟨hA, hB⟩ := phaseCorrection_arguments hθ
+-  have hA0 := arctan_le_arctan hA.1
+-  have hA1 := arctan_le_arctan hA.2
+-  have hB0 := arctan_le_arctan hB.1
+-  have hB1 := arctan_le_arctan hB.2
++  have hA0 := arctan_le_arctan_iff.mpr hA.1
++  have hA1 := arctan_le_arctan_iff.mpr hA.2
++  have hB0 := arctan_le_arctan_iff.mpr hB.1
++  have hB1 := arctan_le_arctan_iff.mpr hB.2
+   have hhalf0 : 0 < arctan (1 / 2) := by
+     rw [← arctan_zero]
+-    exact arctan_lt_arctan (by norm_num)
++    exact arctan_lt_arctan_iff.mpr (by norm_num)
+   have hhalf : arctan (1 / 2) ≤ 1 / 2 := by
+     have h := lt_tan hhalf0 (arctan_lt_pi_div_two _)
+     rw [tan_arctan] at h
+@@ -83,9 +83,9 @@
+   have htx : t ≤ x := by
+     exact (div_le_iff₀ hnP).2 (by simpa only [mul_comm] using hangle)
+   have hsin := sin_le_sin_of_le_of_le_pi_div_two (by linarith [pi_pos]) hx htx
+-  have hTaylor := sin_gt_sub_cube ht (by linarith : t ≤ 1)
++  have hTaylor := sin_gt_sub_cube ht
+   have hpow : t ^ 2 ≤ (1 / 10 : ℝ) ^ 2 := (sq_le_sq₀ ht.le (by norm_num)).2 ht'
+-  have hlin : (399 / 400 : ℝ) * t ≤ t - t ^ 3 / 4 := by
++  have hlin : (399 / 400 : ℝ) * t ≤ t - t ^ 3 / 6 := by
+     nlinarith [mul_le_mul_of_nonneg_left hpow ht.le]
+   have hm := mul_lt_mul_of_pos_left (hlin.trans_lt (hTaylor.trans_le hsin)) hnP
+   have hta : (n : ℝ) * t = a := by dsimp [t]; field_simp

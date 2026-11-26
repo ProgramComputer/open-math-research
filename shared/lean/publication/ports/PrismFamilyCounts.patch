@@ -1,0 +1,37 @@
+--- a/PrismFamilyCounts.lean
++++ b/PrismFamilyCounts.lean
+@@ -24,7 +24,8 @@
+     beforeCounts b =
+       signedRows (2 * b) (2 * b) (b + 1) 0 0 - signedRows (2 * b) (2 * b) (b + 1) 2 1 := by
+   funext q
+-  simp only [beforeCounts, integerPointCount, cardinality_eq_boundedCount, beforeCaps, dilatedCaps,
++  rw [beforeCounts, integerPointCount, cardinality_eq_boundedCount]
++  simp only [beforeCaps, dilatedCaps,
+     List.map_append, List.map_replicate, mul_one, List.map_cons, List.map_nil]
+   rw [mul_comm q 2, mul_comm q (b + 1), ← boxSeries_coeff, boxSeries_append, boxSeries_replicate]
+   simp only [boxSeries, List.map_cons, List.map_nil, List.prod_cons, List.prod_nil, mul_one]
+@@ -46,7 +47,8 @@
+ theorem afterCounts_eq (b : Nat) :
+     afterCounts b = signedRows (2 * b + 2) (2 * b + 1) (b + 1) 0 0 := by
+   funext q
+-  simp only [afterCounts, integerPointCount, cardinality_eq_boundedCount, afterCaps, dilatedCaps,
++  rw [afterCounts, integerPointCount, cardinality_eq_boundedCount]
++  simp only [afterCaps, dilatedCaps,
+     List.map_replicate, mul_one]
+   rw [mul_comm q (b + 1), ← boxSeries_coeff, boxSeries_replicate, capSeries_eq, mul_pow,
+     PowerSeries.mk_one_pow_eq_mk_choose_add Int (2 * b + 1)]
+@@ -104,12 +106,12 @@
+     rw [h, Function.iterate_one, fwdDiff_const]
+     rfl
+   | succ d ih =>
+-    rw [Function.iterate_succ_apply, intAffineChoose_difference, fwdDiff_iter_finset_sum]
++    rw [Function.iterate_succ_apply, intAffineChoose_difference, fwdDiff_iter_finsetSum]
+     simp [ih]
+ 
+ theorem intSignedRows_difference_zero (n d k w e : Nat) :
+     Δ_[1]^[d + 1] (intSignedRows n d k w e) = 0 := by
+-  rw [intSignedRows, fwdDiff_iter_finset_sum]
++  rw [intSignedRows, fwdDiff_iter_finsetSum]
+   apply Finset.sum_eq_zero
+   intro j _
+   split

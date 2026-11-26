@@ -1,0 +1,77 @@
+name: Published Lean stable audit
+on:
+  pull_request:
+    branches: [research, main]
+    paths:
+      - 'shared/lean/publication/**'
+      - 'topics/*/lean/publication/**'
+      - '.github/workflows/publication-lean.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  recheck:
+    name: Stable Lean · ${{ matrix.topic }}
+    strategy:
+      fail-fast: false
+      matrix:
+        topic: [catalan, prism, balanced, ordered, eulerian, ribbon]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Stage only sources from the published commit
+        run: python3 shared/lean/publication/prepare.py ${{ matrix.topic }} ".publication-build"
+      - name: Install pinned toolchain
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          lake-package-directory: .publication-build
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+      - name: Resolve exact versions and fetch imports
+        shell: bash
+        run: |
+          cd ".publication-build"
+          lean --version
+          lake --version
+          lake exe cache get $(cat cache-imports.txt)
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842
+      - name: Rebuild the published declaration roots
+        shell: bash
+        run: |
+          cd ".publication-build"
+          lake build $(cat targets.txt)
+      - name: Audit the axioms of every named declaration
+        run: python3 shared/lean/publication/audit_axioms.py ${{ matrix.topic }} .publication-build
+      - name: Replay the full exported proof with both kernels
+        if: matrix.topic == 'catalan' || matrix.topic == 'prism'
+        run: bash shared/lean/publication/replay-kernel.sh .publication-build "$RUNNER_TEMP/kernel-audit" ${{ matrix.topic }}
+      - name: Preserve small kernel reports separately from the proof export
+        if: always() && (matrix.topic == 'catalan' || matrix.topic == 'prism')
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: kernel-reports-${{ matrix.topic }}
+          retention-days: 30
+          if-no-files-found: ignore
+          path: |
+            ${{ runner.temp }}/kernel-audit/${{ matrix.topic }}/*.txt
+            ${{ runner.temp }}/kernel-audit/${{ matrix.topic }}/*.log
+            ${{ runner.temp }}/kernel-audit/${{ matrix.topic }}/summary.json
+            .publication-build/axioms.json
+            .publication-build/sources.json
+          include-hidden-files: true
+      - name: Preserve versioned audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: published-lean-${{ matrix.topic }}
+          retention-days: 14
+          include-hidden-files: true
+          path: |
+            .publication-build/axioms.json
+            .publication-build/sources.json
+            ${{ runner.temp }}/kernel-audit/${{ matrix.topic }}/

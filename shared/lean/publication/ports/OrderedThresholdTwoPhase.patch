@@ -1,0 +1,56 @@
+--- a/OrderedThresholdTwoPhase.lean
++++ b/OrderedThresholdTwoPhase.lean
+@@ -1,3 +1,4 @@
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+ import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+ import Mathlib.Tactic.FieldSimp
+@@ -31,10 +32,8 @@
+       rw [← mul_div_assoc]
+       exact (eq_div_iff hs.ne').2 him
+     have hr : u.re = u.im * cos u.im / sin u.im := by
+-      rw [he'] at hre
+-      field_simp [hs.ne'] at hre ⊢
+-      apply mul_left_cancel₀ (a := p) hp.ne'
+-      linear_combination -hre
++      rw [he', mul_assoc, div_mul_eq_mul_div] at hre
++      exact (mul_left_cancel₀ hp.ne' hre).symm
+     refine ⟨hs, hr, ?_⟩
+     unfold polePhase
+     rw [← hr]
+@@ -62,10 +61,9 @@
+     (Real.hasDerivAt_sin t) hs.ne').sub
+     (((hasDerivAt_id t).div (Real.hasDerivAt_sin t) hs.ne').log
+       (div_ne_zero ht.ne' hs.ne'))
+-  convert h using 1
+-  simp only [id_eq, one_mul]
+-  field_simp [ht.ne', hs.ne']
+-  ring
++  change HasDerivAt polePhase _ t at h
++  convert h using 1 <;> (try simp only [id_eq, one_mul, Pi.mul_apply, Pi.div_apply]) <;>
++    (try field_simp [ht.ne', hs.ne']) <;> ring
+ 
+ theorem strictAntiOn_polePhase {D : Set ℝ} (hc : Convex ℝ D)
+     (hpos : ∀ t ∈ D, 0 < t ∧ 0 < sin t) : StrictAntiOn polePhase D := by
+@@ -85,8 +83,8 @@
+ 
+ /-- In each upper pole band the imaginary part is uniquely determined by the level. -/
+ theorem unique_in_pole_band (k : ℕ) {s t p : ℝ}
+-    (hs : s ∈ Ioo (k * (2*π)) (k * (2*π) + π))
+-    (ht : t ∈ Ioo (k * (2*π)) (k * (2*π) + π))
++    (hs : s ∈ Ioo ((k : ℝ) * (2*π)) ((k : ℝ) * (2*π) + π))
++    (ht : t ∈ Ioo ((k : ℝ) * (2*π)) ((k : ℝ) * (2*π) + π))
+     (hp : polePhase s = p) (hq : polePhase t = p) : s = t := by
+   apply angle_unique (convex_Ioo _ _) _ hs ht hp hq
+   intro x hx
+@@ -97,8 +95,8 @@
+   exact Real.sin_pos_of_pos_of_lt_pi (sub_pos.mpr hl) (by linarith)
+ 
+ theorem at_most_one_upper_pole (k : ℕ) {p : ℝ} (hp : 0 < p) {u w : ℂ}
+-    (hu : u.im ∈ Ioo (k * (2*π)) (k * (2*π) + π))
+-    (hw : w.im ∈ Ioo (k * (2*π)) (k * (2*π) + π))
++    (hu : u.im ∈ Ioo ((k : ℝ) * (2*π)) ((k : ℝ) * (2*π) + π))
++    (hw : w.im ∈ Ioo ((k : ℝ) * (2*π)) ((k : ℝ) * (2*π) + π))
+     (eu : Complex.exp u = (p : ℂ)*u) (ew : Complex.exp w = (p : ℂ)*w) : u = w := by
+   have h0 : 0 ≤ (k : ℝ) * (2*π) := by positivity
+   obtain ⟨_, hru, hpu⟩ := (upper_pole_iff hp (lt_of_le_of_lt h0 hu.1)).mp eu

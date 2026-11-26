@@ -1,0 +1,133 @@
+--- CatalanStrictPeaksPoleSeriesBounds.lean
++++ CatalanStrictPeaksPoleSeriesBounds.lean
+@@ -42,15 +42,15 @@
+       _ ≤ _ := by rw [pow_succ (5/4:ℝ) (n+1), pow_succ (5/4:ℝ) n]; nlinarith [pow_pos (by norm_num : (0:ℝ)<5/4) n]
+ 
+ /-- The convergent coefficient evaluation used at the two positive poles. -/
+-noncomputable def poleValue (f : PowerSeries ℝ) (t : ℝ) : ℝ := ∑' n, coeff ℝ n f * t^n
++noncomputable def poleValue (f : PowerSeries ℝ) (t : ℝ) : ℝ := ∑' n, PowerSeries.coeff (R := ℝ) n f * t^n
+ 
+ lemma absolute_from_geometric {f : PowerSeries ℝ} {A t : ℝ}
+-    (hf : ∀ n, |coeff ℝ n f| ≤ A*(5/4:ℝ)^n) (ht : 0 ≤ t) (hT : (5/4:ℝ)*t < 1) :
+-    Summable (fun n => |coeff ℝ n f| *t^n) ∧
+-      ∑' n, |coeff ℝ n f| *t^n ≤ A/(1-(5/4)*t) := by
++    (hf : ∀ n, |PowerSeries.coeff (R := ℝ) n f| ≤ A*(5/4:ℝ)^n) (ht : 0 ≤ t) (hT : (5/4:ℝ)*t < 1) :
++    Summable (fun n => |PowerSeries.coeff (R := ℝ) n f| *t^n) ∧
++      ∑' n, |PowerSeries.coeff (R := ℝ) n f| *t^n ≤ A/(1-(5/4)*t) := by
+   have hnon : 0 ≤ (5/4 : ℝ)*t := by positivity
+   have hg := (summable_geometric_of_lt_one hnon hT).mul_left A
+-  have bound (n : ℕ) : |coeff ℝ n f| *t^n ≤ A*((5/4)*t)^n := by
++  have bound (n : ℕ) : |PowerSeries.coeff (R := ℝ) n f| *t^n ≤ A*((5/4)*t)^n := by
+     rw [mul_pow, ← mul_assoc]; gcongr; exact hf n
+   have hh := Summable.of_nonneg_of_le (fun n => mul_nonneg (abs_nonneg _) (pow_nonneg ht n)) bound hg
+   refine ⟨hh, (hh.tsum_le_tsum bound hg).trans_eq ?_⟩
+@@ -58,13 +58,13 @@
+   rfl
+ 
+ private lemma positive_value {f : PowerSeries ℝ} {t : ℝ}
+-    (h0 : coeff ℝ 0 f = 1)
+-    (hsmall : ∀ n : ℕ, |coeff ℝ (n+1) f| ≤ (1/4:ℝ)*(5/4)^n)
++    (h0 : PowerSeries.coeff (R := ℝ) 0 f = 1)
++    (hsmall : ∀ n : ℕ, |PowerSeries.coeff (R := ℝ) (n+1) f| ≤ (1/4:ℝ)*(5/4)^n)
+     (ht : 0 ≤ t) (hT : (5/4:ℝ)*t < 1) (hgap : (t/4)/(1-5/4*t) < 1) :
+     0 < poleValue f t := by
+   have hnon : 0 ≤ (5/4:ℝ)*t := by positivity
+   have hg := (summable_geometric_of_lt_one hnon hT).mul_left (t/4)
+-  have bound (n : ℕ) : ‖coeff ℝ (n+1) f * t^(n+1)‖ ≤ (t/4)*((5/4)*t)^n := by
++  have bound (n : ℕ) : ‖PowerSeries.coeff (R := ℝ) (n+1) f * t^(n+1)‖ ≤ (t/4)*((5/4)*t)^n := by
+     rw [Real.norm_eq_abs, abs_mul, abs_of_nonneg (pow_nonneg ht _), pow_succ, mul_pow]
+     calc
+       _ ≤ ((1/4:ℝ)*(5/4)^n)*(t^n*t) := by gcongr; exact hsmall n
+@@ -73,13 +73,13 @@
+   have htail := hnorm.of_norm
+   have hbound := (norm_tsum_le_tsum_norm hnorm).trans (hnorm.tsum_le_tsum bound hg)
+   rw [tsum_mul_left, tsum_geometric_of_lt_one hnon hT, ← div_eq_mul_inv, Real.norm_eq_abs] at hbound
+-  have hsum : Summable (fun n => coeff ℝ n f * t^n) := (summable_nat_add_iff 1).mp htail
++  have hsum : Summable (fun n => PowerSeries.coeff (R := ℝ) n f * t^n) := (summable_nat_add_iff 1).mp htail
+   rw [poleValue, hsum.tsum_eq_zero_add, h0, pow_zero, mul_one]
+   linarith [(abs_lt.mp (hbound.trans_lt hgap)).1]
+ 
+ lemma value_mul {f g : PowerSeries ℝ} {t : ℝ}
+-    (hf : Summable (fun n => ‖coeff ℝ n f * t^n‖))
+-    (hg : Summable (fun n => ‖coeff ℝ n g * t^n‖)) :
++    (hf : Summable (fun n => ‖PowerSeries.coeff (R := ℝ) n f * t^n‖))
++    (hg : Summable (fun n => ‖PowerSeries.coeff (R := ℝ) n g * t^n‖)) :
+     poleValue (f*g) t = poleValue f t * poleValue g t := by
+   unfold poleValue
+   rw [tsum_mul_tsum_eq_tsum_sum_antidiagonal_of_summable_norm hf hg]
+@@ -93,12 +93,12 @@
+   ring
+ 
+ lemma coeff_Ri_tail (n : ℕ) :
+-    |coeff ℝ (n+1) Ri| ≤ (1/4 : ℝ)*(5/4)^n := by
++    |PowerSeries.coeff (R := ℝ) (n+1) Ri| ≤ (1/4 : ℝ)*(5/4)^n := by
+   simpa only [coeff_Ri] using
+     recurrence_bound invRootCoeff_zero invRootCoeff_one invRootCoeff_succ_succ n
+ 
+ private lemma coeff_Ri_unit (n : ℕ) :
+-    |coeff ℝ n Ri| ≤ (5/4:ℝ)^n := by
++    |PowerSeries.coeff (R := ℝ) n Ri| ≤ (5/4:ℝ)^n := by
+   cases n with
+   | zero => norm_num
+   | succ n =>
+@@ -107,13 +107,13 @@
+     nlinarith [pow_pos (by norm_num : (0:ℝ)<5/4) n]
+ 
+ lemma coeff_Ri_bound (n : ℕ) :
+-    |coeff ℝ n Ri| ≤ 3*(5/4:ℝ)^n := by
++    |PowerSeries.coeff (R := ℝ) n Ri| ≤ 3*(5/4:ℝ)^n := by
+   linarith [coeff_Ri_unit n, pow_pos (by norm_num : (0:ℝ)<5/4) n]
+ 
+ private lemma coeff_R_expansion (n : ℕ) :
+-    coeff ℝ n R = coeff ℝ n Ri +
+-      (1/2 : ℝ)*(if 1 ≤ n then coeff ℝ (n-1) Ri else 0) +
+-      (9/16 : ℝ)*(if 2 ≤ n then coeff ℝ (n-2) Ri else 0) := by
++    PowerSeries.coeff (R := ℝ) n R = PowerSeries.coeff (R := ℝ) n Ri +
++      (1/2 : ℝ)*(if 1 ≤ n then PowerSeries.coeff (R := ℝ) (n-1) Ri else 0) +
++      (9/16 : ℝ)*(if 2 ≤ n then PowerSeries.coeff (R := ℝ) (n-2) Ri else 0) := by
+   have he : R = Ri + PowerSeries.C ℝ (1/2)*(X^1*Ri) + PowerSeries.C ℝ (9/16)*(X^2*Ri) := by
+     unfold R Q
+     ring
+@@ -121,7 +121,7 @@
+   simp only [map_add, coeff_C_mul, coeff_X_pow_mul']
+ 
+ lemma coeff_R_bound (n : ℕ) :
+-    |coeff ℝ n R| ≤ 2*(5/4:ℝ)^n := by
++    |PowerSeries.coeff (R := ℝ) n R| ≤ 2*(5/4:ℝ)^n := by
+   rw [coeff_R_expansion]
+   obtain _ | _ | n := n
+   · norm_num
+@@ -130,9 +130,9 @@
+       if_pos (show 2 ≤ n.succ.succ by omega), Nat.succ_sub_one,
+       show n.succ.succ-2=n by omega]
+     calc
+-      _ ≤ |coeff ℝ (n+2) Ri| + |(1/2:ℝ)*coeff ℝ (n+1) Ri| +
+-        |(9/16:ℝ)*coeff ℝ n Ri| :=
+-          (abs_add_le _ _).trans (add_le_add_right (abs_add_le _ _) _)
++      _ ≤ |PowerSeries.coeff (R := ℝ) (n+2) Ri| + |(1/2:ℝ)*PowerSeries.coeff (R := ℝ) (n+1) Ri| +
++        |(9/16:ℝ)*PowerSeries.coeff (R := ℝ) n Ri| :=
++          (abs_add_le _ _).trans (add_le_add (abs_add_le _ _) le_rfl)
+       _ ≤ (5/4:ℝ)^(n+2) + (1/2)*(5/4)^(n+1) + (9/16)*(5/4)^n := by
+         rw [abs_mul, abs_mul]
+         rw [abs_of_pos (by norm_num : (0 : ℝ) < 1/2), abs_of_pos (by norm_num : (0 : ℝ) < 9/16)]
+@@ -143,16 +143,16 @@
+         nlinarith [pow_pos (by norm_num : (0:ℝ)<5/4) n]
+ 
+ private lemma absSummable_at {f : PowerSeries ℝ} {A t : ℝ}
+-    (hf : ∀ n, |coeff ℝ n f| ≤ A*(5/4:ℝ)^n) (ht : 0 ≤ t) (hT : (5/4:ℝ)*t < 1) :
+-    Summable (fun n => ‖coeff ℝ n f * t^n‖) := by
++    (hf : ∀ n, |PowerSeries.coeff (R := ℝ) n f| ≤ A*(5/4:ℝ)^n) (ht : 0 ≤ t) (hT : (5/4:ℝ)*t < 1) :
++    Summable (fun n => ‖PowerSeries.coeff (R := ℝ) n f * t^n‖) := by
+   simpa only [Real.norm_eq_abs, abs_mul, abs_of_nonneg (pow_nonneg ht _)] using
+     (absolute_from_geometric hf ht hT).1
+ 
+ lemma absSummable_R {t : ℝ} (ht : 0 ≤ t) (hT : (5/4:ℝ)*t < 1) :
+-    Summable (fun n => ‖coeff ℝ n R * t^n‖) := absSummable_at coeff_R_bound ht hT
++    Summable (fun n => ‖PowerSeries.coeff (R := ℝ) n R * t^n‖) := absSummable_at coeff_R_bound ht hT
+ 
+ lemma absSummable_Ri {t : ℝ} (ht : 0 ≤ t) (hT : (5/4:ℝ)*t < 1) :
+-    Summable (fun n => ‖coeff ℝ n Ri * t^n‖) := absSummable_at coeff_Ri_bound ht hT
++    Summable (fun n => ‖PowerSeries.coeff (R := ℝ) n Ri * t^n‖) := absSummable_at coeff_Ri_bound ht hT
+ 
+ lemma poleValue_Ri_pos {t : ℝ} (ht : 0 ≤ t) (hT : (5/4:ℝ)*t < 1)
+     (hgap : (t/4)/(1-5/4*t)<1) : 0 < poleValue Ri t :=

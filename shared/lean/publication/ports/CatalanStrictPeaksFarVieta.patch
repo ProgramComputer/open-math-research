@@ -1,0 +1,31 @@
+--- CatalanStrictPeaksFarVieta.lean
++++ CatalanStrictPeaksFarVieta.lean
+@@ -12,7 +12,7 @@
+ private lemma twice_esymm_two (s : Multiset ℝ) :
+     s.sum ^ 2 = (s.map (fun t => t^2)).sum + 2*s.esymm 2 := by
+   induction s using Multiset.induction with
+-  | empty => simp [Multiset.esymm]
++  | empty => simp [Multiset.esymm, Multiset.powersetCard_zero_right]
+   | cons a s ih =>
+     have h : (a ::ₘ s).esymm 2 = s.esymm 2 + a * s.sum := by
+       rw [Multiset.esymm, Multiset.powersetCard_cons, Multiset.map_add, Multiset.sum_add]
+@@ -89,15 +89,16 @@
+   change 2 * _ = P.leadingCoeff * ((∑ i, y i)^2 - ∑ i, y i ^ 2) at hsq
+   rw [hsum] at hsq
+   have hsq' : U^2 - ∑ i, y i^2 < c * U^2 :=
+-    (mul_lt_mul_left lead).mp (hsq.symm.trans_lt hc)
++    (mul_lt_mul_iff_right₀ lead).mp (hsq.symm.trans_lt hc)
+   have hmax : ∑ i, y i^2 ≤ y l * U := by
+     rw [← hsum, Finset.mul_sum]
+     apply Finset.sum_le_sum
+     intro i _
+     rw [sq]
+-    exact mul_le_mul_of_nonneg_right (show y i ≤ y l from add_le_add_left (last i) 1) (hy i)
++    have hyi : y i ≤ y l := by dsimp only [y]; linarith only [last i]
++    exact mul_le_mul_of_nonneg_right hyi (hy i)
+   have hL : (1-c)*U < y l := by
+-    apply (mul_lt_mul_right hU).mp
++    apply (mul_lt_mul_iff_left₀ hU).mp
+     nlinarith only [hsq', hmax]
+   have hle : y l ≤ U := by
+     rw [← hsum]; exact Finset.single_le_sum (fun i _ => hy i) (Finset.mem_univ l)

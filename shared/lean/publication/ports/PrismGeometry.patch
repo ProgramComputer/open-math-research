@@ -1,0 +1,56 @@
+--- a/PrismGeometry.lean
++++ b/PrismGeometry.lean
+@@ -130,13 +130,15 @@
+ theorem unsplitIntegerCounts :
+     (fun q : Nat => (integerPointCount unsplitCaps 6 q : Int)) = unsplitByCompositions := by
+   funext q
+-  simp [integerPointCount, cardinality_eq_boundedCount, unsplitCaps, dilatedCaps,
++  rw [integerPointCount, cardinality_eq_boundedCount]
++  simp [unsplitCaps, dilatedCaps,
+     unsplitByCompositions, Nat.mul_comm]
+ 
+ theorem splitIntegerCounts :
+     (fun q : Nat => (integerPointCount splitCaps 6 q : Int)) = splitByCompositions := by
+   funext q
+-  simp [integerPointCount, cardinality_eq_boundedCount, splitCaps, dilatedCaps,
++  rw [integerPointCount, cardinality_eq_boundedCount]
++  simp [splitCaps, dilatedCaps,
+     splitByCompositions, Nat.mul_comm]
+ 
+ private theorem real_sum_mul (r : ℝ) (xs : List ℝ) :
+@@ -299,20 +301,20 @@
+   | succ n ih => simp [List.range_succ, List.sum_append, ih, Finset.sum_range_succ]
+ 
+ private theorem coeff_one_sub_X_pow (m j : Nat) :
+-    PowerSeries.coeff Int j ((1 - PowerSeries.X : PowerSeries Int) ^ m) =
++    PowerSeries.coeff (R := Int) j ((1 - PowerSeries.X : PowerSeries Int) ^ m) =
+       (-1 : Int) ^ j * (m.choose j : Int) := by
+   have hneg : (1 : PowerSeries Int) - PowerSeries.X =
+-      PowerSeries.C Int (-1) * PowerSeries.X + 1 := by simp [sub_eq_add_neg, add_comm]
++      PowerSeries.C (R := Int) (-1) * PowerSeries.X + 1 := by simp [sub_eq_add_neg, add_comm]
+   rw [hneg, add_pow, map_sum]
+   have hterm (i : Nat) :
+-      PowerSeries.coeff Int j
+-        ((PowerSeries.C Int (-1) * PowerSeries.X) ^ i *
++      PowerSeries.coeff (R := Int) j
++        ((PowerSeries.C (R := Int) (-1) * PowerSeries.X) ^ i *
+           (1 : PowerSeries Int) ^ (m - i) * (m.choose i : PowerSeries Int)) =
+       if j = i then (-1 : Int) ^ i * (m.choose i : Int) else 0 := by
+     have heq :
+-        (PowerSeries.C Int (-1) * PowerSeries.X) ^ i *
++        (PowerSeries.C (R := Int) (-1) * PowerSeries.X) ^ i *
+           (1 : PowerSeries Int) ^ (m - i) * (m.choose i : PowerSeries Int) =
+-        PowerSeries.C Int ((-1 : Int) ^ i * (m.choose i : Int)) * PowerSeries.X ^ i := by
++        PowerSeries.C (R := Int) ((-1 : Int) ^ i * (m.choose i : Int)) * PowerSeries.X ^ i := by
+       simp only [one_pow, mul_one, mul_pow, map_mul, map_pow, map_natCast]
+       ac_rfl
+     rw [heq, PowerSeries.coeff_C_mul_X_pow]
+@@ -339,7 +341,7 @@
+ /-- The finite vector records the first d+1 coefficients of the normalized count series. -/
+ theorem ehrhartNumerator_eq_series_prefix (d : Nat) (count : Nat → Int) :
+     ehrhartNumerator d count =
+-      (List.range (d + 1)).map (fun j => PowerSeries.coeff Int j
++      (List.range (d + 1)).map (fun j => PowerSeries.coeff (R := Int) j
+         (normalizedCountSeries d count)) := by
+   unfold ehrhartNumerator
+   apply List.map_congr_left

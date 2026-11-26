@@ -1,0 +1,11 @@
+--- a/OpenMathResearch/IntegerLevelNodes.lean
++++ b/OpenMathResearch/IntegerLevelNodes.lean
+@@ -62,7 +62,7 @@
+         refine Fin.lastCases ?_ (fun j => ?_) i
+         · simpa using hx.1
+         · have heq : j.castSucc.succ = j.succ.castSucc := Fin.ext rfl
+-          simpa only [heq, Fin.snoc_castSucc] using ht (Fin.castSucc_lt_succ j)
++          simpa only [heq, Fin.snoc_castSucc] using ht Fin.castSucc_lt_succ
+       · intro i
+         refine Fin.lastCases ?_ (fun j => ?_) i
+         · simpa using show x ∈ Ioo l r from ⟨htl.trans hx.1, hx.2⟩

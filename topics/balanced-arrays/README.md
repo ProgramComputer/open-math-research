@@ -4,6 +4,8 @@ For every $d\ge2$, balanced arrays with row cap $r=d-1$ have $\lfloor n(d-1)/d\r
 
 **🟨 Partial · Lean 4.** Lean proves the all-dimension inclusion–exclusion formula directly from the labeled binary matrices. The determinant, spectral argument and strict interlacing have written proofs. The independent referee reviewed the written proof before this Lean theorem was added. A separate exact computation reconstructed 275 rows and checked 242 consecutive nonconstant pairs. [Lean theorem](lean/BalancedNoFullRowCounting.lean) · [Build and axiom audit](lean/README.md#arrays-with-no-full-row) · [Replay](verify_corank_one.py) · [Archive](results/corank-one.jsonl.gz)
 
+[Stable Lean recheck and per-theorem axiom reports](verification.json) · [Reproduce the audit](../../shared/lean/publication/README.md)
+
 The same nested scalar determinant fails for $U(2,4)$ at every nonnegative power of the falling-factorial normalization. [Obstruction at the next cap](scalar-normalization-obstruction.md)
 
 ## Eventual interlacing at each fixed rank and dimension

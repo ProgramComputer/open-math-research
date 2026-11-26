@@ -15,6 +15,8 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 **Lean or Rocq key**　🟩 Full (entire statement) · 🟨 Partial (named components) · ⬜ None (no checked proof)
 
+[Stable Lean audit and verification records](shared/lean/publication/README.md)
+
 ## Partial work
 
 - For [balanced arrays](topics/balanced-arrays/README.md), the corank-one theorem covers every dimension. Other caps are settled through 24 rows and [through degree fourteen](topics/balanced-arrays/low-degree.md).

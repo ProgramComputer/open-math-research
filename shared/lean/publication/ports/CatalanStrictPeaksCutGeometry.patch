@@ -1,0 +1,12 @@
+--- CatalanStrictPeaksCutGeometry.lean
++++ CatalanStrictPeaksCutGeometry.lean
+@@ -278,8 +278,7 @@
+     nearPoint_im_eq h₀]
+   have ha := radius_pos h₀.le
+   have hsin : 0 < Real.sqrt (1 - d ^ 2) := Real.sqrt_pos.2 (by nlinarith)
+-  field_simp
+-  ring
++  field_simp <;> ring
+ 
+ /-- The coefficient from the far point's conjugate has magnitude at most one. -/
+ theorem far_conjugate_bound {d : ℝ} (h₀ : 0 < d) (h₁ : d < 1) :
