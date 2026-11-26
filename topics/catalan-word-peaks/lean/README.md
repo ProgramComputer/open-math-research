@@ -43,8 +43,9 @@ identifies the analytic branch, and proves the coefficient formula as the
 sum of the four improper ray integrals. It verifies radial moments and
 integrated envelopes and applies them to the normalized near-ray mean under
 the stated interior angle bounds. It bounds the actual normalized far-ray
-contribution in both angular ranges. The phase connection, quantitative
-covariance bounds and strict sign comparisons remain in the written proof.
+contribution in both angular ranges and proves the successive-size bounds
+for the near mean. The phase connection, small-angle real-part estimate and
+strict sign comparisons remain in the written proof.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -195,9 +196,21 @@ and the actual pointwise bounds supply the hypotheses for the integrated
 envelopes. The theorem `nearMean_step_covariance` verifies (8) for every
 positive $n$. `nearTiltCovariance_sub_const` proves that the amplitude
 factor can be centered at its mean or at one. The connection between the
-phase and the angle bounds and the quantitative covariance and sign
-comparisons remain open in Lean.
+phase and the angle bounds remains to be checked.
 [Near-amplitude kernel output](near-amplitude-kernel.txt)
+
+The [near covariance module](CatalanStrictPeaksNearCovariance.lean) proves
+`nearMean_step_lt_one_div`, the quantitative conclusion of (11), for
+$n\ge150$, $1/2\le d<1$, and $n\sqrt{1-d^2}\ge2$. The bound $d\ge1/2$
+includes the paper's small-angle sector. It also proves
+`nearMean_step_lt_four_div`, the conclusion of (12), for $n\ge150$,
+$0<d<1$, $nd\ge2$, and $n\sqrt{1-d^2}\ge2$. The proof centers the actual
+conjugate root where $(1+s)^{-1}$ equals its radial mean. The signed
+density changes sign at that point, so the conjugate root's secant
+bound integrates to the difference of two exact first moments. The
+local cubic and quadratic estimates and the affine tail bound cover
+the rest of the covariance.
+[Kernel audit](near-covariance-kernel.txt)
 
 ## Far-ray contribution
 
@@ -273,6 +286,8 @@ lake env lean -j1 ../../topics/catalan-word-peaks/lean/RayTransferAxioms.lean
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean
 lake build CatalanStrictPeaksNearAmplitude
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearAmplitudeAxioms.lean
+lake build CatalanStrictPeaksNearCovariance
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearCovarianceAxioms.lean
 lake build CatalanStrictPeaksFarRay
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarRayAxioms.lean
 lake build CatalanStrictPeaksPrefix
