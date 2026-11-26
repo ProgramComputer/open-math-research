@@ -1,0 +1,3 @@
+'BalancedNoFullRowCounting.covering_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedNoFullRowCounting.arrays_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedNoFullRowCounting.array_inclusion_exclusion' depends on axioms: [propext, Classical.choice, Quot.sound]
