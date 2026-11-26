@@ -1,0 +1,128 @@
+\section{Upper signs at fixed corank in the critical aspect ratio}\label{sec:fixed-corank-critical-upper}
+
+Fix an integer $c\ge1$. Let $r=d-c$, $d\to\infty$, and $n/d^2\to\alpha\in(0,\infty)$. Write $D=\lfloor nr/d\rfloor$ and consider internal quotas $k$ with $(D-k)/d=O(1)$. Let $a_k$ be the balanced-array coefficients and $t_k=\sqrt{a_{k-1}/a_{k+1}}$. Then eventually
+
+\begin{equation*}
+(-1)^kP_n(-t_k)>0
+\end{equation*}
+
+throughout this upper quota range, in the sequential sense that the result holds for every sequence with bounded $(D-k)/d$. For $(D-k)/d\to\beta>0$, the local curvature has a finite strict limit and the geometric node agrees to $o(1)$ in log radius with the angular phase node at $k\pi$. For $\beta=0$, the curvature diverges. These are upper-quota conclusions for fixed corank.
+
+\subsection{Exact switching and sparse enumeration}
+
+Complement each cell. Hole arrays have column sum $\ell=n-k$ and row sums at least $c$. Set
+
+\begin{equation*}
+p=\ell/n,\quad m=d\ell/n=c+h,\quad h=r-dk/n,\quad
+G(w)=\sum_{s=c}^d\binom ds w^s,\quad U_\ell=[w^{d\ell}]G(w)^n .
+\end{equation*}
+
+Here $\ell\asymp d$, $p=O(1/d)$ and $h=O(1)$. For $m>c$, tilt the hole size $X$ with probabilities proportional to $\binom ds w_\ell^s$ for $c\le s\le d$, choosing $w_\ell>0$ to make $\mathbb E X=m$. The derivative of the mean in $\log w$ is its positive variance, so the tilt exists uniquely. At $m=c$ use the deterministic law $X=c$. Write $V_\ell=\mathrm{Var}(X)$.
+
+For the actual equal-column arrays let $A_s$ count those with a specified row having size $s$. For $s>c$, move one of its $s$ holes to another row in the same column, which has $n-\ell$ possible destinations. The specified row stays above its lower cap after the move. Given an output with row size $s-1$, a reverse move specifies a hole column absent from that row and a donor row containing it. There are at most $(d-s+1)\ell$ choices, whether or not the donor can spare that hole. Thus
+
+\begin{equation*}
+s(n-\ell)A_s\le (d-s+1)\ell A_{s-1},\qquad
+A_s/A_{s-1}\le C/s
+\end{equation*}
+
+when the denominator is positive, with the cross-multiplied form valid always. Hence the actual row-size tail above $L=\lceil\log d\rceil$ is smaller than any fixed negative power of $d$. Row symmetry and a union bound give the same relative conclusion for the omitted arrays with any row above $L$.
+
+The candidate tilt also satisfies a uniform factorial tail. Since it is a binomial tilt conditioned to be at least $c$, its mean is at least the unrestricted binomial mean $d w_\ell/(1+w_\ell)$. Therefore $d w_\ell=O(1)$ and the successive size probabilities have ratio at most $C/(s+1)$. This gives both the superpolynomial tail above $L$ and uniformly bounded moments of every fixed order. The deterministic endpoint has the same properties.
+
+For a row profile $\sigma$ with $\max_i s_i\le L$, write $V_{\sigma}=n^{-1}\sum_i(s_i-m)^2$. In Corollary 5.2 of Greenhill--McKay--Wang, the total is $d\ell\asymp d^2$, the product of maximum degrees is $O(d\log d)=o((d\ell)^{2/3})$, and the standardized column variance $\nu_2$ is zero. Its standardized row variance is $\mu_2=V_{\sigma}/[m(1-p)]=O(L)$, since $\sum_i s_i^2\le L\sum_i s_i=Lnm$. The additional condition $(1+\mu_2)(1+\nu_2)=O((d\ell)^{1/3})$ holds. Thus the number of arrays of this profile and column sum $\ell$ is uniformly
+
+\begin{equation}
+\frac{\binom n\ell^d}{\binom{nd}{d\ell}}\prod_i\binom d{s_i}
+\exp\left(-\frac12+\frac{V_{\sigma}}{2m(1-p)}+o(1)\right).
+\tag{S1}
+\end{equation}
+
+The error term in the cited corollary is $O(\ell L/(d\ell)^{2/3})=O(d^{-1/3}\log d)$. \href{https://doi.org/10.1016/j.jcta.2005.03.005}{Greenhill, McKay and Wang, Corollary 5.2} \enspace \href{https://users.cecs.anu.edu.au/~bdm/papers/irregular.pdf}{Authors' accessible manuscript, §5}
+
+For independent candidate row sizes, the profile law conditional on $\mathcal E=\{\sum_i X_i=d\ell\}$ is proportional to $\prod_i\binom d{s_i}$ with normalizer $U_\ell$. A polynomial lower bound on $\Pr(\mathcal E)$ suffices here. The row pmf is log-concave with contiguous support, and so is the sum pmf $f$ by convolution. Jensen for the concave piecewise-linear interpolation of $\log f$ gives $\log\Pr(\mathcal E)\ge\mathbb E\log f(\sum_iX_i)\ge-\log(nd+1)$, by the entropy bound on its support. The deterministic case is immediate. Consequently a union bound and the factorial tail remove all candidate profiles with a row above $L$ at superpolynomial conditional cost.
+
+On regular profiles the exponential correction in (S1) is at most $e^{CL}$, a polynomial in $d$. For unconditioned independent rows, clip $(X_i-m)^2$ to zero when $X_i>L$. The clipped expectation differs from $V_\ell$ by a superpolynomially small term, and each variable is bounded by $O(L^2)$. Hoeffding with tolerance $d^{-1/4}$ gives a superpolynomial bound for the probability of a comparable deviation of the sample mean. Conditioning via the above polynomial lower bound and applying the polynomial correction weight still leaves a superpolynomial error. Thus summing (S1) and using the actual switching tail gives the uniform relative formula
+
+\begin{equation}
+a_k=\frac{\binom n\ell^d}{\binom{nd}{d\ell}}\,
+U_\ell\,
+\exp\left(-\frac12+\frac{V_\ell}{2m(1-p)}\right)(1+o(1)).
+\tag{S2}
+\end{equation}
+
+This formula includes exact saturation, where the row profile is deterministic. Fixed shifts of an available quota remain in its range.
+
+\subsection{Scalar local curvature and actual signs}
+
+Write $K(\ell)=\log(\binom n\ell^d/\binom{nd}{d\ell})$. Its exact first difference is
+
+\begin{equation}
+K(\ell+1)-K(\ell)
+=\sum_{i=1}^d\log\frac{\ell+i/d}{\ell+1}
++\sum_{i=1}^d\log\frac{n-\ell}{n-\ell-(i-1)/d}
+=-\frac{d}{2\ell}+o(1).
+\tag{S3}
+\end{equation}
+
+The two sums are $-(d-1)/(2(\ell+1))+O(d/\ell^2)$ and $O(d/n)$, respectively, and the error is uniform at bounded shifts. In particular the second difference tends to zero.
+
+If $(D-k)/d\to\beta>0$, then $h\to\beta/\alpha>0$. The scaled tilt $d w_\ell$ is bounded above and bounded away from zero. The upper bound was proved above, and a subsequence tending to zero would force the excess of the conditional mean over $c$ to tend to zero by the factorial ratio bound. If $d w_\ell\to z$ along a subsequence, every fixed tilted size weight tends to $z^s/s!$ up to common normalization, and the factorial tails give convergence of moments. The limiting law is Poisson of parameter $z>0$ conditioned to be at least $c$. Its mean increases strictly with $\log z$ by its positive variance, so the target mean $c+\beta/\alpha$ uniquely specifies $z$. Denote its variance by $V_*>0$. All these limits persist under bounded real shifts of $\ell$.
+
+The scalar conditioning probability at any fixed lattice shift is $(1+o(1))/\sqrt{2\pi nV_\ell}$. For completeness, Fourier inversion of the centered candidate sum gives this uniformly along the stated sequences. Near zero the characteristic function admits the quadratic cumulant expansion with uniform cubic error from the bounded third moments, and its modulus decreases at least as a fixed Gaussian there since the variance stays bounded below. Away from zero the limiting truncated Poisson law has a uniform modulus gap on closed subintervals of $[-\pi,\pi]$, because it has all successive integer sizes from $c$ onward. Total variation convergence, by the factorial tails, transfers this gap to the candidates. After rescaling by $\sqrt n$, dominated integration gives the displayed local limit.
+
+Define the scalar saddle exponent $E(\ell)=n\log G(w_\ell)-d\ell\log w_\ell$ for real $\ell$ in the interior. Its derivatives are
+
+\begin{equation*}
+E'(\ell)=-d\log w_\ell,\qquad E''(\ell)=-\frac{d^2}{nV_\ell}.
+\end{equation*}
+
+Use the tilt equation to cancel the $w_\ell$ derivative. On bounded shifts, $E''$ tends uniformly to $-1/(\alpha V_*)$. Thus the second difference of $\log U_\ell$ has this limit, by the local limit prefactor. The first centered difference of $E$ is $-d\log w_\ell+o(1)$ because its second derivative has uniformly vanishing variation on these shifts. The local limit factor, the correction in (S2), and the residual factor are all continuous to $o(1)$ at bounded shifts. In particular, at every fixed offset $j$,
+
+\begin{equation}
+\log\Gamma_{k+j}\longrightarrow\frac1{\alpha V_*},
+\qquad
+\log t_k=-d\log w_\ell-\frac{d}{2\ell}+o(1),
+\qquad
+\Gamma_i=\frac{a_i^2}{a_{i-1}a_{i+1}}.
+\tag{S4}
+\end{equation}
+
+If instead $(D-k)/d\to0$, let $e=d\ell-cn=d(nr/d-k)$. Then $d\le e=o(d^2)$ at an internal quota. Apply the scalar negative-binomial normalization to the excess hole-size weights $\binom d{c+j}$, which are positive and log-concave. Its $d$-step lower bound gives
+
+\begin{equation*}
+\log\frac{U_\ell^2}{U_{\ell-1}U_{\ell+1}}
+\ge\frac{d(n-1)}{n+e+d-1}\log(1+d/e)
+\ge (1-o(1))\frac{d^2}{e+d}\longrightarrow\infty.
+\end{equation*}
+
+The variance at all three quotas tends to zero, including a possible deterministic saturated neighbor, by the bounded factorial tails and mean deficit tending to zero. Thus the correction in (S2) tends to $e^{-1/2}$ at each, and (S3) has negligible second difference. This gives $\Gamma_k\to\infty$. \href{https://github.com/ProgramComputer/open-math-research/blob/04564a728c21eab6ce511b98a48ccaac754648ff/topics/balanced-arrays/very-tall/very-tall-upper-quota.md#the-last-od-quotas}{Scalar normalization and exact step bound}
+
+For the sign, global log-concavity of the actual coefficients makes their ratios strictly decreasing, by the binomially normalized curvature inequality. At $t_k$ both neighboring term magnitudes relative to its centered term are $\Gamma_k^{-1/2}$, and each outward tail then has decreasing magnitudes. If $\Gamma_k\to\infty$, the first-term bound on the alternating tails gives the claimed sign. If $\beta>0$, (S4) implies every fixed normalized offset magnitude tends to $\exp[-j^2/(2\alpha V_*)]$. Truncating both outward alternating tails at a fixed distance bounds their errors by the first omitted terms. Passing to the limit and then increasing the distance shows the normalized signed value tends to
+
+\begin{equation*}
+\sum_{j\in\mathbb Z}(-1)^j e^{-j^2/(2\alpha V_*)}>0,
+\end{equation*}
+
+by the periodized Gaussian Fourier identity. No uniform absolute tail estimate is needed. Compactness of the bounded possible limits of $(D-k)/d$ now proves the sign conclusion along every sequence in the stated range.
+
+\subsection{Angular overlap}
+
+Let $v=1/w_\ell$ be the occupied-cell tilt and $\phi=\pi/d$. For an arbitrary real occupied tilt near $v$, use the corresponding hole law and write $m=\mathbb E X$, $V=\mathrm{Var}(X)$ and $y(v)=n(d-m)/d$. The row phase $\arg H_{\rm occ}(ve^{i\phi})$ is $(d-m)\phi+O(\phi^3)$, by expanding the centered hole characteristic function. The argument is taken continuously from the positive real tilt, so near this range it is the branch in $[0,r\phi]$.
+
+The transverse coefficient is the $e^{-i\phi X}$-tilted mean of $\lambda(X)=X(d-X)/[d(d-1)]$. Since $\mathbb E\lambda=m/d+O(d^{-2})$ and $\mathrm{Cov}(\lambda,X)=V/d+O(d^{-2})$, with moments uniformly bounded, its argument is
+
+\begin{equation*}
+\arg a_\phi=-\frac{V}{m}\phi+O(d^{-2}).
+\end{equation*}
+
+For the angular phase $\Psi=n\arg H_{\rm occ}(ve^{i\phi})-\tfrac{d-1}{2}\arg a_\phi$, it follows that
+
+\begin{equation}
+\Psi(v)/\pi=y(v)+\frac{V}{2m}+o(1).
+\tag{S5}
+\end{equation}
+
+At the geometric occupied tilt $v_{\rm geo}=t_k^{1/d}$, (S4) gives $\log v_{\rm geo}=\log v-1/(2\ell)+o(1/d)$. Since $d y/d\log v=nV/d$, evaluation at this shifted tilt changes $y$ by $-V/(2m)+o(1)$. Thus $y(v_{\rm geo})=k-V/(2m)+o(1)$ and $\Psi(v_{\rm geo})=k\pi+o(1)$.
+
+When $\beta>0$, the derivative of the row argument in $\log v$ is $V\phi+O(\phi^3)$ by centering its differentiated characteristic function. The log-tilt derivative of $\arg a_\phi$ is $O(\phi)$ by the bounded tilted hole moments, with its value at $\phi=0$ real before taking the imaginary part. Therefore $d\Psi/d\log v\sim\pi n V_*/d$ uniformly near these tilts. The angular node at exactly $k\pi$ has log-tilt distance $o(1/d)$ from the geometric node, hence log-radius distance $o(1)$ in the original polynomial variable. The theta sign persists at any radius $t_ke^{o(1)}$: each fixed-offset normalized magnitude has the same limit, and both first outward ratios stay strictly below one, so the same alternating-tail proof applies. Also the adjacent geometric log-radius spacing tends to $1/(\alpha V_*)$ by (S4). This gives an ordered matching overlap, in particular at $(D-k)/d\to1$, without assuming a Gaussian angular integral expansion in the critical aspect ratio.
