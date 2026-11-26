@@ -43,9 +43,11 @@ identifies the analytic branch, and proves the coefficient formula as the
 sum of the four improper ray integrals. It verifies radial moments and
 integrated envelopes and applies them to the normalized near-ray mean under
 the stated interior angle bounds. It bounds the actual normalized far-ray
-contribution in both angular ranges and proves the checkpoint sign criterion
-under the stated phase and radial premises. The explicit phase connection,
-quantitative covariance bounds and old-root signs remain in the written proof.
+contribution in both angular ranges. The explicit phase gives the actual
+alternating checkpoint signs and a complete list of simple negative roots
+in every row from length $150$. The finite proof covers the earlier rows.
+Formal verification of interlacing past the finite prefix still needs the
+signs at the old middle and extreme roots.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -235,9 +237,24 @@ The theorem `normalizedCoefficient_close_to_phase` gives
 $|Y_n-\Re(U_n)|<77/100$ when $n\ge150$, $nd\ge29/10$, and
 $n\sin\theta\ge2$. Under these premises `eval_sign_of_nearPhaseUnit`
 gives the original polynomial the sign $(-1)^k$ whenever
-$\Re(U_n)=(-1)^k$. Identifying the explicit angle in $U_n$ and establishing
-the radial premises from the phase levels are subsequent steps.
-[Normalization kernel output](normalized-rays-kernel.txt)
+$\Re(U_n)=(-1)^k$. [Normalization kernel output](normalized-rays-kernel.txt)
+
+## Explicit checkpoint phase and simple negative roots
+
+The [phase module](CatalanStrictPeaksCheckpointPhase.lean) defines the
+correction in (2), proves its continuity and exact endpoint values, and
+verifies the lower and upper bounds used in (3). Every point between the
+first and last interior phase levels satisfies $nd\ge29/10$ and
+$n\sin\theta\ge2$. The proof uses monotonicity of sine and its cubic lower
+bound at the two required angle thresholds, scaled by $1/n$.
+
+The [phase bridge](CatalanStrictPeaksPhaseBridge.lean) identifies the actual
+leading factor as $U_n=e^{-i\Psi_n}$ by evaluating the principal-root
+directions and using the quartic equation at $z$. The theorem
+`eval_sign_at_checkpoint` proves the alternating signs for the original
+polynomial. The theorem `roots_from_150` discharges every premise of the
+ordered checkpoint theorem and proves the complete simple-negative root
+count from length $150$. [Checkpoint phase kernel output](checkpoint-phase-kernel.txt)
 
 ## Exact isolating intervals through length 150
 
@@ -298,6 +315,8 @@ lake build CatalanStrictPeaksFarRay
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarRayAxioms.lean
 lake build CatalanStrictPeaksNormalizedRays
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/NormalizedRaysAxioms.lean
+lake build CatalanStrictPeaksPhaseBridge
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/CheckpointPhaseAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~

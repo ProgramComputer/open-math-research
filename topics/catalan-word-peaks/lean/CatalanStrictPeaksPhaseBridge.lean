@@ -128,8 +128,9 @@ private theorem phase_algebra {θ : ℝ} (hθ : θ ∈ Set.Ioo (0 : ℝ) (Real.p
         Real.sin_pi_div_two, mul_zero, mul_one, zero_sub, hzr, hzi]
       field_simp [ha.ne']
       ring
-  have hq0 : q ≠ 0 := by rw [hq_form]; exact mul_ne_zero
-    (Complex.ofReal_ne_zero.mpr (by positivity)) (Complex.exp_ne_zero _)
+  have hq0 : q ≠ 0 := by
+    rw [hq_form]
+    exact mul_ne_zero (Complex.ofReal_ne_zero.mpr (by positivity)) (Complex.exp_ne_zero _)
   have hq_arg : q.arg = θ - Real.pi / 2 := by
     rw [hq_form, Complex.exp_mul_I]
     apply Complex.arg_mul_cos_add_sin_mul_I (by positivity)
@@ -146,21 +147,22 @@ private theorem phase_algebra {θ : ℝ} (hθ : θ ∈ Set.Ioo (0 : ℝ) (Real.p
         field_simp [haC]
         ring
   have hxr : (u * v).re = 4 * a ^ 2 * d := by
-    rw [hx_form]
-    simp only [Complex.add_re, Complex.one_re, Complex.re_ofReal_mul, pow_two, Complex.mul_re,
-      hzr, hzi]
     calc
-      _ = 1 + (a ^ 2) ^ 2 * (4 * d ^ 2 - (s ^ 2 + d ^ 2)) := by ring
+      _ = 1 + (a ^ 2) ^ 2 * (4 * d ^ 2 - (s ^ 2 + d ^ 2)) := by
+        rw [hx_form]
+        simp only [Complex.add_re, Complex.one_re, pow_two, Complex.mul_re, Complex.ofReal_re,
+          Complex.ofReal_im, zero_mul, sub_zero, hzr, hzi]
+        ring
       _ = (a ^ 2 * (1 + 2 * d)) ^ 2 + (a ^ 2) ^ 2 * (4 * d ^ 2 - 1) := by rw [htrig, har, one_pow]
       _ = (4 * a ^ 2 * d) * (a ^ 2 * (1 + 2 * d)) := by ring
       _ = _ := by rw [har, mul_one]
   have hxi : (u * v).im = 4 * a ^ 4 * d * s := by
     rw [hx_form]
-    simp only [Complex.add_im, Complex.one_im, Complex.im_ofReal_mul, pow_two, Complex.mul_im,
-      hzr, hzi, zero_add]
+    simp only [Complex.add_im, Complex.one_im, pow_two, Complex.mul_im, Complex.ofReal_re,
+      Complex.ofReal_im, zero_mul, mul_zero, zero_add, add_zero, hzr, hzi]
     ring
   have hcross_arg : (u * v).arg = Real.arctan (s / (1 + 2 * d)) := by
-    rw [arg_eq_arctan (by rw [hxr]; positivity), hxr, hxi]
+    rw [arg_eq_arctan (z := u * v) (by rw [hxr]; positivity), hxr, hxi]
     congr 1
     apply (div_eq_div_iff (by positivity) (by positivity)).2
     linear_combination (4 * a ^ 2 * d * s) * har
@@ -181,10 +183,10 @@ private theorem phase_algebra {θ : ℝ} (hθ : θ ∈ Set.Ioo (0 : ℝ) (Real.p
   have hv : v ≠ 0 := fun h => by simp [h] at hvr
   have hx_arg_add : (u * v).arg = u.arg + v.arg := by
     apply Complex.arg_mul hu hv
-    have hU := Complex.neg_pi_div_two_lt_arg_iff.2 (z := u) (.inl hur)
-    have hV := Complex.neg_pi_div_two_lt_arg_iff.2 (z := v) (.inl hvr)
-    have hU' := Complex.arg_lt_pi_div_two_iff.2 (z := u) (.inl hur)
-    have hV' := Complex.arg_lt_pi_div_two_iff.2 (z := v) (.inl hvr)
+    have hU : -(Real.pi / 2) < u.arg := Complex.neg_pi_div_two_lt_arg_iff.2 (.inl hur)
+    have hV : -(Real.pi / 2) < v.arg := Complex.neg_pi_div_two_lt_arg_iff.2 (.inl hvr)
+    have hU' : u.arg < Real.pi / 2 := Complex.arg_lt_pi_div_two_iff.2 (.inl hur)
+    have hV' : v.arg < Real.pi / 2 := Complex.arg_lt_pi_div_two_iff.2 (.inl hvr)
     exact ⟨by linarith, by linarith⟩
   have hkr : k.re = 2 * a ^ 2 * (1 + d - d ^ 2) := by
     dsimp only [k]
@@ -201,6 +203,7 @@ private theorem phase_algebra {θ : ℝ} (hθ : θ ∈ Set.Ioo (0 : ℝ) (Real.p
     rw [arg_eq_arctan hkr0, hkr, hki, ← Real.arctan_neg]
     congr 1
     field_simp [ha.ne', hD0.ne']
+    ring
   have hquartic : quartic (scale d) z = 0 :=
     (quartic_zero_iff hd hD z).2 (.inl rfl)
   have hden : 2 * z * ((scale d : ℂ) - z) = k ^ 2 / 2 := by
@@ -209,7 +212,7 @@ private theorem phase_algebra {θ : ℝ} (hθ : θ ∈ Set.Ioo (0 : ℝ) (Real.p
     linear_combination -(1 / 2 : ℂ) * hquartic
   have hB : -rayPrefactor d 0 z =
       2 * (principalRoot q * (principalRoot u * principalRoot v)) / k ^ 2 := by
-    rw [rayPrefactor_near_form, neg_div, neg_neg, hden]
+    rw [rayPrefactor_near_form, neg_div, neg_neg, hden, div_div_eq_mul_div]
     dsimp only [cutFactor, q, u, v]
     ring
   have hx_phase : unitOf (principalRoot u) * unitOf (principalRoot v) =
@@ -223,7 +226,7 @@ private theorem phase_algebra {θ : ℝ} (hθ : θ ∈ Set.Ioo (0 : ℝ) (Real.p
     ← Complex.exp_add, ← Complex.exp_sub, hq_arg, hk_arg]
   congr 1
   simp only [phaseCorrection, d, s, Complex.ofReal_add, Complex.ofReal_mul, Complex.ofReal_sub,
-    Complex.ofReal_div, Complex.ofReal_neg, Complex.ofReal_ofNat, Nat.cast_ofNat]
+    Complex.ofReal_div, Complex.ofReal_neg, Complex.ofReal_ofNat, Complex.ofReal_one, Nat.cast_ofNat]
   ring
 
 /-- The actual upper near-ray factor is the exponential of the paper's
@@ -293,10 +296,13 @@ noncomputable def catalanCheckpoints (n : ℕ) (hn : 150 ≤ n) : Checkpoints n 
   interval := by linarith [Real.pi_pos]
   continuous := (continuousOn_checkpointPhase n).div_const _
   leftPhase := by
-    simp [checkpointPhase, phaseCorrection_zero] <;> field_simp [Real.pi_ne_zero]
+    simp [checkpointPhase, phaseCorrection_zero]
+    field_simp [Real.pi_ne_zero]
+    ring
   rightPhase := by
     rw [checkpointPhase, phaseCorrection_pi_div_two]
-    field_simp [Real.pi_ne_zero] <;> ring
+    field_simp [Real.pi_ne_zero]
+    ring
   modulusOrder := strictMonoOn_modulus
   modulusPos _ := modulus_pos
   signs k hk hkm θ hθ hphase :=

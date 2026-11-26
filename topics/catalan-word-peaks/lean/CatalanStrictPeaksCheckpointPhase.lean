@@ -68,7 +68,8 @@ theorem phaseCorrection_zero : phaseCorrection 0 = -(π / 4) := by
   simp [phaseCorrection, arctan_zero]
 
 theorem phaseCorrection_pi_div_two : phaseCorrection (π / 2) = π / 8 := by
-  simp [phaseCorrection, arctan_zero, arctan_one] <;> ring
+  simp [phaseCorrection, arctan_zero, arctan_one]
+  ring
 
 private theorem radial_sine_bound {n : ℕ} {x a : ℝ} (hn : 150 ≤ n)
     (ha : a ∈ Set.Ioc (0 : ℝ) 4) (hx : x ≤ π / 2) (hangle : a ≤ (n : ℝ) * x) :
