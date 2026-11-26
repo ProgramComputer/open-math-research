@@ -2,6 +2,8 @@
 
 There are absolute constants $C>0$ and $N$ such that, for every $n\ge N$, $d\ge Cn/\log n$, and every row cap, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. The constants are unspecified. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. **⬜ None** for Lean or Rocq. [Theorem, proof and independent review](dense-regime/README.md)
 
+For $2\le d\le n$ and every cap, a reviewed comparison with the unrestricted polynomial leaves at most $CD\sqrt{n\log(n+1)}/d$ of the $D=\lfloor nr/d\rfloor$ roots uncertified as simple and negative. It identifies individual roots below the cap by disjoint disks. Both growing-dimension results use unspecified absolute constants. **⬜ None** for Lean or Rocq. [Below-cap comparison](dense-regime/below-cap/README.md)
+
 For four columns with row cap two, the polynomial has exactly $\lfloor n/2\rfloor$ distinct negative zeros at every row count $n$. The computer-assisted proof covers $0\le n\le532$ by exact finite certificates and $n\ge533$ by a uniform sign argument. Consecutive-row interlacing remains open in this case. **⬜ None** for Lean or Rocq. [Theorem, proof and independent review](four-columns/README.md)
 
 For every $d\ge2$, balanced arrays with row cap $r=d-1$ have $\lfloor n(d-1)/d\rfloor$ simple negative zeros for every row count $n$. Consecutive rows strictly interlace. When the degree stays the same, the new rightmost zero is closer to zero. This settles the entire family $U(d-1,d)$. The general conjecture remains open. [Four-page paper](no-full-row.pdf) · [Proof](no-full-row.md) · [Independent review](review-no-full-row.md) · [Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)

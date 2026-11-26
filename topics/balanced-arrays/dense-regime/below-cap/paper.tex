@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\setlength{\emergencystretch}{2em}
+\title{Simple negative zeros below the row cap in balanced arrays}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We count labeled binary arrays with $n$ rows, $d$ columns, equal
+column sums and row cap $r$. For $2\le d\le n$ the degree is
+$D=\lfloor nr/d\rfloor$, and at most
+$CD\sqrt{n\log(n+1)}/d$ zeros are left uncertified as simple and
+negative, with an unspecified absolute constant $C$. The bound
+is uniform over the row caps. It follows by comparing the array
+polynomial with the unrestricted binomial-power polynomial on
+disjoint circles around selected roots. A separate finite example
+uses exact rational sign brackets.
+\end{abstract}
+
+This theorem addresses a range of Per Alexandersson's balanced-array conjecture for uniform matroids. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Original conjecture}
+
+Let $P(q)=\sum_{k=0}^D a_kq^k$ be the labeled balanced-array polynomial with $n$ rows, $d$ columns, row cap $r$, and $D=\lfloor nr/d\rfloor$. Let $S(P)$ count its simple strictly negative zeros.
+
+\textbf{Theorem.} There is an absolute constant $C$ such that, for $2\le d\le n$ and every $1\le r\le d$,
+
+\[
+0\le D-S(P)\le C D\,\frac{\sqrt{n\log(n+1)}}{d}.
+\]
+
+In particular, along any sequence where $d/\sqrt{n\log(n+1)}\to\infty$, the fraction of simple negative roots tends to one uniformly over caps whenever $D>0$. Dimensions $d>n$ already have all roots by coefficient separation. The estimate leaves open whether any of the remaining roots are nonreal or repeated.
+
+The proof identifies individual zeros in the range where the estimate is informative. Write $F(q)=\sum_{k=0}^n\binom nk^d q^k$ for the unrestricted polynomial and $-\rho_1,\ldots,-\rho_n$ for its zeros in increasing order of absolute value. For $D>d/2$, every index
+
+\[
+1\le i\le (1-\alpha)D,\qquad
+\alpha=A\frac{\sqrt{n\log(n+1)}}{d}\le\tfrac12
+\]
+
+gives a distinct simple zero of $P$ in $|z+\rho_i|<\rho_i/(4n^2)$, for an absolute constant $A$ sufficiently large. These are the first $i$ capped zeros in order of increasing modulus up through any accepted index $i$. Every other capped zero has modulus greater than $T_i=\sqrt{\rho_i\rho_{i+1}}$.
+
+\section{Counting arrays on a root circle}
+
+At the positive radius $t=|z|$, give the integer $K$ weights $\binom nk^d t^k/F(t)$. Given $K=k$, choose $d$ independent, uniform $k$-subsets of the $n$ rows. Each outcome is exactly one unrestricted labeled matrix. Thus
+
+\[
+\frac{|P(z)-F(z)|}{F(t)}
+\le\frac{F(t)-P(t)}{F(t)}
+=\mathbb P(\text{at least one row exceeds the cap}).
+\]
+
+Given $K=k$, the sum in any specified row has the binomial law with $d$ trials and success probability $k/n$.
+
+The \hyperref[app:full]{root-circle estimate} gives a log-spacing of at least $2\pi/\sqrt{n(n+1)}$ for the full polynomial and the lower bound
+
+\[
+\frac{|F(z)|}{F(t)}
+\ge \exp[-C_1(1+\mathrm{Var}(K))\log(n+1)]
+\]
+
+on $|z+\rho_i|=\rho_i/(4n^2)$. The disks are pairwise disjoint. Write $p_j=t/(t+\rho_j)$. The factorization of $F$ shows that $K$ has the law of a sum of independent Bernoulli variables with parameters $p_j$. By the spacing, the number of $\rho_j\le t$ is $i$ or $i-1$. Each discrepancy between $p_j$ and $\mathbf1_{\rho_j\le t}$ is at most $2p_j(1-p_j)$, so $|\mathbb E K-i|\le1+2\mathrm{Var}(K)$.
+
+\section{Local variance and cap error}
+
+Here are details keeping the root count uniform when $r$ is small. If $m$ is a mode of $K$, then
+
+\[
+\mathbb E(K-m)^2\le C_2(1+m/d).
+\]
+
+Indeed the weights are $b_j=\binom nj^d t^j$. At distance $j$ to the right of $m$, their next outward ratio is at most $((m+1)/(m+j+1))^d$, by comparison with the right-hand ratio at the mode. The left-hand counterpart is at most $((m-j)/m)^d$ if $j<m$ and $m>0$. Omit unavailable sides. Put $L=1+\lceil\sqrt{(m+1)/d}\rceil$. For $j\ge L$ these bounds are at most $\exp(-c/L)$: on the right use $\log(1+L/(m+1))\ge L/(m+1+L)$ and $dL^2\ge m+1$, and on the left use $\log(1-L/m)\le-L/m$ when applicable. Shifting a tail index outward by $hL$ steps therefore reduces its mass by at least a factor $e^{-ch}$ for indices already at distance $L$ or more. Summing gives $\mathbb P(|K-m|\ge(h+1)L)\le2e^{-ch}$ and hence the moment bound.
+
+Consequently $|m-i|\le C_3(1+m/d)$, by the preceding mean-index estimate and Cauchy--Schwarz. We may take $d\ge2C_3$ in the nontrivial range by enlarging $A$. Then $m\le C_4(i+1)$. Since $i\le D$ and $D>d/2$, we have
+
+\[
+\mathrm{Var}(K)\le C_5D/d,\qquad
+|\mathbb E K-i|\le C_6D/d.
+\]
+
+Let $s=\alpha D$. For $A$ sufficiently large, $\mathbb E K\le D-3s/4$, since $i\le D-s$ and $\alpha d=A\sqrt{n\log(n+1)}$. Bernstein's inequality for the Bernoulli sum therefore gives $\mathbb P(K>D-s/2)\le\exp(-c_1s^2/D)$. Indeed the variance is $O(D)$ and the threshold above the mean is at least $s/4$, with $s\le D$. On the complementary event the expected sum in a specified row is at most $d(D-s/2)/n$, whereas $r\ge dD/n$. A binomial upper-tail bound at the gap $ds/(2n)$ gives probability at most $\exp(-c_2ds^2/(nD))$: both the mean and the chosen gap are bounded by $dD/n$. The union bound over rows and $d\le n$ give
+
+\[
+\frac{|P(z)-F(z)|}{F(t)}
+\le (n+1)\exp[-c_3A^2(D/d)\log(n+1)].
+\]
+
+Because $D/d>1/2$, this is strictly smaller than the lower bound for $|F(z)|/F(t)$ once $A$ is a large enough absolute constant. Rouch\'e's theorem gives exactly one zero counting multiplicity in each indicated disk. Conjugation preserves the disk and the polynomial is real, so that zero is real, simple and negative.
+
+To prove ordering, fix an accepted $i$, necessarily $i<n$, and take
+$t=T_i=\sqrt{\rho_i\rho_{i+1}}$. Exactly $i$ of the unrestricted moduli
+are below $t$, so the Bernoulli mean-index, local variance and cap-error
+bounds apply unchanged on the full circle $|z|=t$. The log-distance
+from $t$ to each unrestricted modulus is at least
+$\pi/\sqrt{n(n+1)}$. The close and far factor estimates in the
+\hyperref[app:full]{root-circle bound}, now with no centered factor,
+give $|F(z)|/F(t)\ge\exp[-C_7\mathrm{Var}(K)\log(n+1)]$ there.
+Increasing the same absolute $A$ if necessary gives strict
+Rouch\'e dominance on this circle. Thus $P$ has exactly $i$ zeros
+inside it and none on it. By spacing, $\rho_i(1+1/(4n^2))<T_i$,
+so the first $i$ small disks lie entirely inside this circle and
+exhaust its capped zeros. The disk order is also their modulus
+order, since their modulus intervals are pairwise disjoint.
+This proves the ordering assertion.
+
+\section{Completing the uniform estimate}
+
+If $D\le d/2$, all internal coefficient ratios $a_k^2/(a_{k-1}a_{k+1})$ exceed four by the normalized log-concavity bound $(1+1/k)^d(1+1/(n-k))^d$. Indeed $(1+2/d)^d\ge4$ for $d\ge2$. The geometric-center sign argument gives all $D$ simple negative roots, including the immediate cases of degrees zero and one. For $d>n$ the same conclusion follows from $(1+2/n)^{2d}>4$ at every internal index. Both inequalities follow from the \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/orientation-normalization.md}{published orientation comparison}.
+
+In the remaining case, if $\alpha>1/2$, the trivial bound $D-S(P)\le D$ is sufficient after increasing $C$. Otherwise the disks supply at least $\lfloor(1-\alpha)D\rfloor$ simple negative roots, so the loss is at most $\alpha D+1$. Here $\alpha D>A\sqrt{n\log(n+1)}/2$, which absorbs the integer rounding. This proves the theorem.
+
+\section{Exact finite illustration}
+Take $n=7$, $d=14$ and $r=12$. The separately verified example in
+\path{example/README.md} in the
+\href{https://github.com/ProgramComputer/open-math-research}{project repository}
+accounts for all six capped and seven unrestricted roots by exact
+rational sign brackets. Exactly the first three same-index capped
+and unrestricted magnitudes satisfy the relative tolerance $1/49$.
+That tolerance is chosen for the finite illustration and differs
+from the analytic disk radius in the theorem. The script performs
+an exact recount and also accepts an option to compare the result
+against the earlier seven-row coefficient archive.
+
+\appendix
+\section{Uniform root-circle bounds for the unrestricted polynomial}
+\label{app:full}
+
+For integers $n,d\ge2$, let
+
+\[
+F(q)=F_{n,d}(q)=\sum_{k=0}^n\binom nk^d q^k.
+\]
+
+Write its zeros as $-\rho_1,\ldots,-\rho_n$, with $0<\rho_1<\cdots<\rho_n$. They are all simple, and
+
+\[
+\log\rho_{i+1}-\log\rho_i\ge\frac{2\pi}{\sqrt{n(n+1)}}.
+\tag{1}
+\]
+
+At every $t>0$, the probability law $\Pr(K=k)=\binom nk^d t^k/F(t)$ satisfies
+
+\[
+\mathrm{Var}(K)\le C(1+n/d)
+\tag{2}
+\]
+
+for an absolute constant $C$. Finally, on the circle $|z+\rho_i|=e^{-h}\rho_i$ with $e^{-h}\le1/(4n)$, let $K_t$ be the tilted law at $t=|z|$. With absolute constants,
+
+\[
+\begin{aligned}
+\frac{|F(z)|}{F(|z|)}
+&\ge \exp\bigl[-h-C'(1+\mathrm{Var}(K_t))\log(n+1)\bigr]\\
+&\ge \exp\bigl[-h-C''(1+n/d)\log(n+1)\bigr].
+\end{aligned}
+\tag{3}
+\]
+
+All statements hold in particular throughout $2\le d\le n$.
+
+\subsection{Logarithmic root spacing}
+
+Rodrigues' formula for the Legendre polynomial $L_n$, expanded by Leibniz's rule, gives
+
+\[
+L_n(x)=2^{-n}\sum_{k=0}^n\binom nk^2(x-1)^k(x+1)^{n-k}.
+\]
+
+Thus $F_{n,2}(q)=(1-q)^nL_n((1+q)/(1-q))$. Orthogonality of $L_n$ to all lower-degree polynomials on $[-1,1]$ follows by integration by parts in Rodrigues' formula. If it had fewer than $n$ sign-change roots in this interval, their linear factors would form a lower-degree polynomial whose product with $L_n$ has constant nonzero sign off its zeros, contradicting orthogonality. Consequently $F_{n,2}$ has $n$ simple negative zeros.
+
+Write $y=\log\rho$ at $q=-\rho$, so the Legendre argument is $x(y)=-\tanh(y/2)$. Then $x'=-(1-x^2)/2$. The Legendre equation $((1-x^2)L_n')'=-n(n+1)L_n$ implies for $f(y)=L_n(x(y))$ that
+
+\[
+f''(y)+\frac{n(n+1)}{4\cosh^2(y/2)}\,f(y)=0.
+\]
+
+On an interval between consecutive zeros of $f$, of length $\ell$, multiply by $f$ and integrate by parts. The endpoint terms vanish. The Dirichlet inequality gives
+
+\[
+\left(\frac{\pi}{\ell}\right)^2\int f^2
+\le\int (f')^2
+=\int\frac{n(n+1)}{4\cosh^2(y/2)}f^2
+\le\frac{n(n+1)}4\int f^2.
+\]
+
+This proves (1) for $d=2$. In degree $n$ the Schur--Szeg\H{o} product is coefficientwise multiplication on the coordinates relative to $\binom nk q^k$, so $F_{n,d+1}=F_{n,d}*F_{n,2}$. The same-sign real-rootedness and logarithmic mesh theorem applies to the two degree-$n$ factors and preserves the lower bound on the minimum successive root ratio. The resulting positive coefficients and nonzero constant term force all real zeros to be negative. Induction gives (1), including simplicity. \href{https://doi.org/10.1016/j.crma.2010.11.031}{Katkova, Shapiro and Vishnyakova, Theorems 4 and 6}
+
+\subsection{Tilted variance}
+
+Let $b_k=\binom nk^d t^k$ and $R_k=b_k/b_{k-1}$. At every internal index,
+
+\[
+\log(R_k/R_{k+1})
+=d\bigl[\log(1+1/k)+\log(1+1/(n-k))\bigr]
+\ge \frac{4d}{n+2}.
+\]
+
+Here $\log(1+1/j)\ge1/(j+1)$ and the two denominators sum to $n+2$. In particular the curvature is at least $\lambda=\min(1,d/n)$. Choose any mode $m$ of $b$. The first outward ratio on either side of $m$ is at most one. For $j\ge0$ the ratio of the mass at outward distance $j+1$ to that at distance $j$ is at most $e^{-\lambda j}$, by multiplying the successive curvature bounds. This applies separately to the laws of $K-m$ conditional on $K\ge m$ and $m-K$ conditional on $K\le m$.
+
+Compare either one-sided law to the reference law on the nonnegative integers with weights $g_j=e^{-\lambda j(j-1)/2}$. Its likelihood ratio relative to this reference is nonincreasing, including after setting the candidate weights to zero outside their support. A nonincreasing likelihood ratio implies stochastic domination by the reference law. For example, the covariance of the likelihood ratio and an increasing test function under the reference is nonpositive by the independent-copy covariance formula. The reference normalization is at least $\sum_{j\ge0}e^{-\lambda j^2/2}\ge c\lambda^{-1/2}$. Its unnormalized second moment is $O(\lambda^{-3/2})$ by $j(j-1)/2\ge j^2/4$ for $j\ge2$ and Gaussian sum bounds. Each conditional second moment about $m$ is therefore $O(\lambda^{-1})$. Combining the two sides and using $\mathrm{Var}(K)\le\mathbb E(K-m)^2$ proves (2).
+
+Independently, the factorization gives the probability generating function
+
+\[
+\frac{F(tz)}{F(t)}=
+\prod_{j=1}^n\left[(1-p_j)+p_jz\right],
+\qquad p_j=\frac{t}{t+\rho_j}.
+\]
+
+Thus $K$ is distributed as a sum of independent Bernoulli variables and
+
+\[
+\mathrm{Var}(K)=\sum_{j=1}^n p_j(1-p_j)
+=\sum_{j=1}^n\frac{1}{4\cosh^2((\log\rho_j-\log t)/2)}.
+\tag{4}
+\]
+
+\subsection{Product bound on each circle}
+
+Put $\epsilon=e^{-h}$, $t=|z|$, and $y_j=\log\rho_j-\log t$. On $|z+\rho_i|=\epsilon\rho_i$, the reverse triangle inequality gives $1-\epsilon\le t/\rho_i\le1+\epsilon$. Hence $|\log(t/\rho_i)|\le2\epsilon$, and the centered factor satisfies
+
+\[
+\frac{|1+z/\rho_i|}{1+t/\rho_i}=\frac{\epsilon}{1+t/\rho_i}\ge\frac{\epsilon}{3}.
+\]
+
+For $j\ne i$, (1) and $2\epsilon\le1/(2n)$ imply $|y_j|\ge 1/n$. The reverse triangle inequality gives the positive bound
+
+\[
+\frac{|1+z/\rho_j|}{1+t/\rho_j}
+\ge\frac{|1-t/\rho_j|}{1+t/\rho_j}
+=\tanh(|y_j|/2).
+\]
+
+For $|y_j|\le1$ this bound is at least $c_1/n$, and its negative logarithm is $O(\log(n+1))$. There are at most $C_1\mathrm{Var}(K)$ such indices by (4), since each contributes a uniformly positive term to that sum.
+
+For $|y_j|>1$ put $a=e^{-|y_j|}\le e^{-1}$. The negative logarithm of the bound is $\log((1+a)/(1-a))\le 2a/(1-a)=O(a)$. Since $p_j(1-p_j)=a/(1+a)^2\ge a/4$, the sum of these negative logarithms is $O(\mathrm{Var}(K))$. Thus the product of all factors except the centered one has negative logarithm $O(\mathrm{Var}(K)\log(n+1))$. Including the centered factor adds at most $h+\log3$, proving the first bound in (3). Applying (2) gives the second bound.
+
+The circles bound pairwise disjoint disks by (1), since for adjacent radii the relative separation $(\rho_{j+1}-\rho_j)/(\rho_{j+1}+\rho_j)$ equals the hyperbolic tangent of half the log-gap and exceeds $\epsilon$. Each disk is invariant under conjugation and lies in the open left half-plane. Consequently a real-coefficient perturbation satisfying the corresponding strict Rouch\'e inequality on any selected circles has one simple negative root in each selected disk. This conclusion is local to those circles. A capped polynomial can have degree smaller than $n$, so a separate argument must identify which disks admit that perturbation estimate.
+\end{document}
