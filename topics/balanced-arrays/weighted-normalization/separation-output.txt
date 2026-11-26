@@ -1,0 +1,3 @@
+12 rows, three columns, cap two: [1, 1716, 271590, 8717280, 73236240, 169585416, 96982116, 9369360, 34650]
+Central second quotient at k=3: 87225632/22830843 < 4
+Successive opposite-sign probes after zero: -1/1024, -1/128, -1/16, -1/8, -1/2, -2, -16, -512

@@ -1,0 +1,18 @@
+Exhaustive 2x3 binary weight models complete.
+250 seeded weighted 2x3 models complete.
+500 seeded weighted 3x3 models complete.
+225 seeded weighted 4x3 models complete.
+30 seeded weighted 4x4 models complete.
+CAPP: 244381
+binary_arrays_considered: 3569280
+box_support: 1475015
+diagonal: 8415
+mixed: 419400
+models: 7405
+positive_weight_arrays: 131601
+pure: 323175
+pure: no failure
+mixed: no failure
+diagonal: no failure
+box_support: no failure
+CAPP: no failure

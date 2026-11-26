@@ -1,0 +1,11 @@
+# Sharp binomial normalization for weighted binary matrices
+
+Give each cell of a labeled binary matrix its own nonnegative weight and each row its own allowed interval of sizes. Let $A(q)$ be the weight of the matrices with column sums $q$. After dividing by the product of the unrestricted binomial counts, the ratio for increasing one column decreases whenever any of the margins increase. In particular, the common-quota sequence $A(k\mathbf 1)/\binom nk^d$ is log-concave on its positive support. Unrestricted matrices with unit weights attain equality. [Proof](proof.md) · [Manuscript](paper.pdf) · [LaTeX source](paper.tex)
+
+If $(1+2/n)^{2d}>4$, every nonzero root of the nonzero weighted common-quota polynomial is simple and negative. Its multiplicity at zero equals its smallest feasible quota. The argument extends the binomial normalization of the common-cap, unit-weight problem to heterogeneous intervals and arbitrary weights, including forbidden cells. [Source and prior results](LITERATURE.md) · [Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)
+
+A column marginal can still have nonreal roots. For four rows and three columns, the intervals $[0,1],[1,3],[2,2],[2,2]$ and fixed second and third margins $2,3$ give $1+11t+14t^2+5t^3$, with discriminant $-695$. This is a counterexample to real-rootedness of individual column marginals in the heterogeneous model. The all-parameter conjecture for equal margins and a common row cap remains open. [Two exact counts and discriminant](check-marginal.py) · [Decision point for the original conjecture](decision.md)
+
+When each unmarked row has upper bound at most three, the normalization and an inclusion coupling also give the exact unrestricted binomial-odds lower bound for how the marked row changes between homogeneous margins. All cells may have different weights. [Marked-row proof and scope](marked-odds.md) · [Independent review](marked-review.md)
+
+**Formal verification**　⬜ None. The normalization theorem, the heterogeneous marked-row inequality and the marginal example have written proofs. A separate agent reviewed the main theorem and independently reconstructed the example. [Review](review.md) · [Finite checks, exact ledger and replay commands](computation.md)
