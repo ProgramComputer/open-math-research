@@ -2,6 +2,8 @@
 
 ## Logarithmic dimension bound
 
+At three to four rows per column and every $`n\ge10^6`$, explicit disk counts isolate all but at most $`\lceil n\sqrt{\log(100n)/(2d)}\rceil+4`$ roots as simple and negative for every row cap. [Finite theorem and independent verification](below-cap/finite-aspect/README.md)
+
 **Theorem.** There are absolute constants $C>0$ and $N$ such that, for every integer $n\ge N$, every $d\ge Cn/\log n$, and every cap $1\le r\le d$, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. The constants are unspecified.
 
 The coefficient of $q^k$ counts labeled binary $n\times d$ matrices with every column sum $k$ and every row sum at most $r$. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. The general all-row conjecture and consecutive interlacing are outside the theorem's scope. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays) · [Prior literature record](literature.md) · [Literature check for the logarithmic range](sublinear-literature.md)
