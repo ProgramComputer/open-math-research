@@ -1,0 +1,38 @@
+--- CatalanStrictPeaksRecurrence.lean
++++ CatalanStrictPeaksRecurrence.lean
+@@ -146,7 +146,7 @@
+       omega
+     have hlast : n + 1 - 2 = n - 1 := by omega
+     unfold peaks at ⊢
+-    rw [hRange, range_succ, filter_insert, hf, hlast]
++    rw [hRange, range_add_one, filter_insert, hf, hlast]
+     by_cases hb : ascent w = true ∧ x.val < lastHeight w
+     · have hl := (peak_append_last hn w x).2 hb
+       have hnot : n - 1 ∉ peaks w := by
+@@ -155,7 +155,7 @@
+         omega
+       change (if HasPeakAt (append w x) (n - 1) then insert (n - 1) (peaks w) else peaks w).card =
+         (peaks w).card + peakIncrement (ascent w) (lastHeight w) x.val
+-      rw [if_pos hl, card_insert_of_not_mem hnot]
++      rw [if_pos hl, card_insert_of_notMem hnot]
+       simp [peakIncrement, hb]
+     · have hl : ¬ HasPeakAt (append w x) (n - 1) := fun h => hb ((peak_append_last hn w x).1 h)
+       simp [hl, peakIncrement, hb, peaks]
+@@ -257,7 +257,7 @@
+   apply sum_congr rfl
+   intro w _
+   by_cases h : canPush (stateOf w) t
+-  · simp [transitionWeight, h, stateOf, lastHeight]
++  · simp only [transitionWeight, if_pos h] <;> rfl
+   · simp [transitionWeight, h]
+ 
+ /-- Store the false and true ascent states at each height. -/
+@@ -415,7 +415,7 @@
+     rw [enumerate_eq_sum_coefficients]
+     exact recover_digit (by simp [encodingBase]) (rowDegree n + 1) (coefficientCount n)
+       (fun i _ => coefficientCount_lt_base n i) k.val k.isLt
+-  simpa only [coefficients, List.getElem_ofFn] using congrArg (fun a : ℕ => (a : ℝ)) hdigit
++  simpa only [coefficients, List.getElem_ofFn, coefficientCount] using congrArg (fun a : ℕ => (a : ℝ)) hdigit
+ 
+ /-- A base exceeding the word count recovers all coefficients from the same
+ evaluation, so it can be shared across a whole prefix. -/

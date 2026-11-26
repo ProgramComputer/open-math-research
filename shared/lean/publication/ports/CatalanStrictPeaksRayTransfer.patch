@@ -1,0 +1,64 @@
+--- CatalanStrictPeaksRayTransfer.lean
++++ CatalanStrictPeaksRayTransfer.lean
+@@ -150,7 +150,7 @@
+ private theorem logBranch_continuous {d : ℝ} (hd : 0 < d) (hD : d < 1) (j : ℕ) :
+     Continuous (logBranch d j) := by
+   unfold logBranch sectorFactor
+-  apply continuous_finset_prod Finset.univ
++  apply continuous_finsetProd Finset.univ
+   intro i _
+   exact (logStripRoot_continuous (cutPoint_norm_pos hd hD i)).comp (by fun_prop)
+ 
+@@ -226,10 +226,12 @@
+   have hr : (‖cutPoint d i‖ : ℂ) ≠ 0 := by exact_mod_cast (cutPoint_norm_pos hd hD i).ne'
+   have hS : exp z = ((Real.exp z.re / ‖cutPoint d i‖ : ℝ) : ℂ) * cutPoint d i := by
+     conv_lhs => rw [← Complex.re_add_im z, exp_add, hExp]
+-    rw [← hPolar, ← Complex.ofReal_exp]
++    have hfactor : exp ((liftedAngle d j i : ℂ) * I) =
++        cutPoint d i / (‖cutPoint d i‖ : ℂ) :=
++      (eq_div_iff hr).2 (by simpa only [mul_comm] using hPolar)
++    rw [hfactor, ← Complex.ofReal_exp]
+     push_cast
+-    field_simp [hr]
+-    ring
++    field_simp [hr] <;> ring
+   rw [hS, Complex.mul_im]
+   simp only [Complex.ofReal_re, Complex.ofReal_im, zero_mul, add_zero]
+   exact mul_ne_zero (div_pos (Real.exp_pos _) (cutPoint_norm_pos hd hD i)).ne'
+@@ -286,6 +288,7 @@
+       (h₁.trans_lt hz.1) (hz.2.trans_le h₂)
+   exact ⟨hFactor 0, hFactor 3, hFactor 1, hFactor 2⟩
+ 
++set_option maxHeartbeats 2000000 in
+ private theorem logSector_continuousOn {d : ℝ} (hd : 0 < d) (hD : d < 1)
+     {j : ℕ} (hj : j ≤ 4) (n : ℕ) :
+     ContinuousOn (logSector d n j) (im ⁻¹' Icc (sectorAngle d j) (sectorAngle d (j + 1))) := by
+@@ -678,7 +681,7 @@
+   have hJumps : Tendsto (fun b : ℝ => ∑ j ∈ Finset.range 4,
+       (∫ x in a..b, logRayJump d n j x)) atTop
+       (𝓝 (∑ j ∈ Finset.range 4, (∫ x in Ioi a, logRayJump d n j x))) :=
+-    tendsto_finset_sum _ fun j hj =>
++    tendsto_finsetSum _ fun j hj =>
+       intervalIntegral_tendsto_integral_Ioi a (logRayJump_integrable hd hD hn
+         (Finset.mem_range.mp hj) a) tendsto_id
+   have hTotal : Tendsto (fun b : ℝ => normalizer *
+@@ -733,8 +736,7 @@
+     exp (onCut d j x) = (Real.exp x : ℂ) * e := by simp [onCut, e, exp_add, ofReal_exp]
+     _ = ((‖cutPoint d j‖ : ℂ) * e) * ((Real.exp x / ‖cutPoint d j‖ : ℝ) : ℂ) := by
+       push_cast
+-      field_simp [hR]
+-      ring
++      field_simp [hR] <;> ring
+     _ = _ := by rw [show (‖cutPoint d j‖ : ℂ) * e = cutPoint d j from cutPoint_polar hd hD j]
+ 
+ /-- The analytic factor of a ray jump with its singular square root omitted. -/
+@@ -855,8 +857,7 @@
+     Real.log_le_log h₀R (hr.le.trans (radius_le_cutPoint hd hD j))
+   rw [logRayJump_integral_cutoff hd hD hn j hRadius, (normalizedRay_integral_data hd hD hn j).2]
+   have hπI : (2 * (Real.pi : ℂ) * I)⁻¹ * (-2 * I) = -(Real.pi : ℂ)⁻¹ := by
+-    field_simp [I_ne_zero, Complex.ofReal_ne_zero.mpr Real.pi_ne_zero]
+-    ring
++    field_simp [I_ne_zero, Complex.ofReal_ne_zero.mpr Real.pi_ne_zero] <;> ring
+   calc
+     _ = ((2 * (Real.pi : ℂ) * I)⁻¹ * (-2 * I)) * ((cutPoint d j)⁻¹ ^ n *
+         ∫ s in Ioi 0, rayIntegrand d n j s) := by ring

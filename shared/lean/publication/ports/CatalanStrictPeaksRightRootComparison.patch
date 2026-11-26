@@ -1,0 +1,24 @@
+--- CatalanStrictPeaksRightRootComparison.lean
++++ CatalanStrictPeaksRightRootComparison.lean
+@@ -55,8 +55,7 @@
+       Polynomial.eval_one, one_mul, Polynomial.eval_sub, Polynomial.eval_X, Polynomial.eval_C,
+       sub_neg_eq_add, Polynomial.eval_prod, ih hts]
+     simp only [Polynomial.eval_sub, Polynomial.eval_X, Polynomial.eval_C, sub_neg_eq_add]
+-    field_simp [hti]
+-    ring
++    field_simp [hti] <;> ring
+ 
+ private theorem logDerivative_roots {m : ℕ} {P : Polynomial ℝ} {r : Fin m → ℝ} (t : ℝ)
+     (hr : CompleteNegativeRoots P r) (ht : ∀ i, 0 < t + r i)
+@@ -126,7 +125,10 @@
+       _ = (s.card : ℝ) * (n : ℝ) ^ 2 := by simp
+       _ ≤ _ := by
+         have hcard : s.card ≤ n :=
+-          (Finset.card_le_univ _).trans (by simp [rowDegree]; omega)
++          by
++            have hfin : s.card ≤ Fintype.card (Fin (rowDegree n)) := Finset.card_le_univ s
++            rw [Fintype.card_fin] at hfin
++            exact hfin.trans (by unfold rowDegree; omega)
+         calc
+           _ ≤ (n : ℝ) * (n : ℝ) ^ 2 := mul_le_mul_of_nonneg_right (by exact_mod_cast hcard) (sq_nonneg _)
+           _ = _ := by ring

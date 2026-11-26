@@ -1,0 +1,25 @@
+--- CatalanStrictPeaksPoleValues.lean
++++ CatalanStrictPeaksPoleValues.lean
+@@ -65,17 +65,17 @@
+   refine (h.mul_right t⁻¹).congr_fun ?_
+   intro n
+   rw [PowerSeries.coeff_succ_X_mul, pow_succ]
+-  field_simp
+-  ring
++  field_simp <;> ring
+ 
+ theorem value_one (t : ℝ) : poleValue 1 t = 1 := (eval_one t).tsum_eq
+ 
+ theorem value_Q (t : ℝ) : poleValue Q t = 1 + t/2 + (9/16)*t^2 := by
+   have h := eval_add (eval_add (eval_one t) (eval_C_mul (v := 1/2) (eval_x t)))
+     (eval_C_mul (v := 9/16) (eval_x_sq t))
+-  unfold Q
+-  convert h.tsum_eq using 1
+-  ring
++  calc
++    poleValue Q t = 1 + (1/2 : ℝ)*t + (9/16 : ℝ)*t^2 := by
++      simpa only [poleValue, Q] using h.tsum_eq
++    _ = _ := by ring
+ 
+ theorem poleValue_R_mul_Ri {t : ℝ}
+     (hR : Summable (fun n => ‖cf n R * t^n‖))

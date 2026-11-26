@@ -1,0 +1,886 @@
+{
+  "CatalanStrictPeaks.BetaMoments.covariance_tail_integral_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.integrableOn_moment": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.mass_pos": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.mass_ratio_le": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.mass_succ": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.moment_product": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.near_local_integral_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.near_tail_integral_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.rawMoment_gamma": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.tilt_mean": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.BetaMoments.variance_formula": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutBounds.covariance_tail_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutBounds.near_local_error": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutBounds.near_moment_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutBounds.near_tail_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutBounds.short_reciprocal_bounds": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutBounds.three_factor_majorants": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.analyticGenerating_analyticAt": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.analyticGenerating_cauchyCoeff": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.analyticGenerating_eq_quotient": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.analyticGenerating_finiteDeformation": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.analyticGenerating_fourRays": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.analyticGenerating_hasFPowerSeriesAt": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.analyticGenerating_logarithmicRays": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.branch_at_scale": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.branch_sq": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.checkpointPhase_interior": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.checkpointPhase_strictMonoOn": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.continuousOn_checkpointPhase": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.denominator_near_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.eval_sign_at_checkpoint": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.eval_sign_at_oldRoot_in_phaseBand": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.eval_sign_at_oldRoot_of_phaseSign": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.eval_sign_of_nearPhaseUnit": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.farRayError_abs_le": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.farRayError_interior": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.farRayError_largeAngle": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.farRayError_smallAngle": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.farRay_endpoint_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.farRay_integral_norm_le": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.farRay_largeAngle_factor_lt": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.farRay_prefactor_norm_le": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.farRay_smallAngle_factor_lt": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.far_conjugate_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.far_to_near_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.first_checkpoint_modulus_gap": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.logRayJump_eq_normalized": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.logRayJump_integrable": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.logSector_jump_sqrt": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.logSector_jump_zero": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.logSector_norm_le_large": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.logStripRoot_eq_cutFactor_of_le_radius": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.logStripRoot_jump": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.logStripRoot_sq": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.middleRoot_signs_from_150": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.middle_roots_between_checkpoints": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.modulus_pos": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.modulus_sub_transition_ge_one_sub_cos": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearAmplitude_conjugate_error": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearAmplitude_global": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearAmplitude_local_error": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearAmplitude_sixth_error": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearAmplitude_tail_error": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearConjugateRatio_lipschitz": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearConjugateRatio_one_le_re": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearMean_close_to_one": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearMean_re_gt_seventeen_twentieths": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearMean_step_covariance": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearMean_step_lt_four_div": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearMean_step_lt_one_div": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearPhaseUnit_eq_exp": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearPhaseUnit_im_sign_between": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearPhaseUnit_re_at_level": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearRay_integral_eq_mean": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.nearTiltCovariance_sub_const": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.near_conjugate_coefficient": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.near_to_far_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.norm_nearPhaseUnit": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.norm_order": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.normalizedCoefficient_close_to_phase": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.normalizedCoefficient_eq_near_add_far": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.opposite_cross_bounds": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.phaseCorrection_bounds": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.phaseCorrection_pi_div_two": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.phaseCorrection_zero": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.quartic_factor": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.quartic_real_ne_zero": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.quartic_zero_iff": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.rayCoefficientTerm_rev": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.rayIntegrand_integrable": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.rayLeadingScale_pos": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.rayPrefactor_near_ne_zero": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.roots_after_first_modulus_gap": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.roots_from_150": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.strictMonoOn_modulus": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.CutGeometry.strictMonoOn_scale": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FarEdge.far_root_bounds": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FarEdge.farthest_root_sign": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FarEdge.shifted_top_two": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FastCoefficients.row_eq_coefficients": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Finite.checkPair_sound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Finite.checkRow_sound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Finite.interlacing_before_150": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Finite.interlacing_from_analytic_signs": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Finite.roots_through_150": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.A_succ": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.C_succ_split": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.coeff_scaled": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.discriminantBranch_constant": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.discriminantBranch_square": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.generatingFunction_eq": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.join_firstReturn": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.join_valid": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.peaks_card_join": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.returnIndex_join": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.FirstReturn.scaled_eq": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.DtF_tau_eq_radical": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.F_tau_eq_radical": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.R_mul_Ri": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.R_sq": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.absSummable_R": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.absSummable_Ri": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.coeff_R_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.coeff_Ri_bound": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.coeff_Ri_tail": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.hasSum_B_at_b": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.hasSum_H_at_a": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.poleValue_R_at_a": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.poleValue_Ri_at_b": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.poleValue_Ri_pos": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.row_pole_error_of_radical": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.NearPoleSeries.value_mul": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Recurrence.append_valid": [
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Recurrence.byState_step": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Recurrence.coefficients_get_eq_C": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Recurrence.enumerate_X_eq_C": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Recurrence.enumerate_eq_sum_words": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Recurrence.peaks_card_append": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.Recurrence.rows_get_eq_byState": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.RightEdge.ratio_growth_of_poles": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.RightEdge.rightmost_root_sign": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.RightEdge.rightmost_sign_of_logDerivative_growth": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.RightEdge.row_pole_errors": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.TopThree.coeff_even_next": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.TopThree.coeff_even_next_two": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.TopThree.coeff_even_top": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.TopThree.coeff_odd_next": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.TopThree.coeff_odd_next_two": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.TopThree.coeff_odd_top": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.coeff_C": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.entry_le_index": [
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.eval_zero_pos": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.interlacing_all": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.interlacing_from_finite_and_analytic_signs": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.leadingCoeff_pos": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.natDegree_C": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.next_from_old_root_signs": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.odd_step_degree": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.peaks_card_le": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.positive_even_step_degree": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.roots_all": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.roots_from_checkpoints": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "CatalanStrictPeaks.strict_peaks_all_lengths": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "OpenMathResearch.LogarithmicContour.circleIntegral_eq_angular": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "OpenMathResearch.LogarithmicContour.deform": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "OpenMathResearch.LogarithmicContour.integral_logRadius_improper": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "OpenMathResearch.LogarithmicContour.integral_logRadius_substitution": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "OpenMathResearch.OrientedNegativeInterlace.CompleteNegativeRoots.unique": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "OpenMathResearch.OrientedNegativeInterlace.next_of_signs_at_all_old_roots": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "OpenMathResearch.OrientedNegativeInterlace.roots_of_signed_test_points": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditExportType.catalan": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.peakCountsAgree": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.catalanPolynomial_eq": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.catalanPublished_of_successors": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.catalanOriginal_of_published": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.catalanSourcePublished": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.catalanSourceOriginal": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.wordConditionsAgree": []
+}

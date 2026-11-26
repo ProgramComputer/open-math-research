@@ -1,0 +1,23 @@
+--- a/PrismFamilyGeometry.lean
++++ b/PrismFamilyGeometry.lean
+@@ -73,14 +73,18 @@
+       (Module.finrank ℝ (affineSpan ℝ (realFinSlice (beforeFinCaps b) (b + 1))).direction)
+       (fun q => (finLatticeCount (beforeFinCaps b) (b + 1) q (beforeFinNonempty b) : Int)) := by
+   rw [beforeAffineDimension]
+-  simpa only [finLatticeCount_eq, beforeFinCaps_list, beforeCounts] using beforeNumeratorSeries b hb
++  have h := beforeNumeratorSeries b hb
++  unfold beforeCounts at h
++  simpa only [finLatticeCount_eq, beforeFinCaps_list] using h
+ 
+ theorem afterFinSeries (b : Nat) :
+     (afterNumerator b : PowerSeries Int) = normalizedCountSeries
+       (Module.finrank ℝ (affineSpan ℝ (realFinSlice (afterFinCaps b) (b + 1))).direction)
+       (fun q => (finLatticeCount (afterFinCaps b) (b + 1) q (afterFinNonempty b) : Int)) := by
+   rw [afterAffineDimension]
+-  simpa only [finLatticeCount_eq, afterFinCaps_list, afterCounts] using afterNumeratorSeries b
++  have h := afterNumeratorSeries b
++  unfold afterCounts at h
++  simpa only [finLatticeCount_eq, afterFinCaps_list] using h
+ 
+ #print axioms beforeAffineDimension
+ #print axioms afterAffineDimension

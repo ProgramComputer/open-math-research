@@ -1,0 +1,309 @@
+{
+  "PrismFamily.afterAffineDimension": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.afterFinSeries": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.afterIntExtension_diff": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.afterIntExtension_nat": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.afterInterior_reflection": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.afterNumeratorSeries": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.afterNumerator_no_root_gt_one": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.afterNumerator_reflect": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.afterNumerator_top": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.beforeAffineDimension": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.beforeFinSeries": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.beforeIntExtension_diff": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.beforeIntExtension_nat": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.beforeInterior_reflection": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.beforeNumeratorSeries": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.beforeNumerator_top": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.coefficient_gap": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.coefficient_gap_beyond_one": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.familyBoxSplitCounterexample": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.familyNumeratorsDoNotAlternate": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.familyNumeratorsDoNotInterlace": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.no_family_interlacing": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismFamily.polynomial_obstruction": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.boundedCompositions_nodup": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.boundedCount_eq_length": [
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.cardinality_eq_boundedCount": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.compositionRowsDoNotInterlace": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.computedRowsDoNotInterlace": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.ehrhartNumerator_eq_series_prefix": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.ehrhartNumerator_of_seriesPolynomial": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.ehrhartPolynomialsDoNotInterlace": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.finBoxSplitCounterexample": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.finLatticeEquiv": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.integerCoordinateSlice_iff_real": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.integerPointEquiv": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.integerPointNumeratorsDoNotInterlace": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.integerPointSeriesPolynomialsDoNotInterlace": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.integerPoint_iff_in_dilation": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.mem_boundedCompositions": [
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.ofFn_image_realFinSlice": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.realFinSlice_eq_box_intersection": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.splitAffineDimension": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.splitCounterexample": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.splitEhrhartCertificate": [
+    "propext"
+  ],
+  "PrismSplit.splitEhrhartDegree": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.splitEhrhartSeries": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.splitFinEhrhartSeries": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.splitFirstCounts": [
+    "propext"
+  ],
+  "PrismSplit.splitRealSliceDilation": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.splitSamplesAgree": [
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.unsplitAffineDimension": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.unsplitEhrhartCertificate": [
+    "propext"
+  ],
+  "PrismSplit.unsplitEhrhartDegree": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.unsplitEhrhartSeries": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.unsplitFinEhrhartSeries": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.unsplitFirstCounts": [
+    "propext"
+  ],
+  "PrismSplit.unsplitRealSliceDilation": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "PrismSplit.unsplitSamplesAgree": [
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditExportType.prismSix": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditExportType.prismFamily": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.prismCount_eq_integerPointCount": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.isPrismNumerator_of_slice": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.prismSourcePublished": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "AuditReference.prismSourceAdmissible": [
+    "Quot.sound",
+    "propext"
+  ]
+}

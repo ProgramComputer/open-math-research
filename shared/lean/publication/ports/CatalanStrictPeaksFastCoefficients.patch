@@ -1,0 +1,11 @@
+--- CatalanStrictPeaksFastCoefficients.lean
++++ CatalanStrictPeaksFastCoefficients.lean
+@@ -71,7 +71,7 @@
+     | zero => decide
+     | succ n =>
+       rw [Nat.centralBinom, show (4 : ℕ) = 2 ^ 2 by decide, ← pow_mul]
+-      exact (Nat.choose_le_two_pow _ _ (by omega)).le
++      exact Nat.choose_le_two_pow _ _
+   exact hbinom.trans (Nat.pow_le_pow_right (by decide) hn)
+ 
+ /-- One candidate evaluation at the coefficient base per row. -/

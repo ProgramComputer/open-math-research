@@ -1,0 +1,21 @@
+--- CatalanStrictPeaksRightPoleArithmetic.lean
++++ CatalanStrictPeaksRightPoleArithmetic.lean
+@@ -52,8 +52,7 @@
+   have herror : |P - 11 / 16| ≤ 11 / 16 / 100 := by
+     have heq : P - 11 / 16 = (v n - (11 / 16) * a) / a := by
+       dsimp [P]
+-      field_simp [ha.ne']
+-      ring
++      field_simp [ha.ne'] <;> ring
+     rw [heq, abs_div, abs_of_pos ha]
+     calc
+       _ ≤ (24 * (3 / 2 : ℝ) ^ n) / a := div_le_div_of_nonneg_right hv ha.le
+@@ -81,7 +80,7 @@
+     rw [← hfactor, ← mul_div_assoc]
+     dsimp only [E, P]
+     rw [← add_div]
+-    field_simp [ha.ne', hpos.ne']
++    field_simp [ha.ne', hpos.ne'] <;> ring
+   have hminus : -(20 * (n : ℝ) / L) ≤ E / P := by
+     calc
+       _ = -(20 * (n : ℝ)) / L := by ring

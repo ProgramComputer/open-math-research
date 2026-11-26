@@ -1,0 +1,36 @@
+--- CatalanStrictPeaksRightCheckpoint.lean
++++ CatalanStrictPeaksRightCheckpoint.lean
+@@ -21,7 +21,9 @@
+   rw [scale_eq_product hd]
+   calc
+     _ ≤ 2 * (1 / 3 : ℝ) ^ 2 * (1 + d) * sqrt 3 := by gcongr
+-    _ = _ := by rw [scale_eq_product (by norm_num : (0 : ℝ) < 1)]; norm_num; ring
++    _ = _ := by
++      rw [scale_eq_product (by norm_num : (0 : ℝ) < 1)]
++      norm_num <;> ring
+ 
+ /-- The modulus increases by at least the decrease of the cosine from
+ its value at the transition. -/
+@@ -51,8 +53,7 @@
+           _ ≤ (27 / 16 : ℝ) * (3 + d) * (1 - d) := hnum
+           _ = _ := by ring)
+     _ = 1 / ((4 / 27 : ℝ) * (1 + d) ^ 2) - 1 - 11 / 16 := by
+-      field_simp [(show 0 < 1 + d by positivity).ne']
+-      ring
++      field_simp [(show 0 < 1 + d by positivity).ne'] <;> ring
+     _ ≤ _ := by
+       rw [inv_eq_one_div]
+       exact sub_le_sub_right (sub_le_sub_right hrec 1) (11 / 16)
+@@ -70,10 +71,10 @@
+     rw [heq] at hangle
+     linarith
+   have hsin₁ : (3 / 4 : ℝ) * u ≤ sin (θ / 2) := calc
+-    _ ≤ u - u ^ 3 / 4 := by
++    _ ≤ u - u ^ 3 / 6 := by
+       nlinarith [mul_le_of_le_one_left (sq_nonneg u) hu1,
+         mul_le_of_le_one_right hu.le hu1]
+-    _ ≤ sin u := (sin_gt_sub_cube hu hu1).le
++    _ ≤ sin u := (sin_gt_sub_cube hu).le
+     _ ≤ _ := sin_le_sin_of_le_of_le_pi_div_two (by linarith [pi_pos]) (by linarith [hθ.2, pi_pos]) huθ
+   have hsin₂ : ((3 / 4 : ℝ) * u) ^ 2 ≤ sin (θ / 2) ^ 2 :=
+     (sq_le_sq₀ (by positivity) ((by positivity : (0 : ℝ) ≤ (3 / 4 : ℝ) * u).trans hsin₁)).2 hsin₁

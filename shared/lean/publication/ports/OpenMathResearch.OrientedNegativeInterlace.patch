@@ -1,0 +1,14 @@
+--- OrientedNegativeInterlace.lean
++++ OrientedNegativeInterlace.lean
+@@ -59,7 +59,10 @@
+       apply Fin.strictMono_iff_lt_succ.mpr
+       intro i
+       have hgap : u i.castSucc ≤ l i.succ := by
+-        simpa [Fin.castSucc, Fin.succ] using horder ⟨i, by simp⟩
++        have hl : i.castSucc = (⟨i.val, by omega⟩ : Fin (d + 1)) := Fin.ext (by simp)
++        have hr' : i.succ = (⟨i.val + 1, by omega⟩ : Fin (d + 1)) := Fin.ext (by simp)
++        rw [hl, hr']
++        exact horder ⟨i, by simp⟩
+       exact (hr i.castSucc).2.1.trans ((hgap.trans_lt (hr i.succ).1))
+   refine ⟨r, ⟨hdegree, hmono, fun i => (hnonneg i).trans_lt (hr i).1, ?_⟩,
+     fun i => ⟨(hr i).1, (hr i).2.1⟩⟩

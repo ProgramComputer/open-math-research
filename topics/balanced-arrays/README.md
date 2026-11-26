@@ -10,6 +10,8 @@ The dominant terms in a torus integral come from the two points at which all coo
 
 **🟨 Partial · Lean 4.** Lean proves that each connected component of the maximizing set for the balanced-array row polynomial on the fixed-product torus contains a diagonal point. The diagonal phase comparison, integral estimates and final root count have written proofs. [Exact formal scope](lean/README.md) · [Kernel report](verification.json)
 
+[Stable Lean recheck and per-theorem axiom reports](verification.json) · [Reproduce the audit](../../shared/lean/publication/README.md)
+
 ## All row counts with row cap one less than the column count
 
 For every $d\ge2$ and $n\ge0$, the balanced-array polynomial for $U(d-1,d)$ has its full degree $\lfloor n(d-1)/d\rfloor$ of distinct negative zeros. Consecutive rows strictly alternate, with the new row supplying the rightmost zero when both rows have zeros. Inclusion–exclusion gives a determinant of totally nonnegative leading matrix sections after a coefficient normalization. A factorial multiplier transfers strict alternation to the original rows. A fresh agent-assisted referee checked the proof against the original conjecture. The exact replay independently verifies 275 rows and 242 adjacent pairs with a nonconstant old row. **🟨 Partial · Lean 4.** Lean checks the coefficient identity from the labeled matrices. The determinant and root arguments remain on paper. [Lean theorem](lean/BalancedNoFullRowCounting.lean) · [Manuscript](no-full-row.pdf) [Proof](no-full-row.md) · [Independent review](review-no-full-row.md) · [Verifier](verify_corank_one.py) · [Exact archive](results/corank-one.jsonl.gz)
