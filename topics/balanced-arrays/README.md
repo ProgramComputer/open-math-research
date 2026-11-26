@@ -97,3 +97,7 @@ At every fixed $d\ge2$ and row cap, the geometric-center signs reverse at asympt
 ## Coefficient curvature near the upper quota
 
 An exact screen checked a proposed deficit-dependent curvature inequality at 13,346 internal quotas. The scalar row-deficit model admits a convolution proof without equal-column conditioning. The general bound for balanced arrays remains open. [Screen, analytic checks and scalar proof](deficit-curvature/README.md)
+
+## Obstructions to deleting rows
+
+The direct backward coefficient map can fail on the binomial test polynomial. Independent optional-row retention can also introduce a nonreal pair, even when all deterministic row counts in the mixture are real-rooted. [Exact witnesses and full symbol screen](row-deletion/README.md)
