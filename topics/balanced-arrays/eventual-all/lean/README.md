@@ -69,3 +69,36 @@ lake env lean "$topic/BalancedOccupiedPhase.lean"
 ~~~
 
 The agent-assisted check uses Lean 4.19.0, compiler commit `6caaee842e94`, and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. [Axiom output](occupied-phase-axioms.txt)
+
+## Quantitative tilt of the occupied-cell phase
+
+[BalancedOccupiedTilt.lean](BalancedOccupiedTilt.lean) uses the actual normalized weights $\binom ds v^s/\sum_{j=0}^r\binom dj v^j$ for $v>0$ and integers $1\le r<d$. It defines the finite mean $\mu$ and variance $V$, centers the positive-weight complex sum at angle $\mu\phi$, and checks that the rotation introduces no wrap of the principal argument, where $\phi=\pi/d$.
+
+The proof checks the real-part lower bound $1-V\phi^2/2$ and the imaginary-part bound $2V\phi^2$ for the centered sum. It then proves the unconditional estimates
+
+$$
+|\arg H(ve^{i\phi})-\mu\phi|\le 2\pi V\phi^2
+$$
+
+and
+
+$$
+|\Psi(v)/\pi-n\mu/d|\le 2nV\phi^2+(d-1)/2.
+$$
+
+This verifies the argument estimate and its contribution to the phase inequality in [the eventual proof](../proof.md#the-phase-radii). The conditional theorem `phase_deviation_le_min_mean_deficit` also checks the scalar interpolation from the three truncated-binomial variance bounds in [the published derivation](../../very-tall/proof.md), and gives the term $4\pi^2\min(y,T-y)/\sqrt d$ with $y=n\mu/d$ and $T=nr/d$. The next formal obligations are the bounds $V\le d/4$, $V\le\mu(1+\mu)$ and $V\le(r-\mu)(1+r-\mu)$ for these finite probabilities. The angular signs and mixed radius joins are separate.
+
+The published variance derivation uses two inputs. Conditioning an exchangeable coordinate on success or failure gives the same $(d-1)$-trial tilted law truncated at $r-1$ or $r$, respectively. The former mean is no larger, so the conditional difference in total size is at most one. The tail argument uses the decreasing ratios of the positive masses of $S$ and $r-S$. For their survival probabilities $F_j$ and masses $p_j$, the ratio $F_j/p_j$ is a sum of successive products of those ratios and decreases. Hence $F_{i+j}\le F_iF_j$, which bounds the second factorial moment by twice the squared mean. These two arguments have been checked on paper and are the hypotheses left open in the conditional Lean theorem.
+
+Use the research pins above. Compile the shared first-hit module, topic specialization and concrete phase before checking the tilt module.
+
+~~~sh
+cd shared/lean
+lake build OpenMathResearch.FirstLevelHits Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+topic=../../topics/balanced-arrays/eventual-all/lean
+lake env lean --root="$topic" -o .lake/build/lib/lean/BalancedPhaseFirstHit.olean "$topic/BalancedPhaseFirstHit.lean"
+lake env lean --root="$topic" -o .lake/build/lib/lean/BalancedOccupiedPhase.olean "$topic/BalancedOccupiedPhase.lean"
+lake env lean "$topic/BalancedOccupiedTilt.lean"
+~~~
+
+The local replay uses Lean 4.19.0, compiler commit `6caaee842e94`, and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. [Axiom output](occupied-tilt-axioms.txt)
