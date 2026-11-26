@@ -1,0 +1,156 @@
+\documentclass[11pt]{article}
+\usepackage[hmargin=0.9in,vmargin=0.8in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\Var}{\mathrm{Var}}
+\title{Simple negative roots of balanced-array polynomials\\at square-root dimension near full row capacity}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Consider labeled binary arrays with a common column sum and a common upper bound on row sums. We give an explicit condition under which the generating polynomial in the column sum has only simple negative zeros. At a geometric midpoint between consecutive unrestricted root moduli, the variance of the tilted column sum is controlled by the number of root moduli beyond that midpoint. This local bound makes a perturbation argument effective at dimension of order $\sqrt{n\log n}$. The resulting bound is $d^2\ge16384n\log(n+1)$ and $50n(d-r)\le29d^2$, where $d$ is the dimension and $r$ the row cap.
+\end{abstract}
+
+For positive integers $n,d$ and $1\le r\le d$, let $a_k$ count the $n\times d$ binary matrices with labeled rows and columns, column sums all $k$, and every row sum at most $r$. Put $P(z)=\sum_k a_k z^k$ and $D=\lfloor nr/d\rfloor$. Every $0\le k\le D$ occurs: fill column $j$, starting with $j=0$, in the $k$ consecutive row positions numbered $jk,\ldots,jk+k-1$ modulo $n$. The maximum row sum is $\lceil dk/n\rceil$. Above $D$ the total row capacity is insufficient. Alexandersson asks whether $P$ is always real-rooted~\cite{symcat}.
+
+\begin{theorem}\label{thm}
+Let $d\ge2$. If
+\[
+ d^2\ge 16384\,n\log(n+1),\qquad 4n(d-r)\le d^2,
+\]
+then $P$ has exactly $D$ distinct negative zeros.
+\end{theorem}
+
+The logarithm is natural. Theorem~\ref{wide} below enlarges the permitted corank by the factor $58/25$. For example, if $m\ge10^6$, $n=m^3$, $d=m^2$ and $4(d-r)\le m$, the theorem applies. Indeed $m/\log(m^3+1)$ is increasing there by differentiation, and $\log(10^{18}+1)<44$. At $m=10^6$ and $d-r=250000$, the degree is $999999750000000000$. These are consequences of the inequalities. The unrestricted original conjecture remains open.
+
+\section{Two inputs and the comparison circles}
+Normalized log-concavity of the validity probability $a_k/\binom nk^d$ gives, at every internal quota~\cite{orientation},
+\begin{equation}\label{curv}
+ G_k=\frac{a_k^2}{a_{k-1}a_{k+1}}\ \ge \left[\left(1+\frac1k\right)\left(1+\frac1{n-k}\right)\right]^d .
+\end{equation}
+For $F(z)=\sum_{k=0}^n\binom nk^d z^k$, write its roots as $-\rho_j$, with $0<\rho_1<\cdots<\rho_n$. For $n,d\ge2$ the unrestricted mesh estimate is~\cite{meshproof}
+\begin{equation}\label{mesh}
+ \log(\rho_{j+1}/\rho_j)\ge 2\pi/\sqrt{n(n+1)} .
+\end{equation}
+For $d=2$ this follows by the Legendre change of variable and the Dirichlet inequality between consecutive zeros. The Schur--Szeg\H{o} logarithmic mesh theorem~\cite{ksv} extends it to every $d\ge2$ by composing with $F_{n,2}$. We will use \eqref{mesh} at $t=T_i=\sqrt{\rho_i\rho_{i+1}}$.
+
+At any $t>0$, let $K$ have probabilities $\binom nk^d t^k/F(t)$, and write $H=n-K$. Factoring $F(tz)/F(t)$ shows that $K$ is distributed as a sum of independent Bernoulli variables with probabilities $p_j=t/(t+\rho_j)$. Put $V=\Var(H)=\sum_j p_j(1-p_j)$. At $t=T_i$, let $N=n-i$. Since $|p_j-\mathbf1_{\rho_j<t}|\le2p_j(1-p_j)$,
+\begin{equation}\label{mean}
+ |\E H-N|\le2V .
+\end{equation}
+
+\begin{lemma}\label{circle}
+If $n\ge64$, then for $|z|=T_i=t$,
+\[
+ |F(z)|/F(t)\ge \exp[-8V\log(n+1)] .
+\]
+\end{lemma}
+\begin{proof}
+For $y_j=\log(\rho_j/t)$ the absolute ratio of the $j$th linear factors is at least $\tanh(|y_j|/2)$. The half-mesh bound gives $|y_j|>1/n$. If $|y_j|\le1$, then $\tanh(|y_j|/2)\ge1/(4n)$, and $p_j(1-p_j)=1/(2+2\cosh y_j)>1/6$. Here $6\log(4n)\le8\log(n+1)$ since $n\ge64$. If $|y_j|>1$, put $b=e^{-|y_j|}<3/8$. Integrating $2/(1-u^2)$ from $0$ to $b$ bounds the log loss by
+\[
+ \log\frac{1+b}{1-b}\le\frac{2b}{1-b^2}
+  =\frac{2(1+b)}{1-b}\,p_j(1-p_j)<8p_j(1-p_j).
+\]
+Sum over all factors, using $\log(n+1)>1$.
+\end{proof}
+
+\section{A local variance bound}
+Assume $d<n$ and the hypotheses of Theorem~\ref{thm}. Then $d>16384\log(n+1)>16384$. Define $k_0=n-\lfloor2d/5\rfloor$. For every $1\le i<k_0$ we have $N>2d/5$.
+\begin{lemma}\label{local}
+At each such midpoint, $V\le72N/d$, $V\le N/192$, and $\E H\ge .99N$.
+\end{lemma}
+\begin{proof}
+Let $w_h=\binom nh^d t^{-h}$ and let $m$ maximize $w_h$. The first step away from $m$ on either side has ratio at most one. Comparing the next ratios to those first ratios gives
+\[
+ \frac{w_{m+j+1}}{w_{m+j}}\le\left(\frac{m+1}{m+j+1}\right)^d,\qquad
+ \frac{w_{m-j-1}}{w_{m-j}}\le\left(\frac{m-j}{m}\right)^d
+\]
+whenever the step is defined. Let $L=\lceil\sqrt{(m+1)/d}\rceil$. A block of $L$ outward steps starting at distance at least $L$ from $m$ has product at most $\exp[-dL^2/(m+1+L)]$ on the right, by $\log(1+s)\ge s/(1+s)$, and at most $\exp[-dL^2/m]$ on the left when that side exists. As $m+1\le dL^2$ and $L\le L^2$, both products are at most $\exp[-d/(d+1)]<2/5$.
+
+For $h\ge0$, move each support point at distance at least $(h+1)L$ by $hL$ towards $m$. This is injective, since the two images stay on opposite sides at distance at least $L$. Summation of the block bounds shows $\Prob(|H-m|\ge(h+1)L)\le(2/5)^h$. Sum tails for $\lceil|H-m|/L\rceil^2$ to get
+\[
+ \E(H-m)^2\le L^2\left[1+\sum_{h\ge0}(2h+3)(2/5)^h\right]
+ = (74/9)L^2 < 9L^2\le19(1+m/d).
+\]
+The last step uses $L^2\le2(1+(m+1)/d)$ and $d\ge18$. Equation~\eqref{mean} and Cauchy--Schwarz now give
+\[
+ |m-N|\le \sqrt{19(1+m/d)}+38(1+m/d)\le43(1+m/d).
+\]
+Thus $m\le(N+43)/(1-43/d)<6N/5$ since $N>2d/5$ and $d>16384$. Substitution gives $V\le19(5/2+6/5)N/d<72N/d$. The other two conclusions follow from $d>16384$ and \eqref{mean}, using $144/d<.01$.
+\end{proof}
+
+\section{Comparing the capped and unrestricted polynomials}
+With the tilt at $T_i$, first draw $K$, then independently choose a uniform $K$-subset of the $n$ rows for each column. The probability of any row exceeding the cap equals $1-P(t)/F(t)$. Since every coefficient of $F-P$ is nonnegative, this bounds $|P(z)-F(z)|/F(t)$ throughout $|z|=t$.
+
+As $H$ is a sum of independent Bernoulli variables, the lower-tail Bernstein inequality bounds $\Prob(H<.9N)$ by $\exp(-N/10)$. Indeed the deficit from the mean is at least $.09N$ and the exponent is at least
+\[
+ \frac{(.09)^2N}{2(1/192+.09/3)}>N/10 .
+\]
+Condition on $H\ge .9N$. The number of omissions in any specified row is binomial with parameters $d,H/n$. Set $M=dN/n$ and $c=d-r$. The mean $\mu$ satisfies $\mu\ge.9M$, and $c\le d^2/(4n)<5M/8$. A row overflows only if it has fewer than $c$ omissions. Chernoff's lower-tail exponent $(\mu-c)^2/(2\mu)$ increases in $\mu\ge c$ and decreases in $c\le\mu$. Therefore the exponent is at least $(121/2880)M>M/24$. Taking a union over rows and adding the Bernstein bound gives at most $(n+1)e^{-M/24}$, since $d<n$.
+
+This error is strictly smaller than the lower bound in Lemma~\ref{circle}. To see this, use $8V\le576N/d$ and
+\[
+ \frac M{24}-576\frac Nd\log(n+1)-\log(n+1)
+ \ \ge\ \left[\left(\frac{16384}{24}-576\right)\frac Nd-1\right]\log(n+1)>0 .
+\]
+Rouch\'e's theorem now counts exactly $i$ zeros of $P$ inside $|z|=T_i$ and excludes zeros on that circle. Moreover $P(-T_i)$ has the sign $(-1)^i$ of $F(-T_i)$, by strict comparison on the real axis.
+
+\section{Recovering the remaining roots}
+At an internal quota $k$ with $G_k>9$ use the radius $x_k=\sqrt{a_{k-1}/a_{k+1}}$. At $x_k$ the ratios of each neighboring term to the central one are equal to $\tau=G_k^{-1/2}<1/3$. Log-concavity makes the successive outward ratios on either side at most $\tau$. Hence the absolute sum of the off-center terms on the circle is at most $2\tau/(1-\tau)<1$ times the central magnitude. Rouch\'e comparison with the central monomial counts $k$ zeros inside the circle and excludes boundary zeros. Also $P(-x_k)$ has sign $(-1)^k$.
+
+For $d\ge n\ge2$, \eqref{curv} gives $G_k\ge(1+2/n)^{2d}>9$ throughout: expand the product and use $k(n-k)\le n^2/4$, then strict Bernoulli at exponent $n$. Cases of degree at most one are immediate. Otherwise, with $d<n$, for $k_0\le k<D$ we have $n-k\le 2d/5$. Hence
+\[
+ \log G_k\ge d\log(1+1/(n-k))\ge d/(2d/5+1)>12/5>\log 9 .
+\]
+There is a tail to join, since $D=n-\lceil nc/d\rceil$ and $D-k_0\ge3d/20-2>1$. The two families thus give one radius for every index $1,\ldots,D-1$. Each radius for index $k$ encloses exactly $k$ zeros and excludes boundary zeros. Nested disks therefore order the radii strictly by index, including across the change of families. Starting from $P(0)=1$ and ending with the sign $(-1)^D$ at negative infinity, there are $D$ successive sign changes on the negative ray. Their distinct real zeros exhaust the degree, proving Theorem~\ref{thm}.
+
+\section{A wider range of caps}
+The following refinement uses the same midpoint comparison with sharper variance estimates near the joining index.
+\begin{theorem}\label{wide}
+The conclusion of Theorem~\ref{thm} holds if $d^2\ge16384n\log(n+1)$ and $50n(d-r)\le29d^2$.
+\end{theorem}
+\begin{proof}
+We need only treat $d<n$. Write $c=d-r$, set $k_0=n-\lfloor5d/8\rfloor$ and retain the notation $N=n-i$, $M=dN/n$. On the midpoints $1\le i<k_0$, one has $N>5d/8$. The proof of Lemma~\ref{local} applies unchanged, since $N>2d/5$ and its variance argument uses no cap assumption.
+
+If $N\le7d/10$, the bound $m\le(N+43)/(1-43/d)$ gives $m+2<5d/7$. If $N\le9d/10$, it gives $m+2<d$. For outward steps starting at distance at least one, the proof of Lemma~\ref{local} bounds the ratios by $e^{-d/(m+2)}$ on either side. If this is at most $s$, shifting $j-1$ positions towards the mode gives $\Prob(|H-m|\ge j)\le s^{j-1}$ for $j\ge1$. Consequently
+\[
+ V\le\E(H-m)^2\le\sum_{j\ge1}(2j-1)s^{j-1}=(1+s)/(1-s)^2.
+\]
+We may take $s=1/4$ or $s=2/5$ in the two respective bands, giving $V\le20/9$ or $V\le35/9$.
+
+In the table, $a$ bounds $c/M$ above. We condition on $H\ge pN$. The bound $V\le vN$ and \eqref{mean} give $\E H-pN\ge \ell N$. The two right columns give lower bounds $N/A$ and $M/B$ for the Bernstein exponent of the exceptional tilt and the Chernoff exponent of the exceptional row, respectively.
+\[
+\begin{array}{c|cccc|cc}
+ N/d & p & a & v & \ell & A & B\\\hline
+ (5/8,7/10] & .99 &116/125 &1/4000 &19/2000 &100&520\\
+ (7/10,9/10] & .99 &29/35 &1/2500 &9/1000 &100&100\\
+ (9/10,\infty) & .9 &29/45 &1/192 &9/100 &10&28
+\end{array}
+\]
+Indeed $c/M\le(29/50)/(N/d)$, $\ell^2/[2(v+\ell/3)]>1/A$, and $(p-a)^2/(2p)>1/B$. In the last line use $2V/N\le144/d<.01$ for the mean estimate. In each row $M\le N$ and $A\le B$, so the total failure probability is at most $(n+1)e^{-M/B}$. This is strictly smaller than the bound in Lemma~\ref{circle}: the needed comparisons in the three rows are
+\[
+ \frac{16384}{520}\frac58>8\frac{20}9+1,\quad
+ \frac{16384}{100}\frac7{10}>8\frac{35}9+1,\quad
+ \left(\frac{16384}{28}-576\right)\frac9{10}>1 .
+\]
+We again have exactly $i$ roots in each midpoint circle and sign $(-1)^i$ at its negative real point.
+
+For $k_0\le k<D$, every internal $j$ among $k,k-1,k+1$ satisfies $\log G_j>d/(5d/8+2)>1.59$ by \eqref{curv}. On the circle $x_k$, each immediate neighbor has relative magnitude $\tau<e^{-.795}<.453$. The next outward ratio is $\tau/G_{k\pm1}<.453\cdot .205$ on each side where a second term exists. Log-concavity bounds all further ratios on that side by the same quantity. The entire off-center sum relative to the middle term is thus at most
+\[
+ \frac{2\cdot .453}{1-.453\cdot .205}<1 .
+\]
+This strict estimate gives the monomial root count and sign even when one side ends at the first neighboring term. Since $D-k_0\ge(5/8-29/50)d-2>1$, the two families join as before and exhaust the degree.
+\end{proof}
+
+\begin{thebibliography}{9}
+\bibitem{symcat} P. Alexandersson. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Balanced arrays of uniform matroids}. In \emph{The symmetric functions catalog}, accessed November 26, 2026.
+\bibitem{orientation} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/blob/2cadc6002bda2bec41c982f5899cad820033074e/topics/balanced-arrays/orientation-normalization.md}{An orientation proof of normalized log-concavity for balanced arrays}. Open Problems in Mathematics, 2026.
+\bibitem{meshproof} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/blob/2cadc6002bda2bec41c982f5899cad820033074e/topics/balanced-arrays/dense-regime/below-cap/full-rank-root-stability.md}{Uniform root-circle bounds for the full-rank polynomial}. Open Problems in Mathematics, 2026.
+\bibitem{ksv} O. Katkova, B. Shapiro, and A. Vishnyakova. \href{https://doi.org/10.1016/j.crma.2010.11.031}{Multiplier sequences and logarithmic mesh}. \emph{C. R. Math. Acad. Sci. Paris} 349 (2011), 35--38.
+\end{thebibliography}
+\end{document}
