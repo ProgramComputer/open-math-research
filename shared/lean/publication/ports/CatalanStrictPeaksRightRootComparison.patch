@@ -10,12 +10,15 @@
  
  private theorem logDerivative_roots {m : ℕ} {P : Polynomial ℝ} {r : Fin m → ℝ} (t : ℝ)
      (hr : CompleteNegativeRoots P r) (ht : ∀ i, 0 < t + r i)
-@@ -126,7 +125,7 @@
+@@ -126,7 +125,10 @@
        _ = (s.card : ℝ) * (n : ℝ) ^ 2 := by simp
        _ ≤ _ := by
          have hcard : s.card ≤ n :=
 -          (Finset.card_le_univ _).trans (by simp [rowDegree]; omega)
-+          (Finset.card_finset_fin_le s).trans (by unfold rowDegree; omega)
++          by
++            have hfin : s.card ≤ Fintype.card (Fin (rowDegree n)) := Finset.card_le_univ s
++            rw [Fintype.card_fin] at hfin
++            exact hfin.trans (by unfold rowDegree; omega)
          calc
            _ ≤ (n : ℝ) * (n : ℝ) ^ 2 := mul_le_mul_of_nonneg_right (by exact_mod_cast hcard) (sq_nonneg _)
            _ = _ := by ring

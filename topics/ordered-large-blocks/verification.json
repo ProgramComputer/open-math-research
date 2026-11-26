@@ -68,5 +68,96 @@
         "'OrderedThresholdFourSigns.threshold_four_two_pair_sign' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
     }
-  ]
+  ],
+  "stable_recheck": {
+    "topic": "ordered-large-blocks",
+    "scope": "The threshold-two through threshold-four sign and root-count components and the general sector angular inequalities, under their formal hypotheses.",
+    "published_source_commit": "312293aa850010e9d9509d6850a482b9c7b7966f",
+    "workflow_checkout_commit": "941127e40a2d77f008ef678b8b37b032040c4195",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45763051596/job/139717331888",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45763051596/artifacts/15091325283",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ordered .publication-build",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ordered .publication-build"
+    ],
+    "checked_declarations": 30,
+    "standard_axiom_changes": [],
+    "modules": [
+      {
+        "file": "topics/ordered-large-blocks/lean/OrderedThresholdTwoSigns.lean",
+        "published_sha256": "32a5a73646a7c7b73e4dfc07e3e45859ad0a9d9c148a07ecf1c3ead63ee5c559",
+        "kernel_output": [
+          "'OrderedThresholdTwoSigns.roots_of_alternating_sign_mesh' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdTwoSigns.transfer_same_degree' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdTwoSigns.transfer_extra_root' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdTwoSigns.threshold_two_next_row' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ],
+        "port_patch": "shared/lean/publication/ports/OrderedThresholdTwoSigns.patch",
+        "port_patch_sha256": "4dd153ddab55d4f4fc510bd3ed912f8aac85b1d6980dc416312bef3a589edff9"
+      },
+      {
+        "file": "topics/ordered-large-blocks/lean/OrderedThresholdTwoPhase.lean",
+        "published_sha256": "9231314343984c6b0cf25581907e984479fb78e21d40606e39eb841a11dd5e71",
+        "kernel_output": [
+          "'OrderedThresholdTwoPhase.upper_pole_iff' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdTwoPhase.derivative_polePhase' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdTwoPhase.strictAntiOn_polePhase' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdTwoPhase.unique_in_pole_band' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdTwoPhase.at_most_one_upper_pole' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdTwoPhase.consecutive_sign' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ],
+        "port_patch": "shared/lean/publication/ports/OrderedThresholdTwoPhase.patch",
+        "port_patch_sha256": "b4db5c4802ad8532d84eade9cff3aaf4a6147254150a5aa0ddd34f78fa0da393"
+      },
+      {
+        "file": "topics/ordered-large-blocks/lean/OrderedThresholdThreeSigns.lean",
+        "published_sha256": "a56901925bb50cfc3a6b062856ae101284ce47c2fe9950814fd4229e19c42cf1",
+        "kernel_output": [
+          "'OrderedThresholdThreeSigns.cancel_negative_real_pole' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdThreeSigns.radius_lower_bound_from_log_derivatives' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdThreeSigns.radius_lower_bound_linear' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdThreeSigns.radius_ratio_exp_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdThreeSigns.real_pole_envelope' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdThreeSigns.signed_sine_dominates' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdThreeSigns.paired_tail_is_small' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdThreeSigns.cosine_error_budget' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdThreeSigns.third_pole_next_row_sign' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdThreeSigns.threshold_three_next_row' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ],
+        "port_patch": "shared/lean/publication/ports/OrderedThresholdThreeSigns.patch",
+        "port_patch_sha256": "aa8b0579cb6fc6259d605fc9d4d43507869d21ee1c59630c6ff59d5edd2a597d"
+      },
+      {
+        "file": "topics/ordered-large-blocks/lean/OrderedGlobalAngular.lean",
+        "published_sha256": "4555ae361a8df4d86c99ace479e45cb197b60d558293344a61c33c36ac1cadc5",
+        "kernel_output": [
+          "'OrderedGlobalAngular.sector_weight_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedGlobalAngular.sector_boundary_sines' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedGlobalAngular.rotated_numerator_im_negative' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedGlobalAngular.angle_lt_of_sin_sub_neg' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedGlobalAngular.abs_sin_nat_multiple_le' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedGlobalAngular.first_sector_derivative_positive' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ],
+        "port_patch": "shared/lean/publication/ports/OrderedGlobalAngular.patch",
+        "port_patch_sha256": "24c25114dce1bc93674e7f024472a6a00961b86e9c68ab73133848a5c848bd58"
+      },
+      {
+        "file": "topics/ordered-large-blocks/lean/OrderedThresholdFourSigns.lean",
+        "published_sha256": "ad0e9e2b6e69dddb592bfb85c1efdb6a16a5d0f46fb57339d90b62e0f89fc067",
+        "kernel_output": [
+          "'OrderedThresholdFourSigns.determinant_identity' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdFourSigns.determinant_margin_after_perturbation' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdFourSigns.determinant_sign_transfer' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OrderedThresholdFourSigns.threshold_four_two_pair_sign' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ]
+      }
+    ],
+    "status": "passed"
+  }
 }

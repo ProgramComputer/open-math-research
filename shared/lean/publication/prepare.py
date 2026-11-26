@@ -78,7 +78,7 @@ def main():
         if args.group == "catalan":
             # Mathlib 4.36 makes the coefficient ring implicit in these maps.
             source = re.sub(r"PowerSeries\.(coeff|C|constantCoeff) (ℝ|ℂ|P|R|S)(?![\w'])",
-                            r"PowerSeries.\1 (R := \2)", source)
+                            r"PowerSeries.\1 («R» := \2)", source)
             source = source.replace("eval_finset_sum", "eval_finsetSum")
             source = re.sub(r"(Nat\.strong_induction_on with\n\s*\| )h ", r"\1ind ", source)
             path.write_text(source)
