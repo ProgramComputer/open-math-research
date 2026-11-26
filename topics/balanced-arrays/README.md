@@ -85,3 +85,7 @@ With seven rows, cap $6t$, and $7t$ columns, adding one column induces a diagona
 ## The geometric-center sign test at fixed dimension
 
 At every fixed $d\ge2$ and row cap, the geometric-center signs reverse at asymptotically half of the internal quotas. This limits a sufficient test for real-rootedness. [Obstruction, proof and exact endpoint checks](geometric-centers/README.md)
+
+## Coefficient curvature near the upper quota
+
+An exact screen checked a proposed deficit-dependent curvature inequality at 13,346 internal quotas. The scalar row-deficit model admits a convolution proof without equal-column conditioning. The general bound for balanced arrays remains open. [Screen, analytic checks and scalar proof](deficit-curvature/README.md)
