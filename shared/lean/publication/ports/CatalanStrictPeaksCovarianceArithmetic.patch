@@ -1,0 +1,42 @@
+--- CatalanStrictPeaksCovarianceArithmetic.lean
++++ CatalanStrictPeaksCovarianceArithmetic.lean
+@@ -85,8 +85,7 @@
+   have hx : (n : ℝ) ≠ 0 := by linarith
+   unfold scaledMoment tiltedMoment
+   rw [pow_succ]
+-  field_simp [hx]
+-  ring
++  field_simp [hx] <;> ring
+ 
+ private theorem scaled_tilted_bounds {n : ℕ} (hn : 150 ≤ n) :
+     (n : ℝ) ^ 2 * tiltedMoment n 1 ≤ 307 / 50 ∧
+@@ -150,8 +149,7 @@
+       (n : ℝ) / 8 * tiltedMoment n 3 + 1 / (20 * (n : ℝ))) =
+     11 * y * T1 + ((y + 11 / 8) * y) * T2 + (y ^ 2 / 8) * T3 + 1 / 20 := by
+     dsimp [y, T1, T2, T3]
+-    field_simp [hx.ne']
+-    ring
++    field_simp [hx.ne'] <;> ring
+   have hq : 0 < tiltAverage n := lt_of_lt_of_le (by norm_num) (tiltAverage_ge hn)
+   have hA := mul_le_mul_of_nonneg_left b1 (show 0 ≤ 11 * y by positivity)
+   have hB := mul_le_mul_of_nonneg_left b2 (show 0 ≤ (y + 11 / 8) * y by positivity)
+@@ -186,8 +184,7 @@
+       ((n : ℝ) / 2 + 1) * tiltedMoment n 2 + 1 / (20 * (n : ℝ))) =
+     (1 / 2 + 11 * y) * T1 + ((1 / 2 + y) * y) * T2 + 1 / 20 := by
+     dsimp [y, T1, T2]
+-    field_simp [hx.ne']
+-    ring
++    field_simp [hx.ne'] <;> ring
+   have hq : 0 < tiltAverage n := lt_of_lt_of_le (by norm_num) (tiltAverage_ge hn)
+   have hA := mul_le_mul_of_nonneg_left b1 (show 0 ≤ 1 / 2 + 11 * y by positivity)
+   have hB := mul_le_mul_of_nonneg_left b2 (show 0 ≤ (1 / 2 + y) * y by positivity)
+@@ -216,8 +213,7 @@
+         (11 * y) * scaledMoment n 1 + (y ^ 2 + 11 * y / 8) * scaledMoment n 2 +
+           (y ^ 2 / 8) * scaledMoment n 3 + y / 20 := by
+     dsimp [y, scaledMoment]
+-    field_simp [hx.ne']
+-    ring
++    field_simp [hx.ne'] <;> ring
+   rw [heq]
+   have hA := mul_le_mul_of_nonneg_left b1 (show 0 ≤ 11 * y by positivity)
+   have hB := mul_le_mul_of_nonneg_left b2 (show 0 ≤ y ^ 2 + 11 * y / 8 by positivity)

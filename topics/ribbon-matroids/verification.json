@@ -29,5 +29,87 @@
         "'RibbonExamples.diamond_deletion' depends on axioms: [propext]"
       ]
     }
-  ]
+  ],
+  "stable_recheck": {
+    "topic": "ribbon-matroids",
+    "scope": "The polygon reduction under invariant deletion and cycle evaluation hypotheses, and the kernel-decided finite rank-three graph identities.",
+    "published_source_commit": "312293aa850010e9d9509d6850a482b9c7b7966f",
+    "workflow_checkout_commit": "6b930183e6a548a6c60a2a9e00bc80cf49fb0c4e",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45762382062/job/139715148490",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45762382062/artifacts/15090174000",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon .publication-build",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon .publication-build"
+    ],
+    "checked_declarations": 13,
+    "standard_axiom_changes": [
+      {
+        "declaration": "RibbonExamples.quadrilateral_kl",
+        "published": [
+          "propext"
+        ],
+        "stable": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "declaration": "RibbonExamples.diamond_kl",
+        "published": [
+          "propext"
+        ],
+        "stable": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      {
+        "declaration": "RibbonExamples.doubledDiamond_kl",
+        "published": [
+          "propext"
+        ],
+        "stable": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    ],
+    "modules": [
+      {
+        "file": "topics/ribbon-matroids/lean/Ribbon.lean",
+        "published_sha256": "c9b88ff04c708167d87674b51eec40d69a379893612102e6512831bcaf30c632",
+        "kernel_output": [
+          "'Ribbon.polygonParallel' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'Ribbon.ParallelAlong.commonEdge' depends on axioms: [propext, Quot.sound]",
+          "'Ribbon.ParallelAlong.endpointsAfterDeletion' does not depend on any axioms",
+          "'Ribbon.polygon_eq_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'Ribbon.polygon_narayana' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'Ribbon.fan_narayana' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ]
+      },
+      {
+        "file": "topics/ribbon-matroids/lean/RibbonExamples.lean",
+        "published_sha256": "4c376f897d81432365d1b400930533faa3d826637625ff01d97052d593139c4f",
+        "kernel_output": [
+          "'RibbonExamples.quadrilateral_kl' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'RibbonExamples.diamond_kl' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'RibbonExamples.doubledDiamond_kl' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'RibbonExamples.diamond_narayana' depends on axioms: [propext]",
+          "'RibbonExamples.doubledDiamond_narayana' depends on axioms: [propext]",
+          "'RibbonExamples.diamond_deletion' depends on axioms: [propext]",
+          "'RibbonExamples.diamond_coefficients' depends on axioms: [propext]"
+        ]
+      }
+    ],
+    "status": "passed"
+  }
 }

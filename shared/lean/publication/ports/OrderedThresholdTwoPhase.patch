@@ -27,7 +27,7 @@
 -  field_simp [ht.ne', hs.ne']
 -  ring
 +  change HasDerivAt polePhase _ t at h
-+  convert h using 1 <;> (try simp only [id_eq, one_mul]) <;>
++  convert h using 1 <;> (try simp only [id_eq, one_mul, Pi.mul_apply, Pi.div_apply]) <;>
 +    (try field_simp [ht.ne', hs.ne']) <;> ring
  
  theorem strictAntiOn_polePhase {D : Set ℝ} (hc : Convex ℝ D)

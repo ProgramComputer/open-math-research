@@ -18,8 +18,8 @@ case "$topic" in
     theorems=(PrismSplit.finBoxSplitCounterexample PrismFamily.familyBoxSplitCounterexample AuditExportType.prismSix AuditExportType.prismFamily)
     ;;
   catalan)
-    modules=(CatalanStrictPeaksAllInterlacing AuditCatalanExportType AuditCatalanWordBridge)
-    theorems=(CatalanStrictPeaks.strict_peaks_all_lengths AuditExportType.catalan AuditReference.catalanPolynomial_eq)
+    modules=(CatalanStrictPeaksAllInterlacing AuditCatalanExportType AuditCatalanWordBridge AuditCatalanFullSource)
+    theorems=(CatalanStrictPeaks.strict_peaks_all_lengths AuditExportType.catalan AuditReference.catalanPolynomial_eq AuditReference.catalanSourcePublished AuditReference.catalanSourceOriginal)
     ;;
   *)
     echo "Unknown audit topic: $topic" >&2

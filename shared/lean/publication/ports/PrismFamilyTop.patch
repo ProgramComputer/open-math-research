@@ -73,6 +73,15 @@
    rw [capSeries_one, coeff_one_add_pow]
  
  private theorem nextCoeff_from_reflection (d : Nat) (F : Int → Int) (L I : Nat → Int)
+@@ -210,7 +210,7 @@
+     (afterIntExtension_diff b) (fun n hn => afterInterior_reflection b n hb hn)
+     (by simp [afterInterior]) (afterInterior_two b)
+   rw [afterInterior_three b] at h
+-  simpa [after, Nat.cast_add, Nat.cast_mul] using h
++  simpa [after, Nat.cast_add, Nat.cast_mul, add_assoc, one_add_one_eq_two] using h
+ 
+ theorem nextCoeff_map_int_real (p : Polynomial Int) :
+     (p.map (Int.castRingHom ℝ)).nextCoeff = (p.nextCoeff : ℝ) := by
 @@ -218,8 +218,8 @@
    simp [Polynomial.nextCoeff, Polynomial.natDegree_map_eq_of_injective hinj]
  

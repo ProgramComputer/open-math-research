@@ -1,11 +1,53 @@
 --- a/PrismDimensions.lean
 +++ b/PrismDimensions.lean
-@@ -261,7 +261,7 @@
-     (∑ i ∈ Finset.range (d + 1), Polynomial.C (f i) * Polynomial.X ^ i).natDegree ≤ d := by
-   rw [Polynomial.natDegree_le_iff_coeff_eq_zero]
-   intro k hk
+@@ -118,8 +118,7 @@
+             _ = _ := by
+               dsimp only [eps]
+               have hne : bound + 1 ≠ 0 := by linarith
+-              field_simp
+-              ring
++              field_simp <;> ring
+         have hci : (1 : ℝ) ≤ (caps i : ℝ) := by exact_mod_cast (hpositive i)
+         rw [abs_le] at hperturb
+         change 0 ≤ (caps i : ℝ) / 2 + eps * v i ∧
+@@ -257,18 +256,6 @@
+   rw [splitAffineDimension]
+   simpa only [finLatticeCount_eq, splitFinCaps_list] using splitEhrhartSeries
+ 
+-private theorem finitePowerSum_degree_le (d : Nat) (f : Nat → Int) :
+-    (∑ i ∈ Finset.range (d + 1), Polynomial.C (f i) * Polynomial.X ^ i).natDegree ≤ d := by
+-  rw [Polynomial.natDegree_le_iff_coeff_eq_zero]
+-  intro k hk
 -  rw [Polynomial.finset_sum_coeff]
-+  rw [Polynomial.finsetSum_coeff]
-   apply Finset.sum_eq_zero
-   intro i hi
-   have hne : k ≠ i := by
+-  apply Finset.sum_eq_zero
+-  intro i hi
+-  have hne : k ≠ i := by
+-    have := Finset.mem_range.mp hi
+-    omega
+-  rw [Polynomial.coeff_C_mul_X_pow, if_neg hne]
+-
+ private theorem coefficients_get {p : Polynomial Int} {m : Nat} {cs : List Int}
+     (hc : (List.range m).map p.coeff = cs) (i : Nat) (hi : i < m) :
+     p.coeff i = (cs[i]?).getD 0 := by
+@@ -289,7 +276,9 @@
+   have hcoeffs : (List.range 11).map unsplitEhrhartPolynomial.coeff = unsplitCoefficients := by
+     rw [← ehrhartNumerator_of_seriesPolynomial 10 _ _ unsplitEhrhartSeries, unsplitIntegerCounts]
+     exact unsplitCompositionCertificate
+-  have hbound : unsplitEhrhartPolynomial.natDegree ≤ 10 := finitePowerSum_degree_le 10 _
++  have hbound : unsplitEhrhartPolynomial.natDegree ≤ 10 := by
++    unfold unsplitEhrhartPolynomial
++    exact polynomialPrefix_degree _ _
+   have hz : unsplitEhrhartPolynomial.coeff 10 = 0 := coefficients_get hcoeffs 10 (by decide)
+   have hn : unsplitEhrhartPolynomial.coeff 9 = 1 := coefficients_get hcoeffs 9 (by decide)
+   exact degree_from_upper hbound hz (by rw [hn]; decide)
+@@ -298,7 +287,9 @@
+   have hcoeffs : (List.range 12).map splitEhrhartPolynomial.coeff = splitCoefficients := by
+     rw [← ehrhartNumerator_of_seriesPolynomial 11 _ _ splitEhrhartSeries, splitIntegerCounts]
+     exact splitCompositionCertificate
+-  have hbound : splitEhrhartPolynomial.natDegree ≤ 11 := finitePowerSum_degree_le 11 _
++  have hbound : splitEhrhartPolynomial.natDegree ≤ 11 := by
++    unfold splitEhrhartPolynomial
++    exact polynomialPrefix_degree _ _
+   have hz : splitEhrhartPolynomial.coeff 11 = 0 := coefficients_get hcoeffs 11 (by decide)
+   have hn : splitEhrhartPolynomial.coeff 10 = 1 := coefficients_get hcoeffs 10 (by decide)
+   exact degree_from_upper hbound hz (by rw [hn]; decide)

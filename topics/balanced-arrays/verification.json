@@ -105,5 +105,114 @@
         "'BalancedThreeColumnCounting.array_prefix_negative_roots' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
     }
-  ]
+  ],
+  "stable_recheck": {
+    "topic": "balanced-arrays",
+    "scope": "Corank-one labeled-array inclusion–exclusion, torus components, disk estimates, and the three-column conditional phase sign count.",
+    "published_source_commit": "312293aa850010e9d9509d6850a482b9c7b7966f",
+    "workflow_checkout_commit": "337c4ff4fadf54497a83a5a6ce862fa0235ae383",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45762740458/job/139716300711",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45762740458/artifacts/15089819220",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py balanced .publication-build",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py balanced .publication-build"
+    ],
+    "checked_declarations": 30,
+    "standard_axiom_changes": [],
+    "modules": [
+      {
+        "file": "topics/balanced-arrays/lean/BalancedPairCompression.lean",
+        "published_sha256": "c732c88cd3b5777afe8c9acbaf09fdc0be6456d10b0d20088b56e2203f6768d3",
+        "kernel_output": [
+          "'BalancedPairCompression.unit_pair_interior' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedPairCompression.affine_normSq_lt_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedPairCompression.exists_compressing_unit_pair' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedPairCompression.slope_eq_zero_at_unit_pair_max' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ]
+      },
+      {
+        "file": "topics/balanced-arrays/lean/BalancedTorusMaxima.lean",
+        "published_sha256": "b5dd4c097d9494af85bb7bffe7e5a887dc7a28638e08b9bbe3a077fbcfb1b815",
+        "kernel_output": [
+          "'BalancedTorusMaxima.prod_replacePair' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedTorusMaxima.replacePair_mem_unitProductTorus' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedTorusMaxima.diagonal_of_two_maxima' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedTorusMaxima.rowObjective_eq_elementary_sum' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedTorusMaxima.pairAffine_rowObjective' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ]
+      },
+      {
+        "file": "topics/balanced-arrays/lean/BalancedTorusComponents.lean",
+        "published_sha256": "2a7b4391552ec92d7838f30f6be0ea123563276b2d63dbad864539ebc6bcc366",
+        "kernel_output": [
+          "'BalancedTorusComponents.isCompact_unitProductTorus' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedTorusComponents.modulusMaxima_nonempty' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedTorusComponents.exists_diagonal_in_modulusMaxima_component' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedTorusComponents.continuous_rowObjective' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedTorusComponents.rowObjective_exists_diagonal_in_component' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedTorusComponents.dilated_rowObjective_exists_diagonal_in_component' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ],
+        "port_patch": "shared/lean/publication/ports/BalancedTorusComponents.patch",
+        "port_patch_sha256": "8ff0f5f728b78dbc3ff13e5cf4d40102481f961eafd7cb64c81b4ed366e9eb02"
+      },
+      {
+        "file": "shared/lean/OpenMathResearch/DiskUniqueness.lean",
+        "published_sha256": "1a9a7a01e83da3714253ffaa87ad249eb927d0836b5a6a3a1ef434bcfc19c996",
+        "kernel_output": [
+          "'OpenMathResearch.DiskUniqueness.power_difference_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OpenMathResearch.DiskUniqueness.derivative_tail_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OpenMathResearch.DiskUniqueness.linear_derivative_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OpenMathResearch.DiskUniqueness.injective_on_disk' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OpenMathResearch.DiskUniqueness.geometric_tail_bound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OpenMathResearch.DiskUniqueness.extended_disk_budget' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ]
+      },
+      {
+        "file": "shared/lean/OpenMathResearch/AlternatingSignRoots.lean",
+        "published_sha256": "d237237c192582c3e7d304b1a8fb8911b01e105fb3b104755596a11f694c5d5f",
+        "kernel_output": [
+          "'OpenMathResearch.AlternatingSignRoots.roots_of_complete_list' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OpenMathResearch.AlternatingSignRoots.roots_of_alternating_sign_mesh' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OpenMathResearch.AlternatingSignRoots.transfer_same_degree' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'OpenMathResearch.AlternatingSignRoots.transfer_extra_root' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ],
+        "port_patch": "shared/lean/publication/ports/OpenMathResearch.AlternatingSignRoots.patch",
+        "port_patch_sha256": "a1b10024efacec5668c5a6ea162ff84368d69dbeda974bc9764056d8333e4303"
+      },
+      {
+        "file": "shared/lean/OpenMathResearch/IntegerLevelNodes.lean",
+        "published_sha256": "ac3a5ecad50609a0bb0d5e0153d27ef001ebf87792cffe244f6087449076825e",
+        "kernel_output": [
+          "'OpenMathResearch.IntegerLevelNodes.increasing_integer_level_nodes' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ],
+        "port_patch": "shared/lean/publication/ports/OpenMathResearch.IntegerLevelNodes.patch",
+        "port_patch_sha256": "86395d1d780228492e9a240f014ee31f0d6e01dbe52fab1a75f5484fe03767d0"
+      },
+      {
+        "file": "topics/balanced-arrays/lean/BalancedThreeColumnSigns.lean",
+        "published_sha256": "59c8fc468e4f55d758e1f9865c90eb23aeea6edf0157a14322de6b7222794a66",
+        "kernel_output": [
+          "'BalancedThreeColumnSigns.positive_roots_of_phase_signs' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ]
+      },
+      {
+        "file": "topics/balanced-arrays/lean/BalancedNoFullRowCounting.lean",
+        "published_sha256": "56460851ef546fc5b68f4e73bc13290f41615a68c7779866a055b2c1a4152769",
+        "kernel_output": [
+          "'BalancedNoFullRowCounting.covering_card' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedNoFullRowCounting.arrays_card' depends on axioms: [propext, Classical.choice, Quot.sound]",
+          "'BalancedNoFullRowCounting.array_inclusion_exclusion' depends on axioms: [propext, Classical.choice, Quot.sound]"
+        ],
+        "port_patch": "shared/lean/publication/ports/BalancedNoFullRowCounting.patch",
+        "port_patch_sha256": "bb54dc8b17ad4b9ca79efa46bd42da45b4d28a06a220d39d9b43e2025c52eb3d"
+      }
+    ],
+    "status": "passed"
+  }
 }
