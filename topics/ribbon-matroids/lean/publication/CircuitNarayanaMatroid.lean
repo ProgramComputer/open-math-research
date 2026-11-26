@@ -149,7 +149,7 @@ private theorem CircuitBases.rankLayer_card (F : Flat M) (k : ℕ) (hk : k < hei
       exact fun _ hF' hD' => (hSubD hD').2 hF'
     have hU : F.val ∪ (D.val : Set α) ⊆ M.E := Set.union_subset F.property.subset_ground (hSubD.trans Set.diff_subset)
     have hCard : (F.val ∪ (D.val : Set α)).ncard = F.val.ncard + k := by
-      rw [Set.ncard_union_eq hDisj, Set.ncard_coe_Finset, hD.2]
+      rw [Set.ncard_union_eq hDisj, Set.ncard_coe_finset, hD.2]
     have hSmall : (F.val ∪ (D.val : Set α)).ncard < r := by
       rw [hHeight] at hk
       omega

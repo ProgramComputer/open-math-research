@@ -45,15 +45,13 @@ private theorem circuitKLCoeff_absorption (m i k : ℕ) (hki : k ≤ i) (hi : i 
       ((m + 1).choose i : ℤ) * ((i.choose k : ℤ) * ((m - i).choose (i + 1 - k) : ℤ)) := by
   have h1 : ((m + 1).choose k : ℤ) * ((m - k + 1).choose (i - k + 1) : ℤ) =
       ((m + 1).choose (i + 1) : ℤ) * ((i + 1).choose k : ℤ) := by
-    have hn : i + 1 ≤ m + 1 := by omega
     have hk : k ≤ i + 1 := by omega
-    have h := (Nat.choose_mul hn hk).symm
+    have h := (Nat.choose_mul (n := m + 1) hk).symm
     rw [show m + 1 - k = m - k + 1 by omega, show i + 1 - k = i - k + 1 by omega] at h
     exact_mod_cast h
   have h2 : ((m + 1).choose k : ℤ) * ((m - k + 1).choose (i - k) : ℤ) =
       ((m + 1).choose i : ℤ) * (i.choose k : ℤ) := by
-    have hn : i ≤ m + 1 := by omega
-    have h := (Nat.choose_mul hn hki).symm
+    have h := (Nat.choose_mul (n := m + 1) hki).symm
     rw [show m + 1 - k = m - k + 1 by omega] at h
     exact_mod_cast h
   unfold circuitKLCoeff
