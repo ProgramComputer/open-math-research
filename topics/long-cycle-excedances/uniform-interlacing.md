@@ -1,6 +1,6 @@
 # Eventual strict interlacing for all cycle-length thresholds
 
-**Proposed theorem.** There is an absolute $N$ such that whenever $n\ge N$ and $3\le k\le n$, the $n-2$ nonzero roots of $E_{n,k}$ are simple and negative and they strictly interlace the nonzero roots of $E_{n+1,k}$. Zero is simple. The same $N$ applies to all thresholds. The proof leaves the finite set of smaller row sizes unresolved; it gives no numerical upper bound suitable for enumerating that set.
+**Theorem.** There is an absolute $N$ such that whenever $n\ge N$ and $3\le k\le n$, the $n-2$ nonzero roots of $E_{n,k}$ are simple and negative and they strictly interlace the nonzero roots of $E_{n+1,k}$. Zero is simple. The same $N$ applies to all thresholds. The proof leaves the finite set of smaller row sizes unresolved; it gives no numerical upper bound suitable for enumerating that set.
 
 Use $a_{n,p}=[t^p]E_{n,k}(t)$, $\alpha_{n,p}=a_{n,p}/p^n$, and $P_n(t)=E_{n,k}(t)/t$. The consecutive comparison always holds $k$ fixed across the two sizes. The uniformity assertions allow $k$ to vary with the old size. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Reviewed extreme-rank argument](https://github.com/ProgramComputer/open-math-research/pull/7) · [Project issue](https://github.com/ProgramComputer/open-math-research/issues/4)
 
@@ -140,7 +140,7 @@ Indeed $(1+A/k)^{-n}\le\exp(-An/(2k))\le n^{-A/(2C_0)}$ for large $k$, $r=O(\sqr
 
 ## Discrete Poisson derivative at nearby poles
 
-It remains to compare the included pole amplitudes when $c_1\sqrt k\le s\le10k$. For $|w_p|\le R_{\max}$ we have $|\Im w_p|\le C_{A,c_1}s/\sqrt k$. On the vertical segment joining $s$ to such a pole, the derivative of the complex sum in (11) is
+It remains to compare the included pole amplitudes when $c_1\sqrt k\le s\le10k$. For $|w_p|\le R_{\max}$ we have $|\Im w_p|\le C_{A,c_1}s/\sqrt k$. On the vertical segment joining $s$ to such a pole, the derivative of the auxiliary sum $\sum_{m\ge1}Q(k,mw)/m$, whose negative occurs in (11), is
 $$
 -\sum_{m\ge1}\frac{e^{-mw}(mw)^{k-1}}{(k-1)!}.
 $$
@@ -206,7 +206,7 @@ For the differentiated mixed sum we claim $|M'|\le n^{-1/2+o(1)}=o(n d_n)$. Use 
 $$
  |M'|\ll\frac{n D P_1 P}{k^2 S}\exp(2\sqrt{PD})=n^{-1/2+o(1)}.
 $$
-Differentiation is justified at each fixed $\theta>0$ by summable majorants of these differentiated pole series (and finitely many cycle types). For the common-pole sum the conjugate pair $\pm1$ gives $2\cos(n\theta)$, with derivative $-2n\sin(n\theta)$. Each remaining positive odd $p$ costs at most $|z_p|^n$ in the half sum, or $p|z_p|^{n+1}$ after differentiation and division by $n$, since $|z'_p|\le p|z_p|^2$. Both sums are below $1/10$ by the weighted bound in [the fixed-threshold proof](fixed-threshold.md) ($nS^2\ge1$). This proves the two bulk bounds.
+Differentiation is justified at each fixed $\theta>0$ by summable majorants of these differentiated pole series (and finitely many cycle types). For the common-pole sum the conjugate pair $\pm1$ gives $2\cos(n\theta)$, with derivative $-2n\sin(n\theta)$. Each remaining positive odd $p$ costs at most $|z_p|^n$ in the half sum, or $p|z_p|^{n+1}$ after differentiation and division by $n$, since $|z'_p|\le p|z_p|^2$. Here $p|z_p|\ge1$ for $p\ge1$, since $|z_p|^{-2}=1+(p^2-1)S^2\le p^2$. Both sums are below $1/10$ by the weighted bound in [the fixed-threshold proof](fixed-threshold.md) ($nS^2\ge1$). This proves the two bulk bounds.
 
 At an old root the maximum-insertion recurrence gives the exact identity
 $$

@@ -1,6 +1,6 @@
 # Excedance zeros for permutations with long cycles
 
-A proposed uniform theorem gives one cutoff $N$ such that for every $n\ge N$ and every $3\le k\le n$, the nonzero roots are simple, negative and strictly interlace the next row at the same $k$. This would leave only finitely many pairs in the full conjecture. The proof gives no numerical $N$. [Uniform argument](uniform-interlacing.md)
+The uniform theorem gives one cutoff $N$ such that for every $n\ge N$ and every $3\le k\le n$, the nonzero roots are simple, negative and strictly interlace the next row at the same $k$. This leaves only finitely many pairs in the full conjecture. The proof gives no numerical $N$. [Uniform argument](uniform-interlacing.md) · [Independent review](review-uniform-interlacing.md)
 
 For minimum cycle length $k=3$, the reviewed proof gives simple negative nonzero roots and strict interlacing between consecutive rows for every $n\ge3$. Both conclusions also hold for every $k\ge3$ and $n\ge Bk^2$ with one absolute constant $B$. The proof does not give its numerical value. [Uniform cutoff](quadratic-cutoff.md) · [Review](review-quadratic-cutoff.md) All $399$ coefficient vectors in the finite part for $k=3$ were reconstructed independently. The original conjecture still asks for all $n\ge k$ at every $k\ge4$. [Argument](fixed-threshold.md) · [Source and earlier work](LITERATURE.md) · [Alexandersson’s original statement](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances)
 
