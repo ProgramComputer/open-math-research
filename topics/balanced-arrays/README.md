@@ -123,3 +123,5 @@ An exact screen checks the individual rays and their coordinate adjacencies. Two
 [Universal finite coverage through 36 rows](finite-36/README.md) reconciles all dimensions and caps at row 36, including 28 distinct exact residual cases.
 
 [Carried-load curvature and finite extensions](engset-curvature/README.md) proves strict extension concavity in three fixed-shape asymptotic regimes and gives a conditional linear dimension bound.
+
+[Column balance near quota saturation](bessel-margins/README.md) gives an explicit outer-root bound and narrows the band in which normalized curvature could obstruct real-rootedness.
