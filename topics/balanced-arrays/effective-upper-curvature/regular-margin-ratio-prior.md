@@ -1,0 +1,37 @@
+# Regular-row two-column margin ratio: attribution and scope
+
+Screen date: 2026-11-26. Supporting lemma for [balanced-array issue #2](https://github.com/ProgramComputer/open-math-research/issues/2).
+
+Let $`C(u)>0`$ count labeled binary $`n\times d`$ matrices with all row sums $`r`$ and column sums $`u`$. For distinct columns $`i,j`$ with $`0<u_j\le u_i<n`$, write $`\Delta=u_i-u_j`$, $`A=\Delta+1`$, and $`u'=u+e_i-e_j`$. In a uniform matrix of type $`u`$, let $`X`$ count rows with a one in column $`j`$ and a zero in column $`i`$. The statements screened are
+
+$$
+\frac{C(u')}{C(u)}=\mathbb E\frac{X}{X+A}
+\ \ge\ 1-\frac{A}{u_j(1-u_i/n)}.
+$$
+
+The bound is informative when the denominator is large relative to $`A`$. If $`u_i=n`$ or $`u_j=0`$, the outward move has count zero and the denominator vanishes.
+
+## Mathematical check
+
+Freeze every column except $`i,j`$. Each row needs zero, one or two more entries. Let $`q`$ rows need two ones. These are forced, and $`u_j-q=X`$ of the remaining one-entry rows must take their one in column $`j`$. The respective completion counts are $`\binom{\Delta+2X}{X}`$ and $`\binom{\Delta+2X}{X-1}`$. Their ratio is $`X/(X+A)`$, with zero when $`X=0`$. Every residual pattern with a target completion also has a source completion. Averaging under the source law gives the identity. This argument for the identity works with arbitrary fixed row sums. It also gives the upper bound $`u_j/(u_i+1)`$.
+
+For the row marginal, mark row $`a`$ using $`\prod_\ell e_{u_\ell}(z_\ell,(x_b)_{b\ne a})`$ and extract the required powers of every $`x_b`$. Total degree imposes the marked row sum. The resulting multi-affine polynomial is real stable by elementary symmetric stability, multiplication, differentiation and real specialization. Thus the two marked indicators in columns $`i,j`$ are negatively correlated. Row exchangeability yields $`\mathbb E X\ge u_j(1-u_i/n)`$.
+
+After conditioning on a specified support of column $`i`$, mark column $`j`$ using $`\prod_a e_{r-A_{ai}}(z_a,(x_\ell)_{\ell\notin\{i,j\}})`$ and extract all remaining column quotas. Total degree imposes the quota of column $`j`$. Specialize the marked coordinates on the support of $`i`$ to one and identify the other marked coordinates with $`t`$. This gives the stable univariate probability generating polynomial of $`X`$ after normalization. Its normalized factors are Bernoulli generating functions because its coefficients are nonnegative and its zeros are real. Equal row sums make the conditional law of $`X`$ independent of which support of $`i`$ was fixed, by row permutation. Consequently $`X`$ is Poisson–binomial unconditionally. The argument concerns these marginals and does not apply a strong Rayleigh claim to the full edge-indicator law.
+
+For Poisson–binomial $`X`$ of mean $`\lambda>0`$, its generating function on $`0\le t\le1`$ is at most $`\exp[-\lambda(1-t)]`$. Integrating yields $`\mathbb E[(1+X)^{-1}]\le(1-e^{-\lambda})/\lambda\le1/\lambda`$. Since $`A\ge1`$, applying this to $`1-A/(A+X)`$ proves the bound. Keeping the factor $`t^{A-1}`$ gives the stronger $`1-A\int_0^1t^{A-1}\exp[-\lambda(1-t)]\,dt`$.
+
+## Primary precedents
+
+- Borcea, Brändén and Liggett, *Negative dependence and the geometry of polynomials*, Proposition 3.1 and Theorems 4.1 and 4.9, give the closure properties and negative-correlation implications used here. The marked-row and conditional-marked-column calculations explicitly reduce the matrix question to these standard results. [JAMS DOI](https://doi.org/10.1090/S0894-0347-08-00618-8), [publisher PDF](https://www.ams.org/journals/jams/2009-22-02/S0894-0347-08-00618-8/S0894-0347-08-00618-8.pdf).
+- Liebenau and Wormald give an exact adjacent-degree ratio by double-counting path switches for arbitrary allowed edge sets. Their bipartite preprint §2.5 Proposition 2.6(b), Eqs. (9)–(10), imports Proposition 3.1 of the earlier general paper. With complete bipartite allowable edges, each correction subtracts the expected number of common neighbors from an endpoint degree. This is direct precedent for the switching setup and expresses the same count ratio as a ratio of expected available switch counts in the two fibers. These statements do not give the one-fiber expectation of a fraction or the proposed explicit finite lower bound. [Published general paper, Proposition 3.1](https://ems.press/content/serial-article-files/42558), [bipartite preprint, Eqs. (9)–(10)](https://arxiv.org/pdf/2006.15797#page=11), [published bipartite paper](https://doi.org/10.1002/rsa.21105).
+- Ryser's interchanges are 2-by-2 operations within one fiber with both margins preserved. Canfield–McKay Theorem 1, printed pages 2–3, counts doubly regular tables asymptotically. CGM Theorem 1 and GMW Theorem 1.3 handle broader prescribed margins under asymptotic hypotheses. Greenhill–McKay 2009 gives specified-subgraph probabilities in a fixed degree class. These statements do not provide the finite lower bound for all regular-row inputs. [Ryser 1957](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/4BE766CCFDF1704C196AA182C0C5EC88/S0008414X00044734a.pdf/combinatorial_properties_of_matrices_of_zeros_and_ones.pdf), [CM 2005](https://doi.org/10.37236/1926), [CGM](https://web.maths.unsw.edu.au/~csg/papers/CGM.pdf), [GMW](https://web.maths.unsw.edu.au/~csg/papers/irregular-final.pdf), [Greenhill–McKay 2009](https://doi.org/10.1002/rsa.20273).
+- Leake and Mohammadi Yekta, arXiv:2609.39917v2, Theorem 3.1, gives midpoint log-concavity for bounded lattice points of unimodular fibers. This applies to binary tables via the totally unimodular bipartite incidence system. With column exchange symmetry it gives qualitative monotonicity under balancing a pair. It does not state the explicit outward-step lower bound. [Primary preprint, §3.1](https://arxiv.org/html/2609.39917v2#S3.SS1).
+
+## Search record
+
+Web and academic-index queries included “binary contingency tables fixed row sums column margins ratio balancing Schur concavity switching positive matrices Canfield exact ratio”, “binary matrices prescribed margins strongly Rayleigh conditional column overlap real rooted regular bipartite degree sequence”, “number 0-1 matrices Schur-concave prescribed margins column sums switching”, “ratio 0-1 matrices adjacent prescribed column sums switching count bipartite graph degree transfer”, and “switching number of bipartite graphs degree sequences ratio change one degree transfer”. Followed the numbered propositions and version-of-record references above. The Wiley section fetch timed out, so the exact bipartite numbering is from the linked arXiv version and the general proposition is cited from its published version.
+
+GitHub CLI code query “strongly Rayleigh” “contingency tables” and issue query “prescribed margins” “strongly Rayleigh” were empty. Indexed queries “site:github.com 0-1 matrices prescribed margins Rayleigh” and “site:x.com prescribed margins binary matrices switching OR Rayleigh” found no exact argument. Direct X query “binary matrices” “prescribed margins” Rayleigh redirected to sign-in. Direct Google Scholar returned a synchronization interstitial. The screen is limited to accessible indexed results and the primary sources followed above.
+
+No source inspected stated the full one-fiber expectation and this specific finite lower bound together. Credit the switching antecedent and stability machinery, and treat the derivation as a supporting lemma without a priority assertion.
