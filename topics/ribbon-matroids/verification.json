@@ -289,5 +289,69 @@
         "sha256": "6e17881193a675e0005d8b7ba9c3f6872f678ee78ff586e5d88bdebc8b09c886"
       }
     ]
+  },
+  "matroid_kl_deletion": {
+    "status": "passed",
+    "formal_coverage": "Partial. Lean checks a deletion identity for actual finite Mathlib matroids under the vanishing corrections appropriate for the ribbon argument.",
+    "scope": [
+      "The centered coefficient profile implements the Laurent polynomial shift and is determined by its coordinate constants under the symmetry and support conditions.",
+      "The deletion flat map has a rank-preserving lift by closure. Its rank discrepancy is at most one and discrepancy-one coordinates give the prescribed pair of original flats.",
+      "If the complement of the element spans and the top-coefficient corrections vanish, deletion preserves the Z-polynomial. Deleting a parallel copy also preserves the Z-polynomial."
+    ],
+    "remaining": [
+      "The direct-sum and positive-rank hypotheses for each relevant contraction must be proved from the ribbon bases and overlaps.",
+      "Rank-preserving reduction from the original connected ribbons to the spine with its boundary spokes, and the circuit evaluation and root conclusion."
+    ],
+    "workflow_checkout_commit": "80c651fe749551da99527bcda576299e70e8e91a",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45837492441/job/139970117998",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45837492441/artifacts/15125603074",
+    "hosted_artifact_digest": "sha256:68d7f104c3d5e394f5261c763402608f2e3d6ab62dfb342126ee456208d01ca3",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2836,
+    "checked_declarations": 54,
+    "new_declarations": [
+      "OpenMathResearch.MatroidKL.IsKLFamily.centeredCoeff_zero",
+      "OpenMathResearch.MatroidKL.IsKLFamily.isPerverseProfile",
+      "OpenMathResearch.MatroidKL.IsPerverseProfile.ext_of_constants",
+      "OpenMathResearch.MatroidKL.centeredCoeff_at_exponent",
+      "OpenMathResearch.MatroidKL.centeredCoeff_one",
+      "OpenMathResearch.MatroidKL.centeredCoeff_shiftedSum",
+      "OpenMathResearch.MatroidKL.deleteFlat_discrepancy_one",
+      "OpenMathResearch.MatroidKL.deletionFlat_adj",
+      "OpenMathResearch.MatroidKL.flatRank_deleteFlat_gap",
+      "OpenMathResearch.MatroidKL.flatRank_liftDeletionFlat",
+      "OpenMathResearch.MatroidKL.matroidZ_delete_of_parallel",
+      "OpenMathResearch.MatroidKL.matroidZ_delete_of_tau_zero",
+      "OpenMathResearch.MatroidKL.shiftedSum_eq_of_deletionPush",
+      "OpenMathResearch.MatroidKL.translatedSum_pushProfile"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "new_modules": [
+      {
+        "name": "OpenMathResearch.MatroidFlatDelete",
+        "file": "shared/lean/OpenMathResearch/MatroidFlatDelete.lean",
+        "sha256": "e3aafe608e48fa956472d674aacd3ed8e7409c31fd09ebac45109a7e9455b5e8"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLDeletionProfile",
+        "file": "shared/lean/OpenMathResearch/MatroidKLDeletionProfile.lean",
+        "sha256": "f609ad564aff140eb7a15105588a0acd12d08bf2a804362430562961812e41aa"
+      }
+    ]
   }
 }
