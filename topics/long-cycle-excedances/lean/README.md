@@ -33,3 +33,29 @@ LEAN
 ```
 
 All three modules compiled. The audit reported `propext`, `Classical.choice` and `Quot.sound`.
+
+## From an exact prefix to a whole-row sign
+
+[LongCyclePrefixTail.lean](LongCyclePrefixTail.lean) checks the omitted-term estimate in the [intermediate certificate](../intermediate/README.md#certificate-in-each-intervening-gap). For the reduced row $P=E_{N,k}/t$, the coefficient at exponent $j$ is the coefficient at exponent $j+1$ of the original excedance polynomial. The certificate uses the bound $0\le [t^j]P\le(j+1)^N$. Given this bound on the omitted coefficients, Lean checks that the first $W$ coefficients approximate $P(-y)$ with error at most
+
+$$
+\frac{(W+1)^N B^W}{1-B((W+2)/(W+1))^N},
+$$
+
+for $0\le y\le B$ and a positive denominator. The comparison uses the decreasing ratio of the successive absolute term bounds and the existing finite geometric sum lemma. A strict signed prefix margin larger than this error proves the actual endpoint sign. The checked interval Horner rule also transfers a signed margin to the whole modulus window. Its multiplication bounds are for nonnegative moduli, as in the recorded certificates.
+
+The declaration `interlace_of_prefix_and_mixed_witnesses` supplies the endpoint signs to the mixed root-list theorem above. It accepts exact old roots, whole-row signs already proved by other means, and prefix-certified signs in the same witness family. The remaining inputs are the row degrees, the coefficient envelope for the original permutation rows, and the analytic or finite data placing all the windows. In particular the Lean proof has not replayed all the recorded windows of the reviewed result for $k\ge7$ result.
+
+The example uses cutoff seven and sizes 14 and 15, which both admit two cycles. The dyadic endpoints are $6/65536$ and $7/65536$. Lean checks opposite old signs and a strictly negative next-row value throughout the window using four low coefficients. The [exact fixture reconstruction](check-cutoff7-fixture.py) separately obtains all 27 coefficients from the one- and two-cycle formulas and compares them to the Lean vectors. That reconstruction is an exact integer calculation. The original-permutation identification is not part of the Lean fixture theorem. [Fixture output](cutoff7-fixture-output.txt)
+
+With the pinned research toolchain and mixed-witness objects above, run
+
+~~~sh
+cd shared/lean
+lake build OpenMathResearch.DiskUniqueness
+topic=../../topics/long-cycle-excedances/lean
+lake env lean --root="$topic" -o .lake/build/lib/lean/LongCyclePrefixTail.olean "$topic/LongCyclePrefixTail.lean"
+python3 -I -B "$topic/check-cutoff7-fixture.py"
+~~~
+
+The agent-assisted replay formed fresh objects for `AlternatingSignRoots`, `OrientedNegativeInterlace`, `LongCycleMixedRootWitnesses` and the new certificate module, reusing the pinned `DiskUniqueness` object. It used Lean 4.19.0 (compiler commit `6caaee842e94`) and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. The six new audited declarations use only `propext`, `Classical.choice` and `Quot.sound`. This is supporting Lean coverage for issue #4. [Axiom output](prefix-tail-axioms.txt) · [Alexandersson’s original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances)
