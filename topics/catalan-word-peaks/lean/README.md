@@ -52,6 +52,21 @@ finite prefix give simple negative roots at every length. Lean proves the
 strict next-row sign at all old middle roots from length $150$. Strict
 interlacing at these lengths also requires the two extreme-root signs.
 
+## Evaluation at the right endpoint
+
+At $t=-11/16$ the discriminant factors as $(1-9x/4)^2 Q(x)$, where
+$Q(x)=1+x/2+9x^2/16$. Lean differentiates the generating function of the
+word-counting polynomials before specializing. It identifies both resulting
+series using the square root $R(0)=1$ and its inverse $I$.
+[Formal identities](CatalanStrictPeaksNearPoleSeries.lean) · [Radical recurrence](CatalanStrictPeaksPoleRadical.lean)
+
+The coefficients satisfy $|[x^{k+1}]I|\le (5/4)^k/4$. This makes the tails
+absolutely summable at $x=16/27$ and $x=4/9$, and their sum in absolute
+value is less than the constant term of $I$. Thus $I$ takes the positive
+branch at both evaluation points. The numerator values entering the two
+residues are $H(16/27)=11/16$ and $B(4/9)=4\sqrt{3}/27$.
+[Exact pole values](CatalanStrictPeaksPoleValues.lean) · [Coefficient and convergence bounds](CatalanStrictPeaksPoleSeriesBounds.lean)
+
 ## Exact recurrence on heights and preceding ascents
 
 The [recurrence module](CatalanStrictPeaksRecurrence.lean) proves that a
@@ -339,6 +354,8 @@ Lean and mathlib.
 ~~~sh
 lake build OpenMathResearch.OrientedNegativeInterlace CatalanStrictPeaks CatalanStrictPeaksInterlacing
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/Axioms.lean
+lake build CatalanStrictPeaksPoleValues
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/PoleValuesAxioms.lean
 lake build CatalanStrictPeaksRecurrence
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/RecurrenceAxioms.lean
 lake build CatalanStrictPeaksFirstReturn CatalanStrictPeaksGeneratingFunction CatalanStrictPeaksDiscriminant

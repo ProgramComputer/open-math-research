@@ -140,6 +140,22 @@ name = "CatalanStrictPeaksFirstReturn"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
+name = "CatalanStrictPeaksNearPoleSeries"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksPoleRadical"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksPoleSeriesBounds"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
+name = "CatalanStrictPeaksPoleValues"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
 name = "CatalanStrictPeaksGeneratingFunction"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
