@@ -1,0 +1,57 @@
+\section{All internal angular signs below quadratic height}\label{sec:subquadratic-angular-nodes}
+
+Let $d\to\infty$, $1\le r<d$, and $n/d^{5/3}\to\infty$. Set $b=d^2/n$, $D=\lfloor nr/d\rfloor$, $t_*=\pi/d$, and $\nu=(d-1)/2$. For $v>0$, let $S$ have probabilities proportional to $\binom ds v^s$ on $0,\ldots,r$. Define $\mu=\mathbb ES$, $V=\mathrm{Var}(S)$, $h=r-\mu$, $a_s=s(d-s)/[d(d-1)]$, $a=\mathbb E a_S$, $\phi(t)=\mathbb E e^{itS}$, and $a(t)=\mathbb E[a_S e^{itS}]/\phi(t)$. Define
+
+\begin{equation*}
+\Psi(v)=n\arg\phi(t_*)-\nu\arg a(t_*).
+\end{equation*}
+
+Take the argument of $\phi(t_*)$ in the sector $[0,rt_*]$, and the argument of $a(t_*)$ as the difference of the arguments of its numerator and denominator there. Both sums are nonzero for $v>0$ because $rt_*<\pi$. As $v$ increases from zero to infinity, the limits of $\Psi$ are $-\nu t_*$ and $(nr/d)\pi$, respectively. Thus the first hitting point $v_k$ of $k\pi$ exists for every $1\le k\le D-1$, and first hitting points are strictly ordered by continuity. No monotonicity of $\Psi$ is required.
+
+At any sequence of internal nodes $\Psi(v)=k\pi$ satisfying $\mu\ge1/10$ and $na/d\to\infty$,
+
+\begin{equation*}
+(-1)^k P_n^{(r,d)}(-v^d)>0
+\end{equation*}
+
+eventually. This applies in particular to first hitting points. There is no restriction on the limit of $V/b$. The mass criterion is satisfied if both $\mu$ and $d-\mu$ are much larger than $b$, since $a\ge\mu(d-\mu)/d^2$. The proof concerns those nodes meeting the mass and mean conditions.
+
+\subsection{Common angular estimates}
+
+Let $H(v)=\sum_{s\le r}\binom ds v^s$ and $R(\theta)=\mathbb E\exp(i\sum_{i\in I}\theta_i)$ for a uniform $S$-subset $I$. The normalized polynomial $P_n^{(r,d)}(-v^d)/H(v)^n$ is the integral of $R^n$ over normalized Haar on $\sum_j\theta_j=\pi\bmod2\pi$. Decompose into fixed-small-radius charts $\theta=t\mathbf1+y$, $\sum y_i=0$, where $t$ runs over the odd angular labels modulo $2\pi$, and their complement. Put
+
+\begin{equation*}
+I_0=\frac{(2\pi na)^{-\nu}}{\sqrt d},\qquad
+G_t=I_0\phi(t)^n(a/a(t))^\nu,\qquad
+e_d=\sqrt{\frac d{na}}+\frac d{na}+\frac{d^{5/2}}{n^{3/2}}.
+\end{equation*}
+
+The arguments of $a(t)$ in retained charts are near zero. By \hyperref[sec:subquadratic-interior-saddle]{the subquadratic transverse comparison}, when $h\ge h_0>0$ fixed and $|t|\le c_0/\sqrt{1+V}$, the chart integral is $G_t+O(e_d I_0|\phi(t)|^n e^{Cd(1+V)t^2})$ and its absolute value is at most $C I_0|\phi(t)|^n e^{Cd(1+V)t^2}$. The proof of these per-chart bounds does not use $nV/d^2\to\infty$, which was only used there to exclude nonprincipal charts. By hypothesis $e_d=o(1)$. The integrated off-chart bound from the same proof is $o(I_0|\phi(t_*)|^n)$, using $na\gg d$ and $V/d^2\le a/d$. Its saturated chord portion, and the far diagonal phases for $h\ge h_0$, have a constant modulus gap and are negligible as $n\gg d\log n$.
+
+For $0<h\le h_0$ with $h_0$ sufficiently small, these bounds hold in every chart with $d(1+V)t^2$ replaced by $dh\min(t^2,1)$. To check the transplant, use the estimates in \href{https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/near-full-all-angular-signs.md}{the near-full angular analysis}: $g(t)=e^{-irt}\phi(t)$ is bounded away from zero on the whole angular circle, $V\asymp h$, and for $\Re a(t)$ the relative correction is $O(h\min(t^2,1))$. The imaginary cubic coefficient is $O(ah\min(|t|,1))$ by factoring out $e^{irt}$ and using the weighted deficit moments. The fourth log coefficient is bounded by $CaQ_4$ globally: the fixed-size $Q_2^2$ difference is $O(a_s/d)$, and the complex size variance of $a_S$ is $O(V/d^2)\le O(a/d)$ by centering at $a_\mu$ and Lipschitz continuity. The pointwise fifth bound and the Gaussian comparison of the subquadratic proof then apply with no change in $e_d$. For exponential domination its coordinate estimate by Young's inequality now costs $\exp(O(dh^2\min(t^2,1)+d/(na)))$, bounded by the claimed factor. The same radial $\chi^2$ estimate costs $O(1)$. Extending the complex Gaussian to the full hyperplane again gives $G_t$. The off-chart decay is unchanged, or follows directly by retaining only the modal size $r$ in the disjoint-pair bound as in the near-full analysis.
+
+\subsection{Interior phase combination}
+
+Suppose $h\ge h_0$. Then $V\ge c_{h_0}$ and $nV\gg d(1+V)$. For near phases, the cumulative diagonal gap proved in the subquadratic note is
+
+\begin{equation*}
+|\phi(t)/\phi(t_*)|\le e^{-c V(t^2-t_*^2)},\qquad t_*\le |t|\le c_0/\sqrt{1+V}.
+\end{equation*}
+
+The factor $e^{Cd(1+V)t^2}$ can be absorbed into half this gap for nonprincipal odd labels $j=|t|/t_*\ge3$, since $t^2/(t^2-t_*^2)\le9/8$. The principal determinant has modulus comparable to $I_0$ since $d(1+V)t_*^2=O(1)$. If $V/b\to\infty$, these estimates suppress the nonprincipal charts by a total relative $o(1)$, and $G_{\pm t_*}$ give the required sign.
+
+Now work on a subsequence with $V/b=nV/d^2$ bounded above. Retain odd phases $|t|\le M/\sqrt{nV}$, with $M$ fixed and sufficiently large to include both principal phases and ensure that discarded phases satisfy $t^2-t_*^2\ge t^2/2$. The retained phases are uniformly near, since $nV\gg1+V$. For $Z=S-\mu$, the central third absolute moment is at most $C V\sqrt{1+V}$, by Cauchy--Schwarz and the fourth-moment bound from the symmetric difference law. Thus $\arg\phi(t)=\mu t+O(V\sqrt{1+V}|t|^3)$, by centering and using the quadratic lower bound on the centered characteristic's real part. The weighted second-moment estimates for $a_S$ give $\arg a(t)=\xi t+O((1+V)t^2)$ with $\xi$ real: center both numerator and denominator at $\mu$, differentiate their logarithms twice using those estimates, and use that their moduli are comparable to $a$ and one, respectively.
+
+Writing $\ell=t/t_*$, a signed odd integer, subtract $\ell\Psi$ from the phase of $G_t$. The linear terms cancel, and $|\ell|t_*^m\le |t|^m$ for $m=2,3$. Hence the phase difference on retained labels is
+
+\begin{equation*}
+O_M\!\left(\sqrt{\frac{1+V}{nV}}+\frac{d(1+V)}{nV}\right)=o(1).
+\end{equation*}
+
+As $\ell k$ has the parity of $k$, retained real parts all reinforce the principal sign. On that range the determinant correction factor is bounded and tends to one in modulus, since $d(1+V)t^2=o(1)$. Their Gaussian amplitudes sum to at least $c I_0|\phi(t_*)|^n(1+d/\sqrt{nV})$: use the principal pair if $d/\sqrt{nV}$ is bounded, and otherwise count odd labels in $|t|\le 1/\sqrt{nV}$ and use $|\phi(t)|\ge e^{-C Vt^2}$. Chart errors are $o(1)$ relative to this sum by $e_d=o(1)$ and the determinant comparison. For discarded near labels the absorbed radial gap gives the summed bound $C I_0|\phi(t_*)|^n(1+d/\sqrt{nV})e^{-c'M^2}$; this is the Gaussian tail sum with spacing $2\pi\sqrt{nV}/d$ in the variable $\sqrt{nV}\,t$. Constants in this case may depend on the subsequence's upper bound on $V/b$. Choosing $M$ sufficiently large gives the sign. A subsequence argument covers arbitrary $V/b$.
+
+\subsection{Near-full phase combination}
+
+Suppose $0<h\le h_0$. The \href{https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/near-full-all-angular-signs.md}{near-full diagonal estimate} gives $|\phi(t)/\phi(t_*)|\le e^{-ch(t^2-t_*^2)}$ for every $t_*\le |t|\le\pi$. Also at a node $nr/d-k=(nh/d)(1+O(d^{-2}+d/n))$, by the phase expansion at $t_*$ and $\arg a(t_*)=O(ht_*)$. Since $k\le D-1$, this gives $nh\gtrsim d$. If $nh/d^2\to\infty$, the determinant correction $e^{Cdh\min(t^2,1)}$ is absorbed into the diagonal gap since $n\gg d$, and the principal pair determines the sign.
+
+On subsequences with $nh/d^2$ bounded retain $|t|\le M/\sqrt{nh}$ as before. The diagonal argument has lift $\mu t+O(h|t|^3)$ and $\arg a(t)=\xi t+O(ht^2)$ with real $\xi$, by the first two determinant derivatives under the deficit estimates. Subtracting $\ell\Psi$ gives an error $O_M((nh)^{-1/2}+d/n)=o(1)$ uniformly across retained labels, with the same parity reinforcement. The determinant factor tends to one in modulus on this range, and the retained amplitudes sum to at least $c I_0|\phi(t_*)|^n(1+d/\sqrt{nh})$. The local errors are a relative $o(1)$ and the discarded sum is bounded on that scale by $C e^{-c'M^2}$, just as in the interior case with $V$ replaced by $h$. This proves the sign in the near-full range as well.
