@@ -49,12 +49,14 @@ jobs:
           Mathlib.Analysis.Polynomial.Basic
           Mathlib.Analysis.SpecialFunctions.Complex.Analytic
           Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
+          Mathlib.Analysis.SpecialFunctions.Log.Deriv
           Mathlib.Analysis.SpecialFunctions.Pow.Real
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
           Mathlib.Data.Fin.Tuple.Basic
           Mathlib.Data.Finset.Prod
           Mathlib.Data.Finset.Sigma
           Mathlib.Data.Fintype.Pi
+          Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
           Mathlib.RingTheory.PowerSeries.Basic
           Mathlib.Tactic.FieldSimp
           Mathlib.Tactic.Linarith

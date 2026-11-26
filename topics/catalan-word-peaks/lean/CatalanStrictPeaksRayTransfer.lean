@@ -497,18 +497,18 @@ private theorem large_quotient_norm_le {c : ℝ} (hc : 0 ≤ c) (hc₁ : c ≤ 1
     simpa [pow_two] using mul_le_mul_of_nonneg_left hr₁ hrpos.le).trans hr42
   have h₁ : ‖1 + z ^ 2‖ ≤ 2 * r ^ 2 := by
     calc
-      ‖1 + z ^ 2‖ ≤ 1 + r ^ 2 := by simpa [r, norm_pow] using norm_add_le (1 : ℂ) (z ^ 2)
+      ‖1 + z ^ 2‖ ≤ 1 + r ^ 2 := by simpa [r, norm_pow] using norm_add_le (1 : ℂ) (z ^ (2 : ℕ))
       _ ≤ 2 * r ^ 2 := by linarith
   have h₄ : ‖4 * (c : ℂ) * z‖ ≤ 4 * r ^ 4 := by
     calc
-      _ = 4 * c * r := by simp [norm_mul, hcNorm, r]
+      _ = 4 * c * r := by simp [norm_mul, Complex.norm_real, abs_of_nonneg hc, r]
       _ ≤ 4 * 1 * r := by gcongr
       _ ≤ _ := by simpa using mul_le_mul_of_nonneg_left hr24 (by norm_num : 0 ≤ (4 : ℝ))
   have hQuartic : ‖quartic c z‖ ≤ 8 * r ^ 4 := by
     unfold quartic
     calc
       _ ≤ ‖1 + z ^ 2‖ ^ 2 + ‖4 * (c : ℂ) * z‖ := by
-        simpa [norm_pow] using norm_sub_le ((1 + z ^ 2) ^ 2) (4 * (c : ℂ) * z)
+        simpa [norm_pow] using norm_sub_le ((1 + z ^ (2 : ℕ)) ^ (2 : ℕ)) (4 * (c : ℂ) * z)
       _ ≤ (2 * r ^ 2) ^ 2 + 4 * r ^ 4 :=
         add_le_add (pow_le_pow_left₀ (norm_nonneg _) h₁ 2) h₄
       _ = _ := by ring
@@ -520,7 +520,7 @@ private theorem large_quotient_norm_le {c : ℝ} (hc : 0 ≤ c) (hc₁ : c ≤ 1
     calc
       _ ≤ ‖1 - z ^ 2‖ + ‖B‖ := norm_sub_le _ _
       _ ≤ (1 + r ^ 2) + 3 * r ^ 2 := add_le_add
-        (by simpa [r, norm_pow] using norm_sub_le (1 : ℂ) (z ^ 2)) hRoot
+        (by simpa [r, norm_pow] using norm_sub_le (1 : ℂ) (z ^ (2 : ℕ))) hRoot
       _ ≤ _ := by linarith
   have hDistance : r / 2 ≤ ‖(c : ℂ) - z‖ := by
     have h := norm_sub_norm_le z (c : ℂ)
@@ -549,7 +549,7 @@ theorem logSector_norm_le_large {d : ℝ} (hd : 0 < d) (hD : d < 1)
     exact Real.exp_le_exp.mpr hlarge
   have hne : exp z ≠ (scale d : ℂ) := by
     intro heq
-    rw [heq, Complex.norm_real, abs_of_nonneg hc.le] at hnorm
+    rw [heq, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hc.le] at hnorm
     linarith
   rw [logSector_eq_quotient hd hD n hj hz hne, norm_mul, norm_pow, norm_inv]
   calc
@@ -573,7 +573,7 @@ private theorem outerArcs_norm_le {d : ℝ} (hd : 0 < d) (hD : d < 1)
     _ ≤ ∑ _j ∈ Finset.range 5, (5 * Real.exp (-(n : ℝ) * b)) * (2 * Real.pi) := by
       apply Finset.sum_le_sum
       intro j hj
-      have hj' : j ≤ 4 := by simpa using Finset.mem_range.mp hj
+      have hj' : j ≤ 4 := Nat.le_of_lt_succ (Finset.mem_range.mp hj)
       have hOrd := (sectorAngle_step hd hD hj').le
       have hlow : 0 ≤ sectorAngle d j := hm (Nat.zero_le _)
       have hhigh : sectorAngle d (j + 1) ≤ 2 * Real.pi := hm (show j + 1 ≤ 5 by omega)
@@ -614,9 +614,9 @@ private theorem logSector_continuous_on_ray {d : ℝ} (hd : 0 < d) (hD : d < 1)
     (n : ℕ) {j : ℕ} (hj : j ≤ 4) {y : ℝ}
     (hy : y ∈ Icc (sectorAngle d j) (sectorAngle d (j + 1))) :
     Continuous (fun x : ℝ => logSector d n j ((x : ℂ) + (y : ℂ) * I)) := by
-  rw [← continuousOn_univ]
-  apply (logSector_continuousOn hd hD hj n).comp (by fun_prop)
-  intro x _
+  have hMap : Continuous (fun x : ℝ => (x : ℂ) + (y : ℂ) * I) := by fun_prop
+  apply (logSector_continuousOn hd hD hj n).comp_continuous hMap
+  intro x
   simpa [Complex.mul_im] using hy
 
 private theorem logRayJump_continuous {d : ℝ} (hd : 0 < d) (hD : d < 1)

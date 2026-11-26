@@ -1,4 +1,6 @@
 import Mathlib.Analysis.Complex.CauchyIntegral
+import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.Ring
 
@@ -125,5 +127,45 @@ theorem deform {m : ℕ} {a b : ℝ} (hab : a ≤ b)
     _ = _ := by
       rw [Finset.sum_add_distrib, hJumps]
       rfl
+
+/-- Change variables from logarithmic radius to normalized outward displacement. -/
+theorem integral_logRadius_substitution {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    {R : ℝ} (hR : 0 < R) {g : ℝ → E} (hg : Continuous g) (a b : ℝ) :
+    (∫ x in a..b, g x) =
+      ∫ s in (Real.exp a / R - 1)..(Real.exp b / R - 1),
+        (1 + s)⁻¹ • g (Real.log (R * (1 + s))) := by
+  let r : ℝ → ℝ := fun x => Real.exp x / R - 1
+  let dr : ℝ → ℝ := fun x => Real.exp x / R
+  let transport : ℝ → E := fun s => (1 + s)⁻¹ • g (Real.log (R * (1 + s)))
+  have hUnit (x : ℝ) : 1 + r x = dr x := by dsimp [r, dr]; ring
+  have hdrPos (x : ℝ) : 0 < dr x := div_pos (Real.exp_pos _) hR
+  have hLog (x : ℝ) : Real.log (R * (1 + r x)) = x := by
+    rw [hUnit]
+    have hProduct : R * dr x = Real.exp x := by
+      dsimp [dr]
+      field_simp [hR.ne'] <;> ring
+    rw [hProduct, Real.log_exp]
+  have hDeriv : ∀ x ∈ uIcc a b, HasDerivAt r (dr x) x := by
+    intro x _
+    exact ((Real.hasDerivAt_exp x).div_const R).sub_const 1
+  have hDr : ContinuousOn dr (uIcc a b) := by
+    dsimp [dr]
+    fun_prop
+  have ht : ContinuousOn transport (r '' uIcc a b) := by
+    rintro s ⟨x, _, rfl⟩
+    have hOne : (1 + r x) ≠ 0 := by rw [hUnit]; exact (hdrPos x).ne'
+    have hContinuousOne : ContinuousAt (fun s : ℝ => 1 + s) (r x) := by fun_prop
+    have hContinuousScale : ContinuousAt (fun s : ℝ => R * (1 + s)) (r x) :=
+      continuousAt_const.mul hContinuousOne
+    have hContinuousLog := hContinuousScale.log (mul_ne_zero hR.ne' hOne)
+    exact ((hContinuousOne.inv₀ hOne).smul (hg.continuousAt.comp hContinuousLog)).continuousWithinAt
+  have hChange := intervalIntegral.integral_comp_smul_deriv' (g := transport) hDeriv hDr ht
+  calc
+    _ = ∫ x in a..b, dr x • (transport ∘ r) x := by
+      apply intervalIntegral.integral_congr
+      intro x _
+      change g x = dr x • ((1 + r x)⁻¹ • g (Real.log (R * (1 + r x))))
+      rw [hLog, hUnit, smul_smul, mul_inv_cancel₀ (hdrPos x).ne', one_smul]
+    _ = _ := hChange
 
 end OpenMathResearch.LogarithmicContour
