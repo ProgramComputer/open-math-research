@@ -1,10 +1,8 @@
 # Real zeros of balanced binary arrays
 
-For all $d\ge2$, every cap gives $\lfloor nr/d\rfloor$ simple negative zeros when $n\ge Cd^2$. For all sufficiently large $n$, the same holds in every dimension $d\ge2$ when $r\le c\log n$. The absolute constants are existential. **⬜ None** for Lean or Rocq. [Quadratic row bound, logarithmic-cap corollary and independent review](quadratic/README.md)
+For each $\alpha>0$, all caps give $\lfloor nr/d\rfloor$ simple negative zeros when $n\ge\alpha d^2$ and $n$ is sufficiently large depending on $\alpha$. For each fixed $M>0$, this also holds in every dimension $d\ge2$ when $r\le M\log n$ and $n$ is large enough depending on $M$. **⬜ None** for Lean or Rocq. [Proof and independent review](critical-aspect/README.md)
 
-For all dimensions $d\ge2$ and all row caps, there is one absolute constant $C$ such that $n\ge Cd^4\log(d+1)$ gives all $\lfloor nr/d\rfloor$ zeros simple and negative. The constant is existential. **⬜ None** for Lean or Rocq. [Proof and independent review](very-tall/README.md)
-
-For each fixed cap $r$, there is a row threshold $N_r$ such that for $n\ge N_r$ and every $d\ge\max(2,r)$, all $\lfloor nr/d\rfloor$ zeros are simple and negative. The threshold is existential. **⬜ None** for Lean or Rocq. [Proof and independent review](fixed-cap/README.md)
+Earlier bounds include the [absolute quadratic cutoff](quadratic/README.md), [quartic-log cutoff](very-tall/README.md), and [dimension-uniform fixed-cap threshold](fixed-cap/README.md).
 
 There are absolute constants $C>0$ and $N$ such that, for every $n\ge N$, $d\ge Cn/\log n$, and every row cap, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. The constants are unspecified. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. **⬜ None** for Lean or Rocq. [Theorem, proof and independent review](dense-regime/README.md)
 

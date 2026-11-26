@@ -1,0 +1,55 @@
+# Critical-aspect angular signs with diverging transverse row mass
+
+Keep the notation of [the quadratic interior saddle](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/very-tall-quadratic-interior-saddle.md), with $`1\le r<d`$, $`d\to\infty`$, and assume $`n/d^2`$ stays in a fixed compact subset of $`(0,\infty)`$. Suppose $`\mu\to\infty`$ and $`d-\mu\to\infty`$. Then $`da\to\infty`$: indeed $`a=[\mu(d-\mu)-V]/[d(d-1)]\ge\mu(d-\mu)/d^2`$, using $`V\le\mu(d-\mu)/d`$. In particular $`na/d\to\infty`$. All the angular estimates below only require $`da\to\infty`$, $`\mu\ge1/10`$, and the stated compact aspect bounds.
+
+Write $`D=\lfloor nr/d\rfloor`$, $`t_*=\pi/d`$ and
+
+$$
+\Psi=n\arg\phi(t_{\ast})-\tfrac{d-1}{2}\arg a(t_{\ast}).
+$$
+
+Take the argument of $`\phi(t_*)`$ continuously in the real tilt (equivalently, the argument in $`[0,r t_*]`$), and the argument of $`a(t_*)`$ near zero. At any nodes $`\Psi=k\pi`$, $`1\le k\le D-1`$, one has $`(-1)^kP_n^{(r,d)}(-v^d)>0`$ eventually along every sequence satisfying the assumptions. No lower-quota estimate is used. Fixed corank with bounded $`d-\mu`$ is outside the asserted range unless $`da\to\infty`$ can be checked separately.
+
+## A quantitative single-chart estimate
+
+For $`h=r-\mu\ge h_0`$ with fixed small $`h_0>0`$, use the near charts $`|t|\le c_0/\sqrt{1+V}`$ from the quadratic proof and let $`b_t=(1+V)t^2`$. For $`0<h\le h_0`$ use all charts and let $`b_t=h\min(t^2,1)`$, using the diagonal and determinant bounds in [the near-full angular analysis](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/near-full-all-angular-signs.md). In both cases $`\phi(t)`$ is bounded away from zero in the respective range. With normalized Haar charts and $`I_0=(2\pi n a)^{-(d-1)/2}/\sqrt d`$, write
+
+$$
+G_t=I_0\thinspace  \phi(t)^n\left(\frac{a}{a(t)}\right)^{(d-1)/2},\qquad
+e_d=\sqrt{\frac d{na}}+\frac d{na}+\frac{d^{5/2}}{n^{3/2}}.
+$$
+
+The integral of the normalized row response $`R^n`$ over each such chart is $`G_t+O(I_0 |\phi(t)|^n e^{Cdb_t}e_d)`$. The modulus of the full chart integral is at most $`C I_0|\phi(t)|^n e^{Cdb_t}`$. Constants can depend on the compact aspect bounds and $`h_0`$.
+
+To prove the estimate, use $`Q_j=\sum y_i^j`$ and $`L=\sum_{i\in I}y_i`$. The log centered chart response has exactly quadratic coefficient $`-a(t)Q_2/2`$, exactly cubic coefficient $`-i\gamma(t)Q_3/6`$, with $`|\gamma(t)|\le Ca`$, and a fourth log coefficient bounded by $`Ca Q_4`$, by [the transverse cumulant calculation](fourth-transverse-cumulant.md). The latter proof uses only bounded $`\phi(t)^{-1}`$, $`a\ge V/d`$ and nonnegative radial weights, so it applies to every near-full phase as well. The error beyond these terms is bounded by $`C\mathbb E|L|^5`$ for all $`\|y\|\le\eta`$ with fixed small $`\eta`$. In detail, $`\delta=R(t\mathbf1+y)/\phi(t)-1`$ has $`|\delta|\le C\mathbb E|L|^2`$ by its zero linear term, and the Taylor expansion of $`\delta`$ has raw remainder at most $`C\mathbb E|L|^5`$. In $`\log(1+\delta)`$ only the square of its quadratic term contributes through order four. The rest of the logarithm is bounded by $`C[(\mathbb E|L|^2)(\mathbb E|L|^3)+(\mathbb E|L|^2)^3]`$, which is at most $`C\mathbb E|L|^5`$ by monotonicity of moment norms and $`\mathbb E|L|^2=O(\eta^2)`$. This estimate uses the bound on $`|\delta-\delta_2|`$ directly rather than squaring the order-four Taylor polynomial.
+
+Under the real Gaussian of precision $`A`$ comparable to $`na`$ on $`\mathbf1^\perp`$, the fixed-support $`L`$ has variance $`s(d-s)/(d A)=(d-1)a_s/A`$. Minkowski with respect to the subset law gives
+
+$$
+\Vert \mathbb E|L|^5\Vert _{L^2(\mathrm{Gauss})}
+\le C(d/A)^{5/2}\mathbb E a_S^{5/2}
+\le C(d/n)^{5/2}.
+$$
+
+For the last bound use $`O(1/d)`$ Lipschitz continuity of $`a_s`$, $`a_\mu=a+V/[d(d-1)]`$, $`a\ge \max(V/d,1/(11d))`$ and $`\mathbb E|S-\mu|^{5/2}\le C(1+V)^{5/4}`$. That moment bound follows from the log-concave survival estimate of the quadratic proof, which holds without a positive lower bound on $`V`$. The cubic and canceled quartic terms have Gaussian $`L^2`$ norms $`O(\sqrt d\,a A^{-3/2})`$ and $`O(d a A^{-2})`$ by Wick and the Gaussian eighth moment. Multiplying by $`n`$ gives $`O(e_d)`$.
+
+For exponential domination in Cauchy–Schwarz, retain the original crude real quartic bound from the quadratic and near-full proofs, namely $`CnaQ_4+Cna^2Q_2^2`$ with the real cubic treated as in those proofs. In the radial $`\chi^2`$ central region it costs only $`\exp(O_L(d^2/n))=O(1)`$ for fixed large $`L`$ and aspect bounded away from zero; the tail is dominated by a weakened Gaussian just as before. The coordinate bounds cost at most $`e^{C d b_t}`$ (use the tilted coefficient derivatives from the near-full proof, or Young's inequality in the quadratic proof). Thus the difference between the $`n`$th powers of the exact chart response and of the complex Gaussian is controlled by the stated bound, by $`|e^x-e^y|\le |x-y|e^{\max(\mathrm{Re}\,x,\mathrm{Re}\,y)}`$ and Cauchy–Schwarz. The Gaussian tail outside each fixed-radius chart is negligible, since $`na\gg d`$. The exact Gaussian gives $`G_t`$, using torus covolume $`\sqrt d(2\pi)^{d-1}`$. Here $`e_d=o(1)`$ uniformly along any admissible sequence.
+
+The complement of the charts is negligible on the principal scale by the quadratic proof's integrated relative-angle bound. Its relative bound is $`\exp(O(d)-cna+O(nV/d^2))=o(1)`$ on the unsaturated chord region, since $`V/d^2\le a/d`$ and $`na\gg d`$. The saturated chord region is bounded by $`\exp(-cn)`$ before normalizing, which absorbs both the principal radial loss and $`O(d\log n)`$. For $`h\ge h_0`$ the non-near diagonal charts also have the constant row modulus gap shown there and are negligible.
+
+## Combining phases when $`h\ge h_0`$
+
+Here $`V\ge c_{h_0}`$. If $`V\to\infty`$, the radial gap in the quadratic proof and the uniform chart bound make all other phases negligible relative to one principal saddle: since $`nV\gg d(1+V)`$, the near phases with $`|t|=j\pi/d`$, odd $`j\ge3`$, decay as $`\exp[-c nV(j^2-1)/d^2]`$. The two principal terms at a node then have the same real sign $`(-1)^k`$.
+
+On any subsequence with $`V`$ bounded above, the same bound makes the sum over $`j>M`$ arbitrarily small on the principal scale by taking $`M`$ sufficiently large, depending only on $`h_0`$ and the aspect bounds. For each fixed signed odd $`j`$, use
+$`\arg\phi(t)=\mu t+O(|t|^3)`$, since the centered third absolute moment is uniformly bounded. Also $`\arg a(t)=\xi t+O(t^2)`$ for a real $`\xi`$, with uniform constant, by the weighted second-moment estimates in the quadratic proof. Thus the phase of $`G_{j t_*}`$ differs from $`j\Psi`$ by $`O_M(n/d^3+1/d)=o(1)`$. Their real parts all have sign $`(-1)^k`$ eventually, and include the principal magnitude. The sum of their local approximation errors is smaller by $`o(1)`$. This proves the sign in the bounded case and then by subsequences for all $`h\ge h_0`$.
+
+## Combining phases when $`0<h\le h_0`$
+
+Here $`V\asymp h`$ and $`\log|\phi(t)/\phi(t_*)|\le-ch(t^2-t_*^2)`$ for $`t_*\le |t|\le\pi`$, by [the near-full estimates](https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/near-full-all-angular-signs.md). The same estimate on node positions there gives $`T-k=(nh/d)(1+O(d^{-2}+d/n))`$ with $`T=nr/d`$, so $`nh\gtrsim d`$ at every internal node. Choose $`M`$ large and retain signed odd phases $`|t|\le M/\sqrt{nh}`$, including the principal pair since $`nh/d^2`$ is bounded above. Write $`\ell=t/t_*`$, an odd integer. The argument of $`H(ve^{it})/H(v)`$ may be lifted as $`\mu t+O(h|t|^3)`$. Also $`\arg a(t)=\xi t+O(ht^2)`$ for a real $`\xi`$, because the first and second derivatives of $`a(t)/a`$ are $`O(h)`$ uniformly. Subtracting $`\ell`$ times the principal phase of $`G`$ cancels the two linear terms. Since $`|\ell|t_*^j\le |t|^j`$ for $`j=2,3`$, the phase difference is
+
+$$
+O(nh|t|^3+dh t^2)=O_M((nh)^{-1/2}+d/n)=o(1).
+$$
+
+The retained real parts all have sign $`(-1)^k`$. Their total amplitude on the principal scale is at least $`c(1+d/\sqrt{nh})`$ by counting the odd phases in $`|t|\le1/\sqrt{nh}`$ when that count is large, and otherwise using the principal pair. Their local errors are a relative $`o(1)`$ because $`db_t\le M^2d/n=o(1)`$. As in the earlier near-full proof, the discarded total is at most $`C(1+d/\sqrt{nh})e^{-c'M^2}`$ on the principal scale, by the radial phase gap, absorption of $`Cdh t^2`$ since $`n\gg d`$, and the resulting Gaussian lattice tail. Taking $`M`$ sufficiently large gives the sign at every near-full internal node.

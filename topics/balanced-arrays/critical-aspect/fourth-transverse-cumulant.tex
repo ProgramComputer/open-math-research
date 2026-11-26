@@ -1,0 +1,26 @@
+\section{Fourth transverse cumulant for an angular chart}\label{sec:fourth-transverse-cumulant}
+
+Use the notation of \href{https://github.com/ProgramComputer/open-math-research/blob/4fb624ba937a8eecc1361a6066185cd81ab7b172/topics/balanced-arrays/quadratic/very-tall-quadratic-interior-saddle.md}{the quadratic interior saddle proof}. Let $y\in\mathbf 1^\perp$, $L=\sum_{i\in I}y_i$, $Q_j=\sum_i y_i^j$, and write $\mathbb E_t X=\mathbb E[Xe^{itS}]/\phi(t)$. Assume $|\phi(t)|\ge c>0$ and $a\ge V/d$. These conditions hold on the near-phase ranges used below, by the quadratic interior and near-saturation estimates. The first cumulant is zero. The exact fourth cumulant for these complex weights satisfies
+
+\begin{equation*}
+|\kappa_{4,t}(L)|\le C a\sum_i|y_i|^4.
+\end{equation*}
+
+This is a coefficient bound for the logarithm at the chart center. A uniform bound on its higher-order remainder is separate.
+
+\subsection{Fourth order}
+
+For a fixed size $s$, set $p_j=(s)_j/(d)_j$ and $b_s=(s)_2(d-s)_2/(d)_4$, with falling factorials. The exact fourth moment given in the quadratic proof has $Q_2^2$ coefficient $3(p_2-2p_3+p_4)=3b_s$. Its $Q_4$ coefficient is bounded by $Ca_s$ after passing to the complement if $s>d/2$. For $1\le s<d$,
+
+\begin{equation*}
+b_s=a_s^2\,\frac{d(d-1)}{(d-2)(d-3)}
+\left(1-\frac1s\right)\left(1-\frac1{d-s}\right).
+\end{equation*}
+
+Hence $|b_s-a_s^2|\le C a_s/d$, using $a_s^2(1/s+1/(d-s))=a_s/(d-1)$. The zero-size case is immediate. The fourth cumulant subtracts $3(\mathbb E_t L^2)^2$, so the remaining $Q_2^2$ coefficient is
+
+\begin{equation*}
+3\mathbb E_t(b_S-a_S^2)+3\bigl(\mathbb E_t a_S^2-(\mathbb E_t a_S)^2\bigr)=O(a/d).
+\end{equation*}
+
+For the second term center $a_S$ at $a_\mu$. Absolute complex weights are dominated by a constant times the positive radial weights, and $a_s$ is $O(1/d)$-Lipschitz. Thus the complex variance is $O(V/d^2)=O(a/d)$ by $a\ge V/d$. Using $Q_2^2/d\le Q_4$ proves the bound. The Gaussian $L^2$ contribution multiplied by $n$ is now $O(d/(na))$ in place of a raw $O(d^2/n)$ term.
