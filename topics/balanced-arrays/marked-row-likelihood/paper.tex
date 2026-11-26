@@ -41,6 +41,36 @@ Multiply by the weights of the fixed pairings and sum on the same cell monomial.
 For equality take $n=2K+1$, unrestricted rows and column sums $K$ in the smaller array. For $s=0,t=d$ select the monomial in which every cell occurs once. In each column the red cells outside the mark can be chosen in $\binom{2K}{K}$ ways for the target and $\binom{2K}{K-1}$ for the source. The choices in the columns are independent, giving the claimed ratio exactly.
 \end{proof}
 
+\section{The exact odds with exchangeable unmarked rows}
+\begin{theorem}\label{th:odds}
+Suppose the unmarked rows have the same size interval and identical weights within each column. Take two vectors of column margins $\boldsymbol a\le\boldsymbol b$. Write
+\[
+\rho=\max_i\rho_i,\qquad
+\rho_i=\frac{a_i(n-b_i)}{b_i(n-a_i)}\quad (a_i<b_i),\qquad \rho_i=1\quad(a_i=b_i).
+\]
+For the evaluated weights, $F_{\boldsymbol a}(t)F_{\boldsymbol b}(s)\le
+\rho^{t-s}F_{\boldsymbol a}(s)F_{\boldsymbol b}(t)$ for $s<t$.
+\end{theorem}
+
+\begin{proof}
+First take $t=s+1$. Add $\delta_i=b_i-a_i$ red auxiliary cells to column $i$ and pair its exclusive cells in opposite colors. Also pair opposite exclusive cells within the marked row, leaving one mark of its majority color unpaired. With $c$ common marks this last refinement has $(t-c)!$ choices on both sides. Forbid a column auxiliary cell from having the unpaired mark as partner. This removes no source refinements since both slots would be red.
+
+For fixed uncolored refinements, split the marked vertex into degree-two vertices for its pairs and one degree-one vertex for its unpaired slot. The former require one edge in each direction. On the degree-one vertex the source requires out and the target requires in. The auxiliaries require out on both sides and the unmarked vertices have symmetric constraints. Lemma 8 of \cite{kn} again bounds the source count by the target count. For each cell monomial, divide by the full number of refinements of an array pair, namely $(t-c)!\prod_i(h_i+\delta_i)!$, before summation. What remains on the source side is its whole weight. On the target side it is the weight times the probability of retaining random refinements.
+
+In the target first fix both marked masks. The unpaired blue-only mark is uniform among the blue-only marks and this choice is independent of the unmarked cells. If its column is unchanged all pairings are retained. Otherwise put $a=a_i$, $b=b_i$, $\delta=b-a$ and $N=n-1$. By row exchangeability and independence of the two arrays, their unmarked columns are independent uniform subsets of respective sizes $a,b-1$. If $H$ denotes the red-only count, the fraction of column refinements removed is $\delta/(H+\delta)$. Its mean is
+\[
+ \frac{\delta}{\binom Na}\sum_{h\ge0}
+ \frac{\binom{b-1}{a-h}\binom{N-b+1}{h}}{h+\delta}
+ =\frac{\delta}{b}\frac{\binom{N+1}{a}}{\binom Na}
+ =\frac{\delta n}{b(n-a)}.
+\]
+The first equality follows by absorbing the denominator into the first binomial coefficient and applying Vandermonde's identity. Hence the mean retained fraction is $\rho_i\le\rho$. This proves the adjacent comparison.
+
+For a larger gap, pairing all minority marks with majority marks leaves $t-s$ degree-one vertices. Without the prohibition the same orientation argument gives the comparison with factor one. The support at fixed margins is an interval: in a pair of equal-margin arrays, each orientation source with marked sizes $t,s$, $t\ge s+2$, is bounded in count by the target with sizes $t-1,s+1$ by the same Lemma 8 on the unsplit vertex. Thus a positive source product forces positive weights at every intermediate size in both arrays. Adjacent inequalities now multiply; a zero source satisfies the claim directly.
+\end{proof}
+
+For unit weights, unrestricted rows and equal column margins in each array, the marked sizes are binomial with success probabilities $a/n$ and $b/n$. Their likelihood ratios attain the factor in Theorem~\ref{th:odds}. The small-cap inclusion result in the accompanying notes concerns the full set of marks, a distinct comparison.
+
 \section{Application to balanced columns}
 Let $a_k$ count arrays with all column sums $k$ and all row sizes at most $r$. Alexandersson asks whether $\sum_k a_k x^k$ is real-rooted \cite{alex}. Its positive support is $0,\ldots,D$, where $D=\lfloor nr/d\rfloor$. To realize a feasible vector of column margins, allocate blocks of the successive prescribed lengths around a cyclic ordering of the rows. Each block uses distinct rows and all row sizes differ by at most one.
 

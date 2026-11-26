@@ -32,28 +32,37 @@ def deficit_lower(k):
     return Q((D-R)*N,D*(N-k+1))*Q(N-1,N+s-1)*(1-error)
 
 
-def curvature_floor(k):
+def curvature_floor(k, z):
     loss = max(Q(0), deficit_lower(k))
     if k < 507300:
         loss = max(loss, MIXED["residual_lower"](N,k-1))
     mean = Q(N*R-D*k,N)*Q(N-k,N-k+1)
-    return Q(4*D,N+2) + Q(D,260100)*loss*mean
+    return Q(4*D,N+2) + D*z*loss*mean
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--make-tilts", action="store_true")
+    parser.add_argument("--exact-odds", action="store_true")
     args = parser.parse_args()
     indices = range(FIRST-3,SEVEN_LAST+3)
     if args.make_tilts:
         tilts = {str(k):MIXED["proposed"](N-1,k+1) for k in indices}
         WITNESSES.write_text(json.dumps(tilts,separators=(",",":"))+"\n")
         return
-    overlap_bound()
+    if args.exact_odds:
+        z = Q(4*N,(N+1)**2)
+        for k in range(FIRST-2,LAST+1):
+            for q in (k-1,k):
+                assert Q(N,(q+1)*(N-q)) >= z
+        print("Using exact marked-row odds from the hypergeometric identity.")
+    else:
+        overlap_bound()
+        z = Q(1,260100)
     tilts = json.loads(WITNESSES.read_text())
     assert set(tilts) == {str(k) for k in indices}
     intervals = {k:MIXED["phase_bounds"](k,tilts[str(k)]) for k in indices}
-    floors = {k:curvature_floor(k) for k in range(FIRST-2,LAST+1)}
+    floors = {k:curvature_floor(k,z) for k in range(FIRST-2,LAST+1)}
     ceilings = {k:D*(Q(1,k)+Q(1,N-k)) + intervals[k][1]-intervals[k-1][0]
                 for k in range(FIRST-2,SEVEN_LAST+3)}
     exp_minus = MIXED["exp_negative"]

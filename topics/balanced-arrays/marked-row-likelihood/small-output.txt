@@ -1,6 +1,8 @@
-9848 exact couplings across 6025 small-cap fibers.
-13103 nonempty weighted fibers enumerated in total.
-21869 nonzero tilted size comparisons.
+10586 exact couplings across 6495 small-cap fibers.
+13573 nonempty weighted fibers enumerated in total.
+22665 nonzero tilted size comparisons.
+153012 exact binomial-odds comparisons.
+5984 hypergeometric identities at heights 1 through 32.
 1260 coefficientwise comparisons.
 231 coefficient vectors agreed by row and column counting.
 n=10000, r=2, d=130: unrestricted floor < 4 < new uniform floor.

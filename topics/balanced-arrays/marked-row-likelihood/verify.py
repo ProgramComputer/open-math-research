@@ -5,6 +5,7 @@ from fractions import Fraction
 import gzip
 import itertools
 import json
+from math import comb
 from pathlib import Path
 from runpy import run_path
 
@@ -107,6 +108,44 @@ def check_size_comparisons(profiles, n, d):
     return count
 
 
+def check_binomial_odds(profiles, n, d):
+    """All comparable quotas in four columns, all strictly increasing ones otherwise."""
+    masses = {}
+    for q, profile in profiles.items():
+        layers = [0] * (d+1)
+        for mask,w in profile.items():
+            layers[mask.bit_count()] += w
+        masses[q] = layers
+    count = 0
+    for a, lower in masses.items():
+        options = [range(x+(d>4), n+1) for x in a]
+        for b in itertools.product(*options):
+            if a == b or b not in masses:
+                continue
+            rho = max(Fraction(x*(n-y), y*(n-x)) if x < y else Fraction(1)
+                      for x,y in zip(a,b))
+            upper = masses[b]
+            for s in range(d):
+                for t in range(s+1,d+1):
+                    source, target = lower[t]*upper[s], lower[s]*upper[t]
+                    if source or target:
+                        assert source*rho.denominator**(t-s) <= target*rho.numerator**(t-s)
+                        count += 1
+    return count
+
+
+def check_overlap_average():
+    checks = 0
+    for n in range(1,33):
+        for a in range(n):
+            for b in range(a+1,n+1):
+                numerator = sum(Fraction((b-a)*comb(b-1,a-h)*comb(n-b,h),h+b-a)
+                                for h in range(a+1) if a-h <= b-1 and h <= n-b)
+                assert numerator/comb(n-1,a) == Fraction((b-a)*n,b*(n-a))
+                checks += 1
+    return checks
+
+
 def matching_records():
     cases = [
         ([[1]*4]*3, [(0,4),(0,2),(0,2)]),
@@ -115,6 +154,7 @@ def matching_records():
         ([[0,2,1,2,1,1],[1,3,2,1,2,1],[2,1,0,1,1,2]], [(0,6),(1,3),(2,3)]),
         ([[1]*6]*3, [(0,6),(0,4),(0,5)]),
         ([[2,1,3,1,2,1],[1,2,1,0,3,1],[1,3,1,2,1,2]], [(0,6),(1,5),(2,4)]),
+        ([[2,0,3,1],[1,2,3,1],[1,2,3,1],[1,2,3,1]], [(0,4),(1,3),(1,3),(1,3)]),
     ]
     result = []
     for weights, intervals in cases:
@@ -122,6 +162,8 @@ def matching_records():
         d = len(weights[0])
         profiles = fibers(weights, intervals)
         size_comparisons = check_size_comparisons(profiles, len(weights), d)
+        symmetric = len(set(map(tuple,weights[1:]))) == 1 and len(set(intervals[1:])) == 1
+        odds_checks = check_binomial_odds(profiles,len(weights),d) if symmetric else 0
         small_caps = all(hi <= 3 for _, hi in intervals[1:])
         for quotas, profile in sorted(profiles.items()):
             layers = [dict() for _ in range(d+1)]
@@ -134,7 +176,7 @@ def matching_records():
                     checked.append(j)
             rows.append([quotas, sorted(profile.items()), checked])
         result.append(dict(weights=weights, row_intervals=intervals,
-                           size_comparisons=size_comparisons, fibers=rows))
+                           size_comparisons=size_comparisons, odds_checks=odds_checks, fibers=rows))
     return result
 
 
@@ -217,6 +259,8 @@ def main():
     print(f"{transitions} exact couplings across {small_count} small-cap fibers.")
     print(f"{num_fibers} nonempty weighted fibers enumerated in total.")
     print(f"{sum(case['size_comparisons'] for case in matching)} nonzero tilted size comparisons.")
+    print(f"{sum(case['odds_checks'] for case in matching)} exact binomial-odds comparisons.")
+    print(f"{check_overlap_average()} hypergeometric identities at heights 1 through 32.")
     print(f"{sum(len(case['coefficients']) for case in monomials)} coefficientwise comparisons.")
     print(f"{len(coefficients)} coefficient vectors agreed by row and column counting.")
     examples()
