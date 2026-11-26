@@ -6,3 +6,6 @@
 'CatalanStrictPeaks.CutGeometry.nearAmplitude_sixth_error' depends on axioms: [propext, Classical.choice, Quot.sound]
 'CatalanStrictPeaks.CutGeometry.nearMean_step_lt_one_div' depends on axioms: [propext, Classical.choice, Quot.sound]
 'CatalanStrictPeaks.CutGeometry.nearMean_step_lt_four_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.nearMean_re_gt_seventeen_twentieths' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
