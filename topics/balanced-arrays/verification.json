@@ -213,6 +213,14 @@
         "port_patch_sha256": "bb54dc8b17ad4b9ca79efa46bd42da45b4d28a06a220d39d9b43e2025c52eb3d"
       }
     ],
-    "status": "passed"
+    "status": "passed",
+    "upstream_source_rebuild": {
+      "status": "pending",
+      "scope": "Union of direct mathlib imports for all six published results and their transitive prerequisites, rebuilt without a mathlib object cache. The Lean standard library is supplied with the pinned compiler release.",
+      "workflow": "https://github.com/ProgramComputer/open-math-research/actions/runs/45762866977/job/139716713982",
+      "command": "mapfile -t modules < upstream-roots.txt; targets=(); for module in \"${modules[@]}\"; do targets+=(\"+$module:olean\"); done; MATHLIB_NO_CACHE_ON_UPDATE=1 lake build \"${targets[@]}\"",
+      "module_list": "upstream-roots.txt in the stable-upstream-source-rebuild artifact",
+      "reproducer": ".github/workflows/publication-dependencies.yml"
+    }
   }
 }
