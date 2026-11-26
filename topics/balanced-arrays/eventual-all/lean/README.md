@@ -38,7 +38,7 @@ The [sign reduction](BalancedEventualSigns.lean) applies the existing [alternati
 
 [BalancedPhaseFirstHit.lean](BalancedPhaseFirstHit.lean), using the shared [first-hit lemma](../../../../shared/lean/OpenMathResearch/FirstLevelHits.lean), verifies the first-hit step in [The phase radii](../proof.md#the-phase-radii). For a continuous real phase in logarithmic radius with limits below and above a specified level, it constructs the least point attaining that level. The intermediate value theorem gives a hit in a compact interval, and the lower-tail hypothesis excludes earlier hits. Applying the intermediate value theorem before the first hit of a higher level proves strict ordering of the first hits. The exponential map transfers the construction to positive radii.
 
-The declaration `BalancedEventual.exists_balanced_phase_radii` uses the exact lower and upper limits from the written proof and the internal levels $k\pi$ for $1\le k<\lfloor nr/d\rfloor$. It checks the floor comparison required at the upper limit. It assumes continuity and the two limits for the actual phase. The next formal obligation is to define the occupied-cell phase from the two finite tilted row-size sums, show their arguments stay in the stated sectors, and prove continuity and both endpoint limits. The angular signs and geometric-to-phase joins also remain outside Lean. The uniform eventual theorem still has partial formal coverage.
+The declaration `BalancedEventual.exists_balanced_phase_radii` uses the exact lower and upper limits from the written proof and the internal levels $k\pi$ for $1\le k<\lfloor nr/d\rfloor$. It checks the floor comparison required at the upper limit. Its continuity and endpoint hypotheses for the actual phase are discharged below. The angular signs and geometric-to-phase joins remain outside Lean. The uniform eventual theorem still has partial formal coverage.
 
 Use the research pins above. From the repository root, with the pinned dependencies built, run
 
@@ -49,3 +49,23 @@ lake env lean ../../topics/balanced-arrays/eventual-all/lean/BalancedPhaseFirstH
 ~~~
 
 The agent-assisted replay compiled an `.olean` into a temporary output directory with Lean 4.19.0 and the existing mathlib cache at `c44e0c8ee63ca166450922a373c7409c5d26b00b`. All five declarations use only `propext`, `Classical.choice` and `Quot.sound`. [Axiom output](phase-first-hit-axioms.txt)
+
+## The occupied-cell phase and its endpoint limits
+
+[BalancedOccupiedPhase.lean](BalancedOccupiedPhase.lean) constructs the two actual sums evaluated on the ray of angle $\pi/d$, for integers $1\le r<d$. The row weights are $\binom ds$. The moment weights are $\binom ds s(d-s)$, omitting the common positive factor $1/[d(d-1)]$. The two expectations in the quotient in the written phase share the row-law normalization, which cancels. The positive factor omitted from the moment weights leaves its argument unchanged.
+
+The imaginary parts of both sums are positive at every positive radius. Each summand has nonnegative imaginary part, and the summand at size one has positive imaginary part. This places both values in the domain of the continuous principal argument. Their difference of arguments gives the quotient argument without a change of branch. The resulting phase is continuous in the logarithmic radius.
+
+At zero, the row sum tends to one. The moment sum equals the radius times a shifted finite polynomial. Its argument tends to $\pi/d$ by continuity of the argument at that polynomial's nonzero constant term. At infinity, normalizing by the positive $r$th power of the radius gives two finite polynomials in reciprocal radius. Each has a nonzero constant term of argument $r\pi/d$. Thus the phase limits are $-((d-1)/2)(\pi/d)$ and $(nr/d)\pi$. The declaration `BalancedEventual.OccupiedPhase.exists_phase_radii` supplies the ordered first hitting radii directly for the concrete phase.
+
+Run with the same research toolchain. After building the shared lemma above, compile the local first-hit specialization before checking the occupied phase.
+
+~~~sh
+cd shared/lean
+lake build OpenMathResearch.FirstLevelHits
+topic=../../topics/balanced-arrays/eventual-all/lean
+lake env lean --root="$topic" -o .lake/build/lib/lean/BalancedPhaseFirstHit.olean "$topic/BalancedPhaseFirstHit.lean"
+lake env lean "$topic/BalancedOccupiedPhase.lean"
+~~~
+
+The agent-assisted check uses Lean 4.19.0, compiler commit `6caaee842e94`, and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. [Axiom output](occupied-phase-axioms.txt)
