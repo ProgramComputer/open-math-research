@@ -3,7 +3,7 @@
 set -euo pipefail
 
 if [[ $# != 3 ]]; then
-  echo 'Usage: replay-kernel.sh <built shared/lean directory> <artifact directory> prism|catalan' >&2
+  echo 'Usage: replay-kernel.sh <built shared/lean directory> <artifact directory> prism|catalan|ribbon-foundation' >&2
   exit 2
 fi
 
@@ -20,6 +20,10 @@ case "$topic" in
   catalan)
     modules=(CatalanStrictPeaksAllInterlacing AuditCatalanExportType AuditCatalanWordBridge AuditCatalanFullSource)
     theorems=(CatalanStrictPeaks.strict_peaks_all_lengths AuditExportType.catalan AuditReference.catalanPolynomial_eq AuditReference.catalanSourcePublished AuditReference.catalanSourceOriginal)
+    ;;
+  ribbon-foundation)
+    modules=(RibbonNarayana AuditRibbonSource)
+    theorems=(Ribbon.Source.IsRibbonPresentation.narayana AuditRibbonSource.original AuditRibbonSource.published AuditRibbonSource.rankZero)
     ;;
   *)
     echo "Unknown audit topic: $topic" >&2

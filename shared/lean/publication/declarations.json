@@ -138,7 +138,12 @@
     "OpenMathResearch.MatroidKL.CircuitBases.ncard_lt_of_proper_flat",
     "OpenMathResearch.MatroidKL.CircuitBases.flatRank_of_proper",
     "OpenMathResearch.MatroidKL.CircuitBases.narayana_coeff",
-    "Ribbon.Source.IsRibbonPresentation.narayana_coeff"
+    "Ribbon.Source.IsRibbonPresentation.narayana_coeff",
+    "Ribbon.Source.narayana_roots",
+    "Ribbon.Source.IsRibbonPresentation.narayana",
+    "AuditRibbonSource.original",
+    "AuditRibbonSource.published",
+    "AuditRibbonSource.rankZero"
   ],
   "ordered": [
     "OrderedGlobalAngular.abs_sin_nat_multiple_le",
