@@ -22,6 +22,35 @@ def Oriented {m d : ℕ} (old : Fin m → ℝ) (new : Fin d → ℝ) : Prop :=
   (∀ i j, j.val = i.val → new j < old i) ∧
   (∀ i j, j.val = i.val + 1 → old i < new j)
 
+/-- Disjoint increasing positive intervals with opposite endpoint signs
+isolate the complete negative root multiset when their number is the degree. -/
+theorem roots_of_disjoint_intervals {d : ℕ} {P : ℝ[X]} (l u : Fin d → ℝ)
+    (hdegree : P.natDegree = d) (hne : P ≠ 0)
+    (hnonneg : ∀ i, 0 ≤ l i) (hwidth : ∀ i, l i < u i)
+    (horder : ∀ i : Fin (d - 1), u ⟨i, by omega⟩ ≤ l ⟨i.val + 1, by omega⟩)
+    (hs : ∀ i, P.eval (-l i) * P.eval (-u i) < 0) :
+    ∃ r : Fin d → ℝ, CompleteNegativeRoots P r ∧ ∀ i, l i < r i ∧ r i < u i := by
+  classical
+  have hchoice (i : Fin d) : ∃ r, l i < r ∧ r < u i ∧ P.IsRoot (-r) := by
+    have hsign : (P.comp (-X)).eval (l i) * (P.comp (-X)).eval (u i) < 0 := by
+      simpa [eval_comp] using hs i
+    obtain ⟨r, hl, hu, hr⟩ := AlternatingSignRoots.root_between (hwidth i) hsign
+    exact ⟨r, hl, hu, by simpa [Polynomial.IsRoot, eval_comp] using hr⟩
+  choose r hr using hchoice
+  have hmono : StrictMono r := by
+    cases d with
+    | zero => intro i; exact Fin.elim0 i
+    | succ d =>
+      apply Fin.strictMono_iff_lt_succ.mpr
+      intro i
+      have hgap : u i.castSucc ≤ l i.succ := by
+        simpa [Fin.castSucc, Fin.succ] using horder ⟨i, by simp⟩
+      exact (hr i.castSucc).2.1.trans ((hgap.trans_lt (hr i.succ).1))
+  refine ⟨r, ⟨hdegree, hmono, fun i => (hnonneg i).trans_lt (hr i).1, ?_⟩,
+    fun i => ⟨(hr i).1, (hr i).2.1⟩⟩
+  exact AlternatingSignRoots.roots_of_complete_list P (fun i => -r i) hdegree hne
+    (neg_injective.comp hmono.injective) (fun i => (hr i).2.2)
+
 /-- Positive constant and leading coefficients and alternating signs at
 negative test points isolate all the next roots, for either degree change.
 The shared sign transfers already treat both degree patterns. -/
