@@ -43,3 +43,29 @@ lake env lean ../../topics/balanced-arrays/marked-row-likelihood/lean/ArrayOrien
 ~~~
 
 Each module prints its own axiom audit. The local run invoked the same compiler with `LEAN_PATH` pointing to the compiled packages in the locked manifest. In a fresh checkout, `lake exe cache get` fetches the pinned mathlib build artifacts.
+
+## Stable build
+
+On 26 November 2026 the hosted audit built both modules from repository commit `5cc486a58171319924acf9cccb2eb77ca746f405` with Lean 4.36.0 release commit `611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9` and mathlib `fc4f59e577feb1a4956671bc04ac18aaaf8cd842`. The 22 declaration reports list only `Classical.choice`, `propext`, and `Quot.sound`. [GitHub Actions run](https://github.com/ProgramComputer/open-math-research/actions/runs/45892169890) · [Original artifact](https://github.com/ProgramComputer/open-math-research/actions/runs/45892169890/artifacts/15151389033) · [Archived axiom reports](stable/record/axioms.json) · [Lean version](stable/record/lean-version.txt) · [Mathlib revision](stable/record/mathlib-revision.txt)
+
+The [source record](stable/record/sources.json) gives SHA-256 hashes for the original and staged files. Restaging the inputs from the audited commit reproduced both sets of hashes. The [orientation port](stable/ArrayOrientation.patch) unfolds the decoded pair explicitly in two branches of the compatibility proof. The [pairing port](stable/MarkedPairing.patch) uses the current positive-factor cancellation lemma in one proof. Both ports change proofs in the staged copies and preserve the declaration statements. Lean coverage remains partial as described above.
+
+To reproduce the hosted audit, use Bash from the root of a clean checkout with Elan and the pinned stable toolchain available.
+
+~~~bash
+set -euo pipefail
+git checkout --detach 5cc486a58171319924acf9cccb2eb77ca746f405
+audit_script=topics/balanced-arrays/marked-row-likelihood/lean/stable/audit.py
+python3 "$audit_script" stage .marked-row-stable
+(
+  cd .marked-row-stable
+  lean --version | tee lean-version.txt
+  grep -E '^Lean \(version 4\.36\.0,' lean-version.txt
+  lake --version
+  mapfile -t imports < cache-imports.txt
+  lake exe cache get "${imports[@]}"
+  test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842
+  lake build MarkedPairing ArrayOrientation
+)
+python3 "$audit_script" audit .marked-row-stable
+~~~

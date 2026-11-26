@@ -1,0 +1,109 @@
+{
+  "MarkedPairing.weight_nonneg": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "MarkedPairing.sum_hit": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "MarkedPairing.column_sum": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "MarkedPairing.all_columns": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "MarkedPairing.cancel_common_marks": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "MarkedPairing.sharp_binomial_factor": [
+    "Quot.sound",
+    "propext"
+  ],
+  "MarkedPairing.overlap_profile_card": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "MarkedPairing.removedWeight_mul": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "MarkedPairing.removed_probability": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "MarkedPairing.retained_probability": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.arrayEquiv": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.constrained_count": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.outgoingEquiv": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.red_row_size": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.blue_row_size": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.red_column_size": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.blue_column_size": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.row_constrained_count": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.splitOutgoingEquiv": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.ofMatchings_compatible": [
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.refinementsEquiv": [
+    "Quot.sound",
+    "propext"
+  ],
+  "BalancedRowTilt.ColumnPairing.refinement_count_of_quotas": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ]
+}
