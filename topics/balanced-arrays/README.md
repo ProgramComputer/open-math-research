@@ -6,6 +6,8 @@ Earlier bounds include the [five-thirds row bound and polynomial cap or corank r
 
 Every dimension and cap satisfies the conjecture through 35 rows. The exact finite replay includes 171 coefficient vectors and 3,391 simple negative roots certified by integer sign evaluations. [Finite coverage and independent checks](finite-residual/README.md)
 
+For every row count, $d\ge2$, $4d\ge n$ and $10r\ge9d$ give only simple negative roots. The proof combines an exact finite interval replay with analytic estimates. A separate theorem gives effective cutoffs in other high-cap sectors, including $d\ge4n/\log n$ and $4n(d-r)\le d^2$ for $\log n\ge64$. **⬜ None** for Lean or Rocq. [Proofs and replay](effective-sectors/README.md)
+
 Five of the eight residual cases at 36 rows have complete exact root checks. A geometric compensation lemma and independent rational probes also certify the 12-column case with cap ten directly from validity-probability bounds. [Five residual cases and finite checks](curvature-compensation/README.md)
 
 There are absolute constants $C>0$ and $N$ such that, for every $n\ge N$, $d\ge Cn/\log n$, and every row cap, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. **⬜ None** for Lean or Rocq. [Theorem and proof](dense-regime/README.md)
