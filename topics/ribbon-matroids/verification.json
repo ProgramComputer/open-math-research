@@ -128,5 +128,736 @@
       "uncompressed_olean_manifest_sha256": "fb30abd6e41cfc3f2152a4771136b99b42c371b32a79031d9c22b7999e69aaa4",
       "build_log_sha256": "0c3e8ec191f2631823a31cbcb7e90c126dc05dfdf9874f741cfe1a3df1325111"
     }
+  },
+  "matroid_kl_foundation": {
+    "status": "passed",
+    "formal_coverage": "Partial. This check covers the finite-matroid Kazhdan–Lusztig and Z-polynomial definitions and the independently specified ribbon conjecture.",
+    "scope": [
+      "Existence and uniqueness of the integer coefficient family with the rank-zero value, degree bound and palindromicity.",
+      "Equivalence of Z-palindromicity and the original characteristic-polynomial recurrence on the ranked flat intervals.",
+      "The ranked upper flat intervals agree with the flat posets of the actual Mathlib contractions.",
+      "The matroid-level characteristic recurrence and rank-shifted contraction definition of Z hold, including rank zero.",
+      "The source-facing statement is well typed and its boundary height equals the matroid rank."
+    ],
+    "source_statement": "topics/ribbon-matroids/lean/publication/RibbonNarayanaSpec.lean#Ribbon.Source.NarayanaClaim",
+    "remaining": [
+      "The connected-ribbon graphic identification and invariance under simplification.",
+      "The Braden–Vysogorets deletion identity and direct-sum vanishing on the relevant contractions.",
+      "The circuit evaluation and the conclusion that all Narayana zeros are real."
+    ],
+    "independent_kernel": "A replay and comparison with the separately specified original statement are pending an end-to-end proof.",
+    "workflow_checkout_commit": "3391178481972789c43d70ad23e79c5f2dec98d7",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45834249362/job/139958779059",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45834249362/artifacts/15123182145",
+    "hosted_artifact_digest": "sha256:3d312ce65cbf9b0813bddcd4aca76545900a3b8aaf215666fecbee1474695eb7",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2820,
+    "checked_declarations": 33,
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "declarations": [
+      "OpenMathResearch.MatroidKL.IsKLFamily.coeff_eq_zero_of_height_lt",
+      "OpenMathResearch.MatroidKL.IsKLFamily.comp_orderEmbedding",
+      "OpenMathResearch.MatroidKL.IsKLFamily.eq_klCoeff",
+      "OpenMathResearch.MatroidKL.IsKLFamily.zCoeff_eq_zero_of_height_lt",
+      "OpenMathResearch.MatroidKL.IsKLFamily.zCoeff_of_rank_zero",
+      "OpenMathResearch.MatroidKL.IsKLFamily.zCoeff_palindrome",
+      "OpenMathResearch.MatroidKL.coeff_flatKL",
+      "OpenMathResearch.MatroidKL.coeff_matroidZ",
+      "OpenMathResearch.MatroidKL.coeff_shiftedSum",
+      "OpenMathResearch.MatroidKL.contractFlatEmbedding_bot",
+      "OpenMathResearch.MatroidKL.contractFlatEmbedding_exists",
+      "OpenMathResearch.MatroidKL.contractFlatEmbedding_top",
+      "OpenMathResearch.MatroidKL.flatKLCoeff_isKLFamily",
+      "OpenMathResearch.MatroidKL.flatKL_characteristicRecurrence",
+      "OpenMathResearch.MatroidKL.flatKL_contract",
+      "OpenMathResearch.MatroidKL.flatRank_contractFlatEmbedding",
+      "OpenMathResearch.MatroidKL.intervalCharacteristic_apply",
+      "OpenMathResearch.MatroidKL.klCoeff_isKLFamily",
+      "OpenMathResearch.MatroidKL.matroidKL_characteristicRecurrence",
+      "OpenMathResearch.MatroidKL.matroidKL_coeff_eq_zero_of_high",
+      "OpenMathResearch.MatroidKL.matroidKL_of_rank_zero",
+      "OpenMathResearch.MatroidKL.matroidZCoeff_eq_zero_of_rank_lt",
+      "OpenMathResearch.MatroidKL.matroidZCoeff_palindrome",
+      "OpenMathResearch.MatroidKL.matroidZ_eq_sum",
+      "OpenMathResearch.MatroidKL.matroidZ_eq_sum_contract",
+      "OpenMathResearch.MatroidKL.matroidZ_of_rank_zero",
+      "OpenMathResearch.MatroidKL.palindrome_iff_characteristicRecurrence",
+      "OpenMathResearch.MatroidKL.shiftedSum_reflect_of_isKLFamily",
+      "OpenMathResearch.MatroidKL.strictMono_flatRank",
+      "Ribbon.Source.IsRibbonPresentation",
+      "Ribbon.Source.IsRibbonPresentation.rank_eq",
+      "Ribbon.Source.NarayanaClaim",
+      "Ribbon.Source.prefixBase_length"
+    ],
+    "modules": [
+      {
+        "name": "OpenMathResearch.MatroidFlatContract",
+        "file": "shared/lean/OpenMathResearch/MatroidFlatContract.lean",
+        "sha256": "49b7ca6e9b66a22d05fcd13bfdc4df91740637843600a84a00c736f6fe7b63cc"
+      },
+      {
+        "name": "OpenMathResearch.MatroidFlatPolynomial",
+        "file": "shared/lean/OpenMathResearch/MatroidFlatPolynomial.lean",
+        "sha256": "2ac875e9cf83be8b1553c42d9f09d49cc78080f7dc167044bd726d26094ef0ed"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKL",
+        "file": "shared/lean/OpenMathResearch/MatroidKL.lean",
+        "sha256": "79322f9658858ef51a31e7567cb001dc4f6a40bc29c6600067890c92ad26cfef"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLRecurrence",
+        "file": "shared/lean/OpenMathResearch/MatroidKLRecurrence.lean",
+        "sha256": "f5c97e1f5730b932b56776b4cf1b5a3eead202fd101ad035f03cf6ee4ec3fd50"
+      },
+      {
+        "name": "RibbonNarayanaSpec",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonNarayanaSpec.lean",
+        "sha256": "7e6f5e98615f309a0cb545c23da235d4f1303d286540c224cbe5921030410032"
+      }
+    ]
+  },
+  "matroid_kl_direct_sums": {
+    "status": "passed",
+    "formal_coverage": "Partial. The positive-rank direct-sum correction vanishes for the actual finite Mathlib matroids.",
+    "scope": [
+      "The flat poset for the direct sum is the product of the two flat posets, with additive rank.",
+      "The Kazhdan–Lusztig polynomial of the finite direct sum is the product of its summand polynomials.",
+      "The top allowable coefficient for odd total rank vanishes when both ranks are positive. For even total rank the correction is zero by definition."
+    ],
+    "remaining": [
+      "The concrete matroid deletion identity with the vanishing side conditions.",
+      "Showing that the relevant polygon contractions decompose as these positive-rank direct sums.",
+      "The connected-ribbon graphic identification and simplification invariance, the circuit evaluation and Narayana real-rootedness."
+    ],
+    "workflow_checkout_commit": "1210b9748cfe545fe684cb7a5d634c980345a63f",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45836042217/job/139965058103",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45836042217/artifacts/15126845025",
+    "hosted_artifact_digest": "sha256:bed6cadca414c5bdc75f1ae16f8866fedeb956c1685e9e2adce587569a99ac5a",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2830,
+    "checked_declarations": 40,
+    "new_declarations": [
+      "OpenMathResearch.MatroidKL.IsKLFamily.product",
+      "OpenMathResearch.MatroidKL.IsKLFamily.twice_natDegree_lt",
+      "OpenMathResearch.MatroidKL.flatRank_sum",
+      "OpenMathResearch.MatroidKL.matroidKL_sum",
+      "OpenMathResearch.MatroidKL.rank_sum",
+      "OpenMathResearch.MatroidKL.shiftedSum_product",
+      "OpenMathResearch.MatroidKL.tau_sum_eq_zero"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "new_modules": [
+      {
+        "name": "OpenMathResearch.MatroidFlatSum",
+        "file": "shared/lean/OpenMathResearch/MatroidFlatSum.lean",
+        "sha256": "9e5ea7554bd6a2dbe36c8d869e326f5b2fa4df39d3f971f446696ae4c2495775"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLProduct",
+        "file": "shared/lean/OpenMathResearch/MatroidKLProduct.lean",
+        "sha256": "6e17881193a675e0005d8b7ba9c3f6872f678ee78ff586e5d88bdebc8b09c886"
+      }
+    ]
+  },
+  "matroid_kl_deletion": {
+    "status": "passed",
+    "formal_coverage": "Partial. Lean checks a deletion identity for actual finite Mathlib matroids under the vanishing corrections appropriate for the ribbon argument.",
+    "scope": [
+      "The centered coefficient profile implements the Laurent polynomial shift and is determined by its coordinate constants under the symmetry and support conditions.",
+      "The deletion flat map has a rank-preserving lift by closure. Its rank discrepancy is at most one and discrepancy-one coordinates give the prescribed pair of original flats.",
+      "If the complement of the element spans and the top-coefficient corrections vanish, deletion preserves the Z-polynomial. Deleting a parallel copy also preserves the Z-polynomial."
+    ],
+    "remaining": [
+      "The direct-sum and positive-rank hypotheses for each relevant contraction must be proved from the ribbon bases and overlaps.",
+      "Rank-preserving reduction from the original connected ribbons to the spine with its boundary spokes, and the circuit evaluation and root conclusion."
+    ],
+    "workflow_checkout_commit": "80c651fe749551da99527bcda576299e70e8e91a",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45837492441/job/139970117998",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45837492441/artifacts/15125603074",
+    "hosted_artifact_digest": "sha256:68d7f104c3d5e394f5261c763402608f2e3d6ab62dfb342126ee456208d01ca3",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2836,
+    "checked_declarations": 54,
+    "new_declarations": [
+      "OpenMathResearch.MatroidKL.IsKLFamily.centeredCoeff_zero",
+      "OpenMathResearch.MatroidKL.IsKLFamily.isPerverseProfile",
+      "OpenMathResearch.MatroidKL.IsPerverseProfile.ext_of_constants",
+      "OpenMathResearch.MatroidKL.centeredCoeff_at_exponent",
+      "OpenMathResearch.MatroidKL.centeredCoeff_one",
+      "OpenMathResearch.MatroidKL.centeredCoeff_shiftedSum",
+      "OpenMathResearch.MatroidKL.deleteFlat_discrepancy_one",
+      "OpenMathResearch.MatroidKL.deletionFlat_adj",
+      "OpenMathResearch.MatroidKL.flatRank_deleteFlat_gap",
+      "OpenMathResearch.MatroidKL.flatRank_liftDeletionFlat",
+      "OpenMathResearch.MatroidKL.matroidZ_delete_of_parallel",
+      "OpenMathResearch.MatroidKL.matroidZ_delete_of_tau_zero",
+      "OpenMathResearch.MatroidKL.shiftedSum_eq_of_deletionPush",
+      "OpenMathResearch.MatroidKL.translatedSum_pushProfile"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "new_modules": [
+      {
+        "name": "OpenMathResearch.MatroidFlatDelete",
+        "file": "shared/lean/OpenMathResearch/MatroidFlatDelete.lean",
+        "sha256": "e3aafe608e48fa956472d674aacd3ed8e7409c31fd09ebac45109a7e9455b5e8"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLDeletionProfile",
+        "file": "shared/lean/OpenMathResearch/MatroidKLDeletionProfile.lean",
+        "sha256": "f609ad564aff140eb7a15105588a0acd12d08bf2a804362430562961812e41aa"
+      }
+    ]
+  },
+  "ribbon_source_chain": {
+    "status": "passed",
+    "formal_coverage": "Partial. The original nonempty connected source-facing ribbon presentation now implies the interval-transversal basis description.",
+    "scope": [
+      "The cell test agrees with the two boundary north-prefix counts. No two-by-two block forces gap at most one.",
+      "A circuit across an interior cut forces strictly positive gap by giving a basis exchange across the cut.",
+      "The paths have the same interior steps and opposite endpoint steps. The union of their north positions gives a separator chain.",
+      "A set is a basis exactly when it is the range of distinct representatives chosen from the successive closed intervals."
+    ],
+    "remaining": [
+      "Show from these bases and overlaps that each required contraction splits into two positive-rank sides.",
+      "Use the checked deletion theorem to reach the boundary circuit, then verify its Narayana evaluation and the root conclusion."
+    ],
+    "workflow_checkout_commit": "4e2c7fc84d360ac494dd7e1d4de88626a8bf5790",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45839967570/job/139978732737",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45839967570/artifacts/15127529023",
+    "hosted_artifact_digest": "sha256:8a369309c983d27c7b25342661fc93ca9b78a4e51d62bf191e165a2431683bbf",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2842,
+    "checked_declarations": 63,
+    "new_declarations": [
+      "Ribbon.Source.IsRibbonPresentation.exists_chain",
+      "Ribbon.Source.IsRibbonPresentation.first_steps",
+      "Ribbon.Source.IsRibbonPresentation.inner_step_eq",
+      "Ribbon.Source.IsRibbonPresentation.last_steps",
+      "Ribbon.Source.IsRibbonPresentation.length_ge_two",
+      "Ribbon.Source.IsRibbonPresentation.prefix_gap_eq_one",
+      "Ribbon.Source.IsRibbonPresentation.prefix_gap_le_one",
+      "Ribbon.Source.IsRibbonPresentation.prefix_gap_pos",
+      "Ribbon.Source.cell_iff_prefix_counts"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "new_modules": [
+      {
+        "name": "RibbonBoundaryProfile",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonBoundaryProfile.lean",
+        "sha256": "a2e28adc6edc03e387d00811a8de6d4ea89dfc2f9a04876841c7a0f5c0413779"
+      },
+      {
+        "name": "RibbonChainPresentation",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonChainPresentation.lean",
+        "sha256": "122edc4759d1448de7007e84bd8732cfd48c9d14ea7da1a0c1fcae87156eb102"
+      }
+    ]
+  },
+  "ribbon_circuit_boundary": {
+    "status": "passed",
+    "formal_coverage": "Partial. Lean reduces the actual finite matroid of an arbitrary nonempty connected ribbon to a rank-preserving circuit matroid with the same Z-polynomial.",
+    "scope": [
+      "A splice of two bases of the contraction at an interior interval element is again a basis. The splice splits the matroid across the cut.",
+      "For each required flat pair, explicit independent chains prove that both sides of the further contraction have positive rank.",
+      "Each interior deletion preserves Z. Finite induction leaves exactly the separators, and each boundary basis omits exactly one separator.",
+      "Relabeling the two sides preserves the flat ranks and the Kazhdan–Lusztig coefficients used in the direct-sum vanishing theorem."
+    ],
+    "remaining": [
+      "Evaluate the actual circuit Z-polynomial as Narayana and check the real-rootedness and simple-negative-root conclusions."
+    ],
+    "workflow_checkout_commit": "030174141132d8bfd0031236428e1dd5737ef9a3",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45842864905/job/139988838720",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45842864905/artifacts/15130210739",
+    "hosted_artifact_digest": "sha256:197fec6cb291c354d42a62dc0d0d0efca477350fd438d5fcebde746ea84e5f9d",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2857,
+    "checked_declarations": 82,
+    "new_declarations": [
+      "OpenMathResearch.MatroidKL.SplitsAt.contract",
+      "OpenMathResearch.MatroidKL.SplitsAt.tau_eq_zero",
+      "OpenMathResearch.MatroidKL.eq_map_sum_of_splitsAt",
+      "OpenMathResearch.MatroidKL.flatRank_map",
+      "OpenMathResearch.MatroidKL.matroidKL_map",
+      "OpenMathResearch.MatroidKL.matroidZ_delete_of_split",
+      "OpenMathResearch.MatroidKL.rank_map",
+      "OpenMathResearch.MatroidKL.splitsAt_of_baseSplice",
+      "OpenMathResearch.MatroidKL.tau_map",
+      "Ribbon.Source.IsChainPresentation.restricted",
+      "Ribbon.Source.IsRestrictedChain.contract_splitsAt",
+      "Ribbon.Source.IsRestrictedChain.delete_nonseparator",
+      "Ribbon.Source.IsRestrictedChain.isBase_iff_of_ground_sep",
+      "Ribbon.Source.IsRestrictedChain.lower_base",
+      "Ribbon.Source.IsRestrictedChain.matroidZ_delete_of_inside",
+      "Ribbon.Source.IsRestrictedChain.reduce_to_separators",
+      "Ribbon.Source.IsRestrictedChain.spans_without_nonseparator",
+      "Ribbon.Source.IsRestrictedChain.upper_base",
+      "Ribbon.Source.IsRibbonPresentation.exists_circuitBoundary"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "declarations_using_fewer_axioms": {
+      "Ribbon.Source.IsChainPresentation.restricted": [
+        "propext"
+      ]
+    },
+    "new_modules": [
+      {
+        "name": "OpenMathResearch.MatroidKLMap",
+        "file": "shared/lean/OpenMathResearch/MatroidKLMap.lean",
+        "sha256": "7c44886395e10383470e5e031dbb694df4a225098f6997c04bf4b7c3bc76572d"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLSeparation",
+        "file": "shared/lean/OpenMathResearch/MatroidKLSeparation.lean",
+        "sha256": "916a7ac4580c2bbe747b49e9258f9e736b571ebf80e663ad33c370fae0cf0589"
+      },
+      {
+        "name": "OpenMathResearch.MatroidKLSplitDeletion",
+        "file": "shared/lean/OpenMathResearch/MatroidKLSplitDeletion.lean",
+        "sha256": "fd77bc5c1ff763ef00e322a5cfd2e2177e71b641c28b76c6ce101d938d9e2484"
+      },
+      {
+        "name": "RibbonChainBoundary",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonChainBoundary.lean",
+        "sha256": "07aa4b4a26e0b217de562b717b7491d947f92292ec37092f0bcaf3c0ebbf43cd"
+      },
+      {
+        "name": "RibbonChainDeletion",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonChainDeletion.lean",
+        "sha256": "e062af91d0872a6fa924a88fd85e99bc29567abeb5f32c86a7f27b6851e5554d"
+      }
+    ]
+  },
+  "ribbon_narayana_coefficients": {
+    "status": "passed",
+    "formal_coverage": "Partial. Lean proves the Narayana coefficient equality for the actual matroid of every nonempty connected ribbon.",
+    "scope": [
+      "The proper circuit flats are exactly the subsets of its ground set of cardinality less than the rank. Their upper interval rank layers are counted by a bijection to sets of fixed cardinality.",
+      "An integer binomial determinant and two applications of Vandermonde’s identity evaluate the candidate circuit Z-sum. Its symmetry and strict degree cutoff identify the Kazhdan–Lusztig coefficients by uniqueness.",
+      "The source-facing ribbon coefficients follow by the checked reduction to the circuit boundary."
+    ],
+    "remaining": [
+      "Check the root conclusion of the original claim and the stronger simple-negative-root conclusion in the proof."
+    ],
+    "workflow_checkout_commit": "5e0ce5a776a4439b1ae30d617fc29c4d28a58b2f",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45844563707/job/139994777606",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45844563707/artifacts/15130765884",
+    "hosted_artifact_digest": "sha256:2a121333b0d0b6ad6e03c91f7f9a82a5e8df36e016c43955ae0df6fc3e529f61",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2868,
+    "checked_declarations": 92,
+    "new_declarations": [
+      "OpenMathResearch.MatroidKL.CircuitBases.flatRank_of_proper",
+      "OpenMathResearch.MatroidKL.CircuitBases.indep_iff",
+      "OpenMathResearch.MatroidKL.CircuitBases.isFlat_of_ncard_lt",
+      "OpenMathResearch.MatroidKL.CircuitBases.narayana_coeff",
+      "OpenMathResearch.MatroidKL.CircuitBases.ncard_lt_of_proper_flat",
+      "OpenMathResearch.MatroidKL.CircuitBases.rank_eq",
+      "OpenMathResearch.MatroidKL.circuitKLCoeff_convolution",
+      "OpenMathResearch.MatroidKL.circuitKLCoeff_high",
+      "OpenMathResearch.MatroidKL.circuitNarayana_clear",
+      "Ribbon.Source.IsRibbonPresentation.narayana_coeff"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "declarations_using_fewer_axioms": {
+      "Ribbon.Source.IsChainPresentation.restricted": [
+        "propext"
+      ],
+      "OpenMathResearch.MatroidKL.circuitKLCoeff_high": [
+        "Quot.sound",
+        "propext"
+      ],
+      "OpenMathResearch.MatroidKL.circuitNarayana_clear": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "new_modules": [
+      {
+        "name": "RibbonNarayanaCoefficients",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonNarayanaCoefficients.lean",
+        "sha256": "40791e0f5eaeaebb7aed07a615fc3a3b2235dbb0a557c04e25069d2fd3906589"
+      },
+      {
+        "name": "CircuitNarayanaMatroid",
+        "file": "topics/ribbon-matroids/lean/publication/CircuitNarayanaMatroid.lean",
+        "sha256": "fa2e88a6880a4ddf406ebdc67e2e8efaba1c03bf59df3e9670b72812a11330e3"
+      },
+      {
+        "name": "CircuitNarayanaCoefficients",
+        "file": "topics/ribbon-matroids/lean/publication/CircuitNarayanaCoefficients.lean",
+        "sha256": "3a223f126a0d3a86d9d0de105bed49e23b4c45adec21d70710d89d58d4ccbcfd"
+      }
+    ]
+  },
+  "ribbon_full_verification": {
+    "status": "passed",
+    "scope": "Every nonempty connected ribbon lattice path matroid of rank r has the Narayana Z-polynomial of order r+1, with exactly r roots, all strictly negative, real and simple. For the degenerate rank-zero convention, Z is 1.",
+    "written_only": "The extension to arbitrary collections of noncrossing diagonals of a convex polygon has a written proof and a conditional graph reduction in Lean.",
+    "primary_source": "https://github.com/PerAlexandersson/symmetricfunctions.com/blob/b4a005205cfd78dd987facedf2e1916ef1e308fd/tex-source/realRootedOpenProblems.tex#L496-L506",
+    "formal_theorem": {
+      "declaration": "Ribbon.Source.IsRibbonPresentation.narayana",
+      "file": "topics/ribbon-matroids/lean/publication/RibbonNarayana.lean"
+    },
+    "statement_comparison": {
+      "specification_file": "topics/ribbon-matroids/lean/publication/RibbonNarayanaSpec.lean",
+      "comparison_file": "topics/ribbon-matroids/lean/publication/AuditRibbonSource.lean",
+      "original_source": {
+        "specification": "Ribbon.Source.NarayanaClaim",
+        "checked_declaration": "AuditRibbonSource.original"
+      },
+      "strengthened_written_result": {
+        "specification": "Ribbon.Source.PublishedNarayanaClaim",
+        "checked_declaration": "AuditRibbonSource.published"
+      },
+      "degenerate_rank_zero": {
+        "specification": "Ribbon.Source.RankZeroNarayanaClaim",
+        "checked_declaration": "AuditRibbonSource.rankZero"
+      },
+      "method": "The Lean kernel checks the theorem against separate types for the original claim, the stronger written claim, and the rank-zero convention. Both kernels replay those comparison declarations and their dependencies."
+    },
+    "toolchain": {
+      "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+      "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+      "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+      "lake_manifest": "shared/lean/publication/lake-manifest.json",
+      "independent_checker": "Nanoda (Rust)",
+      "nanoda_source_commit": "4c544ed4099c8227f07d5de77ad1e69fb0740a27",
+      "release_binaries_sha256": {
+        "lean": "db7f559d05795e7af52e42bc966c90240a39dcb9712161c54c97afa546e20c00",
+        "leanexport": "8298d4412a1f8986b5dbfd1d9925211778d8d320fc47b72040c8fdfdd5b603d5",
+        "leanchecker": "2b2ff08805ace61c935b023f8114ac3f7f1d3bc79cb4e8c47ef7801a5af58798",
+        "nanoda_bin": "8241c5e6baa29490aa118d382f97961b208ae730fdb96545c2abed74c9ece5a8"
+      }
+    },
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build",
+      "bash shared/lean/publication/replay-kernel.sh .publication-build \"$RUNNER_TEMP/kernel-audit\" ribbon-foundation"
+    ],
+    "workflow_checkout_commit": "6bde424aa1dec1062b4f94a93ee4990bb0a3bbef",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45845745191/job/139998824404",
+    "hosted_export_artifact": {
+      "url": "https://github.com/ProgramComputer/open-math-research/actions/runs/45845745191/artifacts/15132001974",
+      "digest": "sha256:e98cfb3eaef9a54c73d64baa01529879b5880220486a5a38615e1ea61a73ec82"
+    },
+    "hosted_reports_artifact": {
+      "url": "https://github.com/ProgramComputer/open-math-research/actions/runs/45845745191/artifacts/15131352120",
+      "digest": "sha256:ab951bdb47aeead7b3657e90970945d10ac77bc2531eb6fdd4c2f59cfefa2b2a"
+    },
+    "completed_lake_jobs": 4483,
+    "declaration_axioms": {
+      "checked_declarations": 97,
+      "report_sha256": "112c81fefe4a484f339050195c0d3e639d252453980cb599ea5cad1d83a43d7d",
+      "standard_axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "declarations_using_fewer_axioms": {
+        "Ribbon.Source.IsChainPresentation.restricted": [
+          "propext"
+        ],
+        "OpenMathResearch.MatroidKL.circuitKLCoeff_high": [
+          "Quot.sound",
+          "propext"
+        ],
+        "OpenMathResearch.MatroidKL.circuitNarayana_clear": [
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "export_root_axioms": {
+        "Ribbon.Source.IsRibbonPresentation.narayana": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AuditRibbonSource.original": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AuditRibbonSource.published": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AuditRibbonSource.rankZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    "export": {
+      "additional_checked_groups": 0,
+      "declaration_count": 24717,
+      "export_sha256": "c2580b2970a3d6838d33728f53e433de32e7d63bffba3f0ec1e07435f285e7ec",
+      "expression_count": 2163464,
+      "meta": {
+        "exporter": {
+          "name": "lean4export",
+          "version": "3.1.0"
+        },
+        "format": {
+          "version": "3.1.0"
+        },
+        "lean": {
+          "githash": "611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9",
+          "version": "4.36.0"
+        }
+      },
+      "roots": {
+        "AuditRibbonSource.original": {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "declaration_count": 24709
+        },
+        "AuditRibbonSource.published": {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "declaration_count": 24710
+        },
+        "AuditRibbonSource.rankZero": {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "declaration_count": 8442
+        },
+        "Ribbon.Source.IsRibbonPresentation.narayana": {
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "declaration_count": 24707
+        }
+      }
+    },
+    "official_kernel_verdict": "Lean default kernel accepts the solution",
+    "independent_kernel_verdict": "Checked 24717 declarations with no errors",
+    "staged_sources_report_sha256": "abecac4b5926be2070727bd7d65ed568ed21ffd1bbb570b554a2e3f2b2152013",
+    "modules": {
+      "RibbonNarayanaSpec": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonNarayanaSpec.lean",
+        "staged_sha256": "56856ddcf87ee7a1ebdc68c6b792c4de58975285e34f566c11e8e014f94a8fa8"
+      },
+      "RibbonNarayanaCoefficients": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonNarayanaCoefficients.lean",
+        "staged_sha256": "40791e0f5eaeaebb7aed07a615fc3a3b2235dbb0a557c04e25069d2fd3906589"
+      },
+      "CircuitNarayanaMatroid": {
+        "published_path": "topics/ribbon-matroids/lean/publication/CircuitNarayanaMatroid.lean",
+        "staged_sha256": "fa2e88a6880a4ddf406ebdc67e2e8efaba1c03bf59df3e9670b72812a11330e3"
+      },
+      "CircuitNarayanaCoefficients": {
+        "published_path": "topics/ribbon-matroids/lean/publication/CircuitNarayanaCoefficients.lean",
+        "staged_sha256": "3a223f126a0d3a86d9d0de105bed49e23b4c45adec21d70710d89d58d4ccbcfd"
+      },
+      "OpenMathResearch.MatroidFlatPolynomial": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidFlatPolynomial.lean",
+        "staged_sha256": "2ac875e9cf83be8b1553c42d9f09d49cc78080f7dc167044bd726d26094ef0ed"
+      },
+      "OpenMathResearch.MatroidKLRecurrence": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLRecurrence.lean",
+        "staged_sha256": "f5c97e1f5730b932b56776b4cf1b5a3eead202fd101ad035f03cf6ee4ec3fd50"
+      },
+      "OpenMathResearch.MatroidKL": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKL.lean",
+        "staged_sha256": "79322f9658858ef51a31e7567cb001dc4f6a40bc29c6600067890c92ad26cfef"
+      },
+      "RibbonChainBoundary": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonChainBoundary.lean",
+        "staged_sha256": "07aa4b4a26e0b217de562b717b7491d947f92292ec37092f0bcaf3c0ebbf43cd"
+      },
+      "RibbonChainDeletion": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonChainDeletion.lean",
+        "staged_sha256": "e062af91d0872a6fa924a88fd85e99bc29567abeb5f32c86a7f27b6851e5554d"
+      },
+      "OpenMathResearch.MatroidKLSplitDeletion": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLSplitDeletion.lean",
+        "staged_sha256": "fd77bc5c1ff763ef00e322a5cfd2e2177e71b641c28b76c6ce101d938d9e2484"
+      },
+      "OpenMathResearch.MatroidKLSeparation": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLSeparation.lean",
+        "staged_sha256": "916a7ac4580c2bbe747b49e9258f9e736b571ebf80e663ad33c370fae0cf0589"
+      },
+      "OpenMathResearch.MatroidKLMap": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLMap.lean",
+        "staged_sha256": "7c44886395e10383470e5e031dbb694df4a225098f6997c04bf4b7c3bc76572d"
+      },
+      "OpenMathResearch.MatroidFlatSum": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidFlatSum.lean",
+        "staged_sha256": "9e5ea7554bd6a2dbe36c8d869e326f5b2fa4df39d3f971f446696ae4c2495775"
+      },
+      "OpenMathResearch.MatroidKLProduct": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLProduct.lean",
+        "staged_sha256": "6e17881193a675e0005d8b7ba9c3f6872f678ee78ff586e5d88bdebc8b09c886"
+      },
+      "OpenMathResearch.MatroidFlatContract": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidFlatContract.lean",
+        "staged_sha256": "49b7ca6e9b66a22d05fcd13bfdc4df91740637843600a84a00c736f6fe7b63cc"
+      },
+      "OpenMathResearch.MatroidFlatDelete": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidFlatDelete.lean",
+        "staged_sha256": "e3aafe608e48fa956472d674aacd3ed8e7409c31fd09ebac45109a7e9455b5e8"
+      },
+      "OpenMathResearch.MatroidKLDeletionProfile": {
+        "published_path": "shared/lean/OpenMathResearch/MatroidKLDeletionProfile.lean",
+        "staged_sha256": "f609ad564aff140eb7a15105588a0acd12d08bf2a804362430562961812e41aa"
+      },
+      "RibbonChainPresentation": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonChainPresentation.lean",
+        "staged_sha256": "122edc4759d1448de7007e84bd8732cfd48c9d14ea7da1a0c1fcae87156eb102"
+      },
+      "RibbonBoundaryProfile": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonBoundaryProfile.lean",
+        "staged_sha256": "a2e28adc6edc03e387d00811a8de6d4ea89dfc2f9a04876841c7a0f5c0413779"
+      },
+      "RibbonNarayana": {
+        "published_path": "topics/ribbon-matroids/lean/publication/RibbonNarayana.lean",
+        "staged_sha256": "36dac97f39fbd31eb9a463e461bb29eb9a509dae66483458da8763b4847d47c1"
+      },
+      "NarayanaRolle": {
+        "published_path": "topics/ribbon-matroids/lean/publication/NarayanaRolle.lean",
+        "staged_sha256": "b1e1500d4b88fa89a871ae6b02fc8d8772bc875f767ea4a1e8a0d3289999f9f1"
+      },
+      "AuditRibbonSource": {
+        "published_path": "topics/ribbon-matroids/lean/publication/AuditRibbonSource.lean",
+        "staged_sha256": "c26a565ab8facaaaf6000a19d405374ade3b517cd4c6622eaf0b83083abebe45"
+      }
+    },
+    "source_convention": {
+      "description": "The source describes a connected skew shape. The standard snake convention requires at least two ground elements, with a one-square ribbon as its smallest case. The empty-area singleton coloop lies outside this convention.",
+      "definition": "https://doi.org/10.1016/j.aam.2016.11.008",
+      "section": "Definition at the start of section 3.2",
+      "empty_area_singleton_coloop": "The written rank-one argument covers this optional degenerate case."
+    },
+    "original_author_issue": "https://github.com/PerAlexandersson/RealRooted/issues/2650",
+    "provenance": {
+      "original_conjecture": "https://github.com/PerAlexandersson/symmetricfunctions.com/blob/b4a005205cfd78dd987facedf2e1916ef1e308fd/tex-source/realRootedOpenProblems.tex#L496-L506",
+      "repository_proof": {
+        "commit": "https://github.com/ProgramComputer/open-math-research/commit/d27bf1897bff2f426d57bea5efdbc9fca6f17d4f",
+        "public_push_utc": "2026-11-25T21:14:08Z"
+      },
+      "symcat_credit": {
+        "theorem": "https://www.symmetricfunctions.com/schubertMatroidZ.htm#ribbonMatroidZNarayana",
+        "source_commit": "https://github.com/PerAlexandersson/symmetricfunctions.com/commit/c697a84b47c36a53e3b63b3dcb4cd6305905a19d",
+        "source_commit_utc": "2026-11-26T12:33:36Z",
+        "credited_author": "Steve Raj",
+        "draft_title": "Outerplanarity from the Z-polynomial of a graphic matroid",
+        "draft_date": "2026-11-25"
+      },
+      "relationship": "Unknown. This audit verifies the preexisting repository argument."
+    },
+    "blind_coverage_review": {
+      "file": "topics/ribbon-matroids/formal-coverage-review.md",
+      "sha256": "f891e49bf5032e209a4a373e3dfcbc950aba8c22bc2465b9aac80c2f35dd6e8b",
+      "method": "Agent-assisted blind review of the anonymized written argument and Lean source statements. Build and independent-kernel replay are separate machine checks.",
+      "verdict": "The definitions and exported statements cover the exact nonempty ribbon conjecture and the stronger simple-negative-root result."
+    }
   }
 }
