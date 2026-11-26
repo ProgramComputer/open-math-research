@@ -39,11 +39,10 @@ the reusable result to the exact Catalan polynomial in two stages.
   every old root.
 
 **Partial Lean verification.** Lean verifies the entire finite prefix,
-identifies the analytic branch and Cauchy coefficients, and checks the
-finite-radius deformation and the jumps at the radial cuts. It verifies the
-radial moments and integrated envelopes. The passage to the four improper
-ray integrals and the full checkpoint and old-root sign comparisons remain
-in the written proof.
+identifies the analytic branch, and proves the coefficient formula as the
+sum of the four improper ray integrals. It verifies radial moments and
+integrated envelopes. The branch-amplitude normalization and the full
+checkpoint and old-root sign comparisons remain in the written proof.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -153,14 +152,34 @@ five successive angular sectors from the exact four branch points.
 Its theorem `analyticGenerating_finiteDeformation` identifies
 $c^nC_n(1-c^{-2})$ with the sum of the five outer arcs and the four signed
 radial differences, with the Cauchy normalization $1/(2\pi i)$.
-The starting circle can be any positive radius below the nearer branch
-points and the outer logarithmic radius may take any larger value.
+The starting radius can be any positive radius below the nearer branch
+points and the outer radius can be at least as large as the starting radius.
 The theorems `logSector_jump_zero` and `logSector_jump_sqrt` give the
 two cases of each signed radial difference with its exact rational factor.
 
-The outer-arc limit, the change of variables to the four improper integrals
-in (1), and the full covariance and sign comparisons remain in the written proof.
 [Contour kernel output](ray-transfer-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45743833834)
+
+## Improper ray coefficient formula
+
+For $0<d<1$, let $c=\mathrm{scale}(d)$ and let $\mathcal Z$ be the four cut
+points. The theorem `analyticGenerating_fourRays` proves that for each
+positive coefficient index $n$,
+$$
+c^n C_n(1-c^{-2}) =
+-\frac{1}{\pi}\sum_{\zeta\in\mathcal Z}\zeta^{-n}
+\int_0^\infty \sqrt{s}(1+s)^{-n-1}B_\zeta(\zeta(1+s))\,ds,
+\qquad
+B_\zeta(x)=-\frac{\prod_{\nu\in\mathcal Z,\ \nu\ne\zeta}\sqrt{1-x/\nu}}{2x(c-x)}.
+$$
+Each square root in $B_\zeta$ is principal. The theorem
+`rayIntegrand_integrable` checks absolute integrability on all four rays.
+
+The proof bounds the generating function uniformly at outer radii at least
+two and sends the outer arcs to zero. Its substitution $s=e^x/|\zeta|-1$
+for logarithmic radius $x$ supplies the Jacobian $(1+s)^{-1}$, giving the
+factor $(1+s)^{-n-1}$ and the signed prefactor $-\zeta^{-n}/\pi$.
+Factoring the amplitudes for the covariance and sign comparisons remains in
+the written proof. [Improper ray kernel output](improper-ray-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45746699648)
 
 ## Exact isolating intervals through length 150
 
@@ -214,6 +233,7 @@ lake build CatalanStrictPeaksAnalyticBranch
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/AnalyticBranchAxioms.lean
 lake build OpenMathResearch.LogarithmicContour CatalanStrictPeaksLogRoot CatalanStrictPeaksRayTransfer
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/RayTransferAxioms.lean
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~

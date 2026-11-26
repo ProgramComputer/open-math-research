@@ -74,5 +74,10 @@ jobs:
             tee "$RUNNER_TEMP/catalan-ray-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/ray-transfer-kernel.txt \
             "$RUNNER_TEMP/catalan-ray-axioms.txt"
-      - name: Audit the proposed improper logarithmic limits
-        run: lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean
+      - name: Audit the improper ray coefficient formula
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-improper-ray-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/improper-ray-kernel.txt \
+            "$RUNNER_TEMP/catalan-improper-ray-axioms.txt"
