@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/catalan-prefix.yml
       - shared/lean/lakefile.toml
+      - shared/lean/lake-manifest.json
       - shared/lean/lean-toolchain
       - 'shared/lean/OpenMathResearch/**'
       - 'topics/catalan-word-peaks/lean/**'
