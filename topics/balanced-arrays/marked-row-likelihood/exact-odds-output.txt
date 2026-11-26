@@ -1,0 +1,6 @@
+Using exact marked-row odds from the hypergeometric identity.
+330 seven-term signs at 506471..506800.
+Minimum certified sign margin at 506594 exceeds 132366/10^7.
+1105 factor-four signs at 506801..507905.
+Minimum certified log curvature at 506801 exceeds 14101059/10^7.
+Joined to the reviewed signs through 506470 and from 507905 to degree minus one.

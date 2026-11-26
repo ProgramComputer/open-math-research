@@ -1,0 +1,50 @@
+506471..506570, depth 20, E <= 3907/10^12.
+  seven terms: 36; parity exceeds 110327785/10^9.
+  factor four: 64; log-curvature exceeds 1386667615/10^9.
+506571..506650, depth 15, E <= 4948/10^12.
+  factor four: 80; log-curvature exceeds 1438086308/10^9.
+506651..506750, depth 15, E <= 8771/10^12.
+  factor four: 100; log-curvature exceeds 1511568931/10^9.
+506751..506850, depth 15, E <= 21881/10^12.
+  factor four: 100; log-curvature exceeds 1619536870/10^9.
+506851..506950, depth 15, E <= 107061/10^12.
+  factor four: 100; log-curvature exceeds 1720818561/10^9.
+506951..507050, depth 15, E <= 798152/10^12.
+  factor four: 100; log-curvature exceeds 1559027166/10^9.
+507051..507075, depth 12, E <= 532599/10^12.
+  factor four: 25; log-curvature exceeds 1931447081/10^9.
+507076..507100, depth 12, E <= 791287/10^12.
+  factor four: 25; log-curvature exceeds 1873429131/10^9.
+507101..507125, depth 12, E <= 1179933/10^12.
+  factor four: 25; log-curvature exceeds 1755954351/10^9.
+507126..507150, depth 12, E <= 1766298/10^12.
+  factor four: 25; log-curvature exceeds 1545737325/10^9.
+507151..507175, depth 16, E <= 681193/10^12.
+  factor four: 25; log-curvature exceeds 2178050442/10^9.
+507176..507200, depth 16, E <= 1130165/10^12.
+  factor four: 25; log-curvature exceeds 2050898461/10^9.
+507201..507225, depth 16, E <= 1896392/10^12.
+  factor four: 25; log-curvature exceeds 1773587262/10^9.
+507226..507250, depth 20, E <= 1217405/10^12.
+  factor four: 25; log-curvature exceeds 2228386459/10^9.
+507251..507255, depth 24, E <= 228726/10^12.
+  factor four: 5; log-curvature exceeds 2848735421/10^9.
+507256..507260, depth 24, E <= 258037/10^12.
+  factor four: 5; log-curvature exceeds 2860685269/10^9.
+507261..507265, depth 24, E <= 291889/10^12.
+  factor four: 5; log-curvature exceeds 2870860686/10^9.
+507266..507270, depth 24, E <= 331031/10^12.
+  factor four: 5; log-curvature exceeds 2878899834/10^9.
+507271..507275, depth 24, E <= 376340/10^12.
+  factor four: 5; log-curvature exceeds 2884376141/10^9.
+507276..507280, depth 24, E <= 428852/10^12.
+  factor four: 5; log-curvature exceeds 2886786187/10^9.
+507281..507285, depth 24, E <= 489785/10^12.
+  factor four: 5; log-curvature exceeds 2885535134/10^9.
+507286..507290, depth 24, E <= 560573/10^12.
+  factor four: 5; log-curvature exceeds 2879919120/10^9.
+507291..507295, depth 24, E <= 642917/10^12.
+  factor four: 5; log-curvature exceeds 2869103932/10^9.
+507296..507300, depth 24, E <= 738827/10^12.
+  factor four: 5; log-curvature exceeds 2852099049/10^9.
+830 consecutive quotas certified: {'factor four': 794, 'seven terms': 36}.

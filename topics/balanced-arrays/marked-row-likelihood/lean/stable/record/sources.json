@@ -1,0 +1,12 @@
+{
+  "MarkedPairing": {
+    "path": "topics/balanced-arrays/marked-row-likelihood/lean/MarkedPairing.lean",
+    "source_sha256": "f26f2ddca9bbdf10e6978402c82d5ba1fd21dfc8350870db14f35520d659a13c",
+    "staged_sha256": "ca231ddb64d537a18d9583af72571a6872fc49c187bff4514d35999c3cbc1e97"
+  },
+  "ArrayOrientation": {
+    "path": "topics/balanced-arrays/marked-row-likelihood/lean/ArrayOrientation.lean",
+    "source_sha256": "5f8d7148ff12d546499cfdd955eef7dc0f7d5788a1baea54d28d36f1b909ada2",
+    "staged_sha256": "3b6438cb44f9b11ad82e6c8badd834fde8e520fdfd790e75c7a1429fec5a980c"
+  }
+}

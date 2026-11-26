@@ -1,0 +1,7 @@
+--- MarkedPairing.lean
++++ MarkedPairing.lean
+@@ -66,3 +66,3 @@
+   rw [powers, pow_add, mul_assoc] at comparison
+-  have h := (mul_le_mul_left (pow_pos hρ (s-c))).mp comparison
++  have h := (mul_le_mul_iff_right₀ (pow_pos hρ (s-c))).mp comparison
+   rw [one_div, inv_pow, inv_mul_le_iff₀ (pow_pos hρ (t-s))]

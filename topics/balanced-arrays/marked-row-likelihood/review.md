@@ -1,0 +1,23 @@
+# Agent-assisted mathematical review
+
+An independent agent-assisted review checked the arguments below against their stated hypotheses and the cited graph-orientation lemmas. The review found no mathematical gap in the four claims within the scopes described here.
+
+## Coefficientwise likelihood comparison
+
+In each cell monomial, the common and exclusive cells fix the red-exclusive count and the pairing denominator in each column. The bound on the red-exclusive count makes the dummy-pair weight nonnegative. When the marked cell is blue-exclusive, averaging the pairing weight gives exactly the factor $K/(K+1)$. The source and target lower bounds satisfy the orientation inequality at the dummy, marked and unmarked vertices. The comparison therefore holds coefficientwise, including zero coefficients and after substitution of any nonnegative cell weights. With $2K+1$ rows, the complementary-array monomial attains the factor $(1+1/K)^d$ for size gap $d$. [Argument](likelihood.md) · [Kahn–Neiman, §4, Lemma 8](https://arxiv.org/pdf/1001.0610#page=9)
+
+## Exact binomial odds
+
+The uncolored column and marked-row pairings define a single labeled orientation graph. The exclusion of auxiliary edges at the unpaired marked vertex is fixed by the pairings and is vacuous for the source. The split marked vertices, auxiliaries and ordinary vertices meet the orientation lemma’s bounds, and the unrestricted refinement denominators agree on each cell monomial. Conditional on a positive-weight pair of marked masks in the target, the choice of unpaired blue mark is independent of the unmarked data. The two selected unmarked columns are independent uniform subsets of the specified sizes by row symmetry. Vandermonde’s identity gives the stated retention probability, including changed margins with $a_i=0$ or $b_i=n$. Equal margins retain every pairing. A zero target product forces a zero source product by the unnormalized comparison. The unrestricted split with several unpaired vertices gives positive swapped endpoint masses whenever the source is positive, and equal-margin balancing fills the intervening supports. This justifies telescoping and handles $\rho=0$. The resulting bound uses exchangeability among the unmarked rows. Independent unrestricted columns with unit weights attain the homogeneous tilt. [Argument](binomial-odds.md) · [Kahn–Neiman, §4, Lemma 8](https://arxiv.org/pdf/1001.0610#page=9)
+
+## Curvature criterion
+
+Deleting from a feasible terminal fiber gives feasible intermediate insertions on both paths. Row symmetry gives positive missing-cell conditioning at their bases. Counting insertion incidences gives the normalized extension identity, and the coordinatewise comparison gives the stated monotonicity of the saturation loss. The tilted survival ratio, the lower bound on balanced saturation and the uniform curvature estimate follow with the stated constants. Strict factor-four separation produces $D$ distinct negative roots by the alternating signs at the increasing test radii and the two endpoint signs. The limiting regime gives infinitely many triples where the strengthened sufficient test succeeds and the binomial-only test fails. [Argument](curvature.md) · [Insertion identities and coefficient separation](../orientation-normalization.md)
+
+## Capped-row inclusion coupling
+
+Feasibility gives $2L\le t$, and if $L\ge2$, the cap gives $t\le b+L\le2L+1$. Thus the listed reductions exhaust the intervals for cap at most three. The odd-degree leaf extension is unique and the equal-degree vertex splits have the same factorial multiplicity for every admissible orientation. After labeling, the refined graphs satisfy Chan’s hypotheses, including the allowance for parallel edges. The marked edges are loop-free and correspond to distinct columns. Reversal gives equal total weights on the two levels. Zero totals give zero contribution, and otherwise the weighted normalized matching gives the required inclusion coupling. Summing the signed comparison over fixed refinements and dividing by their multiplicities gives the conclusion for adjacent feasible marked-size slices. [Argument](coupling.md) · [Chan, §§2–4](https://arxiv.org/html/2509.06273v1#S2)
+
+## Scope
+
+The original balanced-arrays conjecture asks for real-rootedness of the diagonal counting polynomial for all allowed parameters. The curvature argument proves a sufficient range, and the likelihood and coupling arguments establish the comparisons above. The million-row root certificate and formal verification were outside this review. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)

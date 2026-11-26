@@ -1,0 +1,4 @@
+Every marked-column swap obeys the bound needed for both nested slice couplings.
+606 exact curvature checks cover 507300..507905.
+Minimum certified loss times deficit at 507300: greater than 4986304/10^7.
+Uniform log curvature exceeds 139095364/10^8 and the quotient exceeds four.

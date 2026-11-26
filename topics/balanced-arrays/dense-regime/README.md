@@ -20,7 +20,11 @@ The coefficient of $q^k$ counts labeled binary $n\times d$ matrices with every c
 
 ## Largest roots by absolute value
 
-A row-switching theorem gives a lower bound on the number of simple negative outer roots whenever the cap is a fixed proportion of the dimension, uniformly for at least as many rows as columns. The marked-row test and the outer bound now isolate 506,565 of 508,000 roots in the million-row example, leaving 1,435 roots of undetermined type. [Marked-row proof and independent exact checks](below-cap/finite-aspect/marked-row/README.md) [Theorem and exact counts](below-cap/finite-aspect/upper-edge/README.md)
+A row-switching theorem gives a lower bound on the number of simple negative outer roots whenever the cap is a fixed proportion of the dimension, uniformly for at least as many rows as columns. [Outer-root theorem and exact counts](below-cap/finite-aspect/upper-edge/README.md)
+
+## Complete million-row instance
+
+With one million labeled rows, 250,000 labeled columns and row cap 127,000, all 508,000 roots are simple and negative. The centered recursion and phase-order estimates certify the middle interval left by the marked-row and outer-root bounds. **⬜ None** for Lean or Rocq. [Proof and independent verification of the fixed instance](below-cap/finite-aspect/marked-row/complete-instance/README.md)
 
 ## Roots below the row cap
 
