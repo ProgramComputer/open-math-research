@@ -733,7 +733,8 @@ private theorem exp_onCut {d : ℝ} (hd : 0 < d) (hD : d < 1)
     exp (onCut d j x) = (Real.exp x : ℂ) * e := by simp [onCut, e, exp_add, ofReal_exp]
     _ = ((‖cutPoint d j‖ : ℂ) * e) * ((Real.exp x / ‖cutPoint d j‖ : ℝ) : ℂ) := by
       push_cast
-      field_simp [hR] <;> ring
+      field_simp [hR]
+      ring
     _ = _ := by rw [show (‖cutPoint d j‖ : ℂ) * e = cutPoint d j from cutPoint_polar hd hD j]
 
 /-- The analytic factor of a ray jump with its singular square root omitted. -/
@@ -823,7 +824,9 @@ private theorem normalizedRay_integral_data {d : ℝ} (hd : 0 < d) (hD : d < 1)
   have hEq : EqOn f (fun s => scaleFactor * rayIntegrand d n j s) (Ioi 0) :=
     fun s hs => logRayJump_eq_normalized hd hD n j (le_of_lt hs)
   refine ⟨?_, ?_⟩
-  · apply (Integrable.const_mul hSub.1 scaleFactor⁻¹).congr_fun _ measurableSet_Ioi
+  · have hInverse : IntegrableOn (fun s => scaleFactor⁻¹ * f s) (Ioi 0) :=
+      Integrable.const_mul hSub.1 scaleFactor⁻¹
+    apply hInverse.congr_fun _ measurableSet_Ioi
     intro s hs
     rw [hEq hs, ← mul_assoc, inv_mul_cancel₀ hScale, one_mul]
   · rw [hSub.2, setIntegral_congr_fun measurableSet_Ioi hEq, MeasureTheory.integral_const_mul]
@@ -851,7 +854,8 @@ theorem analyticGenerating_fourRays {d : ℝ} (hd : 0 < d) (hD : d < 1)
     Real.log_le_log h₀R (hr.le.trans (radius_le_cutPoint hd hD j))
   rw [logRayJump_integral_cutoff hd hD hn j hRadius, (normalizedRay_integral_data hd hD hn j).2]
   have hπI : (2 * (Real.pi : ℂ) * I)⁻¹ * (-2 * I) = -(Real.pi : ℂ)⁻¹ := by
-    field_simp [I_ne_zero, Complex.ofReal_ne_zero.mpr Real.pi_ne_zero] <;> ring
+    field_simp [I_ne_zero, Complex.ofReal_ne_zero.mpr Real.pi_ne_zero]
+    ring
   calc
     _ = ((2 * (Real.pi : ℂ) * I)⁻¹ * (-2 * I)) * ((cutPoint d j)⁻¹ ^ n *
         ∫ s in Ioi 0, rayIntegrand d n j s) := by ring
