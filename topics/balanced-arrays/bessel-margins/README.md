@@ -22,4 +22,6 @@ Replay the exact rational certificates with the Python standard library from the
 python3 -B topics/balanced-arrays/bessel-margins/certificates.py | diff - topics/balanced-arrays/bessel-margins/certificates.jsonl
 ~~~
 
+For regular row profiles, the variance of the third column after conditioning the first two to balance strictly exceeds the Gaussian conditional variance. The excess has an explicit bound independent of the number of rows. This rules out an exact variance contraction at that step. [Variance calculation and exact replay](conditional-variance.md)
+
 **⬜ None** for Lean or Rocq. The [lower source comparison](lower-review.md), [upper-bound audit](upper-review.md) and [consequences review](consequences-review.md) are agent-assisted. [Research issue #2](https://github.com/ProgramComputer/open-math-research/issues/2)
