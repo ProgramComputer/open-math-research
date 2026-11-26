@@ -1,6 +1,6 @@
 name = "open_math_research"
 version = "0.1.0"
-defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns"]
+defaultTargets = ["PrismSplit", "PrismCounts", "PrismGeometry", "PrismDimensions", "PrismSeriesClosure", "PrismFamily", "Ribbon", "RibbonExamples", "BalancedPairCompression", "PrismFamilyCounts", "PrismFamilyReciprocity", "PrismFamilyTop", "PrismFamilyGeometry", "PrismFamilyInterlacing", "BalancedTorusMaxima", "BalancedTorusComponents", "EulerianRootSpacing", "EulerianCluster", "OpenMathResearch.DiskUniqueness", "OrderedThresholdTwoSigns", "OrderedThresholdTwoPhase", "OrderedThresholdThreeSigns", "BalancedThreeColumnSigns", "BalancedThreeColumnCounting"]
 
 [[require]]
 name = "mathlib"
@@ -110,4 +110,12 @@ name = "OpenMathResearch.IntegerLevelNodes"
 
 [[lean_lib]]
 name = "BalancedThreeColumnSigns"
+srcDir = "../../topics/balanced-arrays/lean"
+
+[[lean_lib]]
+name = "BalancedThreeColumnPrefix"
+srcDir = "../../topics/balanced-arrays/lean"
+
+[[lean_lib]]
+name = "BalancedThreeColumnCounting"
 srcDir = "../../topics/balanced-arrays/lean"

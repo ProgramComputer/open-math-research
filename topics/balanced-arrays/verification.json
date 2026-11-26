@@ -78,6 +78,32 @@
       "kernel_output": [
         "'BalancedThreeColumnSigns.positive_roots_of_phase_signs' depends on axioms: [propext, Classical.choice, Quot.sound]"
       ]
+    },
+    {
+      "file": "topics/balanced-arrays/lean/BalancedThreeColumnPrefix.lean",
+      "sha256": "db98bc71143c1bf908566dec4c9f01944490828eea3d3e3dfc78b70cbebc21af",
+      "exit_code": 0,
+      "kernel_output": [
+        "'BalancedThreeColumnPrefix.coeff_normalizedRow' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnPrefix.coeff_originalRow' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnPrefix.formulaRow_natDegree_prefix' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnPrefix.prefix_negative_roots' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnPrefix.prefix_original_negative_roots' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
+    },
+    {
+      "file": "topics/balanced-arrays/lean/BalancedThreeColumnCounting.lean",
+      "sha256": "05fbc48658a8f5131342851d8357676b7a5548d8aa7f5b13948e11322bc08ce9",
+      "exit_code": 0,
+      "kernel_output": [
+        "'BalancedThreeColumnCounting.allowedPairs_card' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnCounting.allowedTriples_card' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnCounting.binaryArrays_card_eq_supports' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnCounting.coeff_arrayRow' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnCounting.arrayRow_eq_originalRow' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnCounting.array_prefix_natDegree' depends on axioms: [propext, Classical.choice, Quot.sound]",
+        "'BalancedThreeColumnCounting.array_prefix_negative_roots' depends on axioms: [propext, Classical.choice, Quot.sound]"
+      ]
     }
   ]
 }
