@@ -1,0 +1,148 @@
+\documentclass[11pt]{article}
+\usepackage[hmargin=.85in,vmargin=.75in]{geometry}
+\usepackage{amsmath,amsthm,amssymb,hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\Z}{\mathcal{Z}}
+\newcommand{\eps}{\varepsilon}
+\title{Root distributions of balanced binary arrays\\with a common row cap}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We bound the number of zeros in every fixed disk on a logarithmic scale for the column-quota polynomial of a labeled binary array. When the height and dimension both tend to infinity and the cap occupies a positive fraction of the dimension, the limiting count is a clipped logistic function, irrespective of the aspect ratio. A fixed cap gives the mean of a truncated Poisson variable. A sparse cap tending to infinity gives a uniform limit for the entire rescaled spectrum. Reciprocal versions describe the largest roots at fixed or growing corank. The proofs count all complex roots with multiplicities. They use margin majorization and elementary inequalities for the radial Mahler measure.
+\end{abstract}
+
+Let $a_k$ count the $n\times d$ binary matrices with labeled rows and columns, each column sum $k$, and all row sums at most $r$, where $1\le r\le d$. Set $P(q)=\sum_k a_kq^k$. Its degree is $D=\lfloor nr/d\rfloor$, by filling successive columns in consecutive cyclic intervals of $k$ rows. Its constant term is one. Write $\Z$ for its complex roots counted with multiplicity. Alexandersson asks whether these roots always lie on the negative real axis~\cite{symcat}. The finite bounds below describe root moduli and require no hypothesis about their arguments.
+
+\section{Five limiting counts}
+Throughout, $n,d\to\infty$. The degree and row cap can vary. All limits below hold at every fixed $z>0$. Define
+\[
+ E_{\le b}(z)=\sum_{j=0}^b z^j/j!,\qquad
+ E_{\ge h}(z)=\sum_{j=h}^\infty z^j/j!,\qquad
+ \mu_E(z)=zE'(z)/E(z).
+\]
+These means correspond to a Poisson variable of parameter $z$ conditioned on the indicated set.
+\begin{theorem}\label{laws}
+\leavevmode
+\begin{enumerate}
+\item If $r/d\to\rho\in(0,1]$, with no restriction on $n/d$, then
+\[
+ \frac1n\#\{\xi\in\Z: |\xi|^{1/d}\le z\}\ \longrightarrow \min\{z/(1+z),\rho\}.
+\]
+\item If $r=b\ge1$ is fixed and $d=o(n)$, then
+\[
+ \frac d n\#\{\xi\in\Z: d|\xi|^{1/d}\le z\}
+ \ \longrightarrow\ \mu_{E_{\le b}}(z).
+\]
+\item If $d-r=h\ge1$ is fixed and $d=o(n)$, then
+\[
+ \frac d n\#\{\xi\in\Z: d/|\xi|^{1/d}\le z\}
+ \ \longrightarrow\ \mu_{E_{\ge h}}(z)-h .
+\]
+\item If $s=r\to\infty$, $s/d\to0$ and $L=ns/d\to\infty$, then
+\[
+ \frac1L\#\{\xi\in\Z: (d/s)|\xi|^{1/d}\le z\}
+ \ \longrightarrow\ \min(z,1).
+\]
+In particular the empirical distribution normalized by $D$ converges weakly to the uniform distribution on $[0,1]$.
+\item If $s=d-r\to\infty$, $s/d\to0$ and $L=ns/d\to\infty$, then
+\[
+ \frac1L\#\{\xi\in\Z: (d/s)/|\xi|^{1/d}\le z\}
+ \ \longrightarrow\ (z-1)_+ .
+\]
+\end{enumerate}
+\end{theorem}
+The third and fifth statements describe only the upper end of the original spectrum. The first includes the unrestricted binomial powers when the exponent $d$ grows. For a fixed exponent the unrestricted zero distribution was studied by Abel, Gawronski and Neuschel~\cite{agn}.
+
+\section{Two finite inequalities}
+Fix labeled row sizes $s_1,\ldots,s_n$ in $\{0,\ldots,d\}$ whose sum is $dk$. Write $B$ for the number of matrices with precisely these row sizes and all column sums $k$.
+\begin{lemma}\label{smooth}
+The following lower bound holds:
+\[
+ B\ge \frac{\prod_i\binom d{s_i}}
+ {\min\bigl((n+1)^d,\binom{dk+d-1}{d-1}\bigr)} .
+\]
+\end{lemma}
+\begin{proof}
+With fixed row sizes the balanced column margins maximize the count, a case of majorization for bipartite degree sequences~\cite{berger}. To see this, fix every entry outside two columns. Rows with zero or two residual entries are forced. If $a$ rows need one entry in the pair, the number of ways to assign $j$ of them to the first column is $\binom a j$. Moving one unit from a column larger by at least two to the smaller column moves $j$ toward $a/2$ and weakly increases the count. Summing over the fixed entries retains this inequality. Repeated transfers reach the equal vector since each transfer decreases the sum of squared margins. The sum over all margin vectors is $\prod_i\binom d{s_i}$. Both quantities in the denominator bound the number of possible vectors.
+\end{proof}
+
+For a nonzero polynomial $A(q)=\sum_{j=0}^m b_jq^j$ with nonnegative coefficients and leading coefficient $b_m>0$, define
+\[
+ \M_A(t)=b_m\prod_{\xi:A(\xi)=0}\max(t,|\xi|)\qquad(t>0).
+\]
+By Jensen's formula $\log\M_A(t)$ is the circular mean of $\log|A|$. The product also suffices to establish the next result.
+\begin{lemma}\label{mahler}
+For every $j$ and $t>0$,
+\[
+ b_jt^j/\binom mj\le\M_A(t)\le A(t).
+\]
+The right derivative of $\log\M_A(e^v)$ in $v$ counts roots of modulus at most $e^v$, and the left derivative counts those strictly inside.
+\end{lemma}
+\begin{proof}
+Expand $A(tX)$ as a product of linear factors and bound each summand in its $j$th coefficient by $\M_A(t)$. The upper bound follows from $|A(te^{iu})|\le A(t)$ and Jensen's formula, also for circles containing a root by continuity. The derivative formula follows directly from the product, including zero roots.
+\end{proof}
+
+We repeatedly use that pointwise convergence of convex functions on the line to a differentiable limit traps both one-sided derivatives between secant slopes converging to its derivative. This follows by first keeping the secant width fixed, taking the limit along the sequence, and then sending the width to zero.
+
+\section{A finite estimate in the dense scale}
+Let $n,d\ge2$, $p=r/d$ and $H(x)=-x\log x-(1-x)\log(1-x)$ with the continuous endpoint convention. Set
+\[
+ J(v)=\frac{\log\M_P(e^{dv})}{nd},\qquad
+ \Phi_p(v)=\max_{0\le x\le p}\{H(x)+vx\},\qquad
+ U=\frac{\log(n+1)}{nd},
+\]
+\[
+ E(B)=H(1/n)+H(1/d)+\frac B n+
+       \frac{\log(d+1)}d+\frac{\log(n+1)}n+\frac{\log 2}{d}.
+\]
+\begin{theorem}\label{finite}
+For any real $v$ and $\delta>0$, writing $C$ for the number of roots of modulus at most $e^{dv}$,
+\[
+ \left|C/n-\min\{(1+e^{-v})^{-1},p\}\right|
+ \le \frac\delta8+\frac{U+E(|v|+\delta)}\delta .
+\]
+The same bound holds with strict inequality in the radius test.
+\end{theorem}
+\begin{proof}
+We have $a_k\le\binom nk^d\le\exp(ndH(k/n))$. Lemma~\ref{mahler} gives $J(v)\le\Phi_p(v)+U$. For the lower bound take a maximizer $x$ and $k=\lfloor nx\rfloor$. Choose row sizes $\lfloor dk/n\rfloor,\lceil dk/n\rceil$ in the unique multiplicities making their sum $dk$. Both sizes used are admissible. The binomial bound $\binom dj\ge e^{dH(j/d)}/(d+1)$ follows by evaluating the modal probability of a binomial variable with mean $j$. The binary entropy obeys $|H(x)-H(y)|\le H(|x-y|)$, by concavity and symmetry. Applying it at the two rounding steps costs at most $H(1/n)+H(1/d)$. The linear term costs at most $|v|/n$. Lemma~\ref{smooth} costs at most $\log(n+1)/n$. The selected coefficient in Lemma~\ref{mahler} costs at most $\log 2/d$ because $D\le n$. Thus $J(v)\ge\Phi_p(v)-E(|v|)$.
+
+The derivative $\Phi'_p(v)=\min((1+e^{-v})^{-1},p)$ is $1/4$-Lipschitz, including the clipping point. Its secant slopes over width $\delta$ differ from it by at most $\delta/8$. Bounding the secants of $J$ on either side proves the assertion, using Lemma~\ref{mahler}. First let $n,d\to\infty$ and then $\delta\downarrow0$ to obtain part 1 of Theorem~\ref{laws}.
+\end{proof}
+
+\section{Fixed caps and coranks}
+It is convenient to count either ones or holes. In the second interpretation the polynomial is $Q(y)=y^nP(1/y)$, the row sizes belong to $[h,d]$, and zero is a root of multiplicity $m_0=n-D=\lceil nh/d\rceil$. Every other root is the reciprocal of an original root. In the first interpretation put $Q=P$, use the range $[0,b]$, and set $m_0=0$.
+
+Let $E$ be the corresponding truncated exponential from Theorem~\ref{laws}. We claim that for every $z>0$,
+\[
+ \frac1n\log\M_Q((z/d)^d)\longrightarrow\log E(z).
+\]
+For the upper bound, forget the equal-column condition, so $Q((z/d)^d)$ is at most the $n$th power of the permitted row sum $\sum_s\binom ds(z/d)^s$. Its limit per row is $E(z)$ by domination by $z^s/s!$.
+
+For the lower bound choose a fixed finite interval $I$ within the permitted sizes, including the two smallest allowed sizes, starting at zero or $h$. In the fixed-cap case take all allowed sizes. Let $E_I(z)=\sum_{s\in I}z^s/s!$ and $\pi_s=(z^s/s!)/E_I(z)$. Choose a row histogram with frequencies tending to $\pi_s$: first round $n\pi_s$ to integers with total $n$, then move fewer than $d$ rows from the smallest to the next size until the grand total is divisible by $d$. Both frequencies are positive and $d=o(n)$. The resulting common margin $k$ is $O(n/d)$. If the histogram has counts $n_s$, the number of distinct assignments of these sizes to labeled rows is $n!/\prod_s n_s!$. For each, use Lemma~\ref{smooth}. Its logarithmic loss divided by $n$ is $O((d/n)\log(1+n/d))=o(1)$, by the weak-composition bound. Multiplying the lower estimate by $(z/d)^{dk}$ puts a factor $\binom ds(z/d)^s$ on each row of size $s$. After division of the logarithm by $n$, Stirling's formula gives the limit
+\[
+ -\sum_{s\in I}\pi_s\log\pi_s+\sum_{s\in I}\pi_s\log(z^s/s!)=\log E_I(z).
+\]
+The coefficient loss in Lemma~\ref{mahler} is at most $\log\binom nk=o(n)$ since $k/n=O(1/d)$. Taking successively larger fixed $I$ in the hole case proves the claim.
+
+The logarithmic limit as a function of $v=\log z$ is differentiable with derivative $\mu_E(z)$. The one-sided derivatives of the finite functions are $d/n$ times the corresponding counts. For holes subtract the $m_0$ forced zero roots, with $dm_0/n\to h$. This proves parts 2 and 3.
+
+\section{Growing sparse caps and coranks}
+In either interpretation put $s=r$ or $s=d-r$, and suppose $s\to\infty$, $s/d\to0$, $L=ns/d\to\infty$. At the radius $(sz/d)^d$, normalize the logarithm of the Mahler measure by $ns$. If the allowed rows have size at most $s$, the upper bound before taking logarithms is the $n$th power of the permitted binomial sum at weight $sz/d$. For $z\le1$ use the full sum $(1+sz/d)^d$. For $z>1$ use the bound $z^j\le z^s$ at $j\le s$ and take the full sum at $s/d$. These give normalized upper limits $z$ and $1+\log z$, respectively. For rows of size at least $s$, use the full sum for $z\ge1$, and use $z^j\le z^s$ when $0<z<1$. The corresponding upper limits are $z$ and $1+\log z$ in those respective ranges.
+
+For upper-bounded rows put $u=\min(z,1)$, $k=\lfloor Lu\rfloor$; for lower-bounded rows put $u=\max(z,1)$, $k=\lceil Lu\rceil$. In each case $k/L\to u$. Take the two consecutive row sizes giving total $dk$ as in the dense estimate. Every size $j$ used is admissible, and $j/s\to u$. The falling product for the binomial coefficient and Stirling's formula give, uniformly for these two sizes,
+\[
+ \log\binom dj=j\log(d/j)+j+O(\log(j+1)+j^2/d).
+\]
+After adding $j\log(sz/d)$ and dividing by $s$, the result tends to $u(1+\log(z/u))$, equal to the upper limit. Lemma~\ref{smooth} costs $O(\log(1+L)/L)$ on this scale. Lemma~\ref{mahler} costs at most $\log\binom nk/(ns)=O((1+\log(d/s))/d)$. Both tend to zero. This proves convergence of the normalized logarithm to the asserted piecewise functions. Their derivatives in $\log z$ agree on either side of $z=1$ and equal $\min(z,1)$ for the cap or $\max(z,1)$ for holes. In the hole interpretation the $\lceil L\rceil$ forced roots contribute one in the limit after normalization by $L$. This proves parts 4 and 5.
+
+\begin{thebibliography}{9}
+\bibitem{symcat} P. Alexandersson. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Balanced arrays of uniform matroids}. The symmetric functions catalog, accessed November 26, 2026.
+\bibitem{berger} A. Berger. \href{https://arxiv.org/abs/1212.5443}{The connection between the number of realizations for degree sequences and majorization}. arXiv:1212.5443, 2012.
+\bibitem{agn} U. Abel, W. Gawronski, and T. Neuschel. \href{https://doi.org/10.1007/s40315-013-0013-3}{Binomial polynomials}. Computational Methods and Function Theory 13 (2013), 163--180.
+\end{thebibliography}
+\end{document}

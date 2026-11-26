@@ -1,0 +1,15 @@
+Smoothing: 144 sorted size profiles, 28724 balancing moves
+homogeneous: (1, 120, 690, 180); 1/128:1/32 carries 1, 1/8:1/4 carries 1, 3:4 carries 1
+homogeneous holes: (0, 0, 180, 690, 120, 1); 1/4:1/2 carries 1, 4:8 carries 1
+two caps: (1, 282, 3714, 3036); 1/16:1/8 carries 1, 1:3/2 carries 1
+two caps holes: (0, 0, 0, 0, 3036, 3714, 282, 1); 3/4:1 carries 1, 8:16 carries 1
+three caps: (1, 916, 9474, 480); 1/16:1/8 carries 1
+three caps holes: (0, 0, 0, 480, 9474, 916, 1); 1/32:1/16 carries 1, 8:16 carries 1
+nonreal: (1, 2, 1, 2); 1/4:3/4 carries 1, 3/4:3/2 carries 2
+repeated moduli: (1, 0, 2, 0, 1); 3/4:3/2 carries 4
+Jensen: 575 coefficient bounds, 15 strict root-count secants
+Exact boundary at radius 1: the product (1+q^2)^2 has left count 0 and right count 4.
+Dense finite estimate: n=d=64, cap=63, w=1/2, C=21, rational RHS < 42/100
+Dense finite estimate: n=d=64, cap=63, w=1, C=32, rational RHS < 203/500
+Dense finite estimate: n=d=64, cap=63, w=2, C=43, rational RHS < 42/100
+Finite theorem at n=1000000, d=250000, r=127000: radius 2^(-250000), count 324834..341833.
