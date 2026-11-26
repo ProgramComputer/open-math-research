@@ -1,0 +1,8 @@
+import CatalanStrictPeaksNormalizedRays
+
+
+#print axioms CatalanStrictPeaks.CutGeometry.rayCoefficientTerm_rev
+#print axioms CatalanStrictPeaks.CutGeometry.norm_nearPhaseUnit
+#print axioms CatalanStrictPeaks.CutGeometry.normalizedCoefficient_eq_near_add_far
+#print axioms CatalanStrictPeaks.CutGeometry.normalizedCoefficient_close_to_phase
+#print axioms CatalanStrictPeaks.CutGeometry.eval_sign_of_nearPhaseUnit

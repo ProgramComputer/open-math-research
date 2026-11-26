@@ -53,6 +53,7 @@ jobs:
           Mathlib.Analysis.SpecialFunctions.Log.Deriv
           Mathlib.Analysis.SpecialFunctions.Pow.Real
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+          Mathlib.Data.Fin.Rev
           Mathlib.Data.Fin.Tuple.Basic
           Mathlib.Data.Finset.Prod
           Mathlib.Data.Finset.Sigma
@@ -110,3 +111,12 @@ jobs:
             tee "$RUNNER_TEMP/catalan-far-ray-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/far-ray-kernel.txt \
             "$RUNNER_TEMP/catalan-far-ray-axioms.txt"
+      - name: Check the normalized coefficient identity
+        run: lake build CatalanStrictPeaksNormalizedRays
+      - name: Audit the normalized coefficient and sign criterion
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/NormalizedRaysAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/normalized-rays-kernel.txt \
+            "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
