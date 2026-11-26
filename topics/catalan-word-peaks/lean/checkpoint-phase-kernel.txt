@@ -7,3 +7,11 @@
 'CatalanStrictPeaks.CutGeometry.nearPhaseUnit_re_at_level' depends on axioms: [propext, Classical.choice, Quot.sound]
 'CatalanStrictPeaks.CutGeometry.eval_sign_at_checkpoint' depends on axioms: [propext, Classical.choice, Quot.sound]
 'CatalanStrictPeaks.CutGeometry.roots_from_150' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.checkpointPhase_strictMonoOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.middle_roots_between_checkpoints' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.nearPhaseUnit_im_sign_between' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.roots_all' depends on axioms: [propext, Classical.choice, Quot.sound]

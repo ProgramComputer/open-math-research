@@ -43,11 +43,13 @@ identifies the analytic branch, and proves the coefficient formula as the
 sum of the four improper ray integrals. It verifies radial moments and
 integrated envelopes and applies them to the normalized near-ray mean under
 the stated interior angle bounds. It bounds the actual normalized far-ray
-contribution in both angular ranges. The explicit phase gives the actual
-alternating checkpoint signs and a complete list of simple negative roots
-in every row from length $150$. The finite proof covers the earlier rows.
-Formal verification of interlacing past the finite prefix still needs the
-signs at the old middle and extreme roots.
+contribution in both angular ranges and proves the successive-size bounds
+for the near mean.
+
+Lean pairs the conjugate rays and proves the alternating checkpoint signs
+for the explicit phase. The analytic proof from length $150$ and the exact
+finite prefix give simple negative roots at every length. The signs at
+the old middle and extreme roots remain separate formal work.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -197,10 +199,21 @@ $0<d<1$, $nd\ge2$, and $n\sqrt{1-d^2}\ge2$. The checked ray integrability
 and the actual pointwise bounds supply the hypotheses for the integrated
 envelopes. The theorem `nearMean_step_covariance` verifies (8) for every
 positive $n$. `nearTiltCovariance_sub_const` proves that the amplitude
-factor can be centered at its mean or at one. The connection between the
-phase and the angle bounds and the quantitative covariance and sign
-comparisons remain open in Lean.
+factor can be centered at its mean or at one.
 [Near-amplitude kernel output](near-amplitude-kernel.txt)
+
+The [near covariance module](CatalanStrictPeaksNearCovariance.lean) proves
+`nearMean_step_lt_one_div`, the quantitative conclusion of (11), for
+$n\ge150$, $1/2\le d<1$, and $n\sqrt{1-d^2}\ge2$. The bound $d\ge1/2$
+includes the paper's small-angle sector. It also proves
+`nearMean_step_lt_four_div`, the conclusion of (12), for $n\ge150$,
+$0<d<1$, $nd\ge2$, and $n\sqrt{1-d^2}\ge2$. The proof centers the actual
+conjugate root where $(1+s)^{-1}$ equals its radial mean. The signed
+density changes sign at that point, so the conjugate root's secant
+bound integrates to the difference of two exact first moments. The
+local cubic and quadratic estimates and the affine tail bound cover
+the rest of the covariance.
+[Kernel audit](near-covariance-kernel.txt)
 
 ## Far-ray contribution
 
@@ -254,7 +267,15 @@ directions and using the quartic equation at $z$. The theorem
 `eval_sign_at_checkpoint` proves the alternating signs for the original
 polynomial. The theorem `roots_from_150` discharges every premise of the
 ordered checkpoint theorem and proves the complete simple-negative root
-count from length $150$. [Checkpoint phase kernel output](checkpoint-phase-kernel.txt)
+count from length $150$. The [all-length theorem](CatalanStrictPeaksAllRoots.lean)
+combines this with the exact prefix in `roots_all`.
+
+The [phase order module](CatalanStrictPeaksPhaseOrder.lean) proves that
+$\Psi_n$ is strictly increasing on the closed checkpoint interval using
+the derivative bound for its correction. For each middle rank it gives
+an angle realizing the actual root modulus and locates its phase between
+the two adjacent checkpoint levels. It gives the corresponding sign of
+the imaginary part of $U_n$. [Checkpoint phase kernel output](checkpoint-phase-kernel.txt)
 
 ## Exact isolating intervals through length 150
 
@@ -311,11 +332,13 @@ lake env lean -j1 ../../topics/catalan-word-peaks/lean/RayTransferAxioms.lean
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean
 lake build CatalanStrictPeaksNearAmplitude
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearAmplitudeAxioms.lean
+lake build CatalanStrictPeaksNearCovariance
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearCovarianceAxioms.lean
 lake build CatalanStrictPeaksFarRay
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarRayAxioms.lean
 lake build CatalanStrictPeaksNormalizedRays
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/NormalizedRaysAxioms.lean
-lake build CatalanStrictPeaksPhaseBridge
+lake build CatalanStrictPeaksPhaseOrder CatalanStrictPeaksAllRoots
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/CheckpointPhaseAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean

@@ -55,11 +55,13 @@ jobs:
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+          Mathlib.Combinatorics.Enumerative.Catalan
           Mathlib.Data.Fin.Rev
           Mathlib.Data.Fin.Tuple.Basic
           Mathlib.Data.Finset.Prod
           Mathlib.Data.Finset.Sigma
           Mathlib.Data.Fintype.Pi
+          Mathlib.Data.Nat.Choose.Bounds
           Mathlib.Data.Real.Pi.Bounds
           Mathlib.MeasureTheory.Function.Jacobian
           Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
@@ -100,6 +102,15 @@ jobs:
             tee "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/near-amplitude-kernel.txt \
             "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"
+      - name: Check the successive-size near-ray estimates
+        run: lake build CatalanStrictPeaksNearCovariance
+      - name: Audit the quantitative covariance bounds
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearCovarianceAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-near-covariance-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/near-covariance-kernel.txt \
+            "$RUNNER_TEMP/catalan-near-covariance-axioms.txt"
       - name: Check the far-ray bounds
         run: lake build CatalanStrictPeaksFarRay
       - name: Audit the far-ray bounds
@@ -118,8 +129,8 @@ jobs:
             tee "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/normalized-rays-kernel.txt \
             "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
-      - name: Check the explicit checkpoint phase and root count
-        run: lake build CatalanStrictPeaksPhaseBridge
+      - name: Check the explicit checkpoint phase and all-length root count
+        run: lake build CatalanStrictPeaksPhaseOrder CatalanStrictPeaksAllRoots
       - name: Audit the checkpoint phase and root count
         shell: bash
         run: |
