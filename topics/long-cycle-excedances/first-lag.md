@@ -1,6 +1,6 @@
 # Interlacing when a second cycle first becomes possible
 
-**Proposed partial theorem.** Put $P_n(t)=E_{n,k}(t)/t$, where $E_{n,k}$ counts permutations of $[n]$ with every cycle of length at least $k$, by excedances. For every $k\ge3$, $P_{2k-1}$ and $P_{2k}$ have simple negative roots that strictly interlace, with $P_{2k}$ supplying both outer roots. At every root $x$ of $P_{2k-1}$, the new-cycle term in the insertion recurrence has magnitude strictly smaller than the derivative term. The proposed proof uses exact integer signs for $3\le k\le200$ and estimates for $k\ge201$. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/4)
+**Partial theorem.** Put $P_n(t)=E_{n,k}(t)/t$, where $E_{n,k}$ counts permutations of $[n]$ with every cycle of length at least $k$, by excedances. For every $k\ge3$, $P_{2k-1}$ and $P_{2k}$ have simple negative roots that strictly interlace, with $P_{2k}$ supplying both outer roots. At every root $x$ of $P_{2k-1}$, the new-cycle term in the insertion recurrence has magnitude strictly smaller than the derivative term. The proof uses exact integer signs for $3\le k\le200$ and estimates for $k\ge201$. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/4) · [Independent agent-assisted review](review-first-lag.md)
 
 ## The two signs to check
 
