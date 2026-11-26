@@ -1,0 +1,453 @@
+\section{Consecutive interlacing through the two-cycle range}
+\label{sec:two-cycle-insertion}
+
+\textbf{Two-cycle interlacing theorem.}
+Let $k\ge3$. For every $k\le n\le3k-2$, put $P_n(t)=E_{n,k}(t)/t$.
+Then $P_n$ and $P_{n+1}$ have simple negative zeros, and the zeros of
+$P_{n+1}$ strictly interlace those of $P_n$ with the new polynomial
+supplying both outer zeros. More precisely, at every zero $x$ of $P_n$,
+\begin{equation}
+ \left|L(x)\right|<\left|D(x)\right|,\qquad
+ D(t)=t(1-t)P_n'(t),\qquad
+ L(t)=\binom{n}{k-1}A_{k-1}(t)E_{n+1-k,k}(t).
+ \label{eq:two-cycle-lag}
+\end{equation}
+Thus the conclusion covers every consecutive pair for which the new row
+admits at most two cycles.
+
+To obtain the insertion recurrence, either insert the largest label
+into an edge of an existing cycle or place it in a new $k$-cycle.
+Inserting it after the initial label of an ascending edge preserves
+the excedance count. Inserting it in any other edge adds one
+excedance. With the convention $E_{0,k}=1$ and $E_{m,k}=0$ for
+$1\le m<k$, this gives
+\begin{equation}
+ P_{n+1}(t)=\bigl(1+(n-1)t\bigr)P_n(t)+D(t)+L(t).
+ \label{eq:two-cycle-recurrence}
+\end{equation}
+The two polynomials $P_{n+1}$ and $P_{n+1}-2L$ therefore take the values
+$D+L$ and $D-L$, respectively, at an old root. For $k\le n\le2k-2$
+only single cycles occur in both rows and $L=0$. Eulerian
+interlacing follows from
+$A_{m+1}=(1+mt)A_m+t(1-t)A_m'$ by induction from $A_1=1$,
+evaluating the recurrence at the simple negative zeros of $A_m$.
+The first nonzero insertion term, at $n=2k-1$, is covered by the
+\href{https://github.com/ProgramComputer/open-math-research/pull/27}{reviewed first-transition argument}.
+It compares $A_{2k-2}$ with both polynomials
+$A_{2k-1}\pm\binom{2k-1}{k-1}tA_{k-1}^2$.
+We treat $2k\le n\le3k-2$ below.
+
+\subsection{The first ranks and their derivative bound}
+
+Write $M=n-1$, $E=E_{n,k}$, and
+$\alpha_p=[t^p]E/p^M$ for $p\ge1$. We take $n\ge100$ in this
+subsection. The bounds needed for the first ranks are
+\begin{equation}
+ 0\le\alpha_p\le3\quad(p\ge1),\qquad
+ \alpha_p\ge99/100\quad
+ \left(p\le \frac{451}{1000}\sqrt M\right).
+ \label{eq:two-cycle-coefficients}
+\end{equation}
+A permutation with $p-1$ descents gives a word on $p$ colors by assigning
+each label to its increasing run. The word determines the permutation,
+so $[t^p](tA_m)\le p^m$. Conversely, sorting each color class and
+concatenating the classes in color order creates all $p-1$ descents
+if every class meets both label halves. The union bound shows that
+the single-cycle term $tA_M$ alone gives
+$\alpha_p\ge 1-2p\exp(-\lfloor M/2\rfloor/p)$. For the stated
+range of $p$, this error is below
+$\sqrt M\exp(-9\sqrt M/10)<1/100$.
+
+Each unordered pair of cycles is counted twice in the sum
+\begin{equation}
+ E(t)=tA_{n-1}(t)+\frac12\sum_{j=k}^{n-k}\binom nj
+                (tA_{j-1}(t))(tA_{n-j-1}(t)).
+ \label{eq:two-cycle-exact-polynomial}
+\end{equation}
+Consequently the coefficient bound from words, followed by symmetry
+under $a\mapsto p-a$, gives
+\[
+ \alpha_p\le
+ 1+\frac12\sum_{a=1}^{p-1}\frac{p}{a(p-a)}
+        \Pr\{\operatorname{Bin}(n,a/p)\in[k,n-k]\}
+ =
+ 1+\sum_{a=1}^{p-1}\frac1a
+        \Pr\{\operatorname{Bin}(n,a/p)\in[k,n-k]\}.
+\]
+Since $k\ge n/3$, Hoeffding's inequality bounds the probability by
+$\exp(-8n/225)$ whenever $a/p\notin(1/5,4/5)$. For $p\le n-1$ the sum of
+these terms is at most $(1+\log n)\exp(-8n/225)<1/6$.
+The expression decreases for $n\ge100$ and satisfies the bound at
+$n=100$ using $\log100<14/3$ and $\exp(32/9)>34$.
+For the remaining indices the sum of $1/a$ is at most $11/6$.
+When $p\le4$, this follows by summing through $a=3$.
+When $5\le p\le11$, all the indices lie in $[2,8]$.
+For $p\ge12$, integrate $1/a$ from the first index to the last,
+allowing the first term separately, to obtain
+$\log4+5/p\le\log4+5/12<11/6$. Coefficients beyond $n-1$ vanish.
+This proves \eqref{eq:two-cycle-coefficients}.
+
+Put $H=\lfloor(7/20)\sqrt M\rfloor$.
+For a rank $1\le h\le H$ define
+\[
+ \rho=\frac{\alpha_h}{\alpha_{h+1}},\qquad
+ u=\rho\left(\frac h{h+1}\right)^M,\qquad
+ G(z)=\frac{E(uz)}{\alpha_h h^M(uz)^h},\qquad
+ b_p=\left[\frac ph\left(\frac h{h+1}\right)^{p-h}\right]^M.
+\]
+We have $h+1\le(451/1000)\sqrt M$ and
+$\rho,\rho^{-1}\le R=100/33$. The terms of $G$ with indices
+$h,h+1$ are exactly $1,z$. The successive ratios of $b_p$ away from
+this pair are at most $(1-1/h^2)^M$ on the left and
+$(1-1/(h+1)^2)^M$ on the right. Both are bounded by
+$q_0=\exp(-1000000/203401)<1/135$, and the left side is empty
+when $h=1$.
+
+Whenever $q_0\max(|\rho z|,|\rho z|^{-1})\le\eta$, the absolute values
+of the terms of $G$ at indices $h-\ell$ and $h+1+\ell$ are at most
+$R\eta^\ell$ and $R|z|\eta^\ell$, respectively, for $\ell\ge1$.
+The second estimate uses the coefficient ratio to $\alpha_{h+1}$,
+as the right central term equals $z$.
+On $|z+1|=1/4$ we may take $\eta=3/100$, since
+$3/4\le |z|\le5/4$. Here
+\[
+ |G(z)-(1+z)|\le R(1+|z|)\frac{\eta}{1-\eta}<1/4.
+\]
+On $|z|=1/2$ and $|z|=3$ we may take $\eta=7/100$, and the same
+bound is below $1/2$ and $2$, respectively. Rouch\'e's theorem
+applied to $z^{h-1}G(z)$ gives $h-1$ roots inside $|z|=1/2$, $h$
+inside $|z|=3$, and one in $|z+1|<1/4$. That disk lies in the
+annulus between the two circles. Its sole root is real by
+conjugation. Thus $P_n$ has a simple negative root $x=uz$ of absolute
+rank $h$ with $3/4<|x|/u<5/4$.
+
+At this root, put $X=|x|$. The normalized derivative
+$xE'(x)/(\alpha_h h^M x^h)$ equals $zG'(z)-G(z)$ because
+$G(z)=0$. Its central terms contribute $-1$ together. The remaining
+weights are $\ell+1$ and $\ell$ on the left and right. With
+$\eta=3/100$ this gives
+\begin{equation}
+ \begin{split}
+ \bigl|zG'(z)-G(z)+1\bigr|
+ &\le R\left((1+5/4)\frac{\eta}{(1-\eta)^2}
+                    +\frac{\eta}{1-\eta}\right)<\frac13,\\
+ |xE'(x)|&>\frac23\alpha_h h^M X^h .
+ \end{split}
+ \label{eq:two-cycle-front-derivative}
+\end{equation}
+
+The residual row has size $n+1-k$ between $k$ and $2k-1$.
+It consists of single cycles, so
+$L(t)=\binom{n}{k-1}tA_{k-1}(t)A_{n-k}(t)$. Applying the same
+coefficient bound to both Eulerian factors yields
+\[
+ [t^r](tL)
+ \le \frac{n}{n-k+1}\,r^M
+     \sum_{a=1}^{r-1}
+         \Pr\{\operatorname{Bin}(M,a/r)=k-1\}.
+\]
+Here $b=(k-1)/M$ belongs to $[1/3,1/2]$, and Stirling's bounds give
+\[
+ \Pr\{\operatorname{Bin}(M,b)=k-1\}
+ \le \frac{\exp(1/(12M))}{\sqrt{2\pi M b(1-b)}}
+ < \frac{7}{8\sqrt M}.
+\]
+Changing the binomial parameter from $b$ to $y$ multiplies this
+point probability by $\exp(-M I(b,y))$, where
+$I(b,y)=b\log(b/y)+(1-b)\log((1-b)/(1-y))$.
+As a function of $b$, $I$ and its first derivative vanish at $b=y$,
+and its second derivative is at least four. Thus
+$I(b,y)\ge2(b-y)^2$. The Gaussian sum on the lattice $y=a/r$ is
+at most $1+\sqrt{\pi/2}\,r/\sqrt M$. Indeed, each superlevel
+interval contains at most its length plus one lattice points in
+the $a$ coordinate, and integrating the level from zero to one
+gives the bound. Since $n/(n-k+1)<2$,
+\begin{equation}
+ [t^r](tL)\le \frac{2(7/8)}{\sqrt M}\,
+       r^M\left(1+\sqrt{\pi/2}\,\frac r{\sqrt M}\right).
+ \label{eq:two-cycle-front-lag}
+\end{equation}
+For the sum at $x$, the weights
+$r^M X^r/(\alpha_h h^M X^h)$ are bounded by
+$(100/99)\eta^\ell$ at $r=h-\ell$ and
+$(100/99)(5/4)\eta^\ell$ at $r=h+1+\ell$, for $\ell\ge0$.
+For the right-hand weights use $1/\alpha_{h+1}$, which absorbs
+the factor $\rho$ from the first step. The weight in parentheses in
+\eqref{eq:two-cycle-front-lag} is at most $157/100$ through
+$r=h+1$ and grows by less than $13/100$ per step thereafter. The
+normalized weighted sum is therefore below
+\[
+ \frac{100}{99}\left(\frac94\frac{157}{100(1-\eta)}
+          +\frac54\frac{13\eta}{100(1-\eta)^2}\right)
+ <\frac{37}{10}.
+\]
+Since $E'(x)=xP_n'(x)$, equations
+\eqref{eq:two-cycle-front-derivative} and
+\eqref{eq:two-cycle-front-lag} give
+\begin{equation}
+ \frac{|L(x)|}{|D(x)|}
+ =\frac{|xL(x)|}{(1+X)|xE'(x)|}
+ <\frac{777}{80\sqrt M}<1.
+ \label{eq:two-cycle-front-ratio}
+\end{equation}
+
+\subsection{Middle-root signs and a fixed rational comparison}
+
+For $t=-e^{-s}$, $s\ge0$, let
+\[
+ r=\sqrt{s^2+\pi^2},\qquad
+ \theta=\arg(s+i\pi),\qquad S=\sin\theta,\qquad
+ z_p=(\cos\theta+ipS)^{-1},\qquad
+ B_m=\sum_{p\ \mathrm{odd}}z_p^m .
+\]
+Here $p$ runs over both positive and negative odd integers.
+The Eulerian power-sum identity gives the normalized $m$-cycle weight
+\begin{equation}
+ \frac{r^m tA_{m-1}(t)}{m!(1-t)^m}=\frac{B_m}{m}\qquad(m\ge2).
+ \label{eq:two-cycle-pole}
+\end{equation}
+Indeed $tA_{m-1}(t)/((m-1)!(1-t)^m)$ is the coefficient of $w^{m-1}$
+in $1/(1+e^{w-s})-1$. The identity at $t=-1$ follows by continuity.
+The poles $s+ip\pi$ all have residue $-1$.
+For fixed $s$, the circles of radii $\sqrt{s^2+4b^2\pi^2}$, with integers
+$b\to\infty$, stay a positive distance from the poles. On these
+circles the reciprocal denominator is bounded: if the real part
+of $w-s$ is bounded away from zero the reverse triangle inequality
+applies, and otherwise its imaginary part stays away from the odd
+multiples of $\pi$. The coefficient integral on the circle tends to
+zero. Summing the residues in the coefficient formula proves
+\eqref{eq:two-cycle-pole}, since the sum converges absolutely.
+
+Define
+\[
+ F_n=\frac{r^n E_{n,k}(t)}{n!(1-t)^n},\qquad
+ f=\frac n2F_n
+   =\frac{B_n}{2}+\sum_{j=k}^{n-k}w_j\frac{B_jB_{n-j}}{2},
+ \qquad w_j=\frac{n}{2j(n-j)}.
+\]
+The identity follows by applying \eqref{eq:two-cycle-pole} to
+\eqref{eq:two-cycle-exact-polynomial}. Set $W=\sum_{j=k}^{n-k}w_j$.
+Then $W=\sum_{j=k}^{n-k}1/j\le\log 2<7/10$, by integration from
+$k-1$ and the bound $n-k\le2k-2$.
+
+Assume $n\ge N=192$ and $nS^2\ge c=6/5$.
+Let $\beta=c/N=1/160$ and $K(p)=1+\beta(p^2-1)$. If $m/n\ge a$,
+the monotonicity of $(1+u/n)^n$ in $n$ for $u\ge0$ gives
+$|z_p|^m\le K(p)^{-H_a}$, where $H_a=Na/2$.
+All the parameters $a$ used below are at least $1/3$ and are integer
+multiples of $1/48$, so $H_a$ is an integer. With
+\[
+ I_a=\frac{K(9)^{1-H_a}}{4\beta(H_a-1)},\qquad
+ T(a)=\sum_{p=3,5,7,9} K(p)^{-H_a}+\frac{I_a}{9},\qquad
+ U(a)=\sum_{p=3,5,7,9}pK(p)^{-H_a}+I_a ,
+\]
+we obtain, for $e_m=B_m/2-\cos(m\theta)$,
+\begin{equation}
+ |e_m|\le T(a),\qquad |e_m'|\le mU(a).
+ \label{eq:two-cycle-single-tails}
+\end{equation}
+The term with $|p|=1$ gives the displayed cosine. For the derivative,
+$|z_p'|\le |p|\,|z_p|^2$ and $|z_p|\le1$. The sum on positive odds
+above nine is at most half the integral starting at nine of the
+decreasing majorant. The weighted integrand $pK(p)^{-H_a}$ decreases
+there because $(2H_a-1)\beta p^2>1-\beta$. Its half integral equals
+$I_a$, and the unweighted integrand is at most one ninth of the weighted
+one on that interval. These summable bounds also justify
+differentiating the series in this region.
+
+Suppose $u\le\min(j,n-j)/n\le v$ for one adjacent mesh interval
+$[u,v]$. Put
+\begin{align*}
+ A_{uv}&=1+2\bigl(T(u)+T(1-v)+T(u)T(1-v)\bigr),\\
+ C_{uv}&=1-2u+
+ 2v\bigl(T(1-v)+U(u)(1+T(1-v))\bigr)\\
+ &\hspace{2.65em}
+ +2(1-u)\bigl(T(u)+U(1-v)(1+T(u))\bigr).
+\end{align*}
+For the two principal cosines, the identity
+$2\cos(j\theta)\cos((n-j)\theta)=\cos(n\theta)+\cos((2j-n)\theta)$
+gives a residual bounded by one in magnitude and $n(1-2u)$ in
+derivative magnitude. Applying \eqref{eq:two-cycle-single-tails} and
+the product rule to the terms involving at least one $e_m$ bounds
+the full residual by $A_{uv}$ and its derivative by $nC_{uv}$.
+
+For the threshold interval with index $i\in\{16,\ldots,23\}$ choose
+$q=i/48\le k/n\le q_+=(i+1)/48$. Let $A_i,C_i$ be the respective
+maxima of $A_{uv},C_{uv}$ over the adjacent mesh intervals in
+$[q,1/2]$. With $T_*=T(1)$ and $U_*=U(1)$ this proves
+\begin{equation}
+ \begin{split}
+ |f-(1+W)\cos(n\theta)|&\le T_*+WA_i,\\
+ |f'/n+(1+W)\sin(n\theta)|&\le U_*+WC_i.
+ \end{split}
+ \label{eq:two-cycle-mixed-tails}
+\end{equation}
+
+To compare the insertion terms at a root $t=x$, multiply $D(x)$
+and $L(x)$ by $x r^{n+1}/(n!(1-x)^{n+1})$.
+Their transformed values are, respectively,
+$S F_n'(\theta)$ and $B_kB_{n+1-k}/(n+1-k)$.
+For the first equality use $t\,d\theta/dt=\pi/r^2$.
+Terms from differentiating the normalization vanish at a zero of the
+old row. For the second, apply
+\eqref{eq:two-cycle-pole} to each of the two factors of $tL$.
+Dividing further by $2S$ gives derivative magnitude $|f'|/n$
+and lag magnitude at most
+\[
+ J_i=\frac{2(1+T(q))(1+T(1-q_+))}{15(1-q_+)},
+\]
+since $(n+1-k)S\ge(1-q_+)\sqrt{nc}>15(1-q_+)$.
+The weight $W$ satisfies $0\le W\le W_i$ with
+\[
+ W_i=\min\left(\frac7{10},\frac{1-2q+1/N}{q}\right).
+\]
+The second bound uses at most $n-2k+1$ terms each at most $1/k$.
+
+Define
+\[
+ R_i(w)=\frac{(T_*+wA_i)^2+(U_*+wC_i+J_i)^2}{(1+w)^2}.
+\]
+The table gives upper integer bounds for $10^6R_i(w)$ at the two
+endpoints, computed by rational arithmetic from the formulas above.
+The last two columns are ceilings.
+\[
+\begin{array}{c|c|r|r}
+ i & W_i & \lceil 10^6R_i(0)\rceil & \lceil 10^6R_i(W_i)\rceil\\ \hline
+ 16 & 7/10  & 85473  & 988936\\
+ 17 & 7/10  & 88476  & 921937\\
+ 18 & 49/72 & 92155  & 844623\\
+ 19 & 41/76 & 96575  & 649634\\
+ 20 & 33/80 & 101824 & 488795\\
+ 21 & 25/84 & 108020 & 358384\\
+ 22 & 17/88 & 115311 & 256385\\
+ 23 & 9/92  & 123892 & 182547
+\end{array}
+\]
+Since $A_i\ge1$, the polynomial
+\[
+ (T_*+wA_i)^2+(U_*+wC_i+J_i)^2-(1+w)^2
+\]
+is convex in $w$. Its endpoint values are strictly negative, so
+\begin{equation}
+ (T_*+WA_i)^2+(U_*+WC_i+J_i)^2<(1+W)^2.
+ \label{eq:two-cycle-quadratic}
+\end{equation}
+At a checkpoint $\theta=l\pi/n$ in this region,
+\eqref{eq:two-cycle-mixed-tails} and \eqref{eq:two-cycle-quadratic}
+give $\operatorname{sgn} f=(-1)^l$.
+At a zero of $f$, the first bound in \eqref{eq:two-cycle-mixed-tails}
+bounds the cosine in the same inequality. Hence
+$(1+W)|\sin(n\theta)|>U_*+WC_i+J_i$. The second bound in
+\eqref{eq:two-cycle-mixed-tails} gives $|f'|/n>J_i$.
+This proves \eqref{eq:two-cycle-lag} at all old roots in the
+middle region on the side $-1\le t<0$.
+
+\subsection{Joining the regions and counting signs}
+
+Take $H=\lfloor(7/20)\sqrt{n-1}\rfloor$ as above and suppose $n\ge192$.
+At the first checkpoint $\theta_{H+1}=(H+1)\pi/n$ we have
+$n\sin^2\theta_{H+1}>6/5$. Indeed
+$b=(7\pi/20)\sqrt{n-1}/n<\theta_{H+1}$ and
+$b^2<121/(100n)$. Using $\sin b\ge b-b^3/6$ and
+$333/106<\pi<22/7$ gives
+\[
+ n\sin^2\theta_{H+1}>
+ \left(\frac7{20}\frac{333}{106}\right)^2
+ \frac{191}{192}\left(1-\frac{121}{115200}\right)^2>\frac65.
+\]
+All the first $H$ roots precede this checkpoint in increasing modulus.
+Their moduli are bounded by $(5/4)R(H/(H+1))^{n-1}$, and the
+checkpoint corresponds to $s=\pi\cot\theta_{H+1}<n/(H+1)$.
+With $M=n-1$, the positive Taylor series of
+$-\log(1-1/(H+1))$ gives
+\[
+ M\log(1+1/H)-\frac{M+1}{H+1}
+ \ge\frac{M}{2(H+1)^2}-\frac1{H+1}
+ \ge\frac{1}{2(451/1000)^2}-\frac14
+ >\log((5/4)R).
+\]
+This proves the strict separation.
+
+Let $t_l=-\exp(-\pi\cot(l\pi/n))$ for
+$l=H+1,\ldots,n-H-1$. The lower-half checkpoints through
+$l=\lfloor n/2\rfloor$ satisfy the middle condition,
+so $E_{n,k}(t_l)$ has sign $(-1)^l$ there. The upper-half
+checkpoints follow by reciprocity. In fact
+$t_{n-l}=1/t_l$ and $E_{n,k}(1/t)=t^{-n}E_{n,k}(t)$,
+so the signs are again $(-1)^l$.
+The $n-2H-2$ gaps between consecutive checkpoints each contain a
+negative old root. The first $H$ roots and their $H$ reciprocal
+partners lie strictly outside these gaps. This exhausts the degree
+$n-2$ of $P_n$, so all old roots are simple.
+For odd $n$ the center belongs to the central gap, and for even $n$
+it is a checkpoint. Every old root on the lower side is therefore
+covered by \eqref{eq:two-cycle-front-ratio} or
+\eqref{eq:two-cycle-quadratic}. At an old root $x$, the reciprocal
+identity for $P_n$ implies $D(1/x)=x^{1-n}D(x)$.
+The cycle factors of $L$ give $L(1/x)=x^{1-n}L(x)$.
+This transfers \eqref{eq:two-cycle-lag} to the upper side as well.
+
+Since $P_n(0)=1$, the sign of $D$ at the old root of absolute rank
+$h$ is $(-1)^h$. The two next-row polynomials $P_{n+1}$ and
+$P_{n+1}-2L$ have constant and leading coefficients one, with
+degree $n-1$. At every old root their signs equal the sign of $D$
+by \eqref{eq:two-cycle-lag}. Both therefore have a root in each
+successive gap and in each of the two outer intervals on the
+negative axis. This exhausts their degree and proves strict
+interlacing for $n\ge192$.
+
+\subsection{Exact replay for the remaining pairs}
+
+The remaining range has $3\le k\le95$ and
+$2k\le n\le\min(191,3k-2)$. It contains $3\,007$ consecutive pairs
+with $379\,502$ old roots, counting reciprocal partners and any
+central roots. The finite verifier constructs the original coefficients
+by distinguishing the cycle containing label one:
+\[
+ P_n(t)=A_{n-1}(t)+t\sum_{j=k}^{n-k}
+              \binom{n-1}{j-1}A_{j-1}(t)A_{n-j-1}(t).
+\]
+It checks \eqref{eq:two-cycle-recurrence} separately as an integer
+polynomial identity and checks both next-row polynomials against the
+same old polynomial. Eulerian coefficients are reconstructed by their
+recurrence and cross-checked by finite differences. A separate
+Eulerian sign computation and the transition at $n=2k-1$ initialize the
+brackets for each threshold.
+
+Below modulus one, the verifier locates disjoint dyadic brackets
+with denominator $2^{256}$. The signs of the old polynomial at the
+bracket endpoints of rank $h$ are $(-1)^{h-1}$ and $(-1)^h$ in
+order of increasing modulus. The brackets, their reciprocal partners,
+and the center when the old degree is odd exhaust the old degree.
+Each next-row polynomial is tested for sign $(-1)^h$ at both endpoints of that bracket. The sign
+calculation uses scaled integer Horner evaluation. At each step the
+rounding error is less than one scaled unit, and multiplication
+by the modulus contracts the accumulated error. Hence an accumulator
+with magnitude exceeding the degree in those units certifies the sign.
+The endpoint signs at zero and $-1$ are evaluated exactly.
+
+For each next-row polynomial, these signs force a lower root in
+every gap between old brackets and one before the first bracket.
+If the old degree is odd, the sign checked at its central root
+forces an additional new root between the last lower bracket and
+$-1$. If the new degree is odd, reciprocity gives its central root.
+Reciprocal partners and these roots exhaust the new degree.
+Thus each next-row polynomial has the same fixed sign throughout
+each old bracket, and the central check and reciprocity give the
+corresponding signs at the other old roots. This proves
+\eqref{eq:two-cycle-lag} and strict interlacing for all finite pairs.
+
+The \href{https://github.com/ProgramComputer/open-math-research/tree/research/topics/long-cycle-excedances}{topic archive}
+contains the rational bound checker, the finite verifier and its replay
+materials. Run the following from that topic directory with Python~3
+and \texttt{python-flint} installed. FLINT is used for integer
+polynomial arithmetic, and root signs use integer Horner evaluation.
+\begin{verbatim}
+python3 -I -O verify_two_cycle_bounds.py
+python3 -I -O verify_two_cycle_band.py
+\end{verbatim}
+The second command reconstructs the brackets and needs no root archive.
+Its optional \texttt{--records} argument writes a gzip JSONL index with
+the certified pair ranges and hashes of the coefficients and endpoints.
+The first command checks all sixteen rational endpoint comparisons and
+the checkpoint join. No Lean or Rocq verification is asserted here.
