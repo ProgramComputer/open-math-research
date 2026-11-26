@@ -147,3 +147,12 @@ jobs:
             tee "$RUNNER_TEMP/catalan-checkpoint-phase-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/checkpoint-phase-kernel.txt \
             "$RUNNER_TEMP/catalan-checkpoint-phase-axioms.txt"
+      - name: Check the old middle-root signs
+        run: lake build CatalanStrictPeaksMiddleRoots
+      - name: Audit the old middle-root signs
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/MiddleRootsAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-middle-roots-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/middle-roots-kernel.txt \
+            "$RUNNER_TEMP/catalan-middle-roots-axioms.txt"

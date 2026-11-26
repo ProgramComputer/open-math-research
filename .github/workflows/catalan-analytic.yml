@@ -50,7 +50,10 @@ jobs:
           Mathlib.Data.Finset.Sigma
           Mathlib.Data.Fintype.Pi
           Mathlib.MeasureTheory.Function.Jacobian
+          Mathlib.RingTheory.Polynomial.Vieta
           Mathlib.RingTheory.PowerSeries.Basic
+          Mathlib.RingTheory.PowerSeries.WellKnown
+          Mathlib.Tactic.LinearCombination
           Mathlib.Tactic.FieldSimp
           Mathlib.Tactic.Linarith
           Mathlib.Tactic.Positivity
@@ -71,3 +74,10 @@ jobs:
             tee "$RUNNER_TEMP/catalan-beta-moments-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/beta-moments-kernel.txt \
             "$RUNNER_TEMP/catalan-beta-moments-axioms.txt"
+      - name: Check the farthest old root from the three leading word coefficients
+        run: lake build CatalanStrictPeaksFarthestSign
+      - name: Audit the farthest-root and coefficient theorems
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarthestSignAxioms.lean > "$RUNNER_TEMP/catalan-farthest-sign.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/farthest-sign-kernel.txt "$RUNNER_TEMP/catalan-farthest-sign.txt"
