@@ -1,0 +1,189 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,geometry}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\usepackage[hidelinks]{hyperref}
+\geometry{margin=1.1in}
+\title{Effective real-rootedness sectors for balanced arrays}
+\author{ProgramComputer}
+\date{November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For the balanced-array polynomial in Per Alexandersson's uniform-matroid
+conjecture, we prove simple negative zeros at every row count $n$ if
+$d\ge2$, $4d\ge n$, and $10r\ge9d$. A finite exact interval replay
+joins a direct large-row proof. A separate argument gives effective
+cutoffs for a family of rank and dimension ratios, including an explicit
+near-full-cap sector at logarithmically sublinear dimension.
+\end{abstract}
+
+Let $0\le r\le d$ be an integer cap. The coefficient of $q^k$ counts the
+labeled $n$ by $d$ binary arrays with common column sum $k$ and all row sums
+at most $r$. The conjecture that this polynomial is real-rooted for every
+choice was stated by
+\href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Per Alexandersson}.
+Our all-row result combines the analytic estimate for $n\ge1024$ with
+the finite replay for $36\le n<1024$ and the
+\href{https://github.com/ProgramComputer/open-math-research/blob/4f011fab7ca16608d1472edc462a99d97a78dd78/topics/balanced-arrays/finite-residual/README.md}{reviewed result through 35 rows}.
+Constant polynomials have no roots. Throughout we use the
+validity-probability log-concavity theorem, which reduces to the
+Kahn--Neiman orientation inequality.
+\section{Analytic sectors}\label{sec:analytic}
+
+Let $a_k$ count the labeled $n$ by $d$ binary arrays whose row sums are at most $r$ and whose column sums are all $k$. Write $D=\lfloor nr/d\rfloor$, $p_k=a_k/\binom nk^d$ and $g_k=((1+1/k)(1+1/(n-k)))^d$. We use the previously proved orientation inequality $p_k^2\ge p_{k-1}p_{k+1}$. The $a_k$ are positive throughout their support, as one sees by placing consecutive cyclic blocks of $k$ ones in the successive columns. The maximum row sum then equals $\lceil dk/n\rceil$. \href{https://github.com/ProgramComputer/open-math-research/blob/ccd2cd0eaaf9555d680ea405a5cc013176fcd7e2/topics/balanced-arrays/orientation-normalization.md}{Orientation proof}
+
+\textbf{Large-row part of the all-row theorem.} If $n\ge1024$, $d\ge n/4$ and $10r\ge9d$, the polynomial has $D$ simple negative roots.
+
+\textbf{Effective sector theorem.} Let $1/2<\rho<1$ and $c>\rho(1-\rho)\log4$ be rational. There is an effectively computable $N(c,\rho)$ such that the same conclusion holds whenever $n\ge N(c,\rho)$, $d\ge cn$ and $r\ge\rho d$. The numerical theorem below uses much smaller constants than the general construction.
+
+The existing all-cap eventual theorem gives an unspecified threshold even with no rank or dimension restrictions. Here the cutoff can be calculated using elementary operations with rigorous error bounds. The issue outside these sectors is how to handle quotas close to the cap where the binomial approximation and factor-four separation can both fail.
+
+\subsection{Alternating signs at geometric nodes}
+
+Write $G_i=a_i^2/(a_{i-1}a_{i+1})\ge g_i>1$. For $1\le k<D$ take $x_k=\sqrt{a_{k-1}/a_{k+1}}$. Successive nodes increase because the ratios $a_{i-1}/a_i$ increase. Put $w_j=a_{k+j}x_k^j/a_k$ for indices in the support. Then $w_0=1$, $w_{\pm1}=t=1/\sqrt{G_k}$, and the weights decrease outwards on both sides. The sign of interest is $\sum_j(-1)^j w_j$. At a quota with $g_k>4$, it is at least $1-2t>0$ by pairing every second term with the following term on each side. If both sides reach distance three, the same pairing gives the stronger lower bound
+
+\begin{equation*}
+1-2t+t^2\sum_{e\in\lbrace-1,1\rbrace}\frac1{G_{k+e}}\left(1-\frac{t}{G_{k+e}G_{k+2e}}\right).
+\end{equation*}
+
+Indeed, $w_{2e}=t^2/G_{k+e}$ and $w_{3e}/w_{2e}=t/(G_{k+e}G_{k+2e})$. Positive signs at all these nodes, together with the constant and the leading term, yield one root in each of $D$ disjoint negative intervals.
+
+\subsection{Explicit constants}
+
+Assume $n\ge1024$. For every $i$ the bounds $\log(1+1/i)\ge1/(i+1)$ and convexity give $\log g_i\ge4d/(n+2)\ge n/(n+2)$, so $g_i>27/10$. We may take $d<n$ since otherwise all $g_i>4$. Write $g=g_k$ and consider a quota with $g\le4$. Then $23n/100<k<77n/100$. Indeed, outside that interval convexity and symmetry give
+
+\begin{equation*}
+\log g\ge \frac14\left(\frac1{23/100+1/n}+\frac1{77/100+1/n}\right)>1.39>\log4.
+\end{equation*}
+
+Every quota at distance at most three from $k$ is present. For $|i-k|\le2$ we have $i/n\le193/250$. Select the $d$ uniform $i$-subsets independently, one per column. Each row sum is binomial with parameters $d,i/n$. Union bounding over rows, increasing the success probability to $b=193/250$, and applying the exponential Markov bound at $a=9/10$ gives
+
+\begin{equation*}
+1-p_i\le n\exp[-d H(a,b)], \qquad
+H(a,b)=a\log(a/b)+(1-a)\log((1-a)/(1-b)).
+\end{equation*}
+
+This tail bound follows by minimizing $((1-b)+b e^s)^d e^{-sda}$ over positive $s$. For $a\ge b>1/2$, the second derivative of $H$ in $a$ is $1/(a(1-a))\ge1/(b(1-b))$, so $H(a,b)\ge(a-b)^2/(2b(1-b))$. Thus $p_i\ge99/100$ for every $n\ge1024$: $n e^{-nH/4}$ decreases on this range and already lies below $1/100$ at its left endpoint.
+
+For $|i-k|\le1$ the derivative of $d\log[(1+1/y)(1+1/(n-y))]$ on the segment between $i,k$ has absolute value at most $2n/(.228n)^2<.038$ since $d<n$. Hence $g_i\le1.04g$ and $G_{k\pm1}\le1.04g/(.99)^2<1.07g$. The inequality $t<.61$ and the global lower bound $G_j>2.7$ turn the signed sum above into a quantity at least $1-2t+1.70t^2/g$. This quadratic decreases for $0\le t\le1/\sqrt g$ because $1.70t/g<1$. Its value there is at least
+
+\begin{equation*}
+1-2/\sqrt g+1.70/g^2>0.
+\end{equation*}
+
+The last expression increases for $g\ge2.7$ since $g^{3/2}>3.40$, and is positive at $2.7$. This proves the numerical theorem. The comparison script uses rational bounds for the few exponential constants.
+
+\subsection{General effective cutoff}
+
+Choose rational $1/2<\beta<\rho$ with $c>\beta(1-\beta)\log4$, and set $h=1-\beta$. Take $d<n$ as above. For $n$ large enough that $c((\beta+1/n)^{-1}+(h+1/n)^{-1})>\log4$, every quota with $g_k\le4$ lies in $hn<k<\beta n$. All larger $n$ satisfy the same bound. Also $g_i\ge\exp(4cn/(n+2))\ge e^{2c}$ for $n\ge2$.
+
+Put $q=g_k^{-1/2}$ and fix a rational $e^{-c}<Q<1$. The bilateral series $\Theta(q)=\sum_{j\in\mathbb Z}(-1)^j q^{j^2}$ is bounded below by $\exp(-3Q/(1-Q)^2)$ for $0<q\le Q$. Indeed its product is $\prod_{m\ge1}(1-q^{2m})(1-q^{2m-1})^2$ and $-\log(1-x)\le x/(1-Q)$ for $x\le Q$. \href{https://dlmf.nist.gov/20.5.E9}{Jacobi triple product, DLMF 20.5.9}
+
+Choose a positive rational $\eta$ below that lower bound, and an odd positive $J$ such that $2Q^{(J+1)^2}/(1-Q)<\eta/3$. Choose rational $\epsilon>0$ with $(2J+1)(\exp(J^2\epsilon/2)-1)<\eta/3$. Let $\delta=(\rho-\beta)/2$, $\lambda=2c\delta^2$. Impose $n\ge 2(J+1)/h$, $n\ge(J+1)/\delta$, and $n\ge1/\lambda$. The full window through $k\pm(J+1)$ is then in the support and its quota densities are at most $\rho-\delta$. On this window $1-p_i\le E(n)=n\exp(-\lambda n)$ by the binomial bound above or its limit at zero, using $H(a,b)\ge 2(a-b)^2$ from $\partial^2 H/\partial a^2\ge4$.
+
+Increase $n$ until $E(n)<1$ and
+
+\begin{equation*}
+\frac{8J}{h^2 n}-2\log(1-E(n))<\epsilon.
+\end{equation*}
+
+Such an integer is found by doubling, and the inequality holds thereafter by monotonicity. For $|i-k|\le J$ the derivative bound from the numerical proof gives $|\log g_i-\log g_k|\le8J/(h^2 n)$. The three probabilities in $G_i/g_i$ give $|\log G_i-\log g_i|\le-2\log(1-E(n))$. Thus $|\log G_i-\log g_k|<\epsilon$.
+
+Since $w_{\pm1}=G_k^{-1/2}$ and the successive log slopes on each side change by $-\log G_{k\pm j}$, it follows that $|\log w_j+j^2\log g_k/2|\le j^2\epsilon/2$ for $|j|\le J$. The sum of absolute errors between $w_j$ and $q^{j^2}$ on this window is at most $(2J+1)(e^{J^2\epsilon/2}-1)$. The omitted ideal tail has absolute value at most $2Q^{(J+1)^2}/(1-Q)$. Therefore the signed sum through distance $J$ is positive. The omitted actual tails each begin with an even index, and pairing successive terms gives a nonnegative remainder on each side. This completes the proof and specifies a terminating threshold calculation using strict comparisons.
+
+\section{An explicit sublinear dimension bound near full rank}\label{sec:logarithmic}
+
+\textbf{Theorem.} Let $L=\log n\ge64$, $d\ge4n/L$, $d\ge2$, and $4n(d-r)\le d^2$. Then the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative roots. In particular the dimension-to-height ratio may tend to zero. The earlier all-cap theorem at this scale has unspecified constants. The present cap restriction gives an effective uniform bound.
+
+Use $g_k,G_k,w_j$ and the alternating-node test in the \hyperref[sec:analytic]{analytic sector proof}. We may assume $d<n$, and put $c=d/n$. A quota requiring attention has $g_k\le4$. Necessarily $d/2<k<n-d/2$: otherwise $\log g_k\ge d/(d/2+1)>\log4$ since $d\ge5$. Put $a=(\log g_k)/2$. Then $3c/2\le a\le\log 2$, by $\log g_k\ge4d/(n+2)$.
+
+Poisson summation for the Gaussian at frequency $1/2$ yields
+
+\begin{equation*}
+\sum_{j\in\mathbb Z}(-1)^j e^{-a j^2}
+=\sqrt{\pi/a}\sum_{m\in\mathbb Z}e^{-\pi^2(m+1/2)^2/a}
+\ge2e^{-2/c}.
+\end{equation*}
+
+For the inequality retain $m=0,-1$, use $\pi^2<12$ and $\sqrt{\pi/a}>1$. Equivalently, the displayed identity follows by evaluating at $1/2$ the Fourier series of the periodized Gaussian of parameter $\pi^2/a$. \href{https://dlmf.nist.gov/20.7.E33}{Theta transformation, DLMF 20.7.33}
+
+Let $J$ be the smallest odd integer at least $4/c$. Then $J\le6/c\le3L/2$ and $J+1\le2L\le d/8$. The numerical inequalities used here and below follow from
+
+\begin{equation*}
+2e^L>5L^4, \qquad e^{L/2}>254 L^5 \qquad(L\ge64).
+\end{equation*}
+
+Both ratios increase on this interval and the left-end comparisons follow from the exponential Taylor series. In particular $e^L>4L^2$, as needed for the window bound. Every local quota through $k\pm(J+1)$ is in the support and has density at most $1-3c/8$. The cap fraction is at least $1-c/4$. The binomial second-derivative estimate and union bound from the sector proof give
+
+\begin{equation*}
+1-p_i\le n e^{-n c^3/32}\le n e^{-2n/L^3}\le n^{-4}
+\end{equation*}
+
+throughout the window. There each of the two coordinates $i,n-i$ is at least $d/4$. The derivative of the baseline log curvature in the quota has magnitude at most $32/d$. Thus $|\log G_i-\log g_k|\le32J/d+4n^{-4}\le33J/d$ for $|i-k|\le J$. As in the sector proof, $|\log w_j+a j^2|\le z=33 J^3/(2d)$ for $|j|\le J$.
+
+The bound $(2J+1)2z\le99J^4/d\le127L^5/n< n^{-1/2}/2$ implies $z<1$ and bounds the sum of the absolute errors on the window, because $e^z-1\le2z$. The ideal Gaussian tails have absolute sum at most
+
+\begin{equation*}
+\frac{2 e^{-a(J+1)^2}}{1-e^{-a(2J+3)}}\le \frac{2e^{-24/c}}{1-e^{-12}}< e^{-2/c}.
+\end{equation*}
+
+Therefore the actual alternating sum on the window is positive, since $e^{-2/c}\ge n^{-1/2}$. The rest of the actual alternating sum is nonnegative by pairing outwards from the even distance $J+1$ on each side. All required signs follow.
+
+At the opposite endpoint, $4nr\le d^2$ gives $D\le d/4$, for which ordinary separation alone suffices. Both bounds leave the central caps open.
+
+\section{Finite high-rank certificate}\label{sec:finite}
+
+\textbf{Result.} For $36\le n<1024$, $d\ge\lceil n/4\rceil$, and $r\ge\lceil9d/10\rceil$, the original balanced-array polynomials have only simple negative zeros. The finite replay below uses the available full-cap and corank-one endpoints and the normalized log-concavity theorem. The initial rows are supplied by the earlier reviewed finite proof.
+
+Let $p_k=a_k/\binom nk^d$, let $D=\lfloor nr/d\rfloor$, and let
+
+\begin{equation*}
+g_k=\left(\frac{(k+1)(n-k+1)}{k(n-k)}\right)^d, \qquad
+\Gamma_k=\frac{a_k^2}{a_{k-1}a_{k+1}}\ge g_k
+\end{equation*}
+
+at internal quotas. The inequality is the normalized log-concavity theorem. All coefficients up to $D$ are positive, since successive columns may use successive cyclic blocks of $k$ rows, making all row occupancies at most $\lceil dk/n\rceil$. A strict factor-four bound at an internal $k$ gives the sign at the geometric center $t_k=\sqrt{a_{k-1}/a_{k+1}}$. At the endpoints use zero and a sufficiently large negative argument. Strict log-concavity gives strictly ordered centers. These signs certify the full degree of distinct roots.
+
+At an active quota, put $\tau=\Gamma_k^{-1/2}$. Both immediate terms have normalized magnitude $\tau$. In direction $e\in\{-1,1\}$ the combined second and third terms, with the later alternating remainder, contribute at least
+
+\begin{equation*}
+\frac{\tau^2}{\Gamma_{k+e}}
+\left(1-\frac{\tau}{\Gamma_{k+e}\Gamma_{k+2e}}\right).
+\end{equation*}
+
+The remainder has the sign of its first term because strict log-concavity makes the term magnitudes decrease outward. The code checks that all active quotas permit both third terms at the lowest considered cap.
+
+\subsection{First pass}
+
+For any cap at least $r_0$, set $l_k=\max(0,1-n\thinspace \mathbb P(\mathrm{Bin}(d,k/n)>r_0))$, so $l_k\le p_k\le1$. The exact binomial tail is bounded above by evaluating its finite sum with upward rounding. On the active quotients the code checks a certified lower bound $G\le g_k$ is at least $9/4$. Therefore $\tau\le2/3$. A lower bound for the normalized signed value is $1-2\tau+C\tau^2$ with any $0\le C\le1$ at most
+
+\begin{equation*}
+\sum_{e=\pm1}
+\frac{l_k l_{k+2e}}{g_{k+e}}
+\left(1-\frac{2}{3g_{k+e}g_{k+2e}}\right).
+\end{equation*}
+
+This quadratic is decreasing for $0\le\tau\le1$, so it suffices that $1-2/\sqrt G+C/G>0$. Squaring the equivalent positive-side inequality gives $(G+C)^2>4G$, the test in the binary64 checker.
+
+The checker advances each elementary arithmetic operation with IEEE binary64 outward rounding. It checks round-to-nearest, uses the adjacent representable value in the required direction after every operation, and uses compiler flags that disallow contraction and fast-math. Integer arguments and integer products used when building the base ratios are exactly representable throughout this range. The curvature base reaches its minimum at the center since it is $1+(n+1)/(k(n-k))$. For fixed $n$, once the lower bound on this minimum to power $d$ exceeds four, all larger $d$ are automatically separated. The independent orientation bound also covers $d\ge n$.
+
+\subsection{Refinement}
+
+The first pass at $r_0=\lceil9d/10\rceil+1$ covers every relevant pair. For the 100 pairs where the first pass at $r_0=\lceil9d/10\rceil$ is incomplete, only that exact minimum cap remains. Bound its $p_k$ by exact integer Bonferroni sums, using the prescribed-row defect histogram in \href{https://github.com/ProgramComputer/open-math-research/blob/114696f2f69429411c6cd4f11955aee963d5320d/topics/balanced-arrays/curvature-compensation/defect-histogram.md}{defect-histogram proof}. For an additional upper bound, negative association of the independent column indicators yields $p_k\le(1-\mathbb P(\mathrm{Bin}(d,k/n)>r_0))^n$. This upper bound applies to the exact cap under refinement.
+
+Use the resulting rational intervals to bound each needed $\Gamma_i$ from both sides, clipping its lower bound below by $g_i$. A dyadic upper bound $T$ on $\Gamma_k^{-1/2}$ then gives the correction $C$ by bounding each summand in the displayed second--third term formula. The exact minimum of $1-2\tau+C\tau^2$ over $0\le\tau\le T$ is its endpoint value if $CT\le1$, and $1-1/C$ otherwise. This uses only rational arithmetic and an integer square root. The largest Bonferroni order needed anywhere is eight, so no whole-array count is required.
+
+\subsection{Replay}
+
+The binary64 and independent integer mantissa implementations give identical miss files. The first pass covers 50,724 of 50,824 nontrivial pairs, rechecking 12,281,490 active quotas. The offset-one pass covers all 50,536 nontrivial pairs. The separate 95\% pass covers all 50,136 nontrivial pairs. The refinement covers the 100 missed minima, with 37 certified at order one, 47 at order three, 14 at order five and two at order eight. It checks every quota between the first and last miss for each pair.
+
+The integer-only checker stores a nonzero value as a 48-bit normalized mantissa times a signed power of two, with a separate zero value. Alignment floors or ceilings the shifted mantissa. Subtraction reverses the rounding on the subtrahend and clamps the result at zero. Mantissa products and shifted division numerators are exact in 128 bits before outward packing. The integer checker verifies that the last quota at the minimum cap is right of the central minimum and has baseline curvature greater than four. Every new interior quota at a larger cap therefore passes separation. One can also see this directly since for such a quota $k$, $n-k+1\le n/10+2$, and $\log g_k\ge d/(n-k+1)\ge45/28>\log4$.
+
+
+\paragraph{Replay and scope.}
+The exact component uses two directed arithmetic implementations in its first pass
+and rational arithmetic for the 100 remaining minimum-cap inputs. The accompanying
+replay records all misses and their refinements. The theorem applies to the ordinary
+unweighted polynomial. The unrestricted all-row conjecture remains open.
+\end{document}

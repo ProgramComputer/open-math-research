@@ -1,0 +1,1 @@
+nontrivial tuples 50536, covered 50536, incomplete 0, active quotas 12271716
