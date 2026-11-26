@@ -159,7 +159,7 @@ theorem IsRestrictedChain.contract_splitsAt (h : IsRestrictedChain M sep) {k : F
     · intro hi
       by_contra! hki
       rcases lt_or_eq_of_le hki with hk | rfl
-      · exact (rep_above_cut hBoundsB hHi hk).not_le hi.le
+      · exact (not_le_of_gt (rep_above_cut hBoundsB hHi hk)) hi.le
       · exact hi.ne hbMid
     · exact rep_below_cut hBoundsB hLo
   have hcCut (i : Fin r) : c i < e ↔ i < k := by
@@ -167,7 +167,7 @@ theorem IsRestrictedChain.contract_splitsAt (h : IsRestrictedChain M sep) {k : F
     · intro hi
       by_contra! hki
       rcases lt_or_eq_of_le hki with hk | rfl
-      · exact (rep_above_cut hBoundsC hHi hk).not_le hi.le
+      · exact (not_le_of_gt (rep_above_cut hBoundsC hHi hk)) hi.le
       · exact hi.ne hcMid
     · exact rep_below_cut hBoundsC hLo
   let splice : Fin r → Fin n := fun i => if i < k then b i else c i
