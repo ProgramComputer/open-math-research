@@ -40,8 +40,10 @@ the reusable result to the exact Catalan polynomial in two stages.
 
 **Partial Lean verification.** Lean verifies the entire finite prefix,
 identifies the analytic branch and Cauchy coefficients, and checks the
-finite-radius deformation and the jumps at the radial cuts. The written proof
-covers the improper ray integrals and the full integral and endpoint comparisons.
+finite-radius deformation and the jumps at the radial cuts. It verifies the
+radial moments and integrated envelopes. The passage to the four improper
+ray integrals and the full checkpoint and old-root sign comparisons remain
+in the written proof.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -102,8 +104,22 @@ rational bound in (5) after inserting the stated beta moments, and the
 exponential comparisons in (6) and in the covariance tail. It uses exact
 arithmetic at the first four lengths and an inequality for each step of four.
 
-The beta moment identities and the derivation of all checkpoint and old-root
-signs remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
+[Cut kernel output](cut-kernel.txt)
+
+## Radial density and normalized moments
+
+The [radial moment module](CatalanStrictPeaksBetaMoments.lean) uses the
+substitution $s=x^{-1}-1$ in the integrals with weight
+$\sqrt{s}/(1+s)^{n+1}$. It proves integrability and the product formula for
+$M_j$ when $j+1/2<n$, the variance formula, and the tilt mean in (8).
+The normalization ratio bound in (6) follows from monotonicity of
+$n^2b(n)$ for integer $n$.
+
+The module integrates the quadratic envelope in (5) and verifies the
+$1/50$ and $1/(20n)$ tail bounds for the affine envelope in (6) and (11).
+Applying the envelopes to the loss of the actual ray amplitude requires
+its pointwise bounds and weighted integrability. The covariance comparisons
+and strict signs also remain in the written proof. [Radial moment kernel output](beta-moments-kernel.txt)
 
 ## Analytic branch and Cauchy coefficient
 
@@ -143,7 +159,7 @@ The theorems `logSector_jump_zero` and `logSector_jump_sqrt` give the
 two cases of each signed radial difference with its exact rational factor.
 
 The outer-arc limit, the change of variables to the four improper integrals
-in (1), and the beta moment and sign estimates remain in the written proof.
+in (1), and the full covariance and sign comparisons remain in the written proof.
 [Contour kernel output](ray-transfer-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45743833834)
 
 ## Exact isolating intervals through length 150
@@ -192,6 +208,8 @@ lake build CatalanStrictPeaksFirstReturn CatalanStrictPeaksGeneratingFunction Ca
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/GeneratingFunctionAxioms.lean
 lake build CatalanStrictPeaksCutGeometry CatalanStrictPeaksCutParameter CatalanStrictPeaksCutBounds CatalanStrictPeaksMomentArithmetic
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/CutAxioms.lean
+lake build CatalanStrictPeaksBetaMoments
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/BetaMomentsAxioms.lean
 lake build CatalanStrictPeaksAnalyticBranch
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/AnalyticBranchAxioms.lean
 lake build OpenMathResearch.LogarithmicContour CatalanStrictPeaksLogRoot CatalanStrictPeaksRayTransfer
