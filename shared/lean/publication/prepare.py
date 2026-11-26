@@ -79,7 +79,8 @@ def main():
             additional[path.stem] = path
         additional["AuditReferenceSpecs"] = HERE/"reference"/"AuditReferenceSpecs.lean"
     elif args.group == "ribbon-foundation":
-        for name in ("MatroidKL", "MatroidKLRecurrence", "MatroidFlatPolynomial"):
+        for name in ("MatroidKL", "MatroidKLRecurrence", "MatroidFlatPolynomial",
+                     "MatroidFlatContract"):
             additional["OpenMathResearch." + name] = HERE.parent / "OpenMathResearch" / (name + ".lean")
         additional["RibbonNarayanaSpec"] = (HERE.parents[2] / "topics" / "ribbon-matroids" /
                                             "lean" / "publication" / "RibbonNarayanaSpec.lean")

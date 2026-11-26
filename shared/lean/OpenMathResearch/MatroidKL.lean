@@ -1,6 +1,7 @@
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.Data.Fintype.Basic
 import Mathlib.Data.Int.Basic
+import Mathlib.Order.Hom.Basic
 
 /-!
 # Kazhdan–Lusztig coefficients from ranked upper intervals
@@ -161,10 +162,61 @@ theorem IsKLFamily.zCoeff_of_rank_zero (rank : α → ℕ) (hRank : StrictMono r
     omega
   rw [zCoeff, hTail, add_zero, hp.rank_zero a hZero i]
 
+section UpperEmbedding
+
+variable {β : Type*} [Fintype β] [PartialOrder β] [OrderTop β]
+
+private def strictUpperEquiv (f : β ↪o α)
+    (hUpper : ∀ a b, f a ≤ b → ∃ c : β, f c = b) (a : β) :
+    {b : β // a < b} ≃ {c : α // f a < c} :=
+  Equiv.ofBijective (fun b => ⟨f b.val, f.lt_iff_lt.mpr b.property⟩) (by
+    constructor
+    · intro b c h
+      exact Subtype.ext (f.injective (congrArg Subtype.val h))
+    · intro c
+      obtain ⟨b, hb⟩ := hUpper a c.val c.property.le
+      have hab : f a < f b := by simpa only [hb] using c.property
+      exact ⟨⟨b, f.lt_iff_lt.mp hab⟩, Subtype.ext hb⟩)
+
+/-- The ranked upper-interval construction is unchanged by an order embedding with upward
+closed image and a constant shift of rank. -/
+theorem IsKLFamily.comp_orderEmbedding (rank : α → ℕ) (rank' : β → ℕ) (f : β ↪o α)
+    (hUpper : ∀ a b, f a ≤ b → ∃ c : β, f c = b) (hTop : f ⊤ = ⊤) (shift : ℕ)
+    (hShift : ∀ a, rank (f a) = shift + rank' a) {p : α → ℕ → ℤ}
+    (hp : IsKLFamily rank p) : IsKLFamily rank' (fun a => p (f a)) := by
+  have hTopRank : rank ⊤ = shift + rank' ⊤ := (congrArg rank hTop).symm.trans (hShift ⊤)
+  have hHeight (a : β) : height rank (f a) = height rank' a := by
+    rw [height, height, hTopRank, hShift]
+    omega
+  have hZ (a : β) (i : ℕ) : zCoeff rank' (fun b => p (f b)) a i = zCoeff rank p (f a) i := by
+    classical
+    simp only [zCoeff, upperTail]
+    congr 1
+    apply Fintype.sum_equiv (strictUpperEquiv f hUpper a)
+    intro b
+    change (if rank' b.val - rank' a ≤ i then p (f b.val) (i - (rank' b.val - rank' a)) else 0) =
+      (if rank (f b.val) - rank (f a) ≤ i then p (f b.val) (i - (rank (f b.val) - rank (f a))) else 0)
+    have hGap : rank (f b.val) - rank (f a) = rank' b.val - rank' a := by
+      rw [hShift, hShift]
+      omega
+    rw [hGap]
+  constructor
+  · intro a h i
+    exact hp.rank_zero (f a) ((hHeight a).trans h) i
+  · intro a i hPos hHigh
+    exact hp.high_coeff (f a) i (by simpa only [hHeight] using hPos)
+      (by simpa only [hHeight] using hHigh)
+  · intro a i hLow
+    rw [hZ, hZ, ← hHeight a]
+    exact hp.palindrome (f a) i (by simpa only [hHeight] using hLow)
+
+end UpperEmbedding
+
 #print axioms klCoeff_isKLFamily
 #print axioms IsKLFamily.eq_klCoeff
 #print axioms IsKLFamily.zCoeff_palindrome
 #print axioms IsKLFamily.zCoeff_eq_zero_of_height_lt
 #print axioms IsKLFamily.zCoeff_of_rank_zero
+#print axioms IsKLFamily.comp_orderEmbedding
 
 end OpenMathResearch.MatroidKL
