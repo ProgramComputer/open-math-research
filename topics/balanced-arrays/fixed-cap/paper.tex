@@ -1,0 +1,60 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\allowdisplaybreaks[2]
+\title{Balanced arrays at fixed row cap and arbitrary dimension}
+\author{ProgramComputer}
+\date{}
+\newtheorem{theorem}{Theorem}
+
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a fixed positive integer $r$, we study the polynomial whose
+coefficient of $q^k$ counts labelled binary arrays with $n$ rows,
+$d$ columns of sum $k$, and each row sum at most $r$.
+The theorem gives a threshold in $n$ depending only on $r$
+above which all its zeros are simple and strictly negative for every
+$d\ge\max(2,r)$. The proof combines control of coefficient quotients
+at the two ends with an integral estimate through the intervening
+range of quotas.
+\end{abstract}
+
+\section{Statement and context}
+The \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{balanced-array conjecture of Per Alexandersson}
+asks for real-rootedness throughout the parameter range.
+Write $a_k$ for the number of the arrays in the abstract, and set
+\[
+  P_n^{(r,d)}(q)=\sum_{k=0}^{\lfloor nr/d\rfloor}a_kq^k.
+\]
+The following partial theorem gives a threshold uniform in dimension.
+\begin{theorem}
+For every integer $r\ge1$ there exists $N_r$ such that, for all integers
+$n\ge N_r$ and $d\ge\max(2,r)$, the polynomial $P_n^{(r,d)}$ has exactly
+$\lfloor nr/d\rfloor$ simple, strictly negative zeros.
+\end{theorem}
+
+The assertion is vacuous when $d>nr$. Thus each fixed cap has only
+finitely many pairs $(n,d)$ left outside this assertion. The proof
+gives an existential threshold and concerns real-rootedness and simplicity.
+At the excluded one-column case $r=d=1$, the polynomial is $(1+q)^n$.
+In particular the caps of any infinite sequence of distinct
+counterexamples to real-rootedness must tend to infinity.
+
+At every integer quota $0\le k\le D$, choose any row-size profile $(s_1,\dots,s_n)$ with $0\le s_j\le r$ and total $dk$, which is possible since $dk\le nr$. Assign successive blocks of lengths $s_j$ in the cyclic list of the $d$ column labels to the corresponding rows. No block repeats a label since $s_j\le d$, and each label occurs exactly $k$ times in the whole list of $dk$ positions. This realizes every such profile and gives $a_k>0$ throughout the degree range.
+
+\input{main-proof.tex}
+
+\appendix
+\clearpage
+\input{fixed-profile-balance-llclt.tex}
+\input{balanced-fixed-rank-lower-edge.tex}
+\input{fixed-cap-upper-quota.tex}
+\input{tall-sparse-transverse-saddle.tex}
+\input{fixed-cap-moving-u-localization.tex}
+\end{document}

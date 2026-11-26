@@ -1,0 +1,117 @@
+\section{Torus localization for fixed cap and a moving row tilt}\label{sec:localization}
+
+2026-11-26 / Private research note
+
+Fix $r\ge1$ and let $d\to\infty$, with $t=u/d>0$ and $u$ allowed to vary. Put
+
+\begin{equation*}
+H(w)=\sum_{s=0}^r\binom ds w^s,\qquad
+R(\mathbf z)=\sum_{|A|\le r}t^{|A|}\prod_{i\in A}z_i,\qquad
+H_\tau=H(te^{i\tau}),\qquad \phi=\pi/d .
+\end{equation*}
+
+Use normalized Haar measure on the torus $|z_i|=1$, $\prod_i z_i=-1$. Under the real row tilt $\mathbb P(A)=t^{|A|}/H(t)$, let $S=|A|$, $\mu=\mathbb E S$ and $V=\mathrm{Var}(S)$. Suppose that
+
+\begin{equation*}
+n\mu/d^2\longrightarrow\infty,\qquad
+n(r-\mu)/d^2\longrightarrow\infty.
+\end{equation*}
+
+For distinct $i,j$ put $\lambda_0=\mathbb P(i\in A)-\mathbb P(i,j\in A)$. Then $\lambda_0\asymp_r\mu/d$. Use the positive reference saddle scale $|H_\phi|^n I_0$, where
+
+\begin{equation*}
+I_0=\frac{1}{(2\pi)^{d-1}\sqrt d}
+\left(\frac{2\pi}{n\lambda_0}\right)^{(d-1)/2}.
+\end{equation*}
+
+The absolute integral off the two clusters of common phases $\pm\phi$ is $o(|H_\phi|^n I_0)$. The same applies within those clusters off the cutoff $\max_i|p_i|\le M\sqrt{d\log d/(n\mu)}$ for sufficiently large fixed $M$, where $p_i$ is the phase deviation from the common phase. All bounds below have constants depending only on $r$ and on fixed choices of small arcs. The reference scale is for a single saddle before adding the conjugate contribution.
+
+\subsection{Row moments and diagonal gaps}
+
+The size $s$ has weight $\binom ds (u/d)^s=a_su^s$, with $a_s$ bounded above and below by positive constants depending only on $r$ for $0\le s\le r$ and $d\ge2r$. For $0<u\le1$, the masses at zero and one are respectively $\asymp_r1$ and $\asymp_r u$. Here $\mu\asymp_r V\asymp_r u$ and $r-\mu$ is bounded below. For $u\ge1$, the masses at $r$ and $r-1$ are respectively $\asymp_r1$ and $\asymp_r u^{-1}$. Here $r-\mu\asymp_r V\asymp_r u^{-1}$ and $\mu$ is bounded below. The variance lower bounds follow by retaining the two indicated atoms in the independent-copy variance identity. The upper bounds follow by taking the squared distance from the dominant endpoint. Thus $V\asymp_r\min(\mu,r-\mu)$, and in particular $nV/d^2\to\infty$.
+
+For any fixed $\eta_0>0$, the two respective adjacent masses give $|H_\tau/H(t)|\le e^{-cV}$ on $\eta_0\le|\tau|\le\pi$, by the squared-characteristic-function identity. Near zero, let $\chi(\tau)=\mathbb E e^{i(S-\mu)\tau}$. The centered moments of order $m\ge2$ in absolute value are bounded by $r^{m-2}V$. Hence $\chi=1+O(V\tau^2)$, $\chi'=O(V|\tau|)$, and $\chi''=-V+O(V|\tau|)$. On a sufficiently small fixed interval this gives $(\log|\chi|)''=-V+O(V|\tau|)\le -V/2$. By evenness,
+
+\begin{equation*}
+\log|H_\tau/H_\phi|\le -cV(\tau^2-\phi^2)
+\quad\text{for }\phi\le|\tau|\le\eta_0,
+\end{equation*}
+
+when $\eta_0$ is chosen small enough. The same formulas also give $|H_\phi|/H(t)\ge \exp(-CV/d^2)$.
+
+\subsection{Transverse bound and common-arc localization}
+
+Let $\overline z=d^{-1}\sum_i z_i$. For $W=\prod_{i\in A}z_i$, the complex variance $\mathrm{Var}(W)=\mathbb E|W-\mathbb E W|^2$ is $1-|R/H(t)|^2$. Condition on $S=s\ge1$ and on the first $s-1$ indices of a uniform ordered rendering of $A$. The remaining index is uniform among $m=d-s+1$ available positions, and the product from the conditioned entries has modulus one. The resulting conditional variance is $1-|\overline z_{\mathrm{avail}}|^2$. Averaging over the conditioned indices gives
+
+\begin{equation*}
+\mathbb E(1-|\overline z_{\mathrm{avail}}|^2\mid S=s)
+=\frac{d(m-1)}{m(d-1)}(1-|\overline z|^2).
+\end{equation*}
+
+Indeed, $1-|\overline z_{\mathrm{avail}}|^2=m^{-2}\sum_{i<j\text{ available}}|z_i-z_j|^2$ and each pair is available with probability $m(m-1)/(d(d-1))$. The prefactor is bounded below for $d\ge2r+1$, and $\mathbb P(S\ge1)\ge\mu/r$. The law of total variance therefore proves
+
+\begin{equation}
+|R/H(t)|\le \exp[-c\mu(1-|\overline z|^2)].
+\tag{G1}
+\end{equation}
+
+Choose a representative coordinate $j$ minimizing $\sum_i|z_i-z_j|^2$. This minimum is at most the average $2d(1-|\overline z|^2)$. Fix a small angle $\eta>0$. Outside the common-arc region, for every representative $j$ some other coordinate $i$ satisfies $|\arg(z_i/z_j)|>\eta$. For the minimizing $j$, retain half of that chord penalty in (G1), giving a factor $e^{-c n\mu/d}$ after taking the $n$th power. Eliminate a coordinate different from $i,j$ in the torus parametrization. Conditional on the freely integrated pin $z_j$, the other $d-2$ coordinates in this chart have independent Haar measure and each contributes at most $C\sqrt{d/(n\mu)}$ from its chord factor. Summing over the at most $d(d-1)$ pairs, the absolute integral outside the common-arc region is bounded by
+
+\begin{equation*}
+H(t)^n d^2 e^{-c n\mu/d}(C d/(n\mu))^{(d-2)/2}.
+\end{equation*}
+
+Relative to $|H_\phi|^n I_0$, its logarithm is bounded above by $-c n\mu/d+O(d+\log d+\log(n\mu/d)+nV/d^2)$. This tends to minus infinity, since $n\mu/d\gg d$ and $V=O_r(\mu)$.
+
+Every common-arc point can be lifted to angles differing by at most $2\eta$ using a representative. Their average $\tau$ is an odd multiple of $\pi/d$ by the product constraint. On reducing $\tau$ modulo $2\pi$ to $(-\pi,\pi]$, write $z_i=e^{i(\tau+p_i)}$ with $\sum_i p_i=0$ and $|p_i|\le2\eta$. This representation is unique within these bounds: if two representations coincide, differences of their componentwise integer angle shifts are zero since the pairwise differences of the deviations have range smaller than $2\pi$. The shifts thus coincide at every coordinate, and averaging shows that the canonical phases and deviations coincide. Each cluster uses measure $(2\pi)^{-(d-1)}dp_1\cdots dp_{d-1}$ with $p_d=-\sum_{i<d}p_i$. This follows by using the first $d-1$ circle variables, each with a unique lift in the short interval for fixed $\tau$. The uniqueness avoids a factor of $d$ in the later sum over small-angle clusters. On every such cluster, the pairwise chord bound and $\sum_i p_i=0$ give $1-|\overline z|^2\ge c d^{-1}\sum_i p_i^2$.
+
+\subsection{Far common phases}
+
+For $X_A=\sum_{i\in A}p_i$, conditional symmetry gives $\mathbb E(X_A\mid S)=0$ and
+
+\begin{equation*}
+|R/H(t)-H_\tau/H(t)|
+=\left|\mathbb E\bigl[e^{i\tau S}(e^{iX_A}-1-iX_A)\bigr]\right|
+\le C \frac{\mu}{d}\sum_i p_i^2.
+\end{equation*}
+
+Here $\mathbb E X_A^2\le r\mathbb E\sum_{i\in A}p_i^2=(r\mu/d)\sum_i p_i^2$. For $|\tau|\ge\eta_0$, write $B=(\mu/d)\sum_i p_i^2$. If $B\le c_1 V$ for sufficiently small $c_1>0$, the diagonal gap and this Taylor bound give $|R/H(t)|\le 1-c_2V\le e^{-c_3(V+B)}$. If $B>c_1V$, (G1) gives $|R/H(t)|\le e^{-cB}\le e^{-c_4(V+B)}$. Integrating the resulting transverse Gaussian over the zero-sum hyperplane and summing the at most $d$ clusters bounds their contribution relative to $|H_\phi|^n I_0$ by $\exp[-c nV+O(d+\log d+nV/d^2)]$. This is negligible.
+
+\subsection{Small common phases and the sharp transverse volume}
+
+Choose $\eta_0$ and then $\eta$ small enough in terms of $r$. For $|\tau|\le\eta_0$, the complex tilt with weights proportional to $e^{i\tau S}t^{|A|}$ is well-defined since $|H_\tau/H(t)|\ge\cos(r\eta_0)>0$. Denote expectations under it by $\mathbb E_\tau$. Direct differentiation of the weights shows that, for $m=2,3,4$, their $m$th moment of $X_A$ and its first two $\tau$ derivatives are at most $C(\mu/d)\sum_i|p_i|^m$ in modulus. In fact $\mathbb E|X_A|^m\le r^{m-1}(\mu/d)\sum_i|p_i|^m$, and the size factors from differentiation are uniformly bounded. Symmetry gives $\mathbb E_\tau X_A=0$ and $\mathbb E_\tau X_A^2=\lambda_\tau\sum_i p_i^2$, where $\lambda_\tau$ is the difference between the one- and two-coordinate inclusion weights. At zero,
+
+\begin{equation*}
+\frac{\mu}{d}\left(1-\frac{r-1}{d-1}\right)\le\lambda_0\le\frac{\mu}{d}.
+\end{equation*}
+
+The derivative bounds and conjugation give $\mathrm{Re}\lambda_\tau=\lambda_0+O(\mu\tau^2/d)$. The real part of the cubic term in $\mathbb E_\tau e^{iX_A}$ has size $O(|\tau|(\mu/d)\sum_i|p_i|^3)$ since it vanishes at zero. Taylor expansion through the cubic and the logarithm, using $|\tau||p_i|^3\le(\tau^2p_i^2+p_i^4)/2$, give
+
+\begin{equation}
+\log|R/H_\tau|
+\le-\frac{\lambda_0}{2}(1-C\tau^2)\sum_i p_i^2
+ +\frac{C\mu}{d}\sum_i p_i^4.
+\tag{G2}
+\end{equation}
+
+The fourth-order Taylor remainder obeys the moment bound above. The logarithm error is bounded by $C(\mu d^{-1}\sum_i p_i^2)^2\le C(\mu/d)\sum_i p_i^4$, since $\mu\le r$. These Taylor expansions apply uniformly once the arcs are small enough.
+
+Set $a=n\lambda_0(1-C\tau^2)/2\asymp n\mu/d$, $b=Cn\mu/d$ and $f(x)=e^{-ax^2+bx^4}\mathbf1_{\{|x|\le2\eta\}}$. The arc can be chosen so that the quartic term is at most half the quadratic on the support and $f$ decreases for positive $x$. The majorant in (G2) integrates in the $d-1$ free coordinates to at most $f^{*d}(0)/(2\pi)^{d-1}$. The one-dimensional mass is $Z=\sqrt{\pi/a}(1+O(1/a))$: after scaling $y=\sqrt a\,x$, the difference from the Gaussian has absolute integral at most $O(1/a)$ by the bound $(C/a)y^4e^{-y^2/2}$ plus a Gaussian cutoff tail.
+
+The normalized convolution densities satisfy $\|(f/Z)^{*m}\|_\infty\le C\sqrt{a/m}$ for $m\ge2$. In the scaled variable the density tends in $L^1$ to a normalized Gaussian, with variance bounded below and fourth moment bounded above. The characteristic modulus is at most $e^{-c\xi^2}$ near zero by the independent-copy variance bound and fourth-order cosine Taylor bound. On every fixed interval away from zero it is bounded above by a constant smaller than one by the Gaussian limit. At larger frequencies it is at most $C/|\xi|$ by integration by parts, since the monotone halves give bounded total variation. Taking the split to large frequencies beyond $2C$, the integral of the $m$th power is $O(m^{-1/2})$ and Fourier inversion proves the assertion.
+
+Consequently each small-angle cluster contributes at most
+
+\begin{equation*}
+C I_0 |H_\tau|^n \exp(Cd\tau^2+Cd^2/(n\mu)).
+\end{equation*}
+
+The first correction comes from replacing $\lambda_0$ by $\lambda_0(1-C\tau^2)$ and the second from $Z^d$. For a nonprincipal cluster $|\tau|\ge3\phi$, the first correction is absorbed in the diagonal gap because $nV\gg d$ and $\tau^2\le(9/8)(\tau^2-\phi^2)$. Summing over the odd phases gives, relative to $|H_\phi|^n I_0$, at most
+
+\begin{equation*}
+C e^{Cd^2/(n\mu)}
+\sum_{j\ge1}\exp[-c(nV/d^2)((2j+1)^2-1)]
+=O(e^{-c'nV/d^2})=o(1).
+\end{equation*}
+
+For either principal cluster, flag a coordinate with $|p_i|>v$. Integrate the normalized density of that coordinate over the tail, bounded by $C e^{-cav^2}$, and use the $(d-1)$-fold convolution sup bound for the remaining coordinates. Union over $d$ coordinates gives an extra factor $Cd e^{-cav^2}$. At $v=M\sqrt{d\log d/(n\mu)}$, this is $o(1)$ for large fixed $M$. This proves the localization and the cutoff.
