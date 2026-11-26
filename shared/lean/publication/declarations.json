@@ -128,7 +128,17 @@
     "Ribbon.Source.IsRibbonPresentation.rank_eq",
     "Ribbon.Source.NarayanaClaim",
     "Ribbon.Source.cell_iff_prefix_counts",
-    "Ribbon.Source.prefixBase_length"
+    "Ribbon.Source.prefixBase_length",
+    "OpenMathResearch.MatroidKL.circuitKLCoeff_high",
+    "OpenMathResearch.MatroidKL.circuitKLCoeff_convolution",
+    "OpenMathResearch.MatroidKL.circuitNarayana_clear",
+    "OpenMathResearch.MatroidKL.CircuitBases.rank_eq",
+    "OpenMathResearch.MatroidKL.CircuitBases.indep_iff",
+    "OpenMathResearch.MatroidKL.CircuitBases.isFlat_of_ncard_lt",
+    "OpenMathResearch.MatroidKL.CircuitBases.ncard_lt_of_proper_flat",
+    "OpenMathResearch.MatroidKL.CircuitBases.flatRank_of_proper",
+    "OpenMathResearch.MatroidKL.CircuitBases.narayana_coeff",
+    "Ribbon.Source.IsRibbonPresentation.narayana_coeff"
   ],
   "ordered": [
     "OrderedGlobalAngular.abs_sin_nat_multiple_le",
