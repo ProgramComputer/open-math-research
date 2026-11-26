@@ -30,7 +30,8 @@ private theorem opposite_signs {a b : ℝ} {k : ℕ}
   rw [heq] at h
   exact neg_pos.mp h
 
-private theorem root_between {G : ℝ[X]} {l r : ℝ} (hlr : l < r)
+/-- A polynomial with opposite signs at two endpoints has a root strictly between them. -/
+theorem root_between {G : ℝ[X]} {l r : ℝ} (hlr : l < r)
     (hs : G.eval l * G.eval r < 0) :
     ∃ y : ℝ, l < y ∧ y < r ∧ G.IsRoot y := by
   rcases mul_neg_iff.mp hs with ⟨hl, hr⟩ | ⟨hl, hr⟩
