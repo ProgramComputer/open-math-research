@@ -250,7 +250,8 @@ private theorem norm_sub_conj_swap (z w : ℂ) : ‖w - conj z‖ = ‖z - conj 
     _ = ‖conj w - z‖ := by simp only [map_sub, Complex.conj_conj]
     _ = _ := norm_sub_rev _ _
 
-private theorem rayPrefactor_near_form (d : ℝ) (x : ℂ) :
+/-- The three factors that remain in the near-ray prefactor. -/
+theorem rayPrefactor_near_form (d : ℝ) (x : ℂ) :
     rayPrefactor d 0 x =
       -(cutFactor (farPoint d) x * cutFactor (conj (nearPoint d)) x *
         cutFactor (conj (farPoint d)) x) / (2 * x * ((scale d : ℂ) - x)) := by

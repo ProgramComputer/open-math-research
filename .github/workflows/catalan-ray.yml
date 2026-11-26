@@ -52,20 +52,29 @@ jobs:
           Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
           Mathlib.Analysis.SpecialFunctions.Log.Deriv
           Mathlib.Analysis.SpecialFunctions.Pow.Real
+          Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+          Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+          Mathlib.Combinatorics.Enumerative.Catalan
           Mathlib.Data.Fin.Rev
           Mathlib.Data.Fin.Tuple.Basic
           Mathlib.Data.Finset.Prod
           Mathlib.Data.Finset.Sigma
           Mathlib.Data.Fintype.Pi
+          Mathlib.Data.Nat.Choose.Bounds
+          Mathlib.Data.Real.Pi.Bounds
           Mathlib.MeasureTheory.Function.Jacobian
           Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
+          Mathlib.Order.Fin.Basic
           Mathlib.RingTheory.PowerSeries.Basic
           Mathlib.Tactic.FieldSimp
           Mathlib.Tactic.Linarith
           Mathlib.Tactic.LinearCombination
           Mathlib.Tactic.Positivity
           Mathlib.Tactic.Ring
+          Mathlib.Topology.Algebra.Polynomial
+          Mathlib.Topology.Instances.Real.Lemmas
+          Mathlib.Topology.Order.IntermediateValue
       - name: Check the logarithmic strips and contour summation
         run: lake build CatalanStrictPeaksLogRoot OpenMathResearch.LogarithmicContour
       - name: Check the finite-radius deformation
@@ -120,3 +129,12 @@ jobs:
             tee "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/normalized-rays-kernel.txt \
             "$RUNNER_TEMP/catalan-normalized-rays-axioms.txt"
+      - name: Check the explicit checkpoint phase and all-length root count
+        run: lake build CatalanStrictPeaksPhaseOrder CatalanStrictPeaksAllRoots
+      - name: Audit the checkpoint phase and root count
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/CheckpointPhaseAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-checkpoint-phase-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/checkpoint-phase-kernel.txt \
+            "$RUNNER_TEMP/catalan-checkpoint-phase-axioms.txt"
