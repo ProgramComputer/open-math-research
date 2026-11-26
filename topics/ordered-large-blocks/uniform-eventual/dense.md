@@ -57,7 +57,22 @@ The adjacent row phase is $`\Phi+\arg z_+`$, with $`\arg z_+\asymp 1/j`$. At an 
 
 ## Joining to genuine ranks
 
-Start at the compact scaled-modulus root theorem and continue with the moving pole argument up to $`u\le\epsilon j`$ for fixed sufficiently small $`\epsilon>0`$. Under $`m/j^2\to\infty`$ its required infimum of $`M/u^2`$ tends to infinity along this entire continuation. In a fixed interval of radii near $`r=e^{-\epsilon/2}`$ the two constructions coexist. Indeed $`q=(j!/\rho^j)r^{-j}/V(r)`$, whereas the moving pole scale uses $`\log((1+q)j V_j(1))=u+\log u`$, with $`V_j(1)`$ comparable to $`(\log2)^j/j!`$. Thus $`u/j=-\log r+o(1)`$ there. The positive rescalings of the spatial coordinate take poles of one denominator to the very same physical poles of the original ordered-block generating function. Both continuations select its nearest conjugate pair. The physical Cauchy residue divided by the pole itself fixes the phase, up to a positive real normalization and the choice of conjugate branch. Choosing the upper physical pole in the present formula corresponds to conjugation of the positive-$`\Im w`$ branch in the moving formula. Their real phases therefore agree modulo $`2\pi`$, with an integer shift independent of the row size on this overlap. One can choose the residue arguments near zero in both formulas, since both residue factors have positive real part there for large $`j`$. The angle terms are both $`n`$ times the physical upper-pole angle. This identifies the bands of the two adjacent rows *exactly*. The compact start fixes their absolute ranks and the continuing bands preserve them. Angular exclusion here covers an annulus in $`|q|`$ itself; the earlier exclusion in $`|1+q|`$ covers all smaller $`|q|`$ up to the overlap by $`|1+q|\le1+|q|`$. All counted moduli are genuine complex-root ranks.
+The [compact scaled-modulus theorem](../growing-outer-ranks/compact-start.md) fixes the initial rank labels. Its sharp-edge location is $`\rho_*`$, the positive double pole at the sharp lower edge. The renewal scale $`\rho`$ solves $`S_j(\rho)=1`$. The [moving-pole proof](../growing-outer-ranks/moving-poles.md) continues the count to $`u\le\epsilon j`$ for fixed sufficiently small $`\epsilon>0`$, as justified by the [overlap audit](../growing-outer-ranks/review-pole-overlap.md). Since $`m/j^2\to\infty`$, the infimum of $`M/u^2`$ tends to infinity on this continuation.
+
+Near $`r=e^{-\epsilon/2}`$, the saddle scale $`q=(j!/\rho^j)r^{-j}/V(r)`$ and the moving scale $`\log((1+q)jV_j(1))=u+\log u`$ give $`u/j=-\log r+o(1)`$. In the physical spatial coordinate $`w`$ the common denominator is
+
+$$
+P_q(w)=1-S_j(w)+qC_j(w)=2-e^w+(1+q)C_j(w),
+\qquad C_j(w)=\sum_{b\ge j}\frac{w^b}{b!}.
+$$
+
+Under a spatial dilation $`w=az`$ with $`a>0`$, a simple pole at $`w_0=az_0`$ contributes $`z_0^{-n}`$ times the coefficient amplitude
+
+$$
+-\frac{1}{az_0P_q'(az_0)}=-\frac{1}{w_0P_q'(w_0)}.
+$$
+
+The minus sign comes from enlarging the coefficient contour. This amplitude is independent of the dilation, and the angle is unchanged. Both arguments select the nearest physical conjugate pair. The upper physical pole corresponds to the conjugate of the positive-imaginary branch in the moving logarithmic coordinate. On the overlap the upper amplitude is $`T(r)/j`$ times $`1+O(1/j)`$, so both arguments use the same branch of its argument near zero. Their phases are exactly $`n`$ times the common upper-pole angle minus this residue argument, for both row sizes. Both proofs isolate one zero per full band and exclude intervening complex zeros. The compact labels therefore transfer through common bands. Below the seam, $`|1+q|\le1+|q|`$ and the padded moving-pole interval cover all smaller moduli.
 
 The two descriptions have an interval of overlap containing many consecutive full bands: $`d\log q/d\log r=-(j+\mathcal M(r))`$, while the real phase derivative in $`\log q`$ is comparable to $`m/j^2`$ there. Thus a fixed open interval of matching radii has phase length comparable to $`m/j`$, tending to infinity. The count of all roots up to real $`q`$ in the continued range differs by $`O(1)`$ from $`\Phi/\pi`$ by the compact start and band exhaustion. The constant is bounded uniformly in $`j,m`$ because the argument branches stay bounded.
 
