@@ -19,7 +19,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 - For [balanced arrays](topics/balanced-arrays/README.md), the conjecture holds in [every degree through fourteen](topics/balanced-arrays/low-degree.md) and for every rank and dimension through 24 rows. For arbitrary row counts, $d\ge(n+1)\log(2)/2$ suffices.
 - Every sufficiently large [Eulerian-square row](topics/eulerian-matrix-square/README.md) has only simple real roots. At every row from $n=3$, the two extreme roots at each end strictly alternate with the next row. The all-root cutoff is unknown.
-- For [long-cycle excedances](topics/long-cycle-excedances/README.md), the uniform theorem leaves a finite set of smaller rows at $k\ge4$. Every consecutive pair ending before size $3k$ now strictly interlaces. An explicit cutoff for all pairs remains open.
+- For [long-cycle excedances](topics/long-cycle-excedances/README.md), the uniform theorem leaves a finite set of smaller rows at $k\ge4$. Every pair ending before size $3k$ strictly interlaces. An explicit large-threshold bound also covers rows with unboundedly many cycles.
 - For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.
 
 ## Citation
