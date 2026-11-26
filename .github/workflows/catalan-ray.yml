@@ -48,6 +48,7 @@ jobs:
           Mathlib.Analysis.Complex.CauchyIntegral
           Mathlib.Analysis.Polynomial.Basic
           Mathlib.Analysis.SpecialFunctions.Complex.Analytic
+          Mathlib.Analysis.SpecialFunctions.Gamma.Beta
           Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
           Mathlib.Analysis.SpecialFunctions.Log.Deriv
           Mathlib.Analysis.SpecialFunctions.Pow.Real
@@ -56,6 +57,7 @@ jobs:
           Mathlib.Data.Finset.Prod
           Mathlib.Data.Finset.Sigma
           Mathlib.Data.Fintype.Pi
+          Mathlib.MeasureTheory.Function.Jacobian
           Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
           Mathlib.RingTheory.PowerSeries.Basic
           Mathlib.Tactic.FieldSimp
@@ -81,3 +83,12 @@ jobs:
             tee "$RUNNER_TEMP/catalan-improper-ray-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/improper-ray-kernel.txt \
             "$RUNNER_TEMP/catalan-improper-ray-axioms.txt"
+      - name: Check the normalized near-ray mean
+        run: lake build CatalanStrictPeaksNearAmplitude
+      - name: Audit the near-ray mean and covariance
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearAmplitudeAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/near-amplitude-kernel.txt \
+            "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"

@@ -1,0 +1,8 @@
+'CatalanStrictPeaks.CutGeometry.rayPrefactor_near_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.nearAmplitude_local_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.nearAmplitude_global' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.nearAmplitude_tail_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.nearRay_integral_eq_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.nearMean_close_to_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.nearMean_step_covariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.nearTiltCovariance_sub_const' depends on axioms: [propext, Classical.choice, Quot.sound]
