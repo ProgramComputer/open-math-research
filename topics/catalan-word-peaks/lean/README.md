@@ -282,6 +282,17 @@ an angle realizing the actual root modulus and locates its phase between
 the two adjacent checkpoint levels. It gives the corresponding sign of
 the imaginary part of $U_n$. [Checkpoint phase kernel output](checkpoint-phase-kernel.txt)
 
+## First-checkpoint separation at the right edge
+
+The [right-checkpoint module](CatalanStrictPeaksRightCheckpoint.lean) bounds
+the positive modulus at the first phase level. Theorem
+`first_checkpoint_modulus_gap` gives modulus at least $11/16+1/n^2$.
+Theorem `roots_after_first_modulus_gap` places every root after the
+rightmost one strictly beyond that separation for $n\ge150$. It uses the
+middle-rank angle theorem at the second root. The shared theorem
+`CompleteNegativeRoots.unique` identifies the ordered lists obtained
+from separate comparisons. [Right-checkpoint kernel output](right-checkpoint-kernel.txt)
+
 ## Exact isolating intervals through length 150
 
 The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
@@ -345,6 +356,8 @@ lake build CatalanStrictPeaksNormalizedRays
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/NormalizedRaysAxioms.lean
 lake build CatalanStrictPeaksPhaseOrder CatalanStrictPeaksAllRoots
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/CheckpointPhaseAxioms.lean
+lake build CatalanStrictPeaksRightCheckpoint
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightCheckpointAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~

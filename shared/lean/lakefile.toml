@@ -156,6 +156,10 @@ name = "CatalanStrictPeaksCutParameter"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
 [[lean_lib]]
+name = "CatalanStrictPeaksRightCheckpoint"
+srcDir = "../../topics/catalan-word-peaks/lean"
+
+[[lean_lib]]
 name = "CatalanStrictPeaksCutBounds"
 srcDir = "../../topics/catalan-word-peaks/lean"
 
