@@ -1,8 +1,8 @@
 # Real zeros of balanced binary arrays
 
-All caps give $\lfloor nr/d\rfloor$ simple negative zeros when $d\ge2$ and $n\ge Cd^{5/3}$. For all sufficiently large $n$, the same holds in every dimension $d\ge2$ if $\min(r,d-r)\le c n^{1/5}$. The absolute constants are existential. **⬜ None** for Lean or Rocq. [Proof and independent review](fifth-thirds/README.md)
+One absolute threshold $N$ gives $\lfloor nr/d\rfloor$ simple negative zeros for every $n\ge N$, $d\ge2$, and $1\le r\le d$. The threshold is ineffective, and the original all-row-count conjecture remains open. **⬜ None** for Lean or Rocq. [Proof and independent reviews](eventual-all/README.md)
 
-Earlier bounds include [all fixed quadratic aspects](critical-aspect/README.md), the [absolute quadratic cutoff](quadratic/README.md), [quartic-log cutoff](very-tall/README.md), and [dimension-uniform fixed-cap threshold](fixed-cap/README.md).
+Earlier bounds include the [five-thirds row bound and polynomial cap or corank range](fifth-thirds/README.md), [all fixed quadratic aspects](critical-aspect/README.md), the [absolute quadratic cutoff](quadratic/README.md), [quartic-log cutoff](very-tall/README.md), and [dimension-uniform fixed-cap threshold](fixed-cap/README.md).
 
 There are absolute constants $C>0$ and $N$ such that, for every $n\ge N$, $d\ge Cn/\log n$, and every row cap, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. The constants are unspecified. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. **⬜ None** for Lean or Rocq. [Theorem, proof and independent review](dense-regime/README.md)
 
