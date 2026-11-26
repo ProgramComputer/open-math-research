@@ -835,11 +835,14 @@ theorem rayIntegrand_integrable {d : ℝ} (hd : 0 < d) (hD : d < 1)
 
 /-- The exact Catalan coefficient as the sum of the four improper ray integrals. -/
 theorem analyticGenerating_fourRays {d : ℝ} (hd : 0 < d) (hD : d < 1)
-    {r : NNReal} (h₀ : 0 < r) (hr : (r : ℝ) < radius d) {n : ℕ} (hn : 0 < n) :
+    {n : ℕ} (hn : 0 < n) :
     ((scale d ^ n * (C n).eval (1 - (scale d ^ 2)⁻¹) : ℝ) : ℂ) =
-      ∑ j : Fin 4, (-(cutPoint d j)⁻¹ ^ n / (Real.pi : ℂ)) *
+      ∑ j : Fin 4, (-((cutPoint d j)⁻¹ ^ n) / (Real.pi : ℂ)) *
         ∫ s in Ioi 0, rayIntegrand d n j s := by
-  have h₀R : 0 < (r : ℝ) := by exact_mod_cast h₀
+  let r : NNReal := ⟨radius d / 2, div_nonneg (radius_pos hd.le).le (by norm_num)⟩
+  have h₀R : 0 < (r : ℝ) := div_pos (radius_pos hd.le) (by norm_num)
+  have h₀ : 0 < r := by exact_mod_cast h₀R
+  have hr : (r : ℝ) < radius d := half_lt_self (radius_pos hd.le)
   rw [analyticGenerating_logarithmicRays hd hD h₀ hr hn, ← Fin.sum_univ_eq_sum_range,
     Finset.mul_sum]
   apply Finset.sum_congr rfl

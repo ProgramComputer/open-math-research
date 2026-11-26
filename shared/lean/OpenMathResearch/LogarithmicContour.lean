@@ -155,7 +155,7 @@ theorem integral_logRadius_substitution {E : Type*} [NormedAddCommGroup E] [Norm
     rw [hUnit]
     have hProduct : R * dr x = Real.exp x := by
       dsimp [dr]
-      field_simp [hR.ne'] <;> ring
+      field_simp [hR.ne']
     rw [hProduct, Real.log_exp]
   have hDeriv : ∀ x ∈ uIcc a b, HasDerivAt r (dr x) x := by
     intro x _
@@ -204,13 +204,14 @@ theorem integral_logRadius_improper {E : Type*} [NormedAddCommGroup E] [NormedSp
   have hNorm (s : ℝ) (hs : 0 ≤ s) :
       ‖transport s‖ = (1 + s)⁻¹ • ‖g (Real.log (R * (1 + s)))‖ := by
     have hPos : 0 ≤ (1 + s)⁻¹ := inv_nonneg.mpr (by linarith)
-    simp [transport, norm_smul, Real.norm_eq_abs, abs_of_nonneg hPos, smul_eq_mul]
+    simp only [transport, norm_smul, Real.norm_eq_abs, abs_of_nonneg hPos, smul_eq_mul]
   have hFiniteNorm (b : ℝ) (hb : a ≤ b) :
       (∫ x in a..b, ‖g x‖) = ∫ s in (0)..u b, ‖transport s‖ := by
     have hChange := integral_logRadius_substitution hR hg.norm a b
     change (∫ x in a..b, ‖g x‖) =
       ∫ s in u a..u b, (1 + s)⁻¹ • ‖g (Real.log (R * (1 + s)))‖ at hChange
-    rw [hZero, hChange]
+    rw [hZero] at hChange
+    rw [hChange]
     apply intervalIntegral.integral_congr
     intro s hs
     rw [uIcc_of_le (hNonneg hb)] at hs
