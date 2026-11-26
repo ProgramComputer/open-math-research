@@ -1,6 +1,6 @@
 # Real zeros of balanced binary arrays
 
-For the open four-column cap-two case, the paired-margin polynomial is stable exactly through five rows. At six rows the bivariate method fails although the original diagonal still has three negative zeros. [Exact classification and replay](paired-stability.md)
+For four columns with row cap two, the balanced-array polynomial has only simple negative zeros at every row count. The computer-assisted proof combines forty lower sign changes, uniform analytic phase estimates, and exact checks through 532 rows. A blind agent-assisted review checked the full argument against the original conjecture. **⬜ None** for Lean or Rocq. [Four-column theorem and verification](four-columns/README.md)
 
 Fix a column count $d\ge2$ and a row cap $1\le r<d$. Let $a_{n,k}$ count labeled $n\times d$ binary arrays with $k$ ones in each column and at most $r$ ones in each row. Define $P_n(q)=\sum_k a_{n,k}q^k$.
 
@@ -53,7 +53,7 @@ When $d\ge2$ and $nr\ge d$, the unique closest zero is $-b_n$. In the next row e
 python -I -O topics/balanced-arrays/verify_first_root.py
 ~~~
 
-For four columns at row cap two, a Hermite-polynomial expansion reduces the problem to a stronger integer sequence. Two constructions and exact root checks agree in all 121 rows through $n=120$. An all-row proof for four columns remains open. [Reduction and replay](four-column-mehler.md) · [Exact scope of the scalar determinant method](scalar-determinant-boundary.md)
+For four columns at row cap two, a Hermite-polynomial expansion reduces the problem to a stronger integer sequence. Two constructions and exact root checks agree in all 121 rows through $n=120$. The all-row proof uses a separate sign argument. [Reduction and replay](four-column-mehler.md) · [Exact scope of the scalar determinant method](scalar-determinant-boundary.md)
 
 At row cap two, every order-two minor comparing two row counts and two componentwise ordered quota vectors is coefficientwise nonnegative in the pair-type weights. This makes the entries of the consecutive Bézout matrices nonnegative. Their higher principal minors are the remaining obstacle in this approach to interlacing. **⬜ None.** [Statement and proof](rank-two-row-minors.md) · [Independent review](review-rank-two-row-minors.md)
 
