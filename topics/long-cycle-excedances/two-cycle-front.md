@@ -5,7 +5,7 @@ $$
 \left|\frac{L(x)}{(1-x)xP'(x)}\right|<\frac{777}{80\sqrt M}<1,\qquad
 L(t)=\binom n{k-1}A_{k-1}(t)E_{n+1-k,k}(t).
 $$
-The front estimate therefore covers this entire band for every $k\ge50$. The proof also works at any rank $h$ such that $h+1\le(451/1000)\sqrt M$.
+Thus for every $k\ge50$ the estimate controls these first $H$ roots in every row of the band. The proof also works at any rank $h$ such that $h+1\le(451/1000)\sqrt M$.
 
 ## Coefficients of the old row
 

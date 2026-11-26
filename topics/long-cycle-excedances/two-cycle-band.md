@@ -2,7 +2,7 @@
 
 Let $E_{n,k}$ be the excedance polynomial for permutations with all cycles of length at least $k$, and let $P_n=E_{n,k}/t$. Here $k$ stays fixed when comparing consecutive rows. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances)
 
-**Proposed partial theorem.** Whenever $k\ge3$ and $k\le n\le3k-2$, the old and new polynomials $P_n,P_{n+1}$ have simple negative roots and strictly interlace. Both signs of the term creating a new $k$-cycle preserve the old derivative’s signs. This includes every consecutive pair for which the new permutation can have at most two cycles.
+**Partial theorem.** Whenever $k\ge3$ and $k\le n\le3k-2$, the old and new polynomials $P_n,P_{n+1}$ have simple negative roots and strictly interlace. Both signs of the term creating a new $k$-cycle preserve the old derivative’s signs. This includes every consecutive pair for which the new permutation can have at most two cycles.
 
 Write $D(t)=t(1-t)P_n'(t)$ and $L(t)=\binom n{k-1}A_{k-1}(t)E_{n+1-k,k}(t)$, so $P_{n+1}(x)=D(x)+L(x)$ at an old root. For $n<2k-1$ the rows are ordinary Eulerian polynomials and $L=0$. The first nonzero lag at $n=2k-1$ has a separate proof. We consider $2k\le n\le3k-2$. [First transition](first-lag.md)
 
@@ -76,4 +76,6 @@ $$
 $$
 All samples $l=H+1,\ldots,\lfloor n/2\rfloor$ therefore have alternating signs. Reflect to $l=n-\lfloor n/2\rfloor,\ldots,n-H-1$ using $E_{n,k}(1/t)=t^{-n}E_{n,k}(t)$, giving sign $(-1)^l$ there as well. We obtain $n-2H-2$ disjoint gaps between samples. These give $n-2H-2$ distinct negative old roots. The $H$ small and $H$ reciprocal large roots lie strictly outside those gaps. This exhausts the degree $n-2$ of $P_n$. Both old-root insertions preserve the derivative sign in all gaps by the middle estimate and reflection. At the two outer ends both next-row pencils (the original row with either insertion sign) have constant and leading coefficient one. Alternation therefore exhausts the next degree $n-1$ and proves strict interlacing.
 
-The preceding argument proves the proposed statement for $n\ge192$. The finite cases $2k\le n<192$, $n\le3k-2$, require the separate replay. **⬜ None.** There is no checked Lean or Rocq proof of this statement.
+For $2k\le n\le3k-2$ with $n<192$ an exact calculation certifies all 3,007 transitions. It reconstructs the polynomials from the cycle containing label one, isolates the old roots with dyadic intervals, and checks both pencils by endpoint signs and degree exhaustion. A second reconstruction from consecutive insertions reproduces all three coefficient vectors for each transition. Combining this finite proof with the analytic ranges establishes the stated theorem. The first transition outside this theorem runs from $3k-1$ to $3k$, when three cycles can first occur. [Finite argument, data and reproduction](two-cycle-finite.md) · [Independent agent-assisted review](review-two-cycle-band.md)
+
+**⬜ None.** The result has a written proof and exact arithmetic checks.
