@@ -41,8 +41,9 @@ the reusable result to the exact Catalan polynomial in two stages.
 **Partial Lean verification.** Lean verifies the entire finite prefix,
 identifies the analytic branch, and proves the coefficient formula as the
 sum of the four improper ray integrals. It verifies radial moments and
-integrated envelopes. The branch-amplitude normalization and the full
-checkpoint and old-root sign comparisons remain in the written proof.
+integrated envelopes and applies them to the normalized near-ray mean under
+the stated interior angle bounds. The far-ray estimates, quantitative
+covariance bounds and strict sign comparisons remain in the written proof.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -116,9 +117,7 @@ $n^2b(n)$ for integer $n$.
 
 The module integrates the quadratic envelope in (5) and verifies the
 $1/50$ and $1/(20n)$ tail bounds for the affine envelope in (6) and (11).
-Applying the envelopes to the loss of the actual ray amplitude requires
-its pointwise bounds and weighted integrability. The covariance comparisons
-and strict signs also remain in the written proof. [Radial moment kernel output](beta-moments-kernel.txt)
+[Radial moment kernel output](beta-moments-kernel.txt)
 
 ## Analytic branch and Cauchy coefficient
 
@@ -181,6 +180,25 @@ factor $(1+s)^{-n-1}$ and the signed prefactor $-\zeta^{-n}/\pi$.
 Factoring the amplitudes for the covariance and sign comparisons remains in
 the written proof. [Improper ray kernel output](improper-ray-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45746699648)
 
+## Normalized near-ray mean and tilt covariance
+
+The [near-amplitude module](CatalanStrictPeaksNearAmplitude.lean) uses the
+actual index-zero prefactor $B_z$ from the improper coefficient formula.
+It proves the squares and positive real parts of the principal cut-factor
+ratios and identifies the normalized integrand with the reciprocal and
+three-factor product used in (4)–(6). Its theorem
+`nearRay_integral_eq_mean` factors the integral into $B_z(z)b(n)J_n$.
+
+The theorem `nearMean_close_to_one` proves $|J_n-1|<73/100$ for $n\ge150$,
+$0<d<1$, $nd\ge2$, and $n\sqrt{1-d^2}\ge2$. The checked ray integrability
+and the actual pointwise bounds supply the hypotheses for the integrated
+envelopes. The theorem `nearMean_step_covariance` verifies (8) for every
+positive $n$. `nearTiltCovariance_sub_const` proves that the amplitude
+factor can be centered at its mean or at one. The connection between the
+phase and the angle bounds, the far-ray bounds, and the numerical
+covariance and sign comparisons remain open in Lean.
+[Near-amplitude kernel output](near-amplitude-kernel.txt)
+
 ## Exact isolating intervals through length 150
 
 The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
@@ -234,6 +252,8 @@ lake env lean -j1 ../../topics/catalan-word-peaks/lean/AnalyticBranchAxioms.lean
 lake build OpenMathResearch.LogarithmicContour CatalanStrictPeaksLogRoot CatalanStrictPeaksRayTransfer
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/RayTransferAxioms.lean
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean
+lake build CatalanStrictPeaksNearAmplitude
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearAmplitudeAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~

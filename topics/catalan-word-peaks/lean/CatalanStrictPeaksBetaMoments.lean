@@ -300,11 +300,13 @@ theorem mass_ratio_le {N n : ℕ} (hN : 0 < N) (hNn : N ≤ n) :
   apply (div_le_div_iff₀ (mass_pos hn) hNpow).2
   simpa only [mul_comm] using scaledMass_monotone hNn
 
-private theorem rayWeight_nonneg (n : ℕ) {s : ℝ} (hs : 0 ≤ s) : 0 ≤ rayWeight n s := by
+/-- The radial weight is nonnegative on the ray. -/
+theorem rayWeight_nonneg (n : ℕ) {s : ℝ} (hs : 0 ≤ s) : 0 ≤ rayWeight n s := by
   unfold rayWeight
   positivity
 
-private theorem affine_moment {n : ℕ} (hn : (3 / 2 : ℝ) < (n : ℝ)) (A B : ℝ) :
+/-- Integrability and exact integral for an affine function times the radial weight. -/
+theorem affine_moment {n : ℕ} (hn : (3 / 2 : ℝ) < (n : ℝ)) (A B : ℝ) :
     IntegrableOn (fun s => (A + B * s) * rayWeight n s) (Ioi 0) ∧
       (∫ s in Ioi (0 : ℝ), (A + B * s) * rayWeight n s) =
         mass n * (A + B * moment n 1) := by
