@@ -1,0 +1,546 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\usepackage{microtype}
+\setlength{\emergencystretch}{3em}
+\newcommand{\erfc}{\operatorname{erfc}}
+\title{Real zeros of four-column balanced arrays with row cap two}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $a_{n,k}$ count labeled binary $n\times4$ arrays with column sums $k$
+and row sums at most two. For every $n\ge0$, the polynomial
+$\sum_k a_{n,k}q^k$ has $\lfloor n/2\rfloor$ simple negative zeros.
+For $n\ge533$, forty signs follow from exact shifted integer polynomial
+checks and an alternating-tail estimate. Three uniform estimates for a
+complex torus integral supply the remaining signs. An exact finite
+replay treats $0\le n\le532$. This proves the four-column, rank-two case
+of Alexandersson's balanced-array conjecture.
+\end{abstract}
+\section{The array polynomial and the global root count}
+\label{sec:proof}
+
+\textbf{Theorem.} For every integer $n\ge0$, let $a_{n,k}$ count the labeled binary $n\times4$ arrays with all four column sums equal to $k$ and all row sums at most two. The polynomial
+\[
+P_n(q)=\sum_{k\ge0}a_{n,k}q^k
+=\sum_{k\ge0}[x_1^k x_2^k x_3^k x_4^k](1+e_1(x)+e_2(x))^n q^k
+\]
+has exactly $\lfloor n/2\rfloor$ distinct negative zeros. For $n=0,1$ it equals 1.
+
+This is the $(r,d)=(2,4)$ specialization of Per Alexandersson's conjecture on balanced arrays of uniform matroids. All allowed row supports carry unit weight. The conjecture for arbitrary $(r,d)$ remains open, and consecutive interlacing is a separate question. The literature record (\path{literature.md}) discusses prior computations and the author's reported eventual claim. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{SymCat, ``Balanced arrays of uniform matroids''}; \href{https://github.com/PerAlexandersson/RealRooted/issues/2005}{Alexandersson's statement and counting formula}
+
+\subsection{Degree and coefficient formula}
+\label{sec:degree-and-coefficient-formula}
+
+The constant coefficient is 1. An array of quota $k$ has $4k$ ones, so $k\le\lfloor n/2\rfloor$. For each quota in that range one can take $k$ rows of type $1100$ and $k$ rows of type $0011$, with the remaining rows zero. Thus $P_n$ has degree $d_n=\lfloor n/2\rfloor$ and positive coefficients through that degree. In particular, $P_n(-t^4)$ has sign $(-1)^{d_n}$ for all sufficiently large $t$.
+
+Let $M_{k,p}$ count the $p$-edge matchings of the complete four-partite graph with $k$ vertices per color. Label the $k$ ones in each column separately. Each row containing two ones induces a matching edge between labels from different colors. The $p$ edges and the $4k-2p$ unmatched vertices give $4k-p$ blocks to inject into the $n$ labeled rows. This is a bijection for labeled ones, and each array has $(k!)^4$ such labelings. Hence
+\[
+a_{n,k}=\frac{1}{(k!)^4}\sum_{p=0}^{2k} M_{k,p}(n)_{4k-p},
+\qquad
+(x)_s=\prod_{h=0}^{s-1}(x-h).
+\tag{1}
+\]
+If $s>n\ge0$, then $(n)_s=0$. The matching counts can be computed from the empty graph by appending one color at a time. For an old matching with $p$ edges on $c$ colors, there are $ck-2p$ unused old vertices. Appending $i$ edges to the new color has $\binom{ck-2p}{i}\binom{k}{i}i!$ choices. The restriction of the resulting matching to the old colors is unique.
+
+\subsection{The finite range}
+\label{sec:the-finite-range}
+
+For $0\le n\le532$, the finite certificates (\path{certificates/rows/}) give positive dyadics $0<t_1<\cdots<t_{d_n-1}$ when $d_n\ge2$ with
+\[
+\operatorname{sgn}P_n(-t_j^4)=(-1)^j.
+\]
+The independent integer checker (\path{code/independent_prefix.py}) reconstructs all coefficients from (1) and the color-class recurrence. It checks the coefficient rows, node order and count, and evaluates every sign by integer Horner evaluation. At a reduced rational argument $q=A/B$ with $B>0$, the evaluated integer is $B^{d_n}P_n(A/B)$. The producing checker (\path{code/prefix.py}) uses an independent inclusion--exclusion matching count and rigorous Arb evaluation with exact integer fallback. The finite-prefix review (\path{review/prefix.md}) describes the derivations and replay results.
+
+The sign at $t=0$ is positive and the sign at a sufficiently large finite $t$ is $(-1)^{d_n}$. Continuity gives $d_n$ distinct roots in the intervening open intervals, including the single interval between these endpoints if $d_n=1$. There are no roots when $d_n=0$. Since $t\mapsto-t^4$ is injective for $t>0$, the degree forces exactly $d_n$ simple negative roots.
+
+\subsection{Forty lower roots starting at row 533}
+\label{sec:forty-lower-roots-for-every-nge533}
+
+\subsubsection{A decreasing alternating tail}
+\label{sec:a-decreasing-alternating-tail}
+
+For adjacent quotas, double-count a quota-$k+1$ array together with a choice of one of its occupied positions to delete in each column. There are $(k+1)^4$ choices in every such array. Removal preserves the row cap and gives a quota-$k$ array. The remaining array and the four deletion row indices, in column order, determine the starting array and all four choices uniquely. There are at most $n^4$ tuples of deletion rows for each remaining array, allowing equal indices for different columns. Thus
+\[
+(k+1)^4 a_{n,k+1}\le n^4 a_{n,k}.
+\tag{2}
+\]
+For $b_k=a_{n,k}t^{4k}$, this gives $b_{k+1}\le (nt/(k+1))^4 b_k$. If $nt<M+1$, the magnitudes are nonincreasing for $k\ge M$, including all coefficients beyond the degree, which vanish. Pairing consecutive terms of the alternating tail after $M$ gives
+\[
+\sum_{k=0}^M(-1)^k b_k\le P_n(-t^4)\quad(M\text{ odd}),\qquad
+P_n(-t^4)\le\sum_{k=0}^M(-1)^k b_k\quad(M\text{ even}).
+\tag{3}
+\]
+
+\subsubsection{A simultaneous integer certificate}
+\label{sec:a-simultaneous-integer-certificate}
+
+Set $n_0=533$. For $1\le j\le40$, the lower certificate (\path{certificates/lower.jsonl}) specifies integers $y_j,s_j,M_j$ and uses the node
+\[
+t_j(n)=\frac{y_j}{16n-s_j}.
+\]
+The list has strictly increasing positive $y_j$ and $s_j$, and $16n_0>s_j$ in every record. Hence the nodes are positive and strictly increasing for every $n\ge n_0$. The certificate uses $M_j$ of parity opposite to $j$ and verifies
+\[
+(M_j+1)(16n_0-s_j)>n_0 y_j.
+\]
+The function $n/(16n-s_j)$ decreases for $n\ge n_0$ since $s_j>0$. Therefore $nt_j(n)<M_j+1$ throughout this range, and (3) applies.
+
+To check each truncated sum at once for all these rows, fix a record $(j,y,s,M)$ and set $X=n-n_0$. Put $D=16(n_0+X)-s$ and
+\[
+R_k(X)=\sum_p M_{k,p}(n_0+X)_{4k-p}\in\mathbb Z[X].
+\]
+The checker constructs $A_{-1}=0$ and step by step constructs
+\[
+A_k = D^4 A_{k-1}+(-1)^k y^{4k}\frac{(M!)^4}{(k!)^4}R_k(X)
+\quad (0\le k\le M).
+\]
+Induction gives
+\[
+A_k=\sum_{h=0}^{k}D^{4(k-h)}(-1)^h y^{4h}\frac{(M!)^4}{(h!)^4}R_h(X).
+\]
+Thus at $X=n-n_0$,
+\[
+A_M(X)=(M!)^4 D^{4M}\sum_{k=0}^M a_{n,k}(-t_j(n)^4)^k.
+\tag{4}
+\]
+The multiplier is positive. The lower checker (\path{code/lower.py}) uses exact integer polynomial arithmetic and reports zero coefficients of the wrong sign or equal to zero among degrees $0$ through $\deg A_M$ in $(-1)^j A_M$. Each has positive constant term, so its value is strictly positive at every $X\ge0$. This proves the sign of the truncated sum. By its parity and (3), the sign of $P_n(-t_j(n)^4)$ is exactly $(-1)^j$. The sign at zero is positive, so the forty intervening intervals contain forty distinct roots and the value at $t_{40}(n)=718/(16n-507)$ is strictly positive.
+
+\subsection{Phase signs on the rest of the positive axis}
+\label{sec:phase-signs-on-the-rest-of-the-positive-axis}
+
+Let $\zeta=e^{i\pi/4}$ and, for $t>0$, define
+\[
+S=1+4\zeta t+6it^2,\qquad
+\Lambda=\frac{2\zeta t+4it^2}{S},\qquad
+\Psi_n(t)=n\arg S-\frac32\arg\Lambda,\qquad
+C_n=\frac{(\pi n|\Lambda|)^{3/2}}{|S|^n}.
+\]
+The arguments are principal. The \hyperref[sec:central]{central calculation} proves $\Re\Lambda>0$, gives the normalized torus integral on two copies of the angular domain, and bounds its difference from the real part of one complex Gaussian. In particular, the phase is continuous for $t>0$. For any $n\ge533$, the following ranges give sign $(-1)^j$ whenever $\Psi_n(t)=j\pi$ and $0\le j\le d_n-1$.
+
+\begin{itemize}
+\renewcommand{\labelitemi}{$\bullet$}
+\item For $0<t\le1/5$ and $nt\ge40$, the \hyperref[sec:small]{small-parameter estimate} bounds $|C_nP_n(-t^4)-\cos\Psi_n|$ by $2/5$. It uses sharper local damping on successive radial regions and the angular averages of the quartic and squared cubic errors.
+\item For $1/5\le t\le38/7$, the compact calculation below bounds the same error by $33827/100000$.
+\item For $t\ge38/7$, the \hyperref[sec:upper]{upper estimate} uses the opposite-pair coordinates and retains the contribution of both positive-half saddle values. Its conclusion applies directly at the designated nodes.
+\end{itemize}
+
+\subsubsection{The compact interval}
+\label{sec:the-compact-interval}
+
+Use $Q=|p|^2$ in the central integral. Retain the precise positive rates, writing $H=|\Lambda|$ and $L=\Re\Lambda$. The rates and error constants from the central calculation are
+\[
+\begin{aligned}
+a&=\frac{3(4\sqrt2t/9+16t^2/3+16\sqrt2t^3/3+16t^4)}{\pi^2|S|^2},
+& a_0&=\frac{37}{50}L,\\
+B_0&=\frac{t/2+4t^2/3}{|S|}+\frac{H^2}{2},
+&K_0&=\frac{4t}{3\sqrt3|S|},\\
+b&=\frac{2\sqrt2t+12\sqrt2t^3}{|S|^2}.
+\end{aligned}
+\]
+The last expression is the lower relative squared-modulus gap for the minus cube before simplifying it to a coarser rate. Averaging it with the original global radial gap gives $|R_-/S|\le e^{-aQ/2-b/4}$.
+
+For $x\ge0$ put
+\[
+G(x)=\operatorname{erfc}(\sqrt{x})+2\sqrt{x/\pi}\,e^{-x}.
+\]
+The full-space radial Gaussian tail beyond $Q=1/4$ for rate $nr$ is $(\pi/(nr))^{3/2}G(nr/4)$. This follows by one integration by parts on $\int_{\sqrt{nr/4}}^\infty s^2e^{-s^2}\,ds$. Combining the local error on $Q\le1/4$, the actual plus tail, the comparison Gaussian tail, and the minus integral, in that order, gives
+\[
+\begin{aligned}
+|C_nP_n(-t^4)-\cos\Psi_n|
+\le {}&
+\frac{21}{20}\frac{(H/a_0)^{3/2}}{n a_0}
+  \left(\frac{15B_0}{4a_0}+\frac{105K_0^2}{16a_0^2}\right)\\
+&+\left(\frac H a\right)^{3/2}G(na/4)
+ +\left(\frac H L\right)^{3/2}G(nL/4)
+ +\left(\frac{2H}{a}\right)^{3/2}e^{-nb/4}.
+\end{aligned}
+\tag{5}
+\]
+Here $n\ge533$ ensures the local loss factors are at most $21/20$. The positivity of the rates, together with the decreasing Gaussian exterior fraction $G$, shows each term is nonincreasing in $n$ for fixed $t$. The compact interval checker (\path{code/middle.py}) evaluates (5) at $n=533$ with Arb enclosures on 2,048 closed rational subintervals covering $[1/5,38/7]$. All upper enclosures are at most $33827/100000<1/2$ in the recorded replay.
+
+\subsubsection{The transition to node 41}
+\label{sec:the-transition-to-node-41}
+
+For $u=1/n\in(0,1/533]$ set $\tau=nt_{40}=718/(16-507u)$ and $t_{40}=\tau u$. In the same interval checker (\path{code/middle.py}), 64 closed rational subintervals covering $[0,1/533]$ verify
+\[
+\tau>40,\qquad t_{40}<1/5,\qquad \Psi_n(t_{40})<41\pi.
+\tag{6}
+\]
+To see the last enclosure, set $t=t_{40}$, $h=(2\sqrt2+6t)/(1+2\sqrt2t)$, and $z=th$. Then
+\[
+\arg S=\arctan z,\qquad
+\arg\Lambda=\frac{\pi}{4}+\arctan\left(\frac{\sqrt2t}{1+\sqrt2t}\right)-\arctan z.
+\]
+As $0\le z<1$, the alternating expansion gives $\arctan z\le z(1-z^2/3+z^4/5)$. The expression checked by the code is the resulting upper bound $\tau h(1-z^2/3+z^4/5)-(3/2)\arg\Lambda$ on the phase. This expression also has a well-defined limit at the enclosed endpoint $u=0$.
+
+As $t\to\infty$, $\arg S\to\pi/2$ and $\Lambda\to2/3$, so $\Psi_n(t)\to n\pi/2>(d_n-1)\pi$. Starting at $t_{40}$, choose a finite point beyond it at which the phase exceeds $(d_n-1)\pi$. By continuity, there is a point strictly between them of phase $41\pi$. Starting from that point and using the same finite right endpoint, continuity supplies a later point of phase $42\pi$. Continuing produces strictly increasing points of phase $j\pi$ for $41\le j\le d_n-1$. This argument uses only continuity and the two endpoint inequalities.
+
+Every such point has $nt>40$ by (6), so one of the three phase bounds applies. Thus the signs after $t_{40}$ are successively negative, positive, and alternating through $(-1)^{d_n-1}$. A final sufficiently large point has sign $(-1)^{d_n}$. The intervals following $t_{40}$ therefore contribute $d_n-40$ additional distinct roots. Along with the forty lower roots, these give $d_n$ distinct negative zeros, and the degree forces all to be simple. Together with the finite range, this proves the stated result.
+
+\section{The torus integral and its quadratic approximation}
+\label{sec:central}
+
+For the degree-$\lfloor n/2\rfloor$ polynomial $P_n$ defined in the \hyperref[sec:proof]{main proof}, use $t>0$, $\zeta=e^{i\pi/4}$ and the principal arguments. Set
+\[
+S=1+4\zeta t+6it^2,\quad \Lambda=(2\zeta t+4it^2)/S,\quad
+\Psi_n=n\arg S-\tfrac32\arg\Lambda,\quad C_n=(\pi n|\Lambda|)^{3/2}/|S|^n.
+\]
+Write $\rho=t/(1+t)$ and $\sigma=t/(1+t)^2$. We derive the integrated majorants used in the \hyperref[sec:the-compact-interval]{compact interval calculation}. They also imply $|C_n P_n(-t^4)-\cos\Psi_n|<1/2$ whenever $n\rho\ge450$ and $n\sigma\ge70$.
+
+\subsection{The three-angle integral}
+\label{sec:the-three-angle-integral}
+
+Put $y_j=\zeta e^{i(\pm p_1\pm p_2\pm p_3)}$, taking the four sign triples with sign product $+1$. Their product is $-1$. The integer linear map from the three angles to the arguments of the first three $y_j/\zeta$ is surjective on the torus because its determinant is nonzero, so normalized Haar measure is pushed forward to normalized Haar measure. Constant-term extraction gives
+\[
+P_n(-t^4)=\int (1+t e_1(\mathbf y)+t^2 e_2(\mathbf y))^n\,d\mathbf y .
+\]
+Write $C=\prod_i\cos p_i$, $D=\prod_i\sin p_i$, $U=\sum_i\cos^2p_i$, and $A=U-3/2$. Direct expansion of the six pairs and four singletons gives
+\[
+R=1+2\sqrt2t(C+D)+i\big(2\sqrt2t(C-D)+4t^2A\big).
+\]
+On $U\ge3/2$, divide the torus into cubes centered at the eight choices of integer multiples of $\pi$. After recentering, the common domain is
+\[
+\Omega=\{p\in[-\pi/2,\pi/2]^3: U\ge3/2\}.
+\]
+Four cubes preserve both $C,D$ and four negate both. Write $R_+,R_-$ for those integrands on $\Omega$. The reflection $p_i\mapsto\pi/2-p_i$ interchanges the two sectors $U\ge3/2$ and $U\le3/2$, and maps $R$ to its conjugate, since it swaps $C,D$ and negates $A$. Thus
+\[
+P_n(-t^4)=\frac{1}{\pi^3}\Re\int_\Omega (R_+^n+R_-^n)\,dp.
+\]
+The same reduction applies to an amplitude $W=(R-\Re S)/\Im S$ since the transformation conjugates it.
+
+\subsection{Global damping}
+\label{sec:global-damping}
+
+With $C,D$ interpreted as the signed products in each cube, the squared-modulus gap is exactly
+\[
+\begin{aligned}
+|S|^2-|R|^2={}&4\sqrt2t(1-C-D)+16t^2(1-C^2-D^2)\\
+&+16\sqrt2t^3(3/2-A(C-D))+16t^4U(3-U).
+\end{aligned}
+\]
+All four contributions are nonnegative. In fact put $h=U/3$. By AM--GM, $|C|\le h^{3/2}$ and $|D|\le(1-h)^{3/2}$. The inequality $\sqrt h\le(1+h)/2$, applied at $h$ and $1-h$, gives $|C|+|D|\le1-h(1-h)$. Also $C^2+D^2\le h^3+(1-h)^3=1-3h(1-h)$. Finally $3/2-A(C-D)\ge3/2-|A|=\min(U,3-U)\ge U(3-U)/3$. Therefore the gap is at least $B(t) U(3-U)$ for
+\[
+B(t)=4\sqrt2t/9+16t^2/3+16\sqrt2t^3/3+16t^4.
+\]
+Put $Q=|p|^2$. On $\Omega$, $U\ge3/2$ and $3-U=\sum\sin^2p_i\ge4Q/\pi^2$. It follows that
+\[
+|R_\pm/S|\le e^{-aQ},
+\qquad a=\frac{3B(t)}{\pi^2|S|^2}>\frac{2}{15}\rho .
+\]
+For the last inequality, $|S|^2=1+4\sqrt2t+16t^2+24\sqrt2t^3+36t^4$ and coefficient comparison shows $(1+t)B(t)\ge(4/9)t|S|^2$. Use $\pi^2<10$. The bound on $|R_\pm/S|$ uses $\sqrt{1-x}\le e^{-x/2}$ for $0\le x\le1$.
+
+In the minus cube $C\le0$ and $|D|\le(1/2)^{3/2}<1/2$. Thus $1-C-D\ge1/2$ and $3/2-A(C-D)\ge3/4$, so the gap also exceeds $2\sqrt2t+12\sqrt2t^3$. Divide this by $|S|^2$ and compare coefficients after multiplication by $(1+t)^2$ to obtain a second lower bound $b=(\sqrt2/3)\sigma$ for the relative squared gap. Averaging the two lower bounds gives
+\[
+|R_-/S|\le e^{-aQ/2-b/4}.
+\]
+
+\subsection{Local damping and the Gaussian error}
+\label{sec:local-damping-and-the-gaussian-error}
+
+Work in the ball $Q\le1/4$, which lies within $\Omega$. Here only $R_+$ is considered, with $C\ge0$. We have
+\[
+0\le C-1+\tfrac12Q\le Q^2/8,\qquad
+0\le Q-\sum\sin^2p_i\le Q^2/3,\qquad |D|\le(Q/3)^{3/2}.
+\]
+The cosine estimate follows by expanding $\prod_i(1-(1-\cos p_i))$, using $0\le1-\cos p_i\le p_i^2/2$ and its fourth-order Taylor bound. The sine-square estimate follows from the fourth-order Taylor bound for $\cos(2p_i)$. The last bound is AM--GM.
+
+The four brackets in the exact gap, in order, are bounded below by $Q$ times
+\[
+d_1=\frac12-\frac1{32}-\frac1{6\sqrt3},\quad
+d_2=\frac56,\quad
+d_3=\frac{11}{12}+\frac54d_1,\quad
+d_4=\frac{121}{48}.
+\]
+For the second bracket, with $u_i=\sin^2p_i$, use $1-C^2-D^2=\sum_i u_i-\sum_{i<j}u_i u_j$ and $\sum_{i<j}u_i u_j\le Q^2/3$. The third is $(3-U)+A(1-C+D)$ with $A\ge5/4$, and the fourth is $(3-\sum u_i)\sum u_i$. These constants are each at least $37/50$ times the respective leading coefficients $1/2,1,7/4,3$. Consequently $|R_+/S|\le e^{-a_0Q}$ in the ball with $a_0=(37/50)\Re\Lambda$. Indeed
+\[
+\Re\Lambda=\frac{\sqrt2t+8t^2+14\sqrt2t^3+24t^4}{|S|^2},
+\quad
+\Im\Lambda=\frac{\sqrt2t+4t^2+2\sqrt2t^3}{|S|^2}.
+\]
+Coefficient comparisons give $\Re\Lambda\ge(2/3)\rho$, $|\Lambda|\le2\rho$, and $|\Lambda|\le1$. The displayed real and imaginary parts give $|\Lambda|/\Re\Lambda\le\sqrt2$. In particular
+\[
+a_0\ge(37/75)\rho>(49/100)\rho,\qquad |\Lambda|/a_0<2,\qquad |\Lambda|/a<15.
+\]
+The small-$Q$ limit of the global modulus bound also gives $\Re\Lambda\ge a$.
+
+Write $R_+(p)/S=J+K$ and $R_+(-p)/S=J-K$. Here $K$ contains just the odd sine product. Define
+\[
+B_0=\frac{t/2+4t^2/3}{|S|}+\frac{|\Lambda|^2}{2},\qquad
+K_0=\frac{4t}{3\sqrt3|S|}.
+\]
+Then $|K|\le K_0Q^{3/2}$ and $|J-e^{-\Lambda Q}|\le B_0 Q^2$. For the second inequality, compare both expressions to $1-\Lambda Q$ using the cosine and sine-square bounds and the integral exponential remainder with $\Re\Lambda>0$. Also $B_0\le(7/8)|\Lambda|$ and $K_0^2\le(4/27)|\Lambda|^2$. The former follows from $t/2+4t^2/3\le (3/8)|2\zeta t+4it^2|$, checked by squaring and comparing coefficients, and $|\Lambda|\le1$. The latter follows from $2t\le |2\zeta t+4it^2|$.
+
+By Taylor's formula along the segments from $J$ to $J\pm K$, the average of their $n$th powers differs from $J^n$ by at most
+\[
+\binom n2 K_0^2 Q^3e^{-(n-2)a_0Q}.
+\]
+Indeed the linear terms cancel, and all points of the segments are convex combinations of $J+K,J-K$, so their moduli are bounded by $e^{-a_0Q}$. Telescoping the power difference between $J$ and $e^{-\Lambda Q}$ adds at most $nB_0 Q^2e^{-(n-1)a_0Q}$. Since the ball is symmetric, this bounds the local integral error. The integral of the comparison Gaussian on all of $\mathbb R^3$ is $(\pi/(n\Lambda))^{3/2}$ with the branch in the right half-plane. Divide the error by its magnitude, using
+\[
+\int_{\mathbb R^3} Q^j e^{-hQ}\,dp
+=\pi^{3/2}(3/2)_j h^{-3/2-j}.
+\]
+For $n\ge450$, both factors $(n/(n-1))^{7/2}$ and $(n/(n-2))^{9/2}$ are less than $21/20$. The normalized error on the ball is bounded by
+\[
+\frac{21}{20}\frac{(|\Lambda|/a_0)^{3/2}}{n a_0}
+\left(\frac{15}{4}\frac{B_0}{a_0}+\frac{105}{16}\frac{K_0^2}{a_0^2}\right)
+<\frac{33}{n a_0}.
+\]
+
+For $Q>1/4$, use $e^{-naQ}\le e^{-na/8}e^{-naQ/2}$. The tails of both $R_+^n$ and the comparison Gaussian contribute at most
+\[
+2(2|\Lambda|/a)^{3/2}e^{-na/8}<330e^{-n\rho/60}.
+\]
+In the negative-sign cube integrate the global minus bound to get at most $(2|\Lambda|/a)^{3/2}e^{-nb/4}<165e^{-\sqrt2n\sigma/12}$. All errors are relative to the same Gaussian magnitude. Under $n\rho\ge450,n\sigma\ge70$ the sum is strictly below $1/2$. For instance, $33/(n a_0)<.150$, $330e^{-n\rho/60}<.195$, and $165e^{-\sqrt2n\sigma/12}<.060$, using $\sqrt2>7/5$. Multiplying the Gaussian by $S^n$ and taking its real part gives the stated phase estimate.
+
+
+\section{Small-parameter signs}
+\label{sec:small}
+
+Use the notation $S,\Lambda,\Psi_n,C_n,R_\pm,\Omega,Q$ from \hyperref[sec:central]{the three-angle saddle estimates}. For $0<t\le1/5$ and $T=nt\ge40$,
+\[
+\left|C_nP_n(-t^4)-\cos\Psi_n\right|<\frac12.
+\]
+This supplies the phase signs down to $t=40/n$. The proof uses separate radial bounds on the three-angle integral and the exact angular averages of its quartic and squared cubic errors.
+
+\subsection{Damping on the angular domain}
+\label{sec:damping-on-the-angular-domain}
+
+Throughout this range $\Re\Lambda\ge(5/4)t$, $|\Lambda|\le 2t/(1+t)$, and $1+2\sqrt2t\le |S|$, with the last two bounds from the explicit expressions. For the first, multiply by $|S|^2/t$. The difference is
+\[
+\sqrt2-\frac54+(8-5\sqrt2)t+
+(14\sqrt2-20)t^2+(24-30\sqrt2)t^3-45t^4>0.
+\]
+For example $7/5<\sqrt2<17/12$ and $t\le1/5$ bound it below by $3/20+(11/12-59/50)t>0$.
+
+In the plus cube, the bounds $|R_+/S|\le e^{-a Q}$ hold with $a$ equal to each of
+\[
+\frac{37}{40}t\quad(Q\le1/4),\qquad
+\frac34t\quad(Q\le1/2),\qquad
+\frac5{12}t\quad(Q\le1).
+\]
+To check them, for a general $Q\le u\le1$ the four brackets in the exact squared-modulus gap are at least $Q$ times
+\[
+\begin{aligned}
+d_1(u)&=\frac12-\frac{u}{8}-\frac{\sqrt u}{3\sqrt3},&
+d_2(u)&=1-\frac{2u}{3},\\
+d_3(u)&=1-\frac u3+(3/2-u)d_1(u),&
+d_4(u)&=(3-u)(1-u/3).
+\end{aligned}
+\]
+These follow from the elementary angular bounds in the companion note. For $u=1/4,1/2,1$, they are entrywise at least $37/50,3/5,1/3$ times the vector of leading coefficients $(1/2,1,7/4,3)$. The damping rates follow from the explicit $\Re\Lambda$ and its lower bound above.
+
+There is stronger global damping in $\Omega$ available at small $t$. It starts with
+\[
+1-C-D\ \ge\ \frac{4}{3\pi^2}Q .
+\]
+Put $w=\sqrt{Q/3}$. By concavity of $\log\cos\sqrt x$ and $\log\sin\sqrt x$ on the coordinate-square interval, Jensen's inequality gives $C\le\cos^3w$ and $|D|\le\sin^3w$. The former concavity follows because $\tan u/u$ is increasing, and the latter by composition of increasing concave $\log\sin u$ with $\sqrt x$. The endpoint cases follow by continuity. If $w\le\pi/4$, put $p=\cos w\sin w$. For $L=\cos^3w+\sin^3w$ one has $1-L^2=p^2(3-2p)\ge2p^2$ and $L\le1$. Thus $1-L\ge p^2\ge4w^2/\pi^2$.
+
+For $w\ge\pi/4$, the definition of $\Omega$ gives $|D|\le(1/2)^{3/2}$ and $Q\le3\pi^2/8$, the latter from $\sin^2 p_i\ge4p_i^2/\pi^2$. The function
+\[
+1-(1/2)^{3/2}-\cos^3 w-\frac{4w^2}{\pi^2}
+\]
+is concave on $[\pi/4,\pi/\sqrt8]$ by its second derivative. Its first endpoint is $3/4-1/\sqrt2>0$, and its last endpoint is greater than $1/2-1/(2\sqrt2)-1/8>0$, since $\pi/\sqrt8>\pi/3$. This proves the global angular bound.
+
+Combine that bound with the other three global brackets from the companion note. The damping rate is at least
+\[
+\frac{8\sqrt2t/3+16t^2+16\sqrt2t^3+48t^4}{\pi^2|S|^2}>\frac{t}{4}.
+\]
+For the strict inequality, use $\pi^2<10$ and subtract $(5/2)|S|^2$ from the numerator after division by $t$. The difference is
+\[
+8\sqrt2/3-5/2+(16-10\sqrt2)t+
+(16\sqrt2-40)t^2+(48-60\sqrt2)t^3-90t^4>0.
+\]
+Using $7/5<\sqrt2<17/12$ and $t\le1/5$, a lower bound is $37/30-(88/5)/25-37/125-90/625>0$.
+
+In the minus cube, the first exact gap bracket alone is at least $1-1/(2\sqrt2)$ since its signed $C\le0$ and $|D|\le(1/2)^{3/2}$. Hence the squared gap exceeds $(4\sqrt2-2)t>|S|^2t$, where $|S|^2\le16/5$ in the range under consideration. This yields $|R_-/S|^n\le e^{-T/2}$.
+
+\subsection{Integrated error}
+\label{sec:integrated-error}
+
+As in the companion note, write $R_+(p)/S=J+K$, $R_+(-p)/S=J-K$. Use the fourth-order bound
+\[
+0\le C-1+Q/2\le
+\sum_i\frac{p_i^4}{24}+\sum_{i<j}\frac{p_i^2p_j^2}{4},
+\]
+and the bound $0\le Q-\sum_i\sin^2p_i\le\sum_i p_i^4/3$. Also $|K|^2\le(16t^2/|S|^2)p_1^2p_2^2p_3^2$. The following are the spherical averages of the three polynomials, on any radius:
+\[
+\mathbb E_\mathrm{ang}\sum_i p_i^4=\frac35 Q^2,\qquad
+\mathbb E_\mathrm{ang}\sum_{i<j}p_i^2p_j^2=\frac15 Q^2,\qquad
+\mathbb E_\mathrm{ang}p_1^2p_2^2p_3^2=\frac1{105}Q^3.
+\]
+These identities follow from the independent one-dimensional Gaussian even moments after separating the radial integral. This gives
+\[
+\begin{aligned}
+\mathbb E_\mathrm{ang}|J-e^{-\Lambda Q}|
+&\le \left(\frac{(3/10)t+(4/5)t^2}{|S|}
++\frac{|\Lambda|^2}{2}\right)Q^2
+\le\frac{26}{45}tQ^2,\\
+\mathbb E_\mathrm{ang}|K|^2&\le\frac{16}{105}t^2 Q^3.
+\end{aligned}
+\]
+For the first bound, divide its parenthesis by $t$, use $|S|\ge1+2\sqrt2t$ and $|\Lambda|\le2t/(1+t)$, and note $3/10+2t/(1+t)^2\le26/45$ for $t\le1/5$. The bound on $K$ uses $|S|\ge1$.
+
+Write $G_m(x)=\Gamma(m+1/2,x)/\Gamma(m+1/2)$ for the normalized Gaussian tail, and let $F_*=(100/99)^5$. On a radial subregion with $Q\ge q_0$ and $|R_+/S|\le e^{-\alpha t Q}$, the normalized integrated error from the two local terms is bounded by
+\[
+\mathcal L(T,\alpha,q_0)=
+\frac{F_*}{T}(2/\alpha)^{3/2}
+\left[
+\frac{15}{4}\frac{26}{45\alpha^2}
+G_3\!\left(\frac{99}{100}\alpha Tq_0\right)
++\frac1{\alpha^3}
+G_4\!\left(\frac{99}{100}\alpha Tq_0\right)
+\right].
+\]
+Indeed the Taylor error after the odd term cancels is bounded by $\binom n2|K|^2 e^{-(n-2)\alpha tQ}$, and telescoping the powers of $J$ and $e^{-\Lambda Q}$ adds $n|J-e^{-\Lambda Q}|e^{-(n-1)\alpha tQ}$. The formula follows by integrating $Q^2,Q^3$ and dividing by the magnitude $(\pi/(n|\Lambda|))^{3/2}$ of the leading Gaussian integral. Here $n\ge200$, so $(n-2)/n\ge99/100$, and both prefactor losses are bounded by $F_*$. The exponential Gaussian itself is bounded by the same damping since $\Re\Lambda\ge (5/4)t$.
+
+Use $\mathcal L(T,37/40,0)$ on $Q\le1/4$, and $\mathcal L(T,3/4,1/4)$ on $1/4<Q\le1/2$, enlarging the integral for each bound. The remaining actual plus tails on $1/2<Q\le1$ and $Q>1$ contribute at most
+\[
+(24/5)^{3/2}G_1(5T/24)+8^{3/2}G_1(T/4).
+\]
+The entire comparison Gaussian tail on $Q>1/2$ adds at most $(8/5)^{3/2}G_1(5T/8)$. The minus cube has volume at most $\pi^3$, so its relative contribution is at most $(2\pi T)^{3/2}e^{-T/2}$. The sum is decreasing for $T\ge40$, since the normalized Gaussian tails decrease and $T^{3/2}e^{-T/2}$ decreases for $T>3$.
+
+At $T=40$, this sum is less than $2/5$. The rational enclosure (\path{code/small_constants.py}) bounds fractional powers by integer square roots, uses $\pi<22/7$, and evaluates elementary exponential and Gaussian tail bounds with exact rational arithmetic. It uses the recurrence
+\[
+G_m(x)\le\frac{e^{-x}}{\sqrt\pi}
+\left(\frac1{\sqrt x}
++\sum_{j=1}^m\frac{x^{j-1/2}}{(1/2)_j}\right),\qquad x>0,
+\]
+which follows by integration by parts and the Gaussian integral upper bound at the base exponent. The phase estimate follows by taking the real part of the two conjugate saddle contributions as before.
+
+\section{Upper phase signs}
+\label{sec:upper}
+
+Let $P_n(q)$ count the unweighted four-column balanced binary arrays with row cap two. Use $q=-t^4$, $t>0$, and put
+\[
+\zeta=e^{i\pi/4},\qquad S(t)=1+4\zeta t+6it^2,\qquad
+\Lambda(t)=\frac{2\zeta t+4it^2}{S(t)},\qquad
+\Psi_n(t)=n\arg S(t)-\frac32\arg\Lambda(t).
+\]
+The argument of $S$ is in $(0,\pi/2)$. Below all other arguments are principal. This note proves the following sign estimate with explicit cutoff:
+\[
+n\ge200,\quad t\ge\frac{38}{7},\quad
+\Psi_n(t)=j\pi,\quad 0\le j\le\lfloor n/2\rfloor-1
+\quad\Longrightarrow\quad
+\operatorname{sgn}P_n(-t^4)=(-1)^j.
+\]
+The sign at the far endpoint is $(-1)^{\lfloor n/2\rfloor}$ from the leading term. The top quota is attained by taking $\lfloor n/2\rfloor$ rows of each of the two types $1100$ and $0011$. The finite-node condition includes every other needed upper sign node.
+
+\subsection{Exact four saddle values from opposite-pair coordinates}
+\label{sec:exact-four-saddle-values-from-opposite-pair-coordinates}
+
+Integrate $R(t,y)^n=(1+t e_1(y)+t^2 e_2(y))^n$ on the normalized torus $\prod_{a=1}^4 y_a=-1$. This is exactly $P_n(-t^4)$. For $\theta=(\theta_1,\theta_2,\theta_3)\in[-\pi,\pi]^3$, the two lifts of the comparison coordinates $y_1y_{a+1}/i=e^{i\theta_a}$ are
+\[
+y_a=\epsilon\zeta \exp(i\epsilon_a\cdot\theta/2),\qquad \epsilon\in\{1,-1\},
+\]
+where $\epsilon_1=(1,1,1)$ and the other three vectors have exactly two negative entries. Averaging over $\epsilon$ kills monomials of odd total degree. At even total degree the angular exponents are integers. Their simultaneous vanishing forces all four original exponents to be equal. The angular average on the two lifts is therefore the intended torus integration.
+
+Write
+\[
+A=\tfrac13\sum_{a=1}^3\cos\theta_a,\qquad
+C=\prod_{a=1}^3\cos(\theta_a/2),\qquad
+D=\prod_{a=1}^3\sin(\theta_a/2).
+\]
+The exact pair sum is $e_2(y)=6iA$, and the singleton sum is $4\epsilon\zeta(C-iD)$. Set $v=1/t$, $h=(2/3)e^{-i\pi/4}v$, $d=-iv^2/6$, and $c=\sqrt2/3$, so $h=cv(1-i)$. On the lifts,
+\[
+Z_\epsilon:=\frac{R(t,y)}{6it^2}=A+\epsilon h(C-iD)+d,
+\qquad L_\epsilon=1+\epsilon h+d.
+\]
+At $A=1$ the two values are $L_+$ and $L_-$. Torus conjugation sends $A$ to $-A$ and $R$ to its conjugate, preserving measure. The zero set of $A$ has measure zero, since with two angles fixed the third angle must solve one cosine equation. Thus integrating the $A\ge0$ half and taking twice its real part retains all four saddle values. In particular, the conjugates of $6it^2L_\pm$ are accounted for with their exact phases.
+
+\subsection{A bound relative to a common positive integral}
+\label{sec:a-bound-relative-to-a-common-positive-integral}
+
+Let $d\mu=d\theta/(2\pi)^3$. On $A\ge0$ set $\delta=1-A\in[0,1]$ and
+\[
+M_n=\int_{A\ge0} A^n\,d\mu .
+\]
+Since $\sum \sin^2(\theta_a/2)=3\delta/2$, the half-angle products obey
+\[
+1-3\delta/2\le C\le 1-\delta/2,qquad |D|\le(\delta/2)^{3/2}.
+\]
+For the lower bound use $\sqrt{1-u}\ge 1-u$ and $\prod(1-u_a)\ge1-\sum u_a$. The cosine factors are nonnegative in the selected angular cube. For the upper bounds use arithmetic-geometric means on the squared cosines and squared sines. Consequently
+\[
+|C-iD-A|\le \sqrt{3/8}\,\delta\le\frac58\delta .
+\]
+Subtracting the constant saddle value times $A$ gives
+\[
+|Z_\epsilon-L_\epsilon A|
+\le\left(\frac{5v}{12}+\frac{v^2}{6}\right)\delta .
+\]
+For $0<v\le 7/38$, one has $|L_\epsilon|\ge\Re L_\epsilon\ge1-cv>9/10$. Hence the last bound is at most $\eta|L_\epsilon|\delta$, where
+\[
+\eta=\frac{5v/12+v^2/6}{9/10}<3/32 .
+\]
+The difference-of-powers identity gives
+\[
+|Z_\epsilon^n-L_\epsilon^nA^n|
+\le n\eta|L_\epsilon|^n\delta(A+\eta\delta)^{n-1}.
+\]
+
+The following explicit integral comparison holds for $n\ge200$ and $0\le\eta\le3/32$:
+\[
+\frac{n\int_{A\ge0}\delta(A+\eta\delta)^{n-1}\,d\mu}{M_n}<\frac52 .
+\tag{7}
+\]
+To prove it, set $w_a=\sin(\theta_a/2)$, so $\delta=(2/3)|w|^2$. The Jacobian relative to $dw/\pi^3$ is $\prod_a(1-w_a^2)^{-1/2}$. On $\delta\le1/6$ it lies between 1 and $2/\sqrt3<7/6$ by $\prod(1-w_a^2)\ge1-|w|^2$. In radial coordinates the Jacobian-free measure is $K\delta^{1/2}\,d\delta$ with $K=2(3/2)^{3/2}/\pi^2>1/4$. The entire radial ball for $\delta\le1/6$ is inside the $w$ cube. For $B_n=\mathrm B(3/2,n+1)$ one has
+\[
+M_n\ge K\big(B_n-(5/6)^n\big),\qquad B_n\ge\frac1{3(2n)^{3/2}}.
+\]
+The second inequality integrates only $0\le\delta\le1/(2n)$, where $(1-\delta)^n\ge1/2$ by Bernoulli's inequality. The discarded beta tail has relative size at most $12n^2(5/6)^n<1/100$ for $n\ge200$.
+
+On the smaller radial ball substitute $z=(1-\eta)\delta$ in the numerator of (7) and enlarge its range to $[0,1]$. Integration by parts gives $n\mathrm B(5/2,n)=\frac32 B_n$. After division by the lower bound on $M_n$, the contribution to (7) is at most
+\[
+\frac{100}{99}\frac32\frac76(32/29)^3.
+\]
+On the complement in $A\ge0$ one has $A+\eta\delta\le163/192$, so its contribution is at most $52n^3(163/192)^{n-1}<1/100$. Both bounds on the exponentially small expressions follow by monotonicity for $n\ge200$ and their rational comparisons at $n=200$. Adding the pieces gives (7). All numerical comparisons are recorded in upper\_constants.py (\path{code/upper_constants.py}).
+
+For $n\ge200$ define the positive normalization
+\[
+N_n(t)=(6t^2)^n M_n |L_+|^n,\qquad
+r_n(t)=\big|L_-/L_+\big|^n.
+\]
+One has $S(t)=6it^2L_+$. Taking twice the real part of the positive-half integral, with the two lifts each of weight $1/2$, now gives
+\[
+\left|\frac{P_n(-t^4)}{N_n(t)}-\cos(n\arg S)\right|
+\le r_n(t)+(1+r_n(t))\frac52\eta.
+\tag{8}
+\]
+The secondary phase is bounded here by its full modulus. Its contribution has thus been retained in the error with an exact modulus bound, rather than discarded in taking the endpoint limit.
+
+\subsection{Comparison with the central phase}
+\label{sec:comparison-with-the-central-phase}
+
+Put $\alpha=\pi/2-\arg S=\arctan((cv+v^2/6)/(1+cv))>0$. Since $1/3<c<1/2$, direct comparison of the arctangent argument with $v/2$ yields $\alpha<v/2$. At positive $t$,
+\[
+\Lambda=\frac23\frac{1+(v/2)e^{-i\pi/4}}{L_+}.
+\]
+The negative argument of the numerator has absolute value smaller than $\alpha$, because $c>1/(2\sqrt2)$ and the ratio $x/(1+x)$ increases with $x$. Consequently $0<\arg\Lambda<\alpha$ and $0<(3/2)\arg\Lambda<21/152$ in the upper range.
+
+Next,
+\[
+|L_+|^2-|L_-|^2=4cv(1+v^2/6),\qquad
+|L_+|^2\le(1+v/2)^2+(v/2+v^2/6)^2<121/100.
+\]
+Using $c>7/15$ and $\log(1-z)\le-z$ yields $r_n(t)\le\exp(-3nv/4)$. At a node $\Psi_n=j\pi$ with $j\le\lfloor n/2\rfloor-1$, put $x_n=n\alpha$. Then $x_n\ge\pi-21/152>29/10$ and $nv>2x_n$. Hence $r_n<1/32$. The signed main cosine at the node is $\cos((3/2)\arg\Lambda)>99/100$. But the right side of (8) is at most $1/32+(1+1/32)/4<99/100$. This proves the upper sign statement.
+\appendix
+\section{Certificate replay}
+The code and archives are in \path{topics/balanced-arrays/four-columns}
+in \href{https://github.com/ProgramComputer/open-math-research}{the project repository}.
+Use Python 3 and python-flint 0.9.0. From the four-column folder, run
+\begin{verbatim}
+python -m pip install python-flint==0.9.0
+shasum -a 256 -c SHA256SUMS
+python code/small_constants.py
+python code/upper_constants.py
+python code/middle.py
+set -o pipefail
+python code/lower.py 533 $(seq 1 40) | diff -u certificates/lower.jsonl -
+python code/prefix.py --directory certificates/rows --verify --last 532
+python code/independent_prefix.py certificates/rows --last 532
+\end{verbatim}
+\end{document}
