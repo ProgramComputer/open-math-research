@@ -1,6 +1,16 @@
 --- CatalanStrictPeaksFarRay.lean
 +++ CatalanStrictPeaksFarRay.lean
-@@ -106,9 +106,10 @@
+@@ -24,8 +24,7 @@
+       ‖cutFactor z w‖ * Real.sqrt (1 + L * s) := by
+   have hfactor : 1 - w * (1 + (s : ℂ)) / z =
+       (1 - w / z) * (1 + (w / (w - z)) * (s : ℂ)) := by
+-    field_simp [hz, sub_ne_zero.mpr hwz]
+-    ring
++    field_simp [hz, sub_ne_zero.mpr hwz] <;> ring
+   have hbound : ‖1 + (w / (w - z)) * (s : ℂ)‖ ≤ 1 + L * s := calc
+     _ ≤ ‖(1 : ℂ)‖ + ‖(w / (w - z)) * (s : ℂ)‖ := norm_add_le _ _
+     _ = 1 + ‖w / (w - z)‖ * s := by
+@@ -106,9 +105,10 @@
    have hdirect : ‖w / (w - z)‖ ≤ L := by
      refine (far_to_near_bound hd hD).trans ?_
      change 1 + 1 / (2 * d) ≤ 1 + (n : ℝ) / 4
@@ -14,3 +24,27 @@
    have hA : ‖cutFactor z x‖ ≤ ‖cutFactor z w‖ * (1 + L * s / 2) :=
      (norm_cutFactor_radial hz hwz hs hL hdirect).trans
        (mul_le_mul_of_nonneg_left (sqrt_affine_le hs hL) (norm_nonneg _))
+@@ -151,9 +151,11 @@
+       positivity
+     _ = _ := by
+       rw [hx]
+-      field_simp [(norm_pos_iff.mpr hw).ne', (norm_pos_iff.mpr hcw).ne',
+-        (show 1 + s ≠ 0 by positivity)]
+-      ring
++      have cancel (a b u v t : ℝ) (hu : u ≠ 0) (hv : v ≠ 0) (ht : t ≠ 0) :
++          a * b * t / (2 * (u * t) * v) = a / (2 * u * v) * b := by
++        field_simp [hu, hv, ht] <;> ring
++      exact cancel _ _ _ _ _ (norm_pos_iff.mpr hw).ne' (norm_pos_iff.mpr hcw).ne'
++        (show 1 + s ≠ 0 by positivity)
+ 
+ private theorem rayPrefactor_conjFar_form (d : ℝ) (x : ℂ) :
+     rayPrefactor d 2 x =
+@@ -500,7 +502,7 @@
+     _ = _ := by
+       change _ = (6 / 5 : ℝ) * (radius d ^ 2) ^ n / h * rayLeadingScale d n
+       rw [rayLeadingScale, pow_right_comm (radius d) 2 n, inv_pow, pow_two]
+-      field_simp [hp.ne', Real.pi_ne_zero, (pow_pos hr n).ne']; ring
++      field_simp [hp.ne', Real.pi_ne_zero, (pow_pos hr n).ne'] <;> ring
+ 
+ /-- On the small-angle range the actual far-ray contribution is less than
+ one hundredth of the inverse row length, in the leading amplitude units. -/

@@ -1,6 +1,16 @@
 --- CatalanStrictPeaksMiddleRoots.lean
 +++ CatalanStrictPeaksMiddleRoots.lean
-@@ -173,8 +173,8 @@
+@@ -48,8 +48,7 @@
+   rw [hρ]
+   push_cast
+   rw [pow_succ (z⁻¹), pow_succ ((a : ℂ)⁻¹)]
+-  field_simp [hz, ha, hB]
+-  ring
++  field_simp [hz, ha, hB] <;> ring
+ 
+ private theorem im_sign_of_near_unit {u z : ℂ} {e : ℝ}
+     (hu : ‖u‖ = 1) (he : e ^ 2 = 1) (heU : 0 < e * u.im)
+@@ -173,8 +172,8 @@
        _ ≤ _ := by
          rw [abs_mul, abs_neg, abs_of_nonneg hd.le, norm_mul, norm_nearPhaseUnit hd hD,
            one_mul]

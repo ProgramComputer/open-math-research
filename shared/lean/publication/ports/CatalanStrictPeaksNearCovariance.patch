@@ -1,5 +1,14 @@
 --- CatalanStrictPeaksNearCovariance.lean
 +++ CatalanStrictPeaksNearCovariance.lean
+@@ -91,7 +91,7 @@
+   have hu₁ : (1 + s)⁻¹ ≤ 1 := inv_le_one_of_one_le₀ (by linarith)
+   have hs' : 1 - (1 + s)⁻¹ ≤ s := by
+     have heq : 1 - (1 + s)⁻¹ = s / (1 + s) := by
+-      field_simp [show 1 + s ≠ 0 by positivity]
++      field_simp [show 1 + s ≠ 0 by positivity] <;> ring
+     rw [heq]
+     apply (div_le_iff₀ (by positivity)).mpr
+     nlinarith
 @@ -99,8 +99,7 @@
    have hq' : 1 - tiltAverage n ≤ 3 / (2 * (n : ℝ)) := by
      have heq : 1 - tiltAverage n = 3 / (2 * ((n : ℝ) + 1)) := by
@@ -10,7 +19,17 @@
      rw [heq]
      apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
      linarith
-@@ -158,9 +157,9 @@
+@@ -134,8 +133,7 @@
+       integral_add h1 (h0.const_mul e), integral_const_mul, ← rawMoment, ← rawMoment]
+     unfold tiltedMoment moment
+     dsimp [e]
+-    field_simp [hmass.ne']
+-    ring
++    field_simp [hmass.ne'] <;> ring
+ 
+ private theorem piecewise_upper_bound {f p q : ℝ → ℝ}
+     (hf : IntegrableOn f (Ioi 0)) (hp : IntegrableOn p (Ioi 0))
+@@ -158,12 +156,16 @@
      _ ≤ (∫ s in L, p s) + ∫ s in T, q s := add_le_add
        (setIntegral_mono_on hfL (hp.mono_set Ioc_subset_Ioi_self) measurableSet_Ioc hlocal)
        (setIntegral_mono_on hfT hq measurableSet_Ioi htail)
@@ -22,21 +41,67 @@
  
  private noncomputable def affineTail (n : ℕ) (s : ℝ) : ℝ :=
    ((2 * (n : ℝ) + 1) * (1 + (n : ℝ) * s / 8)) * rayWeight n s
-@@ -226,7 +225,7 @@
++
++private theorem affineTail_normalized_bound {n : ℕ} (hn : 150 ≤ n) :
++    (∫ s in Ioi (1 / 6 : ℝ), affineTail n s) / mass n < 1 / (20 * (n : ℝ)) := by
++  simpa only [affineTail] using covariance_tail_integral_bound hn
+ 
+ private theorem affineTail_integrable {n : ℕ} (hn : 150 ≤ n) :
+     IntegrableOn (affineTail n) (Ioi (1 / 6)) := by
+@@ -199,8 +201,7 @@
+       C * momentEnvelope n 3 s) / mass n = _
+     rw [integral_add h12 (h3.const_mul C), integral_add (h1.const_mul A) (h2.const_mul B),
+       integral_const_mul, integral_const_mul, integral_const_mul, h1i, h2i, h3i]
+-    field_simp [hmass.ne']
+-    ring
++    field_simp [hmass.ne'] <;> ring
+   have hg : IntegrableOn g (Ioi 0) := hf.norm
+   have hp0 (s : ℝ) (hs : 0 < s) : 0 ≤ p s := by
+     have hw := rayWeight_nonneg n hs.le
+@@ -226,7 +227,7 @@
    apply (div_le_div_of_nonneg_right (norm_integral_le_integral_norm _) hmass.le).trans_lt
    exact (div_le_div_of_nonneg_right htotal hmass.le).trans_lt (by
      rw [add_div, hpInt]
 -    exact add_lt_add_left (covariance_tail_integral_bound hn) _)
-+    linarith only [covariance_tail_integral_bound hn])
++    exact add_lt_add_of_le_of_lt le_rfl (affineTail_normalized_bound hn))
  
  /-- The successive-size bound (12) for the actual normalized near-ray mean.
  The estimate holds throughout the interior parameter range. -/
-@@ -479,7 +478,7 @@
+@@ -258,6 +259,7 @@
+   have hLip : LipschitzOnWith K (nearConjugateRatio d) (Ioi 0) := by
+     apply LipschitzOnWith.of_dist_le_mul
+     intro s hs t ht
++    change dist (nearConjugateRatio d s) (nearConjugateRatio d t) ≤ ((n : ℝ) / 8) * dist s t
+     simpa only [dist_eq_norm, Real.norm_eq_abs] using
+       nearConjugateRatio_lipschitz hd hD hS (mem_Ioi.mp hs).le (mem_Ioi.mp ht).le
+   have hw : ContinuousOn (rayWeight n) (Ioi 0) := by
+@@ -301,8 +303,7 @@
+       rw [setIntegral_congr_fun measurableSet_Ioi (fun s _ => heq s),
+         integral_sub h1 (h0.const_mul s₀), integral_const_mul, hraw1, ← mass]
+       unfold moment
+-      field_simp [(mass_pos hm0).ne']
+-      ring
++      field_simp [(mass_pos hm0).ne'] <;> ring
+   obtain ⟨h0, h0i⟩ := hraw n hn
+   obtain ⟨h1, h1i⟩ := hraw (n + 1) (by omega)
+   have heq (s : ℝ) : (s - s₀) * signedWeight n s =
+@@ -324,8 +325,7 @@
+   have hη : 0 < η := tiltAverage_pos hn
+   have hbase : 0 < 1 + s := by positivity
+   have heq : η - (1 + s)⁻¹ = η * (s - (η⁻¹ - 1)) / (1 + s) := by
+-    field_simp [hη.ne', hbase.ne']
+-    ring
++    field_simp [hη.ne', hbase.ne'] <;> ring
+   rw [signedWeight_eq, heq]
+   have hform : (s - (η⁻¹ - 1)) * (η * (s - (η⁻¹ - 1)) / (1 + s) * rayWeight n s) =
+       (s - (η⁻¹ - 1)) ^ 2 * (η / (1 + s) * rayWeight n s) := by ring
+@@ -479,7 +479,8 @@
          positivity) hloc htail
      apply (div_le_div_of_nonneg_right hcInt hM.le).trans_lt
      rw [add_div, hPint]
 -    exact (add_lt_add_left (covariance_tail_integral_bound hn) _).trans (small_real_part_numeric hn)
-+    linarith only [covariance_tail_integral_bound hn, small_real_part_numeric hn]
++    apply (add_lt_add_of_le_of_lt le_rfl (affineTail_normalized_bound hn)).trans
++    simpa only [A, B, C] using small_real_part_numeric hn
    have hr : IntegrableOn (fun s => (weighted n (nearAmplitude d) s).re) (Ioi 0) :=
      hH.re
    have hw : IntegrableOn (rayWeight n) (Ioi 0) := by
