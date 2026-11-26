@@ -1,0 +1,16 @@
+j= 3  n= 72  old degree=24  new degree=24  certified sign-changing intervals=48
+j= 3  n= 73  old degree=24  new degree=24  certified sign-changing intervals=48
+j= 3  n= 74  old degree=24  new degree=25  certified sign-changing intervals=49
+j= 5  n=140  old degree=28  new degree=28  certified sign-changing intervals=56
+j= 5  n=142  old degree=28  new degree=28  certified sign-changing intervals=56
+j= 5  n=144  old degree=28  new degree=29  certified sign-changing intervals=57
+j= 9  n=288  old degree=32  new degree=32  certified sign-changing intervals=64
+j= 9  n=292  old degree=32  new degree=32  certified sign-changing intervals=64
+j= 9  n=296  old degree=32  new degree=33  certified sign-changing intervals=65
+j=15  n=330  old degree=22  new degree=22  certified sign-changing intervals=44
+j=15  n=337  old degree=22  new degree=22  certified sign-changing intervals=44
+j=15  n=344  old degree=22  new degree=23  certified sign-changing intervals=45
+j=19  n=247  old degree=13  new degree=13  certified sign-changing intervals=26
+j=19  n=256  old degree=13  new degree=13  certified sign-changing intervals=26
+j=19  n=265  old degree=13  new degree=14  certified sign-changing intervals=27
+15 consecutive pairs, 719 disjoint sign-changing intervals across the pairs.
