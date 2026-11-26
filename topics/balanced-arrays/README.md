@@ -1,5 +1,7 @@
 # Real zeros of balanced binary arrays
 
+For every $\epsilon>0$, all sufficiently large rows have simple negative zeros for every $d\ge\epsilon n$ and every row cap. The cutoff depends only on $\epsilon$. **⬜ None** for Lean or Rocq. [Theorem, proof and independent review](dense-regime/README.md)
+
 For four columns with row cap two, the polynomial has exactly $\lfloor n/2\rfloor$ distinct negative zeros at every row count $n$. The computer-assisted proof covers $0\le n\le532$ by exact finite certificates and $n\ge533$ by a uniform sign argument. Consecutive-row interlacing remains open in this case. **⬜ None** for Lean or Rocq. [Theorem, proof and independent review](four-columns/README.md)
 
 For every $d\ge2$, balanced arrays with row cap $r=d-1$ have $\lfloor n(d-1)/d\rfloor$ simple negative zeros for every row count $n$. Consecutive rows strictly interlace. When the degree stays the same, the new rightmost zero is closer to zero. This settles the entire family $U(d-1,d)$. The general conjecture remains open. [Four-page paper](no-full-row.pdf) · [Proof](no-full-row.md) · [Independent review](review-no-full-row.md) · [Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays)
