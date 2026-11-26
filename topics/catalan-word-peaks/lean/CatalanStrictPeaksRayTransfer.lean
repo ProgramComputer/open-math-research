@@ -14,7 +14,8 @@ namespace CatalanStrictPeaks.CutGeometry
 open Complex Set MeasureTheory Filter
 open scoped ComplexConjugate Interval Topology
 
-private noncomputable def cutPoint (d : ℝ) (i : Fin 4) : ℂ :=
+/-- The branch points in circular order, starting with the upper near point. -/
+noncomputable def cutPoint (d : ℝ) (i : Fin 4) : ℂ :=
   match i.val with
   | 0 => nearPoint d
   | 1 => farPoint d
@@ -130,6 +131,17 @@ private theorem cutPoint_norm_pos {d : ℝ} (hd : 0 < d) (hD : d < 1) (i : Fin 4
   · simpa [cutPoint] using hf
   · simpa [cutPoint] using hn
 
+private theorem radius_le_cutPoint {d : ℝ} (hd : 0 < d) (hD : d < 1) (i : Fin 4) :
+    radius d ≤ ‖cutPoint d i‖ := by
+  have h : radius d ≤ ‖farPoint d‖ := by
+    rw [← nearPoint_norm hd hD]
+    exact (norm_order hd hD).le
+  fin_cases i
+  · exact (nearPoint_norm hd hD).ge
+  · exact h
+  · simpa [cutPoint] using h
+  · simpa [cutPoint] using (nearPoint_norm hd hD).ge
+
 private theorem cutFactor_product (d : ℝ) (z : ℂ) :
     (∏ i : Fin 4, cutFactor (cutPoint d i) z) = branch d z := by
   simp [Fin.prod_univ_succ, cutPoint, branch]
@@ -186,18 +198,9 @@ private theorem logBranch_eq_branch_inner {d : ℝ} (hd : 0 < d) (hD : d < 1)
   rw [← cutFactor_product, logBranch]
   apply Finset.prod_congr rfl
   intro i _
-  have hRadius : radius d ≤ ‖cutPoint d i‖ := by
-    have h : radius d ≤ ‖farPoint d‖ := by
-      rw [← nearPoint_norm hd hD]
-      exact (norm_order hd hD).le
-    fin_cases i
-    · exact (nearPoint_norm hd hD).ge
-    · exact h
-    · simpa [cutPoint] using h
-    · simpa [cutPoint] using (nearPoint_norm hd hD).ge
   obtain ⟨h₁, h₂⟩ := liftedAngle_within_strip hd hD hj i hz
   rw [sectorFactor, logStripRoot_eq_cutFactor_of_le_radius (cutPoint_norm_pos hd hD i) h₁ h₂
-    (hr.trans hRadius), liftedAngle_polar hd hD]
+    (hr.trans (radius_le_cutPoint hd hD i)), liftedAngle_polar hd hD]
 
 private theorem cutPoint_im_ne_zero {d : ℝ} (hd : 0 < d) (hD : d < 1) (i : Fin 4) :
     (cutPoint d i).im ≠ 0 := by
@@ -689,5 +692,166 @@ theorem analyticGenerating_logarithmicRays {d : ℝ} (hd : 0 < d) (hD : d < 1)
     filter_upwards [eventually_ge_atTop a] with b hb
     exact (analyticGenerating_finiteDeformation hd hD h₀ hr n hb).symm
   exact tendsto_nhds_unique tendsto_const_nhds (hTotal.congr' hEventually)
+
+private theorem sectorAngle_strict {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    {i j : ℕ} (hij : i < j) (hj : j ≤ 5) : sectorAngle d i < sectorAngle d j :=
+  (sectorAngle_step hd hD (show i ≤ 4 by omega)).trans_le
+    (sectorAngle_mono hd hD (Nat.succ_le_of_lt hij))
+
+private theorem otherFactors_principal {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    (j : Fin 4) (x : ℝ) :
+    otherFactors d j x =
+      ∏ i ∈ Finset.univ.erase j, cutFactor (cutPoint d i) (exp (onCut d j x)) := by
+  unfold otherFactors
+  apply Finset.prod_congr rfl
+  intro i hi
+  have hne : i.val ≠ j.val := fun h => (Finset.mem_erase.mp hi).1 (Fin.ext h)
+  have hIm : (onCut d j x).im = sectorAngle d (j.val + 1) := by simp [onCut, Complex.mul_im]
+  have h₀ (p : Fin 4) : 0 < sectorAngle d (p.val + 1) :=
+    sectorAngle_strict hd hD (Nat.zero_lt_succ _) (by omega)
+  have hπ (p : Fin 4) : sectorAngle d (p.val + 1) < 2 * Real.pi := by
+    exact sectorAngle_strict hd hD (show p.val + 1 < 5 by omega) le_rfl
+  have hLift :
+      liftedAngle d j.val i < (onCut d j x).im ∧
+        (onCut d j x).im < liftedAngle d j.val i + 2 * Real.pi := by
+    rw [hIm]
+    unfold liftedAngle
+    split_ifs with h
+    · exact ⟨sectorAngle_strict hd hD (by omega) (by omega), by linarith [h₀ i, hπ j]⟩
+    · refine ⟨by linarith [hπ i, h₀ j], ?_⟩
+      have hLT := sectorAngle_strict hd hD (show j.val + 1 < i.val + 1 by omega) (by omega)
+      linarith
+  rw [sectorFactor, logStripRoot_eq_cutFactor (cutPoint_norm_pos hd hD i) hLift.1 hLift.2,
+    liftedAngle_polar hd hD]
+
+private theorem exp_onCut {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    (j : Fin 4) (x : ℝ) :
+    exp (onCut d j x) = cutPoint d j * ((Real.exp x / ‖cutPoint d j‖ : ℝ) : ℂ) := by
+  have hR : (‖cutPoint d j‖ : ℂ) ≠ 0 := by exact_mod_cast (cutPoint_norm_pos hd hD j).ne'
+  let e := exp ((sectorAngle d (j.val + 1) : ℂ) * I)
+  calc
+    exp (onCut d j x) = (Real.exp x : ℂ) * e := by simp [onCut, e, exp_add, ofReal_exp]
+    _ = ((‖cutPoint d j‖ : ℂ) * e) * ((Real.exp x / ‖cutPoint d j‖ : ℝ) : ℂ) := by
+      push_cast
+      field_simp [hR] <;> ring
+    _ = _ := by rw [show (‖cutPoint d j‖ : ℂ) * e = cutPoint d j from cutPoint_polar hd hD j]
+
+/-- The analytic factor of a ray jump with its singular square root omitted. -/
+noncomputable def rayPrefactor (d : ℝ) (j : Fin 4) (z : ℂ) : ℂ :=
+  -(∏ i ∈ Finset.univ.erase j, cutFactor (cutPoint d i) z) /
+    (2 * z * ((scale d : ℂ) - z))
+
+/-- The normalized radial integrand in the coefficient identity. -/
+noncomputable def rayIntegrand (d : ℝ) (n : ℕ) (j : Fin 4) (s : ℝ) : ℂ :=
+  (Real.sqrt s : ℂ) * (1 + (s : ℂ))⁻¹ ^ (n + 1) *
+    rayPrefactor d j (cutPoint d j * (1 + (s : ℂ)))
+
+private theorem real_exp_log_cut {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    (j : Fin 4) {s : ℝ} (hs : 0 ≤ s) :
+    Real.exp (Real.log (‖cutPoint d j‖ * (1 + s))) / ‖cutPoint d j‖ = 1 + s := by
+  have hR := cutPoint_norm_pos hd hD j
+  rw [Real.exp_log (mul_pos hR (by linarith))]
+  exact mul_div_cancel_left₀ _ hR.ne'
+
+/-- The logarithmic jump including the Jacobian equals the normalized radial integrand. -/
+theorem logRayJump_eq_normalized {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    (n : ℕ) (j : Fin 4) {s : ℝ} (hs : 0 ≤ s) :
+    (1 + s)⁻¹ • logRayJump d n j.val (Real.log (‖cutPoint d j‖ * (1 + s))) =
+      (-2 * I) * (cutPoint d j)⁻¹ ^ n * rayIntegrand d n j s := by
+  let x := Real.log (‖cutPoint d j‖ * (1 + s))
+  have hScale : Real.exp x / ‖cutPoint d j‖ = 1 + s := real_exp_log_cut hd hD j hs
+  have hOut : 1 ≤ Real.exp x / ‖cutPoint d j‖ := by rw [hScale]; linarith
+  have hJump := logSector_jump_sqrt hd hD n j x hOut
+  change (1 + s)⁻¹ •
+    (logSector d n (j.val + 1) (onCut d j x) - logSector d n j.val (onCut d j x)) = _
+  rw [hJump, otherFactors_principal hd hD, exp_onCut hd hD, hScale]
+  rw [show 1 + s - 1 = s by ring]
+  simp only [rayIntegrand, rayPrefactor, Complex.real_smul, Complex.ofReal_inv, Complex.ofReal_add,
+    Complex.ofReal_one, mul_inv_rev, mul_pow, pow_succ]
+  ring
+
+private theorem logRayJump_vanishes_inward {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    (n : ℕ) (j : Fin 4) {x : ℝ} (hx : x ≤ Real.log ‖cutPoint d j‖) :
+    logRayJump d n j.val x = 0 := by
+  have hR := cutPoint_norm_pos hd hD j
+  have hIn : Real.exp x / ‖cutPoint d j‖ ≤ 1 :=
+    (div_le_one hR).mpr (by simpa only [Real.exp_log hR] using Real.exp_le_exp.mpr hx)
+  exact logSector_jump_zero hd hD n j x hIn
+
+private theorem logRayJump_integral_cutoff {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    {n : ℕ} (hn : 0 < n) (j : Fin 4) {a : ℝ} (ha : a ≤ Real.log ‖cutPoint d j‖) :
+    (∫ x in Ioi a, logRayJump d n j.val x) =
+      ∫ x in Ioi (Real.log ‖cutPoint d j‖), logRayJump d n j.val x := by
+  let b := Real.log ‖cutPoint d j‖
+  have hUnion : Ioi a = Ioc a b ∪ Ioi b := by
+    ext x
+    constructor
+    · intro hx
+      rcases le_or_gt x b with h | h
+      · exact Or.inl ⟨hx, h⟩
+      · exact Or.inr h
+    · rintro (hx | hx)
+      · exact hx.1
+      · exact ha.trans_lt hx
+  have hDisjoint : Disjoint (Ioc a b) (Ioi b) :=
+    Set.disjoint_left.mpr fun x hx hy => (not_lt_of_ge hx.2) hy
+  have hInward : ∫ x in Ioc a b, logRayJump d n j.val x = 0 := by
+    rw [setIntegral_congr_fun measurableSet_Ioc
+      (g := fun _ => (0 : ℂ)) (fun _ hx => logRayJump_vanishes_inward hd hD n j hx.2)]
+    simp
+  have hInt : IntegrableOn (logRayJump d n j.val) (Ioi a) := logRayJump_integrable hd hD hn j.isLt a
+  have hNear : IntegrableOn (logRayJump d n j.val) (Ioc a b) := hInt.mono_set fun _ hx => hx.1
+  have hFar : IntegrableOn (logRayJump d n j.val) (Ioi b) := logRayJump_integrable hd hD hn j.isLt b
+  rw [hUnion, setIntegral_union hDisjoint measurableSet_Ioi hNear hFar, hInward, zero_add]
+
+private theorem normalizedRay_integral_data {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    {n : ℕ} (hn : 0 < n) (j : Fin 4) :
+    IntegrableOn (rayIntegrand d n j) (Ioi 0) ∧
+      (∫ x in Ioi (Real.log ‖cutPoint d j‖), logRayJump d n j.val x) =
+        (-2 * I) * (cutPoint d j)⁻¹ ^ n * ∫ s in Ioi 0, rayIntegrand d n j s := by
+  let R := ‖cutPoint d j‖
+  let scaleFactor := (-2 * I) * (cutPoint d j)⁻¹ ^ n
+  have hR : 0 < R := cutPoint_norm_pos hd hD j
+  have hz : cutPoint d j ≠ 0 := norm_pos_iff.mp hR
+  have hScale : scaleFactor ≠ 0 := mul_ne_zero
+    (mul_ne_zero (by norm_num) I_ne_zero) (pow_ne_zero _ (inv_ne_zero hz))
+  let f : ℝ → ℂ := fun s => (1 + s)⁻¹ • logRayJump d n j.val (Real.log (R * (1 + s)))
+  have hSub : IntegrableOn f (Ioi 0) ∧
+      (∫ x in Ioi (Real.log R), logRayJump d n j.val x) = ∫ s in Ioi 0, f s :=
+    OpenMathResearch.LogarithmicContour.integral_logRadius_improper hR
+      (logRayJump_continuous hd hD n j.isLt) (logRayJump_integrable hd hD hn j.isLt (Real.log R))
+  have hEq : EqOn f (fun s => scaleFactor * rayIntegrand d n j s) (Ioi 0) :=
+    fun s hs => logRayJump_eq_normalized hd hD n j (le_of_lt hs)
+  refine ⟨?_, ?_⟩
+  · apply (Integrable.const_mul hSub.1 scaleFactor⁻¹).congr_fun _ measurableSet_Ioi
+    intro s hs
+    rw [hEq hs, ← mul_assoc, inv_mul_cancel₀ hScale, one_mul]
+  · rw [hSub.2, setIntegral_congr_fun measurableSet_Ioi hEq, MeasureTheory.integral_const_mul]
+
+/-- Each normalized ray integrand is absolutely integrable. -/
+theorem rayIntegrand_integrable {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    {n : ℕ} (hn : 0 < n) (j : Fin 4) : IntegrableOn (rayIntegrand d n j) (Ioi 0) :=
+  (normalizedRay_integral_data hd hD hn j).1
+
+/-- The exact Catalan coefficient as the sum of the four improper ray integrals. -/
+theorem analyticGenerating_fourRays {d : ℝ} (hd : 0 < d) (hD : d < 1)
+    {r : NNReal} (h₀ : 0 < r) (hr : (r : ℝ) < radius d) {n : ℕ} (hn : 0 < n) :
+    ((scale d ^ n * (C n).eval (1 - (scale d ^ 2)⁻¹) : ℝ) : ℂ) =
+      ∑ j : Fin 4, (-(cutPoint d j)⁻¹ ^ n / (Real.pi : ℂ)) *
+        ∫ s in Ioi 0, rayIntegrand d n j s := by
+  have h₀R : 0 < (r : ℝ) := by exact_mod_cast h₀
+  rw [analyticGenerating_logarithmicRays hd hD h₀ hr hn, ← Fin.sum_univ_eq_sum_range,
+    Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro j _
+  have hRadius : Real.log (r : ℝ) ≤ Real.log ‖cutPoint d j‖ :=
+    Real.log_le_log h₀R (hr.le.trans (radius_le_cutPoint hd hD j))
+  rw [logRayJump_integral_cutoff hd hD hn j hRadius, (normalizedRay_integral_data hd hD hn j).2]
+  have hπI : (2 * (Real.pi : ℂ) * I)⁻¹ * (-2 * I) = -(Real.pi : ℂ)⁻¹ := by
+    field_simp [I_ne_zero, Complex.ofReal_ne_zero.mpr Real.pi_ne_zero] <;> ring
+  calc
+    _ = ((2 * (Real.pi : ℂ) * I)⁻¹ * (-2 * I)) * ((cutPoint d j)⁻¹ ^ n *
+        ∫ s in Ioi 0, rayIntegrand d n j s) := by ring
+    _ = _ := by rw [hπI]; ring
 
 end CatalanStrictPeaks.CutGeometry

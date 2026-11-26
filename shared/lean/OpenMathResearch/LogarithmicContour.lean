@@ -1,5 +1,6 @@
 import Mathlib.Analysis.Complex.CauchyIntegral
 import Mathlib.Analysis.SpecialFunctions.Log.Deriv
+import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 import Mathlib.MeasureTheory.Integral.IntervalIntegral.IntegrationByParts
 import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.Ring
@@ -15,8 +16,8 @@ Cauchy–Goursat on the rectangles gives the integral of these jumps.
 
 namespace OpenMathResearch.LogarithmicContour
 
-open Complex Set MeasureTheory
-open scoped Interval
+open Complex Set MeasureTheory Filter
+open scoped Interval Topology
 
 /-- The coefficient contour in logarithmic coordinates. -/
 theorem circleIntegral_eq_angular (f : ℂ → ℂ) (a : ℝ) (n : ℕ) :
@@ -128,6 +129,17 @@ theorem deform {m : ℕ} {a b : ℝ} (hab : a ≤ b)
       rw [Finset.sum_add_distrib, hJumps]
       rfl
 
+private theorem logRadius_transport_continuous {E : Type*} [NormedAddCommGroup E]
+    [NormedSpace ℝ E] {R : ℝ} (hR : 0 < R) {g : ℝ → E} (hg : Continuous g) :
+    ContinuousOn (fun s : ℝ => (1 + s)⁻¹ • g (Real.log (R * (1 + s)))) (Ioi (-1)) := by
+  intro s hs
+  have hOne : (1 + s) ≠ 0 := by have := hs; change -1 < s at this; linarith
+  have hContinuousOne : ContinuousAt (fun u : ℝ => 1 + u) s := by fun_prop
+  have hContinuousScale : ContinuousAt (fun u : ℝ => R * (1 + u)) s :=
+    continuousAt_const.mul hContinuousOne
+  have hContinuousLog := hContinuousScale.log (mul_ne_zero hR.ne' hOne)
+  exact ((hContinuousOne.inv₀ hOne).smul (hg.continuousAt.comp hContinuousLog)).continuousWithinAt
+
 /-- Change variables from logarithmic radius to normalized outward displacement. -/
 theorem integral_logRadius_substitution {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
     {R : ℝ} (hR : 0 < R) {g : ℝ → E} (hg : Continuous g) (a b : ℝ) :
@@ -152,13 +164,10 @@ theorem integral_logRadius_substitution {E : Type*} [NormedAddCommGroup E] [Norm
     dsimp [dr]
     fun_prop
   have ht : ContinuousOn transport (r '' uIcc a b) := by
+    apply (logRadius_transport_continuous hR hg).mono
     rintro s ⟨x, _, rfl⟩
-    have hOne : (1 + r x) ≠ 0 := by rw [hUnit]; exact (hdrPos x).ne'
-    have hContinuousOne : ContinuousAt (fun s : ℝ => 1 + s) (r x) := by fun_prop
-    have hContinuousScale : ContinuousAt (fun s : ℝ => R * (1 + s)) (r x) :=
-      continuousAt_const.mul hContinuousOne
-    have hContinuousLog := hContinuousScale.log (mul_ne_zero hR.ne' hOne)
-    exact ((hContinuousOne.inv₀ hOne).smul (hg.continuousAt.comp hContinuousLog)).continuousWithinAt
+    change -1 < r x
+    linarith [hUnit x, hdrPos x]
   have hChange := intervalIntegral.integral_comp_smul_deriv' (g := transport) hDeriv hDr ht
   calc
     _ = ∫ x in a..b, dr x • (transport ∘ r) x := by
@@ -167,5 +176,57 @@ theorem integral_logRadius_substitution {E : Type*} [NormedAddCommGroup E] [Norm
       change g x = dr x • ((1 + r x)⁻¹ • g (Real.log (R * (1 + r x))))
       rw [hLog, hUnit, smul_smul, mul_inv_cancel₀ (hdrPos x).ne', one_smul]
     _ = _ := hChange
+
+/-- Absolute integrability and the substitution pass to the outward improper ray. -/
+theorem integral_logRadius_improper {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [CompleteSpace E] {R : ℝ} (hR : 0 < R) {g : ℝ → E} (hg : Continuous g)
+    (hInt : IntegrableOn g (Ioi (Real.log R))) :
+    let transport : ℝ → E := fun s => (1 + s)⁻¹ • g (Real.log (R * (1 + s)))
+    IntegrableOn transport (Ioi 0) ∧
+      (∫ x in Ioi (Real.log R), g x) = ∫ s in Ioi 0, transport s := by
+  let a := Real.log R
+  let u : ℝ → ℝ := fun b => Real.exp b / R - 1
+  let transport : ℝ → E := fun s => (1 + s)⁻¹ • g (Real.log (R * (1 + s)))
+  have hZero : u a = 0 := by simp [u, a, Real.exp_log hR, hR.ne']
+  have hNonneg {b : ℝ} (hb : a ≤ b) : 0 ≤ u b := by
+    rw [← hZero]
+    exact sub_le_sub_right (div_le_div_of_nonneg_right (Real.exp_le_exp.mpr hb) hR.le) 1
+  have hTop : Tendsto u atTop atTop := by
+    simpa only [u, sub_eq_add_neg] using
+      (Real.tendsto_exp_atTop.atTop_div_const hR).atTop_add
+        (tendsto_const_nhds : Tendsto (fun _ : ℝ => (-1 : ℝ)) atTop (𝓝 (-1)))
+  have hLocal (b : ℝ) : IntegrableOn transport (Ioc 0 (u b)) := by
+    have hCont : ContinuousOn transport (Icc 0 (u b)) := by
+      apply (logRadius_transport_continuous hR hg).mono
+      intro s hs
+      exact lt_of_lt_of_le (by norm_num : (-1 : ℝ) < 0) hs.1
+    exact hCont.integrableOn_Icc.mono_set Ioc_subset_Icc_self
+  have hNorm (s : ℝ) (hs : 0 ≤ s) :
+      ‖transport s‖ = (1 + s)⁻¹ • ‖g (Real.log (R * (1 + s)))‖ := by
+    have hPos : 0 ≤ (1 + s)⁻¹ := inv_nonneg.mpr (by linarith)
+    simp [transport, norm_smul, Real.norm_eq_abs, abs_of_nonneg hPos, smul_eq_mul]
+  have hFiniteNorm (b : ℝ) (hb : a ≤ b) :
+      (∫ x in a..b, ‖g x‖) = ∫ s in (0)..u b, ‖transport s‖ := by
+    have hChange := integral_logRadius_substitution hR hg.norm a b
+    change (∫ x in a..b, ‖g x‖) =
+      ∫ s in u a..u b, (1 + s)⁻¹ • ‖g (Real.log (R * (1 + s)))‖ at hChange
+    rw [hZero, hChange]
+    apply intervalIntegral.integral_congr
+    intro s hs
+    rw [uIcc_of_le (hNonneg hb)] at hs
+    exact (hNorm s hs.1).symm
+  have hNormLimit : Tendsto (fun b : ℝ => ∫ s in (0)..u b, ‖transport s‖) atTop
+      (𝓝 (∫ x in Ioi a, ‖g x‖)) := by
+    apply (intervalIntegral_tendsto_integral_Ioi a hInt.norm tendsto_id).congr'
+    filter_upwards [eventually_ge_atTop a] with b hb
+    exact hFiniteNorm b hb
+  have hTarget : IntegrableOn transport (Ioi 0) :=
+    integrableOn_Ioi_of_intervalIntegral_norm_tendsto _ 0 hLocal hTop hNormLimit
+  refine ⟨hTarget, tendsto_nhds_unique ?_ (intervalIntegral_tendsto_integral_Ioi _ hTarget hTop)⟩
+  apply (intervalIntegral_tendsto_integral_Ioi a hInt tendsto_id).congr
+  intro b
+  have hChange := integral_logRadius_substitution hR hg a b
+  change (∫ x in a..b, g x) = ∫ s in u a..u b, transport s at hChange
+  simpa only [hZero] using hChange
 
 end OpenMathResearch.LogarithmicContour

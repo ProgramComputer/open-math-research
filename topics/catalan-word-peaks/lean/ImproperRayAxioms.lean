@@ -3,3 +3,8 @@ import CatalanStrictPeaksRayTransfer
 #print axioms CatalanStrictPeaks.CutGeometry.logSector_norm_le_large
 #print axioms CatalanStrictPeaks.CutGeometry.logRayJump_integrable
 #print axioms CatalanStrictPeaks.CutGeometry.analyticGenerating_logarithmicRays
+#print axioms OpenMathResearch.LogarithmicContour.integral_logRadius_substitution
+#print axioms OpenMathResearch.LogarithmicContour.integral_logRadius_improper
+#print axioms CatalanStrictPeaks.CutGeometry.logRayJump_eq_normalized
+#print axioms CatalanStrictPeaks.CutGeometry.rayIntegrand_integrable
+#print axioms CatalanStrictPeaks.CutGeometry.analyticGenerating_fourRays
