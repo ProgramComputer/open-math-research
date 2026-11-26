@@ -2,11 +2,15 @@
 
 Fix a column count $d\ge2$ and a row cap $1\le r<d$. Let $a_{n,k}$ count labeled $n\times d$ binary arrays with $k$ ones in each column and at most $r$ ones in each row. Define $P_n(q)=\sum_k a_{n,k}q^k$.
 
-**Theorem.** For every fixed pair $(r,d)$ and all sufficiently large $n$, all $\lfloor nr/d\rfloor$ zeros of $P_n$ are simple and negative. They strictly interlace the zeros of $P_{n+1}$, whose rightmost zero is further right. The proof gives an existential threshold $N(d,r)$. The conjecture for every $n$ remains open. [Proof](fixed-rank-eventual.pdf) · [Manuscript source](fixed-rank-eventual.tex)
+**Theorem.** For every fixed pair $(r,d)$ and all sufficiently large $n$, all $\lfloor nr/d\rfloor$ zeros of $P_n$ are simple and negative. They strictly interlace the zeros of $P_{n+1}$, whose rightmost zero is further right. The proof gives an existential threshold $N(d,r)$. The all-row conjecture for general caps remains open. [Proof](fixed-rank-eventual.pdf) · [Manuscript source](fixed-rank-eventual.tex)
 
 The dominant terms in a torus integral come from the two points at which all coordinates have angle $\pi/d$ or all have angle $-\pi/d$. The resulting sign changes locate the central roots. Two limits of the coefficient sequence identify the remaining roots at either end and account for the full degree. The author’s public issue had already described a preliminary eventual argument for $(r,d)=(2,4)$. The manuscript credits this overlap. The project proof has received independent internal review. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsGraphs) · [Prior four-column claim](https://github.com/PerAlexandersson/RealRooted/issues/2005)
 
 **🟨 Partial · Lean 4.** Lean proves that each connected component of the maximizing set for the balanced-array row polynomial on the fixed-product torus contains a diagonal point. The diagonal phase comparison, integral estimates and final root count have written proofs. [Exact formal scope](lean/README.md) · [Kernel report](verification.json)
+
+## All row counts with row cap one less than the column count
+
+For every $d\ge2$ and $n\ge0$, the balanced-array polynomial for $U(d-1,d)$ has its full degree $\lfloor n(d-1)/d\rfloor$ of distinct negative zeros. Consecutive rows strictly alternate, with the new row supplying the rightmost zero when both rows have zeros. Inclusion–exclusion gives a determinant of totally nonnegative leading matrix sections after a coefficient normalization. A factorial multiplier transfers strict alternation to the original rows. A fresh agent-assisted referee checked the proof against the original conjecture. The exact replay independently verifies 275 rows and 242 adjacent pairs with a nonconstant old row. **⬜ None.** This all-dimension result has no checked Lean or Rocq proof. [Proof](no-full-row.md) · [Independent review](review-no-full-row.md) · [Verifier](verify_corank_one.py) · [Exact archive](results/corank-one.jsonl.gz)
 
 ## Three columns with row cap two
 
