@@ -17,7 +17,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 ## Partial work
 
-- [Balanced arrays](topics/balanced-arrays/README.md) with row cap $r=d-1$ have simple negative zeros and strictly alternate at every row count. Lean proves its inclusion–exclusion formula from the labeled arrays. The general conjecture also holds in [every degree through fourteen](topics/balanced-arrays/low-degree.md) and for every rank and dimension through 24 rows.
+- [Balanced arrays](topics/balanced-arrays/README.md) with row cap $r=d-1$ have simple negative zeros and strictly alternate at every row count. Lean proves its inclusion–exclusion formula from the labeled arrays. The general conjecture also holds in [every degree through fourteen](topics/balanced-arrays/low-degree.md) and for every rank and dimension through 24 rows. In the open four-column cap-two case, several singleton slices and the sum of the two- and four-singleton slices strictly interlace across consecutive rows.
 - Every sufficiently large [Eulerian-square row](topics/eulerian-matrix-square/README.md) has only simple real roots. At every row from $n=3$, the two extreme roots at each end strictly alternate with the next row. The all-root cutoff is unknown.
 - For [long-cycle excedances](topics/long-cycle-excedances/README.md), any remaining counterexample has old size $3k-1\le n<10^{20}$ and threshold $k\ge4$. Explicit bounds also settle parts of this range.
 - For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.

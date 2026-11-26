@@ -56,3 +56,14 @@ For four columns at row cap two, a Hermite-polynomial expansion reduces the prob
 At row cap two, every order-two minor comparing two row counts and two componentwise ordered quota vectors is coefficientwise nonnegative in the pair-type weights. This makes the entries of the consecutive Bézout matrices nonnegative. Their higher principal minors are the remaining obstacle in this approach to interlacing. **⬜ None.** [Statement and proof](rank-two-row-minors.md) · [Independent review](review-rank-two-row-minors.md)
 
 Three heavy pair types already obstruct an extension to arbitrary positive row weights on four columns. At five rows a weighted triangle gives a quadratic with negative discriminant. More generally a fractional matching gap forces a violation of log-concavity for sufficiently large weights. The original specialization gives $1+540q+2490q^2$ at five rows. [Proof and exact certificates](triangle-weight-gap.md)
+
+## Four columns with prescribed singleton rows
+
+At row cap two, fixing the singleton count in each column gives simple negative nonzero roots and strict consecutive interlacing after removing the forced power of $q$. The same conclusions hold for exactly two singleton rows with arbitrary positive row weights on singleton and pair types. With uniform weights they also hold for exactly four singleton rows, exactly six singleton rows, and the sum of the two- and four-singleton slices. These results concern the stated slices within the four-column problem. **⬜ None.** The Bessel arguments and root comparisons have an agent-assisted independent written review. [Fixed counts and weighted two-singleton slice](singleton-slices.md) · [Uniform four-singleton slice](four-singletons.md) · [Uniform six-singleton slice](uniform-bessel-comparison.md) · [Sum of the two- and four-singleton slices](paired-singleton-sums.md) · [Independent review](review-bessel-slices.md)
+
+The exact coefficient replay compares labeled row enumeration with the Bessel coefficient formulas. It checks 52 uniform, 27 fixed-count, and nine weighted two-singleton rows. [Verifier](code/verify_singleton_slices.py) · [Exact archive](results/singleton-slices.json)
+
+~~~sh
+set -o pipefail
+python -I -O topics/balanced-arrays/code/verify_singleton_slices.py | diff -u topics/balanced-arrays/results/singleton-slices.json -
+~~~
