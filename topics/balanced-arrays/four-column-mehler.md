@@ -53,10 +53,12 @@ $(1-Q)^\delta\sum_{a\ge0}\binom{m+a}{a}^2Q^a$. Euler's hypergeometric transforma
 ## One contour and a rational differential system
 
 Summing (1) over $\delta$ gives
+
 $$
 \sum_{\delta,k\ge0}H_{2k+\delta,k}t^\delta Q^k
-=\mathrm{CT}_z\, \frac{\sqrt D}{\sqrt U\,[D-t(1-Q)]}\bigg|_{w=Q/z}.
+=\mathrm{CT}_z\\, \frac{\sqrt D}{\sqrt U\\,[D-t(1-Q)]}\bigg|_{w=Q/z}.
 $$
+
 Take $Q=qt^2$ to get $G(t,q)=\sum_{n\ge0}H_n(q)t^n$. Use the following notation for the contour integral:
 $$
 A_0=1+Q,\quad B_0=1-3Q,\quad h=t(1-Q),\quad C=B_0-h,\quad

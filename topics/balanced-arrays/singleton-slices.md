@@ -100,7 +100,7 @@ Every array at quota $k$ has $2k+1$ occupied rows. For $n\ge3$ its
 polynomial, after dividing by $(n)_{\underline3}q$, is (1) with
 $N=n-3$ and $c_j=[q^j]U$.
 
-For $\mathrm{Im}\,z>0$ set
+For $`\mathrm{Im}\,z>0`$ set
 $M_j=J_0(2\sqrt{g_j}\,z)/J_1(2\sqrt{g_j}\,z)$.
 These numbers have strictly negative imaginary parts. In fact
 $J_1/J_0=-J_0'/J_0$ has positive imaginary part by summing the

@@ -11,10 +11,12 @@ $$
 B=H\,[y(1-4y)G']^{-1}\pmod G.
 $$
 The inverse exists because these roots are simple, negative, and different from $0$. Lagrange interpolation of the remainder $G'B^2\bmod G$ gives the noncentral sum exactly as
+
 $$
 \sum_{G(s)=0}B(s)^2
 =\frac{[y^{\deg G-1}](G'B^2\bmod G)}{\mathrm{lc}(G)}.
 $$
+
 Indeed the leading coefficient of the interpolation polynomial is the sum of its values times $\mathrm{lc}(G)/G'(s)$. A constant $G$ gives an empty sum.
 
 An independent checker instead writes reciprocal polynomials in $w=t+1/t$. It solves an integer multiplication-matrix system over the rationals and takes the trace of the square of multiplication by the quotient. The two calculations agree entry by entry on every pair with nonzero lag and new size at most 46. There are 441 such pairs. The largest $S$ is $25/36$, attained only at $(n,k)=(5,3)$, where $n$ is the old size. The archive retains every exact rational value. Both methods use the previously certified original coefficient archive. At the declared review point the test supplied a sufficient inequality and supported it on the existing range. Further work requires an estimate at the noncentral roots. [Rational traces](squared-traces.jsonl.gz) · [Quotient-polynomial checker](verify_residue_traces.py) · [Independent matrix checker](verify_companion_traces.py)

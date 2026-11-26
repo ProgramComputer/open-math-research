@@ -144,21 +144,26 @@ For the consecutive comparison, note that $\Psi_n$ is strictly increasing. In (2
 ## Comparing the two exact ray averages
 
 Write $J_n=\mathbb E_n[H_z(S)]$. Positively rescale the original polynomial as
+
 $$
 Y_n=\mathrm{Re}(e^{-i\Psi_n}J_n)+r_n ,
 $$
+
 where $r_n$ is the contribution of the $w$ pair. This uses the normalization $2a^{-n}|B_z(z)|b(n)/\pi$ for $c^n C_n(t)$. In the middle range just identified, (5)–(7) give $|J_n-1|<73/100$ and $|r_n|,|r_{n+1}|<1/25$. For $\theta\le\pi/4$ the sharper remote estimate in the proof of (7) gives $|r_n|,|r_{n+1}|<1/(100n)$.
 
 The size-$n+1$ probability measure is obtained from the size-$n$ measure by tilting by $u(S)=(1+S)^{-1}$. Thus
+
 $$
 J_{n+1}-J_n=\frac{\mathrm{Cov}_n(H_z,u)}{\mathbb E_n u},\qquad
 \mathbb E_n u=\frac{n-1/2}{n+1}.
 \tag{8}
 $$
+
 The covariance here is $\mathbb E_n[(H_z-\mathbb E_n H_z)(u-\mathbb E_n u)]$. Put $M_j=\mathbb E_n S^j$ and $e=3/(2n)$. Then $|u-\mathbb E_n u|\le S+e$, and also $|u-\mathbb E_n u|\le1$. The beta moments are
+
 $$
 M_j=\frac{(3/2)_j}{(n-3/2)(n-5/2)\cdots(n-j-1/2)},\qquad
-\,\mathrm{Var}_n(S)=\frac{(3/2)n}{(n-3/2)^2(n-5/2)}.
+\\,\mathrm{Var}_n(S)=\frac{(3/2)n}{(n-3/2)^2(n-5/2)}.
 $$
 
 For all estimates below, the tail $S>1/6$ has expected contribution less than $1/(20n)$ as long as its integrand is bounded by $(2n+1)(1+nS/8)$. Indeed the same tilt to $N=\lceil n/4\rceil$ used in (6) bounds this expectation by $60n(6/7)^{n-N}$. Multiplying by $n$ gives a function less than $1/20$ at each of $n=150,151,152,153$. It decreases thereafter in each residue class, since $((n+4)/n)^2(6/7)^3<1$.
@@ -176,14 +181,17 @@ $$
 $$
 
 For the covariance of $g$ with $u$, use independent copies $S,S'$ and the product difference identity
+
 $$
-2\,\mathrm{Cov}_n(g,u)=\mathbb E_n[(g(S)-g(S'))(u(S)-u(S'))].
+2\\,\mathrm{Cov}_n(g,u)=\mathbb E_n[(g(S)-g(S'))(u(S)-u(S'))].
 $$
-The two Lipschitz bounds $\ell/2$ and $1$ give $|\mathrm{Cov}_n(g,u)|\le(\ell/2)\,\mathrm{Var}_n(S)$. For the covariance of $H_z-g$ use (9) multiplied by $S+e$ on the local interval, and the same tail bound because $|u-\mathbb E_n u|\le1$. Thus with $F_j=M_{j+1}+eM_j$,
+
+The two Lipschitz bounds $\ell/2$ and $1$ give $`|\mathrm{Cov}_n(g,u)|\le(\ell/2)\,\mathrm{Var}_n(S)`$. For the covariance of $H_z-g$ use (9) multiplied by $S+e$ on the local interval, and the same tail bound because $|u-\mathbb E_n u|\le1$. Thus with $F_j=M_{j+1}+eM_j$,
+
 $$
 |J_{n+1}-J_n|
 \le
-\frac{(n/8)\,\mathrm{Var}_n(S)+11F_1+(1+11n/8)F_2+(n/8)F_3+1/(20n)}
+\frac{(n/8)\\,\mathrm{Var}_n(S)+11F_1+(1+11n/8)F_2+(n/8)F_3+1/(20n)}
      {(n-1/2)/(n+1)}
 <\frac1n.
 \tag{11}
@@ -203,17 +211,19 @@ $$
 \tag{12}
 $$
 
-The numerical inequalities (10)–(12) are rational checks at $n=150$. For (11) and (12) first multiply both sides by $n$. The resulting upper bounds decrease with $n$ because $n^jM_j$ decreases, all coefficients are sums of nonnegative multiples of nonpositive powers of $n$ after inserting the scaled moments, and $(n-1/2)/(n+1)$ increases. Likewise $n^2\,\mathrm{Var}_n(S)$ decreases. This proves the asserted bounds at all larger sizes.
+The numerical inequalities (10)–(12) are rational checks at $n=150$. For (11) and (12) first multiply both sides by $n$. The resulting upper bounds decrease with $n$ because $n^jM_j$ decreases, all coefficients are sums of nonnegative multiples of nonpositive powers of $n$ after inserting the scaled moments, and $(n-1/2)/(n+1)$ increases. Likewise $`n^2\,\mathrm{Var}_n(S)`$ decreases. This proves the asserted bounds at all larger sizes.
 
 ## Strict signs at the old roots
 
 Let $t<0$ be an old middle root of rank $j=k+1$. Put $Z=e^{-i\Psi_n}J_n$. Then $\Re Z=-r_n$. Since $|J_n-1|<73/100<\sin(\pi/3)$, its argument has absolute value less than $\pi/3$. At the old root the corrected phase $\Psi_n-\arg J_n$ has cosine of absolute value less than $(1/25)/(27/100)<1/2$. The old phase itself is between $k\pi$ and $(k+1)\pi$. If the corrected phase fell outside that interval it could differ from an endpoint by at most $\pi/3$, contradicting the cosine bound. Hence $\Im Z$ has sign $(-1)^{k+1}$.
 
 At the same value of $t$, the next phase is $\Psi_n+\theta$, so
+
 $$
-Y_{n+1}=\sin\theta\,\Im Z-\cos\theta\,r_n+r_{n+1}
+Y_{n+1}=\sin\theta\\,\Im Z-\cos\theta\\,r_n+r_{n+1}
        +\mathrm{Re}\bigl(e^{-i(\Psi_n+\theta)}(J_{n+1}-J_n)\bigr).
 $$
+
 For $\theta\le\pi/4$, (10) and the remote bound give $|\Im Z|>4/5$, and $\sin\theta>2/n$. The leading term dominates $1/n+2/(100n)$ from (11) and the two distant values. For $\theta\ge\pi/4$, $|\Im Z|>\sqrt{(27/100)^2-(1/25)^2}>1/4$ and $\sin\theta>7/10$. The leading term dominates $4/n+2/25$ from (12) and the distant values. Thus in both ranges $Y_{n+1}$, hence $C_{n+1}(t)$, has sign $(-1)^j$.
 
 For the old rightmost root, the effective vertical-slit comparison already gives $C_{n+1}(t)<0$, the sign for rank one. For the old farthest root the effective reversed-polynomial comparison gives the sign $(-1)^m$. When the old row is odd, its farthest root lies to the left of all roots of the next even row of degree $m$. When the old row is even, its farthest root is between the two farthest roots of the next odd row of degree $m+1$. [Right-edge proof](effective-right-edge.md) · [Far-left proof](far-left.md)

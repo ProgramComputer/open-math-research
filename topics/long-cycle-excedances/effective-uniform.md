@@ -24,7 +24,7 @@ $$
 $$
 For $s\le10$, $\sum_p|z_p|^2\le2+1/(2S^2)<8$, by telescoping $\sum_{p=3,5,\dots}1/(p^2-1)=1/4$. The linear term costs less than six, and $8e^{1/50}<10$ bounds the coefficient of the harmonic sum in the rest.
 
-For $s>10$ put $L=\min(k-1,\lfloor s^2/16\rfloor)$ and $\delta=R_*-s\le5/s+s/(40k)$. For terms of degree at most $L$, use the exponential sum. The absolute truncated exponential, including the factor $e^{-as}$, is bounded by $e^{a\delta}\Pr(\mathrm{Pois}(aR_*)\le L)$. If $a\le2L/s$, then $a\delta\le5/8+1/20<1$, so this range contributes at most $3(1+\log k)$. For $a>2L/s$ the truncated exponential series times $e^{-aR_*}$ is bounded by the lower-tail probability $\Pr(\mathrm{Pois}(aR_*)\le aR_*/2)\le e^{-aR_*/8}$. Since $\delta/s<3/50$, the resulting sum is at most $\sum_{a\ge1}e^{-as/16}/a<2$. Any remaining degrees have $\ell\ge7$ and $\ell S^2>1/2$. By the lattice integral estimate in [the pole argument](separated-poles.md),
+For $s>10$ put $L=\min(k-1,\lfloor s^2/16\rfloor)$ and $\delta=R_*-s\le5/s+s/(40k)$. For terms of degree at most $L$, use the exponential sum. The absolute truncated exponential, including the factor $e^{-as}$, is bounded by $`e^{a\delta}\Pr(\mathrm{Pois}(aR_*)\le L)`$. If $a\le2L/s$, then $a\delta\le5/8+1/20<1$, so this range contributes at most $3(1+\log k)$. For $a>2L/s$ the truncated exponential series times $e^{-aR_*}$ is bounded by the lower-tail probability $`\Pr(\mathrm{Pois}(aR_*)\le aR_*/2)\le e^{-aR_*/8}`$. Since $\delta/s<3/50$, the resulting sum is at most $\sum_{a\ge1}e^{-as/16}/a<2$. Any remaining degrees have $\ell\ge7$ and $\ell S^2>1/2$. By the lattice integral estimate in [the pole argument](separated-poles.md),
 $$
 \sum_p|z_p|^\ell\le2+\frac{3\pi}{4\sqrt2 S\sqrt\ell}<5 .
 $$

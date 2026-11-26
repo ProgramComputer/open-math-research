@@ -106,14 +106,16 @@ $$
 A_+(u)=\prod_{\nu\ne+}\left(1-\frac{\lambda_\nu}{u\lambda_+}\right)^{-1/2}.
 $$
 The real branch point contribution will use $A_1(u)$, defined by replacing $+$ with $1$ in this formula for $\kappa<u\leq1$, where $\kappa=\sigma/\tau$. All factors use principal square roots. The Cauchy coefficient formula deformed to the cuts gives
+
 $$
 G_n(-a)=
-  2\,\mathrm{Re}\,\frac{\lambda_+^n}{\pi}
-       \int_0^1\frac{u^{n-1/2}}{\sqrt{1-u}} A_+(u)\,du
+  2\\,\mathrm{Re}\\,\frac{\lambda_+^n}{\pi}
+       \int_0^1\frac{u^{n-1/2}}{\sqrt{1-u}} A_+(u)\\,du
  +\frac{\lambda_1^n}{\pi}
-       \int_\kappa^1\frac{u^{n-1/2}}{\sqrt{1-u}} A_1(u)\,du .
+       \int_\kappa^1\frac{u^{n-1/2}}{\sqrt{1-u}} A_1(u)\\,du .
 \tag{8}
 $$
+
 To see the deformation, define the analytic germ in (2) by the product of the four principal reciprocal square roots. For the conjugate pair use rays $x=y/\lambda_\pm$, $y\geq1$. For the positive real branch points the ray jumps of the two square roots cancel beyond $x=1/\lambda_2$, leaving the interval $[1/\lambda_1,1/\lambda_2]$. On the upper side of a cut in the oriented variable $y=\lambda_\nu x$, the singular factor $(1-y)^{-1/2}$ has value $i(y-1)^{-1/2}$, and the lower value is its negative. The upper side is integrated with $y$ increasing. On the real interval the other factors yield $A_1(1/y)>0$. The small endpoint arcs vanish by the integrable square-root singularities. On the large outer circle, the generating function is $O(|x|^{-2})$ for fixed $a>0$, so its contribution vanishes. Substituting $u=1/y$ in the jumps gives (8).
 
 For the nonreal integral, a factor $(1-z/u)^{-1/2}$ with fixed $z\ne0$ has logarithmic derivative of absolute value at most $|z|/(2u|u-z|)$. This ratio is at most $1/(2u)$ when $\Re z\leq0$ and at most $1/(2u|\sin\arg z|)$ otherwise. For the two real-root factors of $A_+(u)$ the angle of $z$ is $-\phi$, giving a bound $1/u$ for each. For the conjugate factor the angle is $-2\phi$. Where its real part is positive, the angle bound gives $|\sin(2\phi)|\geq\sqrt3/2$, so the derivative bound is $1/(\sqrt3 u)$ in all cases. Thus
@@ -122,7 +124,7 @@ $$
 \frac{|A_+(u)-A|}{|A|}\leq u^{-3}-1.
 \tag{9}
 $$
-Indeed the first bound gives $|A_+(u)|\leq |A|u^{-3}$, and integrating the resulting bound on $|A_+'|$ gives the second. Dividing by $c_n|\lambda_+|^n|A|$, the error when replacing the first integral with $c_n \lambda_+^n A$, before taking $2\,\mathrm{Re}$, is at most
+Indeed the first bound gives $|A_+(u)|\leq |A|u^{-3}$, and integrating the resulting bound on $|A_+'|$ gives the second. Dividing by $c_n|\lambda_+|^n|A|$, the error when replacing the first integral with $c_n \lambda_+^n A$, before taking $`2\,\mathrm{Re}`$, is at most
 $$
 \frac{n(n-1)(n-2)}{(n-\frac12)(n-\frac32)(n-\frac52)}-1<\frac1{10},
 \qquad n\geq20.

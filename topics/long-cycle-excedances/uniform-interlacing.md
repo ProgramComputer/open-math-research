@@ -60,12 +60,14 @@ $$
 \tag{7}
 $$
 For the size-only probability append an independent uniform color. If acceptance changes, there is a cycle previously containing exactly $k-1$ labels that receives the new label. A marked cycle of size $j$ has expected count $1/j$ in the run permutation, and it receives the new label with probability $j/p$. Conditional on its existing label count $k-1$, the other labels are uniform over the other colors and the other run cycles are uniform. Therefore
+
 $$
 0\le f(n+1,p,k)-f(n,p,k)\le
-\frac1p\sum_{j=1}^{p-1}\Pr\{\mathrm{Bin}(n,j/p)=k-1\}
+\frac1p\sum_{j=1}^{p-1}\Pr\\{\mathrm{Bin}(n,j/p)=k-1\\}
                  f(n-k+1,p-j,k).
 \tag{8}
 $$
+
 The point masses outside $|j-a|\le D$ total $O(p n^{-12})$. Inside that window $p-j\asymp p$, $n-k+1\asymp n$, and $k(p-j)/(n-k+1)\asymp a$. The upper bound following (4) gives $f(n-k+1,p-j,k)=O(\alpha_{n,p})$ there. If $k>n-k+1$ this conditional probability is zero. The sum of all the point masses in (8) is $O(k^{-1/2}+p/n)$. To see this, the binomial point mass as a function of its probability parameter is unimodal, has integral $1/(n+1)$ by the beta integral, and has maximum $O(k^{-1/2})$ by Stirling because $k/n\le11/20$. A lattice sum at spacing $1/p$ is at most $p$ times the integral plus twice the maximum. Use (1) at both sizes to obtain (7). When $k$ is bounded, (7) follows directly from requiring each color to have at least $k$ labels and to occur in both halves, as the failure probability is exponentially small in $\sqrt n$.
 
 ## Front ranks and their exact orientation
@@ -212,7 +214,7 @@ At an old root the maximum-insertion recurrence gives the exact identity
 $$
  (n+1)F_{n+1,k}=S F'_{n,k}+\left(\sum_p z_p^k\right)F_{n+1-k,k}.
 $$
-This uses $t\,d\theta/dt=\pi/r^2$; differentiating the normalization produces only multiples of the vanishing old polynomial. If $1\le m=n+1-k<k$, the last term vanishes. For $m\ge k$ the absolute cycle expansion gives $|F_{m,k}|\le (P/k)\exp(2\sqrt{PD})$. In fact, with $\ell$ slots the first $\ell-1$ lengths have at most $n^{\ell-1}/(\ell-1)!$ choices, the last is determined, and each slot costs at most $P/k$. Summing after division by $\ell!$ gives the bound. Thus the lag has size at most $P^2\exp(2\sqrt{PD})/k=n^{-1+o(1)}=o(n S d_n)$. At the old root, $|\cos(n\theta)|<1/4$; the derivative has magnitude greater than $n d_n$ and sign $-\mathrm{sgn}\,\sin(n\theta)$. This proves the asserted next-row sign. The estimate supplies the entire middle together with the front ranks already treated above.
+This uses $t\,d\theta/dt=\pi/r^2$; differentiating the normalization produces only multiples of the vanishing old polynomial. If $1\le m=n+1-k<k$, the last term vanishes. For $m\ge k$ the absolute cycle expansion gives $|F_{m,k}|\le (P/k)\exp(2\sqrt{PD})$. In fact, with $\ell$ slots the first $\ell-1$ lengths have at most $n^{\ell-1}/(\ell-1)!$ choices, the last is determined, and each slot costs at most $P/k$. Summing after division by $\ell!$ gives the bound. Thus the lag has size at most $P^2\exp(2\sqrt{PD})/k=n^{-1+o(1)}=o(n S d_n)$. At the old root, $|\cos(n\theta)|<1/4$; the derivative has magnitude greater than $n d_n$ and sign $`-\mathrm{sgn}\,\sin(n\theta)`$. This proves the asserted next-row sign. The estimate supplies the entire middle together with the front ranks already treated above.
 
 
 ## Completion for all minimum cycle lengths

@@ -88,10 +88,12 @@ The asymptotic rules out an induction using $\omega_j\le C\omega_j^*$ with a fix
 ## Equivalent structured sign test and a combinatorial sign obstruction
 
 Let $\mathrm{Bez}_p(u)$ have kernel $(p(t)u(s)-u(t)p(s))/(t-s)$. At the roots of $p$, evaluation diagonalizes it by Vandermonde congruence with entries $p'(x_i)u(x_i)$. Thus positivity of $\mathrm{Bez}_p(q)$ is exactly the positivity of the interlacing weights. The strict insertion bound is equivalent to the stronger pair of inequalities
+
 $$
 \mathrm{Bez}_p((1-t)p')+\mathrm{Bez}_p(\ell)\succ0,\qquad
-\,\mathrm{Bez}_p((1-t)p')-\mathrm{Bez}_p(\ell)\succ0.
+\\,\mathrm{Bez}_p((1-t)p')-\mathrm{Bez}_p(\ell)\succ0.
 $$
+
 This makes the required signed operator comparison explicit. For noncentral roots one can also pass to the reciprocal coordinate $u=t/(1+t)^2$ used in the residue trace. With old polynomial $G(u)$ and lag numerator $H(u)$ in that coordinate, the two positive forms become $\mathrm{Bez}_G((-u(1-4u)G'\pm H)\bmod G)$. Reduction modulo $G$ keeps the arguments within degree $<\deg G$ while preserving their values at the roots.
 
 One direct combinatorial alternative is to split the new row by the length $j$ of the cycle containing the maximum. At an old root the insertion derivative contribution equals the sum of the terms with $j>k$. Those terms can have opposite signs on a genuine row. For example at $k=3,n=7$, take the root $x\in(-1/4,-1/5)$ of the genuine reciprocal factor $1+91t+386t^2+91t^3+t^4$ in $P_7$. Its endpoint signs are $245/256$ and $-1554/625$. In the new row the $j=4$ term is $35x A_3(x)^2<0$, and the $j=5$ term is $35x(1+x)^2R_{10}(x)>0$. The inequalities follow on the whole bracket from $A_3=R_4>0$ and $R_{10}<0$. A lower bound from this decomposition has to account for cancellations between the marked lengths.

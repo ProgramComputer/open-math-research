@@ -25,9 +25,11 @@ If $s>n\ge0$, then $(n)_s=0$. The matching counts can be computed from the empty
 ## The finite range
 
 For $0\le n\le532$, the [finite certificates](certificates/rows/) give positive dyadics $0<t_1<\cdots<t_{d_n-1}$ when $d_n\ge2$ with
+
 $$
-\mathrm{sgn}\,P_n(-t_j^4)=(-1)^j.
+\mathrm{sgn}\\,P_n(-t_j^4)=(-1)^j.
 $$
+
 The [independent integer checker](code/independent_prefix.py) reconstructs all coefficients from (1) and the color-class recurrence. It checks the coefficient rows, node order and count, and evaluates every sign by integer Horner evaluation. At a reduced rational argument $q=A/B$ with $B>0$, the evaluated integer is $B^{d_n}P_n(A/B)$. The [producing checker](code/prefix.py) uses an independent inclusion–exclusion matching count and rigorous Arb evaluation with exact integer fallback. The [finite-prefix review](review/prefix.md) describes the derivations and replay results.
 
 The sign at $t=0$ is positive and the sign at a sufficiently large finite $t$ is $(-1)^{d_n}$. Continuity gives $d_n$ distinct roots in the intervening open intervals, including the single interval between these endpoints if $d_n=1$. There are no roots when $d_n=0$. Since $t\mapsto-t^4$ is injective for $t>0$, the degree forces exactly $d_n$ simple negative roots.
@@ -110,9 +112,11 @@ $$
 The last expression is the lower relative squared-modulus gap for the minus cube before simplifying it to a coarser rate. Averaging it with the original global radial gap gives $|R_-/S|\le e^{-aQ/2-b/4}$.
 
 For $x\ge0$ put
+
 $$
-G(x)=\mathrm{erfc}(\sqrt{x})+2\sqrt{x/\pi}\,e^{-x}.
+G(x)=\mathrm{erfc}(\sqrt{x})+2\sqrt{x/\pi}\\,e^{-x}.
 $$
+
 The full-space radial Gaussian tail beyond $Q=1/4$ for rate $nr$ is $(\pi/(nr))^{3/2}G(nr/4)$. This follows by one integration by parts on $\int_{\sqrt{nr/4}}^\infty s^2e^{-s^2}\,ds$. Combining the local error on $Q\le1/4$, the actual plus tail, the comparison Gaussian tail, and the minus integral, in that order, gives
 $$
 \begin{aligned}
