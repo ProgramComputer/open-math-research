@@ -1,0 +1,3 @@
+Exact independent medium-slab coefficient bounds: 0.004262619561116659 0.012404978890927738
+Exact independent scaled phase and derivative error bounds: 0.027340702814272963 0.18135775813906563
+Independent derivative, lag and 972,000 joins passed.

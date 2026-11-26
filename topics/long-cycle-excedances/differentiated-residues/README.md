@@ -1,4 +1,6 @@
-# Differentiated residues for $n/k\ge50$
+# Strict interlacing from old size 972,000
+
+For every $3\le k\le n$ and $n\ge972{,}000$, the nonzero roots of the minimum-cycle-length excedance polynomials at old size $n$ and new size $n+1$ are simple, negative and strictly interlace. The wide differentiated estimate below gives the cutoff $1{,}408{,}334$. The refinement extends the angular range and checks the phase entrance for both circle comparisons below one million. [Proof of the 972,000 cutoff](submillion.md) · [Independent review](review-submillion-residues.md)
 
 Let $E_{n,k}(t)$ count permutations of $[n]$ by excedances with all cycles of length at least $k$, and put $P_n(t)=E_{n,k}(t)/t$. On the first half of the negative axis put $t=-\exp(-\pi\cot\theta)$, $S=\sin\theta$ and $C=\cos\theta$. Assume
 
@@ -48,17 +50,17 @@ J_+(u)=\sum_s\frac{|b_s|C^{-s}}{N}
      \left(s-1+\frac{\sqrt{s-1}+1}{S^2}\right)u^s.
 $$
 
-The respective coefficient majorants of $A_{a,q}$ and $A'_{a,q}/N$ are $D_+/|q-a|$ and $J_+/|q-a|$, where prime denotes angular derivative. The signed sum over $q$ has coefficient majorant $(\pi/2)\sum_s|b_s|C^{1-s}u^s/S$, with normalized derivative majorant $(\pi/2)J_+$. The [signed kernel argument](../uniform-hilbert/README.md) bounds the sum $\sum_{q\ne a} f_q/(q-a)$ by $\pi/2$ times the variation of any Fourier measure representing $f_q$. Write $z_q^h$ as the Gamma($h$, unit scale) transform at $qS/C$ times $C^{-h}$. The derivative is $h(z_q^{h+1}-Cz_q^h)/S$. The two Gamma densities in the difference reduce to the shape-$h$ density times $x/h-C^2$, with prefactor $C^{-h-1}$. Its variation is at most $C^{-h-1}(1/\sqrt h+S^2)$ from the variance of the Gamma density. For $h=s-1$ the derivative bound follows, with differentiation of $1/S$ contributing the final $+1$ in $J_+$. An individual term uses the same measure bound without the signed sum.
+The respective coefficient majorants of $A_{a,q}$ and $A_{a,q}'/N$ are $D_+/|q-a|$ and $J_+/|q-a|$, where prime denotes angular derivative. The signed sum over $q$ has coefficient majorant $(\pi/2)\sum_s|b_s|C^{1-s}u^s/S$, with normalized derivative majorant $(\pi/2)J_+$. The [signed kernel argument](../uniform-hilbert/README.md) bounds the sum $\sum_{q\ne a} f_q/(q-a)$ by $\pi/2$ times the variation of any Fourier measure representing $f_q$. Write $z_q^h$ as the Gamma($h$, unit scale) transform at $qS/C$ times $C^{-h}$. The derivative is $h(z_q^{h+1}-Cz_q^h)/S$. The two Gamma densities in the difference reduce to the shape-$h$ density times $x/h-C^2$, with prefactor $C^{-h-1}$. Its variation is at most $C^{-h-1}(1/\sqrt h+S^2)$ from the variance of the Gamma density. For $h=s-1$ the derivative bound follows, with differentiation of $1/S$ contributing the final $+1$ in $J_+$. An individual term uses the same measure bound without the signed sum.
 
-At each distinguished pole $a$ keep the two factors $q=a\pm2$ outside the logarithm. For all far factors in this product, use their log series. For the linear far sum take the full signed bound and add the absolute bound for the omitted two terms. At $u=\omega$ this costs at most $(\pi/2+1)D_*$ with $D_*=2$, because $D_+(\omega)\le6/A\le2$ and the signed numerator moment obeys the same bound before its factor $\pi/2$. The higher log terms cost at most
+At each distinguished pole $a$ keep the two factors $q=a\pm2$ outside the logarithm. For all far factors in this product, use their log series. For the linear far sum take the full signed bound and add the absolute bound for the omitted two terms. At $u=\omega$ this costs at most $(\pi/2+1)D_{\mathrm{max}}$ with $D_{\mathrm{max}}=2$, because $D_+(\omega)\le6/A\le2$ and the signed numerator moment obeys the same bound before its factor $\pi/2$. The higher log terms cost at most
 
 $$
-\frac{D_*^2}{4(1-D_*/4)}\sum_{j\ge2}j^{-2}\le2.
+\frac{D_{\mathrm{max}}^2}{4(1-D_{\mathrm{max}}/4)}\sum_{j\ge2}j^{-2}\le2.
 $$
 
-Indeed for $|q-a|=2j\ge4$ each norm is at most $D_*/(2j)$. The geometric logarithm bound uses $1/h\le1/2$ for $h\ge2$. Thus the coefficientwise majorant formed by multiplying the two near factors by the exponential of the far logarithmic envelope has weighted sum at most $4e^{\pi+4}<6000$.
+Indeed for $|q-a|=2j\ge4$ each norm is at most $D_{\mathrm{max}}/(2j)$. The geometric logarithm bound uses $1/h\le1/2$ for $h\ge2$. Thus the coefficientwise majorant formed by multiplying the two near factors by the exponential of the far logarithmic envelope has weighted sum at most $4e^{\pi+4}<6000$.
 
-For the derivative of the far logarithm, its linear part costs at most $(\pi/2+1)J_+(\omega)$. The higher parts cost at most $D_*J_+(\omega)/(2(1-D_*/4))\le2J_+(\omega)$. The derivative of the two polynomial factors adds at most one more factor $J_+(\omega)$ times the undifferentiated majorant. These estimates give an $a$-independent coefficientwise majorant for $Q'_a/N$ with weighted sum at most
+For the derivative of the far logarithm, its linear part costs at most $(\pi/2+1)J_+(\omega)$. The higher parts cost at most $D_{\mathrm{max}}J_+(\omega)/(2(1-D_{\mathrm{max}}/4))\le2J_+(\omega)$. The derivative of the two polynomial factors adds at most one more factor $J_+(\omega)$ times the undifferentiated majorant. These estimates give an $a$-independent coefficientwise majorant for $Q_a'/N$ with weighted sum at most
 
 $$
 6000(\pi/2+4)J_+(\omega)<21000,
@@ -81,7 +83,7 @@ $$
 \le \rho_a^{16k}\exp(-(13/25)(X-16))e^{-v/(25k)}.
 $$
 
-The first exponential is below $1/20{,}000{,}000$ even at $X=49$. For the differentiated distinguished power, the extra absolute factor $|r|/N$ satisfies $(|r|/N)e^{-v/(25k)}\le16/X+25/(eX)<53/100$. This works also for negative $r$ in the full residue series. The $Q'_a/N$ term instead uses the derivative coefficient norm with no extra degree factor.
+The first exponential is below $1/20{,}000{,}000$ even at $X=49$. For the differentiated distinguished power, the extra absolute factor $|r|/N$ satisfies $(|r|/N)e^{-v/(25k)}\le16/X+25/(eX)<53/100$. This works also for negative $r$ in the full residue series. The $Q_a'/N$ term instead uses the derivative coefficient norm with no extra degree factor.
 
 For far poles $|a|\ge7$, keep their actual coefficient contributions. At the fixed angle divide them into those with $\rho_a^{-1}\le\omega$ and those with $\rho_a^{-1}>\omega$. This split estimates the already differentiated identity, so no indicator is differentiated. In the first group, $\rho_a^r\omega^{-(N-r)}\le\rho_a^N$ for every $k\le r\le N$. The far single-pole first moment $\sum_{|a|\ge7}|a|\rho_a^N$ is below $10^{-8}$. Indeed $\rho_a^N\le[1+(147/125)(a^2-1)/192]^{-96}$, and the checker bounds its first term and the weighted monotone integral from seven. The same moment bounds the mass and the distinguished derivative since $r/N\le1$.
 
@@ -107,7 +109,7 @@ Put $s=r_0 C$ and $w_a=s+ia\pi$. The [coefficient identity](../fixed-threshold.m
 The [pole identity for the numerator](../effective-uniform.md#neighboring-residues) gives $(1-t)T_s(w_a)=e^{-H(w_a)}$, where $H(w)=\sum_{b\ge1}e^{-bw}b^{-1}\sum_{j=0}^{k-1}(bw)^j/j!$. Thus $M_a=e^{-H(w_a)}z_a/r_0$ and
 
 $$
-\frac{M'_a}{NM_a}=\frac{z_a}{NS}+\frac{\pi H'(w_a)}{NS^2}.
+\frac{M_a'}{NM_a}=\frac{z_a}{NS}+\frac{\pi H'(w_a)}{NS^2}.
 $$
 
 We have $s>15\sqrt k\ge225$. Along each near vertical segment $\log(|w|/s)<51/(100k)$. The gamma-density sum from the [neighboring-residue proof](../effective-uniform.md#neighboring-residues) therefore gives $\pi|H'(w)|\le\pi e^{51/100}(1/s+1/\sqrt{2\pi(k-1)})<17/100$. In particular the normalized multiplier derivative is below $16/100$.
@@ -115,10 +117,8 @@ We have $s>15\sqrt k\ge225$. Along each near vertical segment $\log(|w|/s)<51/(1
 On the real axis, $H(s)\le1+\log(1+3k/(2s))+1/100$. Sum the harmonic terms for $b\le3k/(2s)$ and use the Poisson lower-tail bound $e^{-bs/18}$ for the rest. Combining with the vertical integral bound gives
 
 $$
-k|M_1|>
-e^{-59/50}\frac{A}{\pi+(3/2)A/C}
-\ge e^{-59/50}\frac{3}{\pi+(9/2)/C}
->23/200.
+k|M_1|> e^{-59/50}\frac{A}{\pi+(3/2)A/C}
+\ge e^{-59/50}\frac{3}{\pi+(9/2)/C}>23/200.
 $$
 
 The nonprincipal near terms divided by the principal pair amplitude have total value below $21/1000$ and total normalized derivative below $7/100$. For $a=3,5$ use $|M_a/M_1|\le e^{(17/100)(a+1)}$, $\rho_3^N<e^{-23/5}$ and $\rho_5^N<e^{-14}$, with derivative cost $a+16/100$. The negative poles are the conjugates.

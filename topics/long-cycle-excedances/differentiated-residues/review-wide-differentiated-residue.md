@@ -19,6 +19,7 @@ Let $c_N=r_0^N/(N!(1-t)^N)>0$. At an old root, $t'=t\pi/S^2$ and $F'_n=c_n E'_{n
 $$
 (n+1)F_{n+1}=SF'_n+B_kF_m
 $$
+
 at this root. Here $B_k=r_0^k tA_{k-1}(t)/((k-1)!(1-t)^k)$. This verifies the $n+1$ factor and identifies the positive lag sign with the actual next row. The same comparison works with the negative lag sign, where the slab theorem claims both. At an integer sample the principal phase differs from $n\theta$ by less than $0.19$, enough with the relative value error to give sign $(-1)^j$ for $F_n$. At an old zero in gap $j$, $|\cos\Psi|<0.03$ and $j\pi-0.19<\Psi<(j+1)\pi+0.19$ force $\Psi$ between the two integer phases. The leading derivative sign is then $(-1)^{j+1}$, kept by the error and the lag bounds. Since $c_{n+1}>0$ and $t<0$, the corresponding sign for $P_{n+1}$ is $(-1)^j$.
 
 ## Joins and replay

@@ -1,0 +1,3 @@
+Differentiated-residue slab passes: normalized derivative > 77/100, lag < 5/100.
+The radial and small-threshold phase joins extend to old size 972,000.
+The combined all-threshold cutoff is 972,000.
