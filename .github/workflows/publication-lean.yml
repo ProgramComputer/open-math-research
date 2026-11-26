@@ -1,0 +1,46 @@
+name: Published Lean stable audit
+on:
+  pull_request:
+    branches: [research, main]
+    paths:
+      - 'shared/lean/publication/**'
+      - '.github/workflows/publication-lean.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  recheck:
+    name: Stable Lean · ${{ matrix.topic }}
+    strategy:
+      fail-fast: false
+      matrix:
+        topic: [catalan, prism, balanced, ordered, eulerian, ribbon]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Stage only sources from the published commit
+        run: python3 shared/lean/publication/prepare.py ${{ matrix.topic }} ".publication-build"
+      - name: Install pinned toolchain
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          lake-package-directory: .publication-build
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+      - name: Resolve exact versions and fetch imports
+        shell: bash
+        run: |
+          cd ".publication-build"
+          lean --version
+          lake --version
+          lake exe cache get $(cat cache-imports.txt)
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842
+      - name: Rebuild the published declaration roots
+        shell: bash
+        run: |
+          cd ".publication-build"
+          lake build $(cat targets.txt)
