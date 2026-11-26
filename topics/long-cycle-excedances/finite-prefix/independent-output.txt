@@ -1,0 +1,4 @@
+Coverage verified from 3 full logs, separately at all 59 thresholds.
+Brute permutation vectors through size eight: 21.
+Explicit cycle partition vectors matched from actual certifier: 37.
+Original-variable joint Sturm intervals: 436 across 10 sample consecutive pairs.

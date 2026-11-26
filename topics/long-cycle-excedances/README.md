@@ -1,6 +1,8 @@
 # Excedance zeros for permutations with long cycles
 
-For every $n\ge10{,}000$ and $3\le k\le n$, the nonzero roots of the minimum-cycle-length excedance polynomial are simple, negative and strictly interlace those of the next row at the same $k$. Together with the three-cycle and threshold-three theorems, this leaves $k\ge4$ and $4k\le n<10{,}000$ as necessary conditions for a counterexample. [Manuscript](paper.pdf) · [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances)
+For every $3\le k\le n$ with $n\le250$ or $n\ge10{,}000$, the nonzero roots of the minimum-cycle-length excedance polynomial are simple, negative and strictly interlace those of the next row at the same $k$. Together with the three-cycle and threshold-three theorems, this leaves $251\le n<10{,}000$, $k\ge4$, and $n\ge4k$ as necessary conditions for a counterexample. [Large-size manuscript](paper.pdf) · [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances)
+
+The exact finite prefix checks 7,021 pairs beyond the three-cycle range and the all-size $k=3$ theorem. An independent replay checks the full certificate and uses Sturm chains in the original polynomial coordinate on ten sample pairs. [Finite prefix, replay and independent review](finite-prefix/README.md)
 
 A paired-residue estimate covers $4\le n/k\le48$. A common-circle Fourier estimate covers $n/k\ge44$, and the three-cycle theorem covers $n/k<4$. The two analytic comparisons have exact scalar replays and independent agent-assisted reviews. Formal verification is ⬜ None. [Paired residues](paired-residues/README.md) · [Fourier contrast](fourier-circle/README.md) · [Earlier degree-block cutoff](degree-blocks/README.md)
 
