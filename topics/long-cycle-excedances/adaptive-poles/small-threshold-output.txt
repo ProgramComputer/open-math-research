@@ -1,0 +1,1 @@
+Small thresholds 3 through 399: every scalar bound passed at n >= 1,000,000.

@@ -1,0 +1,20 @@
+4..5, A=17, row cutoff 10000: squared slack > 30398/10^6
+5..6, A=20, row cutoff 12000: squared slack > 51057/10^6
+6..7, A=23, row cutoff 21601: squared slack > 51686/10^6
+7..8, A=26, row cutoff 36054: squared slack > 44871/10^6
+8..9, A=29, row cutoff 56768: squared slack > 35247/10^6
+9..10, A=32, row cutoff 85334: squared slack > 24254/10^6
+10..12, A=39, row cutoff 182520: squared slack > 42575/10^6
+12..15, A=49, row cutoff 450188: squared slack > 36575/10^6
+15..20, A=54, row cutoff 972000: squared slack > 24742/10^6
+20..25, A=43, row cutoff 963021: squared slack > 31085/10^6
+25..32, A=37, row cutoff 1168214: squared slack > 38696/10^6
+32..40, A=30, row cutoff 1200000: squared slack > 52871/10^6
+40..50, A=26, row cutoff 1408334: squared slack > 76115/10^6
+50..64, A=24, row cutoff 1966080: squared slack > 90131/10^6
+64..80, A=23, row cutoff 2821334: squared slack > 81336/10^6
+80..96, A=23, row cutoff 4062720: squared slack > 72553/10^6
+96..100, A=23, row cutoff 4408334: squared slack > 95816/10^6
+100..125, A=24, row cutoff 7500000: squared slack > 79804/10^6
+Least squared slack is >24254/10^6 in 9..10.
+Small thresholds from one million and the combined cutoff of 4,062,720 pass.
