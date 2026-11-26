@@ -40,6 +40,8 @@ For every $n\ge1$ and every $1\le r\le d$, the normalized sequence $a_{n,k}/\bin
 
 An effective coefficient inequality gives distinct negative roots beyond a terminal geometric radius in modulus, with a stronger test certifying simplicity and separating them by a circle. The criterion applies directly to the finite balanced-array polynomial. [Upper-edge inequality, exact examples and independent reviews](effective-upper-curvature/README.md)
 
+Cellwise balancing proves coefficientwise quota minors of order two and a nonnegative shifted Wronskian on the positive axis. A dimension bound covers specified higher unnormalized minors. [Proofs, independent reviews, and exact screens](quota-minors/README.md)
+
 ## All dimensions through 24 rows
 
 For $0\le n\le24$, the original conjecture holds for every $d$ and $r$. For $d\ge2$ the zeros are simple. A finite reduction leaves 130 polynomials requiring coefficient counts and exact root tests. This computer-assisted theorem has no checked Lean or Rocq proof. [Proof and reproducible finite certificates](finite-linear-reduction.md)
