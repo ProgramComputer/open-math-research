@@ -73,3 +73,5 @@ python3 -IB limits.py
 ~~~
 
 [Original balanced-array conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/2)
+
+At every fixed dimension and proper cap the [shape theorem for the row-slack error](shape/README.md) proves the scale-one comparison at all sufficiently large heights and identifies the unique limiting maximum for caps of at least two. Uniformity in growing dimensions remains open.
