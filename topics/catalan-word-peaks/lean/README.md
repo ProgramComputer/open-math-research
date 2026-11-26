@@ -42,9 +42,10 @@ the reusable result to the exact Catalan polynomial in two stages.
 identifies the analytic branch, and proves the coefficient formula as the
 sum of the four improper ray integrals. It verifies radial moments and
 integrated envelopes and applies them to the normalized near-ray mean under
-the stated interior angle bounds. It also verifies the successive-size
-covariance bounds used at old middle roots. The phase, far-ray estimates,
-small-angle real-part estimate and strict signs remain in the written proof.
+the stated interior angle bounds. It bounds the actual normalized far-ray
+contribution in both angular ranges and proves the successive-size bounds
+for the near mean. The phase connection, small-angle real-part estimate and
+strict sign comparisons remain in the written proof.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -178,8 +179,7 @@ The proof bounds the generating function uniformly at outer radii at least
 two and sends the outer arcs to zero. Its substitution $s=e^x/|\zeta|-1$
 for logarithmic radius $x$ supplies the Jacobian $(1+s)^{-1}$, giving the
 factor $(1+s)^{-n-1}$ and the signed prefactor $-\zeta^{-n}/\pi$.
-Factoring the amplitudes for the covariance and sign comparisons remains in
-the written proof. [Improper ray kernel output](improper-ray-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45746699648)
+[Improper ray kernel output](improper-ray-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45746699648)
 
 ## Normalized near-ray mean and tilt covariance
 
@@ -196,7 +196,7 @@ and the actual pointwise bounds supply the hypotheses for the integrated
 envelopes. The theorem `nearMean_step_covariance` verifies (8) for every
 positive $n$. `nearTiltCovariance_sub_const` proves that the amplitude
 factor can be centered at its mean or at one. The connection between the
-phase and the angle bounds and the far-ray estimates remain to be checked.
+phase and the angle bounds remains to be checked.
 [Near-amplitude kernel output](near-amplitude-kernel.txt)
 
 The [near covariance module](CatalanStrictPeaksNearCovariance.lean) proves
@@ -211,6 +211,25 @@ bound integrates to the difference of two exact first moments. The
 local cubic and quadratic estimates and the affine tail bound cover
 the rest of the covariance.
 [Kernel audit](near-covariance-kernel.txt)
+
+## Far-ray contribution
+
+The [far-ray module](CatalanStrictPeaksFarRay.lean) bounds each of the actual
+far-ray integrals by $(6/5)b(n)|B_w(w)|$ for $n\ge150$ and $nd\ge2$. The
+pointwise comparison uses the three cut-factor norms and the increasing
+distance from $c$ along the far ray. The endpoint calculation squares the
+amplitudes and cancels the two shared cross-pair distances to bound
+$|B_w(w)|\sqrt{\sin\theta}$ by $|B_z(z)|$.
+
+The theorem `farRayError_abs_le` bounds the real contribution of the two
+far-ray terms divided by $2a^{-n}b(n)|B_z(z)|/\pi$ by
+$(6/5)a^{2n}/\sqrt{\sin\theta}$. The theorem `farRayError_smallAngle`
+obtains the sharper $1/(100n)$ bound when $d\ge1/2$ and
+$n\sin\theta\ge2$. The theorem `farRayError_largeAngle` obtains the
+$1/25$ bound when $nd\ge29/10$ and $\sin\theta\ge7/10$. Its radial
+power estimate uses six blocks in the binomial lower bound. The theorem
+`farRayError_interior` gives the uniform $1/25$ bound when $nd\ge29/10$
+and $n\sin\theta\ge2$. [Far-ray kernel output](far-ray-kernel.txt)
 
 ## Exact isolating intervals through length 150
 
@@ -269,6 +288,8 @@ lake build CatalanStrictPeaksNearAmplitude
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearAmplitudeAxioms.lean
 lake build CatalanStrictPeaksNearCovariance
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/NearCovarianceAxioms.lean
+lake build CatalanStrictPeaksFarRay
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarRayAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~

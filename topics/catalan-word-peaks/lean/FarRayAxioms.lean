@@ -1,0 +1,12 @@
+import CatalanStrictPeaksFarRay
+
+#print axioms CatalanStrictPeaks.CutGeometry.farRay_prefactor_norm_le
+#print axioms CatalanStrictPeaks.CutGeometry.farRay_integral_norm_le
+#print axioms CatalanStrictPeaks.CutGeometry.farRay_endpoint_bound
+#print axioms CatalanStrictPeaks.CutGeometry.farRay_smallAngle_factor_lt
+#print axioms CatalanStrictPeaks.CutGeometry.farRay_largeAngle_factor_lt
+#print axioms CatalanStrictPeaks.CutGeometry.rayLeadingScale_pos
+#print axioms CatalanStrictPeaks.CutGeometry.farRayError_abs_le
+#print axioms CatalanStrictPeaks.CutGeometry.farRayError_smallAngle
+#print axioms CatalanStrictPeaks.CutGeometry.farRayError_largeAngle
+#print axioms CatalanStrictPeaks.CutGeometry.farRayError_interior
