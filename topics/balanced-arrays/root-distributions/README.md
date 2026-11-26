@@ -23,3 +23,5 @@ Both growing cases assume $`s\to\infty`$ and $`ns/d\to\infty`$. In the growing-c
 **Formal verification**　⬜ None. An independent agent reviewed the five limits and the finite estimate from the array definition. [Mathematical review](review.md) · [Sources and status](literature.md)
 
 At one million rows, 250,000 columns and cap 127,000, the finite theorem places between 324,834 and 341,833 roots within radius $`2^{-250000}`$. At 64 rows and columns with cap 63, an independent integer calculation gives exactly 32 roots in the unit disk. [Exact checks and reproduction](verification/README.md)
+
+At every internal geometric radius, a sharp universal coefficient criterion bounds the disk count within one of its central index. For balanced arrays it applies to every cap when $`2d\ge(n+2)\log(3/2)`$. [Sharp disk counts and exact sign criterion](single-sign/README.md)

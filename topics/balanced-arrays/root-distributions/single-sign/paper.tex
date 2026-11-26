@@ -1,0 +1,120 @@
+\documentclass[11pt]{article}
+\usepackage[hmargin=.95in,vmargin=.88in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\hypersetup{colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\title{Sharp coefficient thresholds for counting zeros on geometric circles}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a polynomial with positive coefficients, the geometric circle at the $k$th term has radius $\sqrt{a_{k-1}/a_{k+1}}$. If every coefficient second quotient exceeds $9/4$, both open and closed disk counts differ from $k$ by at most one. A single real sign is equivalent to a boundary-free count of $k$. The threshold for the one-root error is sharp, even for quartics. At the higher sharp threshold $\sqrt[3]{16}$ the real part after division by the central monomial decreases strictly on the upper semicircle. These results apply to every cap of a balanced binary array when the dimension is at least an explicit fraction of its height. Under ordinary log-concavity a single local quotient above four is sufficient to obtain the exact centered count.
+\end{abstract}
+
+Write $P(z)=\sum_{j=0}^D a_j z^j$, $a_j>0$, and $G_i=a_i^2/(a_{i-1}a_{i+1})$ for $0<i<D$. At an internal index $k$ set $v=\sqrt{a_{k-1}/a_{k+1}}$. For $|z|=1$ define $F(z)=P(vz)/(a_k(vz)^k)$. The normalization makes the two adjacent terms have equal magnitude $t=G_k^{-1/2}$. Their arguments are $\theta$ and $-\theta$ when $z=e^{i\theta}$.
+
+\begin{theorem}\label{min}
+If every $G_i\ge b_0=\sqrt[3]{16}$, then $\Re F(e^{i\theta})$ is strictly decreasing for $0<\theta<\pi$, with a unique minimum at the negative ray. The constant $b_0$ is best possible for this angular-minimum conclusion, even among positive symmetric quartics.
+\end{theorem}
+\begin{proof}
+Let $c_j$ be the sum of the magnitudes at the two positions at distance $j$ from $k$, using zero for absent terms. Then $c_1=2t$ and
+\[
+ \Re F(e^{i\theta})=1+\sum_{j\ge1}c_j\cos(j\theta).
+\]
+On either side the first outward ratio is $t\le b_0^{-1/2}$. Every subsequent ratio shrinks by a factor at least $b_0$, so $c_{j+1}\le b_0^{-j-1/2}c_j$. Write $h_j=jc_j$. For $j\ge1$,
+\[
+ h_{j+1}\le(1+1/j)b_0^{-j-1/2}h_j\le h_j/2.
+\]
+The last multiplier is largest at $j=1$, where it equals $1/2$. Thus $u_j=h_j-2h_{j+1}+h_{j+2}\ge0$. The terminal nonzero $h_j$ gives a positive $u_j$.
+
+Finite summation by parts twice gives the classical Fej\'er comparison for sine series with convex coefficients~\cite{fejer}
+\[
+ \sum_{j\ge1}h_j\sin(j\theta)=
+ \sum_{m\ge1} u_m
+ \frac{(m+1)\sin\theta-\sin((m+1)\theta)}{2(1-\cos\theta)} .
+\]
+Indeed the displayed kernel is $\sum_{j=1}^m(m+1-j)\sin(j\theta)$ and the corresponding sum of weights at each $j$ telescopes to $h_j$. Each kernel is strictly positive for $0<\theta<\pi$: the geometric sum for $\sin((m+1)\theta)/\sin\theta$ is a sum of $m+1$ unit terms of which at least two have different phases. Its absolute value is strictly less than $m+1$. The derivative of $\Re F(e^{i\theta})$ is the negative of this positive sine sum.
+
+For $1<b<b_0$ use $P(z)=b^{-2}+b^{-1/2}z+z^2+b^{-1/2}z^3+b^{-2}z^4$. All its second quotients equal $b$. At $k=2$, $v=1$ and the derivative of $1+2b^{-1/2}x+2b^{-2}(2x^2-1)$ at $x=-1$ is $2b^{-1/2}-8b^{-2}<0$. Thus there are points with smaller real part than the negative-axis value.
+\end{proof}
+
+\begin{theorem}\label{one}
+Suppose all second quotients exceed $9/4$. Write $N_{<}(v)$ and $N_{\le}(v)$ for the open and closed disk counts with multiplicity. Then
+\[
+ k-1\ \le\ N_{<}(v)\ \le\ N_{\le}(v)\ \le\ k+1 .
+\]
+The two counts both equal $k$ if and only if $(-1)^kP(-v)>0$. If $F(-1)=0$, the only possible boundary zero is $-v$, with multiplicity at most two. If $F(-1)<0$, there is a unique $\theta_*\in(0,\pi)$ with $\Re F(e^{i\theta_*})=0$. According as the imaginary part there is positive, negative, or zero, the open and closed counts are respectively $(k+1,k+1)$, $(k-1,k-1)$, or $(k-1,k+1)$. In the last case the boundary consists of a simple conjugate pair.
+\end{theorem}
+\begin{proof}
+Put $s=2/3$ and $x=\cos\theta$. Use the combined tail magnitudes $c_j$ from the proof of Theorem~\ref{min} and the Chebyshev polynomials $T_j(\cos\theta)=\cos(j\theta)$. The real projection is
+\[
+ A(x)=1+\sum_{j\ge1}c_jT_j(x).
+\]
+Bounding the successive outward ratios with the global quotient bound gives $c_1=2t<4/3$, $c_j\le2s^{j^2}$, and $c_j\le c_i s^{j^2-i^2}$ for $j\ge i\ge1$. We show that $A$ is positive on the right part of $[-1,1]$ and that $A'(x)>0$ wherever $A(x)\le0$.
+
+For $x\ge-1/\sqrt2$, the part through degree two, $1+c_1x+c_2(2x^2-1)$, is strictly increasing: $c_2/c_1\le8/27$ and $1-4(8/27)/\sqrt2>0$. Its value at the left endpoint is at least $1-4/(3\sqrt2)>2/35$. The sum of the absolute values of all later terms is at most
+\[
+ 2s^9/(1-s^7)=1024/18531<2/35.
+\]
+Thus $A>0$ on this interval.
+
+For $-1\le x\le-1/\sqrt2$, put $y=-x$ and $h=-(2x^2-1)/(4x)\in[0,1/4]$. In $A+hA'$ the quadratic term cancels. The constant and linear contributions are $1-c_1(y/2+1/(4y))\ge1-3c_1/4>0$. The cubic multiplier is
+\[
+ T_3+hT'_3=\frac{8y^4-6y^2+3}{4y}\ge\frac12 .
+\]
+Indeed the numerator is increasing in $y^2\ge1/2$ and at least two. For the remaining terms use $|T'_j|\le j^2$, which follows from $|\sin(j\theta)|\le j|\sin\theta|$. Their total absolute contribution is at most
+\[
+ c_3\sum_{j\ge4}(1+j^2/4)s^{j^2-9}<c_3/2
+\]
+when $c_3>0$, and is zero otherwise. Here the first summand is $5s^7$ and successive ratios are at most $(29/20)s^9<1/8$; the geometric bound is $5120/15309<1/2$. This proves $A+hA'>0$ throughout the left interval.
+
+All these positivity statements on compact intervals persist under a small change in the radius, keeping the central index fixed, since the coefficients of the projection and its derivative vary continuously. For such a radius $u$, set $F_u(z)=P(uz)/(a_k(uz)^k)$. Its real projection $A_u(x)$ is positive for $x\ge-1/\sqrt2$ and has $A'_u(x)>0$ at every nonpositive value. Thus any zero is a strictly increasing crossing in $x$, and there can be at most one. In particular if $F_u(-1)>0$, the whole projection is positive. The winding number of $F_u$ then vanishes, and $P$ has $k$ interior roots with a free boundary. Conversely, a free boundary and $k$ interior roots force the sign $(-1)^kP(-u)>0$: nonreal interior roots contribute in pairs, and moving from zero to $-u$ counts the multiplicities of the real interior roots in the sign.
+
+If $F_u(-1)<0$ and the boundary is free, the real part crosses zero once on the upper semicircle as it moves from positive to negative. A crossing above the real axis gives an argument change of $+\pi$, since the path lies in the right half-plane before its crossing and the left half-plane after it. A crossing below gives $-\pi$. Reflection doubles the change on the full circle, giving the two stated counts.
+
+When $v$ is a root modulus, take boundary-free radii just below and above $v$ with no intervening root moduli. Their counts equal $N_{<}(v)$ and $N_{\le}(v)$ and belong to $[k-1,k+1]$. If $F(-1)<0$ and the crossing is at zero, it and its conjugate are the only boundary zeros, both simple by the nonzero angular derivative. If $F(-1)=0$, the one-sided strict crossing at $x=-1$ confines the boundary to $-v$, and the count difference bounds its multiplicity by two.
+\end{proof}
+
+The equivalence between a positive normalized sign and a boundary-free count of $k$ holds also if all quotients are at least $9/4$. The right interval above still has a strict gap. On the left the bound $1-c_1(y/2+1/(4y))$ is strictly positive for $x>-1$, even at $c_1=4/3$, since $y/2+1/(4y)<3/4$ for $1/\sqrt2\le y<1$. Thus $F(-1)>0$ rules out a crossing, and the converse parity argument is unchanged.
+
+The bound one is attained by $3+5z+3z^2$, with a boundary pair at $k=1$. The strict threshold in Theorem~\ref{one} is sharp. The polynomial $(1+z)^4$ has minimum second quotient $9/4$, but its middle geometric disk has open count zero and closed count four. For every smaller threshold, even a strictly positive normalized sign can coexist with four boundary zeros: take the product of two quadratics $1+2\cos(\alpha)z+z^2$ with distinct, sufficiently small positive angles. Both factors are positive at $-1$, the middle radius is one by symmetry, and all four roots are on it. The second quotients of the product tend to $8/3,9/4,8/3$ as the angles tend to zero.
+
+\begin{theorem}\label{four}
+Suppose the coefficients are log-concave. At any single index $0<k<D$ with $G_k>4$, the polynomial has exactly $k$ zeros inside the geometric circle and none on it, and $(-1)^kP(-v)>0$. The conclusion also holds at $G_k=4$ when $D\ge3$.
+\end{theorem}
+\begin{proof}
+Here $t\le1/2$. Log-concavity implies that on either side all outward ratios are at most $t$, so the numbers $2^jw_j$ are nonincreasing for $j\ge1$, starting at $2t$ and eventually zero. Summation by parts expresses the side as a nonnegative weighted sum of $S_m(z)=\sum_{j=1}^m(z/2)^j$ or their conjugates, with weights totaling $2t$. For $|z|=1$ and $u=z/2$,
+\[
+ \Re(1+2S_m(z))=\Re\frac{1+u-2u^{m+1}}{1-u}
+ \ge\frac{3/4-3\cdot 2^{-m-1}}{|1-u|^2}\ge0.
+\]
+This is strict for $m\ge2$. Since the real part of each $S_m$ is at least $-1/2$, one has $\Re F\ge1-2t>0$ for $t<1/2$. If $t=1/2$ and $D\ge3$, one side has a positive second term and hence a positive weight for at least one $m\ge2$. The sum is again strictly positive. Apply the winding argument as above. At equality and degree two the double root of $(1+z)^2$ shows why the degree restriction is necessary.
+\end{proof}
+
+\section*{Application to balanced binary arrays}
+Let $a_k$ count the labeled $n\times d$ zero-one matrices with all columns of sum $k$ and each row of sum at most $r$. Here $1\le r\le d$, $D=\lfloor nr/d\rfloor$, and every $a_k$ through $D$ is positive. Global second-quotient criteria and bounds on arguments of roots are studied by Handelman~\cite{handelman}. Nguyen and Vishnyakova~\cite{nv} obtain an exact count at the same geometric radii for all sufficiently large indices of entire functions with nondecreasing quotients starting at $\sqrt[3]{16}$. Their comparison already places the angular minimum of a symmetric five-term model on the real axis. Here the angular assertion treats the full polynomial, and the disk test is finite and allows unordered quotients. The array conjecture asks for real-rootedness at every size~\cite{alex}. The orientation comparison for labeled arrays~\cite{orientation} gives
+\[
+ G_i\ge\left[\left(1+\frac1i\right)
+                  \left(1+\frac1{n-i}\right)\right]^d
+     \ge \exp\!\left(\frac{4d}{n+2}\right).
+\]
+The last step uses $\log(1+1/i)\ge1/(i+1)$ and the harmonic-mean inequality. The logarithmic inequality here is strict for each positive finite $i$. Therefore $2d\ge(n+2)\log(3/2)$ implies $G_i>9/4$ for every internal $i$. The higher condition $3d\ge(n+2)\log 2$ gives the full angular monotonicity of Theorem~\ref{min}. Throughout the former range Theorem~\ref{one} confines both disk counts to $[k-1,k+1]$ at every geometric radius, even in the transition where the signs are unknown. For example, for $n=10^6$, $d=250000$, and $r=127000$ this covers every one of the 5,518 root positions left between previously certified inner and outer intervals~\cite{switching}. These radii depend on the actual coefficients. This does not classify the roots in that annulus. Positive signs at any consecutive block of geometric radii certify individual simple negative roots between successive radii. The disk counts order the radii, and the intermediate value theorem with the alternating signs gives one root in each annulus of count one. To use this in the finite transition band, one still needs the signs for the actual capped coefficients.
+
+For an application of Theorem~\ref{four} outside this dimension range take $n=10^8,d=100,r=50$. At $k=D-64=49999936$ the prior finite curvature inequality~\cite{upper} gives
+\[
+ \log G_k\ge\frac{1199077934275800}{859999987767059}>139/100>\log 4.
+\]
+Its hypotheses and bound persist at all higher internal indices. The resulting disk counts, signs and the leading sign isolate the 64 largest roots as simple and negative. The prior proof counted 64 distinct negative outer roots and proved simplicity of the outermost 42. This calculation concerns the original labeled arrays and uses no evaluated coefficient vector.
+
+\begin{thebibliography}{9}
+\bibitem{alex} P. Alexandersson. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Balanced arrays of uniform matroids}. The symmetric functions catalog.
+\bibitem{fejer} A. P. Solodov. \href{https://doi.org/10.1070/SM8633}{A sharp lower bound for the sum of a sine series with convex coefficients}. Sb. Math. 207 (2016), Sections 1--2.
+\bibitem{handelman} D. Handelman. \href{https://arxiv.org/abs/1009.6022}{Arguments of zeros of highly log concave polynomials}. Rocky Mountain J. Math. 43 (2013). See Theorems 1.1, 1.2 and Section 2 for related root and argument bounds and symmetric examples.
+\bibitem{nv} T. H. Nguyen and A. Vishnyakova. \href{https://arxiv.org/abs/2101.11757}{On the number of real zeros of real entire functions with a non-decreasing sequence of the second quotients of Taylor coefficients}, Lemma 3.2, \href{https://doi.org/10.7153/mia-2022-25-06}{Math. Inequal. Appl. (2022)}. See also their \href{https://doi.org/10.1016/j.jmaa.2021.124955}{J. Math. Anal. Appl. 498 (2021)}, Lemma 2.1.
+\bibitem{orientation} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/blob/634a1e212f243289667f917cbb86664d2c81f127/topics/balanced-arrays/orientation-normalization.md}{An orientation proof of normalized log-concavity for balanced arrays}, 2026.
+\bibitem{switching} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/pull/173}{Row deficits and the outer roots of balanced binary arrays}, 2026.
+\bibitem{upper} ProgramComputer. \href{https://github.com/ProgramComputer/open-math-research/blob/634a1e212f243289667f917cbb86664d2c81f127/topics/balanced-arrays/effective-upper-curvature/proof.md}{An effective upper-edge coefficient inequality for actual balanced arrays}, final section, 2026.
+\end{thebibliography}
+\end{document}
