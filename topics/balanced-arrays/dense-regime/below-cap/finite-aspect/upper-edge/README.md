@@ -30,4 +30,4 @@ tectonic paper.tex
 
 A subsequent [research note on row-deficit monotonicity](monotonicity/README.md) gives an exact obstruction to extending the switching bound by global monotonicity of the excess number of available rows.
 
-The [marked-row comparison](../marked-row/README.md) now certifies the first 505,661 simple negative roots in this example. Together with the last 95 from row switching, this leaves 2,244 roots in the intervening annulus.
+The [marked-row comparison](../marked-row/README.md) now certifies the first 506,470 simple negative roots in this example. Together with the last 95 from row switching, this leaves 1,435 roots in the intervening annulus.

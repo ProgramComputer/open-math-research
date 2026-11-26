@@ -1,0 +1,5 @@
+809 quotas 505662..506470; 814 convex enclosures among 814 phase sums.
+Minimum lower bound at 506470 exceeds 215985/10^8.
+Three independent 32-block enclosures overlap the convex enclosures.
+Synthetic obstruction replayed at 507000, with all six slopes strictly feasible.
+Unrestricted curvature floor exp(n/(n+2)) exceeds 9/4.
