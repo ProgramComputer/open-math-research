@@ -92,3 +92,12 @@ jobs:
             tee "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/near-amplitude-kernel.txt \
             "$RUNNER_TEMP/catalan-near-amplitude-axioms.txt"
+      - name: Check the far-ray bounds
+        run: lake build CatalanStrictPeaksFarRay
+      - name: Audit the far-ray bounds
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/FarRayAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-far-ray-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/far-ray-kernel.txt \
+            "$RUNNER_TEMP/catalan-far-ray-axioms.txt"
