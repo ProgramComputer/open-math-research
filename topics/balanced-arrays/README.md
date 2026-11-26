@@ -4,6 +4,8 @@ One absolute threshold $N$ gives $\lfloor nr/d\rfloor$ simple negative zeros for
 
 Earlier bounds include the [five-thirds row bound and polynomial cap or corank range](fifth-thirds/README.md), [all fixed quadratic aspects](critical-aspect/README.md), the [absolute quadratic cutoff](quadratic/README.md), [quartic-log cutoff](very-tall/README.md), and [dimension-uniform fixed-cap threshold](fixed-cap/README.md).
 
+Every dimension and cap satisfies the conjecture through 35 rows. The exact finite replay includes 171 coefficient vectors and 3,391 simple negative roots certified by integer sign evaluations. [Finite coverage and independent checks](finite-residual/README.md)
+
 There are absolute constants $C>0$ and $N$ such that, for every $n\ge N$, $d\ge Cn/\log n$, and every row cap, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ simple negative zeros. This extends the earlier theorem for $d\ge\epsilon n$ with fixed $\epsilon>0$. **⬜ None** for Lean or Rocq. [Theorem and proof](dense-regime/README.md)
 
 For $2\le d\le n$ and every cap, a reviewed comparison with the unrestricted polynomial leaves at most $CD\sqrt{n\log(n+1)}/d$ of the $D=\lfloor nr/d\rfloor$ roots uncertified as simple and negative. It identifies individual roots below the cap by disjoint disks. The logarithmic and below-cap bounds use unspecified absolute constants. **⬜ None** for Lean or Rocq. [Below-cap comparison](dense-regime/below-cap/README.md)
