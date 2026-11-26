@@ -1,6 +1,12 @@
 --- a/PrismSeriesClosure.lean
 +++ b/PrismSeriesClosure.lean
-@@ -25,13 +25,13 @@
+@@ -1,4 +1,5 @@
+ import PrismGeometry
++import Mathlib.Algebra.Polynomial.Degree.Lemmas
+ import Mathlib.Algebra.Group.ForwardDiff
+ import Mathlib.RingTheory.PowerSeries.WellKnown
+ 
+@@ -25,13 +26,13 @@
    | succ m ih => simp [Finset.sum_range_succ, ih, List.range_succ, List.sum_append]
  
  theorem boxSeries_coeff (caps : List Nat) (t : Nat) :
@@ -16,7 +22,7 @@
        ((boundedCompositions (c :: caps) t).length : Int)
      rw [capSeries, Finset.sum_mul, map_sum]
      simp only [PowerSeries.coeff_X_pow_mul', ih]
-@@ -81,12 +81,12 @@
+@@ -81,12 +82,12 @@
  theorem one_sub_X_pow_expansion (p n : Nat) :
      (1 - PowerSeries.X ^ p : PowerSeries Int) ^ n =
        ∑ j ∈ Finset.range (n + 1),
@@ -31,7 +37,7 @@
    rw [hneg, one_pow, mul_one, mul_pow, ← pow_mul]
    simp only [map_mul, map_pow, map_natCast]
    ring
-@@ -101,7 +101,7 @@
+@@ -101,7 +102,7 @@
      else 0
  
  private theorem coeff_shifted_choose (q j w e d k : Nat) (hw : w < k) (hd : k - 1 + e ≤ d) :
@@ -40,7 +46,7 @@
        (PowerSeries.X ^ ((j + w) * q + (j + e)) *
          PowerSeries.mk (fun x => ((d + x).choose d : Int))) =
        if j + w < k then affineChoose (k - (j + w)) (d - (j + e)) d q else 0 := by
-@@ -121,7 +121,7 @@
+@@ -121,7 +122,7 @@
      rw [if_neg hl, if_neg (by omega)]
  
  theorem coeff_signedRows (q n d k w e : Nat) (hw : w < k) (hd : k - 1 + e ≤ d) :
@@ -49,7 +55,22 @@
        ((1 - PowerSeries.X ^ (q + 1)) ^ n * PowerSeries.X ^ (w * q + e) *
          PowerSeries.mk (fun x => ((d + x).choose d : Int))) = signedRows n d k w e q := by
    rw [one_sub_X_pow_expansion, Finset.sum_mul, Finset.sum_mul, map_sum, signedRows, Finset.sum_apply]
-@@ -204,31 +204,31 @@
+@@ -191,12 +192,12 @@
+     rw [h, Function.iterate_one, fwdDiff_const]
+     rfl
+   | succ d ih =>
+-    rw [Function.iterate_succ_apply, affineChoose_difference, fwdDiff_iter_finset_sum]
++    rw [Function.iterate_succ_apply, affineChoose_difference, fwdDiff_iter_finsetSum]
+     simp [ih]
+ 
+ theorem signedRows_difference_zero (n d k w e : Nat) :
+     Δ_[1]^[d + 1] (signedRows n d k w e) = 0 := by
+-  rw [signedRows, fwdDiff_iter_finset_sum]
++  rw [signedRows, fwdDiff_iter_finsetSum]
+   apply Finset.sum_eq_zero
+   intro j _
+   split
+@@ -204,32 +205,32 @@
    · exact Function.iterate_fixed (fwdDiff_const (M := Nat) (h := 1) (0 : Int)) (d + 1)
  
  private theorem coeff_normalized_eq_diff (m q : Nat) (f : Nat → Int) :
@@ -83,11 +104,13 @@
  
  theorem coeff_polynomialPrefix (d i : Nat) (s : PowerSeries Int) :
 -    (polynomialPrefix d s).coeff i = if i ≤ d then PowerSeries.coeff Int i s else 0 := by
+-  rw [polynomialPrefix, Polynomial.finset_sum_coeff]
 +    (polynomialPrefix d s).coeff i = if i ≤ d then PowerSeries.coeff (R := Int) i s else 0 := by
-   rw [polynomialPrefix, Polynomial.finset_sum_coeff]
++  rw [polynomialPrefix, Polynomial.finsetSum_coeff]
    simp [Polynomial.coeff_C_mul_X_pow, Finset.sum_ite_eq', Finset.mem_range, Nat.lt_succ_iff]
  
-@@ -239,7 +239,7 @@
+ theorem polynomialPrefix_degree (d : Nat) (s : PowerSeries Int) :
+@@ -239,7 +240,7 @@
    rw [coeff_polynomialPrefix, if_neg (not_le_of_gt hi)]
  
  theorem polynomialPrefix_series (d : Nat) (s : PowerSeries Int)

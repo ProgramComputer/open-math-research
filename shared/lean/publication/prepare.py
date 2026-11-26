@@ -1,5 +1,6 @@
 """Stage a clean build of the published Lean sources and their stable-version ports."""
 import argparse
+import hashlib
 import json
 import re
 import shutil
@@ -47,7 +48,15 @@ def main():
             # Standalone axiom-printing files with repeated names are not libraries.
             continue
         files[name] = path
-    roots = GROUPS[args.group]
+    additional = {}
+    if args.group in ("catalan", "prism"):
+        topic = "catalan-word-peaks" if args.group == "catalan" else "prism-splitting"
+        for path in (HERE.parents[2]/"topics"/topic/"lean"/"publication").glob("Audit*.lean"):
+            additional[path.stem] = path
+        if args.group == "catalan":
+            additional["AuditReferenceSpecs"] = HERE/"reference"/"AuditReferenceSpecs.lean"
+        files.update({k: str(v.relative_to(HERE.parents[2])) for k,v in additional.items()})
+    roots = GROUPS[args.group]+sorted(additional)
     pending = list(roots)
     modules = {}
     mathlib = set()
@@ -55,7 +64,7 @@ def main():
         name = pending.pop()
         if name in modules:
             continue
-        source = git("show", BASE + ":" + files[name])
+        source = additional[name].read_text() if name in additional else git("show", BASE + ":" + files[name])
         for old,new in NEW_IMPORTS.items():
             source = source.replace("import "+old+"\n", "import "+new+"\n")
         relative = Path(*name.split(".")).with_suffix(".lean")
@@ -66,6 +75,13 @@ def main():
         if patch.exists():
             subprocess.run(["patch", "--fuzz=0", "-s", str(path), str(patch)], check=True)
             source = path.read_text()
+        if args.group == "catalan":
+            # Mathlib 4.36 makes the coefficient ring implicit in these maps.
+            source = re.sub(r"PowerSeries\.(coeff|C|constantCoeff) (ℝ|ℂ|P|R|S)(?![\w'])",
+                            r"PowerSeries.\1 (R := \2)", source)
+            source = source.replace("eval_finset_sum", "eval_finsetSum")
+            source = re.sub(r"(Nat\.strong_induction_on with\n\s*\| )h ", r"\1ind ", source)
+            path.write_text(source)
         modules[name] = files[name]
         for mod in re.findall(r"(?m)^(?:public )?import ([\w.]+)", source):
             if mod in files:
@@ -82,7 +98,10 @@ def main():
         shutil.copyfile(HERE / filename, dest / filename)
     (dest / "targets.txt").write_text("\n".join(roots)+"\n")
     (dest / "cache-imports.txt").write_text("\n".join(sorted(mathlib))+"\n")
-    (dest / "sources.json").write_text(json.dumps(modules, indent=2)+"\n")
+    sources = {module: {"published_path": original, "staged_sha256":
+                hashlib.sha256((dest / Path(*module.split(".")).with_suffix(".lean")).read_bytes()).hexdigest()}
+               for module, original in modules.items()}
+    (dest / "sources.json").write_text(json.dumps(sources, indent=2)+"\n")
     print(f"{args.group}: {len(modules)} published source modules, {len(mathlib)} direct mathlib imports")
 
 

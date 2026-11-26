@@ -14,12 +14,12 @@ artifact_root="$(cd -- "$2" && pwd -P)"
 topic="$3"
 case "$topic" in
   prism)
-    modules=(PrismDimensions PrismFamilyInterlacing)
-    theorems=(PrismSplit.finBoxSplitCounterexample PrismFamily.familyBoxSplitCounterexample)
+    modules=(PrismDimensions PrismFamilyInterlacing AuditPrismExportType)
+    theorems=(PrismSplit.finBoxSplitCounterexample PrismFamily.familyBoxSplitCounterexample AuditExportType.prismSix AuditExportType.prismFamily)
     ;;
   catalan)
-    modules=(CatalanStrictPeaksAllInterlacing)
-    theorems=(CatalanStrictPeaks.strict_peaks_all_lengths)
+    modules=(CatalanStrictPeaksAllInterlacing AuditCatalanExportType AuditCatalanWordBridge)
+    theorems=(CatalanStrictPeaks.strict_peaks_all_lengths AuditExportType.catalan AuditReference.catalanPolynomial_eq)
     ;;
   *)
     echo "Unknown audit topic: $topic" >&2

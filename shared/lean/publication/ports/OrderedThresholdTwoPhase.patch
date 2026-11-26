@@ -18,15 +18,17 @@
      refine ⟨hs, hr, ?_⟩
      unfold polePhase
      rw [← hr]
-@@ -63,9 +62,8 @@
+@@ -62,10 +61,9 @@
+     (Real.hasDerivAt_sin t) hs.ne').sub
      (((hasDerivAt_id t).div (Real.hasDerivAt_sin t) hs.ne').log
        (div_ne_zero ht.ne' hs.ne'))
-   convert h using 1
+-  convert h using 1
 -  simp only [id_eq, one_mul]
 -  field_simp [ht.ne', hs.ne']
 -  ring
-+  try simp only [id_eq, one_mul]
-+  field_simp [ht.ne', hs.ne'] <;> ring
++  change HasDerivAt polePhase _ t at h
++  convert h using 1 <;> (try simp only [id_eq, one_mul]) <;>
++    (try field_simp [ht.ne', hs.ne']) <;> ring
  
  theorem strictAntiOn_polePhase {D : Set ℝ} (hc : Convex ℝ D)
      (hpos : ∀ t ∈ D, 0 < t ∧ 0 < sin t) : StrictAntiOn polePhase D := by

@@ -17,22 +17,23 @@
    exact hcompact.inter_right hclosed
  
  /-- The set of all squared-modulus maximizers on a unit fixed-product torus. -/
-@@ -125,10 +126,12 @@
+@@ -125,10 +126,13 @@
    intro k
    by_cases hki : k = i
    · subst k
 -    simpa [replacePair] using (continuous_id : Continuous (fun z : ℂ => z))
-+    simp only [replacePair, if_pos rfl]
-+    exact continuous_id
++    simp only [replacePair, Function.update_self]
++    exact (continuous_id : Continuous (id : ℂ → ℂ))
    by_cases hkj : k = j
    · subst k
 -    simpa [replacePair, hki] using continuous_const.mul Complex.continuous_conj
-+    simp only [replacePair, if_neg hki, if_pos rfl]
-+    exact continuous_const.mul Complex.continuous_conj
++    simp only [replacePair, Function.update_of_ne hki, Function.update_self]
++    exact (continuous_const : Continuous (fun _ : ℂ => x i * x j)).mul
++      Complex.continuous_conj
    simpa [replacePair, hki, hkj] using (continuous_const : Continuous (fun _ : ℂ => x k))
  
  /-- Every connected component of the maximizing set contains a diagonal point. -/
-@@ -138,7 +141,7 @@
+@@ -138,7 +142,7 @@
      ∃ x ∈ connectedComponentIn (modulusMaxima p f) x₀, ∀ i j, x i = x j := by
    have hcompact := isCompact_component (isCompact_modulusMaxima hf hx₀) hx₀
    have haux_cont : Continuous (fun x : ι → ℂ => normSq (∑ k, x k)) :=
@@ -41,7 +42,7 @@
    obtain ⟨x, hx_component, haux⟩ := hcompact.exists_isMaxOn
      ⟨x₀, mem_connectedComponentIn hx₀⟩ haux_cont.continuousOn
    refine ⟨x, hx_component, ?_⟩
-@@ -218,8 +221,8 @@
+@@ -218,8 +222,8 @@
      Continuous (rowObjective (ι := ι) r) := by
    change Continuous (fun x : ι → ℂ => rowObjective r x)
    simp_rw [rowObjective_eq_elementary_sum r hr]

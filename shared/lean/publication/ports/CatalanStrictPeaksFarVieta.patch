@@ -1,0 +1,20 @@
+--- CatalanStrictPeaksFarVieta.lean
++++ CatalanStrictPeaksFarVieta.lean
+@@ -89,7 +89,7 @@
+   change 2 * _ = P.leadingCoeff * ((∑ i, y i)^2 - ∑ i, y i ^ 2) at hsq
+   rw [hsum] at hsq
+   have hsq' : U^2 - ∑ i, y i^2 < c * U^2 :=
+-    (mul_lt_mul_left lead).mp (hsq.symm.trans_lt hc)
++    (mul_lt_mul_iff_left₀ lead).mp (hsq.symm.trans_lt hc)
+   have hmax : ∑ i, y i^2 ≤ y l * U := by
+     rw [← hsum, Finset.mul_sum]
+     apply Finset.sum_le_sum
+@@ -97,7 +97,7 @@
+     rw [sq]
+     exact mul_le_mul_of_nonneg_right (show y i ≤ y l from add_le_add_left (last i) 1) (hy i)
+   have hL : (1-c)*U < y l := by
+-    apply (mul_lt_mul_right hU).mp
++    apply (mul_lt_mul_iff_right₀ hU).mp
+     nlinarith only [hsq', hmax]
+   have hle : y l ≤ U := by
+     rw [← hsum]; exact Finset.single_le_sum (fun i _ => hy i) (Finset.mem_univ l)

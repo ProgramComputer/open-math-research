@@ -20,3 +20,18 @@
      List.map_replicate, mul_one]
    rw [mul_comm q (b + 1), ← boxSeries_coeff, boxSeries_replicate, capSeries_eq, mul_pow,
      PowerSeries.mk_one_pow_eq_mk_choose_add Int (2 * b + 1)]
+@@ -104,12 +106,12 @@
+     rw [h, Function.iterate_one, fwdDiff_const]
+     rfl
+   | succ d ih =>
+-    rw [Function.iterate_succ_apply, intAffineChoose_difference, fwdDiff_iter_finset_sum]
++    rw [Function.iterate_succ_apply, intAffineChoose_difference, fwdDiff_iter_finsetSum]
+     simp [ih]
+ 
+ theorem intSignedRows_difference_zero (n d k w e : Nat) :
+     Δ_[1]^[d + 1] (intSignedRows n d k w e) = 0 := by
+-  rw [intSignedRows, fwdDiff_iter_finset_sum]
++  rw [intSignedRows, fwdDiff_iter_finsetSum]
+   apply Finset.sum_eq_zero
+   intro j _
+   split

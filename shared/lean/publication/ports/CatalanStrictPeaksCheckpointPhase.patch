@@ -1,6 +1,6 @@
 --- CatalanStrictPeaksCheckpointPhase.lean
 +++ CatalanStrictPeaksCheckpointPhase.lean
-@@ -48,10 +48,10 @@
+@@ -48,13 +48,13 @@
  theorem phaseCorrection_bounds {θ : ℝ} (hθ : θ ∈ Set.Icc (0 : ℝ) (π / 2)) :
      -(π / 4) ≤ phaseCorrection θ ∧ phaseCorrection θ ≤ π / 8 + 1 := by
    obtain ⟨hA, hB⟩ := phaseCorrection_arguments hθ
@@ -14,7 +14,11 @@
 +  have hB1 := arctan_le_arctan_iff.mpr hB.2
    have hhalf0 : 0 < arctan (1 / 2) := by
      rw [← arctan_zero]
-     exact arctan_lt_arctan (by norm_num)
+-    exact arctan_lt_arctan (by norm_num)
++    exact arctan_lt_arctan_iff.mpr (by norm_num)
+   have hhalf : arctan (1 / 2) ≤ 1 / 2 := by
+     have h := lt_tan hhalf0 (arctan_lt_pi_div_two _)
+     rw [tan_arctan] at h
 @@ -83,9 +83,9 @@
    have htx : t ≤ x := by
      exact (div_le_iff₀ hnP).2 (by simpa only [mul_comm] using hangle)

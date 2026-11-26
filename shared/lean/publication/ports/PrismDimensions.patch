@@ -1,0 +1,11 @@
+--- a/PrismDimensions.lean
++++ b/PrismDimensions.lean
+@@ -261,7 +261,7 @@
+     (∑ i ∈ Finset.range (d + 1), Polynomial.C (f i) * Polynomial.X ^ i).natDegree ≤ d := by
+   rw [Polynomial.natDegree_le_iff_coeff_eq_zero]
+   intro k hk
+-  rw [Polynomial.finset_sum_coeff]
++  rw [Polynomial.finsetSum_coeff]
+   apply Finset.sum_eq_zero
+   intro i hi
+   have hne : k ≠ i := by

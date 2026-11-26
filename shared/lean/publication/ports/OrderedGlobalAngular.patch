@@ -6,6 +6,15 @@
  import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
  import Mathlib.Algebra.Order.BigOperators.Group.Finset
  import Mathlib.Tactic.FieldSimp
+@@ -34,7 +36,7 @@
+   rw [hdu, hdv] at hcos
+   have hs := (div_le_div_iff₀ (sub_pos.mpr hyx) hy).mp hcos
+   have hs' : y*sin x ≤ x*sin y := by nlinarith only [hs]
+-  apply (mul_le_mul_right hx).mp
++  apply le_of_mul_le_mul_right _ hx
+   dsimp [y] at hs' ⊢
+   nlinarith only [hs']
+ 
 @@ -92,7 +94,7 @@
        have h := sine_chord (mul_nonneg hj₀.le hpos.le) hangle.le h₀ h₁
        have he : (1-(k : ℝ)/(j : ℝ))*((j : ℝ)*theta) =

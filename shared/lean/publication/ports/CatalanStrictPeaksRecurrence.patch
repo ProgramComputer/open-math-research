@@ -1,0 +1,20 @@
+--- CatalanStrictPeaksRecurrence.lean
++++ CatalanStrictPeaksRecurrence.lean
+@@ -146,7 +146,7 @@
+       omega
+     have hlast : n + 1 - 2 = n - 1 := by omega
+     unfold peaks at ⊢
+-    rw [hRange, range_succ, filter_insert, hf, hlast]
++    rw [hRange, range_add_one, filter_insert, hf, hlast]
+     by_cases hb : ascent w = true ∧ x.val < lastHeight w
+     · have hl := (peak_append_last hn w x).2 hb
+       have hnot : n - 1 ∉ peaks w := by
+@@ -257,7 +257,7 @@
+   apply sum_congr rfl
+   intro w _
+   by_cases h : canPush (stateOf w) t
+-  · simp [transitionWeight, h, stateOf, lastHeight]
++  · simp only [transitionWeight, if_pos h] <;> rfl
+   · simp [transitionWeight, h]
+ 
+ /-- Store the false and true ascent states at each height. -/
