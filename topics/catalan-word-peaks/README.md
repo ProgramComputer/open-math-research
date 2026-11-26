@@ -24,3 +24,5 @@ python -I -O topics/catalan-word-peaks/code/verify_all_rows.py topics/catalan-wo
 python -I -O topics/catalan-word-peaks/code/effective_right_edge.py
 python -I -O topics/catalan-word-peaks/code/far_left.py
 ~~~
+
+[Append-state recurrence obstructions](append-states/README.md) records why two local interlacing invariants fail in a combinatorial approach to the known theorem.
