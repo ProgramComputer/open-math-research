@@ -19,3 +19,5 @@ python3 -I -O topics/long-cycle-excedances/verify_cycle_deletions.py
 An independent agent-assisted review checked the run encoding, the explicit formula for the second coefficient, the root separation in consecutive rows, and the uniform binomial probability estimate. The new threshold-three certificate supplies 39,800 disjoint dyadic brackets across the 399 rows. The second checker uses inclusion-exclusion on fixed points and transpositions. [Finite certificate](threshold-three-prefix.jsonl.gz)
 
 The independent referee checked the analytic inequalities and reconstructed all 79,600 endpoint signs by clearing denominators. [Referee report](review-fixed-threshold.md) · [Independent sign checker](verify_endpoints.py) · [Manuscript](paper.tex)
+
+The insertion recurrence suggests an all-size induction at the old roots. Its sufficient inequality passes all 946 consecutive pairs ending by size 46. [Finite induction test](insertion-lag.md)
