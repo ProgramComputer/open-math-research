@@ -1,0 +1,19 @@
+'OpenMathResearch.FiniteTailMoments.tail_submultiplicative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.FiniteTailMoments.variance_le_mean_one_add_mean' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BalancedEventual.OccupiedPhase.variance_le_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.OccupiedPhase.variance_le_mean_times_one_add_mean' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BalancedEventual.OccupiedPhase.weighted_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.OccupiedPhase.variance_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.OccupiedPhase.variance_le_dimension_quarter' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BalancedEventual.OccupiedPhase.variance_le_deficit_times_one_add_deficit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BalancedEventual.OccupiedPhase.phase_deviation_unconditional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

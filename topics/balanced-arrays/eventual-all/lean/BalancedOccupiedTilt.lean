@@ -20,25 +20,25 @@ def mean (d r : ℕ) (v : ℝ) : ℝ :=
 def variance (d r : ℕ) (v : ℝ) : ℝ :=
   ∑ s ∈ range (r + 1), probability d r v s * ((s : ℝ) - mean d r v) ^ 2
 
-private theorem mass_pos (d r : ℕ) {v : ℝ} (hv : 0 < v) : 0 < mass d r v := by
+theorem mass_pos (d r : ℕ) {v : ℝ} (hv : 0 < v) : 0 < mass d r v := by
   unfold mass
   apply Finset.sum_pos' (fun s _ => by unfold rowWeight; positivity)
   exact ⟨0, Finset.mem_range.mpr (Nat.zero_lt_succ _), by simp [rowWeight]⟩
 
-private theorem probability_nonneg (d r s : ℕ) {v : ℝ} (hv : 0 < v) :
+theorem probability_nonneg (d r s : ℕ) {v : ℝ} (hv : 0 < v) :
     0 ≤ probability d r v s := by
   unfold probability rowWeight
   exact div_nonneg (by positivity) (mass_pos d r hv).le
 
-private theorem sum_probability (d r : ℕ) {v : ℝ} (hv : 0 < v) :
+theorem sum_probability (d r : ℕ) {v : ℝ} (hv : 0 < v) :
     ∑ s ∈ range (r + 1), probability d r v s = 1 := by
   simp only [probability, div_eq_mul_inv, ← Finset.sum_mul]
   exact mul_inv_cancel₀ (mass_pos d r hv).ne'
 
-private theorem mean_nonneg (d r : ℕ) {v : ℝ} (hv : 0 < v) : 0 ≤ mean d r v :=
+theorem mean_nonneg (d r : ℕ) {v : ℝ} (hv : 0 < v) : 0 ≤ mean d r v :=
   Finset.sum_nonneg fun s _ => mul_nonneg (probability_nonneg d r s hv) (Nat.cast_nonneg _)
 
-private theorem mean_le (d r : ℕ) {v : ℝ} (hv : 0 < v) : mean d r v ≤ r := by
+theorem mean_le (d r : ℕ) {v : ℝ} (hv : 0 < v) : mean d r v ≤ r := by
   calc
     mean d r v ≤ ∑ s ∈ range (r + 1), probability d r v s * (r : ℝ) :=
       Finset.sum_le_sum fun s hs => mul_le_mul_of_nonneg_left

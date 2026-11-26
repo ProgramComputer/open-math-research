@@ -86,9 +86,9 @@ $$
 |\Psi(v)/\pi-n\mu/d|\le 2nV\phi^2+(d-1)/2.
 $$
 
-This verifies the argument estimate and its contribution to the phase inequality in [the eventual proof](../proof.md#the-phase-radii). The conditional theorem `phase_deviation_le_min_mean_deficit` also checks the scalar interpolation from the three truncated-binomial variance bounds in [the published derivation](../../very-tall/proof.md), and gives the term $4\pi^2\min(y,T-y)/\sqrt d$ with $y=n\mu/d$ and $T=nr/d$. The next formal obligations are the bounds $V\le d/4$, $V\le\mu(1+\mu)$ and $V\le(r-\mu)(1+r-\mu)$ for these finite probabilities. The angular signs and mixed radius joins are separate.
+This verifies the argument estimate and its contribution to the phase inequality in [the eventual proof](../proof.md#the-phase-radii). The conditional theorem `phase_deviation_le_min_mean_deficit` also checks the scalar interpolation from the three truncated-binomial variance bounds in [the published derivation](../../very-tall/proof.md), and gives the term $4\pi^2\min(y,T-y)/\sqrt d$ with $y=n\mu/d$ and $T=nr/d$. The variance bounds for these finite probabilities are supplied below. The angular signs and mixed radius joins are separate.
 
-The published variance derivation uses two inputs. Conditioning an exchangeable coordinate on success or failure gives the same $(d-1)$-trial tilted law truncated at $r-1$ or $r$, respectively. The former mean is no larger, so the conditional difference in total size is at most one. The tail argument uses the decreasing ratios of the positive masses of $S$ and $r-S$. For their survival probabilities $F_j$ and masses $p_j$, the ratio $F_j/p_j$ is a sum of successive products of those ratios and decreases. Hence $F_{i+j}\le F_iF_j$, which bounds the second factorial moment by twice the squared mean. These two arguments have been checked on paper and are the hypotheses left open in the conditional Lean theorem.
+The published variance derivation uses two inputs. Conditioning an exchangeable coordinate on success or failure gives the same $(d-1)$-trial tilted law truncated at $r-1$ or $r$, respectively. The former mean is no larger, so the conditional difference in total size is at most one. The tail argument uses the decreasing ratios of the positive masses of $S$ and $r-S$. For their survival probabilities $F_j$ and masses $p_j$, the ratio $F_j/p_j$ is a sum of successive products of those ratios and decreases. Hence $F_{i+j}\le F_iF_j$, which bounds the second factorial moment by twice the squared mean. The conditional Lean theorem takes these variance estimates as inputs.
 
 Use the research pins above. Compile the shared first-hit module, topic specialization and concrete phase before checking the tilt module.
 
@@ -102,3 +102,29 @@ lake env lean "$topic/BalancedOccupiedTilt.lean"
 ~~~
 
 The local replay uses Lean 4.19.0, compiler commit `6caaee842e94`, and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. [Axiom output](occupied-tilt-axioms.txt)
+
+## Variance of the finite size law
+
+[BalancedTiltVariance.lean](BalancedTiltVariance.lean) supplies all three hypotheses of the quantitative tilt estimate for the same finite law. It proves the binomial recurrence for the normalized weights and sums it against the constant and linear functions of size. With $p_r$ the probability of size $r$, the resulting exact identity is
+
+$$
+(1+v)V=\mu-vp_r(d-r)(r-\mu).
+$$
+
+The nonnegative term at the cap gives $V\le\mu$ and $V\le d/4$. In particular it gives $V\le\mu(1+\mu)$.
+
+For the deficit $J=r-S$, the module extends its probability mass by zero above $r$. The ratio of successive positive masses is $(r-j)/(v(d-r+j+1))$, which decreases with $j$. The checked cross-product inequality compares a shifted mass at every lower index with one at every higher index. The reusable [finite tail module](../../../../shared/lean/OpenMathResearch/FiniteTailMoments.lean) sums this inequality to prove survival submultiplicativity. Finite summation by parts identifies the two tail sums with the mean and half the second factorial moment. Reflection gives mean $r-\mu$ and preserves variance. This proves $V\le(r-\mu)(1+r-\mu)$.
+
+The declaration `BalancedEventual.OccupiedPhase.phase_deviation_unconditional` now checks the quantitative tilt inequality for every positive radius and integer cap $1\le r<d$. It uses the exact phase from the preceding sections. The bounds for the coefficient signs at those radii and their joins with geometric radii remain outside Lean.
+
+Reproduce with Lean 4.19.0, compiler commit `6caaee842e94`, and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. After building the first-hit and occupied-phase objects above, run
+
+~~~sh
+cd shared/lean
+lake build OpenMathResearch.FiniteTailMoments Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+topic=../../topics/balanced-arrays/eventual-all/lean
+lake env lean --root="$topic" -o .lake/build/lib/lean/BalancedOccupiedTilt.olean "$topic/BalancedOccupiedTilt.lean"
+lake env lean "$topic/BalancedTiltVariance.lean"
+~~~
+
+The agent-assisted replay compiled the shared and topic modules to fresh temporary objects. All audited declarations use only `propext`, `Classical.choice` and `Quot.sound`. [Axiom output](tilt-variance-axioms.txt)

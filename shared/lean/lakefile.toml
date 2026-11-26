@@ -106,6 +106,9 @@ srcDir = "../../topics/ordered-large-blocks/lean"
 name = "OpenMathResearch.FirstLevelHits"
 
 [[lean_lib]]
+name = "OpenMathResearch.FiniteTailMoments"
+
+[[lean_lib]]
 name = "OpenMathResearch.AlternatingSignRoots"
 
 [[lean_lib]]
