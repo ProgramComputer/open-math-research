@@ -22,10 +22,21 @@ Lean checks injectivity on a closed complex disk under linear-coefficient domina
 
 The shared theorem `OpenMathResearch.IntegerLevelNodes.increasing_integer_level_nodes` orders witnesses to successive positive integer levels of a continuous phase on a closed interval using its endpoint values. For the three-column phase with terminal value $2n/3$, `BalancedThreeColumnSigns.positive_roots_of_phase_signs` applies the shared alternating-sign root count to the reflected, once-normalized polynomial. Its hypotheses are the degree $\lfloor2n/3\rfloor$, the initial phase below one, the terminal phase $2n/3$, the increasing root-modulus parametrization, the strict signs at integer phase levels, the constant sign, and the leading sign. Lean handles both possible counts of finite samples and proves that the positive simple roots exhaust the reflected root multiset. [Balanced sign-count theorem](BalancedThreeColumnSigns.lean) · [Integer-level selection](../../../shared/lean/OpenMathResearch/IntegerLevelNodes.lean) · [Alternating-sign root count](../../../shared/lean/OpenMathResearch/AlternatingSignRoots.lean)
 
-The proof of those analytic hypotheses, the binomial multiplier transfer, and the finite Sturm prefix are covered by the written argument and exact Python verification. [Three-column proof](../three-column-all-rows.md) · [Kernel report](../verification.json)
+The analytic hypotheses and the binomial multiplier transfer have written proofs. Lean independently verifies the finite prefix from labeled arrays, as detailed below. [Three-column proof](../three-column-all-rows.md) · [Kernel report](../verification.json)
 
 From the shared Lean project with pinned dependencies, run
 
 ~~~sh
 lake build BalancedThreeColumnSigns
+~~~
+
+## Every labeled three-column array through nineteen rows
+
+For every $0\le n<20$, `BalancedThreeColumnCounting.array_prefix_negative_roots` shows that the entire root multiset of the original polynomial consists of $\lfloor2n/3\rfloor$ distinct negative reals. The companion theorem `array_prefix_natDegree` proves its degree. Lean counts the actual functions `Fin n → Fin 3 → Bool` with the prescribed row and column sums. For all $n,k$, it identifies these counts with the binomial-weighted inclusion–exclusion formula via a bijection with triples of subsets. For the finite prefix it checks integer signs on dyadic meshes for both the normalized and original polynomials. The kernel checks each mesh with `decide`. [Array definition, bijection and root theorem](BalancedThreeColumnCounting.lean) · [Sign certificates](BalancedThreeColumnPrefix.lean) · [Optional mesh generator](../code/make_three_column_mesh.py)
+
+Run from the shared Lean project with its pinned dependencies.
+
+~~~sh
+lake build BalancedThreeColumnCounting
+lake env lean -j1 ../../topics/balanced-arrays/lean/ThreeColumnPrefixAudit.lean
 ~~~

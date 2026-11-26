@@ -1,0 +1,14 @@
+import BalancedThreeColumnCounting
+
+#print axioms BalancedThreeColumnPrefix.coeff_normalizedRow
+#print axioms BalancedThreeColumnPrefix.coeff_originalRow
+#print axioms BalancedThreeColumnPrefix.formulaRow_natDegree_prefix
+#print axioms BalancedThreeColumnPrefix.prefix_negative_roots
+#print axioms BalancedThreeColumnPrefix.prefix_original_negative_roots
+#print axioms BalancedThreeColumnCounting.allowedPairs_card
+#print axioms BalancedThreeColumnCounting.allowedTriples_card
+#print axioms BalancedThreeColumnCounting.binaryArrays_card_eq_supports
+#print axioms BalancedThreeColumnCounting.coeff_arrayRow
+#print axioms BalancedThreeColumnCounting.arrayRow_eq_originalRow
+#print axioms BalancedThreeColumnCounting.array_prefix_natDegree
+#print axioms BalancedThreeColumnCounting.array_prefix_negative_roots
