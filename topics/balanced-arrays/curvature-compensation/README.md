@@ -28,7 +28,13 @@ python3 -B independent-near-full.py
 python3 -B defect-check.py
 ~~~
 
-The complete five-vector Sturm replay additionally needs `python-flint==0.9.0`.
+The five archive vectors also pass a separate exact rational sign replay.
+
+~~~sh
+python3 -B independent-count.py defect-d*.jsonl
+~~~
+
+The five-vector Sturm replay additionally needs `python-flint==0.9.0`.
 
 ~~~sh
 python3 -B defect-check.py --shared ../../../shared/python defect-d*.jsonl

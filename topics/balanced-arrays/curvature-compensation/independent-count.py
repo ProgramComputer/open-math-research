@@ -1,6 +1,9 @@
 """Independent corank-two counts and exact rational sign probes."""
+import argparse
 from fractions import Fraction
+import json
 from math import comb, isqrt
+from pathlib import Path
 
 
 def binomial(n, k):
@@ -38,16 +41,26 @@ def evaluate(poly, value):
     return result
 
 
-def verify(n, d):
-    poly = coefficients(n, d)
+def verify(n, r, d, poly):
     degree = len(poly) - 1
-    assert poly[0] == 1 and all(a > 0 for a in poly)
+    assert degree == n*r//d and poly[0] == 1 and all(a > 0 for a in poly)
     probes = [rational_node(Fraction(poly[k-1], poly[k+1])) for k in range(1, degree)]
     assert 0 < probes[0] and all(a < b for a, b in zip(probes, probes[1:]))
     assert all((-1)**k * evaluate(poly, -point) > 0 for k, point in enumerate(probes, 1))
-    print(f"({n},{d-2},{d}): {len(probes)} exact finite signs, {degree} simple negative roots")
+    print(f"({n},{r},{d}): {len(probes)} exact finite signs, {degree} simple negative roots")
 
 
 if __name__ == "__main__":
-    verify(36, 12)
-    verify(36, 11)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("archives", type=Path, nargs="*")
+    args = parser.parse_args()
+    if not args.archives:
+        for d in (12, 11):
+            verify(36, d-2, d, coefficients(36, d))
+    for path in args.archives:
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        n, r, d = (rows[0][field] for field in ("n", "r", "d"))
+        assert all((row["n"], row["r"], row["d"], row["k"]) == (n, r, d, k)
+                   and row["lower"] == row["upper"]
+                   for k, row in enumerate(rows))
+        verify(n, r, d, [row["lower"] for row in rows])
