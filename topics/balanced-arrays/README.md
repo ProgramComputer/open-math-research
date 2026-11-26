@@ -8,6 +8,12 @@ The dominant terms in a torus integral come from the two points at which all coo
 
 **🟨 Partial · Lean 4.** Lean proves that each connected component of the maximizing set for the balanced-array row polynomial on the fixed-product torus contains a diagonal point. The diagonal phase comparison, integral estimates and final root count have written proofs. [Exact formal scope](lean/README.md) · [Kernel report](verification.json)
 
+## Three columns with row cap two
+
+For every $n\ge0$, the polynomial for $U(2,3)$ has $\lfloor2n/3\rfloor$ distinct negative zeros. The proof uses explicit sign bounds for $n\ge20$ and exact Sturm counts below that cutoff. One binomial normalization gives an algebraic generating function with four branch points. Estimates for its coefficients at selected phases locate all the zeros, and a finite multiplier transfers the result back to the array polynomial. Agent-assisted independent review checked the argument and ran a separate exact calculation through $n=20$, including the overlap row. [Seven-page paper](three-column-all-rows.pdf) · [LaTeX source](three-column-all-rows.tex) · [Proof and review](three-column-all-rows.md) · [Prefix verifier](code/verify_three_column_prefix.py) · [Exact prefix records](results/three_column_prefix.jsonl)
+
+**🟨 Partial · Lean 4.** The three-column module turns strict signs at integer phase levels into an exact count of all $\lfloor2n/3\rfloor$ simple roots of the reflected, once-normalized polynomial. The coefficient formula, analytic estimates, small-row Sturm counts, and multiplier transfer remain at the level of the written proof and exact Python checks. [Formal statement and build instructions](lean/README.md#three-columns-with-row-cap-two) · [Kernel report](verification.json)
+
 ## A sufficient bound valid at every row count
 
 For every $n\ge1$ and every $1\le r\le d$, the normalized sequence $a_{n,k}/\binom nk^d$ is log-concave. It follows that $P_n$ has simple negative roots whenever $d\ge (n+1)\log(2)/2$, or whenever $d\ge\sqrt{nr\log 4}$. The proof applies Kahn and Neiman’s inequality for orientations of multigraphs to pairs of arrays. This conclusion has an independently reviewed written proof. Its orientation argument has no checked Lean or Rocq proof. [Counting argument and full hypotheses](orientation-normalization.md)
