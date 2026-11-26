@@ -33,3 +33,19 @@ The verifier compiled the foundation and the sign reduction with these pins and 
 The [sign reduction](BalancedEventualSigns.lean) applies the existing [alternating-sign mesh theorem](../../../../shared/lean/OpenMathResearch/AlternatingSignRoots.lean) to the real polynomial counted from the labeled arrays. It transfers the entire real root multiset to the complex polynomial and proves the derivative is nonzero at every root. It also covers degree zero. Together these yield the checked conditional theorem `eventualClaim_of_alternating_sign_mesh`.
 
 **Outstanding obligation.** Prove `EventualAlternatingSignMesh`: one absolute row threshold must provide the complete ordered sequence of alternating signs for every admissible dimension and cap in positive degree. The uniform estimates which construct those signs remain outside Lean. The eventual theorem itself still has partial formal coverage.
+
+## Ordered first hits for the phase radii
+
+[BalancedPhaseFirstHit.lean](BalancedPhaseFirstHit.lean), using the shared [first-hit lemma](../../../../shared/lean/OpenMathResearch/FirstLevelHits.lean), verifies the first-hit step in [The phase radii](../proof.md#the-phase-radii). For a continuous real phase in logarithmic radius with limits below and above a specified level, it constructs the least point attaining that level. The intermediate value theorem gives a hit in a compact interval, and the lower-tail hypothesis excludes earlier hits. Applying the intermediate value theorem before the first hit of a higher level proves strict ordering of the first hits. The exponential map transfers the construction to positive radii.
+
+The declaration `BalancedEventual.exists_balanced_phase_radii` uses the exact lower and upper limits from the written proof and the internal levels $k\pi$ for $1\le k<\lfloor nr/d\rfloor$. It checks the floor comparison required at the upper limit. It assumes continuity and the two limits for the actual phase. The next formal obligation is to define the occupied-cell phase from the two finite tilted row-size sums, show their arguments stay in the stated sectors, and prove continuity and both endpoint limits. The angular signs and geometric-to-phase joins also remain outside Lean. The uniform eventual theorem still has partial formal coverage.
+
+Use the research pins above. From the repository root, with the pinned dependencies built, run
+
+~~~sh
+cd shared/lean
+lake build OpenMathResearch.FirstLevelHits
+lake env lean ../../topics/balanced-arrays/eventual-all/lean/BalancedPhaseFirstHit.lean
+~~~
+
+The agent-assisted replay compiled an `.olean` into a temporary output directory with Lean 4.19.0 and the existing mathlib cache at `c44e0c8ee63ca166450922a373c7409c5d26b00b`. All five declarations use only `propext`, `Classical.choice` and `Quot.sound`. [Axiom output](phase-first-hit-axioms.txt)

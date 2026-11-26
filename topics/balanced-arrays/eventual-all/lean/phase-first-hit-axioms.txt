@@ -1,0 +1,9 @@
+'OpenMathResearch.FirstLevelHits.exists_firstLevelHit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.FirstLevelHits.exists_ordered_firstLevelHits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.FirstLevelHits.exists_ordered_positive_phase_radii' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BalancedEventual.exists_ordered_integer_phase_radii' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.exists_balanced_phase_radii' depends on axioms: [propext, Classical.choice, Quot.sound]
