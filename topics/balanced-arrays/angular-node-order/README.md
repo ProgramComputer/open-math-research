@@ -38,3 +38,11 @@ python3 -IB verify-phase-order-chebyshev.py
 ~~~
 
 Both checks certify 26,775 positive coefficients and 1,190 zero endpoints. The first verifier also ran through dimension 128 and checked 1,373,632 positive coefficients across 8,128 cap–dimension pairs. The proof uses only dimensions through 35 in its finite step.
+
+## Polynomial signs at sampled radii
+
+The [sample ledger](screen-angular-signs.jsonl.gz) records exact coefficient vectors and 9,162 dyadic samples over 745 parameter triples. The samples were selected by binary64 bisection for the angular phase. At every stored rational tilt the exact polynomial evaluation had the prescribed sign. This experiment leaves the signs at the exact phase radii unresolved. All internal quotas were sampled for ranks one and corank one, with $2\le n\le48$ and $2\le d\le\min(n,10)$, and for the additional vectors in the 36-row ledger. [Screen and exact replay](screen-angular-signs.py) · [36-row coefficient source](../finite-36/exact-vectors.jsonl)
+
+~~~sh
+python3 -IB screen-angular-signs.py verify screen-angular-signs.jsonl.gz --finite-vectors ../finite-36/exact-vectors.jsonl
+~~~
