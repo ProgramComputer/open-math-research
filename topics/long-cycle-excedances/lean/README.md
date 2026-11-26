@@ -59,3 +59,28 @@ python3 -I -B "$topic/check-cutoff7-fixture.py"
 ~~~
 
 The agent-assisted replay formed fresh objects for `AlternatingSignRoots`, `OrientedNegativeInterlace`, `LongCycleMixedRootWitnesses` and the new certificate module, reusing the pinned `DiskUniqueness` object. It used Lean 4.19.0 (compiler commit `6caaee842e94`) and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. The six new audited declarations use only `propext`, `Classical.choice` and `Quot.sound`. This is supporting Lean coverage for issue #4. [Axiom output](prefix-tail-axioms.txt) · [Alexandersson’s original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances)
+
+## The original coefficient envelope from decreasing runs
+
+[LongCycleRunColors.lean](LongCycleRunColors.lean) proves that every coefficient of the original excedance enumerator satisfies
+
+$$
+0\le [t^p]E_{n,k}(t)\le p^n
+$$
+
+for every $k\ge2$. The Lean definition sums over permutations of the actual labels $\mathrm{Fin}(n)$. It counts strict excedances and applies the positive-return-time cutoff used in [Zuo’s pinned statement](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycles/Statement.lean). At cutoff at least two, the return-time condition excludes fixed points. The frozen Lean 4.33.1 archive was screened for the required coefficient envelope, a run-color encoding and an Eulerian or derangement comparison that would give the bound. The archive supplies the general row identity and shape cited above. This coefficient proof uses the pinned research environment.
+
+The proof follows downward edges to the end of each decreasing run. It proves that two labels with the same run end are on a single descending path, because injectivity excludes two incoming edges. For a fixed-point-free permutation, the run ends are precisely the tails of its ascents. The image of each ascent is the largest label in its destination run. Thus the destination-run map is a permutation of the runs.
+
+Tagging a permutation with a bijection of its $p$ run ends to $p$ colors yields a word on the original labels and a permutation of the colors. Lean proves that these two pieces recover the tagged permutation. A downward edge goes to the next smaller label in its color, and an upward edge goes to the largest label of the successor color. There are $p!$ labelings of the run ends. The checked injection into the product of words and color permutations gives the claimed bound after cancellation of $p!$.
+
+The declaration `OpenMathResearch.LongCycleExcedances.RunColors.original_coeff_envelope` concerns the original permutation polynomial. The declaration `reduced_coeff_envelope` uses the identity $E_{n,k}=tP$ to give the bound $(j+1)^n$ at exponent $j$ of the reduced row. This supplies the coefficient-envelope input from the preceding section. Applying the external quotient identity in a common Lean environment and replaying all required root windows remain separate.
+
+With Lean 4.19.0 (compiler commit `6caaee842e94`) and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`, run from the repository root
+
+~~~sh
+cd shared/lean
+lake env lean ../../topics/long-cycle-excedances/lean/LongCycleRunColors.lean
+~~~
+
+The agent-assisted check compiled a fresh object and audited eight declarations. The audit reports subsets of `propext`, `Classical.choice` and `Quot.sound`. [Axiom output](run-colors-axioms.txt)
