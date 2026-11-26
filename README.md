@@ -7,7 +7,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟩 Full · Lean 4 |
 | [Simple negative zeros for four balanced columns with row cap two](topics/balanced-arrays/four-columns/README.md) | Proof for every row count | ⬜ None |
-| [Simple negative zeros for balanced arrays in growing dimensions](topics/balanced-arrays/dense-regime/README.md) | All roots when $n\ge N$ and $d\ge Cn/\log n$, and all but $O(D\sqrt{n\log(n+1)}/d)$ of the $D$ roots for $2\le d\le n$ | ⬜ None |
+| [Simple negative zeros for balanced arrays in growing dimensions](topics/balanced-arrays/dense-regime/README.md) | All roots for $d\ge Cn/\log n$ at large $n$ and in a rank-dependent range, plus a uniform below-cap root count | ⬜ None |
 | [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Strict interlacing for all $k$ at $n\ge10^{20}$, all sizes at $k=3$, and throughout the two-cycle range | ⬜ None |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Strict interlacing for every row count and dimension at $r=d-1$ | 🟨 Partial · Lean 4 (labeled-array coefficient formula) |
 | [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | Strict interlacing at every fixed threshold for sufficiently large rows, and at every size for thresholds two through four | 🟨 Partial · Lean 4 |
