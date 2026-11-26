@@ -6,6 +6,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟩 Full · Lean 4 |
+| [Strict consecutive interlacing for every minimum cycle length at least seven](topics/long-cycle-excedances/all-large-cutoffs/README.md) | Independently reviewed computer-assisted proof for every old size $n\ge k\ge7$ | ⬜ None |
 | [Eventual simple negative zeros for balanced arrays in every dimension](topics/balanced-arrays/eventual-all/README.md) | One eventual row threshold works for every dimension $d\ge2$ and every cap | 🟨 Partial · Lean 4 (support, degree and sign reduction) |
 | [Sharp coefficient thresholds for counting polynomial zeros in disks](topics/balanced-arrays/root-distributions/single-sign/README.md) | Sharp angular thresholds and disk-count bounds independent of degree, with optimal order at weak curvature | ⬜ None |
 | [Binomial normalization for weighted binary matrices](topics/balanced-arrays/weighted-normalization/README.md) | Partial theorem for arbitrary cell weights and row intervals, giving an explicit real-rootedness range | ⬜ None |
@@ -18,7 +19,6 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [Fixed balanced-array minors and positivity through 18 cells](topics/balanced-arrays/fixed-shapes/README.md) | Exact decision for each skew shape and universal binomial-basis positivity through 18 cells at unit weights | ⬜ None |
 | [Simple negative zeros for balanced arrays in growing dimensions](topics/balanced-arrays/dense-regime/README.md) | All roots for $d\ge Cn/\log n$ at large $n$ and in a rank-dependent range, plus all 508,000 simple negative roots in one million-row instance | ⬜ None |
 | [Root distributions of balanced binary arrays](topics/balanced-arrays/root-distributions/README.md) | Finite disk counts and five limiting laws, including the uniform law for growing sparse caps | ⬜ None |
-| [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Strict consecutive interlacing for $k\ge7$ and $n/k\ge20$ at every size, through old size 250, from old size 10,000 onward, for $n\le4k-1$, and at every size for $k=3$ | ⬜ None |
 | [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | All sizes for thresholds two through four, strict eventual interlacing at each fixed threshold, and a positive proportion of the roots when both threshold and size-to-threshold ratio grow | 🟨 Partial · Lean 4 |
 | [Eventual real-rootedness of the Eulerian matrix square](topics/eulerian-matrix-square/README.md) | Partial theorem covering every sufficiently large row | 🟨 Partial · Lean 4 |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Real-rootedness and strict consecutive interlacing at every row count for $r=d-1$ | 🟨 Partial · Lean 4 (labeled-array coefficient formula) |

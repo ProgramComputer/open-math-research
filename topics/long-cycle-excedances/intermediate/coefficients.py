@@ -41,5 +41,3 @@ def next_rows(k, limit, cycle, width):
             result+=comb(n,k-1)*t*cycle[k-1].mul_low(rows[m],width-1)
         rows[n+1]=result.truncate(width)
     return rows
-
-
