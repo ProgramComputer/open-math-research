@@ -23,7 +23,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 ## Partial work
 
 - Earlier balanced-array bounds: [five-thirds row bound and polynomial cap or corank range](topics/balanced-arrays/fifth-thirds/README.md), [all fixed quadratic aspects](topics/balanced-arrays/critical-aspect/README.md), [absolute quadratic cutoff](topics/balanced-arrays/quadratic/README.md), [quartic-log cutoff](topics/balanced-arrays/very-tall/README.md), and [dimension-uniform fixed-cap threshold](topics/balanced-arrays/fixed-cap/README.md).
-- For [balanced arrays](topics/balanced-arrays/README.md), the corank-one theorem covers every dimension. Other caps are settled through 24 rows and [through degree fourteen](topics/balanced-arrays/low-degree.md).
+- For [balanced arrays](topics/balanced-arrays/README.md), the corank-one theorem covers every dimension. Other caps are settled [through 35 rows](topics/balanced-arrays/finite-residual/README.md) and [through degree fourteen](topics/balanced-arrays/low-degree.md).
 - Every sufficiently large [Eulerian-square row](topics/eulerian-matrix-square/README.md) has only simple real roots. At every row from $n=3$, the two extreme roots at each end strictly alternate with the next row. The all-root cutoff is unknown.
 - For [long-cycle excedances](topics/long-cycle-excedances/README.md), every consecutive pair up through size $3k-1$ strictly interlaces at minimum cycle length $k$. Any counterexample has $k\ge4$ and old size $3k-1\le n<10^{20}$.
 - For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.

@@ -40,9 +40,9 @@ For every $n\ge0$, the polynomial for $U(2,3)$ has $\lfloor2n/3\rfloor$ distinct
 
 For every $n\ge1$ and every $1\le r\le d$, the normalized sequence $a_{n,k}/\binom nk^d$ is log-concave. It follows that $P_n$ has simple negative roots whenever $d\ge (n+1)\log(2)/2$, or whenever $d\ge\sqrt{nr\log 4}$. The proof applies Kahn and Neiman’s inequality for orientations of multigraphs to pairs of arrays. This conclusion has an independently reviewed written proof. Its orientation argument has no checked Lean or Rocq proof. [Counting argument and full hypotheses](orientation-normalization.md)
 
-## All dimensions through 24 rows
+## All dimensions through 35 rows
 
-For $0\le n\le24$, the original conjecture holds for every $d$ and $r$. For $d\ge2$ the zeros are simple. A finite reduction leaves 130 polynomials requiring coefficient counts and exact root tests. This computer-assisted theorem has no checked Lean or Rocq proof. [Proof and reproducible finite certificates](finite-linear-reduction.md)
+For $0\le n\le35$, the original conjecture holds for every $d$ and $r$. For $d\ge2$ the zeros are simple. The extension from 24 to 35 rows includes 171 directly certified polynomials and 3,391 roots confirmed by exact integer signs. The result has no checked Lean or Rocq proof. [Certificate and independent replays](finite-residual/README.md) · [Earlier finite reduction through 24 rows](finite-linear-reduction.md)
 
 ## All degrees through fourteen
 

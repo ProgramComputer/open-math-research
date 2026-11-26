@@ -1,0 +1,163 @@
+{
+  "source_revision": "ccd2cd0eaaf9555d680ea405a5cc013176fcd7e2",
+  "prior_universal_rows": [
+    0,
+    24
+  ],
+  "prior_universal_archive_sha256": "855a870caf21e692d11dca04d6ee6561fcda32220e36e8515b50dceb3a601d56",
+  "complete_rows": [
+    25,
+    35
+  ],
+  "original_smallest_residual_row": 25,
+  "next_incomplete_row": 36,
+  "finite_triples": 4829,
+  "infinite_dimension_tail_records": 11,
+  "counts_by_method": {
+    "orientation separation, all d >= n": 11,
+    "rank-one theorem": 308,
+    "full-cap theorem": 308,
+    "corank-one theorem": 297,
+    "four-column cap-two theorem": 11,
+    "degree-at-most-14 theorem": 1913,
+    "fresh exact count and Sturm": 167,
+    "orientation separation": 1821,
+    "inherited coefficients, fresh exact Sturm": 4
+  },
+  "per_row": {
+    "25": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 23,
+      "full-cap theorem": 23,
+      "corank-one theorem": 22,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 142,
+      "fresh exact count and Sturm": 5,
+      "orientation separation": 83
+    },
+    "26": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 24,
+      "full-cap theorem": 24,
+      "corank-one theorem": 23,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 150,
+      "fresh exact count and Sturm": 7,
+      "orientation separation": 95
+    },
+    "27": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 25,
+      "full-cap theorem": 25,
+      "corank-one theorem": 24,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 155,
+      "fresh exact count and Sturm": 9,
+      "orientation separation": 111
+    },
+    "28": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 26,
+      "full-cap theorem": 26,
+      "corank-one theorem": 25,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 162,
+      "fresh exact count and Sturm": 12,
+      "orientation separation": 125
+    },
+    "29": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 27,
+      "full-cap theorem": 27,
+      "corank-one theorem": 26,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 168,
+      "fresh exact count and Sturm": 12,
+      "orientation separation": 144
+    },
+    "30": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 28,
+      "full-cap theorem": 28,
+      "corank-one theorem": 27,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 169,
+      "inherited coefficients, fresh exact Sturm": 4,
+      "fresh exact count and Sturm": 11,
+      "orientation separation": 166
+    },
+    "31": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 29,
+      "full-cap theorem": 29,
+      "corank-one theorem": 28,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 182,
+      "fresh exact count and Sturm": 19,
+      "orientation separation": 176
+    },
+    "32": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 30,
+      "full-cap theorem": 30,
+      "corank-one theorem": 29,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 188,
+      "fresh exact count and Sturm": 19,
+      "orientation separation": 198
+    },
+    "33": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 31,
+      "full-cap theorem": 31,
+      "corank-one theorem": 30,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 193,
+      "fresh exact count and Sturm": 20,
+      "orientation separation": 221
+    },
+    "34": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 32,
+      "full-cap theorem": 32,
+      "corank-one theorem": 31,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 200,
+      "fresh exact count and Sturm": 26,
+      "orientation separation": 238
+    },
+    "35": {
+      "orientation separation, all d >= n": 1,
+      "rank-one theorem": 33,
+      "full-cap theorem": 33,
+      "corank-one theorem": 32,
+      "four-column cap-two theorem": 1,
+      "degree-at-most-14 theorem": 204,
+      "fresh exact count and Sturm": 27,
+      "orientation separation": 264
+    }
+  },
+  "independent_python_recount_rows": [
+    25,
+    28
+  ],
+  "source_archives": {
+    "results/source_range.jsonl": "22b8ded6261cd8af276476420587b8b07e4dbd5b9bf56d4e75adb4beabbe539a",
+    "results/linear_tail_ranges.jsonl": "855a870caf21e692d11dca04d6ee6561fcda32220e36e8515b50dceb3a601d56",
+    "results/degree_reduction.jsonl": "93f6f488c07e119e13baf6ccdad59ac15263206a7877b0c3ea61cdd40a9db1c6",
+    "results/column-extension-cap-two.jsonl.gz": "3bdb5998951636fa30aa119de4e4259e5dac28899088d1750597a00b9022216a",
+    "results/column-extension-corank-two.jsonl.gz": "06a15eacb405cae67f92a85e1aea4284be5e58fa5753197d03729a23e8c4a47e",
+    "results/column-extension-screen.jsonl.gz": "8aed7b65a37a943c9addb1fe0b5b66942f30d71e4b37193f77686331d93db036",
+    "results/column-extension-seven.jsonl.gz": "67e226d650dca65c3ea8c4f508044ba7bef9b9a77e7dc453c58758d3d73d6927",
+    "deficit-curvature/screen.jsonl.gz": "84ead827985bbc4a0726d6bd5c1f944b634ae3c450a8c3b3f7b591a1ddd6f9a4"
+  },
+  "deficit_curvature_overlap": 166,
+  "sha256": {
+    "verify.py": "c81a962d6c0594c47da65a820f5f1ed03ee00bd3fbac04344a2e47587a4b81a2",
+    "exact.cpp": "9cbd7181672c6923e3a5b043dcab0ae4e6ae05a3c788fe9a90cf0adc848ee24e",
+    "records.jsonl.gz": "171e704d2755bd879ba709abb4a9bfd64d66347115a615f3229c2cf2fce44eb2"
+  },
+  "records_jsonl_sha256": "0c6e54c19b96ecd1bd34e4ddb8fadec26dd48ebb75b256d31a82e33ab06588f1",
+  "python_flint_version": "0.9.0",
+  "one_dimensional_root_note": "For d=1, (1+q)^n may have repeated roots."
+}
