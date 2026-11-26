@@ -41,12 +41,14 @@ jobs:
           lake exe cache get
           Mathlib.Algebra.BigOperators.Group.Finset.Sigma
           Mathlib.Algebra.BigOperators.NatAntidiagonal
+          Mathlib.Algebra.Polynomial.Derivative
           Mathlib.Algebra.Polynomial.Roots
           Mathlib.Analysis.Analytic.OfScalars
           Mathlib.Analysis.Analytic.Uniqueness
           Mathlib.Analysis.Complex.Basic
           Mathlib.Analysis.Complex.CauchyIntegral
           Mathlib.Analysis.Polynomial.Basic
+          Mathlib.Analysis.SpecificLimits.Normed
           Mathlib.Analysis.SpecialFunctions.Complex.Analytic
           Mathlib.Analysis.SpecialFunctions.Gamma.Beta
           Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
@@ -156,3 +158,19 @@ jobs:
             tee "$RUNNER_TEMP/catalan-middle-roots-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/middle-roots-kernel.txt \
             "$RUNNER_TEMP/catalan-middle-roots-axioms.txt"
+      - name: Check the rightmost root and all-length strict interlacing
+        run: lake build CatalanStrictPeaksAllInterlacing
+      - name: Audit the rightmost-root sign
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightmostRootAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-rightmost-root-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/rightmost-root-kernel.txt \
+            "$RUNNER_TEMP/catalan-rightmost-root-axioms.txt"
+      - name: Audit the all-length Catalan theorem
+        shell: bash
+        run: |
+          lake env lean -j1 ../../topics/catalan-word-peaks/lean/AllInterlacingAxioms.lean |
+            tee "$RUNNER_TEMP/catalan-all-interlacing-axioms.txt"
+          diff -u ../../topics/catalan-word-peaks/lean/all-interlacing-kernel.txt \
+            "$RUNNER_TEMP/catalan-all-interlacing-axioms.txt"

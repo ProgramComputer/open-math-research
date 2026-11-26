@@ -1,0 +1,7 @@
+'CatalanStrictPeaks.NearPoleSeries.row_pole_error_of_radical' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.RightEdge.ratio_growth_of_poles' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.RightEdge.rightmost_sign_of_logDerivative_growth' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.RightEdge.row_pole_errors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.RightEdge.rightmost_root_sign' depends on axioms: [propext, Classical.choice, Quot.sound]

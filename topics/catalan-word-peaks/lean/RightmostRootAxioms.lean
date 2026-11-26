@@ -1,0 +1,7 @@
+import CatalanStrictPeaksRightmostRoot
+
+#print axioms CatalanStrictPeaks.NearPoleSeries.row_pole_error_of_radical
+#print axioms CatalanStrictPeaks.RightEdge.ratio_growth_of_poles
+#print axioms CatalanStrictPeaks.RightEdge.rightmost_sign_of_logDerivative_growth
+#print axioms CatalanStrictPeaks.RightEdge.row_pole_errors
+#print axioms CatalanStrictPeaks.RightEdge.rightmost_root_sign

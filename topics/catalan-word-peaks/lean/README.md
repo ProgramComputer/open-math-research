@@ -38,7 +38,7 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** Lean verifies the entire finite prefix,
+**Full Lean verification.** Lean verifies the entire finite prefix,
 identifies the analytic branch, and proves the coefficient formula as the
 sum of the four improper ray integrals. It verifies radial moments and
 integrated envelopes and applies them to the normalized near-ray mean under
@@ -49,8 +49,8 @@ for the near mean. It proves the small-angle lower bound for its real part.
 Lean pairs the conjugate rays and proves the alternating checkpoint signs
 for the explicit phase. The analytic proof from length $150$ and the exact
 finite prefix give simple negative roots at every length. Lean proves the
-strict next-row sign at all old middle roots from length $150$. Strict
-interlacing at these lengths also requires the two extreme-root signs.
+strict next-row signs at the old middle and extreme roots from length
+$150$. The closing theorem combines those signs with the finite prefix.
 
 ## Evaluation at the right endpoint
 
@@ -325,6 +325,28 @@ middle-rank angle theorem at the second root. The shared theorem
 `CompleteNegativeRoots.unique` identifies the ordered lists obtained
 from separate comparisons. [Right-checkpoint kernel output](right-checkpoint-kernel.txt)
 
+## Rightmost-root sign and the all-length theorem
+
+The [rightmost-root module](CatalanStrictPeaksRightmostRoot.lean) uses
+$\tau=-11/16$. The value $C_n(\tau)$ has a leading term
+$(11/16)(27/16)^n$ with error at most $24(3/2)^n$. Its derivative has
+leading term $(16\sqrt{3}/27)(9/4)^n$ with error at most
+$20n(27/16)^n$. The exact pole coefficients come from the formal
+generating function. Geometric convolution bounds the coefficient
+tails using the absolute Taylor estimates for the radical and its
+inverse. The resulting logarithmic derivative grows by more than
+$100n^3$ at the next length. The checkpoint separation bounds the
+contribution from all roots except the rightmost, and the product of
+the actual root factors gives the negative next-row value at the old
+rightmost root. [Rightmost-root kernel output](rightmost-root-kernel.txt)
+
+The [all-length module](CatalanStrictPeaksAllInterlacing.lean) has
+`interlacing_all` for every consecutive pair and
+`strict_peaks_all_lengths` for the conjunction of simple negative
+zeros and directed strict interlacing. It applies the checked signs
+at every old root from length $150$ and uses the exact prefix for
+the lower lengths. [All-length kernel audit](all-interlacing-kernel.txt)
+
 ## Exact isolating intervals through length 150
 
 The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
@@ -396,6 +418,9 @@ lake build CatalanStrictPeaksRightCheckpoint
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightCheckpointAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
+lake build CatalanStrictPeaksAllInterlacing
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/RightmostRootAxioms.lean
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/AllInterlacingAxioms.lean
 ~~~
 
 [Kernel output](kernel.txt)
