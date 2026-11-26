@@ -8,6 +8,8 @@ This package studies two quantities that arise in [Alexandersson’s balanced-ar
 
 The Engset source is Azimzadeh and Carpenter, *Operations Research Letters* 44 (2016), 313–318. The proof uses the reciprocal convexity from Theorem 7 in the corrected preprint and changes variables to actual carried load. The two same-mean variance comparisons are applications of the standard convex-order crossing argument. [Version of record](https://doi.org/10.1016/j.orl.2016.02.011) · [Corrected v5, §5](https://arxiv.org/abs/1511.00291v5) · [Karlin–Novikoff](https://doi.org/10.2140/pjm.1963.13.1251) · [Whitt](https://doi.org/10.2307/3213865)
 
+For each fixed dimension, strict extension concavity holds at every genuine internal quota for all sufficiently large row counts, simultaneously over proper caps. The proof includes the moving lower and upper edge regimes. [All-quota theorem and reviews](all-quotas/README.md).
+
 ## Exact finite evidence
 
 The pinned-archive screen reads 1,659 distinct coefficient vectors, including full-cap vectors that it skips when testing the inequality. At a dyadic scale of $2^{256}$ it certifies all 14,570 differences tested. The archive revision and per-source names are embedded in the script. A separate inclusion–exclusion screen recomputes 1,914 corank-one vectors for $4\le n\le90$, $3\le d\le24$, and certifies all 75,968 tested differences at scale $2^{192}$. These corpus sizes count separate replays, with possible overlaps. In both runs each scaled value is enclosed within a unit interval by exact integer-root arithmetic. There were no violations or undecided signs in either run.
