@@ -151,6 +151,33 @@ theorem farRay_prefactor_norm_le {d s : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
         (show 1 + s ≠ 0 by positivity)]
       ring
 
+private theorem rayPrefactor_conjFar_form (d : ℝ) (x : ℂ) :
+    rayPrefactor d 2 x =
+      -(cutFactor (conj (nearPoint d)) x * cutFactor (nearPoint d) x *
+        cutFactor (farPoint d) x) / (2 * x * ((scale d : ℂ) - x)) := by
+  have h : (Finset.univ : Finset (Fin 4)).erase 2 = {0, 1, 3} := by decide
+  rw [rayPrefactor, h]
+  simp [cutPoint, Finset.prod_insert]
+  ring
+
+private theorem norm_cutFactor_conj (z x : ℂ) : ‖cutFactor (conj z) (conj x)‖ = ‖cutFactor z x‖ := by
+  apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
+  rw [norm_cutFactor_sq, norm_cutFactor_sq,
+    show 1 - conj x / conj z = conj (1 - x / z) by simp,
+    Complex.norm_conj]
+
+private theorem norm_rayPrefactor_conjFar (d : ℝ) (x : ℂ) :
+    ‖rayPrefactor d 2 (conj x)‖ = ‖rayPrefactor d 1 x‖ := by
+  have h₁ := norm_cutFactor_conj (nearPoint d) x
+  have h₂ := norm_cutFactor_conj (conj (nearPoint d)) x
+  have h₃ := norm_cutFactor_conj (conj (farPoint d)) x
+  rw [Complex.conj_conj] at h₂ h₃
+  have hdist : ‖(scale d : ℂ) - conj x‖ = ‖(scale d : ℂ) - x‖ := by
+    rw [show (scale d : ℂ) - conj x = conj ((scale d : ℂ) - x) by simp,
+      Complex.norm_conj]
+  simp only [rayPrefactor_conjFar_form, rayPrefactor_far_form, norm_div, norm_neg,
+    norm_mul, h₁, h₂, h₃, hdist, Complex.norm_conj]
+
 private theorem norm_rayIntegrand {d : ℝ} {n : ℕ} {j : Fin 4} {s : ℝ} (hs : 0 ≤ s) :
     ‖rayIntegrand d n j s‖ = BetaMoments.rayWeight n s *
       ‖rayPrefactor d j (cutPoint d j * (1 + (s : ℂ)))‖ := by
@@ -160,33 +187,38 @@ private theorem norm_rayIntegrand {d : ℝ} {n : ℕ} {j : Fin 4} {s : ℝ} (hs 
     Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg (by positivity),
     inv_pow, div_eq_mul_inv]
 
-/-- The actual far-ray integral is bounded by its endpoint times six fifths
-of the mass of the radial density. -/
+/-- Each actual far-ray integral is bounded by the upper far endpoint times
+six fifths of the mass of the radial density. -/
 theorem farRay_integral_norm_le {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
-    (hn : 150 ≤ n) (hnd : 2 ≤ (n : ℝ) * d) :
-    ‖∫ s in Ioi (0 : ℝ), rayIntegrand d n 1 s‖ ≤
+    (hn : 150 ≤ n) (hnd : 2 ≤ (n : ℝ) * d) (j : Fin 4) (hj : j = 1 ∨ j = 2) :
+    ‖∫ s in Ioi (0 : ℝ), rayIntegrand d n j s‖ ≤
       (6 / 5 : ℝ) * BetaMoments.mass n * ‖rayPrefactor d 1 (farPoint d)‖ := by
   have hn0 : 0 < n := by omega
   have hnR : (150 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
   let A := ‖rayPrefactor d 1 (farPoint d)‖
   let B : ℝ := (1 + (n : ℝ) / 4) / 2
   obtain ⟨henv, hmoment⟩ := BetaMoments.affine_moment (n := n) (by linarith) A (A * B)
-  have hmon : ∀ s ∈ Ioi (0 : ℝ), ‖rayIntegrand d n 1 s‖ ≤
+  have hmon : ∀ s ∈ Ioi (0 : ℝ), ‖rayIntegrand d n j s‖ ≤
       (A + A * B * s) * BetaMoments.rayWeight n s := by
     intro s hs
     have hs0 : 0 < s := hs
-    rw [norm_rayIntegrand hs0.le]
-    change BetaMoments.rayWeight n s *
-      ‖rayPrefactor d 1 (farPoint d * (1 + (s : ℂ)))‖ ≤ _
+    have hnorm : ‖rayPrefactor d j (cutPoint d j * (1 + (s : ℂ)))‖ =
+        ‖rayPrefactor d 1 (farPoint d * (1 + (s : ℂ)))‖ := by
+      obtain rfl | rfl := hj
+      · rfl
+      · change ‖rayPrefactor d 2 (conj (farPoint d) * (1 + (s : ℂ)))‖ = _
+        rw [show conj (farPoint d) * (1 + (s : ℂ)) =
+          conj (farPoint d * (1 + (s : ℂ))) by simp, norm_rayPrefactor_conjFar]
+    rw [norm_rayIntegrand hs0.le, hnorm]
     calc
       _ ≤ BetaMoments.rayWeight n s * (A * (1 + (1 + (n : ℝ) / 4) * s / 2)) :=
         mul_le_mul_of_nonneg_left (farRay_prefactor_norm_le hd hD hnd hs0.le)
           (BetaMoments.rayWeight_nonneg n hs0.le)
       _ = _ := by dsimp [B]; ring
   calc
-    _ ≤ ∫ s in Ioi (0 : ℝ), ‖rayIntegrand d n 1 s‖ := norm_integral_le_integral_norm _
+    _ ≤ ∫ s in Ioi (0 : ℝ), ‖rayIntegrand d n j s‖ := norm_integral_le_integral_norm _
     _ ≤ ∫ s in Ioi (0 : ℝ), (A + A * B * s) * BetaMoments.rayWeight n s :=
-      setIntegral_mono_on (rayIntegrand_integrable hd hD hn0 1).norm henv measurableSet_Ioi hmon
+      setIntegral_mono_on (rayIntegrand_integrable hd hD hn0 j).norm henv measurableSet_Ioi hmon
     _ = BetaMoments.mass n * (A + A * B * BetaMoments.moment n 1) := hmoment
     _ = BetaMoments.mass n * A * (1 + B * BetaMoments.moment n 1) := by ring
     _ ≤ _ := by
@@ -194,8 +226,11 @@ theorem farRay_integral_norm_le {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
         rw [BetaMoments.moment_one (by linarith)]
         dsimp [B]
         have hp : 0 < (n : ℝ) - 3 / 2 := by linarith
-        apply (le_of_sub_nonneg)
-        rw [show (6 / 5 : ℝ) - (1 + (1 + (n : ℝ) / 4) / 2 *
+        have hfrac : ((1 + (n : ℝ) / 4) / 2) * (3 / 2) / ((n : ℝ) - 3 / 2) ≤ 1 / 5 :=
+          (div_le_iff₀ hp).2 (by linarith)
+        rw [← mul_div_assoc]
+        linarith
+      rw [show (6 / 5 : ℝ) - (1 + (1 + (n : ℝ) / 4) / 2 *
             ((3 / 2) / ((n : ℝ) - 3 / 2))) =
             ((n : ℝ) / 80 - 21 / 20) / ((n : ℝ) - 3 / 2) by field_simp [hp.ne']; ring]
         exact div_nonneg (by linarith) hp.le
@@ -203,5 +238,281 @@ theorem farRay_integral_norm_le {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
         BetaMoments.mass n * A * (6 / 5) by ring]
       exact mul_le_mul_of_nonneg_left hnum
         (mul_nonneg (BetaMoments.mass_pos hn0).le (norm_nonneg _))
+
+private theorem norm_cutFactor_sq_distance {z x : ℂ} (hz : z ≠ 0) :
+    ‖cutFactor z x‖ ^ 2 = ‖x - z‖ / ‖z‖ := by
+  rw [norm_cutFactor_sq, show 1 - x / z = (z - x) / z by field_simp,
+    norm_div, norm_sub_rev]
+
+private theorem norm_sub_conj_swap (z w : ℂ) : ‖w - conj z‖ = ‖z - conj w‖ := by
+  calc
+    _ = ‖conj (w - conj z)‖ := (Complex.norm_conj _).symm
+    _ = ‖conj w - z‖ := by simp only [map_sub, Complex.conj_conj]
+    _ = _ := norm_sub_rev _ _
+
+private theorem rayPrefactor_near_form (d : ℝ) (x : ℂ) :
+    rayPrefactor d 0 x =
+      -(cutFactor (farPoint d) x * cutFactor (conj (nearPoint d)) x *
+        cutFactor (conj (farPoint d)) x) / (2 * x * ((scale d : ℂ) - x)) := by
+  have h : (Finset.univ : Finset (Fin 4)).erase 0 = {1, 2, 3} := by decide
+  rw [rayPrefactor, h]
+  simp [cutPoint, Finset.prod_insert]
+  ring
+
+private theorem endpoint_dist_le {d : ℝ} (hd : 0 < d) (hD : d < 1) :
+    ‖(scale d : ℂ) - nearPoint d‖ ≤ ‖(scale d : ℂ) - farPoint d‖ := by
+  apply (sq_le_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
+  rw [real_sub_norm_sq, real_sub_norm_sq]
+  have hnorm := (sq_le_sq₀ (norm_nonneg _) (norm_nonneg _)).mpr (norm_order hd hD).le
+  have hnear := mul_pos (scale_pos hd) (nearPoint_re_pos hd)
+  have hfar := mul_neg_of_pos_of_neg (scale_pos hd) (farPoint_re_neg hd)
+  linarith
+
+/-- The actual far endpoint amplitude is bounded by the near endpoint
+amplitude divided by the square root of the near point's sine. -/
+theorem farRay_endpoint_bound {d : ℝ} (hd : 0 < d) (hD : d < 1) :
+    ‖rayPrefactor d 1 (farPoint d)‖ * Real.sqrt (Real.sqrt (1 - d ^ 2)) ≤
+      ‖rayPrefactor d 0 (nearPoint d)‖ := by
+  let z := nearPoint d
+  let w := farPoint d
+  let c : ℂ := (scale d : ℂ)
+  let σ := Real.sqrt (1 - d ^ 2)
+  let τ := w.im / ‖w‖
+  let P := ‖w - z‖ * ‖w - conj z‖ * 2
+  have hz : 0 < ‖z‖ := by rw [show ‖z‖ = radius d from nearPoint_norm hd hD]; exact radius_pos hd.le
+  have hw : 0 < ‖w‖ := by rw [show ‖w‖ = (radius d)⁻¹ from farPoint_norm hd hD]; positivity
+  have hz' := norm_pos_iff.mp hz
+  have hw' := norm_pos_iff.mp hw
+  have hzc' : conj z ≠ 0 := fun h => hz' (by simpa using congrArg (fun u : ℂ => conj u) h)
+  have hwc' : conj w ≠ 0 := fun h => hw' (by simpa using congrArg (fun u : ℂ => conj u) h)
+  have hcz : 0 < ‖c - z‖ := by
+    apply norm_pos_iff.mpr
+    intro h
+    have he := congrArg Complex.im (sub_eq_zero.mp h)
+    change 0 = z.im at he
+    linarith [nearPoint_im_pos hd hD]
+  have hdist : ‖c - z‖ ≤ ‖c - w‖ := endpoint_dist_le hd hD
+  have hcw := hcz.trans_le hdist
+  have hσ : 0 ≤ σ := Real.sqrt_nonneg _
+  have hτ : τ ≤ 1 := (div_le_one hw).2 (Complex.im_le_norm _)
+  have hP : 0 ≤ P := by dsimp [P]; positivity
+  have him : z.im = ‖z‖ * σ := by
+    rw [show ‖z‖ = radius d from nearPoint_norm hd hD]
+    exact nearPoint_im_eq hd
+  have hnear : ‖rayPrefactor d 0 z‖ ^ 2 =
+      P * σ / (2 * ‖z‖ * ‖w‖ * ‖c - z‖) ^ 2 := by
+    simp only [rayPrefactor_near_form, norm_div, norm_neg, norm_mul, Complex.norm_two,
+      div_pow, mul_pow, norm_cutFactor_sq_distance hw', norm_cutFactor_sq_distance hzc',
+      norm_cutFactor_sq_distance hwc', Complex.norm_conj]
+    rw [norm_sub_conjugate _ (nearPoint_im_pos hd hD).le, him,
+      norm_sub_rev z w, ← norm_sub_conj_swap z w]
+    dsimp [P]
+    field_simp [hz.ne', hw.ne', hcz.ne'] <;> ring
+  have hfar : ‖rayPrefactor d 1 w‖ ^ 2 =
+      P * τ / (2 * ‖z‖ * ‖w‖ * ‖c - w‖) ^ 2 := by
+    simp only [rayPrefactor_far_form, norm_div, norm_neg, norm_mul, Complex.norm_two,
+      div_pow, mul_pow, norm_cutFactor_sq_distance hz', norm_cutFactor_sq_distance hzc',
+      norm_cutFactor_sq_distance hwc', Complex.norm_conj]
+    rw [norm_sub_conjugate _ (farPoint_im_pos hd hD).le]
+    dsimp [P, τ]
+    field_simp [hz.ne', hw.ne', hcw.ne'] <;> ring
+  change ‖rayPrefactor d 1 w‖ * Real.sqrt σ ≤ ‖rayPrefactor d 0 z‖
+  apply (sq_le_sq₀ (by positivity) (norm_nonneg _)).mp
+  rw [mul_pow, Real.sq_sqrt hσ, hfar, hnear]
+  calc
+    _ = P * (τ * σ) / (2 * ‖z‖ * ‖w‖ * ‖c - w‖) ^ 2 := by ring
+    _ ≤ P * σ / (2 * ‖z‖ * ‖w‖ * ‖c - w‖) ^ 2 := by
+      have h := mul_le_mul_of_nonneg_right hτ hσ
+      rw [one_mul] at h
+      exact div_le_div_of_nonneg_right (mul_le_mul_of_nonneg_left h hP) (sq_nonneg _)
+    _ ≤ _ := by
+      apply div_le_div_of_nonneg_left (mul_nonneg hP hσ) (by positivity)
+      apply (sq_le_sq₀ (by positivity) (by positivity)).mpr
+      exact mul_le_mul_of_nonneg_left hdist (by positivity)
+
+private theorem radius_sq_pow_eq {d : ℝ} (hd : 0 ≤ d) (n : ℕ) :
+    (radius d ^ 2) ^ n = ((1 + 2 * d) ^ n)⁻¹ := by
+  have hp : 0 < 1 + 2 * d := by positivity
+  rw [show radius d ^ 2 = (1 + 2 * d)⁻¹ by
+    rw [← one_div]
+    exact (eq_div_iff hp.ne').2 (radius_relation hd), inv_pow]
+
+private theorem forty_lt_radial_power {d : ℝ} {n : ℕ} (hd : 0 < d)
+    (hn : 150 ≤ n) (hnd : 29 / 10 ≤ (n : ℝ) * d) :
+    (40 : ℝ) < (1 + 2 * d) ^ n := by
+  let k := n / 6
+  have hk : 6 * k ≤ n := by dsimp [k]; omega
+  have hk' : 4 * n ≤ 25 * k := by dsimp [k]; omega
+  have hkc : (4 : ℝ) * (n : ℝ) ≤ 25 * (k : ℝ) := by exact_mod_cast hk'
+  have hbase : (241 / 125 : ℝ) ≤ 1 + (k : ℝ) * (2 * d) := by
+    nlinarith [mul_le_mul_of_nonneg_right hkc hd.le]
+  calc
+    _ < (241 / 125 : ℝ) ^ 6 := by norm_num
+    _ ≤ (1 + (k : ℝ) * (2 * d)) ^ 6 := pow_le_pow_left₀ (by norm_num) hbase 6
+    _ ≤ ((1 + 2 * d) ^ k) ^ 6 :=
+      pow_le_pow_left₀ (by positivity) (one_add_mul_le_pow (by linarith : -2 ≤ 2 * d) k) 6
+    _ = (1 + 2 * d) ^ (6 * k) := by rw [← pow_mul, Nat.mul_comm]
+    _ ≤ _ := pow_le_pow_right₀ (by linarith) hk
+
+private theorem fast_exp_bound {n : ℕ} (hn : 150 ≤ n) :
+    120 * (n : ℝ) ^ 2 < (2 : ℝ) ^ n := by
+  induction n, hn using Nat.le_induction with
+  | base => norm_num
+  | succ n hn ih =>
+    have hnR : (150 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
+    rw [pow_succ, Nat.cast_succ]
+    have h : 120 * ((n : ℝ) + 1) ^ 2 ≤ 2 * (120 * (n : ℝ) ^ 2) := by
+      nlinarith [sq_nonneg ((n : ℝ) - 2)]
+    linarith
+
+/-- Exponential suppression for the small-angle range, in the units of the
+leading near-ray amplitude. -/
+theorem farRay_smallAngle_factor_lt {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hn : 150 ≤ n) (hdAngle : (1 / 2 : ℝ) ≤ d)
+    (hnsin : 2 ≤ (n : ℝ) * Real.sqrt (1 - d ^ 2)) :
+    (6 / 5 : ℝ) * (radius d ^ 2) ^ n / Real.sqrt (Real.sqrt (1 - d ^ 2)) <
+      1 / (100 * (n : ℝ)) := by
+  let σ := Real.sqrt (1 - d ^ 2)
+  have hnR : 0 < (n : ℝ) := by exact_mod_cast (show 0 < n by omega)
+  have hσ : 0 < σ := Real.sqrt_pos.2 (by nlinarith)
+  have hσ1 : σ ≤ 1 := by
+    apply (sq_le_sq₀ hσ.le zero_le_one).mp
+    dsimp [σ]
+    rw [Real.sq_sqrt (by nlinarith)]
+    nlinarith
+  have hσ' : σ ≤ Real.sqrt σ := by
+    apply (sq_le_sq₀ hσ.le (Real.sqrt_nonneg _)).mp
+    rw [Real.sq_sqrt hσ.le, pow_two]
+    exact mul_le_of_le_one_right hσ.le hσ1
+  have hsqrt : 1 ≤ (n : ℝ) * Real.sqrt σ := by
+    have hp := mul_le_mul_of_nonneg_left hσ' hnR.le
+    change 2 ≤ (n : ℝ) * σ at hnsin
+    linarith
+  have hradial : (radius d ^ 2) ^ n ≤ ((2 : ℝ) ^ n)⁻¹ := by
+    rw [radius_sq_pow_eq hd.le]
+    have hp : (2 : ℝ) ^ n ≤ (1 + 2 * d) ^ n :=
+      pow_le_pow_left₀ (by norm_num) (by linarith) n
+    simpa only [one_div] using (one_div_le_one_div_of_le (by positivity) hp)
+  change (6 / 5 : ℝ) * (radius d ^ 2) ^ n / Real.sqrt σ < _
+  calc
+    _ ≤ (6 / 5 : ℝ) * (((2 : ℝ) ^ n)⁻¹) / Real.sqrt σ := by gcongr
+    _ ≤ (6 / 5 : ℝ) * (((2 : ℝ) ^ n)⁻¹) * (n : ℝ) := by
+      apply (div_le_iff₀ (Real.sqrt_pos.2 hσ)).2
+      nlinarith [mul_le_mul_of_nonneg_left hsqrt
+        (show 0 ≤ (6 / 5 : ℝ) * (((2 : ℝ) ^ n)⁻¹) by positivity)]
+    _ < _ := by
+      have hp : 0 < (2 : ℝ) ^ n := by positivity
+      have h := fast_exp_bound hn
+      rw [show (6 / 5 : ℝ) * ((2 : ℝ) ^ n)⁻¹ * (n : ℝ) =
+        ((6 / 5 : ℝ) * (n : ℝ)) / ((2 : ℝ) ^ n) by rw [div_eq_mul_inv]; ring]
+      apply (div_lt_div_iff₀ hp (by positivity : 0 < 100 * (n : ℝ))).2
+      nlinarith
+
+/-- Exponential suppression for the complementary range. The sixth power of
+a rational Bernoulli bound gives the needed estimate without logarithms. -/
+theorem farRay_largeAngle_factor_lt {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hn : 150 ≤ n) (hnd : 29 / 10 ≤ (n : ℝ) * d)
+    (hσ : (7 / 10 : ℝ) ≤ Real.sqrt (1 - d ^ 2)) :
+    (6 / 5 : ℝ) * (radius d ^ 2) ^ n / Real.sqrt (Real.sqrt (1 - d ^ 2)) <
+      1 / 25 := by
+  let σ := Real.sqrt (1 - d ^ 2)
+  have hσ0 : 0 < σ := (by norm_num : (0 : ℝ) < 7 / 10).trans_le hσ
+  have hroot : (5 / 6 : ℝ) ≤ Real.sqrt σ := by
+    apply (sq_le_sq₀ (by norm_num) (Real.sqrt_nonneg _)).mp
+    rw [Real.sq_sqrt hσ0.le]
+    change (7 / 10 : ℝ) ≤ σ at hσ
+    linarith
+  have hradial : (radius d ^ 2) ^ n < 1 / 40 := by
+    rw [radius_sq_pow_eq hd.le, ← one_div]
+    exact one_div_lt_one_div_of_lt (by norm_num) (forty_lt_radial_power hd hn hnd)
+  change (6 / 5 : ℝ) * (radius d ^ 2) ^ n / Real.sqrt σ < _
+  calc
+    _ ≤ (6 / 5 : ℝ) * (radius d ^ 2) ^ n / (5 / 6 : ℝ) := by gcongr
+    _ < _ := by linarith
+
+/-- The signed summand of the exact coefficient formula at the specified cut. -/
+noncomputable def rayCoefficientTerm (d : ℝ) (n : ℕ) (j : Fin 4) : ℂ :=
+  (-((cutPoint d j)⁻¹ ^ n) / (Real.pi : ℂ)) * ∫ s in Ioi (0 : ℝ), rayIntegrand d n j s
+
+/-- The leading amplitude used to normalize the scaled Catalan coefficient. -/
+noncomputable def rayLeadingScale (d : ℝ) (n : ℕ) : ℝ :=
+  (2 / Real.pi) * (radius d)⁻¹ ^ n * BetaMoments.mass n *
+    ‖rayPrefactor d 0 (nearPoint d)‖
+
+theorem rayLeadingScale_pos {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1) (hn : 0 < n) :
+    0 < rayLeadingScale d n := by
+  unfold rayLeadingScale
+  exact mul_pos (mul_pos (mul_pos (by positivity) (pow_pos (inv_pos.mpr (radius_pos hd.le)) _))
+    (BetaMoments.mass_pos hn)) (norm_pos_iff.mpr (rayPrefactor_near_ne_zero hd hD))
+
+/-- The normalized real contribution of the two far-ray terms. -/
+noncomputable def farRayError (d : ℝ) (n : ℕ) : ℝ :=
+  (rayCoefficientTerm d n 1 + rayCoefficientTerm d n 2).re / rayLeadingScale d n
+
+private theorem farRay_coefficientTerm_norm_le {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hn : 150 ≤ n) (hnd : 2 ≤ (n : ℝ) * d) (j : Fin 4) (hj : j = 1 ∨ j = 2) :
+    ‖rayCoefficientTerm d n j‖ ≤
+      radius d ^ n / Real.pi *
+        ((6 / 5 : ℝ) * BetaMoments.mass n * ‖rayPrefactor d 1 (farPoint d)‖) := by
+  have hr : ‖cutPoint d j‖ = (radius d)⁻¹ := by
+    obtain rfl | rfl := hj
+    · exact farPoint_norm hd hD
+    · change ‖conj (farPoint d)‖ = _
+      rw [Complex.norm_conj, farPoint_norm hd hD]
+  rw [rayCoefficientTerm, norm_mul, norm_div, norm_neg, norm_pow, norm_inv, hr, inv_inv,
+    Complex.norm_real, Real.norm_eq_abs, abs_of_pos Real.pi_pos]
+  exact mul_le_mul_of_nonneg_left (farRay_integral_norm_le hd hD hn hnd j hj)
+    (div_nonneg (pow_nonneg (radius_pos hd.le).le _) Real.pi_pos.le)
+
+/-- The bound for the actual normalized far-ray contribution in the coefficient
+identity. The weight is the radial separation of the near and far endpoints. -/
+theorem farRayError_abs_le {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hn : 150 ≤ n) (hnd : 2 ≤ (n : ℝ) * d) :
+    |farRayError d n| ≤
+      (6 / 5 : ℝ) * (radius d ^ 2) ^ n / Real.sqrt (Real.sqrt (1 - d ^ 2)) := by
+  let h := Real.sqrt (Real.sqrt (1 - d ^ 2))
+  have hp : 0 < h := Real.sqrt_pos.2 (Real.sqrt_pos.2 (by nlinarith))
+  have hn0 : 0 < n := by omega
+  have hm := BetaMoments.mass_pos hn0
+  have hr := radius_pos hd.le
+  have hb : ‖rayPrefactor d 1 (farPoint d)‖ ≤ ‖rayPrefactor d 0 (nearPoint d)‖ / h :=
+    (le_div_iff₀ hp).2 (farRay_endpoint_bound hd hD)
+  rw [farRayError, abs_div, abs_of_pos (rayLeadingScale_pos hd hD hn0)]
+  apply (div_le_iff₀ (rayLeadingScale_pos hd hD hn0)).2
+  calc
+    _ ≤ ‖rayCoefficientTerm d n 1 + rayCoefficientTerm d n 2‖ := Complex.abs_re_le_norm _
+    _ ≤ ‖rayCoefficientTerm d n 1‖ + ‖rayCoefficientTerm d n 2‖ := norm_add_le _ _
+    _ ≤ 2 * (radius d ^ n / Real.pi *
+        ((6 / 5 : ℝ) * BetaMoments.mass n * ‖rayPrefactor d 1 (farPoint d)‖)) := by
+      rw [two_mul]
+      exact add_le_add (farRay_coefficientTerm_norm_le hd hD hn hnd 1 (.inl rfl))
+        (farRay_coefficientTerm_norm_le hd hD hn hnd 2 (.inr rfl))
+    _ ≤ 2 * (radius d ^ n / Real.pi *
+        ((6 / 5 : ℝ) * BetaMoments.mass n * (‖rayPrefactor d 0 (nearPoint d)‖ / h))) := by
+      gcongr
+    _ = _ := by
+      change _ = (6 / 5 : ℝ) * (radius d ^ 2) ^ n / h * rayLeadingScale d n
+      rw [rayLeadingScale, pow_right_comm (radius d) 2 n, inv_pow, pow_two]
+      field_simp [hp.ne', Real.pi_ne_zero, (pow_pos hr n).ne'] <;> ring
+
+/-- On the small-angle range the actual far-ray contribution is less than
+one hundredth of the inverse row length, in the leading amplitude units. -/
+theorem farRayError_smallAngle {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hn : 150 ≤ n) (hdAngle : (1 / 2 : ℝ) ≤ d)
+    (hnsin : 2 ≤ (n : ℝ) * Real.sqrt (1 - d ^ 2)) :
+    |farRayError d n| < 1 / (100 * (n : ℝ)) := by
+  have hnR : (150 : ℝ) ≤ (n : ℝ) := by exact_mod_cast hn
+  have hnd : 2 ≤ (n : ℝ) * d := by nlinarith
+  exact (farRayError_abs_le hd hD hn hnd).trans_lt
+    (farRay_smallAngle_factor_lt hd hD hn hdAngle hnsin)
+
+/-- On the large-angle range the actual far-ray contribution is less than
+one twenty-fifth of the leading amplitude. -/
+theorem farRayError_largeAngle {d : ℝ} {n : ℕ} (hd : 0 < d) (hD : d < 1)
+    (hn : 150 ≤ n) (hnd : 29 / 10 ≤ (n : ℝ) * d)
+    (hσ : (7 / 10 : ℝ) ≤ Real.sqrt (1 - d ^ 2)) :
+    |farRayError d n| < 1 / 25 :=
+  (farRayError_abs_le hd hD hn (by linarith)).trans_lt
+    (farRay_largeAngle_factor_lt hd hD hn hnd hσ)
 
 end CatalanStrictPeaks.CutGeometry
