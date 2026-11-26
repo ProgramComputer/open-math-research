@@ -1,6 +1,6 @@
 --- CatalanStrictPeaksPhaseBridge.lean
 +++ CatalanStrictPeaksPhaseBridge.lean
-@@ -114,8 +114,7 @@
+@@ -114,19 +114,28 @@
    have hq_form : q = (↑(2 * s) : ℂ) * Complex.exp (((θ - Real.pi / 2 : ℝ) : ℂ) * Complex.I) := by
      have hrat : z / conj z = z ^ 2 / ((a ^ 2 : ℝ) : ℂ) := by
        rw [← hzz]
@@ -9,18 +9,38 @@
 +      field_simp [hz, hzc] <;> ring
      rw [show q = 1 - z / conj z by rfl, hrat]
      apply Complex.ext
-     · simp only [Complex.sub_re, Complex.one_re, Complex.div_ofReal_re, pow_two, Complex.mul_re,
-@@ -126,8 +125,7 @@
-     · simp only [Complex.sub_im, Complex.one_im, Complex.div_ofReal_im, pow_two, Complex.mul_im,
-         Complex.im_ofReal_mul, Complex.exp_ofReal_mul_I_im, Real.sin_sub, Real.cos_pi_div_two,
-         Real.sin_pi_div_two, mul_zero, mul_one, zero_sub, hzr, hzi]
+-    · simp only [Complex.sub_re, Complex.one_re, Complex.div_ofReal_re, pow_two, Complex.mul_re,
+-        Complex.re_ofReal_mul, Complex.exp_ofReal_mul_I_re, Real.cos_sub, Real.cos_pi_div_two,
+-        Real.sin_pi_div_two, mul_zero, mul_one, zero_add, hzr, hzi]
 -      field_simp [ha.ne']
--      ring
-+      field_simp [ha.ne'] <;> ring
+-      linear_combination -a ^ 2 * htrig
+-    · simp only [Complex.sub_im, Complex.one_im, Complex.div_ofReal_im, pow_two, Complex.mul_im,
+-        Complex.im_ofReal_mul, Complex.exp_ofReal_mul_I_im, Real.sin_sub, Real.cos_pi_div_two,
+-        Real.sin_pi_div_two, mul_zero, mul_one, zero_sub, hzr, hzi]
+-      field_simp [ha.ne']
++    · simp only [Complex.sub_re, Complex.one_re, Complex.div_ofReal_re,
++        show z ^ 2 = z * z from pow_two z, Complex.mul_re,
++        Complex.ofReal_re, Complex.ofReal_im, Complex.exp_ofReal_mul_I_re, Real.cos_sub,
++        Real.cos_pi_div_two, Real.sin_pi_div_two, mul_zero, zero_mul, sub_zero,
++        mul_one, zero_add, hzr, hzi]
++      have hcancel : ((a * d) * (a * d) - (a * s) * (a * s)) / a ^ 2 = d ^ 2 - s ^ 2 :=
++        (div_eq_iff (pow_ne_zero 2 ha.ne')).2 (by ring)
++      change 1 - ((a * d) * (a * d) - (a * s) * (a * s)) / a ^ 2 = 2 * s * s
++      rw [hcancel]
++      nlinarith only [htrig]
++    · simp only [Complex.sub_im, Complex.one_im, Complex.div_ofReal_im,
++        show z ^ 2 = z * z from pow_two z, Complex.mul_im,
++        Complex.ofReal_re, Complex.ofReal_im, Complex.exp_ofReal_mul_I_im, Real.sin_sub,
++        Real.cos_pi_div_two, Real.sin_pi_div_two, mul_zero, zero_mul, add_zero,
++        mul_one, zero_sub, hzr, hzi]
++      have hcancel : ((a * d) * (a * s) + (a * s) * (a * d)) / a ^ 2 = 2 * d * s :=
++        (div_eq_iff (pow_ne_zero 2 ha.ne')).2 (by ring)
++      change -(((a * d) * (a * s) + (a * s) * (a * d)) / a ^ 2) = 2 * s * (-d)
++      rw [hcancel]
+       ring
    have hq0 : q ≠ 0 := by
      rw [hq_form]
-     exact mul_ne_zero (Complex.ofReal_ne_zero.mpr (by positivity)) (Complex.exp_ne_zero _)
-@@ -139,13 +137,11 @@
+@@ -139,13 +148,11 @@
      calc
        _ = 1 - z * (w + conj w) / (w * conj w) + z ^ 2 / (w * conj w) := by
          dsimp only [u, v]
@@ -36,7 +56,7 @@
    have hxr : (u * v).re = 4 * a ^ 2 * d := by
      calc
        _ = 1 + (a ^ 2) ^ 2 * (4 * d ^ 2 - (s ^ 2 + d ^ 2)) := by
-@@ -202,8 +198,7 @@
+@@ -202,8 +209,7 @@
    have hk_arg : k.arg = -Real.arctan (d * s / (1 + d - d ^ 2)) := by
      rw [arg_eq_arctan hkr0, hkr, hki, ← Real.arctan_neg]
      congr 1
@@ -46,7 +66,7 @@
    have hquartic : quartic (scale d) z = 0 :=
      (quartic_zero_iff hd hD z).2 (.inl rfl)
    have hden : 2 * z * ((scale d : ℂ) - z) = k ^ 2 / 2 := by
-@@ -297,12 +292,10 @@
+@@ -297,12 +303,10 @@
    continuous := (continuousOn_checkpointPhase n).div_const _
    leftPhase := by
      simp [checkpointPhase, phaseCorrection_zero]
