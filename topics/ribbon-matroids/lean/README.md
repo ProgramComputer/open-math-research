@@ -26,7 +26,9 @@ For a finite matroid whose complement of an element spans, `matroidZ_delete_of_t
 
 For an interior element of the interval presentation, Lean constructs bases of its contraction by splicing interval choices across the cut. The two sides split as a direct sum, and independent chains on either side force both ranks to be positive after the further contractions in the deletion identity. The checked deletion therefore preserves $Z$. Repeating over all nonseparator elements leaves exactly the boundary separators. Every basis there omits exactly one separator. The result `Ribbon.Source.IsRibbonPresentation.exists_circuitBoundary` starts from the original source-facing ribbon presentation. [Interior deletion and contraction](publication/RibbonChainDeletion.lean) · [Boundary circuit](publication/RibbonChainBoundary.lean)
 
-Coverage remains 🟨 Partial. Evaluating the resulting circuit matroid’s $Z$-polynomial as Narayana and proving the root statement remain open in Lean. [Verification record](../verification.json) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/133)
+The rank layers of each proper flat of a circuit matroid are counted by subsets of the remaining ground elements. Lean verifies the integer binomial convolution for the circuit’s $Z$-polynomial, proves that the candidate satisfies the unique Kazhdan–Lusztig recursion, and transfers every Narayana coefficient back to the original ribbon. [Circuit-flat counts](publication/CircuitNarayanaMatroid.lean) · [Binomial calculation](publication/CircuitNarayanaCoefficients.lean) · [Original coefficient equality](publication/RibbonNarayanaCoefficients.lean)
+
+Coverage remains 🟨 Partial. The outstanding formal obligation is the root conclusion. [Verification record](../verification.json) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/133)
 
 To build and audit this foundation, use Lean 4.36.0 and the [shared manifest](../../../shared/lean/publication/lake-manifest.json) with mathlib at `fc4f59e577feb1a4956671bc04ac18aaaf8cd842`. Run from the repository root.
 

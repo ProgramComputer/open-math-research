@@ -502,5 +502,82 @@
         "sha256": "e062af91d0872a6fa924a88fd85e99bc29567abeb5f32c86a7f27b6851e5554d"
       }
     ]
+  },
+  "ribbon_narayana_coefficients": {
+    "status": "passed",
+    "formal_coverage": "Partial. Lean proves the Narayana coefficient equality for the actual matroid of every nonempty connected ribbon.",
+    "scope": [
+      "The proper circuit flats are exactly the subsets of its ground set of cardinality less than the rank. Their upper interval rank layers are counted by a bijection to sets of fixed cardinality.",
+      "An integer binomial determinant and two applications of Vandermonde’s identity evaluate the candidate circuit Z-sum. Its symmetry and strict degree cutoff identify the Kazhdan–Lusztig coefficients by uniqueness.",
+      "The source-facing ribbon coefficients follow by the checked reduction to the circuit boundary."
+    ],
+    "remaining": [
+      "Check the root conclusion of the original claim and the stronger simple-negative-root conclusion in the proof."
+    ],
+    "workflow_checkout_commit": "5e0ce5a776a4439b1ae30d617fc29c4d28a58b2f",
+    "lean": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+    "lake": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
+    "mathlib": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+    "lake_manifest": "shared/lean/publication/lake-manifest.json",
+    "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45844563707/job/139994777606",
+    "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45844563707/artifacts/15130765884",
+    "hosted_artifact_digest": "sha256:2a121333b0d0b6ad6e03c91f7f9a82a5e8df36e016c43955ae0df6fc3e529f61",
+    "commands": [
+      "python3 shared/lean/publication/prepare.py ribbon-foundation .publication-build",
+      "(cd .publication-build && lean --version && lake --version)",
+      "(cd .publication-build && lake exe cache get $(cat cache-imports.txt))",
+      "(cd .publication-build && test \"$(git -C .lake/packages/mathlib rev-parse HEAD)\" = fc4f59e577feb1a4956671bc04ac18aaaf8cd842)",
+      "(cd .publication-build && lake build $(cat targets.txt))",
+      "python3 shared/lean/publication/audit_axioms.py ribbon-foundation .publication-build"
+    ],
+    "completed_lake_jobs": 2868,
+    "checked_declarations": 92,
+    "new_declarations": [
+      "OpenMathResearch.MatroidKL.CircuitBases.flatRank_of_proper",
+      "OpenMathResearch.MatroidKL.CircuitBases.indep_iff",
+      "OpenMathResearch.MatroidKL.CircuitBases.isFlat_of_ncard_lt",
+      "OpenMathResearch.MatroidKL.CircuitBases.narayana_coeff",
+      "OpenMathResearch.MatroidKL.CircuitBases.ncard_lt_of_proper_flat",
+      "OpenMathResearch.MatroidKL.CircuitBases.rank_eq",
+      "OpenMathResearch.MatroidKL.circuitKLCoeff_convolution",
+      "OpenMathResearch.MatroidKL.circuitKLCoeff_high",
+      "OpenMathResearch.MatroidKL.circuitNarayana_clear",
+      "Ribbon.Source.IsRibbonPresentation.narayana_coeff"
+    ],
+    "axioms_for_each_declaration": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "declarations_using_fewer_axioms": {
+      "Ribbon.Source.IsChainPresentation.restricted": [
+        "propext"
+      ],
+      "OpenMathResearch.MatroidKL.circuitKLCoeff_high": [
+        "Quot.sound",
+        "propext"
+      ],
+      "OpenMathResearch.MatroidKL.circuitNarayana_clear": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "new_modules": [
+      {
+        "name": "RibbonNarayanaCoefficients",
+        "file": "topics/ribbon-matroids/lean/publication/RibbonNarayanaCoefficients.lean",
+        "sha256": "40791e0f5eaeaebb7aed07a615fc3a3b2235dbb0a557c04e25069d2fd3906589"
+      },
+      {
+        "name": "CircuitNarayanaMatroid",
+        "file": "topics/ribbon-matroids/lean/publication/CircuitNarayanaMatroid.lean",
+        "sha256": "fa2e88a6880a4ddf406ebdc67e2e8efaba1c03bf59df3e9670b72812a11330e3"
+      },
+      {
+        "name": "CircuitNarayanaCoefficients",
+        "file": "topics/ribbon-matroids/lean/publication/CircuitNarayanaCoefficients.lean",
+        "sha256": "3a223f126a0d3a86d9d0de105bed49e23b4c45adec21d70710d89d58d4ccbcfd"
+      }
+    ]
   }
 }
