@@ -38,7 +38,10 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** The analytic estimates for the checkpoint and old-root signs and the finite prefix of interlacing pairs remain open in Lean. The modules below verify the generating function and the exact word coefficients used by those arguments.
+**Partial Lean verification.** Lean verifies the entire finite prefix and
+identifies the analytic branch and Cauchy coefficients. The written proof
+covers the deformation to the radial cuts and the full integral and endpoint
+comparisons.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -77,9 +80,77 @@ polynomials. [Published generating-function identity](https://doi.org/10.26493/2
 The [discriminant module](CatalanStrictPeaksDiscriminant.lean) checks that
 the scaled series has coefficients $c^nC_n(1-c^{-2})$. It proves its quadratic
 equation and constructs a formal square root, with constant term one, of
-$(1+x^2)^2-4cx$ for $c\ne0$. Convergence, analytic branch continuation and
-the sign estimates remain in the analytic proof.
+$(1+x^2)^2-4cx$ for $c\ne0$.
 [Generating-function kernel output](generating-function-kernel.txt)
+
+## Cut geometry and explicit majorants
+
+The [geometry module](CatalanStrictPeaksCutGeometry.lean) factors the quartic
+into its two conjugate pairs for $0<d<1$, shows that the near pair has strictly
+smaller modulus, and rules out real branch points. It verifies the direct,
+conjugate and opposite cross-pair coefficient bounds, including the strict
+near denominator bound $|b_0|<3$. The
+[parameter module](CatalanStrictPeaksCutParameter.lean) proves positivity
+and strict angular ordering of $-t$ on the checkpoint interval.
+
+The [pointwise bounds](CatalanStrictPeaksCutBounds.lean) verify the short
+reciprocal and the three square-root product estimates in (4). They also
+give the local integrand bound used in (5). The square-root factors are inputs
+with their defining squares and nonnegative real parts. The
+[moment arithmetic](CatalanStrictPeaksMomentArithmetic.lean) verifies the
+rational bound in (5) after inserting the stated beta moments, and the
+exponential comparisons in (6) and in the covariance tail. It uses exact
+arithmetic at the first four lengths and an inequality for each step of four.
+
+These statements check the pointwise estimates and numerical inequalities.
+The Cauchy deformation to the cuts, the beta moment identities, and the
+derivation of all checkpoint and old-root signs remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
+
+## Analytic branch and Cauchy coefficient
+
+The [analytic branch module](CatalanStrictPeaksAnalyticBranch.lean) takes the
+product of the principal square roots associated with the four branch points.
+It proves that the product squares to the quartic and has value one at zero.
+The rationalized generating function is analytic on the domain with the four
+radial cuts removed. The theorem `branch_at_scale` verifies the square-root
+value $1-c^2$ at the removable pole $x=c$.
+
+The theorem `analyticGenerating_hasFPowerSeriesAt` identifies the analytic
+Taylor coefficients with $c^nC_n(1-c^{-2})$ by checking the same quadratic
+equation and uniqueness in formal power series.
+The theorem `analyticGenerating_cauchyCoeff` gives the coefficient as a
+Cauchy integral on any circle centered at zero with positive radius less than
+the distance to the nearest branch point. [Analytic branch kernel output](analytic-branch-kernel.txt)
+
+## Exact isolating intervals through length 150
+
+The [packed coefficient checker](CatalanStrictPeaksFastCoefficients.lean)
+uses the proved first-return convolution to certify the evaluation of every
+row at $q=4^{150}+1$. This base exceeds each Catalan word count in the
+prefix. Lean checks the successive convolution identities and recovers
+all coefficients by base-$q$ digit extraction.
+
+The [interval checker](CatalanStrictPeaksFinite.lean) certifies both signs
+at the endpoints of every dyadic interval by comparing the positive and
+negative terms with exact natural-number arithmetic. It checks the
+within-row and consecutive-row interval order and uses the intermediate
+value theorem and the exact degree to exhaust each root multiset.
+
+The [prefix theorems](CatalanStrictPeaksPrefix.lean) prove that rows $0$
+through $150$ have only simple negative zeros (`roots_through_150`) and
+strictly interlace in the specified orientation for old row lengths
+$0\le n<150$ (`interlacing_before_150`). The assertions about constant rows
+are vacuous. `interlacing_from_analytic_signs` combines the checked prefix
+with the analytic checkpoint and old-root sign hypotheses from length $150$
+onward. [Prefix kernel output](prefix-kernel.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45741075005)
+
+To regenerate the candidate data from the repository root, run
+
+~~~sh
+python -I -O topics/catalan-word-peaks/code/make_lean_intervals.py \
+  topics/catalan-word-peaks/results/family-rows.jsonl --last 150 --bits 72 \
+  > topics/catalan-word-peaks/lean/CatalanStrictPeaksIntervalData.lean
+~~~
 
 [Written proof](../proof.md)
 
@@ -95,6 +166,12 @@ lake build CatalanStrictPeaksRecurrence
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/RecurrenceAxioms.lean
 lake build CatalanStrictPeaksFirstReturn CatalanStrictPeaksGeneratingFunction CatalanStrictPeaksDiscriminant
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/GeneratingFunctionAxioms.lean
+lake build CatalanStrictPeaksCutGeometry CatalanStrictPeaksCutParameter CatalanStrictPeaksCutBounds CatalanStrictPeaksMomentArithmetic
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/CutAxioms.lean
+lake build CatalanStrictPeaksAnalyticBranch
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/AnalyticBranchAxioms.lean
+lake build CatalanStrictPeaksPrefix
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~
 
 [Kernel output](kernel.txt)
