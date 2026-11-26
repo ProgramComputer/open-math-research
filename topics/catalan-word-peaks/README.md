@@ -26,3 +26,5 @@ python -I -O topics/catalan-word-peaks/code/far_left.py
 ~~~
 
 [Append-state recurrence obstructions](append-states/README.md) records why two local interlacing invariants fail in a combinatorial approach to the known theorem.
+
+[Motzkin pending-state transfer obstructions](motzkin-pending/README.md) show why pairwise root order alone, or together with either of two separate layer identities, does not force a real-rooted next endpoint in the shifted recurrence.
