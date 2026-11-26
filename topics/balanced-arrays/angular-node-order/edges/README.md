@@ -43,3 +43,5 @@ had an independent agent-assisted review, as did the earlier lower
 finiteness proof. The gamma-mixture reduction and all-quota result
 have separate agent-assisted reviews.
 [Upper and transfer review](phase-edge-review.md#upper-sign-and-transfer) · [Earlier lower finiteness review](phase-lower-review.md) · [Gamma-mixture review](lower-gamma-review.md) · [All-quota review](lower-all-quota-review.md)
+
+A direct finite-array analogue obtained by averaging dilations of the unshifted total-load section on the unit interval fails already at four rows and four columns. The same obstruction holds for an infinite family of high row caps. [Counts, proof and review scope](finite-section-obstruction.md)
