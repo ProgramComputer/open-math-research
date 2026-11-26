@@ -103,3 +103,7 @@ An exact screen checked a proposed deficit-dependent curvature inequality at 13,
 ## Obstructions to deleting rows
 
 The direct backward coefficient map can fail on the binomial test polynomial. Independent optional-row retention can also introduce a nonreal pair, even when all deterministic row counts in the mixture are real-rooted. [Exact witnesses and full symbol screen](row-deletion/README.md)
+
+## Shifted-ray interlacing
+
+An exact screen checks the individual rays and their coordinate adjacencies. Two abstract examples delimit the row-update argument. [Experiment and obstructions](shifted-rays/README.md)
