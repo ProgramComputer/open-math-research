@@ -38,10 +38,19 @@ at every admissible height. The all-height sign problem
 remains open.
 [All-quota proof](all-quota-signs.md)
 
+**Fixed lower quota in large dimension.** For each fixed $k\ge1$, the
+term at quota $k$ dominates at the true angular node uniformly over all
+$n\ge d$ and proper caps with $k<\lfloor nr/d\rfloor$ once $d$ is
+sufficiently large. Together with the fixed-dimension theorem this
+leaves only finitely many triples that could fail the sign at each
+fixed $k$. The dimension cutoff is existential.
+[Uniform inequality and corollary](fixed-lower-quota-signs.md)
+
 **Formal verification**　⬜ None. The upper sign and both transfers
 had an independent agent-assisted review, as did the earlier lower
 finiteness proof. The gamma-mixture reduction and all-quota result
-have separate agent-assisted reviews.
-[Upper and transfer review](phase-edge-review.md#upper-sign-and-transfer) · [Earlier lower finiteness review](phase-lower-review.md) · [Gamma-mixture review](lower-gamma-review.md) · [All-quota review](lower-all-quota-review.md)
+have separate agent-assisted reviews. The fixed lower-quota theorem
+has an independent agent-assisted review and derivation.
+[Upper and transfer review](phase-edge-review.md#upper-sign-and-transfer) · [Earlier lower finiteness review](phase-lower-review.md) · [Gamma-mixture review](lower-gamma-review.md) · [All-quota review](lower-all-quota-review.md) · [Fixed lower-quota review](fixed-quota-node-review.md)
 
 A direct finite-array analogue obtained by averaging dilations of the unshifted total-load section on the unit interval fails already at four rows and four columns. The same obstruction holds for an infinite family of high row caps. [Counts, proof and review scope](finite-section-obstruction.md)
