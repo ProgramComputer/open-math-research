@@ -1,0 +1,22 @@
+--- a/PrismFamily.lean
++++ b/PrismFamily.lean
+@@ -102,16 +102,16 @@
+ identified with the slice numerators by Ehrhart reciprocity in the paper. -/
+ theorem polynomial_obstruction (b : ℕ) (hb : 6 ≤ b) (p q : Polynomial ℝ)
+     (hp : p.Monic) (hq : q.Monic)
+-    (sp : p.Splits (RingHom.id ℝ)) (sq : q.Splits (RingHom.id ℝ))
++    (sp : p.Splits) (sq : q.Splits)
+     (cp : p.nextCoeff = (before b : ℝ)) (cq : q.nextCoeff = (after b : ℝ)) :
+     ¬ ∃ xs ys : List ℝ, (xs : Multiset ℝ) = p.roots ∧
+       (ys : Multiset ℝ) = q.roots ∧ AlternatingNegative xs ys := by
+   rintro ⟨xs,ys,hx,hy,h⟩
+   apply no_family_interlacing b hb
+   refine ⟨xs,ys,h,?_,?_⟩
+-  · rw [← cp, Polynomial.sum_roots_eq_nextCoeff_of_monic_of_split hp sp, ← hx]
++  · rw [← cp, sp.nextCoeff_eq_neg_sum_roots_of_monic hp, ← hx]
+     rfl
+-  · rw [← cq, Polynomial.sum_roots_eq_nextCoeff_of_monic_of_split hq sq, ← hy]
++  · rw [← cq, sq.nextCoeff_eq_neg_sum_roots_of_monic hq, ← hy]
+     rfl
+ 
+ #print axioms polynomial_obstruction

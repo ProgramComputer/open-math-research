@@ -1,0 +1,11 @@
+--- CatalanStrictPeaksCutBounds.lean
++++ CatalanStrictPeaksCutBounds.lean
+@@ -139,7 +139,7 @@
+     rw [norm_mul]
+     simpa using mul_le_mul hvInv huInv (norm_nonneg _) (by norm_num : (0 : ℝ) ≤ 1)
+   · have hInv (z : ℂ) (hz : 1 + z ≠ 0) : (1 + z)⁻¹ - 1 = -z / (1 + z) := by
+-      field_simp
++      field_simp [hz] <;> ring
+     have hU : ‖(1 + u)⁻¹ - 1‖ ≤ (3 / q) * s := by
+       rw [hInv u huNe, norm_div, norm_neg, div_le_iff₀ huPos]
+       calc

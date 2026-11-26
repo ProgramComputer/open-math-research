@@ -1,0 +1,43 @@
+--- a/OrderedThresholdTwoSigns.lean
++++ b/OrderedThresholdTwoSigns.lean
+@@ -73,7 +73,7 @@
+       G.roots = (Finset.univ.image r).val := by
+   classical
+   have hchoice (i : Fin m) : ∃ y : ℝ, t i.castSucc < y ∧ y < t i.succ ∧ G.IsRoot y := by
+-    apply root_between (ht (Fin.castSucc_lt_succ i))
++    apply root_between (ht Fin.castSucc_lt_succ)
+     apply opposite_signs (k := i.val)
+     · simpa using hs i.castSucc
+     · simpa using hs i.succ
+@@ -101,7 +101,7 @@
+     refine Fin.cases ?_ (fun j => ?_) i
+     · simpa using hpos (0 : Fin (m+1))
+     · have heq : j.succ.castSucc = j.castSucc.succ := Fin.ext rfl
+-      simpa only [heq, Fin.cons_succ] using hq (Fin.castSucc_lt_succ j)
++      simpa only [heq, Fin.cons_succ] using hq Fin.castSucc_lt_succ
+ 
+ private theorem snoc_mono {m : ℕ} (t : Fin (m + 1) → ℝ) (ht : StrictMono t)
+     {b : ℝ} (hb : t (Fin.last m) < b) : StrictMono (Fin.snoc t b) := by
+@@ -110,7 +110,7 @@
+   refine Fin.lastCases ?_ (fun j => ?_) i
+   · simpa using hb
+   · have heq : j.castSucc.succ = j.succ.castSucc := Fin.ext rfl
+-    simpa only [heq, Fin.snoc_castSucc] using ht (Fin.castSucc_lt_succ j)
++    simpa only [heq, Fin.snoc_castSucc] using ht Fin.castSucc_lt_succ
+ 
+ private theorem cons_signed {m : ℕ} (q : Fin m → ℝ) (G : ℝ[X])
+     (hzero : 0 < G.eval 0) (hs : ∀ i, 0 < (-1 : ℝ) ^ (i.val + 1) * G.eval (q i)) :
+@@ -189,8 +189,11 @@
+     exact hnonneg.trans_lt (hr i).1
+   · intro i
+     have heq : i.castSucc.succ = i.succ.castSucc := Fin.ext rfl
+-    exact ⟨by simpa [t, t₀, heq] using (hr i.castSucc).2,
+-      by simpa [t, t₀] using (hr i.succ).1⟩
++    have hsample : t i.succ.castSucc = q i := by
++      simp only [t, t₀, Fin.snoc_castSucc, Fin.cons_succ]
++    refine ⟨?_, ?_⟩
++    · simpa only [heq, hsample] using (hr i.castSucc).2
++    · simpa only [hsample] using (hr i.succ).1
+ 
+ private theorem signed_step_with_degree {n : ℕ} (G : ℝ[X]) (q : Fin (n / 2) → ℝ)
+     (hdegree : G.natDegree = (n + 1) / 2) (hq : StrictMono q) (hpos : ∀ i, 0 < q i)

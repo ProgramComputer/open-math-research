@@ -1,0 +1,54 @@
+--- a/BalancedTorusComponents.lean
++++ b/BalancedTorusComponents.lean
+@@ -1,6 +1,7 @@
+ import BalancedTorusMaxima
+ import Mathlib.Analysis.Complex.Basic
+ import Mathlib.Topology.Order.Compact
++import Mathlib.Topology.Algebra.Monoid
+ 
+ /-!
+ # Connected components of fixed-product torus maximizers
+@@ -82,7 +83,7 @@
+   have hcompact : IsCompact {x : ι → ℂ | ∀ i, x i ∈ unitCircleSet} :=
+     isCompact_pi_infinite (fun _ => isCompact_unitCircle)
+   have hclosed : IsClosed {x : ι → ℂ | (∏ i, x i) = p} :=
+-    isClosed_eq (continuous_finset_prod _ fun i _ => continuous_apply i) continuous_const
++    isClosed_eq (continuous_finsetProd _ fun i _ => continuous_apply i) continuous_const
+   exact hcompact.inter_right hclosed
+ 
+ /-- The set of all squared-modulus maximizers on a unit fixed-product torus. -/
+@@ -125,10 +126,12 @@
+   intro k
+   by_cases hki : k = i
+   · subst k
+-    simpa [replacePair] using (continuous_id : Continuous (fun z : ℂ => z))
++    simp only [replacePair, if_pos rfl]
++    exact continuous_id
+   by_cases hkj : k = j
+   · subst k
+-    simpa [replacePair, hki] using continuous_const.mul Complex.continuous_conj
++    simp only [replacePair, if_neg hki, if_pos rfl]
++    exact continuous_const.mul Complex.continuous_conj
+   simpa [replacePair, hki, hkj] using (continuous_const : Continuous (fun _ : ℂ => x k))
+ 
+ /-- Every connected component of the maximizing set contains a diagonal point. -/
+@@ -138,7 +141,7 @@
+     ∃ x ∈ connectedComponentIn (modulusMaxima p f) x₀, ∀ i j, x i = x j := by
+   have hcompact := isCompact_component (isCompact_modulusMaxima hf hx₀) hx₀
+   have haux_cont : Continuous (fun x : ι → ℂ => normSq (∑ k, x k)) :=
+-    continuous_normSq.comp (continuous_finset_sum _ fun i _ => continuous_apply i)
++    continuous_normSq.comp (continuous_finsetSum _ fun i _ => continuous_apply i)
+   obtain ⟨x, hx_component, haux⟩ := hcompact.exists_isMaxOn
+     ⟨x₀, mem_connectedComponentIn hx₀⟩ haux_cont.continuousOn
+   refine ⟨x, hx_component, ?_⟩
+@@ -218,8 +221,8 @@
+     Continuous (rowObjective (ι := ι) r) := by
+   change Continuous (fun x : ι → ℂ => rowObjective r x)
+   simp_rw [rowObjective_eq_elementary_sum r hr]
+-  exact continuous_finset_sum _ fun _ _ => continuous_finset_sum _ fun _ _ =>
+-    continuous_finset_prod _ fun i _ => continuous_apply i
++  exact continuous_finsetSum _ fun _ _ => continuous_finsetSum _ fun _ _ =>
++    continuous_finsetProd _ fun i _ => continuous_apply i
+ 
+ /-- The component theorem for the actual balanced-array row objective at unit radius. -/
+ theorem rowObjective_exists_diagonal_in_component (r : ℕ) (hr : r ≤ Fintype.card ι)

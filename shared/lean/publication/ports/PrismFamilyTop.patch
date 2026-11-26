@@ -1,0 +1,86 @@
+--- a/PrismFamilyTop.lean
++++ b/PrismFamilyTop.lean
+@@ -10,20 +10,20 @@
+   if 0 ≤ j then f j.toNat else 0
+ 
+ private theorem extendCoeff_sub_X (s : PowerSeries Int) (k : Int) :
+-    extendZero (fun j => PowerSeries.coeff Int j ((1 - PowerSeries.X) * s)) k =
+-      extendZero (fun j => PowerSeries.coeff Int j s) k -
+-      extendZero (fun j => PowerSeries.coeff Int j s) (k - 1) := by
++    extendZero (fun j => PowerSeries.coeff (R := Int) j ((1 - PowerSeries.X) * s)) k =
++      extendZero (fun j => PowerSeries.coeff (R := Int) j s) k -
++      extendZero (fun j => PowerSeries.coeff (R := Int) j s) (k - 1) := by
+   cases k with
+   | ofNat k =>
+     cases k with
+     | zero =>
+-      change extendZero (fun j => PowerSeries.coeff Int j ((1 - PowerSeries.X) * s)) 0 = _
++      change extendZero (fun j => PowerSeries.coeff (R := Int) j ((1 - PowerSeries.X) * s)) 0 = _
+       simp [extendZero, sub_mul]
+     | succ n =>
+-      change extendZero (fun j => PowerSeries.coeff Int j ((1 - PowerSeries.X) * s))
++      change extendZero (fun j => PowerSeries.coeff (R := Int) j ((1 - PowerSeries.X) * s))
+           ((n + 1 : Nat) : Int) =
+-        extendZero (fun j => PowerSeries.coeff Int j s) ((n + 1 : Nat) : Int) -
+-        extendZero (fun j => PowerSeries.coeff Int j s) (((n + 1 : Nat) : Int) - 1)
++        extendZero (fun j => PowerSeries.coeff (R := Int) j s) ((n + 1 : Nat) : Int) -
++        extendZero (fun j => PowerSeries.coeff (R := Int) j s) (((n + 1 : Nat) : Int) - 1)
+       rw [show ((n + 1 : Nat) : Int) - 1 = n by omega]
+       have hn : (0 : Int) ≤ (n : Int) + 1 := by positivity
+       simp [extendZero, sub_mul, hn]
+@@ -33,7 +33,7 @@
+     simp [extendZero, hn, hn']
+ 
+ private theorem coeff_eq_extendDiff (m : Nat) (k : Int) (f : Nat → Int) :
+-    extendZero (fun j => PowerSeries.coeff Int j ((1 - PowerSeries.X) ^ m * PowerSeries.mk f)) k =
++    extendZero (fun j => PowerSeries.coeff (R := Int) j ((1 - PowerSeries.X) ^ m * PowerSeries.mk f)) k =
+       (Δ_[1]^[m] (extendZero f)) (k - (m : Int)) := by
+   induction m generalizing k with
+   | zero => simp [extendZero]
+@@ -54,7 +54,7 @@
+     (hr : r ≤ d + 1) (hF : ∀ n : Nat, F (n : Int) = L n)
+     (hzero : Δ_[1]^[d + 1] F = 0)
+     (hI : ∀ n : Nat, 0 < n → (-1 : Int) ^ d * F (-(n : Int)) = I n) :
+-    PowerSeries.coeff Int (d + 1 - r) (normalizedCountSeries d L) =
++    PowerSeries.coeff (R := Int) (d + 1 - r) (normalizedCountSeries d L) =
+       ∑ i ∈ Finset.range r, ((-1 : Int) ^ i * ((d + 1).choose i : Int)) * I (r - i) := by
+   let negPart (k : Int) : Int := if k < 0 then F k else 0
+   have hext : extendZero L = F - negPart := by
+@@ -106,7 +106,7 @@
+   simp [boxSeries]
+ 
+ private theorem coeff_one_add_pow (n j : Nat) :
+-    PowerSeries.coeff Int j ((1 + PowerSeries.X : PowerSeries Int) ^ n) = (n.choose j : Int) := by
++    PowerSeries.coeff (R := Int) j ((1 + PowerSeries.X : PowerSeries Int) ^ n) = (n.choose j : Int) := by
+   have h : ((1 + PowerSeries.X : PowerSeries Int) ^ n) =
+       ((((1 + Polynomial.X : Polynomial Int) ^ n) : Polynomial Int) : PowerSeries Int) := by simp
+   rw [h, Polynomial.coeff_coe, Polynomial.coeff_one_add_X_pow]
+@@ -128,7 +128,7 @@
+   rw [beforeInterior, if_neg (by decide), ← boxSeries_coeff, boxSeries_append,
+     boxSeries_replicate, boxSeries_singleton]
+   rw [show (b + 1) * 3 - (2 * b + 1) = b + 2 by omega]
+-  change PowerSeries.coeff Int (b + 2) (capSeries 1 ^ (2 * b) * capSeries 4) = _
++  change PowerSeries.coeff (R := Int) (b + 2) (capSeries 1 ^ (2 * b) * capSeries 4) = _
+   rw [capSeries_one, capSeries, Finset.mul_sum, map_sum]
+   simp_rw [PowerSeries.coeff_mul_X_pow', coeff_one_add_pow]
+   have hs1 : (2 * b).choose (b - 1) = (2 * b).choose (b + 1) := by
+@@ -149,7 +149,7 @@
+     afterInterior b 3 = ((2 * b + 2).choose (b + 1) : Int) := by
+   rw [afterInterior, if_neg (by decide), ← boxSeries_coeff, boxSeries_replicate,
+     show (b + 1) * 3 - (2 * b + 2) = b + 1 by omega]
+-  change PowerSeries.coeff Int (b + 1) (capSeries 1 ^ (2 * b + 2)) = _
++  change PowerSeries.coeff (R := Int) (b + 1) (capSeries 1 ^ (2 * b + 2)) = _
+   rw [capSeries_one, coeff_one_add_pow]
+ 
+ private theorem nextCoeff_from_reflection (d : Nat) (F : Int → Int) (L I : Nat → Int)
+@@ -218,8 +218,8 @@
+   simp [Polynomial.nextCoeff, Polynomial.natDegree_map_eq_of_injective hinj]
+ 
+ theorem familyNumeratorsDoNotAlternate (b : Nat) (hb : 6 ≤ b)
+-    (sp : ((beforeNumerator b).map (Int.castRingHom ℝ)).Splits (RingHom.id ℝ))
+-    (sq : ((afterNumerator b).map (Int.castRingHom ℝ)).Splits (RingHom.id ℝ)) :
++    (sp : ((beforeNumerator b).map (Int.castRingHom ℝ)).Splits)
++    (sq : ((afterNumerator b).map (Int.castRingHom ℝ)).Splits) :
+     ¬ ∃ xs ys : List ℝ,
+       (xs : Multiset ℝ) = ((beforeNumerator b).map (Int.castRingHom ℝ)).roots ∧
+       (ys : Multiset ℝ) = ((afterNumerator b).map (Int.castRingHom ℝ)).roots ∧

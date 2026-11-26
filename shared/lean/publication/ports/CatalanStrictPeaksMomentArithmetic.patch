@@ -1,0 +1,20 @@
+--- CatalanStrictPeaksMomentArithmetic.lean
++++ CatalanStrictPeaksMomentArithmetic.lean
+@@ -38,7 +38,7 @@
+       hcancel₁, hcancel₂]
+     ring
+   have hpos : 0 < (11 / 100 : ℝ) * (n - 150) ^ 2 + (833 / 50) * (n - 150) + 4593 / 80 := by positivity
+-  apply (mul_lt_mul_right (mul_pos h₁ h₂)).mp
++  apply (mul_lt_mul_iff_right₀ (mul_pos h₁ h₂)).mp
+   linarith
+ 
+ /-- n minus the least integer at least n/4. -/
+@@ -73,7 +73,7 @@
+     (hbase : ∀ n, 150 ≤ n → n < 154 → tailScore p q n < bound)
+     (n : ℕ) (hn : 150 ≤ n) : tailScore p q n < bound := by
+   induction n using Nat.strong_induction_on with
+-  | h n ih =>
++  | ind n ih =>
+     by_cases h : n < 154
+     · exact hbase n hn h
+     · let m := n - 4

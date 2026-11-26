@@ -1,0 +1,19 @@
+--- OpenMathResearch/LogarithmicContour.lean
++++ OpenMathResearch/LogarithmicContour.lean
+@@ -168,7 +168,7 @@
+     rintro s ⟨x, _, rfl⟩
+     change -1 < r x
+     linarith [hUnit x, hdrPos x]
+-  have hChange := intervalIntegral.integral_comp_smul_deriv' (g := transport) hDeriv hDr ht
++  have hChange := intervalIntegral.integral_deriv_smul_comp' (g := transport) hDeriv hDr ht
+   calc
+     _ = ∫ x in a..b, dr x • (transport ∘ r) x := by
+       apply intervalIntegral.integral_congr
+@@ -228,6 +228,6 @@
+   intro b
+   have hChange := integral_logRadius_substitution hR hg a b
+   change (∫ x in a..b, g x) = ∫ s in u a..u b, transport s at hChange
+-  simpa only [hZero] using hChange
++  simpa only [hZero, id_eq] using hChange
+ 
+ end OpenMathResearch.LogarithmicContour

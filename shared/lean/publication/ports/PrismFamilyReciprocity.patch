@@ -1,0 +1,27 @@
+--- a/PrismFamilyReciprocity.lean
++++ b/PrismFamilyReciprocity.lean
+@@ -40,13 +40,13 @@
+ private theorem coeff_interiorShift (d k w e j q : Nat)
+     (hq : 2 ≤ q) (hk : d + 1 ≤ k * q) (hew : e ≤ w) (hje : j + e ≤ d + 1)
+     (hmax : j + e = d + 1 → k < j + w) :
+-    PowerSeries.coeff Int (k * q - (d + 1))
++    PowerSeries.coeff (R := Int) (k * q - (d + 1))
+       (PowerSeries.X ^ ((q - 1) * j + (w * q - e)) *
+         PowerSeries.mk (fun x => ((d + x).choose d : Int))) =
+       if j + w < k then ((((k - (j + w)) * q + (j + e) - 1).choose d : Nat) : Int) else 0 := by
+   let target := k * q - (d + 1)
+   let shift := (q - 1) * j + (w * q - e)
+-  change PowerSeries.coeff Int target (PowerSeries.X ^ shift * _) = _
++  change PowerSeries.coeff (R := Int) target (PowerSeries.X ^ shift * _) = _
+   have htar : (target : Int) = (k : Int) * q - (d + 1 : Nat) := by
+     dsimp only [target]
+     rw [Nat.cast_sub hk, Nat.cast_mul]
+@@ -96,7 +96,7 @@
+ private theorem coeff_interiorRows (n d k w e q : Nat)
+     (hq : 2 ≤ q) (hk : d + 1 ≤ k * q) (hew : e ≤ w) (hn : n + e ≤ d + 1)
+     (hmax : ∀ j ≤ n, j + e = d + 1 → k < j + w) :
+-    PowerSeries.coeff Int (k * q - (d + 1))
++    PowerSeries.coeff (R := Int) (k * q - (d + 1))
+       ((1 - PowerSeries.X ^ (q - 1)) ^ n * PowerSeries.X ^ (w * q - e) *
+         PowerSeries.mk (fun x => ((d + x).choose d : Int))) = interiorRows n d k w e q := by
+   rw [one_sub_X_pow_expansion, Finset.sum_mul, Finset.sum_mul, map_sum, interiorRows]
