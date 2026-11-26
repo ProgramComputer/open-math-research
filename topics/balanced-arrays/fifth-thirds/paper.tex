@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\allowdisplaybreaks[2]
+\renewcommand{\labelitemi}{$\bullet$}
+\setlength{\emergencystretch}{2em}
+\title{A five-thirds row bound for balanced arrays}
+\author{ProgramComputer}
+\date{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study the polynomial counting labeled binary arrays with equal column sums
+and a bound on every row sum. The theorem places all its zeros on
+the strictly negative real axis, with multiplicity one, above an absolute row
+bound of order $d^{5/3}$, where $d$ is the number of columns. At sufficiently
+large row counts $n$, it also covers every dimension when the row cap or
+its corank is at most a sufficiently small constant times $n^{1/5}$.
+\end{abstract}
+
+\section{Statement}
+The \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{balanced-array conjecture of Per Alexandersson}
+asks for real-rootedness throughout the parameter range. Write
+$P_n^{(r,d)}(q)=\sum_k a_kq^k$, where $a_k$ counts labeled binary
+$n\times d$ arrays with every column sum $k$ and every row sum at most $r$.
+
+\begin{theorem}
+There is an absolute $C>0$ such that, for every $d\ge2$, $1\le r\le d$,
+and $n\ge Cd^{5/3}$, the polynomial $P_n^{(r,d)}$ has exactly
+$\lfloor nr/d\rfloor$ simple, strictly negative zeros.
+\end{theorem}
+\begin{corollary}
+There are absolute constants $c>0$ and $N$ such that the same conclusion
+holds for every $n\ge N$, every $d\ge2$, and every admissible row cap with
+$\min(r,d-r)\le c n^{1/5}$.
+\end{corollary}
+The constants are existential. At $d=1$, the polynomial is $(1+q)^n$.
+The original conjecture remains open. In particular, sufficiently large
+counterexamples must satisfy $d>C^{-3/5}n^{3/5}$, $r>cn^{1/5}$, and
+$d-r>cn^{1/5}$.
+
+\input{main-proof.tex}
+
+\appendix
+\clearpage
+\input{fifth-thirds-lower-quota.tex}
+\input{subquadratic-interior-saddle.tex}
+\input{subquadratic-angular-nodes.tex}
+\input{subquadratic-scaling-corank-upper.tex}
+\input{small-corank-subquadratic.tex}
+\input{small-cap-bounded-degree-ratio.tex}
+\end{document}

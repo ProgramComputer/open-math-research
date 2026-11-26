@@ -7,7 +7,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟩 Full · Lean 4 |
 | [Simple negative zeros for four balanced columns with row cap two](topics/balanced-arrays/four-columns/README.md) | Proof for every row count | ⬜ None |
-| [Simple negative zeros for balanced arrays at every fixed quadratic aspect](topics/balanced-arrays/critical-aspect/README.md) | All caps at $n\ge\alpha d^2$ for each fixed $\alpha>0$, and every dimension at $r\le M\log n$ for each fixed $M>0$, eventually in $n$ | ⬜ None |
+| [Simple negative zeros for balanced arrays with polynomial cap or corank](topics/balanced-arrays/fifth-thirds/README.md) | Every dimension at $\min(r,d-r)\le c n^{1/5}$ for large $n$, and every cap at $n\ge Cd^{5/3}$ | ⬜ None |
 | [Simple negative zeros for balanced arrays in growing dimensions](topics/balanced-arrays/dense-regime/README.md) | All roots for $d\ge Cn/\log n$ at large $n$ and in a rank-dependent range, plus a uniform below-cap root count | ⬜ None |
 | [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Strict interlacing for all $k$ at $n\ge10^{20}$, all sizes at $k=3$, and throughout the two-cycle range | ⬜ None |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | Strict interlacing for every row count and dimension at $r=d-1$ | 🟨 Partial · Lean 4 (labeled-array coefficient formula) |
@@ -22,7 +22,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 ## Partial work
 
-- Earlier balanced-array bounds: [absolute quadratic cutoff](topics/balanced-arrays/quadratic/README.md), [quartic-log cutoff](topics/balanced-arrays/very-tall/README.md), and [dimension-uniform fixed-cap threshold](topics/balanced-arrays/fixed-cap/README.md).
+- Earlier balanced-array bounds: [all fixed quadratic aspects](topics/balanced-arrays/critical-aspect/README.md), [absolute quadratic cutoff](topics/balanced-arrays/quadratic/README.md), [quartic-log cutoff](topics/balanced-arrays/very-tall/README.md), and [dimension-uniform fixed-cap threshold](topics/balanced-arrays/fixed-cap/README.md).
 - For [balanced arrays](topics/balanced-arrays/README.md), the corank-one theorem covers every dimension. Other caps are settled through 24 rows and [through degree fourteen](topics/balanced-arrays/low-degree.md).
 - Every sufficiently large [Eulerian-square row](topics/eulerian-matrix-square/README.md) has only simple real roots. At every row from $n=3$, the two extreme roots at each end strictly alternate with the next row. The all-root cutoff is unknown.
 - For [long-cycle excedances](topics/long-cycle-excedances/README.md), every consecutive pair up through size $3k-1$ strictly interlaces at minimum cycle length $k$. Any counterexample has $k\ge4$ and old size $3k-1\le n<10^{20}$.
