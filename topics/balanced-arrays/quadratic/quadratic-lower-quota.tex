@@ -1,0 +1,50 @@
+\section{Lower quota coefficients at the quadratic row scale}\label{sec:quadratic-lower-quota}
+
+Let $d\to\infty$, $n/d^2\to\infty$, $1\le r<d$ and $k/d\to c\in(0,\infty)$. With the original labeled balanced-array counts $a_i$, set $\Gamma_i=a_i^2/(a_{i-1}a_{i+1})$ and $t_i=\sqrt{a_{i-1}/a_{i+1}}$. Let $H(w)=\sum_{s=0}^r\binom ds w^s$ and let $w_x$ be the positive tilt whose size mean is $dx/n$. Then, for every fixed integer $j$,
+
+\begin{equation*}
+\log\Gamma_{k+j}\to 1/c,\qquad \log t_k=d\log w_k+d/(2k)+o(1).
+\end{equation*}
+
+The cap may grow arbitrarily with the dimension. The following proof separates caps at $L=\lceil\log d\rceil$.
+
+\subsection{Caps at or above the cutoff}
+
+At every $i$ in a fixed window about $k$, put $M=di$, $p=i/n$ and $\mu=M/n$. Choose each column independently as a uniform $i$-subset of the rows. The probability of a specified row containing a specified $(L+1)$-subset of columns is $p^{L+1}$. The expected number of such subsets in the array is at most $n\mu^{L+1}/(L+1)!=M\mu^L/(L+1)!=o(1)$, since $M=O(d^2)$, $\mu\to0$ and $L\ge\log d$. Every array violating the cap has such a subset. Hence $a_i=\binom ni^d(1+o(1))$ throughout this window.
+
+To compare the tilt, put $u=dw_k$. Markov's inequality and the ratio of size-one and size-zero masses give $u\le\mu_k/(1-\mu_k)$, where $\mu_k=dk/n$. Under the uncapped law at $w_k$, the mean $m=dw_k/(1+w_k)$ exceeds $\mu_k$ by at most $\sum_{s>r}s u^s/s!\le 2u^{L+1}/L!$ for large $d$. Indeed truncation deletes the upper tail, and $m-\mu_k$ is the unconditional tail expectation of $S-\mu_k$. Thus $d(m-\mu_k)/\mu_k=o(1)$. Because the inverse uncapped tilt is $m/(d-m)$, this gives $d\log(w_k/(k/(n-k)))=o(1)$. The adjacent ratios of the unrestricted binomials now give both conclusions. Explicitly their centered log ratio is $d\log(k/(n-k))+(d/2)\log(1+1/k)-(d/2)\log(1+1/(n-k))$, and their log curvature at $i$ is $d\log(1+1/i)+d\log(1+1/(n-i))$.
+
+\subsection{Caps below the cutoff}
+
+For an integer $i=k+O(1)$ let $X$ have tilted sizes with weights proportional to $\binom ds w_i^s$. Uniformly, $dw_i=\mu+O(\mu^2)$, its variance $V=\mu+O(\mu^2)$, $\mathbb E[X(X-1)]=O(\mu^2)$ and $\mathbb E|X-\mu|^3=O(\mu)$. These follow by bounding size weights by $(dw_i)^s/s!$ with the first two retained. The masses at zero and one have product comparable to $\mu$. Hence
+$|\mathbb E e^{itX}|\le e^{-c_0\mu t^2}$ for $|t|\le\pi$. Fourier inversion at the integer mean gives $\mathbb P(T=M)\sim(2\pi nV)^{-1/2}$ for $T=\sum_{j=1}^n X_j$, by independence, the third-moment Taylor approximation at $t=O((nV)^{-1/2})$, and Gaussian domination. Here $M\asymp d^2\to\infty$.
+
+For a feasible row profile $s_j\le r$ summing to $M$, put $U=\sum_j s_j(s_j-1)$ and $R=\sum_j(s_j-\mu)^2=M(1-\mu)+U$. Greenhill--McKay--Wang's sparse binary margin formula gives its count as
+
+\begin{equation*}
+K_i\prod_j\binom d{s_j}\,
+ \exp\!\left(-\frac12+\frac{R}{2M(1-p)}+o(1)\right),
+\qquad K_i=\frac{\binom ni^d}{\binom{nd}{di}},
+\end{equation*}
+
+uniformly over profiles. Indeed the maximum degree product is $ri=O(d\log d)=o(M^{2/3})$, normalized column variance is zero, and the normalized row variance $R/(M(1-p))\le r/(1-p)=O(\log d)=O(M^{1/3})$. These are the hypotheses of Corollary 5.2 under Theorem 1.3. Each such profile is feasible by cyclically assigning the $M$ column labels to consecutive row slots. \href{https://web.maths.unsw.edu.au/~csg/papers/irregular-final.pdf#page=33}{Authors' final text, Corollary 5.2} \enspace \href{https://doi.org/10.1016/j.jcta.2005.03.005}{Journal DOI}
+
+The law of the profile given $T=M$ weights it in proportion to $\prod\binom d{s_j}$. Write $W(s)=\exp(s(s-1)/(2M(1-p)))$ and $Z=\mathbb E W(X)$. Since $s^2/M=O((\log d)^2/d^2)=o(1)$, we have $1\le Z\le1+C\mu^2/M$. Thus $Z^n=1+O(\mu)$. We need the same upper bound after conditioning, since the crude maximum of $U/M$ could grow. The law reweighted by $W/Z$ still has product of zero and one masses comparable to $\mu$, as $W(0)=W(1)=1$. For any mixture of $n-1$ independent rows, each with either the original law or this reweighted law, the supremum of the total-mass probabilities is $O(M^{-1/2})$ by the same Fourier envelope. Telescope the product minus one, marking row $j$, weighting all previous rows by $W$ and the marked row by $W-1$. Conditional on the marked row, normalize the previous $j-1$ rows and apply the mixed supremum bound to all remaining $n-1$ rows. This gives
+
+\begin{equation*}
+0\le\mathbb E[(\prod_{j=1}^n W(X_j)-1)\mathbf1_{T=M}]
+\le C M^{-1/2}\sum_{j=1}^n Z^{j-1}(Z-1)
+=O(M^{-1/2}\mu).
+\end{equation*}
+
+Dividing by $\mathbb P(T=M)\asymp M^{-1/2}$ proves the conditional claim. The deterministic part of the margin exponent is $(p-\mu)/(2(1-p))=o(1)$. Therefore $a_i=K_i A_i(1+o(1))$ with $A_i=[w^{di}]H(w)^n$.
+
+For completeness, $\Delta_i=\log K_i-\log K_{i-1}$ is exactly
+
+\begin{equation*}
+\sum_{j=1}^d\left(\log\frac{n-i+1}{n-i+j/d}
+                        +\log\frac{i-1+j/d}{i}\right)
+=-\frac{d-1}{2i}+O(d/n+d/i^2).
+\end{equation*}
+
+This follows by expanding the logarithms and summing $1-j/d$. The $K_i$ term thus contributes $d/(2k)+o(1)$ to the signed centered first difference and $o(1)$ to each centered second difference. At real quota $x$ put $E(x)=n\log H(w_x)-dx\log w_x$. Then $E'(x)=-d\log w_x$ and $E''(x)=-d^2/(n V_x)\to-1/c$ uniformly on bounded translates of $k$. Its third derivative is $O(1/d)$ there, since $|dV/d\mu|\le \mathbb E|X-\mu|^3/V=O(1)$. The exact tilt formula says $A_i=e^{E(i)}\mathbb P(T=M)$, and the neighboring central probabilities have ratios tending to one by the local limit and $V_i\sim di/n$. Applying centered first and second differences gives the asserted formulas.

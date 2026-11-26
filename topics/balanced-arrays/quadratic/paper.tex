@@ -1,0 +1,60 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\allowdisplaybreaks[2]
+\setlength{\emergencystretch}{2em}
+\title{A quadratic row bound for balanced arrays}
+\author{ProgramComputer}
+\date{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study the polynomial counting labeled binary $n\times d$ arrays with row sums
+at most $r$ by their common column sum. The theorem gives one
+absolute $C$ such that for every $d\ge2$, every $1\le r\le d$, and $n\ge Cd^2$,
+all its zeros are simple and strictly negative. Together with the rank-dependent
+dimension bound, this covers all dimensions for large $n$ when $r\le c\log n$
+for a sufficiently small absolute $c>0$.
+\end{abstract}
+
+\section{Statement}
+The \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{balanced-array conjecture of Per Alexandersson}
+asks for real-rootedness throughout the parameter range. Let $a_k$ count the
+arrays in the abstract with each column sum equal to $k$, and set
+\[
+P_n^{(r,d)}(q)=\sum_{k=0}^{\lfloor nr/d\rfloor}a_kq^k.
+\]
+\begin{theorem}
+There is an absolute $C>0$ such that for every integer $d\ge2$, every
+$1\le r\le d$, and every integer $n\ge Cd^2$, the polynomial $P_n^{(r,d)}$
+has exactly $\lfloor nr/d\rfloor$ simple, strictly negative zeros.
+\end{theorem}
+\begin{corollary}
+There are absolute $c>0$ and $N$ such that for every $n\ge N$ and every $d\ge2$,
+the same conclusion holds whenever $1\le r\le\min(d,c\log n)$.
+\end{corollary}
+The constants $C$, $c$ and $N$ are existential. At $d=1$, the polynomial is $(1+q)^n$, with a zero of multiplicity $n$ for $n\ge1$. The original all-parameter conjecture remains open.
+
+For the original real-rootedness conjecture, any infinite sequence of
+distinct counterexamples has $n\to\infty$: when $n$ is bounded,
+\href{https://github.com/ProgramComputer/open-math-research/blob/04564a728c21eab6ce511b98a48ccaac754648ff/topics/balanced-arrays/orientation-normalization.md}{coefficient separation}
+covers $d\ge n$, leaving finitely many triples. Along such a sequence the
+cap is eventually greater than $c\log n$, and the dimension lies between
+constant multiples of $\sqrt n$ and $n/\log n$. The upper restriction uses
+the previous \href{https://github.com/ProgramComputer/open-math-research/tree/04564a728c21eab6ce511b98a48ccaac754648ff/topics/balanced-arrays/dense-regime}{high-dimensional bound}.
+
+\input{main-proof.tex}
+
+\appendix
+\clearpage
+\input{quadratic-lower-quota.tex}
+\input{very-tall-quadratic-interior-saddle.tex}
+\input{near-full-all-angular-signs.tex}
+\end{document}
