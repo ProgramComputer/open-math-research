@@ -48,6 +48,7 @@ jobs:
           Mathlib.Analysis.Complex.CauchyIntegral
           Mathlib.Analysis.Polynomial.Basic
           Mathlib.Analysis.SpecialFunctions.Complex.Analytic
+          Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
           Mathlib.Analysis.SpecialFunctions.Pow.Real
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
           Mathlib.Data.Fin.Tuple.Basic
@@ -71,3 +72,5 @@ jobs:
             tee "$RUNNER_TEMP/catalan-ray-axioms.txt"
           diff -u ../../topics/catalan-word-peaks/lean/ray-transfer-kernel.txt \
             "$RUNNER_TEMP/catalan-ray-axioms.txt"
+      - name: Audit the proposed improper logarithmic limits
+        run: lake env lean -j1 ../../topics/catalan-word-peaks/lean/ImproperRayAxioms.lean
