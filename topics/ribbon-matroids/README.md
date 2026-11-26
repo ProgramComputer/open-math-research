@@ -2,7 +2,7 @@
 
 For every connected ribbon lattice path matroid of rank $r$, the $Z$-polynomial equals the Narayana polynomial of order $r+1$. Simplifying the multi-fan gives a polygon with noncrossing diagonals. Deleting each diagonal preserves the polynomial, leaving a boundary cycle with the known Narayana formula.
 
-[Proof](proof.md) · [Manuscript](paper.pdf) · [TeX source](paper.tex) · [Independent flat computations](results/ribbons.jsonl)
+[Proof](proof.md) · [Manuscript](paper.pdf) · [TeX source](paper.tex) · [Blind mathematical review](review.md) · [Independent flat computations](results/ribbons.jsonl)
 
 **🟨 Partial · Lean 4.** Lean verifies the polygon reduction with the general matroid identities as hypotheses, together with concrete rank-three flat recurrences. [Formal scope](lean/README.md) · [Kernel record](verification.json)
 
