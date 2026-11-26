@@ -22,7 +22,7 @@ $`L_\theta=\partial_{\log w}\arg H(we^{i\theta})`$,
 using the continuous argument in the row-size sector. Then
 
 $$
-\frac{\theta V\thinspace{}\max\left\lbrace \mathrm{sinc}(\theta r),\
+\frac{\theta V\thinspace{}\max\left\lbrace \mathrm{sinc}(\theta r),\quad
                            1-C_d\theta^2/12\right\rbrace }
      {\min\left\lbrace 1,\quad 1-V\theta^2+C_d V\theta^4/24\right\rbrace }
 \le L_\theta
