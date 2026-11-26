@@ -8,3 +8,10 @@ Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)
 'BalancedEventual.natDegree_arrayPolynomial' depends on axioms: [propext, Classical.choice, Quot.sound]
 'BalancedEventual.arrayCount_one_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'BalancedEventual.arrayPolynomial_one_column' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.simpleNegativeRoots_of_real_root_list' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.map_realArrayPolynomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.balanced_simpleNegativeRoots_of_sign_mesh' depends on axioms: [propext, Classical.choice, Quot.sound]
+'BalancedEventual.balanced_simpleNegativeRoots_of_degree_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'BalancedEventual.eventualClaim_of_alternating_sign_mesh' depends on axioms: [propext, Classical.choice, Quot.sound]
