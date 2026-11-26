@@ -1,0 +1,14 @@
+'CatalanStrictPeaks.CutGeometry.branch_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.branch_at_scale' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.analyticGenerating_analyticAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.analyticGenerating_eq_quotient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.analyticGenerating_hasFPowerSeriesAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'CatalanStrictPeaks.CutGeometry.analyticGenerating_cauchyCoeff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

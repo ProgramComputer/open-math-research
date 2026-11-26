@@ -38,9 +38,10 @@ the reusable result to the exact Catalan polynomial in two stages.
   For $n\ge150$ it takes the checkpoint package and the strict signs at
   every old root.
 
-**Partial Lean verification.** Lean verifies the entire finite prefix. The
-written proof covers analytic convergence, branch continuation, the Cauchy
-deformation to the cuts, and the complete integral and endpoint comparisons.
+**Partial Lean verification.** Lean verifies the entire finite prefix and
+identifies the analytic branch and Cauchy coefficients. The written proof
+covers the deformation to the radial cuts and the full integral and endpoint
+comparisons.
 
 ## Exact recurrence on heights and preceding ascents
 
@@ -79,8 +80,7 @@ polynomials. [Published generating-function identity](https://doi.org/10.26493/2
 The [discriminant module](CatalanStrictPeaksDiscriminant.lean) checks that
 the scaled series has coefficients $c^nC_n(1-c^{-2})$. It proves its quadratic
 equation and constructs a formal square root, with constant term one, of
-$(1+x^2)^2-4cx$ for $c\ne0$. Convergence and analytic branch continuation remain
-in the analytic proof.
+$(1+x^2)^2-4cx$ for $c\ne0$.
 [Generating-function kernel output](generating-function-kernel.txt)
 
 ## Cut geometry and explicit majorants
@@ -103,9 +103,24 @@ exponential comparisons in (6) and in the covariance tail. It uses exact
 arithmetic at the first four lengths and an inequality for each step of four.
 
 These statements check the pointwise estimates and numerical inequalities.
-The identification of the continued branches, the Cauchy cuts, the beta
-moment identities, and the derivation of all checkpoint and old-root signs
-remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
+The Cauchy deformation to the cuts, the beta moment identities, and the
+derivation of all checkpoint and old-root signs remain in the analytic proof. [Cut kernel output](cut-kernel.txt)
+
+## Analytic branch and Cauchy coefficient
+
+The [analytic branch module](CatalanStrictPeaksAnalyticBranch.lean) takes the
+product of the principal square roots associated with the four branch points.
+It proves that the product squares to the quartic and has value one at zero.
+The rationalized generating function is analytic on the domain with the four
+radial cuts removed. The theorem `branch_at_scale` verifies the square-root
+value $1-c^2$ at the removable pole $x=c$.
+
+The theorem `analyticGenerating_hasFPowerSeriesAt` identifies the analytic
+Taylor coefficients with $c^nC_n(1-c^{-2})$ by checking the same quadratic
+equation and uniqueness in formal power series.
+The theorem `analyticGenerating_cauchyCoeff` gives the coefficient as a
+Cauchy integral on any circle centered at zero with positive radius less than
+the distance to the nearest branch point. [Analytic branch kernel output](analytic-branch-kernel.txt)
 
 ## Exact isolating intervals through length 150
 
@@ -153,6 +168,8 @@ lake build CatalanStrictPeaksFirstReturn CatalanStrictPeaksGeneratingFunction Ca
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/GeneratingFunctionAxioms.lean
 lake build CatalanStrictPeaksCutGeometry CatalanStrictPeaksCutParameter CatalanStrictPeaksCutBounds CatalanStrictPeaksMomentArithmetic
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/CutAxioms.lean
+lake build CatalanStrictPeaksAnalyticBranch
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/AnalyticBranchAxioms.lean
 lake build CatalanStrictPeaksPrefix
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/PrefixAxioms.lean
 ~~~
