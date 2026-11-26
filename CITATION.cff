@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: >-
+  Use this citation for the repository as a whole. For an individual theorem,
+  see its topic README for the written proof and any archived proof sources.
+title: Open Problems in Mathematics
+authors:
+  - name: ProgramComputer
+repository-code: https://github.com/ProgramComputer/open-math-research
+license: ISC
+preferred-citation:
+  type: generic
+  title: Open Problems in Mathematics
+  authors:
+    - name: ProgramComputer
+  year: 2026
+  url: https://github.com/ProgramComputer/open-math-research
