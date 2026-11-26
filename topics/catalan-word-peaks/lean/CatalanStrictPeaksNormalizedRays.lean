@@ -64,7 +64,7 @@ private theorem cutFactor_conj {z x : ℂ} (h : (1 - x / z).arg ≠ Real.pi) :
     cutFactor (conj z) (conj x) = conj (cutFactor z x) := by
   simp only [cutFactor, principalRoot]
   rw [show 1 - conj x / conj z = conj (1 - x / z) by simp, Complex.conj_cpow _ _ h]
-  rw [map_ofNat]
+  rw [map_inv₀, map_ofNat]
 
 private theorem rayPrefactor_rev {d t : ℝ} (hd : 0 < d) (hD : d < 1)
     (j : Fin 4) (ht : 0 < t) :
@@ -138,8 +138,12 @@ private theorem nearCoefficientTerm_normalization {d : ℝ} {n : ℕ} (hd : 0 < 
       (((2 / Real.pi) * BetaMoments.mass n * A : ℝ) : ℂ) *
         (-(nearPoint d)⁻¹ ^ n * rayPrefactor d 0 (nearPoint d) / (A : ℂ) * nearMean d n)
     push_cast
-    field_simp [Complex.ofReal_ne_zero.mpr Real.pi_ne_zero, Complex.ofReal_ne_zero.mpr hA.ne']
-    ring
+    calc
+      _ = ((2 : ℂ) * ((-((nearPoint d)⁻¹ ^ n) / (Real.pi : ℂ)) *
+          (rayPrefactor d 0 (nearPoint d) * (BetaMoments.mass n : ℂ) * nearMean d n))) *
+          ((A : ℂ) * (A : ℂ)⁻¹) := by
+        rw [mul_inv_cancel₀ (Complex.ofReal_ne_zero.mpr hA.ne'), mul_one]
+      _ = _ := by ring
   have hre := congrArg Complex.re hreal
   have hre2 : (2 : ℂ).re = 2 := by norm_num
   have him2 : (2 : ℂ).im = 0 := by norm_num
