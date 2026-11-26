@@ -4,6 +4,8 @@ With one million rows, 250,000 columns and row cap 127,000, **506,565 of the 508
 
 ## Finite sign test
 
+A [proposed proof for all 508,000 roots of this instance](complete-instance/README.md) bridges the remaining interval using two further estimates. Independent review of the extension is pending.
+
 At equal column sums $`K`$ in $`n`$ rows, let $`e(n,K)`$ be the probability that a row is saturated, conditional on a zero in a specified column. The marked row has a size distribution that can be bounded by ordinary binomial distributions truncated at the cap. Removing the marked row gives a recursion, so all the certificate calculations use one-dimensional probabilities.
 
 Suppose $`n\ge10^6`$, $`n/4\le d\le n/2`$, $`1/8\le k/n\le7/8`$, and the required margins are feasible through $`k+2`$. If $`l\le e(n,k-2)`$ and $`e(n,k+2)\le h<1`$ with $`4d(h-l)\le1-h`$ and $`l\ge0`$, then at $`v_k=\sqrt{a_{k-1}/a_{k+1}}`$ the sign of $`P(-v_k)`$ is $`(-1)^k`$. The open and closed disks both contain exactly $`k`$ roots. The manuscript also gives a sharper test using the seven central coefficient bounds.
