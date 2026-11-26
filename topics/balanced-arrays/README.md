@@ -52,3 +52,5 @@ python -I -O topics/balanced-arrays/verify_first_root.py
 ~~~
 
 For four columns at row cap two, a Hermite-polynomial expansion reduces the problem to a stronger integer sequence. Two constructions and exact root checks agree in all 121 rows through $n=120$. An all-row proof for four columns remains open. [Reduction and replay](four-column-mehler.md) · [Exact scope of the scalar determinant method](scalar-determinant-boundary.md)
+
+At row cap two, every order-two minor comparing two row counts and two componentwise ordered quota vectors is coefficientwise nonnegative in the pair-type weights. This makes the entries of the consecutive Bézout matrices nonnegative. Their higher principal minors are the remaining obstacle in this approach to interlacing. **⬜ None.** [Statement and proof](rank-two-row-minors.md) · [Independent review](review-rank-two-row-minors.md)
