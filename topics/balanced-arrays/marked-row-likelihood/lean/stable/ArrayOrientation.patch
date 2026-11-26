@@ -1,0 +1,7 @@
+--- ArrayOrientation.lean
++++ ArrayOrientation.lean
+@@ -58,2 +58,2 @@
+-  · simpa only [if_pos h] using P.red_at_fixed o h
+-  · simpa only [if_neg h] using P.red_at_mate o h
++  · simpa only [ite_eq_left h, decode] using P.red_at_fixed o h
++  · simpa only [ite_eq_right h, decode] using P.red_at_mate o h
