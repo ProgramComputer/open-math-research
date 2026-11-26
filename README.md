@@ -6,8 +6,8 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟨 Partial · Lean 4 |
+| [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | All sizes at $k=3$ and all thresholds simultaneously for sufficiently large rows | ⬜ None |
 | [Zeros of ordered partitions counted by large blocks](topics/ordered-large-blocks/README.md) | Strict interlacing at every fixed threshold for sufficiently large rows, and at every size for thresholds two through four | 🟨 Partial · Lean 4 |
-| [Excedance zeros for permutations with long cycles](topics/long-cycle-excedances/README.md) | Strict interlacing at every size for $k=3$ and uniformly for $n\ge Bk^2$ | ⬜ None |
 | [Eventual real-rootedness of the Eulerian matrix square](topics/eulerian-matrix-square/README.md) | Partial theorem covering every sufficiently large row | 🟨 Partial · Lean 4 |
 | [Real zeros of balanced binary arrays](topics/balanced-arrays/README.md) | All row counts for $U(2,3)$, with partial theorems at general rank and dimension | 🟨 Partial · Lean 4 |
 | [Ordinary descents of permutations with long cycles](topics/long-cycle-descents/README.md) | Partial theorem, including every single cycle | ⬜ None |
@@ -19,7 +19,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 - For [balanced arrays](topics/balanced-arrays/README.md), the conjecture holds in [every degree through fourteen](topics/balanced-arrays/low-degree.md) and for every rank and dimension through 24 rows. For arbitrary row counts, $d\ge(n+1)\log(2)/2$ suffices.
 - Every sufficiently large [Eulerian-square row](topics/eulerian-matrix-square/README.md) has only simple real roots. At every row from $n=3$, the two extreme roots at each end strictly alternate with the next row. The all-root cutoff is unknown.
-- For [long-cycle excedances](topics/long-cycle-excedances/README.md), the remaining cases have $k\ge4$ and $n<Bk^2$. The general proof gives no numerical value for $B$.
+- For [long-cycle excedances](topics/long-cycle-excedances/README.md), a single unknown cutoff remains. The conjecture now reduces to finitely many pairs with $k\ge4$.
 - For [long-cycle descents](topics/long-cycle-descents/README.md), the all-size question remains open at fixed minimum cycle length $k\ge3$.
 
 ## Citation
