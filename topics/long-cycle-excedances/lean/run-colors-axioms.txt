@@ -1,0 +1,20 @@
+'OpenMathResearch.LongCycleExcedances.RunColors.reduced_coeff_envelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.RunColors.original_coeff_envelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.RunColors.card_rows_le_pow' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.RunColors.nextTail_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.RunColors.perm_eq_of_same_runs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.RunColors.runEnd_route' depends on axioms: [propext, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.RunColors.downRoute_of_runEnd_eq' depends on axioms: [propext, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.RunColors.ascent_image_is_max' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
