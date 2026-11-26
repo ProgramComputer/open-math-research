@@ -1,0 +1,9 @@
+import CatalanStrictPeaksRecurrence
+
+#print axioms CatalanStrictPeaks.Recurrence.append_valid
+#print axioms CatalanStrictPeaks.Recurrence.peaks_card_append
+#print axioms CatalanStrictPeaks.Recurrence.byState_step
+#print axioms CatalanStrictPeaks.Recurrence.rows_get_eq_byState
+#print axioms CatalanStrictPeaks.Recurrence.enumerate_eq_sum_words
+#print axioms CatalanStrictPeaks.Recurrence.enumerate_X_eq_C
+#print axioms CatalanStrictPeaks.Recurrence.coefficients_get_eq_C

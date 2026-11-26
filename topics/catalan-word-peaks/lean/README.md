@@ -43,6 +43,30 @@ ray and endpoint comparisons yielding the checkpoint and old-root sign
 hypotheses, and finite prefix Sturm certificates remain outside this kernel
 check.
 
+## Exact recurrence on heights and preceding ascents
+
+The [recurrence module](CatalanStrictPeaksRecurrence.lean) proves that a
+finite-state transfer computes the strict-peak polynomial for every word length.
+A state has height $h$ and a Boolean recording the previous ascent. Appending
+$x\leq h+1$ records the ascent $h<x$ and adds a peak exactly when the old
+flag records an ascent and $x<h$. The proof bijects the extensions with the
+new Catalan words and verifies the update of the peak count. The theorem
+`enumerate_X_eq_C` identifies the transfer polynomial with the word
+enumerator.
+
+The executable function `coefficients n` returns the coefficient list in
+increasing power order. It evaluates the recurrence once at
+$q=(n+1)^n+1$, which exceeds the count in any coefficient. The theorem
+`coefficients_get_eq_C` proves that integer digit extraction in this base
+recovers each coefficient of the original polynomial. Each materialized row
+contains two counts per height, and each step examines a quadratic number of
+state pairs. The algorithm avoids enumerating the words.
+
+The recurrence and coefficient recovery are kernel-checked at every length.
+The generating-function identity, analytic sign estimates and finite Sturm
+certificates remain separate from this formalization.
+[Recurrence kernel output](recurrence-kernel.txt)
+
 [Written proof](../proof.md)
 
 ## Build
@@ -53,6 +77,8 @@ Lean and mathlib.
 ~~~sh
 lake build OpenMathResearch.OrientedNegativeInterlace CatalanStrictPeaks CatalanStrictPeaksInterlacing
 lake env lean -j1 ../../topics/catalan-word-peaks/lean/Axioms.lean
+lake build CatalanStrictPeaksRecurrence
+lake env lean -j1 ../../topics/catalan-word-peaks/lean/RecurrenceAxioms.lean
 ~~~
 
 [Kernel output](kernel.txt)

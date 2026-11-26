@@ -1,0 +1,7 @@
+'CatalanStrictPeaks.Recurrence.append_valid' depends on axioms: [propext, Quot.sound]
+'CatalanStrictPeaks.Recurrence.peaks_card_append' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Recurrence.byState_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Recurrence.rows_get_eq_byState' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Recurrence.enumerate_eq_sum_words' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Recurrence.enumerate_X_eq_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.Recurrence.coefficients_get_eq_C' depends on axioms: [propext, Classical.choice, Quot.sound]
