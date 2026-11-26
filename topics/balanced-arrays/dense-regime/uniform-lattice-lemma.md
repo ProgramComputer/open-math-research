@@ -1,0 +1,40 @@
+# A uniform lattice local limit estimate
+
+**Lemma.** Let $X$ have a log-concave probability mass function with interval support in $\mathbb Z$, mean $\mu$, and finite variance $\sigma^2=\mathrm{Var}(X)\ge1$. If $X_1,\ldots,X_n$ are independent copies and $n\mu\in\mathbb Z$, then
+
+$$
+\mathbb P(X_1+\cdots+X_n=n\mu)
+=\frac{1+O(n^{-1/2})}{\sqrt{2\pi n} \sigma},
+$$
+
+with a numerical implied constant and no upper bound on $\sigma$. If the law belongs to an exponential tilt family, then $|d\sigma/d\mu|\le C$ wherever $\sigma\ge1$ and the tilt is interior.
+
+**Modal mass and moments.** Write $p_j=\mathbb P(X=j)$, choose a mode $m$ and put $b=p_m$. Chebyshev's inequality gives $b\ge c/\sigma$ by placing at least $3/4$ of the mass in an interval containing at most $4\sigma+2$ integers. On either side of the mode let $J$ be the first distance where the mass is at most $b/2$, extending by zero off the support. Since the total mass is at most one, $J\le 2/b+1\le3/b$. Concavity of the log mass gives $p_{m\pm j}\le b 2^{-j/J}$ for $j\ge J$ (immediate if the support ends at $J$), and the modal bound gives $p_{m\pm j}\le2b 2^{-j/J}$ for $0\le j<J$. Thus $p_{m\pm j}\le2b 2^{-bj/3}$. Summing $j^2$ against this bound gives $\sigma^2\le C/b^2$ and hence $b\le C/\sigma$. The same sum with $j^3$ gives $\mathbb E|X-m|^3\le C\sigma^3$, and centering preserves this bound by Jensen's inequality and the triangle inequality. In an interior exponential tilt with parameter $\eta$, the cumulant identities
+
+$$
+\frac{d\mu}{d\eta}=\sigma^2,\qquad
+\frac{d\sigma^2}{d\eta}=\mathbb E(X-\mu)^3
+$$
+
+give $|d\sigma/d\mu|\le C$.
+
+**Fourier bounds.** Let $\phi(t)=\mathbb E e^{it(X-\mu)}$ for $|t|\le\pi$. For $\sigma$ above a fixed numerical threshold, consider the sites in $[\mu-2\sigma,\mu+2\sigma]$ of mass at least $1/(24\sigma)$. At most $6\sigma$ sites are in this interval, so the retained sites have mass at least $1/2$. Since $b\le C/\sigma$, there are at least $c\sigma$ retained sites, and they are contiguous by log-concavity. They give a block of length $M\asymp\sigma$, with $M\ge16$ and mass at least $c/M$ at each site. Restricting
+
+$$
+1-|\phi(t)|^2=\sum_{i,j}p_ip_j\bigl(1-\cos((i-j)t)\bigr)
+$$
+
+to this block bounds it below by a numerical multiple of $1-|U_M(t)|^2$, where $U_M(t)=M^{-1}\sum_{j=0}^{M-1}e^{ijt}$. If $2\pi/M\le|t|\le\pi$, the sine quotient gives $|U_M(t)|\le\pi/(M|t|)\le1/2$. If $|t|\le2\pi/M$, retain the pairs whose distances lie between $M/8$ and $M/4$. There are at least $cM^2$ such pairs, and $1-\cos((i-j)t)\ge cM^2t^2$ on them. This gives
+
+$$
+|\phi(t)|\le \exp\bigl(-c\min(\sigma^2t^2,1)\bigr).
+$$
+
+For $1\le\sigma$ below the fixed threshold, the modal lower bound makes $b$ bounded away from zero and the crossing distances $J$ bounded. On either side of the mode, up to distance $J$ the masses are at most that of the immediate neighbor on that side. Beyond $J$, the same neighbor mass bounds the tail after multiplication by $2^{-(j-J)/J}$. Thus $\mathbb E(X-m)^2\le C(p_{m-1}+p_{m+1})$. Since this expectation is at least $\sigma^2\ge1$, one neighboring mass is bounded below. Pairing it with the modal mass in the cosine sum proves the same Fourier bound for bounded $\sigma$. Finally, padded unimodality gives total variation $2b$, so summation by parts yields
+
+$$
+|\phi(t)|\le \frac{2b}{|1-e^{it}|}\le\frac{C}{\sigma|t|}
+\qquad(0<|t|\le\pi).
+$$
+
+**Inversion.** Fix a numerical $0<a<1$. For $|t|\le a/\sigma$, Taylor's formula and the third-moment bound give $|\phi(t)-e^{-\sigma^2t^2/2}|\le C\sigma^3|t|^3$. The Fourier bound above gives Gaussian decay on this interval. Telescoping the powers of order $n$ therefore bounds their difference by $C n\sigma^3|t|^3 e^{-c(n-1)\sigma^2t^2}$, whose integral is $O((n\sigma)^{-1})$ for $n\ge2$. The Gaussian integral outside this interval is exponentially small relative to $(\sqrt n \sigma)^{-1}$. On $a/\sigma\le |t|\le A/\sigma$, with $A$ a fixed large constant, the original Fourier bound gives an integral $O(e^{-cn}/\sigma)$. On the rest, integrate $(C/(\sigma |t|))^n$ from $A/\sigma$ to infinity, choosing $A>2C$. This gives at most $2A(C/A)^n/(\sigma(n-1))$. The intervals are intersected with $[-\pi,\pi]$ and empty parts are omitted. Since $n\mu$ is integral, Fourier inversion gives the central mass as $(2\pi)^{-1}\int_{-\pi}^{\pi}\phi(t)^n dt$. Comparison with the full Gaussian integral proves the lemma.

@@ -1,0 +1,94 @@
+\section{Dimensions down to a logarithmic factor}\label{sec:logarithmic}
+
+\begin{theorem}\label{thm:logarithmic}
+There are absolute constants $C>0$ and $N\ge3$ such that for every $n\ge N$, every $d\ge Cn/\log n$ and every cap $1\le r\le d$, the balanced-array polynomial has exactly $\lfloor nr/d\rfloor$ distinct negative roots. Both constants are existential. In conjunction with the fixed-dimension theorem, any infinite sequence of distinct counterexamples to the original real-rootedness conjecture must have $d\to\infty$ and $d=O(n/\log n)$.
+\end{theorem}
+
+\subsection{A sequence of hypothetical exceptions}
+
+Write $D=\lfloor nr/d\rfloor$, $P(q)=\sum_{k=0}^D a_kq^k$, and $\delta=d/n$. If no such constants existed, for every integer $j\ge3$ we could choose an exception with $n\ge j$ and $d\log n/n\ge j$. Theorem~\ref{thm:main} allows us to assume $\delta\to0$ along these exceptions. We have $\delta\log n\to\infty$. All estimates below concern this sequence. In particular $d\le n$ eventually.
+
+Choose a failed test point $t_k=\sqrt{a_{k-1}/a_{k+1}}$ in each exception, so $1\le k<D$ and $(-1)^kP(-t_k)\le0$. The test-point argument and \eqref{eq:gamma} give
+
+\[
+\log4\ge\log\Gamma_k,\qquad
+\log\Gamma_i\ge d\log\left(1+\frac{n+1}{i(n-i)}\right),\quad
+\Gamma_i=\frac{a_i^2}{a_{i-1}a_{i+1}}.
+\]
+
+Set $J=\lceil(\log n)^2\rceil$. At every real $u$ within $J+2$ of $k$, the density $x=u/n$ satisfies $x(1-x)\ge c\delta$ for an absolute $c>0$. Indeed $\log(1+t)\ge t/(1+t)$ first gives this at $k$ with a loss $O(1/n)$, and moving $u$ changes $x(1-x)$ by $O(J/n)$. Globally, at every internal quota, $\log\Gamma_i\ge 2d\log(1+2/n)\ge 2\delta$ for large $n$.
+
+\subsection{Local coefficient estimates}
+
+Put $H(z)=\sum_{s=0}^r\binom ds z^s$. For a real quota $0<u<nr/d$, tilt the row distribution on $0,\ldots,r$ by giving $s$ probability proportional to $\binom ds z^s$, with mean $\mu=du/n$. Write $V_u=\sigma_u^2$ for its variance. The limits at $u=0,nr/d$ are deterministic. The binomial convex comparison gives $V_u\le dx(1-x)$. Put
+
+\[
+E(u)=n\log H(z)-du\log z,\qquad
+E''(u)=-\frac{n\delta^2}{V_u}.
+\]
+
+Differentiating the mean in $\log z$ gives $V_u$, proving the derivative formula. The function $E$ extends continuously to both endpoints: as $z$ tends to zero or infinity the tilted law converges to an endpoint mass, and its entropy representation $E/n=-\sum_s p_s\log p_s+\sum_s p_s\log\binom ds$ gives the limits. For an integer $i$ in the feasible window let $p(i)$ be the probability that $n$ independent rows at this tilt have total $di$. Combining Appendices~\ref{app:quantitative-margins} and \ref{app:sparse-enumeration} gives a constant $\beta>0$ for which, uniformly throughout the window,
+
+\[
+\log a_i=\log K_i+E(i)+\log p(i)-\tfrac12+B_i+O(n^{-\beta}),\qquad
+K_i=\frac{\binom ni^d}{\binom{nd}{di}},\qquad
+B_i=\frac{V_i}{2d(i/n)(1-i/n)}.
+\]
+
+Here $0\le B_i\le1/2$ and $-(\log(nd+1))\le\log p(i)\le0$, even at exact saturation. The lower bound comes from log-concavity and the entropy bound at the integer mean as proved in the margin comparison.
+
+Define $\mathcal D f(i)=2f(i)-f(i-1)-f(i+1)$. Throughout the window with adjacent feasible indices,
+
+\[
+|\mathcal D\log K_i|\le C_1d\left(i^{-2}+(n-i)^{-2}\right)=O(1/d).
+\]
+
+Indeed $\mathcal D\log\binom ni^d=d\log(1+1/i)+d\log(1+1/(n-i))$. For the denominator use the product over $1\le h\le d$ of $(1+d/(di-d+h))(1+d/(d(n-i)-d+h))$. Each logarithm in its first factor differs from $\log(1+1/i)$ by $O(i^{-2})$ and the other has the corresponding bound at $n-i$. Both $i$ and $n-i$ are at least a constant times $d$.
+
+\subsection{The two variance ranges}
+
+The uniform lattice estimate in Appendix~\ref{app:lattice-llt} gives $|d\sigma/d\mu|\le L$ wherever $\sigma\ge1$. If $\sigma_k<n^{2/5}$, then $\sigma_u\le\max(1,\sigma_k)+L\delta$ at feasible $|u-k|\le1$. Integrate the Lipschitz bound on intervals where $\sigma>1$, starting at $k$ or the last crossing of level one. Thus $-E''\ge c_1 n^{1/5}\delta^2$ on $[k-1/2,k+1/2]$. Concavity and the triangular integral for $\mathcal D E(k)$ imply the same lower bound up to an absolute factor. If $k+1=nr/d$, the bound follows by continuity or by the concave secant inequality on the remaining half-interval. The four other terms in the log coefficient formula contribute in total at worst $-O(\log n)$. Since $\delta\log n\to\infty$, this forces $\log\Gamma_k\to\infty$, contrary to failure.
+
+Suppose then $\sigma_k\ge n^{2/5}$. All real quotas within $J+2$ of $k$ are in the open feasible interval, and $\sigma_u=\sigma_k+O(\delta(J+2))$ there. Otherwise the path to the boundary, where variance is zero, or to a point with $\sigma=\sigma_k/2$, would have to cross level $\sigma_k/2$ after changing the mean by at most $\delta(J+2)$. The Lipschitz bound on this initial path rules that out.
+
+Write $g=n\delta^2/\sigma_k^2$. Uniformly on this window the entropy curvature satisfies
+
+\[
+|E''(u)+g|=O\left(\frac{n\delta^3(J+2)}{\sigma_k^3}\right)=O(n^{-1/5}(J+2)).
+\]
+
+Also $\log p(i)=-\tfrac12\log(2\pi n)-\log\sigma_i+O(n^{-1/2})$ by the lattice estimate. Its variation is $O(n^{-1/2}+\delta(J+2)/\sigma_k)$. The variance-correction term $B_i$ has variation $O(n^{-1/2}(J+2))$ by the quantitative margin comparison. Equivalently, differentiate $V=\sigma^2$ where $\sigma\ge1$, use $|dV/d\mu|\le 2L\sigma$ and $\sigma^2\le dx(1-x)$, and use $x(1-x)\ge c\delta$ in the denominator. Integrating $-E''$ against the triangular weight of mass one now yields a fixed $\kappa>0$ with
+
+\[
+\log\Gamma_{k+j}=g+O(n^{-\kappa})\qquad (|j|\le J).
+\]
+
+The upper variance bound gives $g\ge4\delta$. The failed-node bound at $j=0$ gives $g\le\log4+O(n^{-\kappa})<2$.
+
+\subsection{Sign of the alternating sum}
+
+At either offset $\pm j$ with $j\ge1$, the magnitude relative to the
+central term at $-t_k$ equals
+\[
+\Gamma_k^{-j/2}\prod_{h=1}^{j-1}\Gamma_{k\pm h}^{-(j-h)}
+\]
+when the term exists and zero otherwise. For $|j|\le J$ this magnitude
+is $\exp(-gj^2/2+O(j^2 n^{-\kappa}))$. The global curvature bound gives an upper bound $e^{-\delta j^2}$ for every magnitude including the tails. The Gaussian sum with curvature $g$ has the same tail bound. Since $\delta\log n\to\infty$, the total error in replacing the normalized signed sum by its Gaussian counterpart is
+
+\[
+O(J^3n^{-\kappa})+O\left(\delta^{-1/2}e^{-\delta J^2/2}\right)=O(n^{-\kappa'})
+\]
+
+for some $\kappa'>0$. Poisson summation gives the strictly positive lower bound
+
+\[
+\sum_{j\in\mathbb Z}(-1)^je^{-gj^2/2}
+=\sqrt{\frac{2\pi}{g}}\sum_{h\in\mathbb Z}e^{-2\pi^2(h+1/2)^2/g}
+\ge\sqrt{\pi}\exp\left(-\frac{\pi^2}{8\delta}\right).
+\]
+
+As $1/\delta=o(\log n)$, this lower bound eventually exceeds any fixed negative power of $n$. The normalized signed sum is therefore positive, contrary to the choice of $k$. This proves existence of $C,N$.
+
+To conclude the assertion about nonreal zeros, fix a bound on $n$. The global separation estimate covers all sufficiently large $d$ uniformly for those row counts, so an infinite sequence of distinct counterexamples has $n\to\infty$. For bounded $d$ there are only finitely many caps. The fixed-rank eventual theorem gives real-rootedness eventually at each proper cap $r<d$.
+
+At full cap the coefficients are $\binom nk^d$ by independence of the columns. For completeness, if $F(x)=\sum_{k=0}^n f_kx^k$ has positive coefficients and only negative zeros, then $\sum_k\binom nk f_k x^k$ also has only negative zeros. Fix $\mathrm{Im}(x)>0$. The zeros in $z$ of $(1+z)^n z^n F(x/z)$ are $-1$ and points strictly below the real axis. Their convex hull omits zero. By the Gauss--Lucas theorem the derivative of order $n$ in $z$ is nonzero at zero. Dividing its value by $n!$ gives exactly the asserted coefficient transform. The resulting real polynomial thus has only real roots, all negative by positivity. Iteration from $(1+x)^n$ proves full-cap real-rootedness for every $d$, including $d=1$ where the zero can be repeated. The case $n=0$ is constant. This proves the restrictions on infinite sequences of counterexamples to the original conjecture. Its full resolution and the sizes of the constants remain open.
