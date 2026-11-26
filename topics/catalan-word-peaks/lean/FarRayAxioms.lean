@@ -9,3 +9,4 @@ import CatalanStrictPeaksFarRay
 #print axioms CatalanStrictPeaks.CutGeometry.farRayError_abs_le
 #print axioms CatalanStrictPeaks.CutGeometry.farRayError_smallAngle
 #print axioms CatalanStrictPeaks.CutGeometry.farRayError_largeAngle
+#print axioms CatalanStrictPeaks.CutGeometry.farRayError_interior

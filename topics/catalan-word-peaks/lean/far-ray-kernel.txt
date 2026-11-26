@@ -7,3 +7,4 @@
 'CatalanStrictPeaks.CutGeometry.farRayError_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
 'CatalanStrictPeaks.CutGeometry.farRayError_smallAngle' depends on axioms: [propext, Classical.choice, Quot.sound]
 'CatalanStrictPeaks.CutGeometry.farRayError_largeAngle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'CatalanStrictPeaks.CutGeometry.farRayError_interior' depends on axioms: [propext, Classical.choice, Quot.sound]
