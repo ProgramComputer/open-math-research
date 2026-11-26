@@ -1,5 +1,12 @@
 {
   "checked_on": "2026-11-25",
+  "source_archive": {
+    "doi": "10.5281/zenodo.24552196",
+    "url": "https://doi.org/10.5281/zenodo.24552196",
+    "verified_public_commit": "b512c108e692b5366e3c3e298ace225c2900e2b0",
+    "file": "open-math-prism-splitting-b512c108.zip",
+    "sha256": "aeb6977e287cf6c7258dff6296eb4ad03fa7926366092c03557c82706c0ba0a5"
+  },
   "toolchain": [
     "The Rocq Prover, version 9.3.0",
     "compiled with OCaml 5.5.2"
