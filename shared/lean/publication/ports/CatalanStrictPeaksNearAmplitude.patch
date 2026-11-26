@@ -18,3 +18,30 @@
    rw [scale_mul_radius_factor hd]
    calc
      _ ≤ (2 * (1 + 2 * d)) * radius d := mul_le_mul_of_nonneg_right hnum (radius_pos hd.le).le
+@@ -409,7 +409,7 @@
+   calc
+     _ ≤ ‖nearAmplitude d s‖ + 1 := by simpa using norm_sub_le (nearAmplitude d s) 1
+     _ ≤ 2 * (n : ℝ) * (1 + (n : ℝ) * s / 8) + 1 :=
+-      add_le_add_right (nearAmplitude_global hd hD hn hS hL hs) _
++      add_le_add (nearAmplitude_global hd hD hn hS hL hs) le_rfl
+     _ ≤ _ := by nlinarith [mul_nonneg (Nat.cast_nonneg (α := ℝ) n) hs]
+ 
+ /-- The nonzero endpoint by which the near prefactor is normalized. -/
+@@ -452,6 +452,7 @@
+   have hf : IntegrableOn (fun s => (rayPrefactor d 0 (nearPoint d))⁻¹ * rayIntegrand d n 0 s)
+       (Ioi 0) := h
+   refine hf.congr_fun (fun s _ => ?_) measurableSet_Ioi
++  change (rayPrefactor d 0 (nearPoint d))⁻¹ * rayIntegrand d n 0 s = weightedNear d n s
+   rw [rayIntegrand_near_eq hd hD, ← mul_assoc, inv_mul_cancel₀ (rayPrefactor_near_ne_zero hd hD),
+     one_mul]
+ 
+@@ -620,8 +621,7 @@
+       (∫ s in Ioi (0 : ℝ), weightedNear d n s) / M =
+     (∫ s in Ioi (0 : ℝ), weightedNear d n s * (((1 + s)⁻¹ - ηR : ℝ) : ℂ)) / M / η
+   rw [ht, integral_sub h₁ (h₀.const_mul η), integral_const_mul]
+-  field_simp [hη, hM]
+-  ring
++  field_simp [hη, hM] <;> ring
+ 
+ private theorem rayWeight_succ_complex (n : ℕ) (s : ℝ) :
+     (BetaMoments.rayWeight (n + 1) s : ℂ) =

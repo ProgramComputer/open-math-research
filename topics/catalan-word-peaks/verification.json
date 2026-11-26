@@ -96,6 +96,22 @@
       "command": "mapfile -t modules < upstream-roots.txt; targets=(); for module in \"${modules[@]}\"; do targets+=(\"+$module:olean\"); done; MATHLIB_NO_CACHE_ON_UPDATE=1 lake build \"${targets[@]}\"",
       "module_list": "upstream-roots.txt in the stable-upstream-source-rebuild artifact",
       "reproducer": ".github/workflows/publication-dependencies.yml"
-    }
+    },
+    "port_history": [
+      {
+        "job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45764340774/job/139721518479",
+        "passed_components": [
+          "CatalanStrictPeaksIntervalData",
+          "CatalanStrictPeaksPrefix",
+          "CatalanStrictPeaksRayTransfer"
+        ],
+        "finite_scope": "Every row of lengths 0 through 150 and every successive pair through 149 to 150. A separate source comparison recovered all 151 coefficient rows, interval rows and packed values in their published order.",
+        "blocking_modules": [
+          "CatalanStrictPeaksPoleSeriesBounds",
+          "CatalanStrictPeaksNearAmplitude"
+        ],
+        "diagnosis": "Porting failure in the stable mathlib addition inequality orientation, a beta reduction before rewriting and a tactic that now closes the goal. This run stopped before the final theorem and external replay."
+      }
+    ]
   }
 }

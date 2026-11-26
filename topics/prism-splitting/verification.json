@@ -191,7 +191,6 @@
       "AuditExportType.prismSix",
       "AuditExportType.prismFamily",
       "AuditReference.prismSourcePublished",
-      "AuditReference.prismSourceAdmissible",
       "AuditReference.prismSourceAdmissible"
     ],
     "allowed_axioms": [
@@ -200,39 +199,82 @@
       "propext"
     ],
     "machine_verification": {
-      "status": "pending",
-      "workflow_checkout_commit": null,
-      "hosted_job": null,
-      "hosted_artifact": null,
-      "lean_version_output": null,
-      "lake_version_output": null,
+      "status": "passed",
+      "workflow_checkout_commit": "704c14e73d4aea517891b0be68d328df8c2c551d",
+      "hosted_job": "https://github.com/ProgramComputer/open-math-research/actions/runs/45764141229/job/139720867335",
+      "hosted_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45764141229/artifacts/15091048039",
+      "lean_version_output": "Lean (version 4.36.0, x86_64-unknown-linux-gnu, commit 611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9, Release)",
+      "lake_version_output": "Lake version 5.0.0-src+611c117 (Lean version 4.36.0)",
       "build": {
-        "status": "pending",
-        "staged_sources_report_sha256": null
+        "status": "passed",
+        "lean_binary_sha256": "db7f559d05795e7af52e42bc966c90240a39dcb9712161c54c97afa546e20c00",
+        "staged_sources_report_sha256": "0169d703d7b391201d5f9e0cf1cc60bc1d1198313b37e0a4ed904adf5a3109fc"
       },
       "declaration_axioms": {
-        "status": "pending",
-        "checked_declarations": null,
-        "report_sha256": null,
-        "export_root_axioms": null
+        "status": "passed",
+        "checked_declarations": 64,
+        "report_sha256": "412fac59d545f3e725841b3b587423dcf0ebd806a2fbfabf14a591d231534955",
+        "export_root_axioms": {
+          "PrismSplit.finBoxSplitCounterexample": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "PrismFamily.familyBoxSplitCounterexample": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "AuditExportType.prismSix": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "AuditExportType.prismFamily": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "AuditReference.prismSourcePublished": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "AuditReference.prismSourceAdmissible": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        "per_declaration": "topics/prism-splitting/lean/publication/axioms-4.36.json"
       },
       "export": {
-        "status": "pending",
-        "sha256": null,
-        "declaration_count": null,
-        "dependency_report_sha256": null,
-        "root_closure_counts": null
+        "status": "passed",
+        "sha256": "a44c803a698aa138e0cd04593f247c8a3b019c621013cd45c04928f62eef6c8e",
+        "exporter_binary_sha256": "8298d4412a1f8986b5dbfd1d9925211778d8d320fc47b72040c8fdfdd5b603d5",
+        "declaration_count": 28385,
+        "dependency_report_sha256": "43c88d3e6c50eb4a32f2113f9a9dfa38fce717ba61ecde7ff8329efaa65a4bbd",
+        "root_closure_counts": {
+          "PrismSplit.finBoxSplitCounterexample": 22024,
+          "PrismFamily.familyBoxSplitCounterexample": 26717,
+          "AuditExportType.prismSix": 22026,
+          "AuditExportType.prismFamily": 27201,
+          "AuditReference.prismSourcePublished": 28347,
+          "AuditReference.prismSourceAdmissible": 1802
+        }
       },
       "official_kernel": {
-        "status": "pending",
-        "binary_sha256": null,
-        "verdict": null
+        "status": "passed",
+        "binary_sha256": "2b2ff08805ace61c935b023f8114ac3f7f1d3bc79cb4e8c47ef7801a5af58798",
+        "verdict": "Lean default kernel accepts the solution"
       },
       "independent_kernel": {
-        "status": "pending",
-        "binary_sha256": null,
-        "verdict": null
-      }
+        "status": "passed",
+        "binary_sha256": "8241c5e6baa29490aa118d382f97961b208ae730fdb96545c2abed74c9ece5a8",
+        "verdict": "Checked 28385 declarations with no errors"
+      },
+      "hosted_artifact_digest": "sha256:2680277387e683e788a21c54b5079f6e6b2fdbf18622cdafe28befa517313c1b",
+      "hosted_reports_artifact": "https://github.com/ProgramComputer/open-math-research/actions/runs/45764141229/artifacts/15090539668",
+      "hosted_reports_artifact_digest": "sha256:f4dfe925eae4cfd215d8888016f463b1d87ee2ed88179a94f35ae97cac0e7b0b"
     },
     "upstream_source_rebuild": {
       "status": "pending",

@@ -1,0 +1,13 @@
+--- CatalanStrictPeaksMiddleRoots.lean
++++ CatalanStrictPeaksMiddleRoots.lean
+@@ -173,8 +173,8 @@
+       _ ≤ _ := by
+         rw [abs_mul, abs_neg, abs_of_nonneg hd.le, norm_mul, norm_nearPhaseUnit hd hD,
+           one_mul]
+-        exact add_le_add_right (add_le_add_right
+-          (mul_le_of_le_one_left (abs_nonneg _) hD.le) _) _
++        exact add_le_add (add_le_add
++          (mul_le_of_le_one_left (abs_nonneg _) hD.le) le_rfl) le_rfl
+   have hstrict : |err| < σ * |Z.im| := by
+     by_cases hdHalf : 1 / 2 ≤ d
+     · have hJ := nearMean_re_gt_seventeen_twentieths hd hD hn hdHalf hS

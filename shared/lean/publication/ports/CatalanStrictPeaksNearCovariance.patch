@@ -10,6 +10,18 @@
      rw [heq]
      apply div_le_div_of_nonneg_left (by norm_num) (by positivity)
      linarith
+@@ -158,9 +157,9 @@
+     _ ≤ (∫ s in L, p s) + ∫ s in T, q s := add_le_add
+       (setIntegral_mono_on hfL (hp.mono_set Ioc_subset_Ioi_self) measurableSet_Ioc hlocal)
+       (setIntegral_mono_on hfT hq measurableSet_Ioi htail)
+-    _ ≤ _ := add_le_add_right (setIntegral_mono_set hp
++    _ ≤ _ := add_le_add (setIntegral_mono_set hp
+       (Filter.Eventually.mono (ae_restrict_mem measurableSet_Ioi) hp0)
+-      (Filter.Eventually.of_forall Ioc_subset_Ioi_self)) _
++      (Filter.Eventually.of_forall fun _ hs => Ioc_subset_Ioi_self hs)) le_rfl
+ 
+ private noncomputable def affineTail (n : ℕ) (s : ℝ) : ℝ :=
+   ((2 * (n : ℝ) + 1) * (1 + (n : ℝ) * s / 8)) * rayWeight n s
 @@ -226,7 +225,7 @@
    apply (div_le_div_of_nonneg_right (norm_integral_le_integral_norm _) hmass.le).trans_lt
    exact (div_le_div_of_nonneg_right htotal hmass.le).trans_lt (by

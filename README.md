@@ -15,6 +15,8 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 **Lean or Rocq key**　🟩 Full (entire statement) · 🟨 Partial (named components) · ⬜ None (no checked proof)
 
+[Stable Lean audit and verification records](shared/lean/publication/README.md)
+
 ## Partial work
 
 - [Balanced arrays](topics/balanced-arrays/README.md) with row cap $r=d-1$ have simple negative zeros and strictly alternate at every row count. Lean proves its inclusion–exclusion formula from the labeled arrays. The general conjecture also holds in [every degree through fourteen](topics/balanced-arrays/low-degree.md) and for every rank and dimension through 24 rows. In the open four-column cap-two case, several singleton slices and the sum of the two- and four-singleton slices strictly interlace across consecutive rows.
