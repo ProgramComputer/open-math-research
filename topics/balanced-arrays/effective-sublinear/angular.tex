@@ -1,0 +1,791 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,geometry}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<-> cmex10}{}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\geometry{margin=1in}
+\emergencystretch=3em
+\title{Geometric test points for balanced arrays of growing dimension}
+\author{ProgramComputer}
+\date{November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $P$ count labeled binary $n$-by-$d$ arrays with equal column totals and a uniform upper bound on every row total. We prove that every geometric test point gives the prescribed strict sign when $\log n\ge10^6$ and $d\ge n^{99/100}$, uniformly in the row bound. In particular all zeros are simple and negative. In the low-curvature case we evaluate the signed Fourier integral itself. The radial shift at a geometric node cancels the phase of the transverse determinant to first order. A second result gives the limiting phase at quadratic aspect below the cap. It implies an infinite family of incorrect geometric signs for polynomials with only simple negative zeros.
+\end{abstract}
+\section{Geometric signs at polynomially sublinear dimension}
+
+\textbf{Theorem.} Let $\log n\ge10^6$ and $d\ge n^{.99}$ with integer $n,d$. For every row cap $1\le r\le d$, every internal geometric node $t_k=\sqrt{a_{k-1}/a_{k+1}}$ satisfies $(-1)^kP(-t_k)>0$. In particular all $\lfloor nr/d\rfloor$ zeros are simple and negative. Here $a_k$ counts labeled binary arrays with $n$ rows, $d$ columns, row sums at most $r$, and all column sums equal to $k$, and $P(q)=\sum_{k=0}^{\lfloor nr/d\rfloor}a_kq^k$.
+
+The support is the interval from zero to $D=\lfloor nr/d\rfloor$ by the cyclic construction in \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/README.md}{the logarithmic bound}. Degrees zero and one follow immediately. At an internal index put $b_k=\log(a_k^2/(a_{k-1}a_{k+1}))$. For $d\ge n$ the orientation inequality gives $b_k\ge4d/(n+2)>\log4$ at every internal index. At any such index the normalized first neighbors at $-t_k$ have total magnitude $2e^{-b_k/2}<1$, and the two subsequent alternating tails begin with positive terms and decrease in magnitude. This gives the required sign. Otherwise set $s=d/n$. At a difficult index with $b_k=\log(a_k^2/(a_{k-1}a_{k+1}))\ge100/\log n$, the \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/angular-overlap.md}{finite-window argument} gives the geometric sign. If $b_k<100/\log n$, at the tilt giving $\mu=dk/n$ it gives $nV/d^2>u/110$ and $nx(1-x)/d>u/200$, where $x=k/n$, $u=\log n$. At the geometric tilt $v=t_k^{1/d}$ these imply
+
+\[
+nV_v/d^2>u/111,\qquad n a_v/d>u/111,\qquad
+a_v=\mathbb E_v[S(d-S)/(d(d-1))].
+\]
+
+For this transfer let $w_k$ be the real tilt of mean $dk/n$. The \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/angular-phase-calibration.md}{phase calculation} gives $|\log(v/w_k)|<3/d$. On the tilt segment the likelihood ratio at any size is between $e^{-3}$ and $e^3$, so the variance remains above $e^{-3}V_k$ by its characterization as the minimum mean squared distance to a constant. The uniform third-moment estimate applies on the segment and bounds $|(\log V)'|$ in log tilt by $10^9\sqrt d/2$. Thus $nV_v/d^2>u/111$. The tilted capped-binomial variance bound gives $V_v\le d a_v$, which suffices for the second inequality. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/angular-phase-review.md}{Transfer proof}
+
+For that real tilt the coefficient definition and Fourier orthogonality give the exact identity
+
+\[
+P(-v^d)/H(v)^n=\int_{\prod z_j=-1}
+\big(\mathbb E_v\prod_{j\in I_S} z_j\big)^n\thinspace{}dz ,
+\]
+
+where $H(v)=\sum_{j\le r}\binom dj v^j$ and $dz$ is normalized Haar probability on the translated codimension-one torus. Each monomial in the expansion integrates to zero unless the column sums agree, and its surviving power of $\prod z_j$ is $(-1)^k$. The principal angular terms are conjugates. Their common complex Gaussian leading term at $t=\pi/d$ has phase $n\arg H(ve^{it})-\frac{d-1}{2}\arg a_v(t)$ with the numerator $a_v(t)=\mathbb E_v[a_S e^{itS}]/\mathbb E_v e^{itS}$. By \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/angular-phase-calibration.md}{the calibration}, this differs from $k\pi$ by less than $n^{-1/10}$. In particular the signed sum of these two Gaussian terms exceeds $1.9|G_t|$.
+
+The \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/angular-principal-lower.md}{principal-chart estimate on the ball of radius two fifths} costs less than $0.02|G_t|$ on each of the two principal charts. On the remaining near charts, on the remote charts, and outside all charts the \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/angular-mass-dominance.md\#larger-radius-global-version-at-the-original-row-cutoff}{large-radius integral bounds} each cost less than $0.01|G_t|$. Thus the signed integral is greater than $(1.9-0.07)|G_t|>0$ after multiplication by $(-1)^k$.
+
+All internal curvatures are positive by the orientation inequality, hence $0<t_1<\cdots<t_{D-1}$. The signs at zero, at the negative geometric nodes, and sufficiently far to the left alternate. They give $D$ disjoint negative intervals containing roots. The degree is $D$, so each root is simple. $\square$
+
+\section{Reduction to quotas with two large variances}
+
+Assume $u=\log n\ge10^6$, $n^{.99}\le d\le n$, and put $s=d/n$. For an internal quota $k$ let $b_k=\log(a_k^2/(a_{k-1}a_{k+1}))$ and $t_k=\sqrt{a_{k-1}/a_{k+1}}$. The published effective comparison extends to this strip at each pair of feasible densities in $[s/3,1-s/3]$. As a consequence, a wrong or zero geometric sign requires
+
+\[
+b_k<100/u,\qquad
+\frac{n x(1-x)}d>u/200,\qquad
+\frac{n\thinspace{}\mathrm{Var}(S_k)}{d^2}> u/110,
+\]
+
+where $x=k/n$ and $S_k$ has tilted capped-binomial weights with mean $dx$. These are necessary conditions for failure of the geometric witness. An angular witness is required only in the regime where both normalized variances grow at least logarithmically. This assertion does not prescribe the order of a mixed family of angular and geometric witnesses.
+
+For the extension, put $T=100/\min(s,1/4)\le400 n^{.01}$. The explicit Bessel and row-atom bound in the published proof is derived for regular profiles if $n^{-1/4}\le\min(s,1/4)/12$, $n/(2T^2)\ge10$, $A-n/d\ge n/(2T)$, and $\log(2\pi n)\le n/(4T^2)$. These follow from $u\ge10^6$ and the displayed $T$ bound. In its last expression the aligned exponent $n^{1/5}/(40T^2)$ is at least $n^{.18}/(40\cdot400^2)$, which exceeds $1000(T^2+u)$; this follows at the lower endpoint and increases thereafter by comparing logarithms. Thus the tail is still below $n^{-10}$ in the subset normalization. The main chart comparison uses only $d\ge n^{.99}$, $\lambda\ge d/5$ and $u\ge10^6$. The determinant-change term $25\eta^2/s$ with $\eta=n^{-1/4}$ is at most $25n^{-.49}$. The previous regular second moment is bounded by $100(nd+1)e^{20/s}$, now possibly superpolynomial. In the cross-event Cauchy--Schwarz bound its logarithm contains $10/s\le10n^{.01}$, whereas the negative tail exponent is at least $d\eta^2\ge n^{.49}$. The self-bad array tails also remain negligible. This yields the original $n^{-1/8}$ slope comparison in the stated strip.
+
+Suppose now $b_k\le\log4$; larger curvature already gives the correct sign. Then $\min(k,n-k)\ge d/\log4-1$ by binomial normalization. The two immediate slopes exist even at a saturated neighbor. As in the published proof the scalar deficit curvature is less than two, since the baseline log curvature costs at most $10/(ns^2)$, and therefore $h=nr/d-k>\sqrt n/2$. In the latter inequality $1/s\le n^{.01}\ll\sqrt n$ suffices. All quotas at distance $J+2$ with $J\le u+2$ exist and have density in $[s/3,1-s/3]$. The tilted variances there are at least $s^2\sqrt n/32$ from the carried-load comparison.
+
+If $b_k\ge100/u$, choose $\lambda_\theta=50/u$, $J$ the smallest odd integer at least $2/\lambda_\theta$, and $\epsilon=(\lambda_\theta/4)e^{-\pi^2/(4\lambda_\theta)}$. Here $\log(1/\epsilon)\le .06u$ and $n^{-1/8}<\epsilon/100$. The original scalar-curvature argument uses $s$, the actual aspect, in its error bounds. The sufficient scalar height inequalities are satisfied because
+$12\log10+\log(J+2)+3\log(1/s)+.06u < u/2$ and
+$14\log10+\log(1/s)+.06u<u/4$.
+The theta lemma itself needs only $\lambda_\theta\le b_k/2$, independent of the global lower bound on all curvatures. Thus the geometric sign is strict and correct. Notice that the earlier sufficient choice $\lambda_\theta\le2s/(1+2/n)$ was used only to check this local center inequality automatically.
+
+At a remaining center $b_k<100/u$, the two individual orientation terms imply $k+1,n-k+1>du/100$. For the displayed $nv/d$ bound use the stronger sum
+$1/(k+1)+1/(n-k+1)=(n+2)/[(k+1)(n-k+1)]$.
+Multiplying and rearranging gives $k(n-k)>du(n+2)/100-(n+1)$, hence $nv/d>u/200$.
+
+For the scalar bound put $\mu_k=dk/n$ and $V(\mu)=\mathrm{Var}(S)$ at real tilt mean $\mu$. The entropy contribution is $I_k=n\int_{-s}^s (s-|t|)/V(\mu_k+t)\,dt$. Its difference from $b_k$ has absolute value at most
+$2\cdot10^9/\sigma_{\min}+4\cdot10^{11}n^{-1/4}+2n^{-1/8}+10/(ns^2)<1/u$,
+where $\sigma_{\min}\ge s n^{1/4}/\sqrt{32}\ge n^{.24}/\sqrt{32}$. This uses the scalar local limit estimate and the standard-deviation Lipschitz bound exactly as before. Some tilt point in this interval therefore has $\sigma\ge s\sqrt{nu/101}$. Since $|d\sigma/d\mu|\le10^9$, the center obeys $\sigma(\mu_k)\ge s(\sqrt{nu/101}-10^9)>s\sqrt{nu/110}$. This is the claimed lower bound.
+
+In particular, all geometric nodes give the required strict signs if $r\le d^2u/(200n)$ and $d\ge n^{.99}$. Indeed $k+1\le nr/d+1\le du/200+1$ forces $b_k\ge d/(k+1)>100/u$. The main use of the reduction is the simultaneous lower bounds on the column precision and the row-size variance when testing the angular integral at unrestricted caps.
+
+\section{Phase calibration at a geometric node}
+
+Assume the hypotheses of \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/angular-overlap.md}{the angular overlap reduction}:
+$u=\log n\ge10^6$, $n^{.99}\le d\le n$, and $k$ is an internal
+quota with $b_k<100/u$. Use its adjacent coefficient comparison
+with error $n^{-1/8}$, and its variance conclusion
+$nV/d^2>u/110$ at the quota tilt. Write $s=d/n$, $x=k/n$,
+$\mu=dx$, $g(x)=\log(x(1-x))$, and $\nu=(d-1)/2$.
+Let $w$ be the positive tilt giving mean $\mu$ for the weight polynomial
+$H(z)=\sum_{j\le r}\binom dj z^j$. Write $S$ for its tilted row size,
+$V=\mathrm{Var}(S)$, $\sigma=\sqrt V$, and
+$\kappa_3=\mathbb E(S-\mu)^3$.
+
+For the geometric node let $v=t_k^{1/d}$ where
+$t_k=\sqrt{a_{k-1}/a_{k+1}}$. Put $t=\pi/d$ and
+$a_v(t)=\mathbb E_v[q_S e^{itS}]/\mathbb E_v e^{itS}$ with
+$q_j=j(d-j)/[d(d-1)]$. The arguments are
+continuous from zero angular displacement. Then
+
+\[
+\left|n\arg H(ve^{it})-\nu\arg a_v(t)-k\pi\right|<n^{-1/10}.
+\]
+
+This calibrates the leading term's phase. Estimates for the relative
+size of the other angular contributions are separate.
+
+\subsection{Scalar displacement}
+
+Put $\theta=\log w$ and $\Delta=\log(v/w)$.
+For current mean $m$ write $f(m)=\log H(w(m))-m\log w(m)$.
+Its first three derivatives at interior tilts are
+$-\log w(m)$, $-1/V(m)$, and $2\sigma'(m)/\sigma(m)^3$.
+Since $V\le d/4$ by the capped-binomial variance bound,
+the center satisfies $n^{.49}\le\sigma\le\sqrt n$ using the
+overlap variance lower bound. At the means of $k\pm1$ and between,
+$\sigma(m)\ge n^{.49}/2$ by the overlap interior variance estimates
+and the explicit Lipschitz bound $|\sigma'|\le10^9$ in
+\href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/scalar.md}{the scalar estimate}. In particular the whole interval is
+inside the domain of that Lipschitz bound. Symmetric Taylor expansion
+of $nf$ therefore gives
+
+\[
+\left|\frac n2[f(\mu+s)-f(\mu-s)]+d\theta\right|
+\le 10^{10}n^{-.47}.
+\]
+
+Indeed $\sup|f'''|\le16\cdot10^9 n^{-1.47}$
+and the Taylor error is at most $ns^3\sup|f'''|/6$.
+The scalar coefficient at mean $m$ is $e^{nf(m)}$ times the
+mean atom of the sum of $n$ tilted rows. Half the difference of the
+logs of the two atoms is bounded by
+$4\cdot10^9 n^{-.49}+10^{11}n^{-1/4}$
+by the explicit local limit estimate and the variance Lipschitz bound.
+The comparison of the balancing factors gives half the difference
+of their logs as $-\nu[g(x+1/n)-g(x-1/n)]/2$ with error
+at most $n^{-1/8}$. The overlap ensures both edges are feasible and
+their densities lie in $[s/3,1-s/3]$. There $|g''|\le18/s^2$,
+so replacing that half difference of $g$ by $g'(x)/n$
+costs at most $5/(ns)$ after multiplication by $\nu$.
+Inserting these estimates into the geometric-node definition gives
+
+\[
+d\Delta=\nu g'(x)/n+E,\qquad |E|\le 4n^{-1/8}.
+\]
+
+The bound $x(1-x)\ge s/5$ gives $|\nu g'(x)/n|\le5/2$.
+Thus $|d\Delta|<3$ and $|\Delta+it|<8/d$.
+
+\subsection{The two angular arguments}
+
+Use the row law at $w$ for both Taylor expansions. Write
+$X=S-\mu$, $z=\Delta+it$, and $\psi(z)=\mathbb E e^{zX}$.
+The checks below hold on the whole disk $|z|\le8/d$, and so
+also establish the claimed continuous branches. We have $|X|\le d$
+and $\mathbb E|X|^3\le10^9\sigma^3$ by the scalar moment estimate.
+Since $e^8<3000$, standard exponential Taylor bounds give
+
+\[
+|\psi(z)-1|\le 10^5 n/d^2,\qquad
+|\psi(z)-1-Vz^2/2|\le 10^{15}n^{3/2}/d^3.
+\]
+
+For example the first estimate uses
+$\mathbb EX=0$ and $e^8V|z|^2/2$; the second uses
+$e^8\mathbb E|X|^3|z|^3/6$. The elementary logarithm bound
+$|\log(1+y)-y|\le |y|^2$ for $|y|\le1/2$ yields
+$|\log\psi(z)-Vz^2/2|\le 10^{16} n^{-1.47}$.
+Here $d\ge n^{.99}$; this makes the square error smaller than the
+cubic error. The identity
+$H(we^z)=H(w)e^{\mu z}\psi(z)$ then gives
+
+\[
+n\arg H(ve^{it})=k\pi+nV\Delta t+E_H,\qquad
+|E_H|\le10^{16} n^{-.47}.
+\]
+
+Put $a=\mathbb E q_S$ and $c=\mathrm{Cov}(q_S,S)$.
+We have $a=(d^2x(1-x)-V)/[d(d-1)]\ge x(1-x)\ge s/5$.
+The size function $j\mapsto q_j$ is $2/d$-Lipschitz on $[0,d]$.
+Centering first at its value at $\mu$ shows
+
+\[
+|c|\le 2V/d,\qquad
+\mathbb E[|q_S-a||X|^2]
+\le (2/d)(\mathbb E|X|^3+\sigma V)
+\le 3\cdot 10^9 n^{3/2}/d .
+\]
+
+In fact the first inequality follows by subtracting $q_\mu$ in
+$\mathbb E[q_S X]$.
+Expand the numerator of
+$a(z)=\mathbb E[q_S e^{zX}]/\psi(z)$ after subtracting $a\psi(z)$.
+Its remainder from the linear term $cz$ is bounded by
+$3\cdot10^{14}n^{3/2}/d^3$, by the preceding second weighted moment.
+Dividing by $a\psi(z)$ costs a factor at most $10n^{.01}$.
+The error from replacing $1/\psi(z)$ by $1$ in the linear term is
+at most $2|cz/a|10^5 n/d^2$. Since
+$|cz/a|\le 20n^{-.98}$, one obtains
+$|a(z)/a-1-cz/a|\le10^{16}n^{-1.46}$.
+In particular the ratio lies in the disk of radius $1/2$ about
+one. Expanding its logarithm and taking imaginary parts gives
+
+\[
+\nu\arg a_v(t)=\nu t c/a+E_a,\qquad |E_a|\le10^{17}n^{-.46}.
+\]
+
+The analytic identity $a(z)=a_v(t)$ at $z=\Delta+it$ follows
+by reweighting the row law. Along both expansions the real
+basepoint at angular displacement zero has a positive value,
+so the branches used in the equations are the required ones.
+
+\subsection{Cancellation and final bound}
+
+The displacement term equals
+$nV\Delta t=\nu t(V/d)g'(x)+(nVt/d)E$.
+The covariance identity is exact because $S(d-S)$ is quadratic:
+
+\[
+\frac{V}{d}g'(x)-\frac ca
+=\frac{\kappa_3}{d^2x(1-x)-V}
+-\frac{V^2(1-2x)}{d x(1-x)[d^2x(1-x)-V]}.
+\]
+
+In particular the apparent contributions of order one in the two
+angular arguments cancel. To bound the residual, use
+$d^2x(1-x)-V\ge d(d-1)x(1-x)\ge n^{1.97}/10$
+and $V\le d x(1-x)$.
+The absolute value of the first term is at most $10^{10}n^{-.47}$.
+The absolute value of the second is at most $1/(d-1)$.
+Since $\nu t<2$ and $nVt/d\le n^{.01}$, the final deviation is
+bounded by
+
+\[
+4n^{-.115}+10^{16}n^{-.47}+10^{17}n^{-.46}
++2\big(10^{10}n^{-.47}+1/(d-1)\big)<n^{-1/10}.
+\]
+
+The last inequality follows at $u=10^6$ by dividing by
+$n^{-1/10}$ and bounding each resulting exponential, all of
+which decrease with $u$.
+
+\section{Quantitative global dominance of the two principal odd angles}
+
+Let $u=\log n$, $n^{.99}\le d\le n$, and let $S$ have the tilted
+capped-binomial law in the angular argument. Put
+$a_s=s(d-s)/(d(d-1))$, $a=\mathbb E a_S$, $V=\mathrm{Var}(S)$,
+$A=na$, $L=nV/d^2$, $\phi(t)=\mathbb E e^{itS}$,
+$t_{\ast}=\pi/d$, and $\nu=(d-1)/2$. Assume
+$A/d,L\ge u/400$.
+Write $R(\theta)=\mathbb E e^{i\sum_{j\in I_S}\theta_j}$, where
+$I_S$ is the uniform row subset given its size. Use normalized Haar
+measure on $\sum_j\theta_j=\pi$ modulo $2\pi$ and the notation
+
+\[
+I_0=\frac{(2\pi A)^{-\nu}}{\sqrt d},\qquad
+G_{\ast}=I_0\phi(t_{\ast})^n\left(\frac a{a(t_{\ast})}\right)^\nu,\qquad
+a(t)=\frac{\mathbb E[a_S e^{itS}]}{\phi(t)} .
+\]
+
+Use transverse balls of radius $b=2/5$ at each common angle. The estimates below discard the complement, all remote labels and the nonprincipal near labels.
+
+\subsection{Preliminary bounds and the principal scale}
+
+The truncated-binomial variance bound gives
+$V\le\mu(1-\mu/d)$ at all tilts, with $\mu=\mathbb ES$.
+For example, its ratio to the binomial mass of mean $\mu$ has
+interval superlevel sets. Subtracting a chord through the two
+sign changes of the mass difference, using equality of mass
+and mean, proves convex-order domination by that binomial.
+In particular $V\le da$, since
+$d(d-1)a=\mu(d-\mu)-V$. We will use
+
+\[
+a\le.26,\qquad a\ge n^{-.01},\qquad da\ge n^{.98},\qquad
+da^2\ge n^{.97},\qquad V\ge n^{.98}.
+\]
+
+These hold for $u\ge10^6$ by $L\ge u/400$, $d\ge n^{.99}$,
+and $a\ge V/d$. Write $\phi_{\ast}=\phi(t_{\ast})$.
+The centered second-moment inequality gives
+$|\phi_{\ast}|\ge1-Vt_{\ast}^2/2$, and $Vt_{\ast}^2\le10a/d<1$.
+Thus $\log(1/|\phi_{\ast}|)\le Vt_{\ast}^2$. Since
+$|a(t_{\ast})|\le a/|\phi_{\ast}|$,
+
+\[
+|G_{\ast}|\ge I_0|\phi_{\ast}|^{n+\nu}\ge I_0e^{-15A/d},
+\qquad
+|G_{\ast}|\ge e^{-2}I_0|\phi_{\ast}|^n .
+\]
+
+The second bound uses $\nu Vt_{\ast}^2\le5a\le1.3$.
+The principal complex precision is nonzero by the near-chart
+estimates, or directly using the Lipschitz bound on $a_s$
+and the independent-copy covariance identity.
+
+\subsection{A pointwise envelope on the full torus}
+
+Set $z_j=e^{i\theta_j}$, $R_0=|\sum_j z_j|$,
+$\bar z=d^{-1}\sum_j z_j$, and $D=\sum_j|z_j-\bar z|^2$.
+Then $D=(d-R_0)(1+R_0/d)\le d$.
+For a fixed size $s$ let $w_s=s(d-s)/d^2$ and $f_s$ be its
+characteristic function. Conditioning independent Bernoulli
+cells at their mean atom $b_s$, then integrating the row angle
+in absolute value, gives
+
+\[
+|f_s|\le b_s^{-1}e^{-w_s(d-R_0)}J(w_sR_0),
+\qquad J(x)=e^{-x}I_{\negthinspace{}B}(x),
+\]
+
+where $I_{\!B}$ denotes the order-zero modified Bessel function.
+On $\mu/2\le s$ and $(d-\mu)/2\le d-s$, we have
+$w_s\ge\mu(d-\mu)/(4d^2)\ge a/5$.
+For $R_0\ge d/2$ use the Bessel upper bound
+$J(x)\le e^{1/(2x)}(2\pi x)^{-1/2}$ for $x\ge10$ and
+$b_s\ge (2\pi d w_s)^{-1/2}e^{-1/(12d w_s)}$ from Stirling.
+Then
+
+\[
+\log |f_s|\le -w_s(d-R_0)+\frac{d-R_0}{d}
+       +\frac{13}{12d w_s}
+\le -.09aD+\frac6{da}.
+\]
+
+Here $d w_s\ge da/5\gg100$, and
+$D\le2(d-R_0)$. On $R_0<d/2$ use $J\le1$. The
+Stirling prefactor costs at most
+$\tfrac12\log(2\pi d w_s)+1/(12d w_s)\le u$,
+which is smaller than $w_s(d-R_0)/10$ because
+$w_s(d-R_0)/10\ge da/100>u$. This gives
+$\log |f_s|\le-.09aD$ in this case.
+\href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/direct-row-tail.md}{Bessel and row-atom inequalities}
+
+The probability of either excluded size event is at most
+$2e^{-.14da}$. To see this, for the tilted mean $m(\eta)$
+of $S$ use $m'(\eta)\le m(\eta)$ at every tilt.
+Integrating $m(-t)\ge\mu e^{-t}$ shows
+$\log\mathbb E e^{-tS}\le-\mu(1-e^{-t})$.
+Chernoff at $t=\log2$ gives the lower-tail bound
+$e^{-\mu(1-\log2)/2}$, and the same argument applies to
+$d-S$. Since $\min(\mu,d-\mu)\ge(d-1)a$ and $\log2<.7$,
+this gives the displayed excluded probability. Average the two
+good-row bounds and use $D\le d$. For $z=da\ge267$,
+$2e^{-.05z}\le6/z$ by the quadratic exponential bound.
+Consequently on the entire torus, for $u\ge10^6$,
+
+\[
+|R|\le e^{-.09aD}\big(e^{6/(da)}+2e^{-.05da}\big)
+\le \exp\left(\frac{12}{da}-.09aD\right).
+\]
+
+\subsection{Complement of the transverse balls}
+
+For $b\le2/5$, the balls $\theta=t\mathbf1+y$,
+$\sum_jy_j=0$, $\|y\|_2\le b$ at the odd labels are disjoint.
+If two lifts agreed modulo $2\pi$, their coordinatewise differences
+would be congruent to one common real number. Those differences
+are in an interval of length $4b<2\pi$, so they are equal, and
+their zero sum then forces the labels to agree.
+
+On the complement, $D\ge b^2/3$. Indeed if $D<b^2/3$,
+then $R_0/d>.99$. Taking principal relative angles $x_j$ to
+$\arg\bar z$ gives $\textbackslash{}sum\_j x\_j^2\textbackslash{}le
+(\textbackslash{}pi^2/4)2D/(1+R\_0/d)<3D$. Subtract their ordinary mean to get
+a zero-sum lift $y$ of norm below $b$. The common angle has an odd
+label because the original angle sum is $\pi$ modulo $2\pi$.
+This identifies a ball containing the point.
+
+Partition the complement over indices $i$ minimizing
+$|z_i-\bar z|$. On each part
+$\sum_j|z_j-z_i|^2\le2D$, so in principal relative angles
+$u_j=\arg(z_j/z_i)$ we have $\sum_{j\ne i}u_j^2\le5D$.
+For a fixed anchor the relative-angle map pushes Haar to
+full normalized Haar in $d-1$ coordinates, since it is a
+surjective homomorphism up to translation. Indeed for any
+relative angles the equation for $d\theta_i$ on the circle
+has a solution. Split the penalty $.09AD$ into two halves.
+The first gives $.015Ab^2$. The second is at least
+$.009 A\sum_{j\ne i}u_j^2$. Integrating the resulting Gaussian
+on each part, and extending those real integrals to the full
+line, gives in the units $I_0$
+
+\[
+I_0^{-1}\int_{\text{outside the balls}} |R|^n
+\le d^{3/2}(1/.018)^\nu
+       \exp\left(\frac{12n}{da}-.015 A b^2\right).
+\]
+
+The power of $d$ includes the sum over anchors and the
+Haar correction of $I_0$. Dividing by $|G_{\ast}|/I_0$ gives a
+logarithmic bound $12n/(da)-.015Ab^2+3d+15A/d$,
+since $\tfrac32\log d+\nu\log(1/.018)\le3d$.
+When $b=10^{-3}$ and $u\ge10^{60}$ this is at most
+$-10^{-8}A$. In fact the positive terms divided by $A$
+are respectively $12/(da^2)$, at most $1200/u$, and $15/d$.
+At $b=2/5$ the same expression is at most $-.001A$ already
+for $u\ge10^6$.
+
+\subsection{Remote odd labels}
+
+Use near labels $|t|\sqrt V\le10^{-3}$ and remote labels
+in the complementary part of the circular interval $[-\pi,\pi]$.
+The numerical log-concave Fourier estimate gives
+$|\phi(t)|\le\exp[-10^{-18}\min(Vt^2,1)]$ because
+$\sqrt V\ge10^4$. In particular remote labels have
+$|\phi(t)|\le e^{-10^{-24}}$. This estimate is the cosine
+block bound in the scalar local limit calculation.
+\href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/adjacent-quotas/scalar.md\#an-explicit-scalar-local-limit-estimate}{Explicit log-concave Fourier bound}
+
+For a centered real $y$ with $Q_2=\sum_j y_j^2$,
+write $f_s(y)=\mathbb E e^{i\sum_{j\in I_s}y_j}$.
+The adjacent-size bound
+
+\[
+|f_{s+1}(y)-f_s(y)|\le \frac{3Q_2}{2d}
+\]
+
+follows by adding a uniform element $J$ outside a uniform
+$s$-subset $I_s$. Given $I_s$, the conditional mean of $y_J$
+is $-L_s/(d-s)$, where $L_s=\sum_{j\in I_s}y_j$.
+The linear term is bounded by
+$\mathbb E L_s^2/(d-s)=a_sQ_2/(d-s)\le Q_2/d$ since
+$\mathbb E L_s=0$ and $|e^{iL_s}-1|\le |L_s|$.
+The second-order error uses $J$ uniform unconditionally and
+is at most $Q_2/(2d)$.
+Take $s_0=\lfloor\mu\rfloor$. On a ball of radius $b\le2/5$,
+
+\[
+|R(t,y)-\phi(t)f_{s_0}(y)|
+\le \frac{3Q_2}{2d}(\sqrt V+1)\le d^{-1/2}
+\]
+
+by $V\le d/4$. Every remote ball thus has
+$|R(t,y)|\le 1-10^{-25}$ at $u\ge10^6$.
+
+\subsection{Nonprincipal near odd labels}
+
+Let $\Delta=S-S'$ for an independent copy. Its symmetric
+log-concave mass and its survival sequence on nonnegative
+integers are log-concave by convolution, or by the decreasing
+successive mass ratios for the survival sequence. Put
+$m=\lceil4\sqrt V\rceil\le5\sqrt V$. The one-sided survival
+satisfies $T(m)\le V/m^2\le1/16$ and $T(0)\ge1/2$.
+Iterating survival ratios, with block ratio at most $1/4$,
+gives $\Pr(|\Delta|>x)\le8e^{-x/(5\sqrt V)}$. Integrating
+this tail yields $\mathbb E\Delta^4\le2\cdot10^5 V^2$.
+Differentiating $1-|\phi(t)|^2$ therefore gives, for
+$0\le t\sqrt V\le10^{-3}$,
+
+\[
+\mathbb E[\Delta\sin(t\Delta)]
+\ge2Vt-\frac{t^3}{6}\mathbb E\Delta^4\ge Vt.
+\]
+
+Since the centered characteristic stays nonzero on this
+interval, integration gives
+
+\[
+|\phi(t)/\phi(t_{\ast})|\le
+\exp[-V(t^2-t_{\ast}^2)/4]
+\qquad(t_{\ast}\le |t|\le10^{-3}/\sqrt V).
+\]
+
+\subsection{Larger-radius global version at the original row cutoff}
+
+At $u\ge10^6$,
+use radius $b=2/5$. The above off-ball bound already holds.
+The remote and nonprincipal near bounds also hold for this
+radius by matching the determinant rather than using the ball
+volume. The following are direct estimates for those two steps.
+
+On the ball the real part of the exact one-row expansion from
+\href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/direct-row-expansion.md}{the single-row expansion} gives
+$\log|f_s(y)|\le-a_s B_y$ with
+$B_y=Q_2/2-1.26Q_4$. Indeed the quartic has absolute
+bound $(7/24)a_sQ_4$, and the real remainder is at most
+$6a_sQ_2 M^4\le6b^2a_sQ_4$. In particular
+$0\le .29Q_2\le B_y\le .5Q_2$. For precision $A_0\ge A/2$,
+the zero-sum Gaussian of precision $A_0$ satisfies
+
+\[
+\mathbb E[\mathbf1_{\Vert Y\Vert \le b}e^{1.26 A_0 Q_4(Y)}]<4.
+\]
+
+To check this, write $Y_j=Z_j-\bar Z$ with independent
+$Z_j\sim N(0,1/A_0)$. Insert the independent mean restriction
+$|\bar Z|\le 2/\sqrt{d A_0}$ at cost at most $4/3$.
+Then $|Z_j|\le .401$ on the ball,
+$|Y_j|^4\le (9/8)^3 |Z_j|^4+9^3|\bar Z|^4$,
+and the deterministic shift in the exponent is below one.
+More precisely it is at most $15000/(d A_0)<.01$.
+The single-coordinate exponent is at most $2A_0Z_j^4$,
+which on this truncation is at most $A_0 Z_j^2/3$.
+The elementary expectation bound is $1+100/A_0$ using
+$\mathbb E[X^4e^{X^2/3}]=3\cdot3^{5/2}<50$ for a standard
+normal $X$. The product and the mean restriction cost at most
+$(4/3)\exp(.01+100d/A_0)<4$.
+
+For remote labels the adjacent-size bound can be factored against
+$|f_{s_0}(y)|\ge1-a_{s_0}Q_2/2>.97$, giving
+$|R|\le e^{-10^{-25}}|f_{s_0}(y)|$.
+Take $A_0=n a_{s_0}$. Since
+$a_{s_0}\ge a-1/(d-1)\ge a/2$, the determinant conversion from
+$A_0$ to $A$ costs at most $e^{2/a}$. The last expectation
+therefore bounds the remote union, relative to $|G_{\ast}|$, by
+$4d\exp(-10^{-25}n+2/a+15A/d)<1/100$.
+
+For near labels the independent-copy covariance identity and the
+adjacent-size bound give
+$|R/\phi-\mathbb E f_S(y)|\le 3Q_2 V|t|/(2d|\phi|)$.
+Since $\mathrm{Var}(a_S)\le V/(d-1)^2$ and $B_y\le .08$,
+the scalar Taylor inequality gives
+
+\[
+\mathbb E|f_S(y)|
+\le\exp\left(-aB_y+\frac{V B_y^2}{(d-1)^2}\right)=U_y,
+\qquad U_y>.97.
+\]
+
+Thus $|R|\le |\phi|U_y\exp(2Q_2 V|t|/d)$.
+At an odd label $j\ge3$ the two extra log exponents in the
+$n$th power have sum at most $nV(.01/d^2+.32|t|/d)$,
+which is less than $.05 nV(t^2-t_{\ast}^2)$. For this use
+$j/(j^2-1)\le3/8$ and $\pi>3$. The Gaussian chart
+expectation above with $A_0=A$ costs at most four, and the two-sided odd-label sum is at most $8e^2\sum_{m\ge1}\exp(-72Lm/5)$, which is less than one hundredth at $u\ge10^6$.
+
+These estimates bound each of the three nonprincipal contributions by one hundredth of the magnitude of one principal term.
+
+\section{Principal angular charts at the original logarithmic height}
+
+Let $u=\log n\ge10^6$, $n^{.99}\le d\le n$, and let $S$ have
+the actual tilted capped-binomial law. Write $a_s=s(d-s)/(d(d-1))$,
+$a=\mathbb E a_S$, $A=na$, $V=\mathrm{Var}(S)$, and
+$\phi(t)=\mathbb E e^{itS}$. Assume $A/d\ge u/111$.
+The geometric-tilt transfer supplies this lower bound in the low-curvature
+case. The ordinary variance comparison gives $V\le da$.
+Let $t=\pi/d$ or $-\pi/d$, $\nu=(d-1)/2$, and set
+
+\[
+a(t)=\frac{\mathbb E[a_S e^{itS}]}{\phi(t)},\qquad
+G_t=\frac{(2\pi A)^{-\nu}}{\sqrt d}\thinspace{}
+       \phi(t)^n\left(\frac{a}{a(t)}\right)^\nu .
+\]
+
+On the transverse ball $\mathcal C$ of zero-sum vectors of Euclidean
+norm at most $b=2/5$ about that common angle, let $I_t$ be the
+normalized Haar integral of the $n$th power of the row factor.
+Then
+
+\[
+|I_t-G_t|<.02\thinspace{}|G_t|.
+\]
+
+This supplies the principal-chart input for the larger-radius
+suppression argument in
+\href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/angular-mass-dominance.md\#larger-radius-global-version-at-the-original-row-cutoff}{Global integral estimates}.
+That argument also requires the lower bound $nV/d^2\ge u/400$.
+Together the three global terms and the two local errors cost
+less than $.07|G_t|$.
+
+\subsection{Precision and row-size mixing}
+
+Let $Q_j=\sum_i y_i^j$ and $M=\max_i|y_i|$. Put
+$\varepsilon=n^{-2/5}$ and let $\mathcal I$ be the part of
+$\mathcal C$ with $M\le\varepsilon$. Write
+$\gamma_s=a_s(d-2s)/(d-2)$, and use
+$\mathbb E_t g=\mathbb E[g e^{itS}]/\phi(t)$ and
+$\gamma(t)=\mathbb E_t\gamma_S$. The centered second-moment
+inequality gives $|\phi(t)|\ge1-Vt^2/2>.999$ because
+$Vt^2\le10 a/d$ and $d$ is large. For a real function $g$ of
+$S$ with Lipschitz constant $L_g$, the independent-copy covariance
+identity gives
+
+\[
+|\mathbb E_t g-\mathbb E g|\le L_g V |t|/|\phi(t)|,\qquad
+\mathbb E|g-\mathbb E_tg|^2
+\le L_g^2 V\left(1+Vt^2/|\phi(t)|^2\right).
+\]
+
+The second bound uses the exact decomposition of the squared
+distance from a complex constant into the ordinary variance
+and the squared distance of the constants. Direct differentiation
+gives $L_{a_s}\le1/(d-1)$ and $L_{\gamma_s}\le3/d$ on $[0,d]$.
+Also $|\gamma_s|\le a_s$ at the integer sizes. It follows that
+
+\[
+|a(t)-a|\le 3a|t|,\qquad |\gamma(t)|\le1.01a,\qquad
+|\Im\gamma(t)|\le3.01a|t|.
+\]
+
+Let $A_t=n\Re a(t)$. Then $A_t\ge.999 A$ and
+$A_t/d\ge u/112$. The modulus-normalized real Gaussian integral
+has scale
+
+\[
+J_t=\frac{(2\pi A_t)^{-\nu}}{\sqrt d}|\phi(t)|^n.
+\]
+
+The full complex quadratic integral equals $G_t$, since
+$\Re a(t)>0$. The ratio of real to complex scales satisfies
+
+\[
+\log(J_t/|G_t|)
+=\frac{\nu}{2}\log\left(1+\frac{(\Im a(t))^2}{(\Re a(t))^2}\right)
+<3dt^2\le30/d ,
+\]
+
+so $J_t/|G_t|<1.001$ at the stated cutoff.
+
+On $\mathcal I$, the fixed-size row expansion gives the logarithm
+of its transverse factor as $L_s+E_s$, where
+$L_s=-a_sQ_2/2-i\gamma_s Q_3/6$ and
+
+\[
+|E_s|\le a_s((7/24)Q_4+8Q_2M^3).
+\]
+
+The quartic bound here uses $|A_{4,s}|\le a_s$,
+$|B_{4,s}|\le2a_s/d$ and $Q_2^2/d\le Q_4$.
+Put $D_s=L_s-\mathbb E_t L_S$, so $\mathbb E_t D_S=0$.
+The preceding variance bounds give, under the ordinary size law,
+
+\[
+\Vert a_S-a(t)\Vert _2\le1.01\sqrt V/d,\qquad
+\Vert \gamma_S-\gamma(t)\Vert _2\le3.01\sqrt V/d.
+\]
+
+By $|Q_3|\le M Q_2$, these imply
+$\|D_S\|_2\le .52 Q_2\sqrt V/d$ on $\mathcal I$.
+In particular $\mathbb E|D_S|^2\le.28\,aQ_4$.
+The uniform bound $a_s\le.26$, the bound $|\phi(t)|>.999$,
+and $Q_2\le.16$, $M\le\varepsilon<.001$ give
+$|D_s|+|E_s|<.06$ for every size. The integral remainder of
+the exponential therefore gives
+
+\[
+|e^{D_s+E_s}-1-D_s|\le1.1|E_s|+.55|D_s|^2.
+\]
+
+With $z=\mathbb E_t e^{D_S+E_S}-1$, averaging and using the
+vanished linear term yield $|z|\le .5aQ_4+9aQ_2 M^3<.01$:
+the coefficient of $aQ_4$ before rounding is at most
+$(1.1(7/24)+.55(.28))/.999<.5$.
+Thus the summed row factor on $\mathcal I$ has the logarithm
+
+\[
+\log(R(t,y)/\phi(t))=-a(t)Q_2/2-i\gamma(t)Q_3/6+E,\qquad
+|E|\le .52aQ_4+10aQ_2M^3 .
+\]
+
+Here $\log(1+z)$ is its local analytic branch and costs at
+most $|z|/(1-|z|)$. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/direct-row-expansion.md}{Fixed-size expansion}
+
+\subsection{A Gaussian fourth-power bound on the larger ball}
+
+For any precision $B\ge A/2$, let $Y_j=Z_j-\bar Z$ where the
+$Z_j$ are independent $N(0,1/B)$ random variables. Then
+
+\[
+\mathbb E[\mathbf1_{\mathcal C}\exp(1.68 B Q_4(Y))]<4 .
+\]
+
+Insert the independent event $|\bar Z|\le2/\sqrt{dB}$ at
+cost at most $4/3$ by Chebyshev. On its intersection with the
+ball, $|Z_j|\le.401$. The weighted fourth-power inequality
+
+\[
+|Z_j-\bar Z|^4\le(9/8)^3|Z_j|^4+9^3|\bar Z|^4
+\]
+
+follows by convexity of the fourth power. Consequently the
+deterministic offset in the exponent is less than
+$20000/(dB)<.01$. The single-coordinate exponent is bounded
+by $2.4 B Z_j^4\le (2/5)B Z_j^2$ on the truncation.
+For a standard normal $X$,
+$\mathbb E[X^4e^{(2/5)X^2}]=3\cdot5^{5/2}<170$.
+The bound $e^w-1\le we^w$ and independence therefore give
+$(4/3)\exp(.01+408d/B)<4$, since $d/B\le222/u$.
+
+\subsection{Inside the small maximum window}
+
+Under the normalized zero-sum Gaussian of precision $A_t$ put
+$H=-in\gamma(t)Q_3/6+nE$ on $\mathcal I$. The cubic moment has
+$\|Q_3\|_2\le\sqrt{6d}/A_t^{3/2}$ by the zero-sum Wick identity.
+The eighth normal moment and Minkowski give
+$\|Q_4\|_2\le\sqrt{105}\,d/A_t^2$.
+Also $\|A_tQ_2\|_2\le d$ from the chi-square distribution with
+$d-1$ degrees of freedom. Thus the inner correction satisfies
+
+\[
+\Vert \mathbf1_{\mathcal I}H\Vert _2
+\le .42\sqrt{d/A_t}+5.4d/A_t+11d\varepsilon^3<.006 .
+\]
+
+In the last comparison, $\sqrt{d/A_t}\le.011$,
+$d/A_t\le.000112$ and $d\varepsilon^3\le n^{-1/5}$.
+On $\mathcal I$ the possible positive real part of the cubic
+is at most $.51 A |t|\varepsilon Q_2$.
+Together with $10A Q_2\varepsilon^3$ it is less than $.001$,
+because $A|t|\le4n^{.01}$ and $Q_2\le.16$.
+It follows that $(\Re H)_+\le .53 A_t Q_4+.001$ on
+$\mathcal I$. The larger-ball quartic bound above gives
+$\mathbb E[\mathbf1_{\mathcal I} e^{2(\Re H)_+}]<5$.
+By Cauchy--Schwarz and $|e^H-1|\le |H|e^{(\Re H)_+}$,
+the integrated replacement error on $\mathcal I$ is
+less than $.006\sqrt5\,J_t<.014J_t$.
+
+\subsection{Restoring the two tails}
+
+The real Gaussian at precision $A_t$ has probability at most
+$2d e^{-A_t\varepsilon^2/2}$ for $M>\varepsilon$.
+For $Q_2>b^2$, exponential Markov with the chi-square parameter
+$1/4$ bounds its probability by
+$2^{(d-1)/2}e^{-A_t b^2/4}\le e^{-300d}$.
+Thus extending the full complex quadratic integral from
+$\mathcal I$ to the whole subspace costs less than $.001J_t$
+in modulus.
+
+For the actual integral on $\mathcal C\setminus\mathcal I$, use
+the matched envelope from the global proof, with
+$B_y=Q_2/2-1.26 Q_4$. It gives
+
+\[
+|R(t,y)|^n\le|\phi(t)|^n
+\exp\left[-A Q_2/2+1.26A Q_4
+ +\frac{nV B_y^2}{(d-1)^2}+\frac{2nV|t|Q_2}{d}\right].
+\]
+
+Since $B_y\le .08$, $Q_2\le .16$ and $|t|=\pi/d$,
+the sum of the last two terms is at most $2nV/d^2\le2 A/d$.
+Apply Hölder with exponents $4/3,4$ under the precision-$A$
+Gaussian. The larger-ball quartic expectation uses coefficient
+$(4/3)(1.26)=1.68$, and the other factor is the fourth root of
+the probability of $M>\varepsilon$. In units $|G_t|$, the outer
+actual contribution is at most
+
+\[
+4e^2\exp(2A/d)(2d)^{1/4}e^{-A\varepsilon^2/8}<.001 .
+\]
+
+Here $(2\pi A)^{-\nu}|\phi(t)|^n/\sqrt d\le e^2|G_t|$
+as in the global calculation. To check the exponents,
+$d\varepsilon^2\ge n^{.19}>32$ allows the positive term
+$2A/d$ to use at most half of the negative exponent.
+The remaining $A\varepsilon^2/16$ exceeds $100u$
+since $A/d\ge u/111$. These inequalities also verify the
+small maximum tail for $A_t\ge.999 A$.
+
+Combining the inner error and the two tails gives
+$(.014+.001)J_t+.001|G_t|<.02|G_t|$, as claimed.
+
+\section{The sign at a geometric node of quadratic aspect}
+
+Let $d\to\infty$, $n/d^2\to\alpha\in(0,\infty)$, and $k/n\to x\in(0,1)$. Assume $\liminf r/d>x$ and $r<d$. Let $t_k=\sqrt{a_{k-1}/a_{k+1}}$ be the geometric node of the capped array polynomial. There are positive normalizations $C_{n,d,r,k}$ for which
+
+\[
+C_{n,d,r,k}(-1)^kP(-t_k)\longrightarrow
+\cos\negthinspace{}\left(\frac{\alpha\pi^3}{6}x(1-x)(1-2x)\right).
+\]
+
+The proof specifies the normalization before taking the limit. In particular, for $n=4d^2$, $k=d^2$ and every $\lceil d/2\rceil\le r<d$, the geometric sign is wrong for all sufficiently large $d$. The polynomial itself has simple negative zeros there by the quadratic-aspect theorem. The sign reversal gives an obstruction to extending the polynomial-dimension proof at its current choice of test points. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/critical-aspect/README.md}{Critical-aspect root theorem}  $\cdot$  \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/effective-sublinear/square-phase-review.md}{Independent agent-assisted calculation}
+
+\subsection{Proof}
+
+Under the uncapped uniform measure for quota $j$, each column is independently a uniform $j$-subset of rows. The load of a specified row has distribution $\mathrm{Bin}(d,j/n)$. For $j=k\pm1$ the fixed gap below $r/d$ gives a probability at most $e^{-cd}$ of a cap violation in this row by the binomial Chernoff bound. A union bound over rows shows $a_j/\binom nj^d=1+O(ne^{-cd})$. Consequently $v=t_k^{1/d}$ differs from the uncapped odds $v_0$ by $O(ne^{-cd}/d)$ in log odds, where, writing $x_d=k/n$,
+
+\[
+v_0^2=\frac{k(k+1)}{(n-k)(n-k+1)},\qquad
+p_0=\frac{v_0}{1+v_0}=x_d+\frac{1-2x_d}{2n}+O(n^{-2}).
+\]
+
+At odds $v$, the actual size $S$ of a tilted row is a binomial of parameters $d,v/(1+v)$ conditioned on $S\le r$. The removed mass is exponentially small. This gives $\mu/d\to x$, $V/d\to x(1-x)$ and $a\to x(1-x)$ for its mean, variance and transverse precision. Write $t=\pi/d$ and $H(v)=\sum_{s=0}^r\binom ds v^s$. Since $r-\mu$ grows linearly in $d$ and $V\to\infty$, the single-chart and remainder estimates in the critical-aspect proof give, for the principal Gaussian $G_t$ of the actual row law,
+
+\[
+P(-v^d)/H(v)^n=2\Re G_t+o(|G_t|).
+\]
+
+Specifically the relative principal-chart error is $O(d^{-1/2})$, and the other near labels have a summable Gaussian bound with parameter $nV/d^2\asymp d$. These bounds on absolute errors hold at the chosen tilt before any condition is imposed on the principal phase. Take $C_{n,d,r,k}=1/(2H(v)^n|G_t|)$. \href{https://github.com/ProgramComputer/open-math-research/blob/main/topics/balanced-arrays/critical-aspect/critical-aspect-angular-nodes.md}{Chart bounds at arbitrary interior tilt}
+
+Along angles from zero to $t$, replacing the capped row law by the binomial at $v_0$ changes its characteristic function $\phi$ and its complex precision $a(t)$ by exponentially small amounts. The test functions for their numerators are bounded, the log-odds displacement is exponentially small, and their binomial values are bounded away from zero in modulus on the segment. Both arguments therefore give an $o(1)$ total error even after multiplication by $n$ or $d$. For the binomial, $\phi(t)=(1+v_0e^{it})^d/(1+v_0)^d$ and $a(t)=v_0e^{it}/(1+v_0e^{it})^2$. Thus
+
+\[
+\arg G_t=(nd+d-1)\arg(1+v_0 e^{it})-(d-1)t/2+o(1)
+\]
+
+in the branches continued along the segment. The argument in the first term is $p_0t-p_0(1-p_0)(1-2p_0)t^3/6+O(t^5)$ by Taylor expansion of the binomial logarithm. The linear terms, after subtracting $k\pi$, give $\pi(np_0-k)+\pi(1-1/d)(p_0-1/2)=o(1)$. The cubic term tends to $-\alpha\pi^3 x(1-x)(1-2x)/6$, and the fifth-degree error tends to zero. Taking the cosine proves the limit.
+
+For $\alpha=4$ and $x=1/4$, the absolute phase displacement is $\pi^3/16$, strictly between $\pi/2$ and $\pi$. If the negative sign failed for arbitrarily large $d$ at some listed cap, a sequence of such caps would satisfy the same strict gap and give the negative limiting cosine, a contradiction. $\square$
+\section*{Sources and verification}
+Alexandersson states the conjecture for every row count, dimension and cap
+in the \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjBalancedArrays}{Symmetric Functions Catalog}.
+The \href{https://github.com/ProgramComputer/open-math-research/issues/2}{research record}
+links the earlier quota bounds and the independent agent-assisted reviews.
+The \href{https://github.com/ProgramComputer/open-math-research/tree/main/topics/balanced-arrays/effective-sublinear}{repository package}
+contains the individual review reports, exact finite arithmetic checks and full derivations of both chart estimates.
+For prior fixed-exponent asymptotics of binomial powers see U. Abel, W. Gawronski and T. Neuschel,
+\href{https://doras.dcu.ie/31197/1/Binomialpolynomials.pdf}{\emph{Binomial Polynomials}}.
+\end{document}
