@@ -7,6 +7,10 @@ from check import WIDTH, bracket, errors, phase_point, poly
 from entrance import entrance
 
 
+if not __debug__:
+    raise SystemExit('Run without -O so every certificate assertion is checked.')
+
+
 def eulerian(m):
     return fmpz_poly([
         sum((-1)**j*comb(m+1,j)*(p-j)**m for j in range(p))

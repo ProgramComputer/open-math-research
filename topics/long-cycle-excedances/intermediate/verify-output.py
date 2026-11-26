@@ -6,6 +6,10 @@ import re
 from entrance import entrance
 from check import phase_point
 
+if not __debug__:
+    raise SystemExit('Run without -O so every certificate assertion is checked.')
+
+
 expected = defaultdict(lambda:[0,0,0])
 gaps=set()
 for n in range(251,1001):
