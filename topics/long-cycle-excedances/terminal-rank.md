@@ -29,7 +29,7 @@ $$
 
 The single-cycle enumerator on $s$ letters is $tA_{s-1}$, by starting its cycle with its largest letter. For $m\ge6$ the denominator has at least two roots in $(-2^{-m},0)$ while both numerator Eulerian factors are positive throughout that interval.
 
-Here are elementary bounds proving those assertions. The Eulerian identity, obtained by applying $z\,d/dz$ successively to the geometric series, gives
+Here are elementary bounds proving those assertions. The Eulerian identity, obtained by applying $z(d/dz)$ successively to the geometric series, gives
 
 $$
 \frac{A_d(-z)}{(1+z)^{d+1}}=\sum_{h\ge1}(-1)^{h-1}h^d z^{h-1}
