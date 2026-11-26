@@ -828,6 +828,7 @@ private theorem normalizedRay_integral_data {d : ℝ} (hd : 0 < d) (hD : d < 1)
       Integrable.const_mul hSub.1 scaleFactor⁻¹
     apply hInverse.congr_fun _ measurableSet_Ioi
     intro s hs
+    change scaleFactor⁻¹ * f s = rayIntegrand d n j s
     rw [hEq hs, ← mul_assoc, inv_mul_cancel₀ hScale, one_mul]
   · rw [hSub.2, setIntegral_congr_fun measurableSet_Ioi hEq, MeasureTheory.integral_const_mul]
 
