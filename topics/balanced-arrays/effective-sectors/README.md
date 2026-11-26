@@ -2,6 +2,8 @@
 
 For every row count and every dimension $`d\ge2`$ with $`4d\ge n`$, the balanced-array polynomial has all simple negative roots if the cap satisfies $`10r\ge9d`$. Its degree is $`\lfloor nr/d\rfloor`$. The coefficient sequence is the one in [Per Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjBalancedArrays).
 
+A bound uniform over every row cap holds for $n\ge10^{200}$ and $200d\ge59n$. [Adjacent-quota proof and independent checks](../adjacent-quotas/README.md)
+
 Two further effective guarantees hold.
 
 - For rational $`1/2<\rho<1`$ and $`c>\rho(1-\rho)\log4`$, a computable row cutoff suffices when $`d\ge cn`$ and $`r\ge\rho d`$.

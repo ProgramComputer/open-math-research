@@ -24,7 +24,8 @@ This answers a question of Alexandersson.
 
 \section{Deleting a diagonal}
 Write $P_M$ and $Z_M$ for the Kazhdan--Lusztig and $Z$-polynomials of a
-loopless matroid. In terms of its lattice of flats $L(M)$,
+matroid, using the same ranked-lattice convention for a matroid with
+loops. In terms of its lattice of flats $L(M)$,
 \[
  Z_M(t)=\sum_{F\in L(M)}t^{\mathrm{rk}(F)}P_{M/F}(t).
 \]
@@ -35,12 +36,13 @@ Braden and Vysogorets \cite{bv}.
 
 \begin{lemma}\label{lem}
 Let a simple graph $G$ be the union of two subgraphs $H_1,H_2$ meeting
-precisely in an edge $e=uv$ and its endpoints. If each $H_i-e$ is
+precisely in an edge $e=uv$ and its endpoints. If each graph $H_i-e$ is
 connected, then $Z_{M(G)}=Z_{M(G-e)}$.
 \end{lemma}
 \begin{proof}
-Set $M=M(G)$. Since $e$ is a noncoloop, Theorem~2.8, equation~(6), of
-\cite{bv} applies. The difference in question is a sum over flats $F$
+The cycle matroid $M=M(G)$ is simple, and a $u$-to-$v$ path in either
+$H_i-e$ puts $e$ on a cycle. Thus $e$ is a noncoloop and Theorem~2.8,
+equation~(6), of \cite{bv} applies. The difference is a sum over flats $F$
 such that $e\notin F$ and $F\cup\{e\}$ is a flat. Each summand contains
 the factor $\tau(M/(F\cup\{e\}))$. In odd rank $s$, $\tau$ is the
 coefficient of $t^{(s-1)/2}$ in the Kazhdan--Lusztig polynomial. In even
@@ -75,28 +77,35 @@ Proposition~4.9 of Proudfoot, Xu and Young \cite{pxy}.
 
 \section{Ribbons}
 A ribbon is a connected skew diagram containing no $2\times2$ square.
-The corresponding connected lattice path matroids are also called
-\emph{snakes}. Alexandersson asks whether their $Z$-polynomial depends
-only on the rank and equals $N_{r+1}$ \cite{alex}. The full fan case is
-the formula of Lu, Xie and Yang \cite{lxy}.
+Alexandersson asks whether the $Z$-polynomial of a connected ribbon
+lattice path matroid depends only on the rank and equals $N_{r+1}$
+\cite{alex}. The full fan case is the formula of Lu, Xie and Yang \cite{lxy}.
 
 \begin{theorem}
 Every connected ribbon lattice path matroid $M$ of rank $r$ has
 $Z_M=N_{r+1}$. Its zeros are simple and strictly negative.
 \end{theorem}
 \begin{proof}
-Theorem~3.2 of Knauer, Mart\'inez-Sandoval and Ram\'irez Alfons\'in
-\cite{kmr} represents $M$ by a multi-fan. Its vertices are a hub and
-the $r$ vertices of a path. Bundles of parallel spokes join the hub to
-selected path vertices including both endpoints. The interval presentation
-of the snake gives one path edge for each element shared by consecutive
-intervals, and a spoke for each element belonging to a single interval.
+In rank one the lattice of flats is a chain on two elements, giving
+$Z_M=1+t=N_2$. If rank-zero degenerate ribbons are admitted, their
+lattice of flats has one element and $Z_M=1=N_1$.
+
+Suppose $r\ge2$. The two bounding paths have no intermediate common
+vertex. Otherwise the bases split as a direct sum on the nonempty sets
+of step positions before and after that vertex. An interior lattice
+point of the diagram would be incident to four unit squares of the
+diagram, making a $2\times2$ square. Thus $M$ is a snake in the sense of
+Knauer, Mart\'inez-Sandoval and Ram\'irez Alfons\'in \cite{kmr}. Their
+Theorem~3.2 represents $M$ by a multi-fan, with a hub and the $r$
+vertices of a path. Spokes join the hub to selected path vertices,
+including both endpoints. The interval presentation gives one path
+edge for each element shared by consecutive intervals, and a spoke
+for each element belonging to a single interval.
 
 Simplifying each parallel class preserves the ranked lattice of flats.
-For $r\ge2$, the path and its endpoint spokes form a polygonal boundary
-on $r+1$ vertices. The other spokes are noncrossing diagonals. Thus
-Theorem~\ref{polygon} gives the identity. In rank one the lattice of flats
-is a chain on two elements, giving $Z_M=1+t=N_2$. Finally, the Jacobi
+The path and its endpoint spokes form a polygonal boundary on $r+1$
+vertices. The other spokes are noncrossing diagonals, so
+Theorem~\ref{polygon} gives the identity. For every $r$, the Jacobi
 binomial expansion gives
 \[
  N_{r+1}(t)=\frac{(1-t)^r}{r+1}
@@ -119,11 +128,11 @@ validity nor its scope depends on a computation.
 \begin{thebibliography}{9}
 \setlength{\itemsep}{2pt}
 \bibitem{alex} P. Alexandersson, \emph{Real-rooted polynomials: open problems},
-\href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm}{Symmetric Functions Catalog}, 2026.
-\bibitem{bv} T. Braden and A. Vysogorets, Kazhdan--Lusztig polynomials of matroids under deletion, \emph{Electron. J. Combin.} 27 (2020), P1.17. \href{https://arxiv.org/abs/1909.09888}{arXiv:1909.09888}.
+\href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#openProblemsGraphs}{Symmetric Functions Catalog}, 2026, and \href{https://github.com/PerAlexandersson/RealRooted/issues/2650}{RealRooted issue 2650}, item~4, 24 November 2026.
+\bibitem{bv} T. Braden and A. Vysogorets, Kazhdan--Lusztig polynomials of matroids under deletion, \emph{Electron. J. Combin.} 27 (2020), P1.17. \href{https://doi.org/10.37236/9026}{doi:10.37236/9026}.
 \bibitem{fmv} L. Ferroni, J. P. Matherne, and L. Vecchi, Deletion formulas for equivariant Kazhdan--Lusztig polynomials of matroids, \emph{SIAM J. Discrete Math.} 39 (2025). \href{https://doi.org/10.1137/24M1673796}{doi:10.1137/24M1673796}.
-\bibitem{kmr} K. Knauer, L. Mart\'inez-Sandoval, and J. L. Ram\'irez Alfons\'in, A Tutte polynomial inequality for lattice path matroids. \href{https://arxiv.org/abs/1510.00600}{arXiv:1510.00600}.
+\bibitem{kmr} K. Knauer, L. Mart\'inez-Sandoval, and J. L. Ram\'irez Alfons\'in, A Tutte polynomial inequality for lattice path matroids, \emph{Adv. Appl. Math.} 94 (2018), 23--38. \href{https://doi.org/10.1016/j.aam.2016.11.008}{doi:10.1016/j.aam.2016.11.008}.
 \bibitem{lxy} L. Lu, M. H. Y. Xie, and A. L. B. Yang, Kazhdan--Lusztig polynomials of fan matroids, wheel matroids, and whirl matroids, \emph{J. Combin. Theory Ser. A} (2022). \href{https://doi.org/10.1016/j.jcta.2022.105665}{doi:10.1016/j.jcta.2022.105665}.
-\bibitem{pxy} N. Proudfoot, Y. Xu, and B. Young, The $Z$-polynomial of a matroid, \emph{Electron. J. Combin.} 25 (2018), P1.26. \href{https://arxiv.org/abs/1706.05575}{arXiv:1706.05575}.
+\bibitem{pxy} N. Proudfoot, Y. Xu, and B. Young, The $Z$-polynomial of a matroid, \emph{Electron. J. Combin.} 25 (2018), P1.26. \href{https://doi.org/10.37236/7105}{doi:10.37236/7105}.
 \end{thebibliography}
 \end{document}
