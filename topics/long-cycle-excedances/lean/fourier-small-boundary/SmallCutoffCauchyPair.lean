@@ -25,7 +25,7 @@ theorem small_cutoff_cauchy_pair {n : ℕ} {k M r R U C S : ℝ}
     (le_div_iff₀ hr).mpr (by linarith only [(div_le_iff₀ hU).mp (hf y)])) j
   have hW : 0≤W := by dsimp only [W]; positivity
   have hW_eq : W*B=(n:ℝ)^2*exp M*(r/R)^n := by
-    dsimp only [W,B]; field_simp; ring
+    dsimp only [W,B]; field_simp <;> ring
   let E := 1300*(n:ℝ)^2*exp (M-(4/5)*((n:ℝ)/k))
   have hWE : W*B ≤ E := by
     rw [hW_eq]

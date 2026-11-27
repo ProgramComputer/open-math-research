@@ -43,7 +43,7 @@ theorem small_cutoff_amplitude {n k s R M : ℝ} (hn : 10000≤n) (hk : 8≤k) (
         _ ≤ (2*(r/k))*2 := mul_le_mul hΔ (by linarith) (by positivity) (by positivity)
         _ = _ := by ring
     have hdv : Δ*(1+r/n)/(r/n) ≤ 4*(n/k) := (div_le_iff₀ hd).mpr
-      (h.trans_eq (by field_simp; ring))
+      (h.trans_eq (by field_simp <;> ring))
     have hv : n/k≤n/8 := div_le_div_of_nonneg_left hn0.le (by norm_num) hk
     linarith
   have H := annular_amplitude_from_contraction hs hk1 hd G w hgap (hw ▸ hrR)
@@ -56,7 +56,7 @@ theorem small_cutoff_amplitude {n k s R M : ℝ} (hn : 10000≤n) (hk : 8≤k) (
     _ ≤ (r*exp M*n)/(r/k/(1+r/k)) := by
       apply div_le_div₀ (by positivity) _ hq hp
       exact mul_le_mul_of_nonneg_left hratio (by positivity)
-    _ = ((k+r)*n)*exp M := by field_simp; ring
+    _ = ((k+r)*n)*exp M := by field_simp <;> ring
     _ ≤ _ := by
       apply mul_le_mul_of_nonneg_right _ (exp_pos _).le
       nlinarith only [mul_le_mul_of_nonneg_right (show k+r≤2*n by linarith) hn0.le]

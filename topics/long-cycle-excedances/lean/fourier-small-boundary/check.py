@@ -8,19 +8,20 @@ import sys
 HERE = Path(__file__).resolve().parent
 MODULES = (
     "SmallCutoffCircleDecay", "SmallCutoffCircle", "SmallCutoffAmplitude",
-    "SmallCutoffCauchyPair", "RepositorySmallBoundary",
+    "SmallCutoffCauchyPair",
 )
 
 
 def compile_small_boundary(project):
+    high = runpy.run_path(str(HERE.parent / "fourier-high-height/check.py"))
+    for module in MODULES:
+        high["check_module"](project, HERE / (module + ".lean"), high["GENERIC"])
     for path, stage in (
         ("fourier-small-cutoff-numerator", "compile_small_cutoff_numerator"),
         ("fourier-eight-nine", "compile_eight_nine_numerator"),
     ):
         runpy.run_path(str(HERE.parent / path / "check.py"))[stage](project)
-    high = runpy.run_path(str(HERE.parent / "fourier-high-height/check.py"))
-    for module in MODULES:
-        high["check_module"](project, HERE / (module + ".lean"), high["GENERIC"])
+    high["check_module"](project, HERE / "RepositorySmallBoundary.lean", high["GENERIC"])
 
 
 if __name__ == "__main__":

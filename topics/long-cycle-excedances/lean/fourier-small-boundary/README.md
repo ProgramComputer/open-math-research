@@ -10,4 +10,4 @@ The squared-radius gap gives distance at least $r/n$ from every pole. The origin
 
 ## Verification
 
-The circle, amplitude, and coefficient estimates passed locally on Lean 4.19. The local composition used the three numerator bounds as explicit hypotheses. The research-pin replay with the original coefficients supplying all three bounds is pending. On Linux, run `python3 -Bu check.py /path/to/fresh/project` in this directory.
+The circle, amplitude, and coefficient estimates passed locally on Lean 4.19. The local composition used the three numerator bounds as explicit hypotheses. The research-pin replay with the original coefficients supplying all three bounds is pending. On Linux, run `python3 -Bu check.py /path/to/fresh/project` in this directory. [Independent mathematical review](review.md)

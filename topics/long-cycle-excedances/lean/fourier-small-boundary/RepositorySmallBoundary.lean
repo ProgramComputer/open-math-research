@@ -57,6 +57,7 @@ theorem original_small_normalized_fourier_errors {k n : ℕ} (hn : 10000 ≤ n)
   have hw : ‖w‖=R := (norm_circleMap_zero R y).trans (abs_of_pos hR)
   have hlo : r≤‖w‖ := hw ▸ hrR
   have hhi' : ‖w‖≤(1+1/(k:ℝ))*r := hw ▸ hhi
+  simp only [originalFourierTrace]
   change r*‖T w/(1+Complex.exp (w-s))‖/‖T p‖ ≤ _
   rw [hT,hT]
   apply small_cutoff_amplitude hnr hkr hkur hs G w hw hm hrR hhi (hreg w hw)

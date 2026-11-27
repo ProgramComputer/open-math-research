@@ -14,7 +14,7 @@ theorem small_cutoff_circle_decay {k r R a : ℝ} (hk : 8 ≤ k) (hr : 0 < r) (h
   let t := R/r
   have ht : 0 < t := div_pos hR hr
   have hsq : t^2=1+a/k := by
-    dsimp only [t]; rw [div_pow,hR2]; field_simp; ring
+    dsimp only [t]; rw [div_pow,hR2]; field_simp <;> ring
   have hv : a/k ≤ 1/4 := (div_le_iff₀ hk0).mpr (by linarith)
   have hThi : t ≤ 9/8 := by nlinarith only [hsq,hv,sq_nonneg (t-9/8)]
   have hden : t*(1+t) ≤ 12/5 := by linarith only [hsq,hv,hThi,show t*(1+t)=t+t^2 by ring]
@@ -25,7 +25,7 @@ theorem small_cutoff_circle_decay {k r R a : ℝ} (hk : 8 ≤ k) (hr : 0 < r) (h
     have hp : 0 < t*(1+t) := by positivity
     have he : 1-1/t=(a/k)/(t*(1+t)) := by
       rw [show a/k=t^2-1 by linarith only [hsq]]
-      field_simp; ring
+      field_simp <;> ring
     rw [he,le_div_iff₀ hp,div_mul_eq_mul_div,div_le_div_iff_of_pos_right hk0]
     nlinarith only [hden,ha]
   apply (log_le_log_iff (pow_pos (div_pos hr hR) _) (exp_pos _)).mp
@@ -71,7 +71,7 @@ theorem small_cutoff_selected_circle {n k s r : ℝ} (hn : 10000≤n) (hk : 8≤
     apply (mul_le_mul_of_nonneg_left hsum hd.le).trans
     apply le_of_eq
     rw [hc]
-    dsimp only [x]; field_simp; ring
+    dsimp only [x]; field_simp <;> ring
   have hsquared (l : ℤ) : c*r^2/k ≤ |R^2-‖(s:ℂ)+(2*(l:ℂ)+1)*π*Complex.I‖^2| := by
     have e : (s:ℂ)+(2*(l:ℂ)+1)*π*Complex.I = (⟨s,(2*(l:ℝ)+1)*π⟩ : ℂ) := by
       apply Complex.ext <;> simp [Complex.mul_re,Complex.mul_im]
