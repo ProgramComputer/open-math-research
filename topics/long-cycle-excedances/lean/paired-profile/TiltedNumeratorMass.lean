@@ -40,7 +40,7 @@ private theorem bin_power_bound {k h i : ℕ} (hk : 0 < k) (hi : i < k) :
     nlinarith
   calc
     _ ≤ (9/8:ℝ)^(4*(h+1)) := pow_le_pow_right₀ (by norm_num) hb
-    _ = ((9/8:ℝ)^4)^(h+1) := pow_mul .. 
+    _ = ((9/8:ℝ)^4)^(h+1) := pow_mul ..
     _ ≤ _ := pow_le_pow_left₀ (by positivity) (by norm_num) _
 
 private theorem block_tilt_bound {k : ℕ} {d : ℕ→ℝ} (hd : Spec k d) (hk : 2 ≤ k) (h : ℕ) :
