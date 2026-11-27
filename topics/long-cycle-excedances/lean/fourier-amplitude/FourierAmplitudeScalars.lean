@@ -74,8 +74,8 @@ The large-aspect power is three halves. -/
 theorem selected_amplitude_regimes {x K r : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ K) (hr : 0 < r)
     (hu : 1 ≤ x*(K*(π/r)^2)) :
     let c := min (1/25 : ℝ) (4/x)
-    (x ≤ 100 → (2+r/K)*(1+(425/98)/c) ≤ 567) ∧
-    (100 ≤ x → (2+r/K)*(1+(425/98)/c) ≤ (57/100)*x*Real.sqrt x) := by
+    (x ≤ 100 → (1+r/K)*(1+(425/98)/c) ≤ 457) ∧
+    (100 ≤ x → (1+r/K)*(1+(425/98)/c) ≤ (46/100)*x*Real.sqrt x) := by
   let c := min (1/25 : ℝ) (4/x)
   have hx0 : 0 < x := by linarith
   have hK : 0 < K := by linarith
@@ -100,14 +100,14 @@ theorem selected_amplitude_regimes {x K r : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ K
   constructor
   · intro h
     have h10 : Real.sqrt x ≤ 10 := (sq_le_sq₀ hs0 (by norm_num)).mp (by nlinarith only [h,hs])
-    change (2+r/K)*(1+(425/98)/c) ≤ _
+    change (1+r/K)*(1+(425/98)/c) ≤ _
     calc
-      _ ≤ (2+315/100)*110 := mul_le_mul (by linarith) (hB h) hF (by norm_num)
+      _ ≤ (1+315/100)*110 := mul_le_mul (by linarith) (hB h) hF (by norm_num)
       _ ≤ _ := by norm_num
   · intro h
     have h10 : 10 ≤ Real.sqrt x := (sq_le_sq₀ (by norm_num) hs0).mp (by nlinarith only [h,hs])
     calc
-      _ ≤ ((515/1000)*Real.sqrt x)*((11/10)*x) :=
+      _ ≤ ((415/1000)*Real.sqrt x)*((11/10)*x) :=
         mul_le_mul (by linarith) (hL h) hF (by positivity)
       _ ≤ _ := by nlinarith only [mul_nonneg hx0.le hs0]
 

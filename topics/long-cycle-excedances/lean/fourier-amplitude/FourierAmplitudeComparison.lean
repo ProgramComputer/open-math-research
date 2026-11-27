@@ -42,7 +42,7 @@ theorem disk_amplitude_comparison {s r M B : ℝ} (hs : 0 ≤ s) (hr2 : r^2=s^2+
     simp only [norm_div,L,hn u hu,hn v hv,norm_div]
     have cancel (A C D E F J : ℝ) (hC : C ≠ 0) (hD : D ≠ 0) (hE : E ≠ 0)
         (hF : F ≠ 0) (hJ : J ≠ 0) :
-        A/J/C = (A/(D/E)/(C/(F/E)))*(D/J)/F := by field_simp; ring
+        A/J/C = (A/(D/E)/(C/(F/E)))*(D/J)/F := by field_simp
     exact cancel _ _ _ _ _ _ (norm_ne_zero_iff.mpr (Complex.exp_ne_zero (G p)))
       (hp u hu).ne' (norm_ne_zero_iff.mpr hc) (hp v hv).ne' (norm_ne_zero_iff.mpr hw)
   calc

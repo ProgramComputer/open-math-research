@@ -9,7 +9,6 @@ on:
       - 'topics/long-cycle-excedances/lean/fourier-stable/FourierDiskLog.lean'
       - 'topics/long-cycle-excedances/lean/fourier-circle/FourierCircleChoice.lean'
       - 'topics/long-cycle-excedances/lean/fourier-circle/FourierLogarithmicGap.lean'
-      - 'topics/long-cycle-excedances/lean/fourier-circle/FourierExponentialGap.lean'
       - 'topics/long-cycle-excedances/lean/fourier-circle/FourierOriginalDenominators.lean'
   workflow_dispatch:
 

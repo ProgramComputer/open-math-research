@@ -1,7 +1,7 @@
 import FourierAmplitudeComparison
 import FourierAmplitudeScalars
 import FourierOriginalDenominators
-import FourierExponentialGap
+import FourierPrincipalPeriod
 
 set_option autoImplicit false
 noncomputable section
@@ -40,7 +40,7 @@ theorem selected_circle_amplitude {x K s M : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ 
     ∃ a ∈ ({2-2*c,2} : Set ℝ), ∃ R : ℝ, 0<R ∧ R^2=r^2*(1+a/K) ∧
       ∀ w : ℂ, ‖w‖=R →
         r*‖Complex.exp (G w)/(1+Complex.exp (w-s))‖/‖Complex.exp (G p)‖ ≤
-          K*Real.exp M*(2+r/K)*(1+(425/98)/c) := by
+          K*Real.exp M*(1+r/K)*(1+(425/98)/c) := by
   intro p r c hu hM
   have hsq : r^2=s^2+π^2 := by
     dsimp [r,p]; rw [Complex.sq_norm,Complex.normSq_apply]; simp; ring
@@ -55,10 +55,9 @@ theorem selected_circle_amplitude {x K s M : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ 
   have hq : 0 < q := div_pos hr hK
   have hd : 0 < δ := by dsimp [δ]; positivity
   have hsmall := selected_gap_is_small hx hk hr hu
-  have hp : (⟨s,π⟩ : ℂ) = p := by dsimp only [p]; apply Complex.ext <;> simp
-  have hprincipal : q/(2+q) ≤ ‖1-Complex.exp (-p/(K:ℂ))‖ := by
-    simpa only [hp,neg_div] using (original_principal_denominator hk hs hr hsq).1
-  have hpd : 0 < q/(2+q) := by positivity
+  have hprincipal : q/(1+q) ≤ ‖1-Complex.exp (-p/(K:ℂ))‖ :=
+    principal_point_denominator (s:=s) hK1.le
+  have hpd : 0 < q/(1+q) := by positivity
   obtain ⟨a,ha,R,hR,hR2,hgap⟩ := original_circle_uniform_denominators hx hk hs hr hsq hu
   have ha' : a=2-2*c ∨ a=2 := ha
   have ha0 : 0 ≤ a := by rcases ha' with h | h <;> linarith
@@ -90,7 +89,7 @@ theorem selected_circle_amplitude {x K s M : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ 
   let D := ‖1-Complex.exp (-p/(K:ℂ))‖
   change r*Real.exp M*(1+Δ*(1+δ)/δ)/D ≤ _
   calc
-    _ ≤ (r*Real.exp M*(1+(425/98)/c))/(q/(2+q)) := by
+    _ ≤ (r*Real.exp M*(1+(425/98)/c))/(q/(1+q)) := by
       apply div_le_div₀ (by positivity) _ hpd hprincipal
       exact mul_le_mul_of_nonneg_left hratio (by positivity)
     _ = _ := by dsimp only [q]; field_simp; ring

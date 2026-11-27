@@ -11,16 +11,18 @@ for $r\le |w|\le (1+1/K)r$. There is a single choice $a=2-2c$ or $a=2$ such that
 
 $$
 \frac{r\left|e^{G(w)}/(1+e^{w-s})\right|}{|e^{G(p)}|}
-\le Ke^M(2+q)\left(1+\frac{425}{98c}\right).
+\le Ke^M(1+q)\left(1+\frac{425}{98c}\right).
 $$
 
-The factor multiplying $Ke^M$ is at most $567$ for $44\le x\le100$ and at most $(57/100)x\sqrt{x}$ for $x\ge100$. [Circle theorem](FourierSelectedAmplitude.lean) · [Scalar bounds](FourierAmplitudeScalars.lean)
+The factor multiplying $Ke^M$ is at most $457$ for $44\le x\le100$ and at most $(46/100)x\sqrt{x}$ for $x\ge100$. [Circle theorem](FourierSelectedAmplitude.lean) · [Scalar bounds](FourierAmplitudeScalars.lean)
 
-The real part of the difference of the two logarithmic errors is at most $M$. Exponentiation bounds the ratio of the two errors by $e^M$. The common normalization $1+e^{-s}$ cancels. At the contracted principal point the remaining denominator is exactly $|1-e^{-p/K}|\ge q/(2+q)$. On the comparison circle the denominator ratio is at most $1+\Delta(1+\delta)/\delta$, with $\delta=(49/100)cq$ and $\Delta=|w-\widehat w|\le 2q$. Since $c^2x\le4/25$ and $q^2\le \pi^2x/K$, one has $\delta\le1/16$. Substitution gives the stated factor $425/98$. [Logarithmic comparison](FourierAmplitudeComparison.lean) · [Pole separation and principal denominator](../fourier-circle/principal-denominator.md)
+The real part of the difference of the two logarithmic errors is at most $M$. Exponentiation bounds the ratio of the two errors by $e^M$. The common normalization $1+e^{-s}$ cancels. For $|\Im v|\le\pi$, zero is a nearest point to $v$ among the periods $2\pi i\ell$. Applying the period-gap inequality with distance $|v|$ yields $|1-e^v|\ge |v|/(1+|v|)$. Taking $v=-p/K$ gives the required principal bound for every $K\ge1$. [Principal strip lemma](FourierPrincipalPeriod.lean)
+
+At the contracted principal point the remaining denominator is exactly $|1-e^{-p/K}|\ge q/(1+q)$. On the comparison circle the denominator ratio is at most $1+\Delta(1+\delta)/\delta$, with $\delta=(49/100)cq$ and $\Delta=|w-\widehat w|\le 2q$. Since $c^2x\le4/25$ and $q^2\le \pi^2x/K$, one has $\delta\le1/16$. Substitution gives the stated factor $425/98$. [Logarithmic comparison](FourierAmplitudeComparison.lean) · [Pole separation and principal denominator](../fourier-circle/principal-denominator.md)
 
 ## Verification
 
-The three new modules compiled with warnings treated as errors on Lean 4.19.0, compiler `6caaee842e94` (short hash), mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. All seven named transitive axiom reports use only `propext`, `Classical.choice` and `Quot.sound`. A separate agent checked the denominator identity, use of the same circle for every angle, and rational constants at both ends of the ranges. [Independent review](review.md) The theorem takes the displayed numerator-contraction inequality as a hypothesis. Its original low- and high-height specializations and the production replay on Lean 4.33.1 are pending.
+The four new modules compiled with warnings treated as errors on Lean 4.19.0, compiler `6caaee842e94` (short hash), mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. All nine named transitive axiom reports use only `propext`, `Classical.choice` and `Quot.sound`. A separate agent checked the denominator identity, use of the same circle for every angle, and rational constants at both ends of the ranges for the preliminary bound using $q/(2+q)$. The strengthened denominator and the two current constants also passed the local Lean check. [Independent review](review.md) The theorem takes the displayed numerator-contraction inequality as a hypothesis. Its original low- and high-height specializations and the production replay on Lean 4.33.1 are pending.
 
 From the repository root with Lean 4.33.1 on the path, use a new directory for the production run.
 

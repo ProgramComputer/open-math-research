@@ -15,7 +15,8 @@ CIRCLE_REPORTS = runpy.run_path(str(CIRCLE / "check.py"))["THEOREMS"]
 MODULES = [
     (STABLE, "FourierDiskLog", ("diskLogisticLog_deriv", "diskLogisticLog_normalized")),
     *((CIRCLE, name, CIRCLE_REPORTS[name]) for name in
-      ("FourierCircleChoice", "FourierLogarithmicGap", "FourierExponentialGap", "FourierOriginalDenominators")),
+      ("FourierCircleChoice", "FourierLogarithmicGap", "FourierOriginalDenominators")),
+    (HERE, "FourierPrincipalPeriod", ("principal_strip_exponential_gap", "principal_point_denominator")),
     (HERE, "FourierAmplitudeComparison", ("annular_amplitude_from_contraction", "disk_amplitude_comparison")),
     (HERE, "FourierAmplitudeScalars", ("selected_gap_is_small", "selected_ratio_factor",
                                       "selected_ratio_regimes", "selected_amplitude_regimes")),
