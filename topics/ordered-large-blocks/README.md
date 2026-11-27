@@ -13,6 +13,8 @@ At every size, ordered partitions satisfy a fractional Newton inequality with to
 
 Every consecutive pair with cubic or quartic old row strictly interlaces. Together with the earlier low-degree theorem this covers every old size $n<5j$ at all thresholds. [Uniform certificates and independent review](bounded-degree/README.md)
 
+An explicit range allows the old degree to grow with the block threshold. The written bound and the rational constructor both give an explicit cutoff for each old degree. [Growing-degree theorem and checks](effective-degree/README.md)
+
 | Threshold | Proof and verification |
 |---|---|
 | Two | [Proof](threshold-two.md) · [Manuscript](paper.pdf) · [Source](paper.tex) |

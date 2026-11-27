@@ -34,6 +34,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 ## Partial work
 
+- An [explicit growing-degree bound for ordered partitions](topics/ordered-large-blocks/effective-degree/README.md) gives consecutive strict interlacing at every old degree when the block threshold reaches the stated degree-dependent cutoff.
 - The [linear-row theorem for ordered partitions](topics/ordered-large-blocks/first-degree-increase/README.md) gives strict interlacing through the first quadratic row and all-size growth of marked-block factorial moments.
 - The [uniform outer-rank theorem for ordered partitions](topics/ordered-large-blocks/outer-ranks/README.md) gives one eventual cutoff across all block thresholds for each fixed number of outer ranks.
 - A [linear dimension bound for every row cap](topics/balanced-arrays/adjacent-quotas/README.md) gives simple negative zeros when $200d\ge59n$ at the lower height $n\ge10^{200}$.
