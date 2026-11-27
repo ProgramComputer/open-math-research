@@ -1,11 +1,18 @@
 --- NumeratorTaylorContraction.lean
 +++ NumeratorTaylorContraction.lean
-@@ -163,7 +163,7 @@
-       have hdec : (9:ℝ)/(4*S*Real.sqrt ((i+k:ℕ):ℝ)) ≤ 9/(4*S*Real.sqrt k) :=
-         div_le_div_of_nonneg_left (by norm_num) (by positivity)
-           (mul_le_mul_of_nonneg_left hBs (by positivity))
+@@ -60 +60,3 @@
+-      linear_combination (36*S) * Real.sq_sqrt hk0.le
++      ring_nf
++      simp only [Real.sq_sqrt hk0.le]
++      all_goals ring
+@@ -113 +114,0 @@
+-          ring
+@@ -120 +121 @@
+-          _ = _ := by field_simp [ne_of_gt hk0]; ring
++          _ = _ := by field_simp [ne_of_gt hk0]
+@@ -146 +147 @@
+-  have hz : ‖z‖ = ρ := by simp [z,norm_mul,hξ, Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg hρ]
++  have hz : ‖z‖ = ρ := by simp [z,hξ, Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg hρ]
+@@ -166 +167 @@
 -      exact div_le_div₀ hC (add_le_add_left hdec 2) hk0 hkiR
 +      exact div_le_div₀ hC (by linarith only [hdec]) hk0 hkiR
-     have hpow := pow_le_pow_left₀ hρ hρq (i+k)
-     dsimp only [f,major]
-     rw [norm_mul,norm_pow,hz]
