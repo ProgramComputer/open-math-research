@@ -120,8 +120,8 @@ theorem single_cutoff_primitive_lattice {n k K lower : ℕ} {d : ℕ → ℝ} (h
         (sin θ)⁻¹*oddBinKernel c₀ a := by
     have hyk : 1/X ≤ (k:ℝ)/n :=
       (div_le_div_iff₀ hX (Nat.cast_pos.mpr hn)).2 (by simpa [mul_comm] using hnX)
-    have h := (angular_paired_bernoulli_kernels hn (by omega : 192 ≤ k) a hS
-      (by positivity : 0 ≤ 1/X) hyk hU hUs).1
+    have h := primitive_angular_bernoulli_kernel (r := k) hn (by omega : 192 ≤ k) a hS
+      (by positivity : 0 ≤ 1/X) hyk hU hUs
     have hker : ‖(pairedPoleDenom (cos θ) (sin θ) a)⁻¹‖^k ≤ oddBinKernel c₀ a := by
       have he : 1/X*U/192 = U/(192*X) := by ring
       simpa only [oddBinKernel,c₀,he] using h
