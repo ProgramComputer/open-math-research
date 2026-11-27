@@ -1,6 +1,6 @@
 # Finite dyadic windows for the original excedance rows
 
-The files here target the literal cutoff-eight pair on 32 and 33 labels. They
+The files here verify the literal cutoff-eight pair on 32 and 33 labels. They
 use the 15 positive-modulus brackets for old size 32 from the independent
 [compact archive in PR #331](https://github.com/ProgramComputer/open-math-research/pull/331).
 The check authenticates the uncompressed archive and compares each embedded
