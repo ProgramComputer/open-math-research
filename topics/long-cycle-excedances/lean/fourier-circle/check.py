@@ -29,6 +29,15 @@ THEOREMS = {
     "FourierSquaredSum": ["infinite_squared_pole_integral"],
     "FourierPoleDifferentiation": ["norm_squared_pole_term", "complexPoleKernel_angular_deriv"],
     "FourierDerivativeBound": ["complexPoleKernel_derivative_bound"],
+    "FourierLatticeDerivative": [
+        "odd_lattice_contrast_first_moment", "lattice_squared_weights", "odd_lattice_contrast_derivative",
+    ],
+    "FourierNormComparison": [
+        "fourier_old_coefficient_bound", "fourier_adjacent_coefficient_bound", "fourier_kernel_error",
+    ],
+    "FourierLatticeSplit": [
+        "odd_lattice_contrast_split", "circle_contrast_sum",
+    ],
 }
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 REPORT = re.compile(r"'OpenMathResearch\.LongCycleExcedances\.(\w+)' depends on axioms:\s*\[([^\]]*)\]")
