@@ -1,0 +1,26 @@
+Exterior coefficient sums — pinned verification, 27 November 2026
+
+Tested PR source: e5fac89b16dc83f80a2128c9b4a38010cec2516c
+Hosted check: https://github.com/ProgramComputer/open-math-research/actions/runs/45955078823/job/140359565436
+Artifact: front-envelope-sums-report (15178917009)
+Lean: 4.33.1, compiler 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+Mathlib: 0df444a360eaa60ab8c11dca51a86af692955474
+Frozen upstream source: 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Command: python3 -Bu topics/long-cycle-excedances/lean/front-envelope-sums/check.py PROJECT [IMPORT_OBJECT_ARCHIVE]
+
+All six module inputs matched their exact tested Git blobs. Each compiled and
+replayed with leanchecker. The source inputs are byte-identical after rebasing
+onto research 58ebb0b073de80ed002c9817461f16eef5c0ad27, which adds the color
+acceptance and insertion audit without changing the supplying Lean modules.
+
+FrontEnvelopeSum 7f44d0943a5f7f6a789c23fae6bb6a5c50033d3555a60df2f8d6aed1e901d5d1 matched; replay passed
+FrontFiniteSums a264484c6a866932cf43cf85e7e082bf0f7ae6084ad2874c55fcf03c4b5c491e matched; replay passed
+FrontLagSum b53c399d9c3ca97681636d0b10565da1035ed82275b52fea50389acc388f86e0 matched; replay passed
+FrontNormAlgebra a718c57b470bf9a48c3bbc1b8214b470d8234eb71fb84e0514a3435e9216244e matched; replay passed
+FrontSmallCap 4bdaf850309ae75ca73ff5cec243eb3fc0f96c4bd6c4008a8350d88d6bdbd133 matched; replay passed
+RepositoryExteriorEnvelopes 7c4c75e76394e20f32fd9145592351a81dfdca559c107ab2c70ed909a0c16175 matched; replay passed
+11 named declarations; propext, Classical.choice, Quot.sound only
+
+The repository theorem is conditional on the actual old and lag coefficient
+envelopes, central coefficient positivity and adaptive scale order and cap.
+This receipt establishes the conditional theorem and its supporting estimates.
