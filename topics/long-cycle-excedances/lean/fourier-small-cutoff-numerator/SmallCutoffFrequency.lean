@@ -99,7 +99,7 @@ theorem tail_frequency_sum_at (k : ℕ) (s t b : ℝ) (hk : 0 < k) (ht : 0 < t) 
           ring
         _ ≤ _ := mul_le_mul_of_nonneg_right hi (exp_pos _).le
   apply hsplit.trans
-  apply add_le_add_left
+  apply add_le_add le_rfl
   have h : b*s ≤ (s-t)*(k:ℝ) := (div_le_iff₀ hk0).mp hgap
   have hbt : b*t ≤ (s-t)*(k:ℝ) :=
     (mul_le_mul_of_nonneg_left hts.le hb.le).trans h
@@ -128,7 +128,7 @@ theorem high_height_tail_tsum_at (k : ℕ) (s t b : ℝ) (hk : 0 < k) (ht : 0 < 
       (∑' a, highHeightTail k s t a) ≤ ((k:ℝ)/(2*t))*exp (-(k:ℝ)/6) + 2/b := by
   have hd (a : ℕ) :
       Summable (fun j : ℕ => (((a+1:ℕ):ℝ)*t)^(j+k)/((j+k).factorial:ℝ)) := by
-    exact (NormedSpace.expSeries_div_hasSum_exp ℝ (((a+1:ℕ):ℝ)*t)).summable.comp_injective
+    exact (NormedSpace.expSeries_div_hasSum_exp (((a+1:ℕ):ℝ)*t)).summable.comp_injective
       (add_left_injective k)
   have hn (a : ℕ) : 0 ≤ highHeightTail k s t a := by
     unfold highHeightTail

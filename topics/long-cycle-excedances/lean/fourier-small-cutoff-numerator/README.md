@@ -13,3 +13,5 @@ Run `python3 -I -B check.py /path/to/new/project` on Linux with Lean 4.33.1. The
 The local Lean 4.19.0 check covers the generic analytic estimates, both scalar budgets, and the combination at the actual contour points with the imported analytic identities supplied explicitly. The production run checks the unconditional wrapper against the genuine imported coefficient and analytic-log sources.
 
 This work gives only the numerator contraction. The small-cutoff contour choice and bound for the denominator, Cauchy error and residues belong to separate steps.
+
+[Independent scope and arithmetic review](independent-review.md)

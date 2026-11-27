@@ -17,11 +17,10 @@ private theorem scale_band_radial_sum {k s B D u v : ℝ} (hk : 0 < k) (hs : 0 <
     (hc : 0 < v-D/k) :
     (B*s/k)*((u*k/s)*exp (D*u) + 1/((v-D/k)*s)) =
     B*u*exp (D*u) + B/(k*v-D) := by
-  have hh : (v-D/k)*k = k*v-D := by field_simp; ring
+  have hh : (v-D/k)*k = k*v-D := by field_simp <;> ring
   rw [←hh]
   generalize hz : (v-D/k) = C at hc ⊢
-  field_simp [hk.ne',hs.ne',hc.ne']
-  ring
+  field_simp [hk.ne',hs.ne',hc.ne'] <;> ring
 
 theorem high_band_numerator_cost (k : ℕ) (hk : 2 ≤ k)
     (s r R d q split decay : ℝ) (hs : 0 < s) (hsr : s ≤ r)
