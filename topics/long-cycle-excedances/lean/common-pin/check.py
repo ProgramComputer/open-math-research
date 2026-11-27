@@ -107,6 +107,11 @@ def compile_topic(project):
     files.append((HERE / "FarPoleTruncation.lean", "FarPoleTruncation"))
     files.append((HERE / "MonomialTiltBounds.lean", "MonomialTiltBounds"))
     files.append((HERE / "TiltAnalyticEvaluation.lean", "TiltAnalyticEvaluation"))
+    files.append((HERE / "HighAngleScalar.lean", "HighAngleScalar"))
+    files.append((HERE / "HighAngleLattice.lean", "HighAngleLattice"))
+    files.append((HERE / "HighAngleActualInputs.lean", "HighAngleActualInputs"))
+    files.append((HERE / "HighAngleRowEstimate.lean", "HighAngleRowEstimate"))
+    files.append((HERE / "ActualHighAngleSign.lean", "ActualHighAngleSign"))
     observed = {}
     failed = set()
     for source, module in files:
@@ -157,7 +162,8 @@ def compile_topic(project):
                    "ReciprocalHalfWindows", "RepositoryHalfAxisAssembly",
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
-                   "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation"):
+                   "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign"):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)

@@ -102,7 +102,7 @@ theorem seriesValue_finiteTilt_exp (g : ℕ → ℝ) (m : ℕ) (w : ℂ) :
       · simp [single]
       · intro i hi hne
         have h : i+1 ≠ m+1 := by omega
-        simp [single, h]
+        simp [single, h, hne]
       · simp
     rw [← hsingle]
     exact finiteTiltSummable single (m+1) w
