@@ -17,7 +17,7 @@ def finiteFourierSlope (m : ℕ) (b : ℕ → ℂ) (w : ℂ) : ℂ :=
 
 theorem finiteFourierLog_deriv (m : ℕ) (b : ℕ→ℂ) (w : ℂ) :
     HasDerivAt (finiteFourierLog m b) (finiteFourierSlope m b w) w := by
-  apply HasDerivAt.sum
+  apply HasDerivAt.fun_sum
   intro i _
   apply ((hasDerivAt_pow (i+1) w).const_mul (b (i+1))).congr_deriv
   simp [mul_assoc]
