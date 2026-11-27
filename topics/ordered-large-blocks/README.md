@@ -2,6 +2,8 @@
 
 Give an ordered set partition of $[n]$ weight $t^k$ when exactly $k$ blocks have size at least $j$. Write $O_{n,j}(t)$ for the sum.
 
+For every threshold, all consecutive pairs with a linear old row strictly interlace in the specified direction, including the first step into degree two. [Proof, exact checks and the continuous-age calculation](first-degree-increase/README.md)
+
 **Theorem.** For each fixed $`j\ge2`$, every sufficiently large row has only simple negative zeros and strictly interlaces its successor. The distribution of the zero moduli has an explicit limit with uniform error $`O_j(1/n)`$. For $`j=2,3,4`$, strict interlacing holds in every size. The fixed-threshold proof has an undetermined cutoff that may depend on $`j`$. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsSetPartitions)
 
 **Reviewed partial theorem.** One eventual old-size cutoff suffices for simple negative zeros and strict consecutive interlacing at all thresholds and ranks. The cutoff is existential. Formal verification is ⬜ None. A fresh-context mathematical review checked the complete assembly. [Uniform eventual proof package](uniform-eventual/README.md)

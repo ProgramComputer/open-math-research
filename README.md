@@ -35,6 +35,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 - The [uniform outer-rank theorem for ordered partitions](topics/ordered-large-blocks/outer-ranks/README.md) gives one eventual cutoff across every threshold for any fixed number of outer ranks.
 - The [growing outer-rank theorems for ordered partitions](topics/ordered-large-blocks/growing-outer-ranks/README.md) give strict consecutive order in the theta and moving-pole regimes.
+- The [first degree increase for ordered partitions](topics/ordered-large-blocks/first-degree-increase/README.md) completes the consecutive comparisons with a linear old row at every threshold.
 - The [finite-alphabet renewal-state argument](topics/ordered-large-blocks/finite-alphabet-states/README.md) isolates the newest-row sign comparison and gives exact obstructions to simpler compatibility conditions.
 - A [linear dimension bound for every row cap](topics/balanced-arrays/adjacent-quotas/README.md) gives simple negative zeros when $200d\ge59n$ at the lower height $n\ge10^{200}$.
 - Earlier balanced-array bounds: [five-thirds row bound and polynomial cap or corank range](topics/balanced-arrays/fifth-thirds/README.md), [all fixed quadratic aspects](topics/balanced-arrays/critical-aspect/README.md), [absolute quadratic cutoff](topics/balanced-arrays/quadratic/README.md), [quartic-log cutoff](topics/balanced-arrays/very-tall/README.md), and [dimension-uniform fixed-cap threshold](topics/balanced-arrays/fixed-cap/README.md).
