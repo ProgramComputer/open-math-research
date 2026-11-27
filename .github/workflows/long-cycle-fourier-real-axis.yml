@@ -7,6 +7,7 @@ on:
       - 'topics/long-cycle-excedances/lean/fourier-stable/**'
       - 'topics/long-cycle-excedances/lean/common-pin/RepositoryCoherentPoles.lean'
       - 'topics/long-cycle-excedances/lean/common-pin/MonomialTiltBounds.lean'
+      - 'topics/long-cycle-excedances/lean/common-pin/TiltAnalyticEvaluation.lean'
   workflow_dispatch:
 
 permissions:
@@ -31,11 +32,11 @@ jobs:
           tar --zstd -xf pinned.tar.zst
           rm pinned.tar.zst
           echo "$RUNNER_TEMP/lean-4.33.1-linux/bin" >> "$GITHUB_PATH"
-      - name: Compile and replay the real-axis bridge
+      - name: Compile and replay the original angular equation
         run: |
           set -euo pipefail
           ulimit -Sn 65536
-          python3 -Bu topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py "$RUNNER_TEMP/fourier-real-axis" --original-log 2>&1 | tee "$RUNNER_TEMP/fourier-real-axis.log"
+          python3 -Bu topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py "$RUNNER_TEMP/fourier-real-axis" --continuation 2>&1 | tee "$RUNNER_TEMP/fourier-real-axis.log"
       - name: Preserve verification report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import runpy
 import shutil
+import subprocess
 
 
 HERE = Path(__file__).resolve().parent
@@ -18,6 +19,18 @@ ORIGINAL_LOG = ("FourierOriginalLog", ("original_cutoff_log_linear", "original_c
 ORIGINAL_ROOTS = ("LongCycleBounds.BandMoments", "LongCycleBounds.CycleProfileLogistic")
 ORIGINAL_SUPPORT = ("RepositoryCoherentPoles", "MonomialTiltBounds")
 
+CONTINUATION = (
+    ("FourierRealContinuation", ("analytic_eq_off_poles_of_real_ray",)),
+    ("FourierLogisticPoles", ("logistic_denominator_zero_iff", "negative_logistic_slope_analytic")),
+    ("FourierLocalPoleBounds", ("local_pole_ratio",)),
+    ("FourierResolventDerivative", ("anchoredPoleSum_hasDerivAt", "inverseSquarePoleSum_analytic")),
+    ("FourierGeometricRemainder", ("pole_remainder_summable", "anchoredPoleSum_taylor_remainder")),
+    ("FourierAnchoredLogistic", ("rowPole_summable", "rowPole_inverseSquare_of_real", "rowPole_anchored_of_real")),
+    ("FourierCutoffLogSlope", ("finiteFourierLog_deriv", "finiteFourierSlope_remainder", "finiteFourierQuotient_deriv")),
+    ("FourierRowAngularEquation", ("angular_cutoff_remainder", "angular_finite_fourier_row")),
+    ("FourierOriginalAngularRow", ("original_row_angular_equation",)),
+)
+
 
 def build_local(project, original, module, theorems):
     run = COMMON["run"]
@@ -26,7 +39,11 @@ def build_local(project, original, module, theorems):
     output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
     print(f"Compile {module} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
     strict = ("-DwarningAsError=true",) if theorems else ()
-    audit = run(project, "lake", "env", "lean", *strict, "-o", str(output), str(source), capture=True)
+    try:
+        audit = run(project, "lake", "env", "lean", *strict, "-o", str(output), str(source), capture=True)
+    except subprocess.CalledProcessError as error:
+        print(error.stdout or "", end="", flush=True)
+        raise
     print(audit, end="", flush=True)
     for theorem in theorems:
         name = re.escape(NAMESPACE + theorem)
@@ -38,7 +55,8 @@ def build_local(project, original, module, theorems):
         print(f"kernel_replay_exit=0 {module}", flush=True)
 
 
-def main(project, original_log):
+def main(project, original_log, continuation):
+    original_log = original_log or continuation
     project.mkdir(parents=True)
     COMMON["prepare"](project)
     run = COMMON["run"]
@@ -48,7 +66,13 @@ def main(project, original_log):
     print(compiler, flush=True)
     upstream = (UPSTREAM, *ORIGINAL_ROOTS) if original_log else (UPSTREAM,)
     suppliers = [Path(*module.split(".")).with_suffix(".lean") for module in upstream]
-    run(project, "lake", "exe", "cache", "get", *map(str, suppliers))
+    extra = set()
+    if continuation:
+        sources = [HERE / (module + ".lean") for module, _ in CONTINUATION]
+        sources.append(HERE.parent / "common-pin" / "TiltAnalyticEvaluation.lean")
+        for source in sources:
+            extra.update(re.findall(r"^import (Mathlib\.[\w.]+)", source.read_text(), re.M))
+    run(project, "lake", "exe", "cache", "get", *map(str, suppliers), *sorted(extra))
     lock = json.loads((project / "lake-manifest.json").read_text())
     for package in lock["packages"]:
         checkout = ".lake/packages/" + package["name"]
@@ -66,11 +90,17 @@ def main(project, original_log):
             original = HERE.parent / "common-pin" / (module + ".lean")
             build_local(project, original, module, ())
         build_local(project, HERE / "FourierOriginalLog.lean", *ORIGINAL_LOG)
+    if continuation:
+        module = "TiltAnalyticEvaluation"
+        build_local(project, HERE.parent / "common-pin" / (module + ".lean"), module, ())
+        for module, theorems in CONTINUATION:
+            build_local(project, HERE / (module + ".lean"), module, theorems)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("project", type=Path, help="a new directory for the check")
     parser.add_argument("--original-log", action="store_true", help="also check the original cutoff logarithm")
+    parser.add_argument("--continuation", action="store_true", help="also check the original angular equation")
     args = parser.parse_args()
-    main(args.project.resolve(), args.original_log)
+    main(args.project.resolve(), args.original_log, args.continuation)
