@@ -1,0 +1,70 @@
+GitHub Actions run 45928963459, job 140276875541, succeeded on 2026-11-27 UTC.
+https://github.com/ProgramComputer/open-math-research/actions/runs/45928963459
+Repository source: 8c71bc6f0a3ca68bd930fff6163fb534165b5192
+Lean: 4.33.1, compiler 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+mathlib: 0df444a360eaa60ab8c11dca51a86af692955474
+Four project modules compiled with -DwarningAsError=true and replayed with leanchecker.
+Extract from the hosted output follows.
+
+Compile TruncatedRows sha256=1347d42538dcff4fb6eaa217340e5cb92a95cabd6573b8f06fa8b60260ac8169
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.all_rows_within' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.uniform_error_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.approx_positive_step' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.chop_within_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.signed_prefix_error' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.chop_loss' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.positive_sum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.round_step' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.coefficient_error' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+replaying TruncatedRows
+kernel_replay_exit=0 TruncatedRows
+Compile CompactRowModel sha256=8a59779b341e6a27f54b476581117229cd1f74527f45c70652a57bddd99a81e4
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.word_fits_envelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.lowerRows_succ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.decode_encode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.TruncatedRows.encode_fits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+replaying CompactRowModel
+kernel_replay_exit=0 CompactRowModel
+Compile OriginalRoundedRows sha256=03787aeb83defd6d63eceff6974578fae7c106f36232ede785a6172bb99cbb45
+'OpenMathResearch.LongCycleExcedances.originalReducedCount_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.originalReducedCount_short' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.original_count_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.rounded_counts_within' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying OriginalRoundedRows
+kernel_replay_exit=0 OriginalRoundedRows
+Compile RepositoryCompactRows sha256=742ff5fd5374776f446be84db32a73ab56957938c32e9946b20fb843177c5686
+'RepositoryQuotientAudit.compact_seed_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.compact_all_original' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.compact_original_prefix_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying RepositoryCompactRows
+kernel_replay_exit=0 RepositoryCompactRows
