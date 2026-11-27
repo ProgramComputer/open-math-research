@@ -19,7 +19,9 @@ theorem norm_far_pole_truncation_le (T : ℕ → ℂ) (n : ℕ) {A R : ℝ} {w :
   have hgeom : (∑ j ∈ range n, (R/W)^j) ≤ 1/(1-R/W) := by
     exact OpenMathResearch.DiskUniqueness.geometric_tail_bound
       (fun j : ℕ => (R/W)^j) 1 (R/W) (by positivity) hratio (by simp) zero_le_one
-      (fun j => by dsimp only; rw [pow_succ, mul_comm]) n
+      (fun j => by
+        change (R/W)^(j+1) ≤ (R/W)*(R/W)^j
+        rw [pow_succ, mul_comm]) n
   calc
     _ ≤ ∑ j ∈ range n, ‖T j * (1 / w^(n-j+1))‖ := norm_sum_le _ _
     _ ≤ ∑ j ∈ range n, (A / (R^(n-1)*W^2)) * (R/W)^(n-1-j) := by
@@ -39,8 +41,7 @@ theorem norm_far_pole_truncation_le (T : ℕ → ℂ) (n : ℕ) {A R : ℝ} {w :
           have he : R^(n-1) = R^j * R^(n-1-j) := by
             rw [← pow_add, ← h1]
           rw [he]
-          field_simp [hR.ne', hW.ne']
-          ring
+          field_simp [hR.ne', hW.ne'] <;> ring
     _ = (A / (R^(n-1)*W^2)) * (∑ j ∈ range n, (R/W)^j) := by
       rw [← mul_sum, sum_range_reflect]
     _ ≤ (A / (R^(n-1)*W^2)) * (1/(1-R/W)) := mul_le_mul_of_nonneg_left hgeom hpos
