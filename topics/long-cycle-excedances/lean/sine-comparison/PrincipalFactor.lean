@@ -47,7 +47,7 @@ private theorem radial_primitive_deriv (m : ℕ) (z v : ℂ)
         ((z*v)^m*v) z := by
       convert ((((hasDerivAt_id z).mul_const v).pow (m+1)).div_const ((m:ℂ)+1)) using 1 <;> try rfl'
       push_cast
-      try simp only [Nat.add_sub_cancel,one_mul]
+      try simp only [id_eq,one_mul,Nat.succ_sub_one]
       field_simp <;> ring
     convert ih.sub hb using 1 <;> try rfl'
     · funext u

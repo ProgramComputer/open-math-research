@@ -52,8 +52,14 @@ MODULES = (
     "RepositoryNumeratorVariation",
     "EntireCycleEvaluation",
     "RepositoryPrincipalFactor",
+    "PrincipalLatticeProduct",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.principal_pole_ratio_norm_le",
+    "OpenMathResearch.LongCycleExcedances.principal_log_lattice_summable",
+    "OpenMathResearch.LongCycleExcedances.principal_lattice_factors_hasProd",
+    "OpenMathResearch.LongCycleExcedances.principal_log_lattice_single_bound",
+    "OpenMathResearch.LongCycleExcedances.principal_product_re_of_lattice_majorant",
     "OpenMathResearch.LongCycleExcedances.principal_disk_exp_re",
     "OpenMathResearch.LongCycleExcedances.principal_radial_denominator",
     "OpenMathResearch.LongCycleExcedances.principal_log_integral_bound",
