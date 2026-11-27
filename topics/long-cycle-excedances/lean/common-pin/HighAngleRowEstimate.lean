@@ -130,15 +130,15 @@ theorem actual_high_angle_row_error {q k : ℕ} (hq : 0 < q) (hk : 7 ≤ k)
         have hmul := mul_le_mul (show (r/W)^2 ≤ oddSquareMajorant i from hgeo.1)
           hb (div_nonneg zero_le_one (by linarith)) (by unfold oddSquareMajorant; positivity)
         have h := mul_le_mul_of_nonneg_left hmul (show 0 ≤ A*ρ^(q-1) by positivity)
-        convert h using 1 <;> ring
+        simpa only [mul_assoc, mul_left_comm, mul_comm] using h
   have hfarS : Summable far :=
     Summable.of_nonneg_of_le (fun _ => by dsimp [far]; positivity) hfar
       (oddSquareSummable.mul_left _)
   have htail : Summable (fun i : ℕ => ‖u ((i+1:ℕ):ℤ)‖) := by
-    convert hfarS.mul_left (r^(q+1))⁻¹ using 1
-    funext i
-    dsimp only [far]
-    rw [← mul_assoc, inv_mul_cancel₀ (pow_ne_zero _ hr.ne'), one_mul]
+    have he (i : ℕ) : (r^(q+1))⁻¹ * far i = ‖u ((i+1:ℕ):ℤ)‖ := by
+      dsimp only [far]
+      rw [← mul_assoc, inv_mul_cancel₀ (pow_ne_zero _ hr.ne'), one_mul]
+    simpa only [he] using hfarS.mul_left (r^(q+1))⁻¹
   have hs : Summable (fun i : ℕ => ‖u (i:ℤ)‖) := (summable_nat_add_iff 1).mp htail
   have hpair := conjugate_lattice_real u hs (poleTrunc_conj T q x)
   have htailSum : |r^(q+1) * (∑' i : ℕ, u ((i+1:ℕ):ℤ)).re| ≤ 5*A*ρ^(q-1) := by
@@ -169,7 +169,7 @@ theorem actual_high_angle_row_error {q k : ℕ} (hq : 0 < q) (hk : 7 ≤ k)
         have h := mul_le_mul hr8 (show A*ρ^q*(1/(1-t)) ≤ A*ρ^q from
           mul_le_of_le_one_right (by positivity) hdiv)
           (by positivity) (by norm_num : (0:ℝ) ≤ 4)
-        convert h using 1 <;> ring
+        simpa only [mul_assoc, mul_left_comm, mul_comm] using h
   have hcoef := (original_coherent_row_pair q k (by omega) x hx).1
   have hreal := congrArg Complex.re hcoef
   simp only [Complex.ofReal_re, Complex.add_re] at hreal
