@@ -98,3 +98,28 @@ The [hosted check](https://github.com/ProgramComputer/open-math-research/actions
 compiled and replayed the module with Lean 4.33.1. The two added
 declarations use only `propext`, `Classical.choice` and `Quot.sound`.
 [Audit excerpt](pole-profile-audit.txt) · [Independent scope review](pole-profile-review.md)
+
+
+## The common pole multiplier of consecutive original rows
+
+[RepositoryCoherentPoles.lean](RepositoryCoherentPoles.lean) proves the
+exact coefficient identity before the shared contour comparison. Specializing
+the frozen formal logistic expression to the cutoff gives the normalized
+original permutation sum. The finite log tilt removes exactly the cycle
+moments of lengths between two and the cutoff minus one. Coefficient
+convolution with the logistic series gives a common signed odd-pole
+truncation for both rows, with one or two highest-degree terms kept
+separately. The proof uses absolute convergence to exchange the finite
+coefficient sum with the infinite pole sum.
+
+This is a prerequisite for estimating the actual consecutive-row contrast
+in the [uniform comparison](../../effective-uniform.md). The analytic
+bounds for the truncated multipliers, the highest-degree terms and the
+resulting sign are separate. [FarPoleTruncation.lean](FarPoleTruncation.lean)
+checks the geometric tail step from a coefficient envelope at radius
+strictly below the pole modulus. The bound keeps a square of the pole
+modulus in the denominator, which allows summing over the far lattice.
+The [successful hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/45930971642)
+compiled and replayed both modules on Lean 4.33.1. The audited declarations
+use only `propext`, `Classical.choice` and `Quot.sound`.
+[Audit excerpt](coherent-poles-audit.txt) · [Independent scope review](coherent-poles-review.md)

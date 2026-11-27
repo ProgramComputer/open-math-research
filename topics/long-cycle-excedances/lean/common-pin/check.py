@@ -21,7 +21,17 @@ COEFFICIENTS = TOPIC / "pinned-quotient"
 IMPORT_SHA = "000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05"
 MATHLIB = "0df444a360eaa60ab8c11dca51a86af692955474"
 COMPILER = "819816b2e0a3bf405af45ae5c7af2491d8f5bee6"
+LOGISTIC_IMPORTS = (
+    "MarkedTwoCycles", "MarkedTwoEGF", "MarkedExponentialBias", "MarkedLabelBias",
+    "MarkedLogistic", "CycleProfile", "CycleProfileEGF", "CycleProfileLogistic",
+)
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.norm_far_pole_truncation_le",
+    "RepositoryQuotientAudit.original_logistic_coefficient",
+    "RepositoryQuotientAudit.original_rescaled_logTilt_coeff",
+    "RepositoryQuotientAudit.coherent_product_coefficient",
+    "RepositoryQuotientAudit.coherent_successor_coefficient",
+    "RepositoryQuotientAudit.original_coherent_row_pair",
     "RepositoryQuotientAudit.original_normalized_pole_profile",
     "RepositoryQuotientAudit.original_nonprincipal_profile_bound",
     "OpenMathResearch.FirstLevelHits.exists_firstLevelHitOn",
@@ -93,6 +103,8 @@ def compile_topic(project):
         (HERE / "RepositoryCenterSign.lean", "RepositoryCenterSign"),
     ]
     files.append((HERE / "RepositoryPoleProfile.lean", "RepositoryPoleProfile"))
+    files.append((HERE / "RepositoryCoherentPoles.lean", "RepositoryCoherentPoles"))
+    files.append((HERE / "FarPoleTruncation.lean", "FarPoleTruncation"))
     observed = {}
     failed = set()
     for source, module in files:
@@ -142,7 +154,8 @@ def compile_topic(project):
                    "StrictRootListTranslation", "RepositoryRootAssembly", "ReciprocalWindowSigns",
                    "ReciprocalHalfWindows", "RepositoryHalfAxisAssembly",
                    "ReciprocalCenterSign", "RepositoryCenterSign",
-                   "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile"):
+                   "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
+                   "FarPoleTruncation"):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
@@ -168,6 +181,13 @@ def main(project, imports):
             raise ValueError(f"unexpected retained object archive {digest}")
         run(project, "tar", "--zstd", "-xf", str(imports))
         print(f"Reused verified 65-module archive sha256={digest}", flush=True)
+    for module in LOGISTIC_IMPORTS:
+        name = "LongCycleBounds/" + module
+        source = project / (name + ".lean")
+        out = project / ".lake/build/lib/lean" / (name + ".olean")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        print(f"Compile {name} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
+        run(project, "lake", "env", "lean", "-o", str(out), str(source))
     compile_topic(project)
 
 
