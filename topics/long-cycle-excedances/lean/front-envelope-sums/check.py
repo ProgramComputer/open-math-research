@@ -19,6 +19,14 @@ MODULES = (
     "FrontSmallCap",
     "RepositoryExteriorEnvelopes",
 )
+SECTOR_MODULES = (
+    "AdaptiveFrontBounds",
+    "AdaptiveFrontWeights",
+    "AdaptiveFrontGap",
+    "RepositoryOldFrontTails",
+    "ExteriorScaleOrder",
+    "RepositorySparseSector",
+)
 EXPECTED = {
     "OpenMathResearch.LongCycleExcedances." + name
     for name in (
@@ -34,6 +42,28 @@ EXPECTED = {
         "front_cap_lt_half",
     )
 } | {"RepositoryQuotientAudit.original_interlacing_of_exterior_weighted_envelopes"}
+SECTOR_EXPECTED = {
+    "RepositoryQuotientAudit.original_front_scale_cap",
+    "OpenMathResearch.LongCycleExcedances.adaptive_front_adjacent_gap",
+    "OpenMathResearch.LongCycleExcedances.exterior_alpha_ratio",
+    "OpenMathResearch.LongCycleExcedances.exterior_scales_ordered",
+    "OpenMathResearch.LongCycleExcedances.front_adaptive_multipliers",
+    "OpenMathResearch.LongCycleExcedances.front_bare_left_weight",
+    "OpenMathResearch.LongCycleExcedances.front_bare_right_weight",
+    "OpenMathResearch.LongCycleExcedances.front_far_rank_geometry",
+    "OpenMathResearch.LongCycleExcedances.front_far_reciprocal",
+    "OpenMathResearch.LongCycleExcedances.front_far_weighted_lag",
+    "OpenMathResearch.LongCycleExcedances.front_inverse_growth_bound",
+    "OpenMathResearch.LongCycleExcedances.front_inverse_growth_small_rank",
+    "OpenMathResearch.LongCycleExcedances.front_left_bare_ratio",
+    "OpenMathResearch.LongCycleExcedances.front_right_bare_ratio",
+    "RepositoryQuotientAudit.original_adaptive_front_scale",
+    "RepositoryQuotientAudit.original_far_front_weighted_lag",
+    "RepositoryQuotientAudit.original_front_adjacent_gap",
+    "RepositoryQuotientAudit.original_front_alpha_ratio",
+    "RepositoryQuotientAudit.original_old_front_weighted_tails",
+    "RepositoryQuotientAudit.original_sparse_sector_interlacing",
+}
 AXIOM_REPORT = re.compile(
     r"^'([^']+)' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])\s*$",
     re.MULTILINE,
@@ -49,9 +79,10 @@ def main(project, imports):
     common.main(project, imports)
 
     observed = {}
-    for module in MODULES:
+    for module in (*MODULES, *SECTOR_MODULES):
+        directory = HERE if module in MODULES else HERE.parent / "sparse-sector"
         source = project / (module + ".lean")
-        shutil.copyfile(HERE / source.name, source)
+        shutil.copyfile(directory / source.name, source)
         output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
         print(f"Compile {module} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
         result = subprocess.run(
@@ -66,13 +97,13 @@ def main(project, imports):
         for name, axioms in AXIOM_REPORT.findall(result.stdout):
             observed[name] = {axiom.strip() for axiom in axioms.split(",") if axiom.strip()}
 
-    for name in sorted(EXPECTED):
+    for name in sorted(EXPECTED | SECTOR_EXPECTED):
         if name not in observed or observed[name] - common.ALLOWED:
             raise ArithmeticError(f"Missing declaration or unexpected axioms for {name}: {observed.get(name)}")
-    for module in MODULES:
+    for module in (*MODULES, *SECTOR_MODULES):
         common.run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
-    print(f"PASS: {len(EXPECTED)} exterior declarations audited", flush=True)
+    print(f"PASS: {len(EXPECTED | SECTOR_EXPECTED)} exterior and sector declarations audited", flush=True)
 
 
 if __name__ == "__main__":

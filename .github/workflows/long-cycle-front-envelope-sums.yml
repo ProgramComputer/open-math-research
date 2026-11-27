@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/long-cycle-front-envelope-sums.yml'
       - 'topics/long-cycle-excedances/lean/front-envelope-sums/**'
+      - 'topics/long-cycle-excedances/lean/sparse-sector/**'
 
 permissions:
   actions: read
@@ -35,7 +36,7 @@ jobs:
           rm pinned.tar.zst
           echo "$RUNNER_TEMP/lean-4.33.1-linux/bin" >> "$GITHUB_PATH"
           gh run download 45917288503 --repo "$GITHUB_REPOSITORY" --name quotient-import-objects --dir "$RUNNER_TEMP" || true
-      - name: Compile and replay exterior coefficient sums
+      - name: Compile and replay the large-size interlacing proof
         run: |
           set -euo pipefail
           ulimit -Sn 65536
