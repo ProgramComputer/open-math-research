@@ -46,7 +46,7 @@ The real count is bounded by $p^n$ because the tagged accepted pairs are a subse
 
 The combinatorial modules through the rational recurrence originally compiled with Lean 4.19.0 and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. The immutable receipt records their original source hashes and axiom reports. The common-pin workflow checks the production modules and adapter with Lean 4.33.1 and mathlib `0df444a360eaa60ab8c11dca51a86af692955474`. [Lean 4.19 combinatorial receipt](combinatorial-lean419.txt) · [Real count receipt](real-bounds-lean419.txt) · [Common-pin runner](../lean/common-pin/check.py)
 
-All four modules compiled and replayed on the frozen Lean 4.33.1 pin. The audit records the exact source hashes and axiom reports for 16 declarations. [Verification record](verification.txt) · [Common-pin check](../lean/common-pin/check.py)
+The common-pin build compiled and replayed all 17 color modules. The receipt records the audited source hashes and named axiom reports. [Combinatorial and successor verification](combinatorial-lean433.txt) · [Initial transform verification](verification.txt)
 
 The successor recurrence transports the actual polynomial insertion law to the color transform. Its marked-cycle convolution gives the exact successive difference and dominates the literal nonnegative lag coefficient. [Successor recurrence and lag comparison](successor.md)
 

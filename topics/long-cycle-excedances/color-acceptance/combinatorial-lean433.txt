@@ -1,0 +1,57 @@
+Common-pin color acceptance combinatorial and successor audit
+Hosted run 45953788781, job 140355463677
+https://github.com/ProgramComputer/open-math-research/actions/runs/45953788781/job/140355463677
+Tested PR head 251a0eff09d1d9c5585c0a3488588b700d99390f
+Lean 4.33.1, mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Raw common-pin.log SHA-256 c637bcb8f684d42bc6d73d7c0f93b739326bf1146aeec1c3ae6a9e5f3c6fb323
+Artifact #15178970369 zip SHA-256 8236452e9029a59c97352d960528c7b877a8a5a72a073d72c33bd8b4e63a89c2
+Reproduction: python3 -Bu topics/long-cycle-excedances/lean/common-pin/check.py <fresh-project-dir> [verified-import-archive]
+
+Compile EulerianColorKernel input-sha256=01e5e07226cc701208ee98edace66a50008807e849f423b0f610d89aa305de1d
+kernel_replay_exit=0 EulerianColorKernel
+Compile ColorAcceptanceSeries input-sha256=fcd5aa7e6d14dc2aa7d8d0fe9ace71be1746e574182b55a23c4a195b0c3b6c5e
+kernel_replay_exit=0 ColorAcceptanceSeries
+Compile ColorTransformError input-sha256=855a29c338ea762a2d9e1a7654c805c48510b13699aab1e0453068efd16f1830
+kernel_replay_exit=0 ColorTransformError
+Compile RepositoryColorTransform input-sha256=b51cd878f97c02f280b9f69a1d9f3b7698127faa0a05c0a11eab095d9e11fdfc
+kernel_replay_exit=0 RepositoryColorTransform
+Compile ColorAnchor input-sha256=6b0a43fb981559ae837403374f370d798443495a48a1b5644468a34b522db52a
+kernel_replay_exit=0 ColorAnchor
+Compile ColorPermSplit input-sha256=9669df0e88b546c57fa8947385d7113cb2f72a3ca18b7f3978473093665cc094
+kernel_replay_exit=0 ColorPermSplit
+Compile ColorCycleCount input-sha256=17d5cd7566cd43c0b3998423820bfad986f9599ca298dd953152c26aeddd81eb
+kernel_replay_exit=0 ColorCycleCount
+Compile ColorBlock input-sha256=4fabd1060dde8b935a0ebe3c7d34f8f58fd3760aea8d5f9f09ff3625dddc34c6
+kernel_replay_exit=0 ColorBlock
+Compile ColorSupportCount input-sha256=54bdc1c0d96d8af9d26bbcac99c2de8c63794893f326330415bc7c44234cdfe5
+kernel_replay_exit=0 ColorSupportCount
+Compile ColorDoubleCount input-sha256=5afd26376366c35e15c97d848595c60753830b0161650f6c28f19491fb9fdc49
+kernel_replay_exit=0 ColorDoubleCount
+Compile ColorRelabel input-sha256=076c69e9bcb8506215d97e689df4a1c6014e596deef559436ae3810b2b3230b2
+kernel_replay_exit=0 ColorRelabel
+Compile ColorRecurrence input-sha256=617a7db629f90534f92627dc591ea5f4f300e0beadad4507b5f5eb9696300753
+kernel_replay_exit=0 ColorRecurrence
+Compile NormalizedColorRecurrence input-sha256=442aa17c52385ffeb40b4bd6228b503b40acac709edf3dd1d31c1cb94a69cce3
+kernel_replay_exit=0 NormalizedColorRecurrence
+Compile NormalizedColorBounds input-sha256=138a3ee0351e801ad8e28dc6a7dd375eaf0e93bb1a07585f322593e1412af44b
+kernel_replay_exit=0 NormalizedColorBounds
+Compile RepositoryColorCombinatorial input-sha256=3d5d4e60d741e9d9863be4abe495471402f9db3a560199596e85655697c7f01c
+kernel_replay_exit=0 RepositoryColorCombinatorial
+Compile ColorInsertion input-sha256=0a85eaa4a0f388e034a5dd61704d0f4ed29490e74a098e4cdff013c061f6e0a8
+kernel_replay_exit=0 ColorInsertion
+Compile RepositoryColorInsertion input-sha256=05f928fd8411994c3800f3dcc43880b4768dacd7dbc8c69a617ebbc19bee4e59
+kernel_replay_exit=0 RepositoryColorInsertion
+
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.normalizedCount_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_recurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_color_count_eq_transform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_color_acceptance_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_color_successor_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_color_successor_lag' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+PASS: 220 declarations audited
+
+The count is of literal accepted words and color permutations. The error and
+lag adapters apply to the original excedance enumerator. The audit establishes
+supporting identities and inequalities for the exterior argument.
