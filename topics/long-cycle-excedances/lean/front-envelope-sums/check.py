@@ -29,6 +29,8 @@ SECTOR_MODULES = (
     "SparseSizeThreshold",
 )
 SINE_MODULES = (
+    "PrincipalDisk",
+    "PrincipalIntegral",
     "PairedSineCoordinates",
     "PairedIntegerWindows",
     "PairedSineComparison",
@@ -93,6 +95,9 @@ ASPECT_EXPECTED = {
     "RepositoryQuotientAudit.original_residual_count_bound",
 }
 SINE_EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.principal_disk_exp_re",
+    "OpenMathResearch.LongCycleExcedances.principal_radial_denominator",
+    "OpenMathResearch.LongCycleExcedances.principal_log_integral_bound",
     "OpenMathResearch.LongCycleExcedances.bin_multiple_derivative_le",
     "OpenMathResearch.LongCycleExcedances.bin_rounded_product_bounds",
     "OpenMathResearch.LongCycleExcedances.bin_integer_derivative_certificate",
