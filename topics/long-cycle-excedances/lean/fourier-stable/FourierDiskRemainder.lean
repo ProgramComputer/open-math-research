@@ -36,7 +36,6 @@ theorem disk_geometric_remainder_bound {ι : Type*} (P : ι → ℂ) {ρ r : ℝ
       _ = (‖z‖/‖P i‖)^m * (‖z‖/(‖P i‖*‖P i-z‖)) := by
         rw [norm_div,norm_mul,norm_pow,norm_pow,pow_succ,pow_succ,div_pow]
         field_simp
-        exact Or.inl (by ring)
       _ ≤ q^m*((ρ/(1-q))*(1/‖P i‖^2)) :=
         mul_le_mul hpow he (by positivity) (pow_nonneg hq0 _)
       _ = _ := by dsimp only [C]; ring
