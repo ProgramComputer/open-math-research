@@ -75,7 +75,43 @@ MIDDLE_MODULES = (
     "RepositoryCenteredRows",
     "RepositoryMiddleCells",
 )
+JOIN_MODULES = (
+    "FrontModulusJoin",
+    "FrontMiddleWitnesses",
+    "JoinAngle",
+    "RepositoryJoinAngle",
+    "MiddleLevelSelection",
+    "RepositoryMiddleLevelSelection",
+    "RealFront",
+    "OriginalLiteralHalfRoots",
+    "RepositoryExteriorReduction",
+)
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.adjacent_front_centers",
+    "OpenMathResearch.LongCycleExcedances.arctan_uniform_join",
+    "OpenMathResearch.LongCycleExcedances.effective_front_adjacent_centers",
+    "OpenMathResearch.LongCycleExcedances.exterior_floor_budget",
+    "OpenMathResearch.LongCycleExcedances.exterior_modulus_lt_phase_boundary",
+    "OpenMathResearch.LongCycleExcedances.front_boxes_ordered",
+    "OpenMathResearch.LongCycleExcedances.front_log_midpoint",
+    "OpenMathResearch.LongCycleExcedances.front_normalize_insertion",
+    "OpenMathResearch.LongCycleExcedances.front_separation_log",
+    "OpenMathResearch.LongCycleExcedances.front_singleton_witness",
+    "OpenMathResearch.LongCycleExcedances.front_successor_sign",
+    "OpenMathResearch.LongCycleExcedances.join_signed_root_moduli",
+    "OpenMathResearch.LongCycleExcedances.ordered_middle_level_roots",
+    "OpenMathResearch.LongCycleExcedances.uniform_join_cutoff_separation",
+    "OpenMathResearch.LongCycleExcedances.uniform_join_geometry",
+    "OpenMathResearch.LongCycleExcedances.uniform_join_phase_from_imag",
+    "OpenMathResearch.LongCycleExcedances.uniform_join_radius_sq",
+    "RepositoryQuotientAudit.original_interlacing_of_exterior_roots",
+    "RepositoryQuotientAudit.original_interlacing_of_literal_half_roots",
+    "RepositoryQuotientAudit.original_ordered_middle_roots",
+    "RepositoryQuotientAudit.original_principal_phase_at_zero",
+    "RepositoryQuotientAudit.original_uniform_join_middle",
+    "RepositoryQuotientAudit.original_uniform_join_phase",
+    "RepositoryQuotientAudit.poleAngle_uniform_join",
+
     "OpenMathResearch.LongCycleExcedances.centered_pole_readout",
     "OpenMathResearch.LongCycleExcedances.fixed_nested_radius_budget",
     "OpenMathResearch.LongCycleExcedances.logarithmic_principal_unit",
@@ -285,6 +321,7 @@ def compile_topic(project):
     files.extend((TOPIC / "uniform-log-tilt" / (m + ".lean"), m) for m in UNIFORM_MODULES)
     files.extend((TOPIC / "vertical-tilt" / (m + ".lean"), m) for m in VERTICAL_MODULES)
     files.extend((TOPIC / "middle-residues" / (m + ".lean"), m) for m in MIDDLE_MODULES)
+    files.extend((TOPIC / "front-middle-join" / (m + ".lean"), m) for m in JOIN_MODULES)
     observed = {}
     failed = set()
     for source, module in files:
@@ -336,7 +373,7 @@ def compile_topic(project):
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
                    "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
-                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES, *MIDDLE_MODULES):
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES, *MIDDLE_MODULES, *JOIN_MODULES):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)

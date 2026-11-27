@@ -9,6 +9,7 @@ on:
       - 'topics/long-cycle-excedances/lean/uniform-log-tilt/*.lean'
       - 'topics/long-cycle-excedances/lean/vertical-tilt/*.lean'
       - 'topics/long-cycle-excedances/lean/middle-residues/*.lean'
+      - 'topics/long-cycle-excedances/lean/front-middle-join/*.lean'
 
 permissions:
   actions: read
