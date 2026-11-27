@@ -86,6 +86,8 @@ def main(directory):
     sys.argv = ["verify_lean.py", ".", "RepositoryQuotientAdapter", "--serial"]
     retained = directory / "verified-build"
     retained.mkdir()
+    if cached_imports := os.environ.get("QUOTIENT_IMPORT_OBJECTS"):
+        subprocess.run(["tar", "--zstd", "-xf", cached_imports], cwd=retained, check=True)
     try:
         # Keep the verifier's clean project until the diagnostic and artifact
         # steps finish. Every input and check is still selected by the verifier.

@@ -7,6 +7,7 @@ on:
       - 'topics/long-cycle-excedances/lean/pinned-quotient/**'
 
 permissions:
+  actions: read
   contents: read
 
 jobs:
@@ -32,6 +33,16 @@ jobs:
           tar --zstd -xf pinned.tar.zst
           rm pinned.tar.zst
           echo "$RUNNER_TEMP/lean-4.33.1-linux/bin" >> "$GITHUB_PATH"
+      - name: Reuse retained pinned imports if available
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          cached="$RUNNER_TEMP/quotient-cache/quotient-import-objects.tar.zst"
+          if gh run download 45917288503 --repo "$GITHUB_REPOSITORY" --name quotient-import-objects --dir "$(dirname "$cached")"; then
+            echo "000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05  $cached" | sha256sum -c
+            echo "QUOTIENT_IMPORT_OBJECTS=$cached" >> "$GITHUB_ENV"
+          fi
       - name: Check general coefficient bridge and execute fixture comparison
         env:
           LEAN_NUM_THREADS: '1'
