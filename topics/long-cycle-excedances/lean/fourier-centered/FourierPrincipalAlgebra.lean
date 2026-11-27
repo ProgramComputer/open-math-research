@@ -22,7 +22,7 @@ theorem actual_principal_displacement (s : ℝ) :
     field_simp [hr.ne'] <;> ring
   · simp only [Complex.sub_im,Complex.ofReal_im,sub_zero,Complex.div_im,zero_mul,
       zero_div,zero_sub,Complex.mul_I_im,Complex.neg_re,Complex.ofReal_re,him,hsq]
-    field_simp [hr.ne'] <;> ring
+    field_simp [hr.ne']
 
 /-- Conjugation of both the normalized original residue and the signed
 adjacent correction follows from a real numerator. -/
