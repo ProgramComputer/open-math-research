@@ -136,7 +136,7 @@ LOAD_MODULES = (
     "RepositoryExteriorLag",
 )
 EXPECTED = {
-    "RepositoryQuotientAudit.OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_at_least_single_cycle",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_at_least_single_cycle",
     "RepositoryQuotientAudit.original_front_alpha_lower_all",
     "RepositoryQuotientAudit.original_front_alpha_lower_of_cutoff",
     "RepositoryQuotientAudit.original_front_alpha_lower_of_full_cutoff",
