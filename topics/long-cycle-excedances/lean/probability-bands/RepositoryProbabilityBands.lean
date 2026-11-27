@@ -17,7 +17,7 @@ theorem originalProbability_spec {k : ℕ} (hk : 2 ≤ k) :
       simp [excedances]
     simp [enumerator, ha, he, Fintype.card_perm]
   · intro m
-    simp [eulerian, eval_finset_sum, Fintype.card_perm]
+    simp [eulerian, eval_finsetSum, Fintype.card_perm]
   · intro r rp
     exact LongCycleBounds.Anchored.anchored_row_recurrence hk (⟨0,rp⟩ : Fin r)
 

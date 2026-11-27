@@ -23,7 +23,7 @@ theorem from_anchored_polynomials {k : ℕ} (hk : 0 < k)
   · intro r hr
     have rp : 0 < r := by omega
     have h := congrArg (fun p : ℝ[X] => p.eval 1) (hrec r rp)
-    simpa only [eval_finset_sum, eval_mul, eval_C, eval_X, one_mul, heuler] using h
+    simpa only [eval_finsetSum, eval_mul, eval_C, eval_X, one_mul, heuler] using h
 
 #print axioms from_anchored_polynomials
 end OpenMathResearch.LongCycleExcedances.CycleProbability
