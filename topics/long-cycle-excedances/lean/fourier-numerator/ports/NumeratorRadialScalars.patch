@@ -1,13 +1,22 @@
 --- NumeratorRadialScalars.lean
 +++ NumeratorRadialScalars.lean
-@@ -1,8 +1,8 @@
- import Mathlib.Analysis.Convex.Deriv
+@@ -2,5 +2,5 @@
  import Mathlib.Analysis.Convex.SpecificFunctions.Basic
- import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 -import Mathlib.Data.Complex.ExponentialBounds
 -import Mathlib.Data.Real.Pi.Bounds
++import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 +import Mathlib.Analysis.Complex.ExponentialBounds
 +import Mathlib.Analysis.Real.Pi.Bounds
  import Mathlib.Tactic.Linarith
- import Mathlib.Tactic.NormNum
- import Mathlib.Tactic.Positivity
+@@ -59,3 +59,5 @@
+     rw [Real.log_inv] at hx
+-    have h := show (1-u)⁻¹ - 1 = u/(1-u) by field_simp [ne_of_gt hz]
++    have h := show (1-u)⁻¹ - 1 = u/(1-u) by
++      field_simp [ne_of_gt hz]
++      ring
+     linarith only [hx,h]
+@@ -121,2 +123,3 @@
+       field_simp [ne_of_gt hk0, ne_of_gt hk1]
++      ring
+     have hfrac : (100/101:ℝ) ≤ (k:ℝ)/((k:ℝ)+1) := by
