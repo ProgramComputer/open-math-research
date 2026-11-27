@@ -55,7 +55,9 @@ theorem propagate_upper {k l : ℕ} {d : ℕ → ℝ} (h : Spec k d) (hk : 0 < k
     have hn : (0 : ℝ) ≤ (r-1 : ℕ) := by positivity
     have hp := ih (r-1) (by omega) (by omega)
     have hq := ih (r-k) (by omega) (by omega)
-    apply (mul_le_mul_left rp).1
+    apply le_of_not_gt
+    intro bad
+    apply (not_lt_of_ge ?_) (mul_lt_mul_of_pos_left bad rp)
     calc
       (r : ℝ) * ((k : ℝ)*d r) =
           (↑(r-1) : ℝ) * ((k : ℝ)*d (r-1)) + (k : ℝ)*d (r-k) := by
@@ -80,7 +82,9 @@ theorem propagate_lower {k l : ℕ} {d : ℕ → ℝ} (h : Spec k d) (hk : 0 < k
     have hn : (0 : ℝ) ≤ (r-1 : ℕ) := by positivity
     have hp := ih (r-1) (by omega) (by omega)
     have hq := ih (r-k) (by omega) (by omega)
-    apply (mul_lt_mul_left rp).1
+    apply lt_of_not_ge
+    intro bad
+    apply (not_lt_of_ge (mul_le_mul_of_nonneg_left bad rp.le))
     calc
       (r : ℝ) * B = (↑(r-1) : ℝ) * B + B := by rw [hc]; ring
       _ < (↑(r-1) : ℝ) * ((k : ℝ)*d (r-1)) + (k : ℝ)*d (r-k) :=
@@ -106,7 +110,7 @@ private theorem log_step_upper {x : ℝ} (hx : 0 < x) :
   have hy : 0 < x+1 := by linarith
   have h := Real.log_le_sub_one_of_pos (div_pos hy hx)
   rw [Real.log_div hy.ne' hx.ne'] at h
-  have e : (x+1)/x-1=1/x := by field_simp
+  have e : (x+1)/x-1=1/x := by field_simp <;> ring
   linarith
 
 private theorem log_step_lower {x : ℝ} (hx : 0 < x) :
@@ -114,7 +118,7 @@ private theorem log_step_lower {x : ℝ} (hx : 0 < x) :
   have hy : 0 < x+1 := by linarith
   have h := Real.log_le_sub_one_of_pos (div_pos hx hy)
   rw [Real.log_div hx.ne' hy.ne'] at h
-  have e : x/(x+1)-1= -(1/(x+1)) := by field_simp
+  have e : x/(x+1)-1= -(1/(x+1)) := by field_simp <;> ring
   linarith
 
 private theorem harmonic_left {x : ℝ} (hx : 0 < x) (m : ℕ) :
@@ -165,13 +169,15 @@ theorem upper_of_tangent {k : ℕ} {d : ℕ → ℝ} (h : Spec k d) (hk : 0 < k)
   have eld : Real.log y = Real.log ((k : ℝ)+(m : ℝ)) - Real.log (k : ℝ) :=
     Real.log_div (by positivity) kp.ne'
   have he := second_block_equation h hk m hm
-  apply (mul_le_mul_left (show 0 < 1+y by linarith)).mp
+  have yp' : 0 < 1+y := by linarith
+  apply le_of_not_gt
+  intro bad
+  apply (not_lt_of_ge ?_) (mul_lt_mul_of_pos_left bad yp')
   calc
     (1+y)*((k : ℝ)*d (2*k+m)) = (↑(2*k+m) : ℝ)*d (2*k+m) := by
       dsimp [y]
       push_cast
-      field_simp
-      ring
+      field_simp <;> ring
     _ = _ := he
     _ ≤ B * (1+y) := by rw [eld] at lg; rw [invlog] at scalar; linarith
     _ = (1+y)*B := by ring
@@ -253,19 +259,20 @@ theorem lower548 {k : ℕ} {d : ℕ → ℝ} (h : Spec k d) (hk : 0 < k) :
   have z : (∑ i ∈ range (m+1), 1/(2*(k : ℝ))) = y/2 + 1/(2*(k : ℝ)) := by
     dsimp [y]
     simp only [sum_const, card_range, nsmul_eq_mul, Nat.cast_succ]
-    field_simp
-    ring
+    field_simp <;> ring
   rw [z] at hed
   have ln2 := Real.log_two_gt_d9
   have nonneg : 0 ≤ 1/(2*(k : ℝ)) := by positivity
-  apply (mul_lt_mul_left (show 0 < 3+y by linarith)).mp
+  have yp' : 0 < 3+y := by linarith
+  apply lt_of_not_ge
+  intro bad
+  apply (not_lt_of_ge (mul_le_mul_of_nonneg_left bad yp'.le))
   calc
     (3+y)*(548/1000 : ℝ) < (↑(3*k+m) : ℝ)*d (3*k+m) := by linarith
     _ = (3+y)*((k : ℝ)*d (3*k+m)) := by
       dsimp [y]
       push_cast
-      field_simp
-      ring
+      field_simp <;> ring
 
 
 theorem lower547 {k : ℕ} {d : ℕ → ℝ} (h : Spec k d) (hk : 0 < k) (r : ℕ) (hr : 3*k ≤ r) :
@@ -295,8 +302,7 @@ theorem from_anchored_counts {k : ℕ} (hk : 0 < k) (count : ℕ → ℝ)
     calc
       (r : ℝ)*(count r/(r.factorial : ℝ)) = count r/(↑(r-1).factorial : ℝ) := by
         rw [fact]
-        field_simp
-        ring
+        field_simp <;> ring
       _ = ∑ a ∈ Icc k r, count (r-a)/((r-a).factorial : ℝ) := by
         rw [hcount r hr, div_eq_mul_inv, sum_mul]
         apply sum_congr rfl
