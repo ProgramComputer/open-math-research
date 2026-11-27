@@ -26,3 +26,5 @@ Use Lean 4.33.1 on the supplying mathlib pin `0df444a360eaa60ab8c11dca51a86af692
 ~~~sh
 python3 -Bu topics/long-cycle-excedances/lean/probability-bands/check.py /tmp/probability-bands
 ~~~
+
+The hosted run compiled and replayed all three modules on the supplying pin. It audited the normalization and original probability declarations using only standard axioms. [Hosted audit receipt](hosted-audit.txt) · [Runner log](https://github.com/ProgramComputer/open-math-research/actions/runs/45925747252/job/140266532063)
