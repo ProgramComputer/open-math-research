@@ -66,4 +66,4 @@ Giving every block the same positive weight can destroy real-rootedness already 
 
 [Finite-alphabet renewal states](finite-alphabet-states/README.md) gives a conditional interlacing update for the normalized long states and exact obstructions to extending it by a split compatibility argument.
 
-A proposed argument covers every consecutive pair with a quadratic old row, including the first step into degree three. [Proof and exact checks](quadratic-rows/README.md)
+The reviewed theorem covers every consecutive pair with a quadratic old row, including the first step into degree three. [Proof and exact checks](quadratic-rows/README.md)

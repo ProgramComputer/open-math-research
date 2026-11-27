@@ -1,6 +1,8 @@
 # Consecutive ordered-partition signs with a quadratic old row
 
-**Proposed theorem.** At every threshold $`j\ge2`$, all consecutive pairs of the unweighted ordered large-block polynomials with quadratic old row strictly interlace in the prescribed direction. This covers $`2j\le n\le3j-1`$. The last pair, from $`3j-1`$ to $`3j`$, includes the first cubic row. In increasing modulus, the order starts with the smallest new root, then the smallest old root, then the second new root and second old root. At the first cubic row the additional new root comes last. Independent mathematical review is pending. Formal verification is ⬜ None. [Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsSetPartitions) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/1) · [Earlier linear-old-row proof](../first-degree-increase/README.md)
+**Theorem.** At every threshold $`j\ge2`$, all consecutive pairs of the unweighted ordered large-block polynomials with quadratic old row strictly interlace in the prescribed direction. This covers $`2j\le n\le3j-1`$. The last pair, from $`3j-1`$ to $`3j`$, includes the first cubic row. In increasing modulus, the order starts with the smallest new root, then the smallest old root, then the second new root and second old root. At the first cubic row the additional new root comes last. The argument and finite checks passed independent review. Formal verification is ⬜ None. [Alexandersson’s conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsSetPartitions) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/1) · [Earlier linear-old-row proof](../first-degree-increase/README.md)
+
+Together with the linked linear-old theorem, consecutive interlacing holds for every old size $j\le n\le3j-1$.
 
 ## A sign separator from the coefficient differences
 
@@ -131,3 +133,5 @@ For $`2\le j<64`$, the exact checker reduces the new cubic modulo the old quadra
 ## Replay
 
 Run `python3 -B check.py` beside this note. The checker uses only the standard library, checks the rational constants in the pole estimates, and recomputes the original integer coefficient rows independently of the marked expansion in every finite case. It certifies 465 equal-degree pairs and 62 first cubic transitions. [Checker](check.py) · [Recorded output](check-output.txt)
+
+[Independent mathematical review](review.md) · [Independent exact sign checker](independent.py) · [Independent checks of the analytic constants](constants.py)

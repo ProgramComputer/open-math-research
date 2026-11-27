@@ -1,6 +1,6 @@
 # Strict interlacing through the first ordered-partition degree increase
 
-**Proposed theorem.** For every threshold $`j\ge2`$, each consecutive pair $`O_{n,j},O_{n+1,j}`$ with a linear old row has simple negative roots and strict oriented interlacing, including the transition from $`n=2j-1`$ to $`2j`$. At equal degrees the new root lies between the old root and zero. At the degree increase the new roots bracket the old root. [Alexandersson’s original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsSetPartitions) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/1)
+**Theorem.** For every threshold $`j\ge2`$, each consecutive pair $`O_{n,j},O_{n+1,j}`$ with a linear old row has simple negative roots and strict oriented interlacing, including the transition from $`n=2j-1`$ to $`2j`$. At equal degrees the new root lies between the old root and zero. At the degree increase the new roots bracket the old root. [Alexandersson’s original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsSetPartitions) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/1)
 
 For a uniform ordered set partition of $`[n]`$, choose any fixed nonempty set of marked block sizes. Every binomial moment of the marked count increases strictly with $`n`$ from the first transition at which that moment can be positive. This includes individual block sizes and yields the signed comparison in the linear band. The endpoint correction for the quadratic row has a separate quantitative bound. Formal verification is ⬜ None. [Continuous-age return and its sign obstruction](age-return.md)
 
@@ -80,3 +80,5 @@ The last inequality follows from $`5(202/100)(7/10)^3<9\le j`$. Dividing the com
 ## Reproduction and provenance
 
 Run `python3 -B check.py` beside this note and compare with the recorded output. It uses only the standard library. [Exact checker](check.py) · [Recorded output](check-output.txt) The pole estimates concern the classical unrestricted ordered Bell series. The marked factorial-moment identity is obtained by substituting $`1+u`$ in Alexandersson’s reciprocal generating function. The proof gives a partial sign result for the original unweighted statistic and an all-size moment comparison. The separate continuous-age note records the precise sign obstruction to a pointwise first-return argument.
+
+[Independent mathematical review of both degree bands](../quadratic-rows/review.md)
