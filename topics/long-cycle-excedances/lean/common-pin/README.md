@@ -97,4 +97,4 @@ contour and correlated adjacent-row error estimates.
 The [hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/45928282511)
 compiled and replayed the module with Lean 4.33.1. The two added
 declarations use only `propext`, `Classical.choice` and `Quot.sound`.
-[Audit excerpt](pole-profile-audit.txt)
+[Audit excerpt](pole-profile-audit.txt) · [Independent scope review](pole-profile-review.md)
