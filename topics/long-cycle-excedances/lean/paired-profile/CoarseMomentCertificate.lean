@@ -5,7 +5,7 @@ set_option autoImplicit false
 namespace OpenMathResearch.LongCycleExcedances
 open Finset
 
-def coarseZerothUnits (c : ℚ) : ℕ :=
+noncomputable def coarseZerothUnits (c : ℚ) : ℕ :=
   (∑ q ∈ signedHead 31, linearWeight c q) + 2 * linearHalfTail c
 
 def coarseFirstUnits (c : ℚ) : ℕ :=
@@ -41,9 +41,9 @@ private theorem coarse_first_tail_cap {c : ℚ} {d : ℝ} (hc : 0 < (c:ℝ)) (hd
   have h : (linearScale:ℚ)*((1+c*(63^2-1))^95)⁻¹/(190*c) ≤ (linearFirstTail c:ℚ) := Nat.le_ceil _
   have h' : (linearScale:ℝ)*((1+(c:ℝ)*(63^2-1))^95)⁻¹/(190*(c:ℝ)) ≤ (linearFirstTail c:ℝ) := by
     exact_mod_cast h
-  convert h' using 1
-  unfold oBase
-  ring
+  calc
+    _ = (linearScale:ℝ)*((1+(c:ℝ)*(63^2-1))^95)⁻¹/(190*(c:ℝ)) := by unfold oBase; ring
+    _ ≤ _ := h'
 
 private theorem coarse_zeroth_tail_cap {c : ℚ} {d : ℝ} (hc : 0 < (c:ℝ)) (hd : (c:ℝ) ≤ d) :
     oTail d 63/(190*d*63) ≤ (2*(linearHalfTail c:ℝ))/linearScale := by
