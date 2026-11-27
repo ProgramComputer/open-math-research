@@ -38,9 +38,15 @@ For the lower bound tilt the binomial generating polynomial by $3/4$. If $k\le3n
 
 For the upper bound tilt by $3/2$. When $nj/p\le2k/3$, the upper tail is at most $\exp(-k/15)$. There are at most $b-1$ relevant lengths. Put $\mu=n/p$. Since $\exp(a\mu/15)\ge(a\mu/15)^3/6$, $a\ge3/2$ and $\mu\ge100$ give $(2/3)a^2\exp(-k/15)\le9/1000$. [Binomial tails](BinomialColorLoad.lean) · [Sums over orbit sizes](ColorLoadRanges.lean) · [Scalar bounds](LoadEnvelope.lean)
 
+## The insertion lag in the large-size sector
+
+The large-size interlacing reduction assumes $n/(200k)>30\log n+20$, hence $n>4000k$. Let $p\le\sqrt n/2$, $x=p/n$, and let $L$ denote the coefficient of the full insertion lag at $t^p$, divided by $p^n$. The exact successor identity bounds $L$ by the unweighted binomial grid with $d=k-1$. This uses only the upper bound 1 on the acceptance probability of the remaining labels. [Grid comparison](ColorLagGrid.lean) · [Statement for the original lag](RepositoryLoadLag.lean)
+
+Suppose the old normalized coefficient satisfies $\alpha(1+8kx/3)\ge99/100$. For $k\ge150$, the scalar theorem proves $L<\alpha/8$ from $L\le x+M$ and $(k-1)M^2\le1$. Indeed $kx^2\le1/16000$, $M\le1/12$, and $kxM\le1/80$. Multiplication gives $(x+M)(1+8kx/3)<99/800$. For $k<150$, one has $kx\le3/4$. In that regime $L\le1/500$ also gives $L<\alpha/8$. These comparisons would meet the required $8/25$ relative lag threshold. The first regime still needs the finite mesh estimate for the binomial grid and its point-mass bound in the common build. Zuo’s supplying theorem `gridBinomial_atom` gives the pointwise bound $1/\sqrt{k-1}$ when $2(k-1)\le n$. [Scalar theorem](SparseLagBudget.lean) · [Zuo’s binomial estimates](https://github.com/AlexZander-666/cycle-minimum-descent-real-roots/blob/e632c19bc246b819cd6b882cbf22c2fa9bc453de/formal/LongCycleBounds/OccupancyBoundedLoadJump.lean)
+
 ## Verification
 
-The six modules were developed and compiled on Lean 4.19. The 16 named declarations had only the standard axioms in that development build. The common research pin is Lean 4.33.1. Its port and kernel replay are pending. A literal enumeration independently checked 280 marked-load probabilities on 137,883 word–permutation pairs and both comparisons in 588 quadruples. The checker includes $0\le n\le6$, $1\le p\le4$, $1\le k\le6$ and $1\le b\le p+1$. [Exact checker](check-marks.py) · [Output](marked-output.txt)
+The six orbit-comparison modules and the two general lag modules compiled on Lean 4.19. Their 19 named declarations used only standard axioms. The ninth module specializes the grid bound to the literal repository insertion lag and awaits the production-pin build. The common research pin is Lean 4.33.1. Its port and kernel replay are pending. A literal enumeration independently checked 280 marked-load probabilities on 137,883 word–permutation pairs and both comparisons in 588 quadruples. The checker includes $0\le n\le6$, $1\le p\le4$, $1\le k\le6$ and $1\le b\le p+1$. [Exact checker](check-marks.py) · [Output](marked-output.txt)
 
 ~~~sh
 python3 -I topics/long-cycle-excedances/color-load-bounds/check-marks.py

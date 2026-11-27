@@ -117,8 +117,16 @@ LOAD_MODULES = (
     "MarkedLoadProbability",
     "ColorLoadRanges",
     "CutoffAcceptanceBudget",
+    "ColorLagGrid",
+    "SparseLagBudget",
+    "RepositoryLoadLag",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.color_lag_grid_upper",
+    "OpenMathResearch.LongCycleExcedances.sparse_lag_large_budget",
+    "OpenMathResearch.LongCycleExcedances.sparse_lag_small_budget",
+    "RepositoryQuotientAudit.original_lag_le_color_grid",
+
     "OpenMathResearch.LongCycleExcedances.ColorAnchor.actual_color_probability_comparison",
     "OpenMathResearch.LongCycleExcedances.ColorAnchor.actual_load_lower_budget",
     "OpenMathResearch.LongCycleExcedances.ColorAnchor.actual_load_upper_budget",
