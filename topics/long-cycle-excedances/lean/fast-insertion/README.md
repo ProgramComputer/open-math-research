@@ -12,6 +12,8 @@ The hosted workflow can reuse the three arithmetic artifacts from run 4593041721
 
 ## Verification
 
+The arithmetic checkpoint aggregate and nine split proof objects have been replayed. The isolated cutoff-13 specialization still exceeded the guarded resource budget, so the exact end-to-end route is paused. [Verification and resource diagnosis](verification.md)
+
 The source targets Lean 4.33.1 with mathlib commit `0df444a360eaa60ab8c11dca51a86af692955474`, the supplying release's own pins. On Linux with its pinned Lean on the search path, run the following from the repository root. The target directory must be new. A second, optional argument may point to the authenticated 65-module upstream archive described in the [common-pin record](../common-pin/README.md).
 
 ~~~sh
