@@ -1,0 +1,26 @@
+{
+  "n": [
+    0,
+    80
+  ],
+  "j": [
+    2,
+    20
+  ],
+  "u": [
+    1,
+    2,
+    4
+  ],
+  "passed": {
+    "derivative likelihood": 138864,
+    "fractional Newton": 19317,
+    "literal rows": 513,
+    "normalized column log-concavity": 22116,
+    "normalized ratio growth": 22701,
+    "rows": 4617,
+    "strict adjacent likelihood": 23307,
+    "strict row log-concavity": 19317,
+    "upper shifted likelihood": 138864
+  }
+}

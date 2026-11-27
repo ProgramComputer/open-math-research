@@ -1,0 +1,1 @@
+16938 strict falling-binomial minors and 18885 nondecreasing slope comparisons passed.

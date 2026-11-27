@@ -6,6 +6,8 @@ Give an ordered set partition of $[n]$ weight $t^k$ when exactly $k$ blocks have
 
 **Reviewed partial theorem.** One eventual old-size cutoff suffices for simple negative zeros and strict consecutive interlacing at all thresholds and ranks. The cutoff is existential. Formal verification is ⬜ None. A fresh-context mathematical review checked the complete assembly. [Uniform eventual proof package](uniform-eventual/README.md)
 
+At every size, ordered partitions satisfy a fractional Newton inequality with top parameter $n/j$, and their tilted large-block counts admit a coupling with jumps at least $j$ positions apart. The Newton inequality has the exact polynomial degree whenever $j$ divides $n$. [Coefficient theorem, proof and checks](likelihood-ratio/README.md)
+
 | Threshold | Proof and verification |
 |---|---|
 | Two | [Proof](threshold-two.md) · [Manuscript](paper.pdf) · [Source](paper.tex) |
