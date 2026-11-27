@@ -58,8 +58,14 @@ VERTICAL_MODULES = (
     "MinorPoleMass",
     "MinorPoleRadius",
     "RepositoryMinorPoles",
+    "SmallRadius",
+    "AllAngleMinorPoles",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.small_log_radius_excludes",
+    "RepositoryQuotientAudit.enclosed_poles_empty_of_small",
+    "RepositoryQuotientAudit.all_angle_enclosed_minor_poles_le_fifth",
+    "RepositoryQuotientAudit.middle_coherent_square_sum",
     "OpenMathResearch.LongCycleExcedances.all_cutoff_vertical_density_budget",
     "OpenMathResearch.LongCycleExcedances.coherent_log_chord_bound",
     "OpenMathResearch.LongCycleExcedances.coherent_vertical_transport",

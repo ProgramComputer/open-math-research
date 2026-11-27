@@ -44,8 +44,9 @@ private theorem poissonRemainder_deriv (m : ℕ) (t : ℝ) :
     simpa only [poissonTerm,pow_zero,mul_one,Nat.factorial_zero,Nat.cast_one,div_one,sub_neg_eq_add,zero_add] using hh
   | succ m ih =>
     have h := ih.sub (poissonTerm_succ_deriv m t)
-    have he : poissonRemainder (m+1) = fun y => poissonRemainder m y - poissonTerm (m+1) y := by
+    have he : poissonRemainder (m+1) = poissonRemainder m - poissonTerm (m+1) := by
       funext y
+      simp only [Pi.sub_apply]
       unfold poissonRemainder poissonTerm
       rw [expPrefix_succ]
       ring

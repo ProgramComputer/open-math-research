@@ -1,6 +1,6 @@
 import GammaDensity
-import Mathlib.Data.Real.Pi.Bounds
-import Mathlib.Data.Complex.ExponentialBounds
+import Mathlib.Analysis.Real.Pi.Bounds
+import Mathlib.Analysis.Complex.ExponentialBounds
 
 noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
