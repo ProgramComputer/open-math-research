@@ -1,18 +1,13 @@
 // Integer replay of dyadic signs for the reduced minimum-cycle excedance rows.
 #include <algorithm>
-#include <array>
+#include "row-storage.hpp"
 #include <charconv>
-#include <gmpxx.h>
 #include <iostream>
 #include <stdexcept>
 #include <string>
 #include <string_view>
 #include <tuple>
 #include <vector>
-
-using Z = mpz_class;
-constexpr unsigned width = 60;
-using Row = std::array<Z, width>;
 
 Row single_cycle(unsigned k) {
     Row p{};
@@ -25,12 +20,16 @@ Row single_cycle(unsigned k) {
     return p;
 }
 
+template <typename Storage>
 struct Rows {
     unsigned k, n;
     Row cycle;
-    std::vector<Row> ring;
-    Rows(unsigned cutoff) : k(cutoff), n(k), cycle(single_cycle(k)), ring(k) { ring[0] = cycle; }
-    Row const &at(unsigned m) const { return ring[m % k]; }
+    std::vector<typename Storage::Stored> ring;
+    Rows(unsigned cutoff) : k(cutoff), n(k), cycle(single_cycle(k)), ring(k) {
+        Row seed = cycle;
+        Storage::store(ring[0], seed);
+    }
+    decltype(auto) at(unsigned m) const { return Storage::read(ring[m % k]); }
     void advance(unsigned target) {
         while (n < target) {
             const Row &p = at(n);
@@ -54,7 +53,7 @@ struct Rows {
                 mpz_addmul(next[i].get_mpz_t(), choices.get_mpz_t(), acc.get_mpz_t());
             }
             ++n;
-            ring[n % k].swap(next);
+            Storage::store(ring[n % k], next);
         }
     }
 };
@@ -72,6 +71,7 @@ Z pow_ui(const Z &a, unsigned n) {
 }
 Powers powers(unsigned n) { return {pow_ui(Z(width + 1), n), pow_ui(Z(width + 2), n)}; }
 
+template <typename Storage>
 void check(const Row &row, const Powers &g, const Z &p, unsigned bits, int sign, Stats &stats) {
     Z D = Z(1) << bits;
     if (p <= 0 || 2 * p >= D)
@@ -83,7 +83,8 @@ void check(const Row &row, const Powers &g, const Z &p, unsigned bits, int sign,
         rounded = row[i] - rounded;
     }
     // Repeated floor errors, with sign reversal, have absolute sum < 2.
-    const Z lower = sign * rounded - 2;
+    const Z uncertainty = Storage::prefix_error(row, p, bits);
+    const Z lower = sign * rounded - 2 - uncertainty;
     const unsigned shift = bits - static_cast<unsigned>(mpz_sizeinbase(p.get_mpz_t(), 2));
     ++stats.checks;
     if (lower > 0 && (g.u << shift) >= 2 * g.v && (lower << (shift * width)) > 2 * g.u)
@@ -99,7 +100,8 @@ void check(const Row &row, const Powers &g, const Z &p, unsigned bits, int sign,
     Z homogeneous = row.back();
     for (int i = width - 2; i >= 0; --i)
         homogeneous = (row[i] << (bits * (width - 1 - i))) - p * homogeneous;
-    if (sign * homogeneous * denominator <= tail_numerator)
+    const Z signed_prefix = sign * homogeneous - (uncertainty << (bits * (width - 1)));
+    if (signed_prefix * denominator <= tail_numerator)
         throw std::runtime_error("uncertified sign");
 }
 
@@ -151,7 +153,7 @@ Key parse(std::string_view line) {
 }
 
 void print_first_pair() {
-    Rows rows(13);
+    Rows<ExactStorage> rows(13);
     rows.advance(252);
     for (unsigned n : {251, 252}) {
         std::cout << '[';
@@ -162,15 +164,8 @@ void print_first_pair() {
     }
 }
 
-int main(int argc, char **argv) {
-    if (argc == 2 && std::string_view(argv[1]) == "--first-pair-prefixes") {
-        print_first_pair();
-        return 0;
-    }
-    if (argc != 1) {
-        std::cerr << "usage: signs [--first-pair-prefixes]\n";
-        return 2;
-    }
+template <typename Storage>
+int replay() {
     try {
         std::string line;
         Key prev{};
@@ -179,7 +174,8 @@ int main(int argc, char **argv) {
         std::vector<Powers> bounds(1002);
         for (unsigned n = 251; n <= 1001; n++)
             bounds[n] = powers(n);
-        Rows rows(7);
+        Rows<Storage> rows(7);
+        Row old, upper;
         while (std::getline(std::cin, line)) {
             auto v = parse(line);
             if (v.k < 7 || v.k > 250 || v.n < 251 || v.n > 1000 || v.n < 4 * v.k ||
@@ -194,14 +190,18 @@ int main(int argc, char **argv) {
             else if (v.r != prev.r + 1 || (prev.b.p << v.a.bits) >= (v.a.p << prev.b.bits))
                 throw std::runtime_error("neighboring brackets");
             if (rows.k != v.k)
-                rows = Rows(v.k);
-            rows.advance(v.n + 1);
+                rows = Rows<Storage>(v.k);
+            if (v.k != prev.k || v.n != prev.n) {
+                rows.advance(v.n + 1);
+                old = rows.at(v.n);
+                upper = rows.at(v.n + 1);
+            }
             int direction = v.r % 2 == 1 ? 1 : -1;
             try {
                 for (auto p : {&v.a, &v.b}) {
-                    check(rows.at(v.n), bounds[v.n], p->p, p->bits,
+                    check<Storage>(old, bounds[v.n], p->p, p->bits,
                           p == &v.a ? direction : -direction, stats);
-                    check(rows.at(v.n + 1), bounds[v.n + 1], p->p, p->bits, -direction, stats);
+                    check<Storage>(upper, bounds[v.n + 1], p->p, p->bits, -direction, stats);
                 }
             } catch (const std::exception &e) {
                 std::cerr << v.n << ' ' << v.k << ' ' << v.r << ' ' << e.what() << '\n';
@@ -217,4 +217,16 @@ int main(int argc, char **argv) {
         std::cerr << e.what() << '\n';
         return 1;
     }
+    return 0;
+}
+
+int main(int argc, char **argv) {
+    if (argc == 1) return replay<ExactStorage>();
+    if (argc == 2 && std::string_view(argv[1]) == "--packed") return replay<PackedStorage>();
+    if (argc == 2 && std::string_view(argv[1]) == "--first-pair-prefixes") {
+        print_first_pair();
+        return 0;
+    }
+    std::cerr << "usage: signs [--packed | --first-pair-prefixes]\n";
+    return 2;
 }
