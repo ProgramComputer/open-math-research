@@ -31,9 +31,15 @@ private def linearWeights (c : ℚ) : Array ℕ :=
 
 private def linearHeadIndex (q : ℤ) : Fin 64 := ⟨(q+32).toNat%64, Nat.mod_lt _ (by decide)⟩
 
+private def linearHeadPoles : Finset ℤ := Icc (-32) 31
+private def linearCenters : Finset ℤ := Icc (-33) 32
+
+private theorem linearHeadPoles_eq : linearHeadPoles = signedHead 31 := rfl
+private theorem linearCenters_eq : linearCenters = signedCenters 31 := rfl
+
 def linearHead (c : ℚ) : ℕ :=
   let W := linearWeights c
-  (signedCenters 31).sup (fun a => ∑ q ∈ (signedHead 31).erase a,
+  linearCenters.sup (fun a => ∑ q ∈ linearHeadPoles.erase a,
     ⌈(W[(linearHeadIndex q).val]'(by simp [W,linearWeights]):ℚ)/
       (oddGap q a:ℚ)⌉₊)
 
@@ -41,6 +47,7 @@ private theorem linearHead_eq (c : ℚ) :
     linearHead c =
       (signedCenters 31).sup (fun a => ∑ q ∈ (signedHead 31).erase a, linearGapWeight c a q) := by
   unfold linearHead
+  rw [linearCenters_eq,linearHeadPoles_eq]
   apply sup_congr rfl
   intro a _
   apply sum_congr rfl
