@@ -96,7 +96,7 @@ theorem literal_slab_linear_envelope_of_spec (j : Fin 9) {n k N : ℕ}
   have hAS := (linearSlabInputs j hn hnX hS hUs).2
   have hA := (linearSlabConstants j).2.2.2.1
   have hKS : 0 < (k:ℝ)*sin θ := hA.trans_le hAS
-  exact (literal_slab_scaled_linear_envelope_of_spec j hn hnX hS hUs hd A a i).trans
+  exact (literal_slab_scaled_linear_envelope_of_spec (N:=N) j hn hnX hS hUs hd A a i).trans
     (mul_le_of_le_one_left (by positivity) ((div_le_one hKS).mpr hAS))
 
 /-- The linear input to the literal rounded-product theorem, instantiated

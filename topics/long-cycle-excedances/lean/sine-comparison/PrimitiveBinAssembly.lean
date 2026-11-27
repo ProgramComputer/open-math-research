@@ -96,7 +96,7 @@ theorem literal_checker_linear_envelope {n k K N J cap G : ℕ}
       (fun q => forgetDegree (literalMarkedPrimitive k N (cos θ) (sin θ) a q))).coeff i ≤ (l i:ℝ)/G := by
   intro i hi
   have hKS : 0 < (k:ℝ)*sin θ := mul_pos (Nat.cast_pos.mpr (by omega)) hS
-  have h := literal_checker_scaled_linear_envelope hK hKk hn hX hnX hS hU hUs hA₀
+  have h := literal_checker_scaled_linear_envelope (N:=N) hK hKk hn hX hnX hS hU hUs hA₀
     b hb hatom hfirst hjump hblock l V T hguard hhead htail hnn hround A a i hi
   exact h.trans (mul_le_of_le_one_left (by positivity) ((div_le_one hKS).mpr hA))
 
