@@ -36,14 +36,16 @@ theorem cutoffExp_deriv (m : ℕ) (z : ℂ) :
       (Complex.hasDerivAt_exp (-z)).comp z (hasDerivAt_id z).neg
   | succ m ih =>
     have h := ih.add (complexPoissonTerm_succ_deriv m z)
-    have he : cutoffExp (m+1) = fun y => cutoffExp m y+complexPoissonTerm (m+1) y := by
+    have he : cutoffExp (m+1) = cutoffExp m + complexPoissonTerm (m+1) := by
       funext y
+      simp only [Pi.add_apply]
       unfold cutoffExp complexPoissonTerm
       rw [sum_range_succ]
       ring
-    rw [he]
-    convert h using 1
-    ring
+    have hv : -complexPoissonTerm m z + (complexPoissonTerm m z - complexPoissonTerm (m+1) z) =
+        -complexPoissonTerm (m+1) z := by ring
+    rw [he, ← hv]
+    exact h
 
 def verticalArgument (x v : ℝ) : ℂ := (x:ℂ)+(v:ℂ)*Complex.I
 def verticalMode (m a : ℕ) (x v : ℝ) := cutoffExp m ((a:ℂ)*verticalArgument x v)/(a:ℂ)
@@ -52,7 +54,7 @@ private theorem verticalMode_deriv (m a : ℕ) (ha : 0 < a) (x v : ℝ) :
     HasDerivAt (verticalMode m a x) (-Complex.I*complexPoissonTerm m ((a:ℂ)*verticalArgument x v)) v := by
   let Z (u : ℂ) := (a:ℂ)*((x:ℂ)+u*Complex.I)
   have hz : HasDerivAt Z ((a:ℂ)*Complex.I) (v:ℂ) := by
-    simpa only [Z,one_mul] using (((hasDerivAt_id (v:ℂ)).mul_const Complex.I).const_add (x:ℂ)).const_mul (a:ℂ)
+    simpa only [Z,one_mul,id_eq] using (((hasDerivAt_id (v:ℂ)).mul_const Complex.I).const_add (x:ℂ)).const_mul (a:ℂ)
   have H := (((cutoffExp_deriv m (Z (v:ℂ))).comp (v:ℂ) hz).div_const (a:ℂ)).comp_ofReal
   have heq : (-complexPoissonTerm m (Z (v:ℂ)) * ((a:ℂ)*Complex.I))/(a:ℂ) =
       -Complex.I*complexPoissonTerm m ((a:ℂ)*verticalArgument x v) := by
@@ -74,8 +76,12 @@ theorem vertical_mode_transport (m a : ℕ) (ha : 0 < a) {x l u C : ℝ}
     unfold D complexPoissonTerm poissonTerm
     simp only [norm_mul,norm_neg,Complex.norm_I,one_mul,norm_div,norm_pow,Complex.norm_exp,hre,
       Complex.norm_natCast,mul_pow]
-    convert mul_le_mul_of_nonneg_left (hrad v hv)
-      (show 0 ≤ Real.exp (-((a:ℝ)*x))*(a:ℝ)^m/(m.factorial:ℝ) by positivity) using 1 <;> ring
+    let A := Real.exp (-((a:ℝ)*x))*(a:ℝ)^m/(m.factorial:ℝ)
+    have hA : 0 ≤ A := by dsimp only [A]; positivity
+    calc
+      _ = A * ‖verticalArgument x v‖^m := by dsimp only [A]; ring
+      _ ≤ A * (x^m*C) := mul_le_mul_of_nonneg_left (hrad v hv) hA
+      _ = _ := by dsimp only [A]; ring
   have h := Convex.norm_image_sub_le_of_norm_hasDerivWithin_le
     (fun v (_ : v ∈ Set.Icc l u) => (verticalMode_deriv m a ha x v).hasDerivWithinAt)
     hb (convex_Icc l u) (Set.left_mem_Icc.mpr hlu) (Set.right_mem_Icc.mpr hlu)
