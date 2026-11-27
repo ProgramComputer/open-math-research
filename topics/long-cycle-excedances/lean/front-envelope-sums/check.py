@@ -31,6 +31,7 @@ SECTOR_MODULES = (
 SINE_MODULES = (
     "PrincipalDisk",
     "PrincipalIntegral",
+    "PrincipalFactor",
     "PairedSineCoordinates",
     "PairedIntegerWindows",
     "PairedSineComparison",
@@ -95,6 +96,9 @@ ASPECT_EXPECTED = {
     "RepositoryQuotientAudit.original_residual_count_bound",
 }
 SINE_EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.principal_log_integral_eq",
+    "OpenMathResearch.LongCycleExcedances.principal_exp_integral_eq_factor",
+    "OpenMathResearch.LongCycleExcedances.principal_lagrange_factor_eq_exp",
     "OpenMathResearch.LongCycleExcedances.principal_disk_exp_re",
     "OpenMathResearch.LongCycleExcedances.principal_radial_denominator",
     "OpenMathResearch.LongCycleExcedances.principal_log_integral_bound",
