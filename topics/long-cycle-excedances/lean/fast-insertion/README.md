@@ -6,6 +6,10 @@ The integer table starts at the unique empty permutation. The frozen insertion r
 
 [Insertion recurrence](InsertionTable.lean) · [Rounding bound](RoundedHorner.lean) · [Tail bound](IntegerTail.lean) · [Connection to the original sum](OriginalInsertionSigns.lean) · [First-pair theorem](FirstPairOriginal.lean)
 
+The endpoint reductions are split into five short blocks, separate from the model that connects the checkpoint entries to the literal permutation rows. The final theorem combines the checked blocks with that model.
+
+The hosted workflow can reuse the three arithmetic artifacts from run 45930417212. Before importing any object, it checks the producing ZIP, insertion source, generator and generated source hashes, compiler and dependency pins, producer kernel receipts and object digests. Each reused artifact retains its original unmodified compiler log. If reuse is unavailable, the workflow builds and replays the arithmetic modules from source. [Producing run](https://github.com/ProgramComputer/open-math-research/actions/runs/45930417212)
+
 ## Verification
 
 The source targets Lean 4.33.1 with mathlib commit `0df444a360eaa60ab8c11dca51a86af692955474`, the supplying release's own pins. On Linux with its pinned Lean on the search path, run the following from the repository root. The target directory must be new. A second, optional argument may point to the authenticated 65-module upstream archive described in the [common-pin record](../common-pin/README.md).

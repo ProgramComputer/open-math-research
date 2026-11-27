@@ -31,9 +31,24 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
-      - name: Install pinned Lean
+      - name: Recover the authenticated arithmetic group
+        id: reuse
+        env:
+          GROUP: ${{ matrix.group }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if python3 -Bu "$MODULES/reuse-group.py" "$GROUP" "$RUNNER_TEMP/row-proofs" \
+              "$RUNNER_TEMP/producer-arithmetic.log" 2>&1 | tee "$RUNNER_TEMP/arithmetic.log"; then
+            echo 'available=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'available=false' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Install pinned Lean for a fresh arithmetic build
+        if: steps.reuse.outputs.available != 'true'
         run: bash "$MODULES/ci-prepare.sh"
       - name: Check coefficient equalities and their proof objects
+        if: steps.reuse.outputs.available != 'true'
         env:
           GROUP: ${{ matrix.group }}
         run: |
@@ -48,6 +63,7 @@ jobs:
           path: |
             ${{ runner.temp }}/row-proofs/
             ${{ runner.temp }}/arithmetic.log
+            ${{ runner.temp }}/producer-arithmetic.log
           retention-days: 30
 
   audit:

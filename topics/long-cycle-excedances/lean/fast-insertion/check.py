@@ -23,7 +23,10 @@ AUDIT = {
                                "original_signed_of_integer_check"},
     "CheckedShard": {"check_sound", "checkedShard"},
     "CheckpointReplay": {"checkpoint_step0", "checkpoint_step251", "checkpoint_first_pair"},
-    "FirstPairOriginal": {"firstPairRanks", "firstPairAllChecks", "firstPair_original_signs"},
+    "FirstPairChecks": {"firstPairRanks"},
+    "FirstPairModel": {"firstPairOldAgrees", "firstPairNewAgrees"},
+    "FirstPairArithmetic": {"firstPairAllChecks"},
+    "FirstPairOriginal": {"firstPair_original_signs"},
 }
 
 
@@ -70,7 +73,11 @@ def prepare_arithmetic(project):
 
 def source_module(project, source):
     shutil.copyfile(source, project / source.name)
-    compile_module(project, source.stem, AUDIT.get(source.stem, set()))
+    name = source.stem
+    expected = AUDIT.get(name, set())
+    if name.startswith("FirstPairChecks") and name != "FirstPairChecks":
+        expected = {"firstPairBlock" + name.removeprefix("FirstPairChecks")}
+    compile_module(project, name, expected)
 
 
 def generate(project):
@@ -146,7 +153,10 @@ def main(project, imports, groups=None):
     else:
         recover_groups(project, folder, groups)
     source_module(project, folder / "CheckpointReplay.lean")
-    source_module(project, HERE / "FirstPairOriginal.lean")
+    for module in ("FirstPairChecks", "FirstPairChecks0", "FirstPairChecks6", "FirstPairChecks12",
+                   "FirstPairChecks18", "FirstPairChecks24", "FirstPairArithmetic",
+                   "FirstPairModel", "FirstPairOriginal"):
+        source_module(project, HERE / (module + ".lean"))
     print("PASS: original permutation signs for 26 gaps, 2 rows, 2 endpoints", flush=True)
 
 
