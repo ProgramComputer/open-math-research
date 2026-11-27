@@ -103,11 +103,11 @@ theorem finite_pole_product_resummed {K ι : Type*} [Field K] [DecidableEq ι]
   · rw [prod_one_add, mul_sum]
     apply sum_congr rfl
     intro u hu
-    have hnot : a ∉ u := fun ha => (not_mem_erase _ _) ((mem_powerset.mp hu) ha)
+    have hnot : a ∉ u := fun ha => (mem_erase.mp ((mem_powerset.mp hu) ha)).1 rfl
     simp only [f, c, erase_insert hnot]
   · intro u hu v hv he
-    have hnu : a ∉ u := fun ha => (not_mem_erase _ _) ((mem_powerset.mp hu) ha)
-    have hnv : a ∉ v := fun ha => (not_mem_erase _ _) ((mem_powerset.mp hv) ha)
+    have hnu : a ∉ u := fun ha => (mem_erase.mp ((mem_powerset.mp hu) ha)).1 rfl
+    have hnv : a ∉ v := fun ha => (mem_erase.mp ((mem_powerset.mp hv) ha)).1 rfl
     simpa only [erase_insert hnu, erase_insert hnv] using congrArg (fun t : Finset ι => t.erase a) he
 
 /-- The finite form of the normalized cycle-pole series, with D the abstract
