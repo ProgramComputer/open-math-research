@@ -57,13 +57,13 @@ theorem principal_log_lattice_summable (j : ℕ) (C : ℝ) {S : ℝ} (hS : S ≠
   have hba : B-A ≠ 0 := sub_ne_zero.mpr ha.symm
   have hd : 0 < ‖1-A/B‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hv1.symm)
   have hgap : 2*|S| ≤ ‖B-A‖ := pole_gap_norm_lower C q.property
-  have he : (1-A/B)⁻¹ = 1+A/(B-A) := by field_simp [hb,hba,sub_ne_zero.mpr hv1.symm]
+  have he : (1-A/B)⁻¹ = 1+A/(B-A) := by field_simp [hb,hba,sub_ne_zero.mpr hv1.symm] <;> ring
   have hrecip : 1/‖1-A/B‖ ≤ K := by
     rw [one_div,←norm_inv,he]
     calc
       _ ≤ ‖(1:ℂ)‖+‖A/(B-A)‖ := norm_add_le _ _
-      _ ≤ K := by rw [norm_one,norm_div]; exact add_le_add_left
-                    (div_le_div_of_nonneg_left (norm_nonneg A) hsep hgap) _
+      _ ≤ K := by rw [norm_one,norm_div]; exact add_le_add le_rfl
+                    (div_le_div_of_nonneg_left (norm_nonneg A) hsep hgap)
   have hnorm := principal_log_integral_bound j (principal_pole_ratio_norm_le C hS q) hv1
   have hj : 1 ≤ (j:ℝ)+1 := by have h : (0:ℝ) ≤ j := Nat.cast_nonneg j; linarith
   calc
@@ -113,8 +113,7 @@ theorem principal_log_lattice_single_bound (j : ℕ) (C : ℝ) {S : ℝ} (hS : S
       have hb' : ‖B‖ ≠ 0 := norm_ne_zero_iff.mpr hb
       change ‖B‖⁻¹ ^ (j+2) / _ = ‖B‖⁻¹ ^ (j+1) / _
       rw [pow_succ _ (j+1)]
-      field_simp
-      ring
+      field_simp <;> ring
 
 /-- A scalar upper bound on the weighted signed-pole sum supplies the
 lower bound for the real part of the actual principal product. -/
