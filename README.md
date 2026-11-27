@@ -42,7 +42,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 - For [balanced arrays](topics/balanced-arrays/README.md), the corank-one theorem covers every dimension. Other caps are settled [through 36 rows](topics/balanced-arrays/finite-36/README.md) and [through degree fourteen](topics/balanced-arrays/low-degree.md).
 - Every sufficiently large [Eulerian-square row](topics/eulerian-matrix-square/README.md) has only simple real roots. At every row from $n=3$, the two extreme roots at each end strictly alternate with the next row. The all-root cutoff is unknown.
 - The published long-cycle excedance results cover every size at $k=3$ and all thresholds through old size 250 or from 10,000 onward. Bowen Zuo’s independently rebuilt Lean proofs cover every size at $k=4,5,6$. [Repository result](topics/long-cycle-excedances/README.md) · [External proof audits](topics/long-cycle-excedances/external-verification/README.md)
-- Bowen Zuo proved Alexandersson’s ordinary-descent conjecture for every minimum cycle length. The repository’s earlier partial theorem also covers arbitrary allowed cycle-type mixtures in its large-cutoff range. [Long-cycle descents](topics/long-cycle-descents/README.md)
+- Bowen Zuo’s full ordinary-descent theorem passed the [independent Lean rebuild](topics/long-cycle-descents/external-verification/README.md). The repository’s earlier partial theorem also covers arbitrary allowed cycle-type mixtures in its large-cutoff range. [Long-cycle descents](topics/long-cycle-descents/README.md)
 
 ## Citation
 
