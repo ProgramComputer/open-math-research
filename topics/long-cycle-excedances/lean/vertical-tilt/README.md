@@ -12,7 +12,7 @@ $$
 \sum_{p\in F}p\left(\frac{r}{|w_p|}\right)^n\left|\frac{T(w_p)}{T(w_1)}\right|\le\frac15.
 $$
 
-These inequalities bound the contribution of the positive nonprincipal poles to the normalized consecutive-row estimate. The [uniform all-cutoff argument](../../effective-uniform.md) used $21/50$ for the same sum. The passage from the residues to signs at every root also requires control of the row remainder and the exterior roots. [Actual phase and tilt](RepositoryPoleTransport.lean) · [Actual weighted sum](RepositoryMinorPoles.lean) · [All-angle result](AllAngleMinorPoles.lean) · [All-angle result](AllAngleMinorPoles.lean) · [All-angle result](AllAngleMinorPoles.lean)
+These inequalities bound the contribution of the positive nonprincipal poles to the normalized consecutive-row estimate. The [uniform all-cutoff argument](../../effective-uniform.md) used $21/50$ for the same sum. The passage from the residues to signs at every root also requires control of the row remainder and the exterior roots. [Actual phase and tilt](RepositoryPoleTransport.lean) · [Actual weighted sum](RepositoryMinorPoles.lean) · [All-angle result](AllAngleMinorPoles.lean)
 
 ## Proof
 
