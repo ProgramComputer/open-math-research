@@ -2,6 +2,8 @@
 
 Here $n$ is the lower row size, $k$ is the same cutoff for both rows, and $E_{n,k}$ counts excedances of permutations whose cycles all have length at least $k$. The [original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) concerns the literal pair $E_{n,k},E_{n+1,k}$. The coverage ledger uses strict negative interlacing for the quotients by the common factor $t$ and weak real interlacing for the literal pair. Both outer negative roots belong to the successor.
 
+The [verified finite supplement](../early-first-split/README.md) closes the first split for the remaining cutoffs from 8 through 54. Together these packages cover every lower size $k\le n<2k$ for $k\ge8$.
+
 ## Supplied Lean results
 
 These results come from Bowen Zuo’s [cutoff-six release](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/releases/tag/v1.2.0), using the repository’s frozen source at `46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554`. The adapter supplies the canonical quotient statement used by the repository’s other sector theorems.
@@ -10,7 +12,7 @@ These results come from Bowen Zuo’s [cutoff-six release](https://github.com/Al
 |---|---|
 | $k\le n\le2k-2$ | `InitialRows.beforeSplitRow` identifies both original rows with $t$ times ordinary Eulerian rows. `EulerianSturm.eulerian_consecutive_strict` gives strict quotient interlacing at old degree $n-2$. `InitialRows.beforeSplitInterlacing` gives the weak original result directly. |
 | $n=2k-1$, $k\ge55$ | `CoefficientRows.firstSplit_quotients` identifies the actual factor for each row, and `EulerianSturm.firstSplit55_strict` supplies strict interlacing at old degree $2k-3$. Multiplication by $t$ gives weak interlacing of the literal rows. The supplier's direct weak `InitialRows.throughFirstSplit` uses $k\ge201$. |
-| $n=2k-1$, $8\le k\le54$ | `Assembly.firstSplitStrict_of_checked` and `Assembly.firstSplit_of_checked` are available. Their checked-window input has no instance for these pairs in the pinned Lean sources. This is a finite certificate obligation for 47 pairs. |
+| $n=2k-1$, $8\le k\le54$ | `Assembly.firstSplitStrict_of_checked` and `Assembly.firstSplit_of_checked` are available. The repository supplies and checks all 47 missing instances in the [finite supplement](../early-first-split/README.md). |
 | $2k\le n\le3k-2$ | `BandFormula.actual_band_row` identifies quotient rows for actual size below $3k$. `BandEndpoint.actual_adjacent_of_separated` indexes by upper size $N=n+1=2k+d$, requires $402\le N$ and $d+1\le\sqrt N/400$, and consumes `SeparatedOnLegs`. No declaration in the pin supplies this separation predicate. This endpoint theorem therefore leaves even its narrow positive-width sub-band conditional. |
 | $3k-1\le n\le4k-2$ | `ThreeCycleQuotient.actual_threeCycle_row` gives exact factors for both rows. `extend_threeCycle_actual_interlacing` asks for the preceding strict pair and the normalized sign at every old zero with nonnegative log-coordinate. Its bound $N<4k$ is on the upper size $N=n+1$. |
 | $n=4k-1$ | The upper size $4k$ can contain four cycles. `GeneralCycleQuotient.actual_general_cycle_row` and `extend_general_actual_interlacing` use the actual all-cycle rows with the same sign premise. The three-cycle row formula may only be used for the old row here. |
