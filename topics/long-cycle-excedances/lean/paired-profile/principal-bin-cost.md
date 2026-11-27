@@ -25,3 +25,5 @@ $$
 for every finite set $T$ omitting zero. Consequently the sum of tilted absolute primitive masses is at most $64/5$. The product of one plus these masses is bounded by $e^{14}$. The part beyond bin 240 of the two principal terms is bounded by $2(4/7)B^{-240} e^{14}<1/10000$. [Numerator estimate](TiltedNumeratorMass.lean) · [Finite positive kernel](PrincipalRowKernel.lean) · [Absolute product estimate](LiteralPrincipalTilt.lean) · [Tail arithmetic](BinCostTail.lean)
 
 The hosted Lean 4.33.1 audits checked and kernel-replayed the reduction. The rounded product recurrence and the nine finite head sums still require numerical certificates. The nonprincipal value, regular numerator, and cutoff-atom errors are the remaining three terms of the determinant proof. [Verification receipt](principal-bin-verification.md) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/4)
+
+The [nine-slab principal-cost certificate](principal-cost-certificate.md) supplies the rounded recurrence and checks the numerical bounds for the finite head.
