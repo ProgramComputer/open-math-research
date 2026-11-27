@@ -29,15 +29,17 @@ The checker accepts the hashed import archive as an optional second argument.
 The next obligation is the exact numeric margin at each required dyadic
 endpoint. The analytic joins must still provide a complete ordered witness family.
 
-[RepositoryRootAssembly.lean](RepositoryRootAssembly.lean) proposes the
+[RepositoryRootAssembly.lean](RepositoryRootAssembly.lean) checks the
 original-row conclusion once that witness family and its signs are supplied.
 The existing mixed-witness theorem gives complete root lists in increasing
 positive modulus order. Negating and reversing the indices gives the ordered
 negative root factorization predicate used by Zuo's frozen
 [weak-interlacing assembly][assembly]. That theorem adjoins the common zero
-to both lists and gives weak interlacing of the literal enumerators. The
-scoped hosted check for these three additional declarations is pending.
+to both lists and gives weak interlacing of the literal enumerators. The [hosted assembly check][root-audit] compiled and replayed both new modules.
+The three new declarations use only `propext`, `Classical.choice` and
+`Quot.sound`. [Assembly audit excerpt](assembly-audit.txt)
 
+[root-audit]: https://github.com/ProgramComputer/open-math-research/actions/runs/45922634178
 [assembly]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleFinite/Assembly.lean#L8
 [hosted]: https://github.com/ProgramComputer/open-math-research/actions/runs/45921839840
 [artifact]: https://github.com/ProgramComputer/open-math-research/actions/runs/45917288503

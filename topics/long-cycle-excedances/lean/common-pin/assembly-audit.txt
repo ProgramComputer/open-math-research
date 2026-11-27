@@ -1,0 +1,17 @@
+GitHub Actions run 45922634178, audit job
+https://github.com/ProgramComputer/open-math-research/actions/runs/45922634178
+Checked adapter commit 66e172c
+Selected audit lines, with timestamps removed
+
+Frozen upstream source 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Reused verified 65-module archive sha256=000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05
+Compile StrictRootListTranslation input-sha256=6263a00094d83a65b51464eb4e9a3cc9c5f7a65d089bada658c53ebcc4d9204e
+Compile RepositoryRootAssembly input-sha256=26fb08cbff77a54f31d92d24d2400f7b904755976d8c75f970fd3d5a6fa827fd
+'RepositoryQuotientAudit.strict_of_complete_moduli' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_weak_of_complete_moduli' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_weak_of_mixed_windows' depends on axioms: [propext, Classical.choice, Quot.sound]
+kernel_replay_exit=0 StrictRootListTranslation
+kernel_replay_exit=0 RepositoryRootAssembly
+PASS: 8 original-row declarations audited
