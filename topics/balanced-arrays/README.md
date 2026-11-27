@@ -1,6 +1,6 @@
 # Real zeros of balanced binary arrays
 
-One absolute threshold $N$ gives $\lfloor nr/d\rfloor$ simple negative zeros for every $n\ge N$, $d\ge2$, and $1\le r\le d$. The threshold is ineffective, and the original all-row-count conjecture remains open. **⬜ None** for Lean or Rocq. [Proof and independent reviews](eventual-all/README.md)
+One absolute threshold $N$ gives $\lfloor nr/d\rfloor$ simple negative zeros for every $n\ge N$, $d\ge2$, and $1\le r\le d$. The threshold is ineffective, and the original all-row-count conjecture remains open. **🟨 Partial · Lean 4** on research. Lean checks support, degree, the one-column identity, the conditional sign-to-roots reduction, ordered first-hit radii for the actual occupied-cell phase, and its unconditional quantitative tilt bound for proper caps. The analytic signs and the joins between geometric and phase radii remain outside Lean. [Proof and independent reviews](eventual-all/README.md) · [Checked components and replay](eventual-all/lean/README.md)
 
 Binomial normalization makes column-extension ratios decrease even with arbitrary cell weights, forbidden cells and row-specific intervals. This gives a weighted real-rootedness criterion and identifies the limitation of a proof based on coefficient separation. [Theorem, example and review](weighted-normalization/README.md)
 
