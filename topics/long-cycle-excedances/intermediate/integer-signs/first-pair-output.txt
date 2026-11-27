@@ -1,0 +1,1 @@
+k=13 sizes=251,252 coefficients=120 gaps=26 exact_signs=104 sha256=5458f69b072a2f16ca975e4836bd4cd2e0b0b1b7626dadd7e5fa21398c0daa2e
