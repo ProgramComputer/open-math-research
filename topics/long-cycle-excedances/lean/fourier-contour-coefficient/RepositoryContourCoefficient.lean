@@ -146,8 +146,10 @@ theorem original_contour_coefficient {k : ℕ} (hk : 2 ≤ k) {s R : ℝ}
     exact seriesValue_original_coherentTilt hk _ _
   have hN (z : ℂ) : AnalyticAt ℂ (contourNumerator k s) z := by
     rw [hfun]
-    have hg : AnalyticAt ℂ g z :=
-      (range (k-1)).analyticAt_sum (fun j _ => analyticAt_const.mul (analyticAt_id.pow _))
+    have hg : AnalyticAt ℂ g z := by
+      first | apply (range (k-1)).analyticAt_fun_sum | apply (range (k-1)).analyticAt_sum
+      intro j _
+      exact analyticAt_const.mul (analyticAt_id.pow _)
     exact analyticAt_cexp.comp hg
   exact logistic_contour_coefficient (show 0 < ρ from hρ) hρR P
     (by rintro _ ⟨l,rfl⟩; exact hρpi.trans_le (pi_le_row_pole_norm s l))

@@ -80,7 +80,8 @@ theorem annular_principal_parts {ρ R : ℝ} (hρ : 0 < ρ) (hle : ρ ≤ R)
   by_cases hEq : R = ρ
   · have he : P = ∅ := by
       ext p
-      simp only [Finset.not_mem_empty, iff_false]
+      rw [show p ∈ (∅ : Finset ℂ) ↔ False by simp]
+      refine ⟨?_, False.elim⟩
       intro hp
       exact lt_irrefl _ ((hP p hp).1.trans ((hP p hp).2.trans_eq hEq))
     simp [hEq, he]
@@ -90,14 +91,10 @@ theorem annular_principal_parts {ρ R : ℝ} (hρ : 0 < ρ) (hle : ρ ≤ R)
     g z hz z - ∑ q ∈ P.erase z, a q * (z-q)⁻¹ else f z - Q z
   have hQ (A : Finset ℂ) (z : ℂ) (hz : z ∉ A) :
       AnalyticAt ℂ (fun w => ∑ q ∈ A, a q * (w-q)⁻¹) z := by
-    induction A using Finset.induction_on with
-    | empty => simpa using (analyticAt_const (𝕜 := ℂ) (v := (0:ℂ)) (x := z))
-    | @insert q A hq ih =>
-      have hqa : z ≠ q := fun e => hz (e.symm ▸ Finset.mem_insert_self _ _)
-      have hz' : z ∉ A := fun h => hz (Finset.mem_insert_of_mem h)
-      have hterm : AnalyticAt ℂ (fun w => a q * (w-q)⁻¹) z :=
-        analyticAt_const.mul ((analyticAt_id.sub analyticAt_const).inv (sub_ne_zero.mpr hqa))
-      simpa only [sum_insert hq, Pi.add_apply] using hterm.add (ih hz')
+    first | apply A.analyticAt_fun_sum | apply A.analyticAt_sum
+    intro q hq
+    have hne : z ≠ q := fun e => hz (e.symm ▸ hq)
+    exact analyticAt_const.mul ((analyticAt_id.sub analyticAt_const).inv (sub_ne_zero.mpr hne))
   have hHan (z : ℂ) (hz : z ∈ closedBall (0:ℂ) R \ ball 0 ρ) : AnalyticAt ℂ H z := by
     by_cases hp : z ∈ P
     · have hmore : ∀ᶠ w in 𝓝 z, w ∉ P.erase z :=
