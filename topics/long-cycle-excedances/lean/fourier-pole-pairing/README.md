@@ -24,3 +24,5 @@ Run the [common-pin check](check.py) from the repository root with Lean 4.33.1 f
     python3 -Bu topics/long-cycle-excedances/lean/fourier-pole-pairing/check.py /tmp/fourier-pole-pairing
 
 The [hosted workflow](../../../../.github/workflows/long-cycle-enclosed-pole-pairing.yml) uses the original Fourier pole and signed-moment inputs, strict compilation and the bundled LeanChecker replay.
+
+The [verification record](verification.md) gives the exact source hashes, axiom results and replay.
