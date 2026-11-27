@@ -1,0 +1,43 @@
+# Primitive-envelope pinned audit
+
+Lean source head `2dcab678f14f2e8cdbb43e09b2e36c5d11bd0cb9`. The hosted proof-log SHA-256 is `5492c96c26b9c7e09e96c37b323e2e3f61fd8a3081348ef2511995fd386fce92` and rational-output SHA-256 is `cb5668b288d45eb4bafc33d082a552d093bfd423c6a236a21ef0e3389496dd62`. [Successful hosted run](https://github.com/ProgramComputer/open-math-research/actions/runs/45978536807)
+
+The driver compiled all 39 source modules, matched all source hashes, and kernel-replayed the 14 bridge modules. It audited the 29 specified declarations with only `propext`, `Classical.choice`, and `Quot.sound`. The independent rational replay matched the two linear tables through bin 240 in all nine slabs.
+
+```text
+Frozen upstream source 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Reused verified common-pin archive sha256=000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05
+Compile BivariateBin input-sha256=ac6b9d50d20f1b265f6c88f7c209889bb542bfd02c619de90375a2a1aa6f3288
+Compile PrimitivePoleKernel input-sha256=bf489d3d270f2fd974f3b3341ae10ec025139aca3fa85b4a6f595c5d5182329f
+Compile DiscreteOddTail input-sha256=f3e9382c2f609853f763c3fffead1d1010bd387f24c9b0c21466dc19c1a81c1e
+Compile LiteralBin input-sha256=739f0edb768bd3e72e179217204c32b29cff25cbc0ad8a34318a00c40c75e085
+Compile PrimitiveBinMass input-sha256=a50f17d192731338c6fb87f5286da78e620c64bf59fe1b5110d8a15593fd8d02
+Compile PrimitiveFirstBlock input-sha256=fd8b32438606321e407117dfcdab196a39b4debdfa2db27af1b6ea61f275661b
+Compile PrimitiveCheckerMass input-sha256=5f7c56bffad94cccf21de153be77297b722190400edeb98271abf8b0b454562b
+Compile PrimitiveLinearEnvelope input-sha256=033f788607f067f57bf1b0d395957ceb3750e44afd86404c7d58368dfe65a556
+Compile SignedStarEnvelope input-sha256=f2870d6b82c690747ecc5ad5527518111b1f5086195f9f785a0adf06f4e5a63e
+Compile PrimitiveBinAssembly input-sha256=0043f2ccf23384929a890633dcb3fe3cbc9f0b55539a77f96eb4ede7f0a117d6
+Compile DyadicStarCertificate input-sha256=c59c507f0e75762392fd9d93eb1c6829448a3f355cfd0639725e5cddda3f5b05
+Compile LiteralBinSupport input-sha256=79c323bb7e940de25ba8349c1da281e36bcdc2f42c7523e6e490ba7d9d0a01ff
+Compile LiteralBinTruncation input-sha256=1d9d0a7569c3d6c769ff65939e9de4a0735d5ca802f19884e900c509b786c98d
+Compile PrimitiveNumeratorInputs input-sha256=b2967ff74abae70d9440965e5dad997aa96cfd4a4bdd86cc9e6d3bd3067aef45
+kernel_replay_exit=0 BivariateBin
+kernel_replay_exit=0 DiscreteOddTail
+kernel_replay_exit=0 DyadicStarCertificate
+kernel_replay_exit=0 LiteralBin
+kernel_replay_exit=0 LiteralBinSupport
+kernel_replay_exit=0 LiteralBinTruncation
+kernel_replay_exit=0 PrimitiveBinAssembly
+kernel_replay_exit=0 PrimitiveBinMass
+kernel_replay_exit=0 PrimitiveCheckerMass
+kernel_replay_exit=0 PrimitiveFirstBlock
+kernel_replay_exit=0 PrimitiveLinearEnvelope
+kernel_replay_exit=0 PrimitiveNumeratorInputs
+kernel_replay_exit=0 PrimitivePoleKernel
+kernel_replay_exit=0 SignedStarEnvelope
+PASS: 29 marked-bin declarations audited
+```
+
+The checked literal theorem `original_checker_linear_envelope` supplies the linear envelope given the finite head, tail and rounding inequalities. The finite witness tables currently have an exact Python replay. The full quantitative determinant remains outside this check.
