@@ -1,0 +1,5 @@
+compact (exact upper bound, cell index) for residue/sD, J/s, phase budget: [(Fraction(1363569, 10000000), 5), (Fraction(142337303, 10000000), 32), (Fraction(4174729, 10000000), 6)]
+middle v, doubled cost, head/s, tail/s, drift/s: 125849/10000000 7479417/5000000 761103/5000000 409/1250000 3582647/5000000
+exterior positive labels <1/(40 sqrt p); zero label <r/(40 sqrt p); upper >W/3.
+hard six: all 42 pairs 7..48; literal n=6..9; two source recurrences; chains 1029 a313525d598cd2ec7a934937e9fe325c33757342d9bcf21ca8eafdc2307a3074
+PASS

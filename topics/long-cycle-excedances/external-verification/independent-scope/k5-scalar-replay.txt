@@ -1,0 +1,4 @@
+Compact maxima (relative residue, drift/s, normalized phase+insertion): (Fraction(949, 400000), (Fraction(87, 8), Fraction(11, 1), Fraction(5, 4))) (Fraction(95990813, 10000000), (Fraction(15, 4), Fraction(31, 8), Fraction(19, 10))) (Fraction(391801, 2000000), (Fraction(15, 4), Fraction(31, 8), Fraction(19, 10)))
+Middle (v, head/s, tail/s, drift/s): (Fraction(1387, 78125), Fraction(423943, 2500000), Fraction(1669, 10000000), Fraction(7395613, 10000000))
+Exterior: 3 r n^5 < 1, quarter-exponential radius > 2n, both label errors <= 1/(60n).
+PASS all budgets for n>=49, weights in [0,1]^3.

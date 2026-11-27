@@ -1,0 +1,2 @@
+PASS k=5 all 43 hard adjacent pairs n=6..48; literal permutations 5..8; both exact recurrences agree.
+Positive strict primitive remainder-chain checks: 1032 SHA-256 05f624d90c8a66d686f30504f3eea7b201b26dbb971a1531af6dfc176051a7d7

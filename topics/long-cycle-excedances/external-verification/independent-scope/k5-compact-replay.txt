@@ -1,0 +1,4 @@
+error44 maximum = 949/400000 < 3/1000 (cell 87)
+drift maximum = 95990813/10000000 < 48/5 (cell 30)
+phase49 maximum = 391801/2000000 < 1/5 (cell 30)
+PASS 88 closed cells covering [0,11], with all rational budgets rechecked.

@@ -1,0 +1,1 @@
+PASS: n=4..511, 507 adjacent pairs (row 4 is the base), 64770 gamma roots, 129540 integer endpoint signs, original t-row recurrence and gamma extraction, permutations through n=8

@@ -1,0 +1,30 @@
+GitHub Actions run 45925747252 (success)
+https://github.com/ProgramComputer/open-math-research/actions/runs/45925747252/job/140266532063
+Checked head 746090f57919de4999592792431b12677b52fdbb
+Raw job log SHA-256 fce90c4ad474b07ba2b009df592400c054d94311d58bb4d18eb7411e85033cc0
+
+Frozen upstream source 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Reused audited upstream object archive sha256=000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05
+Compile CycleProbabilityBands input-sha256=6e1ab04a6f7ab922f33a0e2d3536bc29fd4dfb78080e90a715a48ddfe09f891c
+Compile AnchoredProbability input-sha256=88204327b2d69210c9b399273ac351730b21b4c4933155443842d3a22c9571bf
+Compile RepositoryProbabilityBands input-sha256=ce50800208e20fc84c5561edfbd34582634ed374f7ed0a7c0db30ce26a035cad
+kernel_replay_exit=0 CycleProbabilityBands
+kernel_replay_exit=0 AnchoredProbability
+kernel_replay_exit=0 RepositoryProbabilityBands
+PASS: 8 normalization and original probability declarations audited
+
+'OpenMathResearch.LongCycleExcedances.CycleProbability.from_anchored_counts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.upper61' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.upper59' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.upper47' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.lower547' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.lower548' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.from_anchored_polynomials' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.originalProbability_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.original_upper61' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.original_upper59' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.original_upper47' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.original_lower547' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.CycleProbability.original_lower548' depends on axioms: [propext, Classical.choice, Quot.sound]
