@@ -1,4 +1,4 @@
-import RepositoryHalfAxisAssembly
+import RepositoryStrictHalfWindows
 import LongCycleFinite.Rounded
 
 namespace RepositoryQuotientAudit
@@ -49,18 +49,19 @@ def halfAxisDyadicOK (n : ℕ) (p q : List ℤ)
     (if (n - 2) % 2 = 1 then
       roundedSign (oddSign ((n - 2) / 2 + 1)) q ⟨-1, 0⟩ else true)
 
-theorem original_weak_of_checked_half_axis {n k : ℕ} (hk : 2 ≤ k) (hn : k ≤ n)
+theorem original_strict_and_weak_of_checked_half_axis {n k : ℕ} (hk : 2 ≤ k) (hn : k ≤ n)
     (p q : List ℤ) (hp : ofCoeffs p = (enumerator n k).divX)
     (hq : ofCoeffs q = (enumerator (n + 1) k).divX)
     (windows : Fin ((n - 2) / 2) → HalfAxisDyadicWindow)
     (hcheck : halfAxisDyadicOK n p q windows = true) :
+    StrictNegativeInterlacing (enumerator n k).divX (enumerator (n + 1) k).divX (n - 2) ∧
     WeakRealInterlacing (enumerator n k) (enumerator (n + 1) k) := by
   obtain ⟨hw, hc⟩ := Bool.and_eq_true_iff.mp hcheck
   have hw' (i : Fin ((n - 2) / 2)) :=
     (List.all_eq_true.mp hw) i (by simp)
   have hdata (i : Fin ((n - 2) / 2)) := hw' i
   simp only [Bool.and_eq_true_iff] at hdata
-  apply original_weak_of_half_axis_windows hk hn
+  apply original_strict_and_weak_of_half_axis_windows hk hn
     (fun i => (windows i).lower.value) (fun i => (windows i).upper.value)
   · intro i
     simpa using (Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.1.1
@@ -88,4 +89,4 @@ theorem original_weak_of_checked_half_axis {n k : ℕ} (hk : 2 ≤ k) (hn : k �
 
 end RepositoryQuotientAudit
 
-#print axioms RepositoryQuotientAudit.original_weak_of_checked_half_axis
+#print axioms RepositoryQuotientAudit.original_strict_and_weak_of_checked_half_axis

@@ -29,9 +29,10 @@ private theorem checked32 :
     halfAxisDyadicOK 32 ((coefficientRow 32).map Int.ofNat)
       ((coefficientRow 33).map Int.ofNat) firstWindows = true := by decide
 
-theorem original_weak_cutoff8_size32 :
+theorem original_strict_and_weak_cutoff8_size32 :
+    StrictNegativeInterlacing (enumerator 32 8).divX (enumerator 33 8).divX 30 ∧
     WeakRealInterlacing (enumerator 32 8) (enumerator 33 8) := by
-  refine original_weak_of_checked_half_axis (n := 32) (k := 8) (by decide) (by decide)
+  refine original_strict_and_weak_of_checked_half_axis (n := 32) (k := 8) (by decide) (by decide)
     _ _ ?_ ?_ firstWindows checked32
   · exact ofCoeffs_eq_original_of_reads (width := 32) (by decide) (by decide) (by decide)
       _ (by decide) (rows_original 32 (by decide))
@@ -40,4 +41,4 @@ theorem original_weak_cutoff8_size32 :
 
 end RepositoryQuotientAudit.HalfAxisFirst
 
-#print axioms RepositoryQuotientAudit.HalfAxisFirst.original_weak_cutoff8_size32
+#print axioms RepositoryQuotientAudit.HalfAxisFirst.original_strict_and_weak_cutoff8_size32

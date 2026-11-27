@@ -28,10 +28,11 @@ TOPIC_INPUTS = ("LongCyclePhaseWindows", "LongCycleMixedRootWitnesses", "LongCyc
                 "LongCycleRunColors", "LongCycleReducedRow")
 MODULES = {
     "ExactInsertionTable": {"exactListTable_reads", "ofCoeffs_eq_original_of_reads"},
-    "HalfAxisDyadic": {"original_weak_of_checked_half_axis"},
-    "HalfAxisBlock": {"original_weak_block_of_checked_half_axis"},
+    "RepositoryStrictHalfWindows": {"original_strict_and_weak_of_half_axis_windows"},
+    "HalfAxisDyadic": {"original_strict_and_weak_of_checked_half_axis"},
+    "HalfAxisBlock": {"original_strict_and_weak_block_of_checked_half_axis"},
     "CutoffEightRows": {"rows_original"},
-    "CutoffEightFirstPair": {"original_weak_cutoff8_size32"},
+    "CutoffEightFirstPair": {"original_strict_and_weak_cutoff8_size32"},
 }
 
 

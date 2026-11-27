@@ -7,7 +7,7 @@ open LongCycles LongCycleFinite
 
 /-- One exact coefficient table serves both rows of every checked old-size
 pair. The final supported row is the successor of the last checked old size. -/
-theorem original_weak_block_of_checked_half_axis {k first last width : ℕ}
+theorem original_strict_and_weak_block_of_checked_half_axis {k first last width : ℕ}
     (hk : 2 ≤ k) (hfirst : k ≤ first) (hwidth : last - 2 < width)
     (row : ℕ → List ℕ)
     (hshort : ∀ n < k, ∀ i < width, exactListRead (row n) i = 0)
@@ -21,12 +21,13 @@ theorem original_weak_block_of_checked_half_axis {k first last width : ℕ}
       halfAxisDyadicOK n ((row n).map Int.ofNat) ((row (n+1)).map Int.ofNat)
         (windows n) = true) :
     ∀ n, first ≤ n → n < last →
+      StrictNegativeInterlacing (enumerator n k).divX (enumerator (n + 1) k).divX (n - 2) ∧
       WeakRealInterlacing (enumerator n k) (enumerator (n + 1) k) := by
   intro n hn hlast
   have hk' : k ≤ n := hfirst.trans hn
   have hn' : n + 1 ≤ last := by omega
   have reads := exactListTable_reads hk row hshort hseed hstep
-  refine original_weak_of_checked_half_axis hk hk' _ _ ?_ ?_ _ (hcheck n hn hlast)
+  refine original_strict_and_weak_of_checked_half_axis hk hk' _ _ ?_ ?_ _ (hcheck n hn hlast)
   · exact ofCoeffs_eq_original_of_reads hk hk' (by omega) _ (hlen n (by omega))
       (reads n (by omega))
   · exact ofCoeffs_eq_original_of_reads hk (by omega) (by omega) _ (hlen (n+1) hn')
@@ -34,4 +35,4 @@ theorem original_weak_block_of_checked_half_axis {k first last width : ℕ}
 
 end RepositoryQuotientAudit
 
-#print axioms RepositoryQuotientAudit.original_weak_block_of_checked_half_axis
+#print axioms RepositoryQuotientAudit.original_strict_and_weak_block_of_checked_half_axis
