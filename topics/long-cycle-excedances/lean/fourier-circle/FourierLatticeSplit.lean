@@ -6,18 +6,15 @@ noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
 open Real Filter MeasureTheory
 
-private theorem circle_inv_wave {R : ℝ} (hR : 0 < R) (x : ℝ) :
+private theorem circle_inv_wave (R x : ℝ) :
     (circleMap 0 R x)⁻¹ = circleWave (-1) x / (R:ℂ) := by
   have he : circleMap 0 R x = (R:ℂ)*circleWave 1 x := by
     simp [circleMap,circleWave,mul_comm]
   have hi : circleWave (1:ℤ) x * circleWave (-1) x = 1 := by
     rw [circleWave_add]
     norm_num [circleWave]
-  have hRc : (R:ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hR.ne'
-  rw [he]
-  have h1 : circleWave (1:ℤ) x ≠ 0 := fun h => one_ne_zero (hi.symm.trans (by rw [h,zero_mul]))
-  field_simp
-  linear_combination -(R:ℂ) * hi
+  have hinv : (circleWave 1 x)⁻¹ = circleWave (-1) x := inv_eq_of_mul_eq_one_right hi
+  rw [he, mul_inv_rev, hinv, div_eq_mul_inv]
 
 /-- Sum the signed partial fraction before taking norms. Absolute convergence
 of its two separated terms justifies the addition of the infinite sums. -/
@@ -35,7 +32,7 @@ theorem circle_contrast_sum {ι : Type*} (P c : ι → ℂ) (r C : ℂ) {R : ℝ
     change ‖w‖ = _ at hn
     rw [h,norm_zero,abs_of_pos hR] at hn
     linarith
-  have hinv : w⁻¹ = circleWave (-1) x/(R:ℂ) := circle_inv_wave hR x
+  have hinv : w⁻¹ = circleWave (-1) x/(R:ℂ) := circle_inv_wave R x
   have he : ((r/(R:ℂ))*circleWave (-1) x-C) = r/w-C := by
     rw [div_eq_mul_inv r w,hinv]
     ring
@@ -74,7 +71,7 @@ theorem odd_lattice_contrast_split (P : ℤ → ℂ)
       div_eq_mul_inv,one_mul,norm_mul,norm_inv] using h
   have htail := lattice_eventually_far P hP (R:=R+1) (by linarith)
   apply circle_contrast_sum P c r C hR x hp (fun l he => hg l ((congrArg norm he).trans hw))
-  · apply Summable.of_norm_bounded_eventually _ (hs.mul_left (‖r‖+‖C‖))
+  · apply summable_of_cofinite_norm_le (hs.mul_left (‖r‖+‖C‖))
     filter_upwards [htail] with l hl
     have hp1 : 1 ≤ ‖P l‖ := by linarith
     have hd : 1 ≤ ‖P l-w‖ := by linarith [norm_sub_norm_le (P l) w]
@@ -84,8 +81,8 @@ theorem odd_lattice_contrast_split (P : ℤ → ℂ)
     change ‖((r/P l-C)*c l)/(P l-w)‖ ≤ _
     rw [norm_div,norm_mul]
     exact (div_le_self (mul_nonneg (norm_nonneg _) (norm_nonneg _)) hd).trans
-      (mul_le_mul_of_nonneg_right ((norm_sub_le _ _).trans (add_le_add_right hr _)) (norm_nonneg _))
-  · apply Summable.of_norm_bounded_eventually _ (hs.mul_left ‖r‖)
+      (mul_le_mul_of_nonneg_right ((norm_sub_le _ _).trans (add_le_add hr le_rfl)) (norm_nonneg _))
+  · apply summable_of_cofinite_norm_le (hs.mul_left ‖r‖)
     filter_upwards [htail] with l hl
     rw [norm_mul,norm_div]
     exact mul_le_mul_of_nonneg_right (div_le_self (norm_nonneg _) (by linarith)) (norm_nonneg _)

@@ -1,11 +1,21 @@
 import FourierComplexPoleBound
 import Mathlib.Analysis.PSeries
-import Mathlib.Data.Real.Pi.Bounds
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 
 set_option autoImplicit false
 noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
 open Real Filter
+
+/-- A cofinite comparison with a summable majorant. -/
+theorem summable_of_cofinite_norm_le {ι E : Type*} [NormedAddCommGroup E] [CompleteSpace E]
+    {f : ι → E} {g : ι → ℝ} (hs : Summable g)
+    (h : ∀ᶠ i in cofinite, ‖f i‖ ≤ g i) : Summable f := by
+  first
+  | exact Summable.of_norm_bounded_eventually g hs h
+  | exact Summable.of_norm_bounded_eventually g h hs
+  | exact Summable.of_norm_bounded_eventually hs h
+  | exact Summable.of_norm_bounded_eventually h hs
 
 theorem odd_lattice_height_one_le (l : ℤ) : 1 ≤ |2*(l:ℝ)+1| := by
   by_cases h : 0 ≤ l
@@ -20,7 +30,7 @@ private theorem odd_height_norm (P : ℤ → ℂ) (hP : ∀ l, (P l).im=(2*(l:�
     |2*(l:ℝ)+1| ≤ ‖P l‖ := by
   have h := Complex.abs_im_le_norm (P l)
   rw [hP,abs_mul,abs_of_pos Real.pi_pos] at h
-  exact (le_mul_of_one_le_right (abs_nonneg _) (by linarith [Real.pi_gt_three] : 1 ≤ π)).trans h
+  exact (le_mul_of_one_le_right (abs_nonneg _) (by linarith [Real.one_le_pi_div_two] : 1 ≤ π)).trans h
 
 theorem lattice_inverse_summable (P : ℤ → ℂ) (hP : ∀ l, (P l).im=(2*(l:ℝ)+1)*π)
     {m : ℕ} (hm : 2 ≤ m) : Summable (fun l => 1/‖P l‖^m) := by
@@ -54,7 +64,7 @@ theorem lattice_moment_weights (P : ℤ → ℂ) (hP : ∀ l, (P l).im=(2*(l:ℝ
   have hw l : 0 ≤ W l := div_nonneg (norm_nonneg _) (Real.sqrt_nonneg _)
   have hs := lattice_inverse_summable P hP (m:=k-1) (by omega)
   have hfirst : Summable (fun l : ℤ => |2*(l:ℝ)+1| * W l) := by
-    apply Summable.of_norm_bounded_eventually _ (hs.mul_left (2*R^k))
+    apply summable_of_cofinite_norm_le (hs.mul_left (2*R^k))
     filter_upwards [lattice_eventually_far P hP hR] with l hl
     have hn : 0 < ‖P l‖ := by linarith
     have hg : 0 < ‖P l‖^2-R^2 := sub_pos.mpr (sq_lt_sq' (by linarith) (by linarith))
