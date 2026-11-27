@@ -82,7 +82,8 @@ theorem original_nested_row_error {n k : ℕ} (hn : 0 < n) (hk : 7 ≤ k)
       _ ≤ r^(n+1)*(A/Rstar^n) := mul_le_mul_of_nonneg_left hbound (by positivity)
       _ = _ := by rw [pow_succ r,div_pow]; ring
   constructor
-  · simpa only [hAdef] using hApprox
+  · change Summable a
+    exact hApprox
   · change |r^(n+1)/2 * F -
       (∑' l : ℤ, if ‖coherentPole x l‖ ≤ R₀ then
        ((r:ℂ)/coherentPole x l)^(n+1)*seriesValue T (coherentPole x l) else 0).re/2| ≤ _
@@ -120,8 +121,7 @@ theorem original_middle_nested_row_error {n k : ℕ} (hk : 7 ≤ k)
   refine ⟨ha,he.trans ?_⟩
   have hr : 0 < ‖coherentPole x 0‖ := coherentPole_near_pos x
   apply div_le_div_of_nonneg_right _ (by norm_num)
-  apply add_le_add_right
-  exact mul_le_mul_of_nonneg_left hb (by positivity)
+  exact add_le_add (mul_le_mul_of_nonneg_left hb (by positivity)) le_rfl
 
 #print axioms original_nested_row_error
 #print axioms original_middle_nested_row_error

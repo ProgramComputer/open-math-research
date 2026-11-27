@@ -143,7 +143,7 @@ theorem original_middle_centered_rows {n k : ℕ} (hn : 100 ≤ n) (hk : 7 ≤ k
     have hUp :
         (B*(∑' l : ℤ, (r/‖coherentPole x l‖)^2) + r*A*(r/Rstar)^q)/2 ≤
         (B*(2+(n:ℝ)/2)+r*A*(r/Rstar)^q)/2 := by
-      exact div_le_div_of_nonneg_right (add_le_add_right (mul_le_mul_of_nonneg_left hsb hB) _) (by norm_num)
+      exact div_le_div_of_nonneg_right (add_le_add (mul_le_mul_of_nonneg_left hsb hB) le_rfl) (by norm_num)
     have hBound := div_le_div_of_nonneg_right (hRaw.trans hUp) hU.le
     have hcheck := normalized_nested_budget hn hk hkn hnq hr hm hAmp hsize
     have hrat₁ : r/R₁ = (1+1/(100*(k:ℝ)))⁻¹ := by
