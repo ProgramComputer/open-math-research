@@ -30,21 +30,21 @@ private theorem front_near_rank_range {n p : ℕ} (hn : 10000 ≤ n)
     exact_mod_cast (show 100*(p:ℝ) ≤ n by nlinarith only [hp',hp100,hy2])
 
 private theorem front_alpha_near_lower {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hkn : 4000*k < n) (hp : 0 < p) (hJ : p ≤ ⌊sqrt (n:ℝ)/2⌋₊) :
+    (hkn : k ≤ n) (hp : 0 < p) (hJ : p ≤ ⌊sqrt (n:ℝ)/2⌋₊) :
     99/(100*(1+(8/3:ℝ)*((k:ℝ)*p/n))) ≤ oldFrontAlpha n k p :=
-  original_front_alpha_lower hn hk hkn hp (front_near_rank_range hn hJ).1
+  original_front_alpha_lower_all hn hk hkn hp (front_near_rank_range hn hJ).1
 
 private theorem front_alpha_near_pos {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hkn : 4000*k < n) (hp : 0 < p) (hJ : p ≤ ⌊sqrt (n:ℝ)/2⌋₊) :
+    (hkn : k ≤ n) (hp : 0 < p) (hJ : p ≤ ⌊sqrt (n:ℝ)/2⌋₊) :
     0 < oldFrontAlpha n k p :=
   (show 0 < 99/(100*(1+(8/3:ℝ)*((k:ℝ)*p/n))) by positivity).trans_le
     (front_alpha_near_lower hn hk hkn hp hJ)
 
-theorem original_front_alpha_ratio {n k i j : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hkn : 4000*k < n) (hi : 0 < i) (hj : 0 < j)
+theorem original_front_alpha_ratio_all {n k i j : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hkn : k ≤ n) (hi : 0 < i) (hj : 0 < j)
     (hiJ : i ≤ ⌊sqrt (n:ℝ)/2⌋₊) (hjJ : j ≤ ⌊sqrt (n:ℝ)/2⌋₊) :
     oldFrontAlpha n k j / oldFrontAlpha n k i ≤ (51/10:ℝ)*max 1 ((i:ℝ)/j) := by
-  have hu := original_front_alpha_upper hj hk (by omega : k ≤ n) (front_near_rank_range hn hjJ).2
+  have hu := original_front_alpha_upper hj hk hkn (front_near_rank_range hn hjJ).2
   have he : ((i:ℝ)/j)*((k:ℝ)*j/n) = (k:ℝ)*i/n := by
     field_simp [show (j:ℝ) ≠ 0 by positivity, show (n:ℝ) ≠ 0 by positivity] <;> ring
   have hlo := front_alpha_near_lower hn hk hkn hi hiJ
@@ -65,7 +65,7 @@ theorem original_adaptive_front_scale {n k h : ℕ} (hh : 0 < h) :
     ←original_front_alpha_eq_coeff n k h hh, div_pow, div_mul_div_comm, Nat.cast_add, Nat.cast_one]
 
 private theorem original_front_central_ratios {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hkn : 4000*k < n) (hh : 0 < h) (hJ : h+1 ≤ ⌊sqrt (n:ℝ)/2⌋₊) :
+    (hkn : k ≤ n) (hh : 0 < h) (hJ : h+1 ≤ ⌊sqrt (n:ℝ)/2⌋₊) :
     let ρ := oldFrontAlpha n k h/oldFrontAlpha n k (h+1)
     0 < ρ ∧ ρ ≤ (51/10)*(((h:ℝ)+1)/h) ∧ 1/ρ ≤ 51/10 := by
   have hhJ : h ≤ ⌊sqrt (n:ℝ)/2⌋₊ := by omega
@@ -74,20 +74,20 @@ private theorem original_front_central_ratios {n k h : ℕ} (hn : 10000 ≤ n) (
   have hp : (0:ℝ) < h := by positivity
   have hf : (h:ℝ)/((h:ℝ)+1) ≤ 1 := (div_le_one (by positivity)).2 (by linarith)
   have hg : 1 ≤ ((h:ℝ)+1)/h := (le_div_iff₀ hp).2 (by linarith)
-  have hu := original_front_alpha_ratio hn hk hkn (by omega : 0 < h+1) hh hJ hhJ
-  have hi := original_front_alpha_ratio hn hk hkn hh (by omega : 0 < h+1) hhJ hJ
+  have hu := original_front_alpha_ratio_all hn hk hkn (by omega : 0 < h+1) hh hJ hhJ
+  have hi := original_front_alpha_ratio_all hn hk hkn hh (by omega : 0 < h+1) hhJ hJ
   simp only [Nat.cast_add, Nat.cast_one, max_eq_right hg] at hu
   simp only [Nat.cast_add, Nat.cast_one, max_eq_left hf, mul_one] at hi
   exact ⟨div_pos hα hβ,hu,by rw [one_div_div]; exact hi⟩
 
 private theorem original_front_far_inverse {n k h j : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hkn : 4000*k < n) (hH : h ≤ uniformJoinRank n)
+    (hkn : k ≤ n) (hH : h ≤ uniformJoinRank n)
     (hJ : h+1 ≤ ⌊sqrt (n:ℝ)/2⌋₊) (hj : ⌊sqrt (n:ℝ)/2⌋₊ < j) :
     1/oldFrontAlpha n k (h+1) ≤ 8*(((j-(h+1):ℕ):ℝ)+1) := by
   have hgeo := front_far_rank_geometry hn hH hj
   have hlo := front_alpha_near_lower hn hk hkn (by omega : 0 < h+1) hJ
   have hn0 : (0:ℝ) < n := by positivity
-  have hk' : (k:ℝ) ≤ n := by exact_mod_cast (show k ≤ n by omega)
+  have hk' : (k:ℝ) ≤ n := by exact_mod_cast hkn
   have ha : (k:ℝ)*((h+1:ℕ):ℝ)/n ≤ (h:ℝ)+1 := by
     apply (div_le_iff₀ hn0).2
     rw [Nat.cast_add, Nat.cast_one]
@@ -97,8 +97,8 @@ private theorem original_front_far_inverse {n k h j : ℕ} (hn : 10000 ≤ n) (h
 
 /-- The two old-row coefficient hypotheses of the exterior-envelope theorem,
 at the actual adaptive endpoints. -/
-theorem original_old_front_weighted_tails {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hkn : 4000*k < n) (hh : 0 < h) (hH : h ≤ uniformJoinRank n) :
+theorem original_old_front_weighted_tails_all {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hkn : k ≤ n) (hh : 0 < h) (hH : h ≤ uniformJoinRank n) :
     let P := enumerator n k
     let c := P.coeff h
     let u := originalExteriorScale n k h
@@ -152,7 +152,7 @@ theorem original_old_front_weighted_tails {n k h : ℕ} (hn : 10000 ≤ n) (hk :
     have hr1 : (1:ℝ) ≤ (h:ℝ)/j := by
       apply (le_div_iff₀ (by positivity)).2
       simpa only [one_mul] using (show (j:ℝ) ≤ h by exact_mod_cast hj.le)
-    have hRatio := original_front_alpha_ratio hn hk hkn hh hj0 hJh hjJ
+    have hRatio := original_front_alpha_ratio_all hn hk hkn hh hj0 hJh hjJ
     rw [max_eq_right hr1] at hRatio
     have hαbound := (div_le_iff₀ hα).mp (hRatio.trans (mul_le_mul_of_nonneg_left hrank (by norm_num)))
     have hb := front_bare_left_weight hh hj.le hr.1 hmL
@@ -175,7 +175,7 @@ theorem original_old_front_weighted_tails {n k h : ℕ} (hn : 10000 ≤ n) (hk :
     have hm : 0 ≤ oldFrontAlpha n k j := div_nonneg (hcoefficient j).1 (by positivity)
     have hRatio : oldFrontAlpha n k j/oldFrontAlpha n k (h+1) ≤ 8*((l:ℝ)+1) := by
       by_cases hjJ : j ≤ J
-      · have hratio := original_front_alpha_ratio hn hk hkn (by omega : 0 < h+1) hj0 hJt hjJ
+      · have hratio := original_front_alpha_ratio_all hn hk hkn (by omega : 0 < h+1) hj0 hJt hjJ
         have hb : ((h+1:ℕ):ℝ)/j ≤ 1 := (div_le_one (by positivity)).2 (by exact_mod_cast hj.le)
         rw [max_eq_left hb] at hratio
         exact hratio.trans (by linarith only [Nat.cast_nonneg (α:=ℝ) l])
@@ -203,8 +203,8 @@ theorem original_old_front_weighted_tails {n k h : ℕ} (hn : 10000 ≤ n) (hk :
       _ = (8*((l:ℝ)+1))*((oldFrontAlpha n k (h+1)*((h+1:ℕ):ℝ)^n)*U)*(1/300)^l := by ring
       _ = _ := by rw [original_front_alpha_eq_coeff _ _ _ (by omega),hcenter] <;> ring
 
-theorem original_front_adjacent_gap {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hkn : 4000*k < n) (hh : 0 < h) (hH : h+1 ≤ uniformJoinRank n) :
+theorem original_front_adjacent_gap_all {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hkn : k ≤ n) (hh : 0 < h) (hH : h+1 ≤ uniformJoinRank n) :
     20*originalExteriorScale n k h < originalExteriorScale n k (h+1) := by
   have hJ := front_lag_cutoff_gap hn hH
   have r := original_front_central_ratios (n:=n) (k:=k) (h:=h) hn hk hkn hh (by omega)
@@ -221,8 +221,8 @@ theorem original_front_adjacent_gap {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤
   rw [original_adaptive_front_scale hh, original_adaptive_front_scale (h:=h+1) (by omega)]
   simpa only [Nat.cast_add, Nat.cast_one,add_assoc,one_add_one_eq_two] using hgap
 
-theorem original_far_front_weighted_lag {n k h j : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hkn : 4000*k < n) (hh : 0 < h) (hH : h ≤ uniformJoinRank n)
+theorem original_far_front_weighted_lag_all {n k h j : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hkn : k ≤ n) (hh : 0 < h) (hH : h ≤ uniformJoinRank n)
     (hj : ⌊sqrt (n:ℝ)/2⌋₊ < j) :
     let c := (enumerator n k).coeff h
     let u := originalExteriorScale n k h
@@ -236,7 +236,7 @@ theorem original_far_front_weighted_lag {n k h j : ℕ} (hn : 10000 ≤ n) (hk :
   have hgap := front_lag_cutoff_gap hn hH
   have hJt : h+1 ≤ ⌊sqrt (n:ℝ)/2⌋₊ := by omega
   have hβ := front_alpha_near_pos hn hk hkn (by omega : 0 < h+1) hJt
-  have hcpos := (original_old_front_weighted_tails hn hk hkn hh hH).1
+  have hcpos := (original_old_front_weighted_tails_all hn hk hkn hh hH).1
   have hu : 0 < u := div_pos hcpos.1 hcpos.2
   have hscale := original_adaptive_front_scale (n:=n) (k:=k) hh
   have hr := original_front_central_ratios hn hk hkn hh hJt
@@ -260,15 +260,15 @@ theorem original_far_front_weighted_lag {n k h j : ℕ} (hn : 10000 ≤ n) (hk :
   exact front_far_weighted_lag (by positivity : 0 ≤ U) (by positivity) hβ
     hV.1 hV.2 hb hgeo.2.2.le hrec hcenter
 
-#print axioms original_front_alpha_ratio
+#print axioms original_front_alpha_ratio_all
 #print axioms original_adaptive_front_scale
-#print axioms original_old_front_weighted_tails
-#print axioms original_front_adjacent_gap
-#print axioms original_far_front_weighted_lag
+#print axioms original_old_front_weighted_tails_all
+#print axioms original_front_adjacent_gap_all
+#print axioms original_far_front_weighted_lag_all
 /-- A uniform cap on the literal centers. Multiplying by 9/8 gives the
 upper edge used by the phase-to-exterior join. -/
-theorem original_front_scale_cap {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hs : 4000*k < n) (hh : 0 < h) (hH : h ≤ uniformJoinRank n) :
+theorem original_front_scale_cap_all {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hs : k ≤ n) (hh : 0 < h) (hH : h ≤ uniformJoinRank n) :
     originalExteriorScale n k h ≤ (51/5:ℝ)*
       ((uniformJoinRank n:ℝ)/((uniformJoinRank n:ℝ)+1))^n := by
   have hJ := front_lag_cutoff_gap hn hH
@@ -284,5 +284,49 @@ theorem original_front_scale_cap {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
   rw [original_adaptive_front_scale hh]
   exact mul_le_mul hr (pow_le_pow_left₀ (by positivity) hb n) (by positivity) (by norm_num)
 
+#print axioms original_front_scale_cap_all
+/- The sparse-sector signatures remain available to existing callers. -/
+theorem original_front_alpha_ratio {n k i j : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hkn : 4000*k < n) (hi : 0 < i) (hj : 0 < j)
+    (hiJ : i ≤ ⌊sqrt (n:ℝ)/2⌋₊) (hjJ : j ≤ ⌊sqrt (n:ℝ)/2⌋₊) :
+    oldFrontAlpha n k j / oldFrontAlpha n k i ≤ (51/10:ℝ)*max 1 ((i:ℝ)/j) :=
+  original_front_alpha_ratio_all hn hk (by omega) hi hj hiJ hjJ
+
+theorem original_old_front_weighted_tails {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hkn : 4000*k < n) (hh : 0 < h) (hH : h ≤ uniformJoinRank n) :
+    let P := enumerator n k
+    let c := P.coeff h
+    let u := originalExteriorScale n k h
+    let w := frontCoefficientWeight h ((7/8:ℝ)*u) ((9/8:ℝ)*u)
+    (0 < c ∧ 0 < P.coeff (h+1)) ∧
+    (∀ j < h, |P.coeff j| * w j ≤ (51/10*c)*(((h-j:ℕ):ℝ)+1)*(1/300)^(h-j)) ∧
+    (∀ j, h+1 < j → |P.coeff j| * w j ≤ (9*c)*(((j-(h+1):ℕ):ℝ)+1)*(1/300)^(j-(h+1))) :=
+  original_old_front_weighted_tails_all hn hk (by omega) hh hH
+
+theorem original_front_adjacent_gap {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hkn : 4000*k < n) (hh : 0 < h) (hH : h+1 ≤ uniformJoinRank n) :
+    20*originalExteriorScale n k h < originalExteriorScale n k (h+1) :=
+  original_front_adjacent_gap_all hn hk (by omega) hh hH
+
+theorem original_far_front_weighted_lag {n k h j : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hkn : 4000*k < n) (hh : 0 < h) (hH : h ≤ uniformJoinRank n)
+    (hj : ⌊sqrt (n:ℝ)/2⌋₊ < j) :
+    let c := (enumerator n k).coeff h
+    let u := originalExteriorScale n k h
+    let w := frontCoefficientWeight h ((7/8:ℝ)*u) ((9/8:ℝ)*u)
+    let l := j-(h+1)
+    |(originalFrontLag n k).coeff j| * w j ≤ (36*c)*(l:ℝ)*((l:ℝ)+1)*(1/300)^l :=
+  original_far_front_weighted_lag_all hn hk (by omega) hh hH hj
+
+theorem original_front_scale_cap {n k h : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hs : 4000*k < n) (hh : 0 < h) (hH : h ≤ uniformJoinRank n) :
+    originalExteriorScale n k h ≤ (51/5:ℝ)*
+      ((uniformJoinRank n:ℝ)/((uniformJoinRank n:ℝ)+1))^n :=
+  original_front_scale_cap_all hn hk (by omega) hh hH
+
+#print axioms original_far_front_weighted_lag
+#print axioms original_front_adjacent_gap
+#print axioms original_front_alpha_ratio
 #print axioms original_front_scale_cap
+#print axioms original_old_front_weighted_tails
 end RepositoryQuotientAudit

@@ -6,6 +6,7 @@ on:
       - '.github/workflows/long-cycle-front-envelope-sums.yml'
       - 'topics/long-cycle-excedances/lean/front-envelope-sums/**'
       - 'topics/long-cycle-excedances/lean/sparse-sector/**'
+      - 'topics/long-cycle-excedances/lean/all-aspect-exterior/**'
 
 permissions:
   actions: read
