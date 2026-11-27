@@ -1,0 +1,18 @@
+GitHub Actions run 45923553428, audit job
+https://github.com/ProgramComputer/open-math-research/actions/runs/45923553428
+Checked adapter commit 80b70c1
+Selected audit lines, with timestamps removed
+
+Frozen upstream source 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Reused verified 65-module archive sha256=000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05
+Compile ReciprocalWindowSigns input-sha256=fbb1466b93a9e3b8c538611a7b3a7ab9bb6839bf266c9092b9dcd37b459c2d24
+Compile ReciprocalHalfWindows input-sha256=767f15b15454cd3ff02f009e050ab6ecc7b8d58a08b54bda9903fba583e667b9
+Compile RepositoryHalfAxisAssembly input-sha256=398e685ce5e4ba225477f645546ff0147b4d40d5951b8417814c3c9a16cbe62b
+'RepositoryQuotientAudit.original_divX_reciprocity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_weak_of_half_axis_windows' depends on axioms: [propext, Classical.choice, Quot.sound]
+kernel_replay_exit=0 ReciprocalWindowSigns
+kernel_replay_exit=0 ReciprocalHalfWindows
+kernel_replay_exit=0 RepositoryHalfAxisAssembly
+PASS: 10 original-row declarations audited
