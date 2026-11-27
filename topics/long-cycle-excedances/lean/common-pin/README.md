@@ -27,8 +27,18 @@ python3 -Bu topics/long-cycle-excedances/lean/common-pin/check.py /tmp/long-cycl
 
 The checker accepts the hashed import archive as an optional second argument.
 The next obligation is the exact numeric margin at each required dyadic
-endpoint. Root-list assembly and the analytic joins remain separate.
+endpoint. The analytic joins must still provide a complete ordered witness family.
 
+[RepositoryRootAssembly.lean](RepositoryRootAssembly.lean) proposes the
+original-row conclusion once that witness family and its signs are supplied.
+The existing mixed-witness theorem gives complete root lists in increasing
+positive modulus order. Negating and reversing the indices gives the ordered
+negative root factorization predicate used by Zuo's frozen
+[weak-interlacing assembly][assembly]. That theorem adjoins the common zero
+to both lists and gives weak interlacing of the literal enumerators. The
+scoped hosted check for these three additional declarations is pending.
+
+[assembly]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleFinite/Assembly.lean#L8
 [hosted]: https://github.com/ProgramComputer/open-math-research/actions/runs/45921839840
 [artifact]: https://github.com/ProgramComputer/open-math-research/actions/runs/45917288503
 [prior]: https://github.com/ProgramComputer/open-math-research/actions/runs/45918517895

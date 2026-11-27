@@ -27,6 +27,9 @@ EXPECTED = {
     "RepositoryQuotientAudit.exact_coeff_eq_divX",
     "RepositoryQuotientAudit.canonical_eq_external_divX",
     "RepositoryQuotientAudit.original_signed_point_of_rational_margin",
+    "RepositoryQuotientAudit.strict_of_complete_moduli",
+    "RepositoryQuotientAudit.original_weak_of_complete_moduli",
+    "RepositoryQuotientAudit.original_weak_of_mixed_windows",
 }
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
@@ -69,6 +72,8 @@ def compile_topic(project):
         (HERE / "RationalPointSound.lean", "RationalPointSound"),
         (HERE / "RepositoryQuotientShape.lean", "RepositoryQuotientShape"),
         (HERE / "RepositoryActualRationalPoint.lean", "RepositoryActualRationalPoint"),
+        (HERE / "StrictRootListTranslation.lean", "StrictRootListTranslation"),
+        (HERE / "RepositoryRootAssembly.lean", "RepositoryRootAssembly"),
     ]
     observed = {}
     failed = set()
@@ -115,7 +120,8 @@ def compile_topic(project):
     for name in EXPECTED:
         if name not in observed or observed[name] - ALLOWED:
             raise ArithmeticError(f"Missing declaration or unexpected axioms for {name}: {observed.get(name)}")
-    for module in ("RationalPointSound", "RepositoryQuotientShape", "RepositoryActualRationalPoint"):
+    for module in ("RationalPointSound", "RepositoryQuotientShape", "RepositoryActualRationalPoint",
+                   "StrictRootListTranslation", "RepositoryRootAssembly"):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} original-row declarations audited", flush=True)
