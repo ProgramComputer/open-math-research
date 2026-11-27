@@ -89,8 +89,7 @@ theorem reflected_row_majorant {f : {q:ℤ // q ≠ 0} → ℝ} (hf : Summable f
     generalize (1+h*t*(t+1))^96 = b
     by_cases hb : b=0
     · simp [hb]
-    · field_simp [ht.ne',hA.ne',hb,show t+1≠0 by positivity]
-      ring
+    · field_simp [ht.ne',hA.ne',hb,show t+1≠0 by positivity] <;> ring
 
 
 

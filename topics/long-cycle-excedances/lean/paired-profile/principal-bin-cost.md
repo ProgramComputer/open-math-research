@@ -1,6 +1,6 @@
 # Bounding the principal convolution by 241 bin coefficients
 
-For the adjacent long-cycle excedance determinant, the principal pole contributes a centered convolution error. Fix $n\ge10000$, a cutoff $k\ge2$, an integer lower aspect bound $\ell$ with $\ell k\le n\le48k$, and $S=\sin\theta>0$ with $nS^2\ge6/5$. The estimate holds for each finite pole set at every truncation degree. The theorem takes the linear bin bounds and the integer recurrence for the product coefficients as inputs. [Exact statement](PrincipalBinHeadTail.lean) · [Original adjacent determinant](../../sine-comparison/README.md)
+For the adjacent long-cycle excedance determinant, the principal pole contributes a centered convolution error. Fix $n\ge10000$, a cutoff $k\ge2$, an integer lower aspect bound $\ell$ with $\ell k\le n\le48k$, and $S=\sin\theta>0$ with $nS^2\ge6/5$. The estimate holds for each finite pole set at every truncation degree. The nine-slab theorem uses the checked linear envelope for the literal permutation probabilities. It takes the initial product coefficient and the finite integer recurrence as inputs. [Original-enumerator statement](RepositoryPrincipalSlab.lean) · [General bound](PrincipalBinHeadTail.lean) · [Original adjacent determinant](../../sine-comparison/README.md)
 
 Write $w_q=\cos\theta+i(2q+1)S$ and let $Q$ be the finite product of occupied factors over the poles other than $q=0$. Write $c_k=\exp(-H_{k-1})$ and let $p_r$ be the cutoff probability with weight zero below $k$. Define the error
 

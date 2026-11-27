@@ -84,8 +84,22 @@ MODULES = (
     "PrincipalRowKernel",
     "LiteralPrincipalTilt",
     "PrincipalBinHeadTail",
+    "PrimitiveBinMass",
+    "PrimitiveFirstBlock",
+    "PrimitiveCheckerMass",
+    "DiscreteOddTail",
+    "PrimitiveLinearEnvelope",
+    "SignedStarEnvelope",
+    "PrimitiveBinAssembly",
+    "DyadicStarCertificate",
+    "LiteralLinearTable",
+    "PrimitiveNumeratorInputs",
+    "LinearSlabs",
+    "RepositoryPrincipalSlab",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.original_slab_principal_head_tail",
+    "OpenMathResearch.LongCycleExcedances.slab_principal_head_tail_of_spec",
     "OpenMathResearch.LongCycleExcedances.marked_full_nonnegative",
     "OpenMathResearch.LongCycleExcedances.marked_full_degree_support",
     "OpenMathResearch.LongCycleExcedances.reflected_row_majorant",
@@ -249,13 +263,37 @@ def main(project, imports):
         print(f"Reused verified common-pin archive sha256={digest}", flush=True)
 
     inputs = [(name, TOPIC / folder / f"{name}.lean") for folder, name in SUPPORT]
-    sine_sources = {"PrimitivePoleKernel", "BinProductMajorant", "BinIntegerCertificate",
-                    "BivariateBin", "LiteralBin", "LiteralBinSupport"}
+    sine_sources = {
+        "BinIntegerCertificate",
+        "BinProductMajorant",
+        "BivariateBin",
+        "DiscreteOddTail",
+        "DyadicStarCertificate",
+        "LinearSlabs",
+        "LiteralBin",
+        "LiteralBinSupport",
+        "LiteralLinearTable",
+        "PrimitiveBinAssembly",
+        "PrimitiveBinMass",
+        "PrimitiveCheckerMass",
+        "PrimitiveFirstBlock",
+        "PrimitiveLinearEnvelope",
+        "PrimitiveNumeratorInputs",
+        "PrimitivePoleKernel",
+        "SignedStarEnvelope",
+    }
     for name in MODULES:
         directory = HERE.parent / "sine-comparison" if name in sine_sources else HERE
         inputs.append((name, directory / f"{name}.lean"))
     observed = {}
+    failed_modules = set()
     for module, original in inputs:
+        direct_imports = set(re.findall(r"^import (\w+)$", original.read_text(), re.MULTILINE))
+        failed_imports = direct_imports & failed_modules
+        if failed_imports:
+            failed_modules.add(module)
+            print(f"Skip {module} after failed dependencies {sorted(failed_imports)}", flush=True)
+            continue
         source = project / original.name
         shutil.copyfile(original, source)
         output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
@@ -268,10 +306,14 @@ def main(project, imports):
             stderr=subprocess.STDOUT,
         )
         print(result.stdout, end="", flush=True)
-        result.check_returncode()
+        if result.returncode:
+            failed_modules.add(module)
+            continue
         for name, axioms in AXIOM_REPORT.findall(result.stdout):
             observed[name] = {axiom.strip() for axiom in axioms.split(",") if axiom.strip()}
 
+    if failed_modules:
+        raise RuntimeError(f"Failed or skipped modules: {sorted(failed_modules)}")
     for name in sorted(EXPECTED):
         if name not in observed or observed[name] - common.ALLOWED:
             raise ArithmeticError(f"Missing declaration or unexpected axioms for {name}: {observed.get(name)}")

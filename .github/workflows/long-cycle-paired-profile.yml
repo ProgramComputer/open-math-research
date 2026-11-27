@@ -12,6 +12,17 @@ on:
       - 'topics/long-cycle-excedances/lean/sine-comparison/LiteralBin.lean'
       - 'topics/long-cycle-excedances/lean/sine-comparison/LiteralBinSupport.lean'
       - 'topics/long-cycle-excedances/lean/sine-comparison/PrimitivePoleKernel.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/PrimitiveBinMass.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/PrimitiveFirstBlock.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/PrimitiveCheckerMass.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/DiscreteOddTail.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/PrimitiveLinearEnvelope.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/SignedStarEnvelope.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/PrimitiveBinAssembly.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/DyadicStarCertificate.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/LiteralLinearTable.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/PrimitiveNumeratorInputs.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/LinearSlabs.lean'
 
 concurrency:
   group: paired-profile-${{ github.event.pull_request.number }}
