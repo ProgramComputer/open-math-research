@@ -136,6 +136,12 @@ LOAD_MODULES = (
     "RepositoryExteriorLag",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_at_least_single_cycle",
+    "RepositoryQuotientAudit.original_front_alpha_lower_all",
+    "RepositoryQuotientAudit.original_front_alpha_lower_of_cutoff",
+    "RepositoryQuotientAudit.original_front_alpha_lower_of_full_cutoff",
+    "RepositoryQuotientAudit.original_front_alpha_lower_of_single_cycle",
+
     "OpenMathResearch.LongCycleExcedances.front_rank_square",
     "OpenMathResearch.LongCycleExcedances.front_sparse_of_large_size",
     "OpenMathResearch.LongCycleExcedances.front_remove_lag_normalization",

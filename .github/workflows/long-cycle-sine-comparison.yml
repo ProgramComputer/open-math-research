@@ -37,3 +37,5 @@ jobs:
           python3 -I -B check-cutoff-jump.py > "$RUNNER_TEMP/cutoff-jump.txt"
           diff -u cutoff-jump-output.txt "$RUNNER_TEMP/cutoff-jump.txt"
           python3 -I -B obstruction.py
+          python3 -I -B check-coarse-cost.py > "$RUNNER_TEMP/coarse-cost.txt"
+          diff -u coarse-cost-output.txt "$RUNNER_TEMP/coarse-cost.txt"

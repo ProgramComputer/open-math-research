@@ -1,6 +1,7 @@
 import RepositoryOrbitBaseline
 import CutoffAcceptanceBudget
 import RepositoryColorCombinatorial
+import Mathlib.Data.Fintype.Card
 
 set_option autoImplicit false
 noncomputable section
@@ -40,6 +41,42 @@ theorem realCount_one_color {n k : ℕ} (hkn : k ≤ n) : realCount n 1 k = 1 :=
   rw [h] at eprob
   simpa using eprob.symm
 
+/-- Every word is accepted on a single color cycle when the label cutoff
+does not exceed the total number of labels. -/
+theorem realCount_at_least_single_cycle {n p k : ℕ} (hp : 0 < p) (hkn : k ≤ n) :
+    1/(p:ℝ) ≤ realCount n p k/(p:ℝ)^n := by
+  classical
+  have hevery (ω : BaselinePairs n p p) (c y : Fin p) : ω.val.2.SameCycle c y := by
+    by_contra hy
+    have hshort := Fintype.card_subtype_lt hy
+    have hsize := ω.property c
+    unfold orbitSize at hsize
+    rw [Nat.card_eq_fintype_card] at hsize
+    rw [Fintype.card_fin] at hshort
+    exact (not_le_of_gt hshort) hsize
+  let inject (ω : BaselinePairs n p p) : Accepted n p k :=
+    ⟨ω.val, fun c => by
+      let e : {x : Fin n // ω.val.2.SameCycle c (ω.val.1 x)} ≃ Fin n :=
+        { toFun := Subtype.val
+          invFun := fun x => ⟨x, hevery ω c (ω.val.1 x)⟩
+          left_inv := fun _ => rfl
+          right_inv := fun _ => rfl }
+      change k ≤ Nat.card {x : Fin n // ω.val.2.SameCycle c (ω.val.1 x)}
+      simpa only [Nat.card_congr e, Nat.card_eq_fintype_card, Fintype.card_fin] using hkn⟩
+  have hc : Nat.card (BaselinePairs n p p) ≤ Nat.card (Accepted n p k) :=
+    Nat.card_le_card_of_injective inject (by
+      intro x y h
+      apply Subtype.ext
+      exact congrArg (fun a : Accepted n p k => a.val) h)
+  have hbc : CycleProbability.originalProbability p p = 1/(p:ℝ) := by
+    by_cases he : p = 1
+    · subst p
+      simp [originalProbability_one]
+    · exact CycleProbability.one_cycle (CycleProbability.originalProbability_spec (by omega : 2 ≤ p))
+        le_rfl (by omega)
+  rw [←hbc, ←baselinePairs_probability (n:=n) hp, ←accepted_probability_eq_realCount]
+  exact div_le_div_of_nonneg_right (by exact_mod_cast hc) (by positivity)
+
 end OpenMathResearch.LongCycleExcedances.ColorAnchor
 
 namespace RepositoryQuotientAudit
@@ -78,10 +115,34 @@ theorem original_front_alpha_one {n k : ℕ} (hn : 0 < n) (hk : 2 ≤ k) (hkn : 
     zero_pow hn.ne', mul_zero] at he
   linarith only [he.1, he.2]
 
-/-- The lower old-row envelope in the uniform exterior sector. The chosen
-natural cutoff is the rounded-up value 4kp/(3n). -/
-theorem original_front_alpha_lower {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
-    (hsector : 4000*k < n) (hp : 0 < p) (hrank : 4*p^2 ≤ n) :
+private theorem alpha_front_scaled_error {n p k : ℕ} (hn : 10000 ≤ n) (hp : 0 < p)
+    (hk : 2 ≤ k) (hrank : 4*p^2 ≤ n) {d : ℝ} (hd : 0 ≤ d) (hlim : d ≤ 2*(p:ℝ)-1) :
+    d * (realCount n p k/(p:ℝ)^n - (enumerator n k).coeff p/(p:ℝ)^n) ≤ 3/4000 := by
+  have hn0 : 0 < n := by omega
+  have hn' : (10000:ℝ) ≤ n := by exact_mod_cast hn
+  have hnpos : (0:ℝ) < n := by positivity
+  have hpp : (0:ℝ) < p := by positivity
+  have hrank' : 4*(p:ℝ)^2 ≤ n := by exact_mod_cast hrank
+  have hfa := (original_color_acceptance_error hn0 hp hk).2
+  have hfα : realCount n p k/(p:ℝ)^n - (enumerator n k).coeff p/(p:ℝ)^n ≤
+      2*((n:ℝ)*exp (-((n:ℝ)/p))) := by
+    rw [←sub_div]
+    exact hfa.trans (mul_le_mul_of_nonneg_left
+      (mul_le_mul_of_nonneg_left (alpha_front_transform_loss (n:=n) hp) hnpos.le) (by norm_num))
+  calc
+    _ ≤ d*(2*((n:ℝ)*exp (-((n:ℝ)/p)))) := mul_le_mul_of_nonneg_left hfα hd
+    _ ≤ (2*(p:ℝ)-1)*(2*((n:ℝ)*exp (-((n:ℝ)/p)))) :=
+      mul_le_mul_of_nonneg_right hlim (by positivity)
+    _ ≤ 15/(2*(n:ℝ)) := by
+      simpa only [←mul_assoc] using color_load_transform_budget hnpos hpp (le_refl (p:ℝ)) hrank'
+    _ ≤ 3/4000 := by
+      apply (div_le_iff₀ (by positivity : (0:ℝ) < 2*n)).mpr
+      linarith only [hn']
+
+/-- The load comparison applies whenever the rounded-up cutoff 4kp/(3n)
+is at most the number of colors. -/
+theorem original_front_alpha_lower_of_cutoff {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hcut : 4*k ≤ 3*n) (hp : 0 < p) (hrank : 4*p^2 ≤ n) :
     let a : ℝ := (k:ℝ)*p/n
     99/(100*(1+(8/3:ℝ)*a)) ≤ (enumerator n k).coeff p/(p:ℝ)^n := by
   let a : ℝ := (k:ℝ)*p/n
@@ -89,9 +150,7 @@ theorem original_front_alpha_lower {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ 
   let α : ℝ := (enumerator n k).coeff p/(p:ℝ)^n
   have hn0 : 0 < n := by omega
   have hkn : k ≤ n := by omega
-  have hn' : (10000:ℝ) ≤ n := by exact_mod_cast hn
   have hnpos : (0:ℝ) < n := by positivity
-  have hpp : (0:ℝ) < p := by positivity
   have hap : 0 < a := by dsimp [a]; positivity
   have hnorm : 0 < 100*(1+(8/3:ℝ)*a) := by positivity
   change 99/(100*(1+(8/3:ℝ)*a)) ≤ α
@@ -107,20 +166,12 @@ theorem original_front_alpha_lower {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ 
   have hb1 : (1:ℝ) ≤ b := by exact_mod_cast hb
   have hd : 0 < d := by dsimp [d]; linarith only [hb1]
   have hble : b ≤ p := by
-    have hp2 : (2:ℝ) ≤ p := by exact_mod_cast (show 2 ≤ p by omega)
-    have hp1 : (1:ℕ) ≤ p := hp
-    have hθ : (4/3:ℝ)*a < (p:ℝ)/3000 := by
-      have hs : 4000*(k:ℝ) < n := by exact_mod_cast hsector
-      change (4/3:ℝ)*((k:ℝ)*p/n) < (p:ℝ)/3000
-      rw [←mul_div_assoc]
-      exact (div_lt_iff₀ hnpos).mpr (by nlinarith only [mul_lt_mul_of_pos_right hs hpp])
-    have hlim : (4/3:ℝ)*a ≤ ((p-1:ℕ):ℝ) := by
-      rw [Nat.cast_sub hp1, Nat.cast_one]
-      linarith only [hθ,hp2]
-    have hstrict : b < p := by
-      have hc : b ≤ p-1 := Nat.ceil_le.mpr hlim
-      omega
-    exact hstrict.le
+    apply Nat.ceil_le.mpr
+    have hcut' : 4*(k:ℝ) ≤ 3*(n:ℝ) := by exact_mod_cast hcut
+    have ht := mul_le_mul_of_nonneg_right hcut' (show (0:ℝ) ≤ p by positivity)
+    change (4/3:ℝ)*((k:ℝ)*p/n) ≤ (p:ℝ)
+    rw [←mul_div_assoc]
+    exact (div_le_iff₀ hnpos).mpr (by linarith only [ht])
   have hkpcut : 4*k*p ≤ 3*n*b := by
     have hc := mul_le_mul_of_nonneg_right hbc hnpos.le
     change ((4/3:ℝ)*((k:ℝ)*p/n))*n ≤ (b:ℝ)*n at hc
@@ -133,26 +184,16 @@ theorem original_front_alpha_lower {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ 
   have hf : (249/250:ℝ)/d < f := calc
     _ = 1/d-(1/250:ℝ)/d := by ring
     _ ≤ (Nat.card (BaselinePairs n p b):ℝ)/((p.factorial:ℝ)*(p:ℝ)^n)-(1/250:ℝ)/d :=
-      sub_le_sub_right hbmass _
+      sub_le_sub hbmass (le_refl _)
     _ < _ := hload
-  have hfa : f-α ≤ 2*((n:ℝ)*(1-1/(p:ℝ))^n) := by
-    dsimp only [f,α]
-    rw [←sub_div]
-    exact (original_color_acceptance_error hn0 hp hk).2
-  have hfα := hfa.trans (mul_le_mul_of_nonneg_left
-    (mul_le_mul_of_nonneg_left (alpha_front_transform_loss (n:=n) hp) hnpos.le) (by norm_num))
-  have hrank' : 4*(p:ℝ)^2 ≤ n := by exact_mod_cast hrank
-  have hble' : (b:ℝ) ≤ p := by exact_mod_cast hble
-  have hscaled : d*(f-α) ≤ 15/(2*(n:ℝ)) := calc
-    _ ≤ d*(2*((n:ℝ)*exp (-((n:ℝ)/p)))) := mul_le_mul_of_nonneg_left hfα hd.le
-    _ ≤ _ := by
-      simpa only [d,←mul_assoc] using color_load_transform_budget hnpos hpp hble' hrank'
-  have hsmall : 15/(2*(n:ℝ)) ≤ 3/4000 := by
-    apply (div_le_iff₀ (by positivity : (0:ℝ) < 2*n)).mpr
-    linarith only [hn']
+  have hscaled : d*(f-α) ≤ 3/4000 :=
+    alpha_front_scaled_error hn hp hk hrank hd.le (by
+      have hb' : (b:ℝ) ≤ p := by exact_mod_cast hble
+      dsimp only [d]
+      linarith only [hb'])
   have hαlow : (99/100:ℝ) ≤ α*d := by
     have hf' := (div_lt_iff₀ hd).mp hf
-    exact le_of_lt (by nlinarith only [hf',hscaled.trans hsmall])
+    exact le_of_lt (by nlinarith only [hf',hscaled])
   have ha0 : 0 ≤ α := by
     exact nonneg_of_mul_nonneg_left ((by norm_num : (0:ℝ) ≤ 99/100).trans hαlow) hd
   have hceil := Nat.ceil_lt_add_one (show 0 ≤ (4/3:ℝ)*a by positivity)
@@ -160,6 +201,66 @@ theorem original_front_alpha_lower {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ 
   apply (div_le_iff₀ hnorm).mpr
   have h := hαlow.trans (mul_le_mul_of_nonneg_left hden ha0)
   nlinarith only [h]
+
+/-- The single-cycle contribution gives the same old-row envelope once its
+denominator is at least the number of colors. -/
+theorem original_front_alpha_lower_of_single_cycle {n p k : ℕ} (hn : 10000 ≤ n)
+    (hk : 2 ≤ k) (hkn : k ≤ n) (hp : 0 < p) (hrank : 4*p^2 ≤ n)
+    (hden : (p:ℝ) ≤ 1+(8/3:ℝ)*((k:ℝ)*p/n)) :
+    99/(100*(1+(8/3:ℝ)*((k:ℝ)*p/n))) ≤ (enumerator n k).coeff p/(p:ℝ)^n := by
+  let α := (enumerator n k).coeff p/(p:ℝ)^n
+  let f := realCount n p k/(p:ℝ)^n
+  have hp0 : (0:ℝ) < p := by positivity
+  have hp1 : (1:ℝ) ≤ p := by exact_mod_cast hp
+  have hf : 1/(p:ℝ) ≤ f := realCount_at_least_single_cycle hp hkn
+  have hscaled : (p:ℝ)*(f-α) ≤ 3/4000 :=
+    alpha_front_scaled_error hn hp hk hrank hp0.le (by linarith only [hp1])
+  have hα : 99/100 ≤ α*(p:ℝ) := by
+    have hm := (div_le_iff₀ hp0).mp hf
+    nlinarith only [hm,hscaled]
+  have ha0 : 0 ≤ α :=
+    nonneg_of_mul_nonneg_left ((by norm_num : (0:ℝ) ≤ 99/100).trans hα) hp0
+  apply (div_le_iff₀ (by positivity)).mpr
+  have hh := hα.trans (mul_le_mul_of_nonneg_left hden ha0)
+  linarith only [hh]
+
+/-- The same contribution suffices whenever the proposed load cutoff reaches
+or exceeds the full color count. -/
+theorem original_front_alpha_lower_of_full_cutoff {n p k : ℕ} (hn : 10000 ≤ n)
+    (hk : 2 ≤ k) (hkn : k ≤ n) (hp : 0 < p) (hrank : 4*p^2 ≤ n)
+    (hb : p ≤ ⌈(4/3:ℝ)*((k:ℝ)*p/n)⌉₊) :
+    99/(100*(1+(8/3:ℝ)*((k:ℝ)*p/n))) ≤ (enumerator n k).coeff p/(p:ℝ)^n := by
+  apply original_front_alpha_lower_of_single_cycle hn hk hkn hp hrank
+  have ha : ((p-1:ℕ):ℝ) < (4/3:ℝ)*((k:ℝ)*p/n) := by
+    apply lt_of_not_ge
+    intro h
+    have hceil : ⌈(4/3:ℝ)*((k:ℝ)*p/n)⌉₊ ≤ p-1 := Nat.ceil_le.mpr h
+    omega
+  have hp1 : (1:ℝ) ≤ p := by exact_mod_cast hp
+  rw [Nat.cast_sub hp, Nat.cast_one] at ha
+  linarith only [ha,hp1]
+
+/-- Uniform old-row coefficient envelope for every positive admissible cutoff. -/
+theorem original_front_alpha_lower_all {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hkn : k ≤ n) (hp : 0 < p) (hrank : 4*p^2 ≤ n) :
+    let a : ℝ := (k:ℝ)*p/n
+    99/(100*(1+(8/3:ℝ)*a)) ≤ (enumerator n k).coeff p/(p:ℝ)^n := by
+  by_cases hcut : 4*k ≤ 3*n
+  · exact original_front_alpha_lower_of_cutoff hn hk hcut hp hrank
+  · apply original_front_alpha_lower_of_single_cycle hn hk hkn hp hrank
+    have hc : 3*(n:ℝ) ≤ 8*(k:ℝ) := by exact_mod_cast (show 3*n ≤ 8*k by omega)
+    have hm := mul_le_mul_of_nonneg_right hc (show (0:ℝ) ≤ p by positivity)
+    have hd : (p:ℝ) ≤ (8/3:ℝ)*((k:ℝ)*p/n) := by
+      rw [←mul_div_assoc]
+      exact (le_div_iff₀ (by positivity : (0:ℝ) < n)).mpr (by linarith only [hm])
+    linarith only [hd]
+
+/-- The sparse-sector interface is retained for existing exterior callers. -/
+theorem original_front_alpha_lower {n p k : ℕ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
+    (hsector : 4000*k < n) (hp : 0 < p) (hrank : 4*p^2 ≤ n) :
+    let a : ℝ := (k:ℝ)*p/n
+    99/(100*(1+(8/3:ℝ)*a)) ≤ (enumerator n k).coeff p/(p:ℝ)^n :=
+  original_front_alpha_lower_all hn hk (by omega) hp hrank
 
 /-- The load-only upper envelope at any size with at least 100 labels per
 color. It supplies an upper bound for the original row at this size. -/
@@ -234,6 +335,11 @@ theorem original_front_alpha_upper {n p k : ℕ} (hp : 0 < p) (hk : 2 ≤ k)
 #print axioms ColorAnchor.accepted_probability_eq_realCount
 #print axioms ColorAnchor.realCount_one_color
 #print axioms original_front_alpha_one
+#print axioms OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_at_least_single_cycle
+#print axioms original_front_alpha_lower_of_cutoff
+#print axioms original_front_alpha_lower_of_single_cycle
+#print axioms original_front_alpha_lower_of_full_cutoff
+#print axioms original_front_alpha_lower_all
 #print axioms original_front_alpha_lower
 #print axioms original_front_acceptance_upper
 #print axioms original_front_alpha_upper
