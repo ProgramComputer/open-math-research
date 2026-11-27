@@ -136,13 +136,14 @@ and [uniform comparison](../effective-uniform.md). For each rising pair
 of target levels, it selects the last lower hit before the first upper
 hit. The selected old zero lies in the open phase band. For increasing
 parameters and increasing moduli, the singleton windows are strictly
-ordered.
+ordered and their moduli are strictly above the entrance modulus and below one.
 
 For the aspect-20 join the offset is the number of exterior witnesses
-and the levels are the integer multiples of pi from the first middle
-sample through the half-axis terminal sample. The old sample parity is a
-separate input, since removing the factor of the variable changes the
-sign of the normalized old enumerator at negative arguments. The next
+and the phase levels start at rank `H + 1` and end at rank `n / 2`
+with natural-number division. This gives `n / 2 - H - 1` singleton windows.
+Use `H + 2` as the old sample parity when the cosine estimate is for the
+original enumerator. Removing the factor of the variable reverses its
+sign at negative arguments. The next
 sign is required only at old zeros in the given open phase band. The
 [bounded-aspect estimates](../bounded-aspect/grouped-proof.md) give the
 sign inputs in the integer-angle case. The numerical phase bounds,

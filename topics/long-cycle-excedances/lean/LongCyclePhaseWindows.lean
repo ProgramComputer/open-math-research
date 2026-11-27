@@ -12,7 +12,7 @@ band. The phase need not be monotone. -/
 theorem singleton_windows_of_phase {m offset : ℕ} {a b : ℝ} {P Q : ℝ[X]}
     {phase radius : ℝ → ℝ} (sampleParity : ℕ) (hab : a ≤ b)
     (hf : ContinuousOn phase (Icc a b)) (hr : ContinuousOn radius (Icc a b))
-    (hrmono : StrictMonoOn radius (Icc a b)) (ha : 0 < radius a) (hb : radius b ≤ 1)
+    (hrmono : StrictMonoOn radius (Icc a b)) (hb : radius b ≤ 1)
     (level : Fin (m + 1) → ℝ) (hlevel : StrictMono level)
     (hstart : phase a ≤ level 0) (hend : level (Fin.last m) ≤ phase b)
     (hsample : ∀ i x, x ∈ Icc a b → phase x = level i →
@@ -20,7 +20,7 @@ theorem singleton_windows_of_phase {m offset : ℕ} {a b : ℝ} {P Q : ℝ[X]}
     (hnext : ∀ (i : Fin m) x, x ∈ Icc a b → phase x ∈ Ioo (level i.castSucc) (level i.succ) →
       P.IsRoot (-radius x) → 0 < (-1 : ℝ) ^ (offset + i.val + 1) * Q.eval (-radius x)) :
     ∃ x : Fin m → ℝ, StrictMono x ∧ StrictMono (radius ∘ x) ∧
-      ∀ i, x i ∈ Ioo a b ∧ radius (x i) ∈ Ioo 0 1 ∧
+      ∀ i, x i ∈ Ioo a b ∧ radius (x i) ∈ Ioo (radius a) 1 ∧
         phase (x i) ∈ Ioo (level i.castSucc) (level i.succ) ∧
         P.IsRoot (-radius (x i)) ∧
         0 < (-1 : ℝ) ^ (offset + i.val + 1) * Q.eval (-radius (x i)) := by
@@ -37,7 +37,7 @@ theorem singleton_windows_of_phase {m offset : ℕ} {a b : ℝ} {P Q : ℝ[X]}
     have hlt := lt_of_le_of_ne hw.2 (fun he => (hlevel hij).ne (hwv.symm.trans (he ▸ hj)))
     exact ((hhit i).2 ⟨hsub hw, hwv⟩).trans_lt hlt
   have hband (i : Fin m) := exists_lastLower_before_firstUpper hf (hlo i.castSucc)
-    (hlevel (Fin.castSucc_lt_succ i)) (hhit i.succ)
+    (hlevel (show i.castSucc < i.succ from Nat.lt_succ_self i.val)) (hhit i.succ)
   choose left hleft hlt hinside using hband
   have hleftMem (i : Fin m) : left i ∈ Icc a b :=
     ⟨(hleft i).1.1.1, (hlt i).le.trans (hhit i.succ).1.1.2⟩
@@ -64,7 +64,7 @@ theorem singleton_windows_of_phase {m offset : ℕ} {a b : ℝ} {P Q : ℝ[X]}
     have hh := hhitmono.monotone hidx
     have hbefore : hit j.castSucc ≤ left j :=
       (hleft j).2 ⟨⟨(hhit j.castSucc).1.1.1,
-        (hhitmono (Fin.castSucc_lt_succ j)).le⟩, (hhit j.castSucc).1.2⟩
+        (hhitmono (show j.castSucc < j.succ from Nat.lt_succ_self j.val)).le⟩, (hhit j.castSucc).1.2⟩
     exact (hx i).2.trans ((hh.trans hbefore).trans_lt (hx j).1)
   have hxab (i : Fin m) : x i ∈ Ioo a b :=
     ⟨(hleftMem i).1.trans_lt (hx i).1, (hx i).2.trans_le (hhit i.succ).1.1.2⟩
@@ -75,7 +75,7 @@ theorem singleton_windows_of_phase {m offset : ℕ} {a b : ℝ} {P Q : ℝ[X]}
     have hxi := hxab i
     have hx' : x i ∈ Icc a b := Ioo_subset_Icc_self hxi
     have hs := hinside i (x i) (hx i)
-    exact ⟨hxi, ⟨ha.trans (hrmono ⟨le_rfl, hab⟩ hx' hxi.1),
+    exact ⟨hxi, ⟨hrmono ⟨le_rfl, hab⟩ hx' hxi.1,
       (hrmono hx' ⟨hab, le_rfl⟩ hxi.2).trans_le hb⟩, hs, hz i, hnext i _ hx' hs (hz i)⟩
 
 #print axioms singleton_windows_of_phase
