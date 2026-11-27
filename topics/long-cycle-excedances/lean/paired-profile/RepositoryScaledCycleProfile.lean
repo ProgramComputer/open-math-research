@@ -32,7 +32,7 @@ theorem tendsto_original_scaled_cycle_profile_exp {k : ℕ} (hk : 2 ≤ k)
   rw [←original_scaled_cycle_profile_exp hk x R n]
   apply tendsto_truncated_exp_coeff
   intro p
-  simpa only [scaledCycleLog, map_sum, PowerSeries.coeff_mk] using
+  simpa only [HasSum, SummationFilter.unconditional, scaledCycleLog, map_sum, PowerSeries.coeff_mk] using
     original_hasSum_paired_cycle_log_coeff hk x hx hR p
 
 #print axioms original_scaled_cycle_profile_exp

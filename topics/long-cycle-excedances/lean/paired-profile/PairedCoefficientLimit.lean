@@ -19,7 +19,7 @@ theorem tendsto_power_coeff_of_tendsto_coeff {ι : Type*} {l : Filter ι}
       (fun _ : ι => PowerSeries.coeff (R := ℂ) n 1) l (𝓝 (PowerSeries.coeff (R := ℂ) n 1)))
   | succ j ih =>
     simp only [pow_succ, PowerSeries.coeff_mul]
-    exact tendsto_finset_sum _ fun a _ => (ih a.1).mul (hF a.2)
+    exact tendsto_finsetSum _ fun a _ => (ih a.1).mul (hF a.2)
 
 /-- The fixed coefficient of any power of the finite pole logarithm
 converges to the corresponding power of its coefficientwise limit. -/
@@ -32,7 +32,7 @@ theorem tendsto_paired_log_power_coeff (C : ℝ) {S : ℝ} (hS : S ≠ 0)
           (∑' q : ℤ, ((pairedPoleDenom C S q)⁻¹)^p)/(p:ℂ) else 0) ^ j))) := by
   apply tendsto_power_coeff_of_tendsto_coeff
   intro p
-  simpa only [map_sum, PowerSeries.coeff_mk] using
+  simpa only [HasSum, SummationFilter.unconditional, map_sum, PowerSeries.coeff_mk] using
     (hasSum_paired_cycle_log_coeff C hS hk p)
 
 /-- Every truncated exponential coefficient is a continuous expression
@@ -45,7 +45,7 @@ theorem tendsto_truncated_exp_coeff {ι : Type*} {l : Filter ι}
       PowerSeries.coeff (R := ℂ) n (F i ^ j) / (j.factorial:ℂ)) l
       (𝓝 (∑ j ∈ Finset.range (H+1),
         PowerSeries.coeff (R := ℂ) n (G ^ j) / (j.factorial:ℂ))) := by
-  apply tendsto_finset_sum
+  apply tendsto_finsetSum
   intro j _
   simpa only [div_eq_mul_inv] using
     (tendsto_power_coeff_of_tendsto_coeff hF j n).mul_const ((j.factorial:ℂ)⁻¹)
