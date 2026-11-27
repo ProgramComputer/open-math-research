@@ -9,3 +9,9 @@ At cutoff 13 and new size 256, I used the left endpoint of the rank-32 bracket o
 The result concerns the numerical conditioning of this finite certificate. The comparison is on the literal reduced row; it depends on the same verified coefficient interpretation and tail bound as the previous strict sign checker. The replay is independent executable arithmetic and is outside Lean.
 
 Agent-assisted independent arithmetic review, 26 November 2026 (America/Chicago). The archived verification scripts reproduce the reference full-degree comparison.
+
+## Directed arithmetic review
+
+A second agent reviewed the directed checker at commit `86307df`. Converting a positive GMP integer keeps its leading 60 bits and rounds upward exactly when discarded bits are nonzero. Normalization handles a carry into the next exponent. Sums of aligned significands fit in 61 bits and products in 120. The input bounds on row size, endpoint exponent and line length keep the intermediate exponents within the supported signed integer range.
+
+Both clamped differences subtract nonnegative quantities. If the first difference returns zero, the second cannot become positive. The checker accepts only a strictly positive final difference $m$, for which both subtractions genuinely provide lower bounds. Its directed comparison then proves $m(u-yv)>(1+2^{-32})u^2y^{60}$. In particular the geometric-tail denominator is positive. The reviewer accepted the check under the documented coefficient enclosure, tail majorant and authentication of the archive. The directed implementation was reviewed as C++.
