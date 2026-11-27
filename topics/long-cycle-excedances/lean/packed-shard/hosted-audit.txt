@@ -1,0 +1,17 @@
+GitHub Actions run 45931609250, audit job 140285287116
+https://github.com/ProgramComputer/open-math-research/actions/runs/45931609250
+Checked commit bde40d82a27bd8e83af3fa3a2ed178a55deea20f
+Frozen upstream source 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Lean 4.33.1 compiler commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+Mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Authenticated 65-module archive SHA-256 000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05
+Witness shard SHA-256 e6b756647fcde23d8047abf9968340c6787f22a62cba54d59b3a917e43c628d0
+Generated manifest SHA-256 7d63ed4b0e3020d922d3fad5be8802cad225f4ec6253d5cf82c16fa6f7305f71
+
+All 21 transition modules and five endpoint modules compiled and replayed.
+All 32 packed module source hashes were matched with the local source and manifest.
+Compile PackedShardOriginal sha256=8a6196ab058007a38d9811199c5ac40db3ff685f9b8774db3e32d551451a41f1
+'RepositoryQuotientAudit.packedShard_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.firstShard_original_signs' depends on axioms: [propext, Classical.choice, Quot.sound]
+kernel_replay_exit=0 PackedShardOriginal
+PASS: 131 gaps and 524 strict signs for the original permutation quotients.

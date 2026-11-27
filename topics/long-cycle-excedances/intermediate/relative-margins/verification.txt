@@ -1,0 +1,35 @@
+Reproducibility record | 2026-11-27 UTC
+Apple clang 21.0.0 arm64; GMP 6.3.0; C++17 -O3 -Wall -Wextra.
+All four modes streamed the same canonical archive. See README.md for commands.
+
+exact
+pairs=82395 gaps=541199 exact_signs=2164796 sharp_tail=28 exact_prefix=0
+63014205 8f8115d4f203840560dd74f7cf12654d0bca00561c8ff473f27ed6af3f20a73e seconds 54.54
+
+packed
+pairs=82395 gaps=541199 exact_signs=2164796 sharp_tail=28 exact_prefix=0
+63014205 8f8115d4f203840560dd74f7cf12654d0bca00561c8ff473f27ed6af3f20a73e seconds 71.58
+
+relative
+pairs=82395 gaps=541199 exact_signs=2164796 sharp_tail=29 exact_prefix=0
+63014205 8f8115d4f203840560dd74f7cf12654d0bca00561c8ff473f27ed6af3f20a73e seconds 70.43
+
+dyadic
+pairs=82395 gaps=541199 exact_signs=2164796 sharp_tail=0 exact_prefix=0
+63014205 8f8115d4f203840560dd74f7cf12654d0bca00561c8ff473f27ed6af3f20a73e seconds 42.3
+
+The directed mode uses one upper/lower dyadic test everywhere. Its two fallback counters are unused.
+The 120 reference coefficients printed in --first-pair-prefixes mode matched the archived fixture byte for byte.
+PASS: 8000 comparisons with exact rational arithmetic and 2000 integer conversions.
+
+PASS: n=256 k=13 rank=32 degree=254 sign=1
+2^31 * signed numerator < positive numerator < 2^32 * signed numerator
+Signed-to-positive ratio (decimal for reference): 3.83980901467295134536464E-10
+
+Strict Lean 4.19.0 (6caaee842e94), mathlib c44e0c8ee63ca166450922a373c7409c5d26b00b, shared/lean pins.
+'OpenMathResearch.LongCycleExcedances.RelativeMargins.attainable_perturbation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.RelativeMargins.sign_under_relative_perturbations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

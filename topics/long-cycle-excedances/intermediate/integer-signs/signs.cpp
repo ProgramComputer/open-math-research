@@ -1,7 +1,9 @@
 // Integer replay of dyadic signs for the reduced minimum-cycle excedance rows.
 #include <algorithm>
 #include "row-storage.hpp"
+#include "relative-dyadics.hpp"
 #include <charconv>
+#include <type_traits>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -71,7 +73,7 @@ Z pow_ui(const Z &a, unsigned n) {
 }
 Powers powers(unsigned n) { return {pow_ui(Z(width + 1), n), pow_ui(Z(width + 2), n)}; }
 
-template <typename Storage>
+template <typename Storage, bool relative = false>
 void check(const Row &row, const Powers &g, const Z &p, unsigned bits, int sign, Stats &stats) {
     Z D = Z(1) << bits;
     if (p <= 0 || 2 * p >= D)
@@ -84,23 +86,32 @@ void check(const Row &row, const Powers &g, const Z &p, unsigned bits, int sign,
     }
     // Repeated floor errors, with sign reversal, have absolute sum < 2.
     const Z uncertainty = Storage::prefix_error(row, p, bits);
-    const Z lower = sign * rounded - 2 - uncertainty;
+    Z lower = sign * rounded - 2 - uncertainty;
+    Z positive, tail_scale = 1;
+    if constexpr (relative) {
+        static_assert(std::is_same_v<Storage, ExactStorage>);
+        positive = positive_upper(row, p, bits);
+        lower = (lower << 32) - positive;
+        tail_scale = (Z(1) << 32) + 1;
+    }
     const unsigned shift = bits - static_cast<unsigned>(mpz_sizeinbase(p.get_mpz_t(), 2));
     ++stats.checks;
-    if (lower > 0 && (g.u << shift) >= 2 * g.v && (lower << (shift * width)) > 2 * g.u)
+    if (lower > 0 && (g.u << shift) >= 2 * g.v && (lower << (shift * width)) > 2 * tail_scale * g.u)
         return;
     ++stats.sharp_tail;
     const Z denominator = (g.u << bits) - p * g.v;
     if (denominator <= 0)
         throw std::runtime_error("geometric bound diverges");
-    const Z tail_numerator = g.u * g.u * pow_ui(p, width);
+    const Z tail_numerator = tail_scale * g.u * g.u * pow_ui(p, width);
     if (lower > 0 && ((lower * denominator) << (bits * (width - 1))) > tail_numerator)
         return;
     ++stats.exact_prefix;
     Z homogeneous = row.back();
     for (int i = width - 2; i >= 0; --i)
         homogeneous = (row[i] << (bits * (width - 1 - i))) - p * homogeneous;
-    const Z signed_prefix = sign * homogeneous - (uncertainty << (bits * (width - 1)));
+    Z signed_prefix = sign * homogeneous - (uncertainty << (bits * (width - 1)));
+    if constexpr (relative)
+        signed_prefix = (signed_prefix << 32) - (positive << (bits * (width - 1)));
     if (signed_prefix * denominator <= tail_numerator)
         throw std::runtime_error("uncertified sign");
 }
@@ -164,18 +175,44 @@ void print_first_pair() {
     }
 }
 
-template <typename Storage>
+template <typename Storage, bool relative = false>
+struct IntegerTest {
+    using InputRow = Row;
+    using Bound = Powers;
+    static Bound bounds(unsigned n) { return powers(n); }
+    static Row prepare(Row row) { return row; }
+    static void verify(const Row &row, const Bound &g, const Point &p, int sign, Stats &stats) {
+        check<Storage, relative>(row, g, p.p, p.bits, sign, stats);
+    }
+};
+
+#if defined(__SIZEOF_INT128__)
+struct DirectedRelativeTest {
+    using InputRow = directed::FixedRow;
+    using Bound = directed::FixedPowers;
+    static Bound bounds(unsigned n) { return directed::fixed_powers(n); }
+    static InputRow prepare(const Row &r) { return directed::fixed_row(r); }
+    static void verify(const InputRow &row, const Bound &g, const Point &p, int sign, Stats &stats) {
+        if (!directed::relative_margin_32(row, g, p.p, p.bits, sign))
+            throw std::runtime_error("inconclusive relative dyadic bound");
+        ++stats.checks;
+    }
+};
+
+#endif
+
+template <typename Storage, typename Test = IntegerTest<Storage>>
 int replay() {
     try {
         std::string line;
         Key prev{};
         Stats stats;
         unsigned pairs = 0, gaps = 0;
-        std::vector<Powers> bounds(1002);
+        std::vector<typename Test::Bound> bounds(1002);
         for (unsigned n = 251; n <= 1001; n++)
-            bounds[n] = powers(n);
+            bounds[n] = Test::bounds(n);
         Rows<Storage> rows(7);
-        Row old, upper;
+        typename Test::InputRow old, upper;
         while (std::getline(std::cin, line)) {
             auto v = parse(line);
             if (v.k < 7 || v.k > 250 || v.n < 251 || v.n > 1000 || v.n < 4 * v.k ||
@@ -193,15 +230,15 @@ int replay() {
                 rows = Rows<Storage>(v.k);
             if (v.k != prev.k || v.n != prev.n) {
                 rows.advance(v.n + 1);
-                old = rows.at(v.n);
-                upper = rows.at(v.n + 1);
+                old = Test::prepare(rows.at(v.n));
+                upper = Test::prepare(rows.at(v.n + 1));
             }
             int direction = v.r % 2 == 1 ? 1 : -1;
             try {
                 for (auto p : {&v.a, &v.b}) {
-                    check<Storage>(old, bounds[v.n], p->p, p->bits,
+                    Test::verify(old, bounds[v.n], *p,
                           p == &v.a ? direction : -direction, stats);
-                    check<Storage>(upper, bounds[v.n + 1], p->p, p->bits, -direction, stats);
+                    Test::verify(upper, bounds[v.n + 1], *p, -direction, stats);
                 }
             } catch (const std::exception &e) {
                 std::cerr << v.n << ' ' << v.k << ' ' << v.r << ' ' << e.what() << '\n';
@@ -223,10 +260,20 @@ int replay() {
 int main(int argc, char **argv) {
     if (argc == 1) return replay<ExactStorage>();
     if (argc == 2 && std::string_view(argv[1]) == "--packed") return replay<PackedStorage>();
+    if (argc == 2 && std::string_view(argv[1]) == "--relative-32")
+        return replay<ExactStorage, IntegerTest<ExactStorage, true>>();
+    if (argc == 2 && std::string_view(argv[1]) == "--relative-32-dyadic") {
+#if defined(__SIZEOF_INT128__)
+        return replay<PackedStorage, DirectedRelativeTest>();
+#else
+        std::cerr << "directed replay requires a compiler supporting unsigned __int128\n";
+        return 2;
+#endif
+    }
     if (argc == 2 && std::string_view(argv[1]) == "--first-pair-prefixes") {
         print_first_pair();
         return 0;
     }
-    std::cerr << "usage: signs [--packed | --first-pair-prefixes]\n";
+    std::cerr << "usage: signs [--packed | --relative-32 | --relative-32-dyadic | --first-pair-prefixes]\n";
     return 2;
 }
