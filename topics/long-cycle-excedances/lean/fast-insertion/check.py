@@ -11,6 +11,7 @@ import signal
 import subprocess
 import sys
 from pathlib import Path
+from time import monotonic
 
 HERE = Path(__file__).resolve().parent
 COMMON = HERE.parent / "common-pin"
@@ -51,28 +52,47 @@ def linux_memory_limit():
     return min(available * 3 // 4, available - 1024**3)
 
 
+def process_group_rss(group):
+    rows = subprocess.check_output(["ps", "-eo", "pgid=,rss="], text=True, timeout=5)
+    return sum(int(rss) * 1024 for pgid, rss in
+               (row.split() for row in rows.splitlines() if row.strip())
+               if int(pgid) == group)
+
+
 def run_lean(project, name, argv):
     limit = linux_memory_limit()
-    command = argv
-    if limit is not None:
-        if limit <= 0:
-            raise RuntimeError(f"Not enough runner memory for {name}: cap {limit} bytes")
-        command = ["prlimit", f"--as={limit}", "--", *argv]
-    with subprocess.Popen(command, cwd=project, text=True, stdout=subprocess.PIPE,
+    if limit is not None and limit <= 0:
+        raise RuntimeError(f"Not enough runner memory for {name}: cap {limit} bytes")
+    with subprocess.Popen(argv, cwd=project, text=True, stdout=subprocess.PIPE,
                           stderr=subprocess.STDOUT, start_new_session=True) as child:
-        try:
-            log, _ = child.communicate(timeout=CHILD_SECONDS)
-        except subprocess.TimeoutExpired:
+        deadline = monotonic() + CHILD_SECONDS
+        while True:
             try:
-                os.killpg(child.pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
-            log, _ = child.communicate()
-            print(log, end="", flush=True)
-            raise RuntimeError(f"{name} exceeded {CHILD_SECONDS} seconds (address-space cap: {limit})")
+                log, _ = child.communicate(timeout=1)
+                break
+            except subprocess.TimeoutExpired:
+                cause = None
+                if monotonic() >= deadline:
+                    cause = f"exceeded {CHILD_SECONDS} seconds"
+                elif limit is not None:
+                    try:
+                        rss = process_group_rss(child.pid)
+                        if rss > limit:
+                            cause = f"reached {rss} resident bytes (cap {limit})"
+                    except (OSError, subprocess.SubprocessError, ValueError) as error:
+                        cause = f"could not check resident memory: {error}"
+                if cause is None:
+                    continue
+                try:
+                    os.killpg(child.pid, signal.SIGKILL)
+                except ProcessLookupError:
+                    pass
+                log, _ = child.communicate()
+                print(log, end="", flush=True)
+                raise RuntimeError(f"{name} {cause}")
         print(log, end="", flush=True)
         if child.returncode:
-            raise RuntimeError(f"{name} exited {child.returncode} (address-space cap: {limit})")
+            raise RuntimeError(f"{name} exited {child.returncode}")
     return log
 
 
