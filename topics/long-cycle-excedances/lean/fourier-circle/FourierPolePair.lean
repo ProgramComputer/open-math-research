@@ -11,7 +11,7 @@ def poleGap (p : ℂ) (R : ℝ) : ℝ := |‖p‖^2 - R^2|
 def normalizedPole (p : ℂ) (R x : ℝ) : ℝ :=
   √(poleGap p R) / ‖p - circleMap 0 R x‖
 
-private theorem poleGap_pos {p : ℂ} {R : ℝ} (hR : 0 < R) (hp : ‖p‖ ≠ R) :
+theorem poleGap_pos {p : ℂ} {R : ℝ} (hR : 0 < R) (hp : ‖p‖ ≠ R) :
     0 < poleGap p R := by
   apply abs_pos.mpr
   rcases lt_or_gt_of_ne hp with h | h

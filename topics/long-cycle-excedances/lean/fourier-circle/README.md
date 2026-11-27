@@ -42,14 +42,27 @@ $$
 
 The two lists may overlap or include repeated locations. [Two-pole bound](FourierPolePair.lean) · [Weighted finite products](FourierFinitePoleBound.lean)
 
+The same bound holds for two countably infinite lists with summable nonnegative weights. On each list only finitely many poles may have modulus below $2R$, and each pole must avoid the circle. For $|p|\ge2R$ the normalized kernel is at most $2$, uniformly in angle. The finitely many near poles also have a common bound, since each misses the circle. This gives an integrable constant majorant for the product of partial sums and justifies passage to the limit. [Uniform bound](FourierPoleUniform.lean) · [Infinite weighted products](FourierInfinitePoleBound.lean)
+
+For the complex sums themselves, put $K_p=1/\sqrt{\bigl||p|^2-R^2\bigr|}$. With the same hypotheses on the poles and finite weighted sums on the right, Lean proves
+
+$$
+\int_0^{2\pi}
+\left|\left(\sum_i\frac{c_i}{p_i-Re^{ix}}\right)
+       \left(\sum_j\frac{d_j}{q_j-Re^{ix}}\right)\right|\mathop{}\mathrm{d}x
+\le 2\pi\left(\sum_i|c_i|K_{p_i}\right)\left(\sum_j|d_j|K_{q_j}\right).
+$$
+
+Both complex series converge absolutely at every angle and define continuous functions. This covers the product of the unweighted and contrast-weighted kernels once their pole weights are shown to be summable. [Complex pole products](FourierComplexPoleBound.lean)
+
 ## Verification
 
-The research pin is Lean 4.19.0 at `6caaee842e94` and mathlib at `c44e0c8ee63ca166450922a373c7409c5d26b00b`. Each of the six source modules compiled locally. Their thirteen named axiom reports contain only `propext`, `Classical.choice` and `Quot.sound`. The checker compiles in a fresh directory and verifies the named reports. [Source checker](check.py) · [Dependency manifest](../../../../shared/lean/lake-manifest.json) · [Hosted check](../../../../.github/workflows/long-cycle-fourier-contrast.yml)
+The research pin is Lean 4.19.0 at `6caaee842e94` and mathlib at `c44e0c8ee63ca166450922a373c7409c5d26b00b`. Each of the nine source modules compiled locally. Their eighteen named axiom reports contain only `propext`, `Classical.choice` and `Quot.sound`. The checker compiles in a fresh directory and verifies the named reports. [Source checker](check.py) · [Dependency manifest](../../../../shared/lean/lake-manifest.json) · [Hosted check](../../../../.github/workflows/long-cycle-fourier-contrast.yml)
 
 ```sh
 cd shared/lean
-lake exe cache get Mathlib.Analysis.Complex.CauchyIntegral Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.ExpDeriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Tactic.FieldSimp Mathlib.Tactic.LinearCombination Mathlib.Tactic.NormNum Mathlib.Tactic.Ring Mathlib.Tactic.Positivity
+lake exe cache get Mathlib.Analysis.Complex.CauchyIntegral Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.ExpDeriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Tactic.FieldSimp Mathlib.Tactic.LinearCombination Mathlib.Tactic.NormNum Mathlib.Tactic.Ring Mathlib.Tactic.Positivity Mathlib.MeasureTheory.Integral.DominatedConvergence Mathlib.Analysis.NormedSpace.FunctionSeries
 lake env python3 -I ../../topics/long-cycle-excedances/lean/fourier-circle/check.py
 ```
 
-The verification still requires a specialization to the infinite signed pole sums for the original permutation rows, estimates of those sums, and their use in the large-aspect interlacing theorem.
+The verification still requires the differential equations for the original permutation rows, the numeric bounds on their pole weights, and their use in the large-aspect interlacing theorem.

@@ -19,6 +19,9 @@ THEOREMS = {
     ],
     "FourierPolePair": ["normalizedPole_second_moment", "normalizedPole_pair_integral"],
     "FourierFinitePoleBound": ["finite_pole_product_bound"],
+    "FourierPoleUniform": ["normalizedPole_le_two", "normalizedPole_uniform"],
+    "FourierInfinitePoleBound": ["infinite_pole_product_bound"],
+    "FourierComplexPoleBound": ["norm_pole_term", "complex_pole_product_bound"],
 }
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 REPORT = re.compile(r"'OpenMathResearch\.LongCycleExcedances\.(\w+)' depends on axioms:\s*\[([^\]]*)\]")
