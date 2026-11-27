@@ -1,6 +1,6 @@
 import FourierComplexPoleBound
 import Mathlib.Analysis.PSeries
-import Mathlib.Data.Real.Pi.Bounds
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 
 set_option autoImplicit false
 noncomputable section
@@ -20,7 +20,7 @@ private theorem odd_height_norm (P : ℤ → ℂ) (hP : ∀ l, (P l).im=(2*(l:�
     |2*(l:ℝ)+1| ≤ ‖P l‖ := by
   have h := Complex.abs_im_le_norm (P l)
   rw [hP,abs_mul,abs_of_pos Real.pi_pos] at h
-  exact (le_mul_of_one_le_right (abs_nonneg _) (by linarith [Real.pi_gt_three] : 1 ≤ π)).trans h
+  exact (le_mul_of_one_le_right (abs_nonneg _) (by linarith [Real.one_le_pi_div_two] : 1 ≤ π)).trans h
 
 theorem lattice_inverse_summable (P : ℤ → ℂ) (hP : ∀ l, (P l).im=(2*(l:ℝ)+1)*π)
     {m : ℕ} (hm : 2 ≤ m) : Summable (fun l => 1/‖P l‖^m) := by

@@ -35,8 +35,11 @@ theorem fourier_kernel_error {f D B E : ℝ → ℂ} {M U V : ℝ}
       (hm.intervalIntegrable _ _) (fun x _ => hle x))
   have he : (∫ x in (0:ℝ)..2*π, major x) ≤ (2*π)*(M*(U+V)) := by
     dsimp only [major]
-    rw [intervalIntegral.integral_const_mul,intervalIntegral.integral_add
-      ((cd.mul cb).norm.intervalIntegrable _ _) (ce.norm.intervalIntegrable _ _)]
+    have hadd : (∫ x in (0:ℝ)..2*π, ‖D x*B x‖+‖E x‖) =
+        (∫ x in (0:ℝ)..2*π, ‖D x*B x‖) + (∫ x in (0:ℝ)..2*π, ‖E x‖) :=
+      intervalIntegral.integral_add (f := fun x => ‖D x*B x‖) (g := fun x => ‖E x‖)
+        ((cd.mul cb).norm.intervalIntegrable _ _) (ce.norm.intervalIntegrable _ _)
+    rw [intervalIntegral.integral_const_mul,hadd]
     exact (mul_le_mul_of_nonneg_left (add_le_add hprod hder) hM).trans_eq (by ring)
   unfold normalizedFourierIntegral
   rw [norm_div, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos Real.pi_pos]
