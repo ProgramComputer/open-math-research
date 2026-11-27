@@ -46,13 +46,14 @@ jobs:
           Mathlib.MeasureTheory.Integral.DominatedConvergence
           Mathlib.Analysis.NormedSpace.FunctionSeries
           Mathlib.Analysis.PSeries Mathlib.Data.Real.Pi.Bounds Mathlib.Tactic.Linarith
+          Mathlib.Analysis.SpecialFunctions.Integrals Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+          Mathlib.Analysis.SpecialFunctions.Complex.LogBounds
           Mathlib.Analysis.Calculus.SmoothSeries
           Mathlib.Analysis.Convex.Deriv
           Mathlib.Analysis.Convex.SpecificFunctions.Basic
           Mathlib.Analysis.SumIntegralComparisons
           Mathlib.Analysis.Normed.Group.InfiniteSum
           Mathlib.Topology.Algebra.InfiniteSum.NatInt
-          Mathlib.Analysis.SpecialFunctions.Integrals
           Mathlib.Analysis.SpecificLimits.Normed
           Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
           Mathlib.Data.Complex.ExponentialBounds

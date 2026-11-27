@@ -77,4 +77,6 @@ The differentiated kernel has a termwise angular derivative with an integrated b
 
 The differentiated contrast kernel satisfies the first-moment bound over the full odd lattice. Both integrations by parts now give coefficient inequalities under their stated inputs. [Coefficient errors and verification record](coefficient-errors.md)
 
+A segment integral gives the three lower bounds on the principal denominator used in the large-aspect estimates. [Theorem and verification](principal-denominator.md)
+
 The [small-height numerator contraction](numerator-small-height.md) gives the bound for the explicit odd-pole log series when the height is at most four times the square root of the cutoff.
