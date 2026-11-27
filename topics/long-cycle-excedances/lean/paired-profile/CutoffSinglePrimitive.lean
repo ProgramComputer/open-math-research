@@ -124,7 +124,7 @@ theorem single_cutoff_primitive_lattice {n k K lower : ℕ} {d : ℕ → ℝ} (h
       (by positivity : 0 ≤ 1/X) hyk hU hUs
     have hker : ‖(pairedPoleDenom (cos θ) (sin θ) a)⁻¹‖^k ≤ oddBinKernel c₀ a := by
       have he : 1/X*U/192 = U/(192*X) := by ring
-      simpa only [oddBinKernel,c₀,he] using h
+      simpa only [primitiveAngularPole,oddBinKernel,c₀,he] using h
     have hbn : |numeratorDiff k d k| = 1/(k:ℝ) := by
       rw [hd.numeratorDiff_at_cutoff hk, abs_of_nonneg (by positivity)]
     have he : (k:ℝ)/sin θ*(1/(k:ℝ)) = (sin θ)⁻¹ := by
