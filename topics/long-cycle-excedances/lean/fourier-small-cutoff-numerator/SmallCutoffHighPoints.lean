@@ -6,7 +6,7 @@ noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
 open Finset Real
 
-theorem high_band_at_points (k : ℕ) (hk : 10 ≤ k)
+theorem high_band_at_points (k : ℕ) (hk : 8 ≤ k)
     (s : ℝ) (hs10 : 10 ≤ s)
     (d q split decay M : ℝ)
     (hgeom : ∀ r : ℝ, 0 ≤ r → r^2 = s^2+π^2 →
@@ -65,13 +65,13 @@ theorem high_band_at_points (k : ℕ) (hk : 10 ≤ k)
   have H := high_band_numerator_cost k (by omega) s r R d q split decay
     (by linarith) hsr hd hd0 hd1 hq hrR hR hu0 hv0 hpos hprefix g hG hu hv
   have ht : 5 ≤ t := by
-    have hK : (10:ℝ) ≤ k := by exact_mod_cast hk
-    have hd : 1/(k:ℝ) ≤ 1/10 :=
+    have hK : (8:ℝ) ≤ k := by exact_mod_cast hk
+    have hd : 1/(k:ℝ) ≤ 1/8 :=
       one_div_le_one_div_of_le (by norm_num) hK
     dsimp only [t]
     have h := mul_le_mul_of_nonneg_right
-      (show (9/10:ℝ) ≤ 1-1/(k:ℝ) by linarith) hr
-    have h' := mul_le_mul_of_nonneg_left (hs10.trans hsr) (show (0:ℝ) ≤ 9/10 by norm_num)
+      (show (7/8:ℝ) ≤ 1-1/(k:ℝ) by linarith) hr
+    have h' := mul_le_mul_of_nonneg_left (hs10.trans hsr) (show (0:ℝ) ≤ 7/8 by norm_num)
     linarith only [h,h']
   have HH := H.trans_lt (hbudget t ht)
   change ‖numeratorLog k g ((R:ℂ)*u)-localLogRatio s ((t:ℂ)*u)‖ +

@@ -9,7 +9,7 @@ open scoped Real
 open private principal_norm_eq_radius original_cutoff_range_shift from NumeratorSmallHeightPoints in
 /-- Small-height original-polynomial comparison at the same two points as
 the high-height estimate, given the analytic identification on the unit disk. -/
-theorem original_low_band_at_points {k : ℕ} (hk : 10 ≤ k)
+theorem original_low_band_at_points {k : ℕ} (hk : 8 ≤ k)
     {s : ℝ} (hs : 0 ≤ s) (M : ℝ)
     (hcost : let U := 1/((π/numeratorRadius s)*Real.sqrt k)
       12/(k:ℝ)+(5/2+1)*(2+9*U/2)+2*(3/8)*(2+9*U/4)<M)

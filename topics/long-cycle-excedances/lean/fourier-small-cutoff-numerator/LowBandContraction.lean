@@ -55,7 +55,7 @@ private theorem moment_prefix {k : ℕ} (hk : 2 ≤ k) {S : ℝ} (hS : 0 < S) :
       ring_nf
       simp only [Real.sq_sqrt hk0.le]
 
-private theorem low_band_radial_prefix {k : ℕ} (hk : 10 ≤ k)
+private theorem low_band_radial_prefix {k : ℕ} (hk : 8 ≤ k)
     (c : ℕ → ℂ) {S R A : ℝ} (hS : 0 < S) (hA : 0 ≤ A)
     (hR : 1 ≤ R) {ξ : ℂ} (hξ : ‖ξ‖ = 1)
     (hc1 : ‖c 1‖ ≤ 4)
@@ -67,7 +67,7 @@ private theorem low_band_radial_prefix {k : ℕ} (hk : 10 ≤ k)
       4*(R-(1-1/(k:ℝ))) + A*(2+9/(2*S*Real.sqrt k)) := by
   let ρ : ℝ := 1-1/(k:ℝ)
   have hk0 : (0:ℝ) < k := by exact_mod_cast (show 0 < k by omega)
-  have hkR : (10:ℝ) ≤ k := by exact_mod_cast hk
+  have hkR : (8:ℝ) ≤ k := by exact_mod_cast hk
   have hu : 0 ≤ 1/(k:ℝ) := by positivity
   have hρ : 0 ≤ ρ := sub_nonneg.mpr ((div_le_one hk0).2 (by linarith))
   have hρR : ρ ≤ R := by dsimp only [ρ]; linarith only [hu,hR]
@@ -121,7 +121,7 @@ private theorem low_band_radial_prefix {k : ℕ} (hk : 10 ≤ k)
       simp [Finset.sum_range_succ', hf0]
     _ ≤ _ := add_le_add hf1 htail
 
-private theorem low_band_taylor_tail {k : ℕ} (hk : 10 ≤ k)
+private theorem low_band_taylor_tail {k : ℕ} (hk : 8 ≤ k)
     (c : ℕ → ℂ) {S : ℝ} (hS : 0 < S) {ξ : ℂ} (hξ : ‖ξ‖ = 1)
     (hc : ∀ j : ℕ, 2 ≤ j → ‖c j‖ ≤ (2+9/(4*S*Real.sqrt j))/(j:ℝ)) :
     let z : ℂ := ((1-1/(k:ℝ):ℝ):ℂ)*ξ
@@ -132,7 +132,7 @@ private theorem low_band_taylor_tail {k : ℕ} (hk : 10 ≤ k)
   let q : ℝ := ρ
   let C : ℝ := 2+9/(4*S*Real.sqrt k)
   have hk0 : (0:ℝ) < k := by exact_mod_cast (show 0 < k by omega)
-  have hkR : (10:ℝ) ≤ k := by exact_mod_cast hk
+  have hkR : (8:ℝ) ≤ k := by exact_mod_cast hk
   have hsqrt : 0 < Real.sqrt (k:ℝ) := Real.sqrt_pos.2 hk0
   have hρ : 0 ≤ ρ := sub_nonneg.mpr ((div_le_one hk0).2 (by linarith))
   have hq1 : q < 1 := by
@@ -204,7 +204,7 @@ private theorem low_band_taylor_tail {k : ℕ} (hk : 10 ≤ k)
 
 /-- The simultaneous radial comparison at an outer normalized point and at
 a principal normalized point, from an all-degree odd-pole coefficient envelope. -/
-theorem low_band_contraction {k : ℕ} (hk : 10 ≤ k)
+theorem low_band_contraction {k : ℕ} (hk : 8 ≤ k)
     (c : ℕ → ℂ) {S R : ℝ} (hS : 0 < S)
     (hR : 1 ≤ R) (hRu : R ≤ 1+1/(k:ℝ))
     {ξ η : ℂ} (hξ : ‖ξ‖ = 1) (hη : ‖η‖ = 1)

@@ -40,7 +40,7 @@ private theorem low_height_scale_at {s b U K : ℝ} {k : ℕ}
   rwa [heq]
 
 open private numerator_linear_bound from NumeratorLogSeries in
-theorem original_low_band_series {s : ℝ} (hs : 0 ≤ s) {k : ℕ} (hk : 10 ≤ k) {R : ℝ}
+theorem original_low_band_series {s : ℝ} (hs : 0 ≤ s) {k : ℕ} (hk : 8 ≤ k) {R : ℝ}
     (hR : 1 ≤ R) (hRu : R ≤ 1+1/(k:ℝ)) {ξ η : ℂ}
     (hξ : ‖ξ‖ = 1) (hη : ‖η‖ = 1) :
     let c := numeratorLogSeries s
@@ -79,6 +79,19 @@ theorem low_band_ten_budget {s : ℝ} (hs : 0 ≤ s) {k : ℕ}
   dsimp only
   linarith only [hU,hd]
 
+theorem low_band_eight_budget {s : ℝ} (hs : 0 ≤ s) {k : ℕ}
+    (hk : 8 ≤ k) (hsh : s ≤ 8*Real.sqrt k) :
+    let U := 1/((π/numeratorRadius s)*Real.sqrt k)
+    12/(k:ℝ)+(5/2+1)*(2+9*U/2)+2*(3/8)*(2+9*U/4) < 65 := by
+  have hkR : (8:ℝ) ≤ k := by exact_mod_cast hk
+  have hU := low_height_scale_at hs (b := 8) (U := 13/5) (K := 8)
+    (by norm_num) (by norm_num) (by norm_num) hkR hsh (by norm_num) (by norm_num)
+  have hd := div_le_div_of_nonneg_left (by norm_num : (0:ℝ) ≤ 12)
+    (by norm_num : (0:ℝ)<8) hkR
+  dsimp only
+  linarith only [hU,hd]
+
+#print axioms low_band_eight_budget
 #print axioms original_low_band_series
 #print axioms low_band_fifty_budget
 #print axioms low_band_ten_budget
