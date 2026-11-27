@@ -47,7 +47,7 @@ transports the next-row signs with the degree parity. When the old degree
 is odd, reciprocity gives its root at minus one, and only the next-row
 sign at that point remains an input. The [hosted half-axis check][half-audit]
 compiled and replayed the three new modules. Both additional declarations
-use only `propext`, `Classical.choice` and `Quot.sound`. [Audit excerpt](half-axis-audit.txt)
+use only `propext`, `Classical.choice` and `Quot.sound`. [Audit excerpt](half-axis-audit.txt) · [Independent half-axis review](half-axis-review.md)
 
 [half-audit]: https://github.com/ProgramComputer/open-math-research/actions/runs/45923553428
 [root-audit]: https://github.com/ProgramComputer/open-math-research/actions/runs/45922634178
