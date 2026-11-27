@@ -8,7 +8,7 @@ open Finset
 theorem binomial_residual_identity {N d : ℕ} (hd : d ≤ N) :
     ((N+1).choose d:ℝ)*((N-d+1:ℕ):ℝ)=((N+1:ℕ):ℝ)*(N.choose d:ℝ) := by
   exact_mod_cast (show (N+1).choose d*(N-d+1)=(N+1)*N.choose d by
-    have h := Nat.succ_mul_choose_eq N (N-d)
+    have h := Nat.add_one_mul_choose_eq N (N-d)
     rw [Nat.choose_symm hd] at h
     rw [Nat.choose_symm_of_eq_add (show N+1 = (N-d).succ+d by omega)] at h
     exact h.symm)

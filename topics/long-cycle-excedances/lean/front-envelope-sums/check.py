@@ -122,12 +122,18 @@ def main(project, imports):
     common.main(project, imports)
 
     observed = {}
+    failed = set()
     for module in (*MODULES, *SECTOR_MODULES, *ASPECT_MODULES):
         directory = HERE if module in MODULES else HERE.parent / "sparse-sector"
         if module in ASPECT_MODULES:
             directory = HERE.parent / "all-aspect-exterior"
         source = project / (module + ".lean")
         shutil.copyfile(directory / source.name, source)
+        dependencies = re.findall(r"^import ([\w.]+)", source.read_text(), flags=re.M)
+        if failed.intersection(dependencies):
+            failed.add(module)
+            print(f"Skip {module} after an import failed", flush=True)
+            continue
         output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
         print(f"Compile {module} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
         result = subprocess.run(
@@ -138,10 +144,14 @@ def main(project, imports):
             stderr=subprocess.STDOUT,
         )
         print(result.stdout, end="", flush=True)
-        result.check_returncode()
+        if result.returncode:
+            failed.add(module)
+            continue
         for name, axioms in AXIOM_REPORT.findall(result.stdout):
             observed[name] = {axiom.strip() for axiom in axioms.split(",") if axiom.strip()}
 
+    if failed:
+        raise ArithmeticError(f"Modules not compiled: {sorted(failed)}")
     for name in sorted(EXPECTED | SECTOR_EXPECTED | ASPECT_EXPECTED):
         if name not in observed or observed[name] - common.ALLOWED:
             raise ArithmeticError(f"Missing declaration or unexpected axioms for {name}: {observed.get(name)}")
