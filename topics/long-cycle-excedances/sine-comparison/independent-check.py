@@ -101,7 +101,8 @@ def bound(lo, X, high):
           *(ceil(z*10**6) for z in (Pcost,V,B,J)), int(margin*10**6), flush=True)
 
 
-for lo, X in SLABS:
-    bound(lo, X, True)
-    if X >= 16:
-        bound(lo, X, False)
+if __name__ == '__main__':
+    for lo, X in SLABS:
+        bound(lo, X, True)
+        if X >= 16:
+            bound(lo, X, False)
