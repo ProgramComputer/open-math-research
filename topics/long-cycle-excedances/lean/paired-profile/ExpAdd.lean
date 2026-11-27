@@ -57,7 +57,7 @@ private theorem weightedPow_add (F G : ℂ⟦X⟧) (n : ℕ) :
       (a.factorial:ℂ)⁻¹*((n-a).factorial:ℂ)⁻¹ := by
     rw [← hfac]
     field_simp [ha0,hb0,hc0] <;> ring
-  simp only [weightedPow, ← map_natCast (PowerSeries.C ℂ)]
+  simp only [weightedPow, ← map_natCast (PowerSeries.C (R := ℂ))]
   calc
     _ = PowerSeries.C (R := ℂ) ((n.factorial:ℂ)⁻¹*(n.choose a:ℂ))*F^a*G^(n-a) := by
       rw [map_mul]
