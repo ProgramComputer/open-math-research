@@ -1,5 +1,7 @@
 name: Long-cycle wide-aspect interlacing
 on:
+  push:
+    branches: [review/long-cycle-fourier-wide-interlacing]
   pull_request:
     branches: [research]
     paths:
