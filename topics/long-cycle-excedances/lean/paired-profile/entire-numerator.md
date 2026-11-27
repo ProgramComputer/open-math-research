@@ -22,3 +22,5 @@ From the repository root run
 python3 -I topics/long-cycle-excedances/lean/paired-profile/check-entire-numerator.py
 python3 -I topics/long-cycle-excedances/lean/paired-profile/check.py /tmp/paired-numerator
 ~~~
+
+The [adjacent-row identities](adjacent-windows.md) use the numerator at one to bound centered permutation probabilities uniformly between factorial block endpoints.
