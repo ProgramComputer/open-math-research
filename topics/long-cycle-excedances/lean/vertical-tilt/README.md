@@ -12,7 +12,7 @@ $$
 \sum_{p\in F}p\left(\frac{r}{|w_p|}\right)^n\left|\frac{T(w_p)}{T(w_1)}\right|\le\frac15.
 $$
 
-These inequalities bound the contribution of the positive nonprincipal poles to the normalized consecutive-row estimate. The [uniform all-cutoff argument](../../effective-uniform.md) used $21/50$ for the same sum. The passage from the residues to signs at every root also requires control of the row remainder and the exterior roots. [Actual phase and tilt](RepositoryPoleTransport.lean) · [Actual weighted sum](RepositoryMinorPoles.lean) · [All-angle result](AllAngleMinorPoles.lean) · [All-angle result](AllAngleMinorPoles.lean)
+These inequalities bound the contribution of the positive nonprincipal poles to the normalized consecutive-row estimate. The [uniform all-cutoff argument](../../effective-uniform.md) used $21/50$ for the same sum. The passage from the residues to signs at every root also requires control of the row remainder and the exterior roots. [Actual phase and tilt](RepositoryPoleTransport.lean) · [Actual weighted sum](RepositoryMinorPoles.lean) · [All-angle result](AllAngleMinorPoles.lean)
 
 ## Proof
 
@@ -33,5 +33,7 @@ For an enclosed pole put $z=(p^2-1)S^2$. The identity $|w_p|^2/r^2=1+z$ and encl
 For $0\le x\le10\sqrt{k}$, the enlarged disk contains no nonprincipal poles. Indeed, $r^2=x^2+\pi^2\le102k$ and $R^2-r^2\le(3/(50k))r^2\le306/50$, whereas the first nonprincipal pole lies at squared distance $r^2+8\pi^2$ from the origin. This proves the sum bound throughout the middle range. The squared radius ratios summed over the entire signed pole lattice are also bounded by $2+n/2$. [Exclusion estimate](SmallRadius.lean) · [Both all-angle statements](AllAngleMinorPoles.lean)
 
 ## Verification
+
+Independent agent reviewers checked the discrete moments, pole orientation, density and radius estimates, the positive-side summation, and the full range in $x$. [Independent review](independent-review.md)
 
 The shared research-pin rebuild and replay are pending. The [all-cutoff interlacing result](../../all-cutoffs/README.md) has 🟨 Partial · Lean 4 coverage.
