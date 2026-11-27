@@ -1,6 +1,6 @@
 # Angular derivative of the original cutoff generating function
 
-Write $p_\ell=s+(2\ell+1)\pi i$ and $w=Re^{ix}$. Let $G_k$ be the finite cutoff logarithm with the coefficients of the original permutation generating function at $t=-e^{-s}$. Put $f(z)=e^{G_k(z)}/(1+e^{z-s})$. The theorem proposed for the production pin is the following angular derivative, for $k\ge2$, $s\ge0$ and every real $R,x$ with $w\ne p_\ell$ for all $\ell$.
+Write $p_\ell=s+(2\ell+1)\pi i$ and $w=Re^{ix}$. Let $G_k$ be the finite cutoff logarithm with the coefficients of the original permutation generating function at $t=-e^{-s}$. Put $f(z)=e^{G_k(z)}/(1+e^{z-s})$. Lean checks the following angular derivative, for $k\ge2$, $s\ge0$ and every real $R,x$ with $w\ne p_\ell$ for all $\ell$.
 
 $$
 \frac{d}{dx} f(Re^{ix})
@@ -14,7 +14,7 @@ The exported target uses the power-series numerator from the original cycle prof
 
 ## Verification record
 
-A compatibility implementation of the continuation, local convergence, finite geometric remainder and conditional angular formula compiled on Lean 4.19.0. The latter takes the real-ray equality and finite logarithm coefficients as hypotheses. The production adapter instantiates those inputs on Lean 4.33.1, compiler commit `819816b2e0a3bf405af45ae5c7af2491d8f5bee6` with mathlib `0df444a360eaa60ab8c11dca51a86af692955474`. The production rebuild, axiom reports and bundled checker replay for the joined theorem are pending.
+A compatibility implementation of the continuation, local convergence, finite geometric remainder and conditional angular formula compiled on Lean 4.19.0. The latter takes the real-ray equality and finite logarithm coefficients as hypotheses. The production adapter instantiates those inputs on Lean 4.33.1, compiler commit `819816b2e0a3bf405af45ae5c7af2491d8f5bee6` with mathlib `0df444a360eaa60ab8c11dca51a86af692955474`. The [hosted rebuild](https://github.com/ProgramComputer/open-math-research/actions/runs/46012935660) passed on source commit `592fdbfc73fc009c6adad5d5c15d487568f6517d`. All 14 repository source digests matched the compiler inputs. All 20 named transitive axiom reports used only `propext`, `Classical.choice` and `Quot.sound`, including `original_row_angular_equation`. The bundled Lean checker replayed all 11 audited modules. The run authenticated the upstream release at `46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554` and its retained imports. The all-size formalization still requires quantitative Fourier and residue bounds.
 
 From the repository root, with the pinned Linux toolchain on the path, run the following command with a fresh directory.
 
