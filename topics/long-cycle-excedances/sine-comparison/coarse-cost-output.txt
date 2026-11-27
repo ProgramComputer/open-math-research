@@ -1,0 +1,9 @@
+4 6 star/256 228 costs in upward millionths 75363 105358 6767 687743 rounded margin floor 106587 unrounded margin floor 106589
+6 10 star/256 278 costs in upward millionths 14953 106026 3697 763561 rounded margin floor 93581 unrounded margin floor 93583
+10 16 star/256 331 costs in upward millionths 1137 103976 482 74174 rounded margin floor 310306 unrounded margin floor 310308
+16 22 star/256 368 costs in upward millionths 114 121581 10 904 rounded margin floor 367466 unrounded margin floor 367468
+22 28 star/256 397 costs in upward millionths 101 158181 1 41 rounded margin floor 331751 unrounded margin floor 331754
+28 34 star/256 421 costs in upward millionths 101 218989 1 28 rounded margin floor 270956 unrounded margin floor 270959
+34 40 star/256 441 costs in upward millionths 101 303181 1 40 rounded margin floor 186752 unrounded margin floor 186755
+40 44 star/256 453 costs in upward millionths 101 374639 1 46 rounded margin floor 115288 unrounded margin floor 115291
+44 48 star/256 463 costs in upward millionths 101 387859 1 54 rounded margin floor 102060 unrounded margin floor 102063

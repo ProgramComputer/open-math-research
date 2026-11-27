@@ -33,3 +33,5 @@ jobs:
           python3 -I -B check-nonprincipal.py > "$RUNNER_TEMP/nonprincipal.txt"
           diff -u nonprincipal-output.txt "$RUNNER_TEMP/nonprincipal.txt"
           python3 -I -B obstruction.py
+          python3 -I -B check-coarse-cost.py > "$RUNNER_TEMP/coarse-cost.txt"
+          diff -u coarse-cost-output.txt "$RUNNER_TEMP/coarse-cost.txt"
