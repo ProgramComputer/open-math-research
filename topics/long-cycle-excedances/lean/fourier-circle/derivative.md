@@ -19,3 +19,5 @@ For a single pole the squared distance kernel has angular mean $K_j^2$. The nonn
 The two choices of residues in the common-circle argument give the old-row and contrast derivative terms once the corresponding squared weights are controlled. The identity between the original generating-function derivative and its odd-pole expansion is a separate obligation. [Fourier proof and reproduction command](README.md)
 
 On the shared Lean 4.19.0 research pin the 16 modules compiled in a fresh module directory. The 28 named axiom reports passed using only `propext`, `Classical.choice` and `Quot.sound`. [Reproduction commands](README.md)
+
+The pinned Linux build at `fb71999af06ecf678c4bbcca9e1a7d9bcf0d2607` matched all 16 Git source hashes and passed the 28 named axiom audits. An independent agent checked the positive derivative sign, the radius factor from the angular velocity and cancellation of $2\pi$ under normalized angular measure. The reviewer identified $R T_0$ and $R S T_1$ as the two applications when their squared weights are supplied. [Hosted verification](https://github.com/ProgramComputer/open-math-research/actions/runs/46003560740)
