@@ -13,6 +13,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 TOPIC = HERE.parents[1]
 SUPPORT = (
+    ("lean/sine-comparison", "PrincipalDisk"),
+    ("lean/sine-comparison", "PrincipalIntegral"),
+    ("lean/sine-comparison", "PrincipalFactor"),
     ("color-acceptance", "ColorAnchor"),
     ("color-acceptance", "ColorPermSplit"),
     ("color-acceptance", "ColorBlock"),
@@ -47,8 +50,21 @@ MODULES = (
     "CycleNumeratorVariation",
     "CutoffCycleSeriesRecurrence",
     "RepositoryNumeratorVariation",
+    "EntireCycleEvaluation",
+    "RepositoryPrincipalFactor",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.principal_disk_exp_re",
+    "OpenMathResearch.LongCycleExcedances.principal_radial_denominator",
+    "OpenMathResearch.LongCycleExcedances.principal_log_integral_bound",
+    "OpenMathResearch.LongCycleExcedances.principal_log_integral_eq",
+    "OpenMathResearch.LongCycleExcedances.principal_exp_integral_eq_factor",
+    "OpenMathResearch.LongCycleExcedances.principal_lagrange_factor_eq_exp",
+    "OpenMathResearch.LongCycleExcedances.cutoff_numerator_hasSum",
+    "OpenMathResearch.LongCycleExcedances.original_numerator_hasSum",
+    "OpenMathResearch.LongCycleExcedances.occupied_primitive_hasSum",
+    "OpenMathResearch.LongCycleExcedances.occupied_factor_hasSum_integral",
+    "OpenMathResearch.LongCycleExcedances.occupied_product_hasSum_integral",
     "OpenMathResearch.LongCycleExcedances.finite_pole_partition",
     "OpenMathResearch.LongCycleExcedances.finite_distinguished_pole_product",
     "OpenMathResearch.LongCycleExcedances.finite_pole_product_resummed",

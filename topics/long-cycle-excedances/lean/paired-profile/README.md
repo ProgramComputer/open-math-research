@@ -1,6 +1,6 @@
 # Lean bridge for the paired-residue profile
 
-The [paired-residue middle proof](../../paired-residues/README.md) uses the original fixed-threshold permutation rows for $n\ge10{,}000$ and $4\le n/k\le48$. This package checks supporting exact identities. The occupied-degree product bounds and the resulting middle signs remain open Lean obligations. This package treats values. Angular differentiation remains a separate proof obligation.
+The [paired-residue middle proof](../../paired-residues/README.md) uses the original fixed-threshold permutation rows for $n\ge10{,}000$ and $4\le n/k\le48$. This package checks supporting exact identities. The occupied-degree product bounds and the resulting middle signs remain open Lean obligations. The [entire numerator evaluation](entire-numerator.md) identifies the finite occupied product at the conjugate pole. The derivative-free middle comparison uses values of adjacent rows.
 
 Write $x\ge0$, $R\gt0$ and $z_q=R/(x+i(2q+1)\pi)$ for $q\in\mathbb Z$. At cycle size $p\ge2$ the signed Eulerian moment at $t=-\exp(-x)$ contributes
 

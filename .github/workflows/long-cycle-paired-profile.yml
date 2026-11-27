@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/long-cycle-paired-profile.yml'
       - 'topics/long-cycle-excedances/lean/paired-profile/**'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/Principal*.lean'
 
 concurrency:
   group: paired-profile-${{ github.event.pull_request.number }}
