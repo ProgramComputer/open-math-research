@@ -1,0 +1,18 @@
+Source head 2032cf591c984c1890f25733f7dca947bbc0b2fa
+Hosted run 45930971642, success
+Repository replay: python3 topics/long-cycle-excedances/lean/common-pin/check.py (inputs prepared by .github/workflows/long-cycle-common-pin.yml)
+Artifact ID 15168399182
+Artifact ZIP SHA-256 276bf97e9e306dd4734d6ae76f50872b920013fe9f120491d4d1a3f4f5de09f5
+
+Compile RepositoryCoherentPoles input-sha256=2b9c2267ec1087385c4cc02ed26eae283289a8e58bf7dcf1cc4fafe05e204c54
+'RepositoryQuotientAudit.original_logistic_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_rescaled_logTilt_coeff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.coherent_product_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.coherent_successor_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_coherent_row_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+Compile FarPoleTruncation input-sha256=df0885d7a657de71e8a1d93bcaf0bc952b54ba8b3897c79b0ddde032f9910dbe
+'OpenMathResearch.LongCycleExcedances.norm_far_pole_truncation_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying RepositoryCoherentPoles
+kernel_replay_exit=0 RepositoryCoherentPoles
+replaying FarPoleTruncation
+kernel_replay_exit=0 FarPoleTruncation
