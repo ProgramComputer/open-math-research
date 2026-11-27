@@ -98,9 +98,15 @@ MODULES = (
     "RepositoryPrincipalSlab",
     "RoundedProductTable",
     "PrincipalCostTable",
+    "IntegerCostCertificate",
+    "FixedPrincipalCaps",
     "PrincipalCostBridge",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.rationalPrincipalCost_le_integer_certificate",
+    "OpenMathResearch.LongCycleExcedances.fixedPrincipalCaps_ledger",
+    "OpenMathResearch.LongCycleExcedances.rationalPrincipalCost_le_fixed_cap",
+    "OpenMathResearch.LongCycleExcedances.original_slab_principal_le_fixed_cap",
     "OpenMathResearch.LongCycleExcedances.original_slab_principal_le_computed_cap",
     "OpenMathResearch.LongCycleExcedances.rationalCenteredError_cast",
     "OpenMathResearch.LongCycleExcedances.roundedSlabQ_recurrence",
@@ -249,6 +255,7 @@ def replay_principal_arithmetic(project):
         HERE.parent / "sine-comparison" / "EvalLinearTable.lean",
         HERE / "RunPrincipal.lean",
         HERE / "RunCosts.lean",
+        HERE / "RunFixedLedger.lean",
     )
     outputs = []
     for original in evaluation_sources:
@@ -264,7 +271,7 @@ def replay_principal_arithmetic(project):
     print(f"Independent checker sha256={sha256(checker.read_bytes()).hexdigest()}", flush=True)
     subprocess.run(
         [sys.executable, "-I", str(checker), str(outputs[0]), "--lean-q", str(outputs[1]),
-         "--lean-caps", str(outputs[2])],
+         "--lean-caps", str(outputs[2]), "--lean-ledger", str(outputs[3])],
         check=True,
     )
 

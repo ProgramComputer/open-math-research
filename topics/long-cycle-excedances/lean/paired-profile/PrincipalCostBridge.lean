@@ -1,4 +1,4 @@
-import PrincipalCostTable
+import FixedPrincipalCaps
 import RepositoryPrincipalSlab
 
 set_option autoImplicit false
@@ -55,6 +55,27 @@ theorem original_slab_principal_le_computed_cap (slab : Fin 9) {j n : ℕ}
     (roundedQ linearScale (linearSlabTable slab)) (roundedQ_zero _ _)
     (roundedSlabQ_recurrence slab)).trans_le (principalHeadEstimate_le_computed_cap slab)
 
+/-- The fixed cap has an independent integer certificate. The equality identifies
+the supplied concrete coefficient ledger with the analytic rounding recurrence. -/
+theorem original_slab_principal_le_fixed_cap (slab : Fin 9) {j n : ℕ}
+    (hn : 10000 ≤ n) (hnX : n ≤ linearSlabX slab * (j+2))
+    (hlo : principalLower slab * (j+2) ≤ n) {θ : ℝ}
+    (hS : 0 < Real.sin θ) (hU : 6/5 ≤ (n:ℝ)*Real.sin θ^2) (A : Finset ℤ)
+    (hledger : qSlabPrefix slab 240 = principalQLedger slab) :
+    doubledPrincipalError j n (originalProbability (j+2)) A θ <
+      (fixedPrincipalCaps slab : ℝ) / 1000000 := by
+  have hcap := rationalPrincipalCost_le_fixed_cap slab hledger
+  have hnum : (principalMillionths slab : ℚ) ≤ fixedPrincipalCaps slab := by
+    have hm : (1000000 : ℚ) * rationalPrincipalCost slab ≤ fixedPrincipalCaps slab := by
+      rw [mul_comm]
+      exact (le_div_iff₀ (by norm_num : (0 : ℚ) < 1000000)).mp hcap
+    exact Nat.cast_le.mpr (Nat.ceil_le.mpr hm)
+  have hnum' : (principalMillionths slab : ℝ) ≤ fixedPrincipalCaps slab := by
+    exact_mod_cast hnum
+  exact (original_slab_principal_le_computed_cap slab hn hnX hlo hS hU A).trans_le
+    (div_le_div_of_nonneg_right hnum' (by norm_num))
+
+#print axioms original_slab_principal_le_fixed_cap
 #print axioms original_slab_principal_le_computed_cap
 #print axioms rationalCenteredError_cast
 #print axioms roundedSlabQ_recurrence

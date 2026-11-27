@@ -26,6 +26,7 @@ def main():
     parser.add_argument('linear', type=Path)
     parser.add_argument('--lean-q', type=Path)
     parser.add_argument('--lean-caps', type=Path)
+    parser.add_argument('--lean-ledger', type=Path)
     parser.add_argument('--write-q', type=Path)
     args = parser.parse_args()
     source = ledger(args.linear)
@@ -55,6 +56,8 @@ def main():
         result[upper] = q
     if args.lean_q and ledger(args.lean_q) != result:
         raise ValueError('q table differs from Lean')
+    if args.lean_ledger and ledger(args.lean_ledger) != result:
+        raise ValueError('frozen Lean ledger differs from the rounded recurrence')
     if args.lean_caps and literal_eval(args.lean_caps.read_text()) != caps:
         raise ValueError('cap table differs from Lean')
     if args.write_q:
