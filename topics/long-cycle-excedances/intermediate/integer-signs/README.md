@@ -16,6 +16,10 @@ Put $`u=(W+1)^N`$ and $`v=(W+2)^N`$. The first omitted monomial has absolute val
 
 The full replay used the sharper tail 28 times and did not need the exact retained numerator fallback. Each branch checks the same strict sign with a certified tail bound. [C++ checker](signs.cpp) · [Archive runner](run.py)
 
+## Rounded coefficients
+
+Passing `--packed` retains 48 significant bits and a 16-bit shift per stored coefficient. Each row in the recurrence cache occupies 480 bytes. The exact Eulerian weights and temporary products use GMP integers. For each endpoint, positive Horner evaluation with upward integer rounding bounds the coefficient error. The signed evaluation pays that uncertainty in both the rounded and homogeneous tests. Both modes passed the complete authenticated stream. The packed run used the sharp tail 28 times. [Packed output](packed-output.txt) · [Storage and rounding](row-storage.hpp) · [Lean coefficient enclosure](../../lean/compact-rows/README.md)
+
 ## Reproduce
 
 From this directory, with a C++17 compiler and GMP's C++ development library installed, run:
@@ -23,6 +27,7 @@ From this directory, with a C++17 compiler and GMP's C++ development library ins
 ~~~sh
 c++ -std=c++17 -O3 -Wall -Wextra signs.cpp -lgmpxx -lgmp -o /tmp/long-cycle-signs
 python3 -B run.py ../witness-ledger/shards /tmp/long-cycle-signs
+python3 -B run.py ../witness-ledger/shards /tmp/long-cycle-signs --packed
 ~~~
 
 If your GMP installation is outside the default compiler search path, supply its include and library directories with `-I` and `-L`.

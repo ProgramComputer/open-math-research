@@ -128,15 +128,15 @@ theorem original_count_step (n k : ℕ) (hk : 2 ≤ k) (hkn : k ≤ n)
       C (n.choose (k-1) : ℝ)*(X*A)*originalEnumerator (n+1-k) k) (i : ℕ) :
     originalReducedCount (n+1) k i =
       positiveStep k n a (originalReducedCount n k) (originalReducedCount (n+1-k) k) i := by
-  have rec := canonical_insertion_of_original hkn hk A ins
+  have reducedIdentity := canonical_insertion_of_original hkn hk A ins
   apply Nat.cast_injective (R:=ℝ)
   rw [originalReducedCount_eq]
   cases i with
   | zero =>
-    exact (coeff_zero_of_reduced_insertion _ _ _ _ _ _ rec).trans
+    exact (coeff_zero_of_reduced_insertion _ _ _ _ _ _ reducedIdentity).trans
       (originalReducedCount_eq _ _ _).symm
   | succ i =>
-    rw [coeff_of_reduced_insertion _ _ _ _ _ _ i rec, coeff_mul,
+    rw [coeff_of_reduced_insertion _ _ _ _ _ _ i reducedIdentity, coeff_mul,
       Nat.sum_antidiagonal_eq_sum_range_succ (fun j h =>
         A.coeff j * (canonicalReducedRow (n+1-k) k).coeff h)]
     simp only [positiveStep, Nat.cast_add, Nat.cast_mul, Nat.cast_sum,

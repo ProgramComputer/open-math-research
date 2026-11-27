@@ -11,11 +11,14 @@ STREAM_BYTES = 63_014_205
 STREAM_SHA256 = "8f8115d4f203840560dd74f7cf12654d0bca00561c8ff473f27ed6af3f20a73e"
 
 
-def run(shards, checker):
+def run(shards, checker, packed=False):
     started = monotonic()
     digest = sha256()
     size = 0
-    with subprocess.Popen([checker.resolve()], stdin=subprocess.PIPE) as check:
+    command = [checker.resolve()]
+    if packed:
+        command.append("--packed")
+    with subprocess.Popen(command, stdin=subprocess.PIPE) as check:
         for part in sorted(shards.glob("part-*.csv.gz")):
             with gzip.open(part, "rb") as stream:
                 while chunk := stream.read(256 * 1024):
@@ -35,5 +38,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("shards", type=Path)
     parser.add_argument("checker", type=Path)
+    parser.add_argument("--packed", action="store_true", help="use the 48-bit significand recurrence")
     args = parser.parse_args()
-    run(args.shards, args.checker)
+    run(args.shards, args.checker, args.packed)
