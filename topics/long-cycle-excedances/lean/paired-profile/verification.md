@@ -1,0 +1,29 @@
+# Paired-profile hosted audit
+
+Lean source head `7b80853c02e4b7bc0c83e23bf8b76aee1f28af8d`. The SHA-256 of the retained report is `98b52f7d2cf77e92d28b4a72347a23fa2aa30796a486c897c51c592b3a77f8a9`. [Successful hosted run and report](https://github.com/ProgramComputer/open-math-research/actions/runs/45965386958)
+
+The audit compiled every new Lean module and replayed it with `lake env leanchecker --verbose`. Each of the 22 audited declarations used only `propext`, `Classical.choice`, and `Quot.sound`.
+
+```text
+Frozen upstream source 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Reused verified common-pin archive sha256=000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05
+Compile FinitePoleProduct input-sha256=7534e4efe9287b70b30ea414d1f0cdfbb759d8f504510c39511799c9c12bfaaf
+Compile PairedPoleFamily input-sha256=3498761bdd741f44266ffc8d034c7074c5f1f5c21a4cb788824a44eeb56214cd
+Compile PairedPoleConvergence input-sha256=60b72ee27977c3bbbb1306ec8406b164798b21e76f49fe8b1e8c5508e895580d
+Compile PairedCycleNormalization input-sha256=6d6d21ffb7242feb9936f25adf1f4e5fc5c18566b2743a1644394e5304cfa395
+Compile PairedCoefficientLimit input-sha256=b324c076b7c13467d74afa385fd2184cd32de1ec7897c467a0d8efcaf82fe203
+Compile ScaledCycleProfile input-sha256=2536bdf82cf335bea8bebdfd5ae108c12cecd1ad98ae3df8bb0c132bf0bdc97d
+Compile RepositoryPairedCycleLift input-sha256=9e3ae283b41a2359ce9d5ab8825e9163717e733433e4a35f363dac8491bad90c
+Compile RepositoryScaledCycleProfile input-sha256=b8a4e2e21a1c7ae999ccf8c18a0dcca9ffaebcdc1cd5d2523f38fe083d5e1011
+kernel_replay_exit=0 FinitePoleProduct
+kernel_replay_exit=0 PairedPoleFamily
+kernel_replay_exit=0 PairedPoleConvergence
+kernel_replay_exit=0 PairedCycleNormalization
+kernel_replay_exit=0 PairedCoefficientLimit
+kernel_replay_exit=0 ScaledCycleProfile
+kernel_replay_exit=0 RepositoryPairedCycleLift
+kernel_replay_exit=0 RepositoryScaledCycleProfile
+PASS: 22 paired-profile declarations audited
+```

@@ -1,0 +1,43 @@
+name: Long-cycle sine comparison
+on:
+  pull_request:
+    branches: [research]
+    paths:
+      - '.github/workflows/long-cycle-sine-comparison.yml'
+      - 'topics/long-cycle-excedances/sine-comparison/**'
+      - 'topics/long-cycle-excedances/degree-blocks/verify_degree_blocks.py'
+      - 'topics/long-cycle-excedances/paired-residues/check.py'
+
+permissions:
+  contents: read
+
+jobs:
+  rational-certificates:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Replay both rational enclosures and the Cauchy obstruction
+        working-directory: topics/long-cycle-excedances/sine-comparison
+        run: |
+          set -euo pipefail
+          python3 -I -B check-bounds.py > "$RUNNER_TEMP/sine-bounds.txt"
+          diff -u bounds-output.txt "$RUNNER_TEMP/sine-bounds.txt"
+          python3 -I -B independent-check.py > "$RUNNER_TEMP/sine-independent.txt"
+          diff -u independent-output.txt "$RUNNER_TEMP/sine-independent.txt"
+          python3 -I -B check-carrier.py > "$RUNNER_TEMP/sine-carrier.txt"
+          diff -u carrier-output.txt "$RUNNER_TEMP/sine-carrier.txt"
+          python3 -I -B independent-carrier.py > "$RUNNER_TEMP/sine-independent-carrier.txt"
+          diff -u independent-carrier-output.txt "$RUNNER_TEMP/sine-independent-carrier.txt"
+          python3 -I -B check-nonprincipal.py > "$RUNNER_TEMP/nonprincipal.txt"
+          diff -u nonprincipal-output.txt "$RUNNER_TEMP/nonprincipal.txt"
+          python3 -I -B check-regular.py > "$RUNNER_TEMP/regular.txt"
+          diff -u regular-output.txt "$RUNNER_TEMP/regular.txt"
+          python3 -I -B check-cutoff-jump.py > "$RUNNER_TEMP/cutoff-jump.txt"
+          diff -u cutoff-jump-output.txt "$RUNNER_TEMP/cutoff-jump.txt"
+          python3 -I -B check-four-errors.py > "$RUNNER_TEMP/four-errors.txt"
+          diff -u four-errors-output.txt "$RUNNER_TEMP/four-errors.txt"
+          python3 -I -B obstruction.py
+          python3 -I -B check-coarse-cost.py > "$RUNNER_TEMP/coarse-cost.txt"
+          diff -u coarse-cost-output.txt "$RUNNER_TEMP/coarse-cost.txt"

@@ -1,0 +1,9 @@
+4 6 regular upper millionths 6068 previous 14284
+6 10 regular upper millionths 2565 previous 4248
+10 16 regular upper millionths 198 previous 263
+16 22 regular upper millionths 3 previous 3
+22 28 regular upper millionths 1 previous 1
+28 34 regular upper millionths 1 previous 1
+34 40 regular upper millionths 1 previous 1
+40 44 regular upper millionths 1 previous 1
+44 48 regular upper millionths 1 previous 1

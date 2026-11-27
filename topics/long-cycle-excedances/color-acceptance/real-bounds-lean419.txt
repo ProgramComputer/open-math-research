@@ -1,0 +1,11 @@
+138a3ee0351e801ad8e28dc6a7dd375eaf0e93bb1a07585f322593e1412af44b  NormalizedColorBounds.lean
+Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_recurrence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,61 @@
+name: Long-cycle Fourier identities
+on:
+  pull_request:
+    branches: [research]
+    paths:
+      - '.github/workflows/long-cycle-fourier-contrast.yml'
+      - 'topics/long-cycle-excedances/lean/fourier-circle/**'
+      - 'shared/lean/lean-toolchain'
+      - 'shared/lean/lake-manifest.json'
+      - 'shared/lean/lakefile.toml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: long-cycle-fourier-contrast-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  fourier:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: shared/lean
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          lake-package-directory: shared/lean
+          auto-config: false
+          use-github-cache: false
+          use-mathlib-cache: false
+      - name: Fetch the pinned mathlib imports
+        run: >-
+          lake exe cache get
+          Mathlib.Analysis.Complex.CauchyIntegral
+          Mathlib.Analysis.Complex.RealDeriv
+          Mathlib.Analysis.SpecialFunctions.ExpDeriv
+          Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+          Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus
+          Mathlib.Tactic.FieldSimp Mathlib.Tactic.LinearCombination
+          Mathlib.Tactic.NormNum Mathlib.Tactic.Ring Mathlib.Tactic.Positivity
+          Mathlib.MeasureTheory.Integral.DominatedConvergence
+          Mathlib.Analysis.NormedSpace.FunctionSeries
+          Mathlib.Analysis.PSeries Mathlib.Data.Real.Pi.Bounds Mathlib.Tactic.Linarith
+          Mathlib.Analysis.SpecialFunctions.Integrals Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+          Mathlib.Analysis.SpecialFunctions.Complex.LogBounds
+          Mathlib.Analysis.Calculus.SmoothSeries
+          Mathlib.Analysis.Convex.Deriv
+          Mathlib.Analysis.Convex.SpecificFunctions.Basic
+          Mathlib.Analysis.SumIntegralComparisons
+          Mathlib.Analysis.Normed.Group.InfiniteSum
+          Mathlib.Topology.Algebra.InfiniteSum.NatInt
+          Mathlib.Analysis.SpecificLimits.Normed
+          Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+          Mathlib.Data.Complex.ExponentialBounds
+      - name: Compile Fourier lemmas and audit axioms
+        run: lake env python3 -I ../../topics/long-cycle-excedances/lean/fourier-circle/check.py

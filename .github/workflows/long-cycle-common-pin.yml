@@ -10,6 +10,9 @@ on:
       - 'topics/long-cycle-excedances/lean/vertical-tilt/*.lean'
       - 'topics/long-cycle-excedances/lean/middle-residues/*.lean'
       - 'topics/long-cycle-excedances/lean/front-middle-join/*.lean'
+      - 'topics/long-cycle-excedances/color-acceptance/*.lean'
+      - 'topics/long-cycle-excedances/color-load-bounds/*.lean'
+      - 'topics/long-cycle-excedances/lean/probability-bands/*.lean'
 
 permissions:
   actions: read
