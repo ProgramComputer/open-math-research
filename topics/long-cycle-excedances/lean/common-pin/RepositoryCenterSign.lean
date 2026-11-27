@@ -32,8 +32,8 @@ private theorem even_cycle_center_pos {a : ℕ} (ha : 2 ≤ a) (he : Even a) :
 
 private theorem enumerator_empty_row (k : ℕ) (hk : 2 ≤ k) :
     enumerator 0 k = 1 := by
-  rw [enumerator_ordered_cycle_rows hk]
-  simp [orderedCycleRow]
+  rw [CycleCount.enumerator_ordered_cycle_rows hk]
+  simp [CycleCount.orderedCycleRow]
 
 /-- All even original rows have nonnegative signed center value. When
 the cutoff fits, the single full-size cycle makes the sign strict. -/
