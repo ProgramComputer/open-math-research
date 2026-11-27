@@ -35,3 +35,5 @@ jobs:
           python3 -I -B check-regular.py > "$RUNNER_TEMP/regular.txt"
           diff -u regular-output.txt "$RUNNER_TEMP/regular.txt"
           python3 -I -B obstruction.py
+          python3 -I -B check-coarse-cost.py > "$RUNNER_TEMP/coarse-cost.txt"
+          diff -u coarse-cost-output.txt "$RUNNER_TEMP/coarse-cost.txt"
