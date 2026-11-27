@@ -179,7 +179,7 @@ private theorem coherentTilt_exp_finite {k : ℕ} (hk : 2 ≤ k) (t : ℝ) :
     simp [cutoffLogCoefficient, hk']
   have h₂ : 2 ≤ j := by omega
   have he : j ≤ k-1 ↔ j < k := by omega
-  simp [cutoffLogCoefficient, h1, h₂, (by omega : 1 ≤ j), he]
+  by_cases hjk : j < k <;> simp [cutoffLogCoefficient, h1, h₂, (by omega : 1 ≤ j), he, hjk]
 
 /-- Concrete coefficient envelope for the common-cutoff numerator, expressed
 using the finite logarithm on the chosen radius. -/
@@ -193,7 +193,7 @@ theorem original_coherentTilt_coeff_bound {k : ℕ} (hk : 2 ≤ k) (t R : ℝ)
   rw [abs_mul, abs_of_nonneg (pow_nonneg hR.le _), pow_succ] at h
   apply (le_div_iff₀ (pow_pos hR _)).2
   apply le_of_mul_le_mul_left _ hR
-  convert h using 1 <;> ring
+  simpa only [mul_assoc, mul_left_comm, mul_comm] using h
 
 #print axioms original_coherentTilt_coeff_bound
 end RepositoryQuotientAudit
