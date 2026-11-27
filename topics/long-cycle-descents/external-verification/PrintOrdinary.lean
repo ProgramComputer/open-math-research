@@ -1,7 +1,5 @@
 import AllCutoffsManuscriptAudit
 
-set_option pp.width 100
-
 #print LongCycles.Allowed
 #print LongCycles.descents
 #print LongCycleBounds.DescentTwoLetters.row

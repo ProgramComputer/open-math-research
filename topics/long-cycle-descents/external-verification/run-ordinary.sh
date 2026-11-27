@@ -74,7 +74,11 @@ grep -F 'PASS: 499 fresh local strict builds' "$logdir/formal-audit.log"
 grep -F '22 declarations audited.' "$logdir/formal-audit.log"
 
 cd "$root/rebuild"
-lake env lean -DwarningAsError=true "$entry/PrintOrdinary.lean" | tee "$logdir/exported-statements.log"
 cp receipts/AllCutoffsManuscriptAudit.log "$logdir/axioms.log"
 git -C "$project" status --porcelain --untracked-files=no | tee "$logdir/source-status.txt"
 test ! -s "$logdir/source-status.txt"
+if ! lake env lean -DwarningAsError=true "$entry/PrintOrdinary.lean" | tee "$logdir/exported-statements.log"; then
+    # Keep the freshly built modules available for a separate reporting retry.
+    tar --zstd -cf "$logdir/ordinary-import-objects.tar.zst" .lake/build/lib/lean
+    exit 1
+fi
