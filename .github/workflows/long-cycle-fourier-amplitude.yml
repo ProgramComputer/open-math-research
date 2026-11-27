@@ -5,8 +5,10 @@ on:
     paths:
       - '.github/workflows/long-cycle-fourier-amplitude.yml'
       - 'topics/long-cycle-excedances/lean/fourier-amplitude/**'
-      - 'topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py'
-      - 'topics/long-cycle-excedances/lean/fourier-stable/FourierDiskLog.lean'
+      - 'topics/long-cycle-excedances/lean/fourier-stable/**'
+      - 'topics/long-cycle-excedances/lean/fourier-numerator/**'
+      - 'topics/long-cycle-excedances/lean/fourier-high-height/**'
+      - 'topics/long-cycle-excedances/lean/fourier-circle/Numerator*.lean'
       - 'topics/long-cycle-excedances/lean/fourier-circle/FourierCircleChoice.lean'
       - 'topics/long-cycle-excedances/lean/fourier-circle/FourierLogarithmicGap.lean'
       - 'topics/long-cycle-excedances/lean/fourier-circle/FourierOriginalDenominators.lean'

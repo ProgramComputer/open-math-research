@@ -13,7 +13,6 @@ CIRCLE = HERE.parent / "fourier-circle"
 DRIVER = runpy.run_path(str(STABLE / "check-real-axis.py"))
 CIRCLE_REPORTS = runpy.run_path(str(CIRCLE / "check.py"))["THEOREMS"]
 MODULES = [
-    (STABLE, "FourierDiskLog", ("diskLogisticLog_deriv", "diskLogisticLog_normalized")),
     *((CIRCLE, name, CIRCLE_REPORTS[name]) for name in
       ("FourierCircleChoice", "FourierLogarithmicGap", "FourierOriginalDenominators")),
     (HERE, "FourierPrincipalPeriod", ("principal_strip_exponential_gap", "principal_point_denominator")),
@@ -50,8 +49,7 @@ def compile_amplitude(project):
                 DRIVER["build_local"](project, source, name, reports)
         except subprocess.CalledProcessError:
             failed.add(name)
-    if failed:
-        raise RuntimeError(f"Incomplete amplitude checks: {sorted(failed)}")
+    return failed
 
 
 if __name__ == "__main__":
@@ -61,5 +59,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
     project = args.project.resolve()
     retained = args.retained_imports.resolve(strict=True) if args.retained_imports else None
-    DRIVER["main"](project, True, retained)
-    compile_amplitude(project)
+    DRIVER["main"](project, True, retained, continuation=True)
+    failed = compile_amplitude(project)
+    low = runpy.run_path(str(HERE.parent / "fourier-numerator" / "check.py"))
+    low["compile_numerator"](project)
+    high = runpy.run_path(str(HERE.parent / "fourier-high-height" / "check.py"))
+    for source, namespace in high["MODULES"]:
+        high["check_module"](project, source, namespace)
+    DRIVER["build_local"](project, HERE / "FourierOriginalContraction.lean", "FourierOriginalContraction",
+                          ("original_numerator_contraction_all_heights",))
+    if failed:
+        raise RuntimeError(f"Incomplete amplitude checks: {sorted(failed)}")
+    DRIVER["build_local"](project, HERE / "FourierOriginalAmplitude.lean", "FourierOriginalAmplitude",
+                          ("original_selected_circle_amplitude",))

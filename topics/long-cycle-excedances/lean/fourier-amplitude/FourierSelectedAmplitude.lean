@@ -92,7 +92,7 @@ theorem selected_circle_amplitude {x K s M : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ 
     _ ≤ (r*Real.exp M*(1+(425/98)/c))/(q/(1+q)) := by
       apply div_le_div₀ (by positivity) _ hpd hprincipal
       exact mul_le_mul_of_nonneg_left hratio (by positivity)
-    _ = _ := by dsimp only [q]; field_simp; ring
+    _ = _ := by dsimp only [q]; field_simp
 
 #print axioms selected_circle_amplitude
 end OpenMathResearch.LongCycleExcedances
