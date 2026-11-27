@@ -25,11 +25,12 @@ private theorem gap_of_squared_gap (w p : ℂ) (R δ h : ℝ) (hw : ‖w‖ = R)
 /-- One of the two explicit comparison radii has an ordinary distance gap
 at least (49/100) c r/K at every point and satisfies the contraction bound
 there for all radial contractions simultaneously. -/
-theorem original_circle_uniform_denominators {x K s r : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ K)
+theorem original_circle_kernel_gap_and_denominators {x K s r : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ K)
     (hs : 0 ≤ s) (hr : 0 < r) (hr2 : r^2=s^2+π^2) (hu : 1 ≤ x*(K*(π/r)^2)) :
     let c := min (1/25 : ℝ) (4/x)
     let δ := (49/100)*(c*r/K)
     ∃ a ∈ ({2-2*c,2} : Set ℝ), ∃ R : ℝ, 0 < R ∧ R^2=r^2*(1+a/K) ∧
+      (∀ l : ℤ, c*r^2/K ≤ |R^2-‖(s:ℂ)+(2*(l:ℂ)+1)*π*I‖^2|) ∧
       ∀ w : ℂ, ‖w‖=R →
         (∀ l : ℤ, δ ≤ ‖w-((s:ℂ)+(2*(l:ℂ)+1)*π*I)‖) ∧
         ∀ α : ℝ, 0 ≤ α → α ≤ 1 →
@@ -58,15 +59,31 @@ theorem original_circle_uniform_denominators {x K s r : ℝ} (hx : 44 ≤ x) (hk
     _ ≤ δ*((203/100)*r) := mul_le_mul_of_nonneg_left hsum hδ.le
     _ ≤ d*r := by dsimp only [δ]; nlinarith [mul_pos hd hr]
     _ = _ := by dsimp only [d]; ring
-  refine ⟨a,ha,R,hR,hR2,?_⟩
-  intro w hw
-  have hg (l : ℤ) : δ ≤ ‖w-((s:ℂ)+(2*(l:ℂ)+1)*π*I)‖ := by
-    apply gap_of_squared_gap _ _ R δ (c*r^2/K) hw _ hsize
+  have hsquared (l : ℤ) : c*r^2/K ≤ |R^2-‖(s:ℂ)+(2*(l:ℂ)+1)*π*I‖^2| := by
     have he : (s:ℂ)+(2*(l:ℂ)+1)*π*I = (⟨s,(2*(l:ℝ)+1)*π⟩ : ℂ) := by
       apply Complex.ext <;> simp [Complex.mul_re,Complex.mul_im]
     rw [he]
     exact hgap l
+  refine ⟨a,ha,R,hR,hR2,hsquared,?_⟩
+  intro w hw
+  have hg (l : ℤ) : δ ≤ ‖w-((s:ℂ)+(2*(l:ℂ)+1)*π*I)‖ :=
+    gap_of_squared_gap _ _ R δ (c*r^2/K) hw (hsquared l) hsize
   exact ⟨hg,fun α ha' hα => original_contracted_circle_ratio hs ha' hα hδ w hg⟩
 
+/-- Projection of the simultaneous choice onto the physical denominator bounds. -/
+theorem original_circle_uniform_denominators {x K s r : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ K)
+    (hs : 0 ≤ s) (hr : 0 < r) (hr2 : r^2=s^2+π^2) (hu : 1 ≤ x*(K*(π/r)^2)) :
+    let c := min (1/25 : ℝ) (4/x)
+    let δ := (49/100)*(c*r/K)
+    ∃ a ∈ ({2-2*c,2} : Set ℝ), ∃ R : ℝ, 0 < R ∧ R^2=r^2*(1+a/K) ∧
+      ∀ w : ℂ, ‖w‖=R →
+        (∀ l : ℤ, δ ≤ ‖w-((s:ℂ)+(2*(l:ℂ)+1)*π*I)‖) ∧
+        ∀ α : ℝ, 0 ≤ α → α ≤ 1 →
+          ‖1+Complex.exp ((α:ℂ)*w-s)‖ / ‖1+Complex.exp (w-s)‖ ≤
+            1+‖(α:ℂ)*w-w‖*(1+δ)/δ := by
+  obtain ⟨a,ha,R,hR,hR2,_,hden⟩ := original_circle_kernel_gap_and_denominators hx hk hs hr hr2 hu
+  exact ⟨a,ha,R,hR,hR2,hden⟩
+
+#print axioms original_circle_kernel_gap_and_denominators
 #print axioms original_circle_uniform_denominators
 end OpenMathResearch.LongCycleExcedances

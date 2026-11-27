@@ -17,6 +17,7 @@ theorem original_selected_circle_amplitude {k : ℕ} (hk : 100 ≤ k) {x s : ℝ
     let T := seriesValue (coherentTilt k (-Real.exp (-s)))
     1 ≤ x*((k:ℝ)*(π/r)^2) →
     ∃ a ∈ ({2-2*c,2} : Set ℝ), ∃ R : ℝ, 0<R ∧ R^2=r^2*(1+a/(k:ℝ)) ∧
+      (∀ l : ℤ, c*r^2/(k:ℝ) ≤ |R^2-‖(s:ℂ)+(2*(l:ℂ)+1)*π*Complex.I‖^2|) ∧
       ∀ w : ℂ, ‖w‖=R →
         let A := r*‖T w/(1+Complex.exp (w-s))‖ / ‖T p‖
         (x ≤ 100 → A ≤ (k:ℝ)*Real.exp (2997/100)*457) ∧
@@ -25,7 +26,7 @@ theorem original_selected_circle_amplitude {k : ℕ} (hk : 100 ≤ k) {x s : ℝ
   let G := numeratorLog k (fun j => (cutoffLogCoefficient k (-Real.exp (-s)) j : ℂ))
   have hT (z : ℂ) : T z = Complex.exp (G z) := seriesValue_original_coherentTilt (by omega) _ _
   have hk' : (100:ℝ) ≤ k := by exact_mod_cast hk
-  obtain ⟨a,ha,R,hR,hR2,hA⟩ := selected_circle_amplitude hx hk' hs G
+  obtain ⟨a,ha,R,hR,hR2,hsquared,hA⟩ := selected_circle_amplitude hx hk' hs G
     hu (fun w => original_numerator_contraction_all_heights hk hs w)
   have hr : 0 < r := by
     have hp : p ≠ 0 := by
@@ -34,7 +35,7 @@ theorem original_selected_circle_amplitude {k : ℕ} (hk : 100 ≤ k) {x s : ℝ
       simp [p,Real.pi_ne_zero] at h
     exact norm_pos_iff.mpr hp
   obtain ⟨hb,hl⟩ := selected_amplitude_regimes hx hk' hr hu
-  refine ⟨a,ha,R,hR,hR2,?_⟩
+  refine ⟨a,ha,R,hR,hR2,hsquared,?_⟩
   intro w hw
   dsimp only
   rw [hT,hT]

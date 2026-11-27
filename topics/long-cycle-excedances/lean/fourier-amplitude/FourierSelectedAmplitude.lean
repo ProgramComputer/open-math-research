@@ -38,6 +38,7 @@ theorem selected_circle_amplitude {x K s M : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ 
       ‖G w-diskLogisticLog s ((((1-1/K)*r/‖w‖:ℝ):ℂ)*w)‖ +
       ‖G p-diskLogisticLog s (((1-1/K:ℝ):ℂ)*p)‖ ≤ M) →
     ∃ a ∈ ({2-2*c,2} : Set ℝ), ∃ R : ℝ, 0<R ∧ R^2=r^2*(1+a/K) ∧
+      (∀ l : ℤ, c*r^2/K ≤ |R^2-‖(s:ℂ)+(2*(l:ℂ)+1)*π*Complex.I‖^2|) ∧
       ∀ w : ℂ, ‖w‖=R →
         r*‖Complex.exp (G w)/(1+Complex.exp (w-s))‖/‖Complex.exp (G p)‖ ≤
           K*Real.exp M*(1+r/K)*(1+(425/98)/c) := by
@@ -58,7 +59,7 @@ theorem selected_circle_amplitude {x K s M : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ 
   have hprincipal : q/(1+q) ≤ ‖1-Complex.exp (-p/(K:ℂ))‖ :=
     principal_point_denominator (s:=s) hK1.le
   have hpd : 0 < q/(1+q) := by positivity
-  obtain ⟨a,ha,R,hR,hR2,hgap⟩ := original_circle_uniform_denominators hx hk hs hr hsq hu
+  obtain ⟨a,ha,R,hR,hR2,hsquared,hgap⟩ := original_circle_kernel_gap_and_denominators hx hk hs hr hsq hu
   have ha' : a=2-2*c ∨ a=2 := ha
   have ha0 : 0 ≤ a := by rcases ha' with h | h <;> linarith
   have ha2 : a ≤ 2 := by rcases ha' with h | h <;> linarith
@@ -74,7 +75,7 @@ theorem selected_circle_amplitude {x K s M : ℝ} (hx : 44 ≤ x) (hk : 100 ≤ 
       _ ≤ r^2*(1+2/K) := by linarith
       _ ≤ r^2*(1+2/K)+(r/K)^2 := le_add_of_nonneg_right (sq_nonneg _)
       _ = _ := by ring
-  refine ⟨a,ha,R,hR,hR2,?_⟩
+  refine ⟨a,ha,R,hR,hR2,hsquared,?_⟩
   intro w hw
   have hlo : r ≤ ‖w‖ := hw ▸ hRlo
   have hhi : ‖w‖ ≤ (1+1/K)*r := hw ▸ hRhi
