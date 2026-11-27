@@ -30,6 +30,11 @@ CONTINUATION = (
     ("FourierCutoffLogSlope", ("finiteFourierLog_deriv", "finiteFourierSlope_remainder", "finiteFourierQuotient_deriv")),
     ("FourierRowAngularEquation", ("angular_cutoff_remainder", "angular_finite_fourier_row")),
     ("FourierOriginalAngularRow", ("original_row_angular_equation",)),
+    ("FourierDiskLog", ("diskLogisticLog_deriv", "diskLogisticLog_normalized")),
+    ("FourierDiskRemainder", ("disk_geometric_remainder_bound",)),
+    ("FourierDiskConvergence", ("disk_finite_fourier_log_tendsto",)),
+    ("FourierNumeratorSeries", ("numerator_series_hasSum_disk_log",)),
+    ("FourierOriginalLogSeries", ("original_log_series_hasSum",)),
 )
 
 def build_local(project, original, module, theorems):
@@ -116,6 +121,8 @@ def main(project, original_log, retained_imports, continuation):
     if continuation:
         module = "TiltAnalyticEvaluation"
         build_local(project, HERE.parent / "common-pin" / (module + ".lean"), module, ())
+        module = "NumeratorLogDefinitions"
+        build_local(project, HERE.parent / "fourier-circle" / (module + ".lean"), module, ())
         for module, theorems in CONTINUATION:
             source = HERE / (module + ".lean")
             imports = set(re.findall(r"^import ([\w.]+)", source.read_text(), re.M))
