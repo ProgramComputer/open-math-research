@@ -55,7 +55,12 @@ theorem rationalPrincipalCost_le_integer_certificate (slab : Fin 9) (cap : ℕ)
   unfold rationalPrincipalCost
   change 1/10000 + 2 * (∑ b ∈ range 241,
     rationalCenteredError (f b) * ((Q[b]! : ℚ) / linearScale)) ≤ (cap : ℚ) / 1000000
-  apply le_trans (add_le_add_left (mul_le_mul_of_nonneg_left hs (by norm_num)) (1/10000))
+  have hmono : 1/10000 + 2 * (∑ b ∈ range 241,
+      rationalCenteredError (f b) * ((Q[b]! : ℚ) / linearScale)) ≤
+      1/10000 + 2 * ((scaledIntegerCost (principalLower slab) Q : ℚ) / D) := by
+    have hscaled := mul_le_mul_of_nonneg_left hs (by norm_num : (0 : ℚ) ≤ 2)
+    simpa only [add_comm] using (add_le_add_left hscaled (1/10000 : ℚ))
+  refine hmono.trans ?_
   have hD : 0 < D := hSG
   apply (le_div_iff₀ (by norm_num : (0:ℚ) < 1000000)).mpr
   apply (le_of_mul_le_mul_right ?_ hD)
