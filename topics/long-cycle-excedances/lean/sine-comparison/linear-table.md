@@ -6,4 +6,4 @@ The theorem `original_slab_linear_envelope` bounds the linear coefficient of the
 
 The theorem supplies the linear-envelope input to the rounded product bound without any head, tail, or rounding hypothesis. Its computational comparison checks all 241 entries, including the four initial zeros, in each of the nine slabs. The full determinant comparison and its other quantitative estimates remain separate obligations. [Table definition and proof](LiteralLinearTable.lean) · [Literal slab theorem](LinearSlabs.lean) · [Executable cross-check](compare-linear-table.py)
 
-The same path-scoped driver builds the package. After its build, run `lake env lean /path/to/EvalLinearTable.lean > table.txt` inside the scratch project, then run `python3 -BI compare-linear-table.py table.txt` from this folder.
+The same path-scoped driver builds the package. After its build, run `lake env lean /path/to/EvalLinearTable.lean > table.txt` inside the scratch project, then run `python3 -BI compare-linear-table.py table.txt` from this folder. [Pinned verification receipt](linear-table-verification.md)
