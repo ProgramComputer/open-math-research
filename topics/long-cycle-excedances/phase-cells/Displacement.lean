@@ -1,5 +1,5 @@
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
-import Mathlib.Data.Real.Pi.Bounds
+import Mathlib.Analysis.Real.Pi.Bounds
 
 namespace OpenMathResearch.LongCycleExcedances
 open Set Real
@@ -47,17 +47,24 @@ theorem cosecant_oscillation_variation {a b m D C : ℝ} {F e : ℝ → ℝ}
     have hmc := ((hasDerivAt_id x).const_mul m).cos
     have hd := (hF x hx).sub (hmc.div ((hasDerivAt_sin x).const_mul m)
       (mul_ne_zero hm.ne' (hs x hx).ne'))
-    convert hd using 1
-    dsimp [f]
-    field_simp [hm.ne', (hs x hx).ne']
-    ring
+    change HasDerivAt H
+      ((-sin (m*x)/sin x+e x)-
+        (-sin (m*x)*(m*1)*(m*sin x)-cos (m*x)*(m*cos x))/(m*sin x)^2) x at hd
+    have he :
+        (-sin (m*x)/sin x+e x)-
+          (-sin (m*x)*(m*1)*(m*sin x)-cos (m*x)*(m*cos x))/(m*sin x)^2 = f x := by
+      dsimp [f]
+      field_simp [hm.ne', (hs x hx).ne'] <;> ring
+    rwa [he] at hd
   have hB (x : ℝ) (hx : x ∈ Icc a b) : HasDerivAt B (g x) x := by
     have hd := (((hasDerivAt_const x (1:ℝ)).div (hasDerivAt_sin x)
       (hs x hx).ne').neg.div_const m).add ((hasDerivAt_id x).const_mul (D*C))
-    convert hd using 1
-    dsimp [g]
-    field_simp [hm.ne', (hs x hx).ne']
-    ring
+    change HasDerivAt B
+      (-((0*sin x-1*cos x)/(sin x)^2)/m+D*C*1) x at hd
+    have he : -((0*sin x-1*cos x)/(sin x)^2)/m+D*C*1 = g x := by
+      dsimp [g]
+      field_simp [hm.ne', (hs x hx).ne'] <;> ring
+    rwa [he] at hd
   have hbound (x : ℝ) (hx : x ∈ Icc a b) : |f x| ≤ g x := by
     have hc : 0 ≤ cos x := cos_nonneg_of_mem_Icc ⟨by linarith [hx.1, pi_pos], hx.2.trans hb⟩
     have he := (hErr x hx).trans (show D/sin x ≤ D*C by
@@ -163,10 +170,12 @@ theorem high_angle_displacement_of_deriv {k : ℕ} (hk : 7 ≤ k) {γ : ℝ → 
   · exact sub_eq_zero.mpr hend
   · intro x hx
     have h := (hdiff x hx).hasDerivAt.sub (hasDerivAt_id x)
-    convert h using 1
-    dsimp [e]
-    rw [hc]
-    ring
+    have he : -sin ((2*(k:ℝ)-1)*x)/sin x+e x = deriv γ x-1 := by
+      dsimp [e]
+      rw [hc]
+      ring
+    rwa [he]
+
 
 #print axioms cosecant_oscillation_variation
 #print axioms high_angle_displacement

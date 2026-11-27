@@ -64,7 +64,7 @@ theorem finiteTilt_diagonal_hasDerivAt (g : ℕ → ℝ → ℝ) (m : ℕ) (x : 
     simp only [sum_range_succ]
     convert hh using 1 <;> try rfl'
     push_cast
-    try simp only [Nat.succ_sub_one, one_mul, mul_one, smul_eq_mul]
+    try simp only [Pi.pow_apply, Nat.succ_sub_one, one_mul, mul_one, smul_eq_mul]
     ring
 
 #print axioms finiteTilt_diagonal_hasDerivAt

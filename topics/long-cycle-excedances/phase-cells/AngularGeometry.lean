@@ -52,7 +52,7 @@ theorem angular_pole_geometry {θ : ℝ} (ha : π/6 ≤ θ) (hb : θ ≤ π/2) :
     apply Complex.ext
     · simp only [Complex.add_re, Complex.ofReal_re, Complex.mul_I_re,
         Complex.ofReal_im, neg_zero, add_zero, Complex.mul_re,
-        Complex.add_im, Complex.mul_I_im, zero_mul, sub_zero]
+        Complex.add_im, Complex.mul_I_im, Complex.I_re, Complex.I_im, zero_mul, sub_zero]
       dsimp [x,r,angleCoordinate,w]
       ring
     · simp only [Complex.add_im, Complex.ofReal_im, Complex.mul_I_im,

@@ -26,14 +26,16 @@ theorem seventhPrimitive_deriv (t : ℝ) :
   have hv : HasDerivAt (fun x : ℝ => x/√(1+x^2)) (1/u^3) t := by
     convert (hasDerivAt_id t).div hs hu.ne' using 1 <;> try rfl'
     change 1/u^3 = (1*u - t*(1/(2*u)*(0+2*t^(2-1)*1)))/u^2
-    field_simp [hu.ne']
-    linear_combination -2*u^3 * hsq
+    calc
+      1/u^3 = (u^2-t^2)/u^3 := by rw [show u^2-t^2=1 by linarith]
+      _ = _ := by field_simp [hu.ne']; ring
   have hh := (hv.sub ((hv.pow 3).const_mul (2/3))).add ((hv.pow 5).const_mul (1/5))
   convert hh using 1 <;> try rfl'
   change (1/u)^7 = 1/u^3 - 2/3 * (3*(t/u)^(3-1)*(1/u^3)) +
     1/5 * (5*(t/u)^(5-1)*(1/u^3))
-  field_simp [hu.ne']
-  linear_combination -3*u^15*(u^2-t^2+1) * hsq
+  calc
+    (1/u)^7 = (u^2-t^2)^2/u^7 := by rw [show u^2-t^2=1 by linarith]; ring
+    _ = _ := by norm_num [div_pow]; field_simp [hu.ne']; ring
 
 theorem seventhPrimitive_le (t : ℝ) (ht : 0 ≤ t) : seventhPrimitive t ≤ 8/15 := by
   let v := t / √(1+t^2)

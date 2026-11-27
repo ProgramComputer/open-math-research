@@ -1,4 +1,4 @@
-import ActualHighAngleSign
+import ActualPhaseDerivative
 import AngularGeometry
 import CellReadout
 import Displacement
@@ -13,9 +13,7 @@ def angleRow (n k : ℕ) (θ : ℝ) : ℝ :=
   (enumerator n k).eval (-Real.exp (-angleCoordinate θ))
 
 def angleLogTilt (k : ℕ) (θ : ℝ) : ℂ :=
-  let x := angleCoordinate θ
-  ∑ j ∈ range (k-1), (cutoffLogCoefficient k (-Real.exp (-x)) (j+1):ℂ) *
-    (coherentPole x 0)^(j+1)
+  principalLogTilt k (angleCoordinate θ)
 
 def anglePhase (n k : ℕ) (θ : ℝ) : ℝ :=
   ((n+1:ℕ):ℝ)*θ - (angleLogTilt k θ).im
