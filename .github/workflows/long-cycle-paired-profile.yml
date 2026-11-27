@@ -6,6 +6,10 @@ on:
       - '.github/workflows/long-cycle-paired-profile.yml'
       - 'topics/long-cycle-excedances/lean/paired-profile/**'
 
+concurrency:
+  group: paired-profile-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 permissions:
   actions: read
   contents: read

@@ -48,7 +48,28 @@ def main(project, imports):
     )
     common = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(common)
-    common.main(project, imports)
+    project.mkdir(parents=True)
+    common.prepare(project)
+    version = common.run(project, "lean", "--version", capture=True).strip()
+    if common.COMPILER not in version:
+        raise ValueError(f"unexpected compiler {version}")
+    print(version, flush=True)
+    common.run(project, "lake", "exe", "cache", "get")
+    mathlib = common.run(
+        project, "git", "-C", ".lake/packages/mathlib", "rev-parse", "HEAD", capture=True
+    ).strip()
+    if mathlib != common.MATHLIB:
+        raise ValueError(f"unexpected mathlib {mathlib}")
+    print(f"mathlib {mathlib}", flush=True)
+
+    if imports is None:
+        common.run(project, "lake", "--wfail", "build", "+LongCycleBounds.GeneralCycleQuotient")
+    else:
+        digest = sha256(imports.read_bytes()).hexdigest()
+        if digest != common.IMPORT_SHA:
+            raise ValueError(f"unexpected retained object archive {digest}")
+        common.run(project, "tar", "--zstd", "-xf", str(imports))
+        print(f"Reused verified common-pin archive sha256={digest}", flush=True)
 
     observed = {}
     for module in MODULES:
