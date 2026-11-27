@@ -1,0 +1,2 @@
+Exact logarithm bounds, eight low-index triple-pole bounds and rational margins passed.
+465 same-degree pairs and 62 cubic carries passed exact sign and coefficient checks.
