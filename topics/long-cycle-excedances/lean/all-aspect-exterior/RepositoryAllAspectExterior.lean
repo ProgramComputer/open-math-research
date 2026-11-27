@@ -62,8 +62,8 @@ theorem original_exterior_coefficient_tests_all {n k h : ℕ}
   exact ⟨⟨ha,hu⟩,front_certificates_of_weighted_envelopes P Q V ha hu hsmall hgap rfl hc hrec
     hleft hright hnearW (fun j hj => original_far_front_weighted_lag_all hn hk hkn hh hH hj)⟩
 
-/-- The first H disjoint literal old-root windows have the required actual
-successor signs at every admissible cutoff, conditional on the near-lag bound. -/
+/-- Each of H ordered, disjoint intervals contains a literal old root with the
+required successor sign, conditional on the near-lag bound. -/
 theorem original_exterior_root_witnesses_all {n k : ℕ}
     (hn : 10000 ≤ n) (hk : 2 ≤ k) (hkn : k ≤ n)
     (hnear : ∀ j ≤ ⌊sqrt (n:ℝ)/2⌋₊,

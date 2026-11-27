@@ -7,7 +7,7 @@ E_{n,k}(-f_i)=0,\qquad (-1)^{i+2}E_{n+1,k}(-f_i)>0,\qquad
 f_i<\exp\left(-\frac{\pi}{\tan((H+1)\pi/n)}\right).
 $$
 
-Each root lies in its prescribed open interval about an actual coefficient ratio. The theorem supplies exterior witnesses, with no restriction on $n/k$. A complete interlacing argument also needs $\lfloor n/2\rfloor-H-1$ ordered middle witnesses with the correct successor signs and the applicable center-sign argument. The repository’s earlier written proof includes exterior signs at all these sizes. This argument gives a shorter bound for the lag and a candidate formal verification of the exterior witnesses. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Prior exterior proof](../../effective-front.md) · [Literal theorem](AllAspectExterior.lean)
+Each root lies in its prescribed open interval about an actual coefficient ratio. The theorem supplies exterior witnesses, with no restriction on $n/k$. A complete interlacing argument also needs $\lfloor n/2\rfloor-H-1$ ordered middle witnesses with the correct successor signs and the applicable center-sign argument. For $k\ge3$ the repository’s earlier written proof includes exterior signs at all these sizes. This argument gives a shorter bound for the lag and a candidate formal verification of the exterior witnesses. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Prior exterior proof](../../effective-front.md) · [Literal theorem](AllAspectExterior.lean)
 
 ## Two binomial grids
 
@@ -33,6 +33,8 @@ $$
 For $k\le150$ we have $a\le3/4$, so the geometric grid bound gives $L\le1/500$. For $2k>n+1$ the residual has positive size less than $k$, hence the lag vanishes. For the old coefficient lower bound, the orbit cutoff $b=\lceil4a/3\rceil$ only requires $b\le p$ in the marking argument. When $b\ge p$, a permutation consisting of a single cycle on the $p$ colors already gives acceptance probability at least $1/p$. [Scalar comparison](SharpLagBudget.lean) · [Mesh bounds](TwoGridLag.lean) · [Supplying atom](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/BandBinomial.lean#L77-L86) · [Coefficient bounds](../../color-load-bounds/RepositoryColorAlpha.lean)
 
 ## Verification
+
+A fresh-context reviewer reconstructed the endpoint cases of the residual grid and the rational margin, and reproduced the four large-row digests using a separate Eulerian recurrence. The root witnesses give existence, ordering and successor signs. Exact ordinal rank and uniqueness inside the intervals require further information. [Independent review](independent-review.md) · [Recurrence-based checker](check-half-recurrence.py)
 
 The integer checker decomposes each permutation with $n<3k$ into a single cycle or an unordered pair of cycles. A cycle of length $r$ contributes $t A_{r-1}(t)$, where $A_s$ is the Eulerian polynomial. It computes the lag from both its cycle factor and the separately enumerated successor. It agreed with literal permutations on 33 complete rows of sizes at most eight. For $(n,k)=(10000,5000),(10001,5001),(10000,5002),(10008,5000)$ it checked every positive rank through 50, including the vanishing-lag and two-cycle transitions. [Exact checker](check-half.py) · [Output and prefix digests](check-half-output.txt)
 
