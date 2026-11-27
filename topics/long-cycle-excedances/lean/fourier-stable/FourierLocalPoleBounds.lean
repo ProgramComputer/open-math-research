@@ -39,7 +39,7 @@ theorem local_pole_ratio {ι : Type*} (P : ι → ℂ) {U : Set ℂ} (hU : IsOpe
   have ht := norm_add_le (P i-w) w
   rw [sub_add_cancel] at ht
   rw [add_mul,one_mul]
-  exact ht.trans (add_le_add_left (hnorm.trans hratio) _)
+  linarith [hnorm.trans hratio]
 
 #print axioms local_pole_ratio
 end OpenMathResearch.LongCycleExcedances
