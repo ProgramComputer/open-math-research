@@ -1,4 +1,5 @@
 import NumeratorPoleVolume
+import NumeratorLogDefinitions
 import Mathlib.Analysis.Complex.Basic
 import Mathlib.Topology.Algebra.InfiniteSum.NatInt
 
@@ -6,11 +7,6 @@ set_option autoImplicit false
 noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
 open scoped BigOperators Real
-
-def numeratorPole (s : ℝ) (l : ℤ) : ℂ :=
-  (s : ℂ) + (2 * (l : ℂ) + 1) * π * Complex.I
-
-def numeratorRadius (s : ℝ) : ℝ := Real.sqrt (s^2+π^2)
 
 theorem numeratorRadius_pos (s : ℝ) : 0 < numeratorRadius s :=
   Real.sqrt_pos.2 (by positivity)
