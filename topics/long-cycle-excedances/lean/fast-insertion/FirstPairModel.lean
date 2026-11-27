@@ -1,4 +1,4 @@
-import OriginalInsertionSigns
+import FirstPairEulerian
 import CheckpointReplay
 
 namespace RepositoryQuotientAudit
@@ -6,7 +6,9 @@ open Polynomial LongCycles LongCycleFinite
 open OpenMathResearch.LongCycleExcedances.InsertionTable
 
 private theorem firstPairWeightAgrees : agrees 61 checkpointEulerian (eulerian 12) := by
-  have weights : ∀ i : Fin 61, entry checkpointEulerian i = entry (descentCoeffs 12) i := by decide
+  have weights : ∀ i : Fin 61, entry checkpointEulerian i = entry (descentCoeffs 12) i := by
+    rw [descentCoeffsSnapshot12]
+    decide
   intro i hi
   rw [show entry checkpointEulerian i = entry (descentCoeffs 12) i from weights ⟨i, hi⟩]
   exact insertionEulerian_agrees 61 13 i hi
