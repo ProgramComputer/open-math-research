@@ -9,6 +9,7 @@ from pathlib import Path
 import re
 import runpy
 import shutil
+import subprocess
 import urllib.request
 
 HERE = Path(__file__).resolve().parent
@@ -92,6 +93,21 @@ def check(project, imports):
         target.parent.mkdir(parents=True, exist_ok=True)
         out.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, target)
+        raw = sha256(target.read_bytes()).hexdigest()
+        print(f"Source {module} sha256={raw}", flush=True)
+        if module in ("OpenMathResearch/AlternatingSignRoots", "OpenMathResearch/OrientedNegativeInterlace"):
+            patch = COMMON["SHARED"] / "publication/ports" / (module.replace("/", ".") + ".patch")
+            print(f"Port {module} patch-sha256={sha256(patch.read_bytes()).hexdigest()}", flush=True)
+            with patch.open() as edits:
+                subprocess.run(["patch", "--batch", str(target)], stdin=edits, text=True, check=True)
+        if module == "LongCycleRunColors":
+            target.write_text(target.read_text().replace(
+                "Polynomial.finset_sum_coeff", "Polynomial.finsetSum_coeff"))
+        if module == "LongCyclePrefixTail":
+            target.write_text(target.read_text().replace(
+                "add_le_add_left hlo _, add_le_add_left hhi _",
+                "add_le_add (le_refl (c 0)) hlo, add_le_add (le_refl (c 0)) hhi",
+            ))
         print(f"Compile {module} sha256={sha256(target.read_bytes()).hexdigest()}", flush=True)
         run(project, "lake", "env", "lean", "-o", str(out), str(target))
 
