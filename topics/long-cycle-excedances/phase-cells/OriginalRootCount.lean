@@ -12,7 +12,8 @@ theorem original_ordered_high_angle_roots {n k : ℕ} (hn : 0 < n)
     ∃ z : Fin (n/2 - (n+5)/6) → ℝ, StrictAnti z ∧
       ∀ i, z i ∈ Ioo (-1:ℝ) 0 ∧ (enumerator n k).eval (z i) = 0 ∧
         0 < (-1:ℝ)^((n+5)/6 + i.val + 1) * (enumerator (n+1) k).eval (z i) := by
-  apply ordered_grid_roots _ _ n hn
+  apply ordered_grid_roots (fun t => (enumerator n k).eval t)
+    (fun t => (enumerator (n+1) k).eval t) n hn
   intro j ha hb
   obtain ⟨⟨θ, hθ, hz⟩, hs⟩ := original_high_angle_cells hn hk hsize ha hb
   exact ⟨θ,hθ,hz,hs θ ⟨hθ.1.le,hθ.2.le⟩ hz⟩

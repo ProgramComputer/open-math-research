@@ -42,7 +42,7 @@ theorem original_middle_phase_strictAnti {n k : ℕ} (hk : 7 ≤ k) (hn : k ≤ 
       ring
     have hr2 : r^2 ≤ (n:ℝ)*π^2 := by
       rw [hsq]
-      exact (add_le_add_right (pow_le_pow_left₀ hx.1.le hx.2.le 2) _).trans hb
+      linarith only [pow_le_pow_left₀ hx.1.le hx.2.le 2, hb]
     have hm : 1 ≤ (n:ℝ)*(π/r)^2 := by
       rw [div_pow, ← mul_div_assoc, le_div_iff₀ (pow_pos hr _), one_mul]
       exact hr2
