@@ -34,13 +34,13 @@ private theorem sinh_secant {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 1) :
 
 /-- Uniform difference of the two radial powers, and its sharper value
 when the outer radius is the principal radius itself. -/
-theorem small_band_radial_power {k j : ℕ} (hk : 10 ≤ k) (hjk : j < k) :
+theorem small_band_radial_power {k j : ℕ} (hk : 8 ≤ k) (hjk : j < k) :
     (1 + 1/(k:ℝ))^j - (1 - 1/(k:ℝ))^j ≤ (5/2) * ((j:ℝ)/k) ∧
       1 - (1 - 1/(k:ℝ))^j ≤ (j:ℝ)/k := by
   let u : ℝ := 1/(k:ℝ)
   let t : ℝ := (j:ℝ)*u
   let d : ℝ := t/((k:ℝ)-1)
-  have hkR : (10:ℝ) ≤ k := by exact_mod_cast hk
+  have hkR : (8:ℝ) ≤ k := by exact_mod_cast hk
   have hk0 : (0:ℝ) < k := by linarith
   have hk1 : 0 < (k:ℝ)-1 := by linarith
   have hu0 : 0 ≤ u := by dsimp only [u]; positivity
@@ -80,7 +80,7 @@ theorem small_band_radial_power {k j : ℕ} (hk : 10 ≤ k) (hjk : j < k) :
     rw [sub_eq_add_neg, Real.exp_add] at heq
     linarith only [heq,hp,hx']
   have ha : Real.exp 1 - Real.exp (-1) + 1/((k:ℝ)-1) ≤ (5/2:ℝ) := by
-    have hlast : 1/((k:ℝ)-1) ≤ 1/9 := by
+    have hlast : 1/((k:ℝ)-1) ≤ 1/7 := by
       apply div_le_div_of_nonneg_left (by norm_num) (by norm_num)
       linarith
     linarith only [hlast, Real.exp_one_lt_d9, Real.exp_neg_one_gt_d9]
