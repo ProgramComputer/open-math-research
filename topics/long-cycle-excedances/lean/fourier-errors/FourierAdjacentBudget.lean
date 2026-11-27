@@ -34,7 +34,9 @@ theorem absorb_adjacent_fourier_corrections {n k x S M O J A a f g H : ℝ}
   have hshift : (n-k)*A*f ≤ (9/10)*S*(x/(x-2))*(M*k*O) := by
     calc
       _ ≤ (n-k)*((9/10)*n*S)*f := mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hA hnk') hf
-      _ = ((9/10)*S*(n/(n-2*k)))*((n-k)*(n-2*k)*f) := by field_simp [hnk.ne']; ring
+      _ = (9/10)*S*((n/(n-2*k))*(n-2*k))*((n-k)*f) := by
+        rw [div_mul_cancel₀ _ hnk.ne']; ring
+      _ = ((9/10)*S*(n/(n-2*k)))*((n-k)*(n-2*k)*f) := by ring
       _ ≤ ((9/10)*S*(n/(n-2*k)))*(M*k*O) := mul_le_mul_of_nonneg_left hf1 (by positivity)
       _ = _ := by rw [hratio]
   have hend : (n-k)*a*g ≤ (1/50)*S*(M*k*O) := by

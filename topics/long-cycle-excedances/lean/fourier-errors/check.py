@@ -12,7 +12,7 @@ MODULES = (
     ("FourierKernelScalars", ("scaled_fourier_kernel_bounds",)),
     ("FourierAdjacentBudget", ("absorb_adjacent_fourier_corrections",)),
     ("FourierNormalizedError", ("normalized_circle_error",)),
-    ("FourierNumericCoefficients", ("numerical_fourier_coefficient_pair",)),
+    ("FourierNumericCoefficients", ("numerical_fourier_coefficient_pair", "correction_bounds_from_entrance")),
 )
 
 

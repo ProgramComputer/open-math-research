@@ -6,6 +6,25 @@ noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
 open Real
 
+/-- The angular entrance and cutoff lower bound control the two correction
+multipliers on the original adjacent Fourier row. -/
+theorem correction_bounds_from_entrance {n k x S A a : ℝ} (hk : 100 ≤ k)
+    (hx : 48 ≤ x) (hn : n=x*k) (hS : 0 < S) (hu : 1 ≤ x*(k*S^2))
+    (hA : A ≤ 9*Real.sqrt x) (ha : a ≤ 1) :
+    A ≤ (9/10)*n*S ∧ a ≤ (1/50)*n*S := by
+  have hx0 : 0 < x := by linarith
+  have hk0 : 0 < k := by linarith
+  have hn0 : 0 < n := hn ▸ mul_pos hx0 hk0
+  have h1 : 1 ≤ n*S^2 := by rw [hn]; linarith only [hu]
+  have hsq : n ≤ (n*S)^2 := by nlinarith only [mul_le_mul_of_nonneg_left h1 hn0.le]
+  have hh : (10*Real.sqrt x)^2 ≤ (n*S)^2 := by
+    rw [mul_pow,Real.sq_sqrt hx0.le]
+    exact le_trans (by rw [hn]; nlinarith only [mul_le_mul_of_nonneg_left hk hx0.le]) hsq
+  have h10 := (sq_le_sq₀ (by positivity) (by positivity)).mp hh
+  have hs5 : 5 ≤ Real.sqrt x := (sq_le_sq₀ (by norm_num) (Real.sqrt_nonneg _)).mp
+    (by nlinarith only [hx,Real.sq_sqrt hx0.le])
+  constructor <;> linarith only [hA,ha,h10,hs5]
+
 private theorem norm_frequency_product {j k : ℤ} (hk : 0 ≤ k) (hj : k ≤ j) (z : ℂ) :
     ‖((j-k:ℤ):ℂ)*(j:ℂ)*z‖ = (j:ℝ)*((j:ℝ)-(k:ℝ))*‖z‖ := by
   have hj' : (0:ℝ) ≤ (j:ℝ) := by exact_mod_cast hk.trans hj
@@ -64,5 +83,6 @@ theorem numerical_fourier_coefficient_pair {n k : ℤ} (hk : 0 < k) {x : ℝ} (h
   · exact normalized_circle_error hx hk' hn hr hT hS (norm_nonneg _) (add_nonneg hJ (mul_nonneg hcor hO))
       HA hamp hdec hB₁ hB₂ hnew
 
+#print axioms correction_bounds_from_entrance
 #print axioms numerical_fourier_coefficient_pair
 end OpenMathResearch.LongCycleExcedances
