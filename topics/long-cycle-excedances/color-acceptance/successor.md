@@ -11,6 +11,8 @@ $$
 
 Here $C_{0,0}=1$ and $C_{0,p}=0$ for positive $p$. For $p\ge1$, dividing by $p^{n+1}$ gives the increase in the acceptance probability. The $j=p$ term matters when $n=k-1$.
 
+Bowen Zuo formalizes a broader weighted binomial jump in the accompanying sources of his minimum-cycle descent project. Here the probability jump above is the unweighted $u=0$ specialization. Zuo also identifies the occupancy probability with the corresponding original excedance-row coefficient in the transformed label basis. The modules here connect the unweighted identity to the literal insertion lag and the repository's common-pin exterior estimates. [Zuo’s occupancy identification](https://github.com/AlexZander-666/cycle-minimum-descent-real-roots/blob/e632c19bc246b819cd6b882cbf22c2fa9bc453de/formal/LongCycleBounds/OccupancyVerified.lean#L129-L133) · [Zuo’s weighted binomial jump](https://github.com/AlexZander-666/cycle-minimum-descent-real-roots/blob/e632c19bc246b819cd6b882cbf22c2fa9bc453de/formal/LongCycleBounds/OccupancyBinomialJump.lean#L130-L136)
+
 ## Counting newly accepted pairs
 
 Appending any color to an accepted word preserves acceptance, giving exactly $p$ extensions. A newly accepted pair has exactly one cycle of colors that received too few labels before the extension. It contained $k-1$ old labels and the new letter lands in it. If it contains $j$ colors, choose them in $\binom pj$ ways and order the cycle in $(j-1)!$ ways. Choose the old labels in $\binom n{k-1}$ ways, assign them to the cycle in $j^{k-1}$ ways, and choose the new label’s color in $j$ ways. Multiply by the accepted count $(p-j)! C_{m,p-j}$ on the complement. Dividing by $p!$ gives exactly the displayed summand.
