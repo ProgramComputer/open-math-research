@@ -1,0 +1,11 @@
+# Original wide-aspect interlacing
+
+For old size $n\ge10000$ and cutoff $k\ge100$ with $n\ge48k$, the proposed endpoint gives strict negative interlacing for the original unweighted minimum-cycle-length excedance polynomials at sizes $n$ and $n+1$ after division by their common zero. The old quotient has degree $n-2$. The endpoint also gives weak real interlacing for the full enumerators. [Original Lean statement](RepositoryWideInterlacing.lean).
+
+The proof uses the signed margins for the literal rows on the same circle. The logarithmic seam $b=\mathrm{uniformJoinLog}(n)$ satisfies $b>10\sqrt{k}$ and lies inside the size-sine domain. The original principal phase at the seam is below level $H+1$, where $H=\mathrm{uniformJoinRank}(n)$, and reaches at least level $\lfloor n/2\rfloor$ at height zero. On each intervening full phase cell the old row crosses zero and the successor has the required alternating sign. The $H$ existing exterior witnesses have modulus below $\exp(-b)$. The middle witnesses have modulus in $(\exp(-b),1)$ and their parity agrees with the exterior witnesses. The checked reciprocal root assembly completes the strict and weak statements from these signed half-root lists. [Seam height](FourierPhaseEntrance.lean) · [Literal phase cell](RepositoryWidePhaseCells.lean).
+
+The entrance passed strict Lean 4.19. The two compatibility bodies also passed a strict local interface check, which imports the generic phase and root-list theorems and takes the exact centered-row and existing repository-specific inputs as premises. The production run will check the actual original definitions and suppliers on the research pin. The common-pin driver prepares the original centered rows and reuses the same import-order plan as the bounded-aspect proof for the additional modules. It checks byte identity of any reused source and audits the three new declarations. Run from the repository root with Lean 4.33.1 first on the path. [Checker](check.py) · [Hosted workflow](../../../../.github/workflows/long-cycle-fourier-wide-interlacing.yml).
+
+    python3 -Bu topics/long-cycle-excedances/lean/fourier-wide-interlacing/check.py /tmp/fourier-wide-interlacing
+
+List the added local import closure and input hashes with `--plan`.
