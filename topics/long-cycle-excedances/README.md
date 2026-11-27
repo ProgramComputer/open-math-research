@@ -2,6 +2,8 @@
 
 The case assembly gives real-rootedness and consecutive interlacing for every fixed minimum cycle length $k\ge3$ and every old size $n\ge k$. It combines ProgramComputer’s proofs for cutoff three and cutoffs at least seven with Bowen Zuo’s independently rebuilt all-size theorems for cutoffs four, five and six. Zuo also gives an independent cutoff-three proof. Joint formal verification is 🟨 Partial · Lean 4. [All-cutoff proof, attribution and verification](all-cutoffs/README.md) · [Large-cutoff manuscript and certificates](all-large-cutoffs/README.md) · [Finite endpoint kernel benchmarks](lean/fast-packed-checks/README.md)
 
+Bowen Zuo’s independent cutoff-seven theorem also covers every original unweighted adjacent pair starting with sizes 7 and 8. The supplying release was independently rebuilt and replayed in Lean 4.33.1. [Cutoff-seven verification](external-verification/cutoff-seven/README.md)
+
 In the large-size exterior range $n\ge10000$, $k\ge8$, $n>4000k$, Lean bounds the insertion lag by one eighth of the old coefficient for $0<p\le\sqrt n/2$. The proof uses the original permutation enumerator and a finite grid of binomial masses. [Coefficient and lag verification](color-load-bounds/README.md)
 
 The [adjacent sine comparison](sine-comparison/README.md) gives an independently reviewed value-only estimate for the middle signs at bounded ratios. Its scalar certificate covers both angle ranges, including sizes where an additional cycle becomes admissible.
