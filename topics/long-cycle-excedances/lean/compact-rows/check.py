@@ -20,34 +20,38 @@ AUDITS = {
 }
 
 
+def audit_module(project, module, expected, source_path=None):
+    source = project / (module + ".lean")
+    output = project / ".lake/build/lib/lean" / (module + ".olean")
+    if source_path is not None:
+        shutil.copyfile(source_path, source)
+    print(f"Compile {module} sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
+    command = ["lake", "env", "lean", "-DwarningAsError=true", "-o",
+               str(output), str(source)]
+    result = subprocess.run(command, cwd=project, text=True, capture_output=True)
+    print(result.stdout, result.stderr, sep="", end="", flush=True)
+    result.check_returncode()
+    seen = set()
+    for name, group in re.findall(
+        r"^'([^']+)' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])",
+        result.stdout, flags=re.M,
+    ):
+        axioms = {word.strip() for word in group.split(",") if word.strip()}
+        if axioms - COMMON["ALLOWED"]:
+            raise ValueError(f"Unexpected axioms for {name}: {axioms}")
+        seen.add(name.rsplit(".", 1)[-1])
+    missing = expected - seen
+    if missing:
+        raise ValueError(f"Missing theorem audits for {missing}")
+    COMMON["run"](project, "lake", "env", "leanchecker", "--verbose", module.replace("/", "."))
+    print(f"kernel_replay_exit=0 {module}", flush=True)
+
+
 def check(project, imports):
     COMMON["main"](project, imports)
-    run = COMMON["run"]
-    dest = project / ".lake/build/lib/lean"
-    for module in ("LongCycleBounds/UniversalRecurrence", *AUDITS):
-        source = project / (module + ".lean")
-        if module in AUDITS:
-            shutil.copyfile(HERE / source.name, source)
-        print(f"Compile {module} sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
-        command = ["lake", "env", "lean", "-DwarningAsError=true", "-o",
-                   str(dest / (module + ".olean")), str(source)]
-        result = subprocess.run(command, cwd=project, text=True, capture_output=True)
-        print(result.stdout, result.stderr, sep="", end="", flush=True)
-        result.check_returncode()
-        seen = set()
-        for name, group in re.findall(
-            r"^'([^']+)' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])",
-            result.stdout, flags=re.M,
-        ):
-            axioms = {word.strip() for word in group.split(",") if word.strip()}
-            if axioms - COMMON["ALLOWED"]:
-                raise ValueError(f"Unexpected axioms for {name}: {axioms}")
-            seen.add(name.rsplit(".", 1)[-1])
-        missing = AUDITS.get(module, set()) - seen
-        if missing:
-            raise ValueError(f"Missing theorem audits for {missing}")
-        run(project, "lake", "env", "leanchecker", "--verbose", module.replace("/", "."))
-        print(f"kernel_replay_exit=0 {module}", flush=True)
+    audit_module(project, "LongCycleBounds/UniversalRecurrence", set())
+    for module, expected in AUDITS.items():
+        audit_module(project, module, expected, HERE / (module + ".lean"))
 
 
 if __name__ == "__main__":
