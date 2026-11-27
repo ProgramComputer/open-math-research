@@ -74,3 +74,5 @@ An independent agent compared the signed identity and the complex pole-product e
 The integral product estimate also has a specialization to the actual odd lattice, including the signed contrast multiplier and absolute convergence for every cutoff at least three. [Statement, proof and remaining obligations](lattice.md)
 
 The differentiated kernel has a termwise angular derivative with an integrated bound in terms of the squared pole factors. [Differentiation and angular integral](derivative.md)
+
+The differentiated contrast kernel satisfies the first-moment bound over the full odd lattice. Both integrations by parts now give coefficient inequalities under their stated inputs. [Coefficient errors and verification record](coefficient-errors.md)

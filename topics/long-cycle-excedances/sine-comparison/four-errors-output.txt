@@ -1,0 +1,9 @@
+4 6 error ceilings 72559 79191 6068 380128 rounded margin floor 443872 unrounded margin floor 443874
+6 10 error ceilings 12006 71852 2565 322525 rounded margin floor 572870 unrounded margin floor 572871
+10 16 error ceilings 643 63943 198 22826 rounded margin floor 402465 unrounded margin floor 402467
+16 22 error ceilings 104 71088 3 170 rounded margin floor 418710 unrounded margin floor 418712
+22 28 error ceilings 101 84319 1 2 rounded margin floor 405652 unrounded margin floor 405655
+28 34 error ceilings 101 106820 1 1 rounded margin floor 383152 unrounded margin floor 383156
+34 40 error ceilings 101 137495 1 1 rounded margin floor 352477 unrounded margin floor 352481
+40 44 error ceilings 101 161380 1 1 rounded margin floor 328592 unrounded margin floor 328596
+44 48 error ceilings 101 164099 1 1 rounded margin floor 325873 unrounded margin floor 325877
