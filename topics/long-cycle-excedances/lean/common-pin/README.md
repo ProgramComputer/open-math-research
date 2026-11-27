@@ -74,3 +74,24 @@ and `Quot.sound`. [Audit excerpt](center-audit.txt) · [Independent review](cent
 [artifact]: https://github.com/ProgramComputer/open-math-research/actions/runs/45917288503
 [prior]: https://github.com/ProgramComputer/open-math-research/actions/runs/45918517895
 [shape]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/GeneralCycleQuotient.lean#L131
+
+
+## The original-row pole expansion
+
+[RepositoryPoleProfile.lean](RepositoryPoleProfile.lean) proposes an exact
+expansion of the normalized original permutation row for every cutoff at
+least two. The expansion sums over the allowed cycle counts, with each
+cycle moment represented by the full signed odd-pole series. It uses the
+frozen ordered cycle moment recurrence and Eulerian partial fraction identity.
+
+The second theorem bounds the difference from keeping just the nearest
+conjugate pole pair in each individual cycle. On the infinite region where
+the cutoff is at least eight and its product with the squared pole-angle
+sine is at least one, each cycle is controlled by the frozen decay estimate.
+For each cycle count the bound increases its nonnegative factorial-weighted
+scale by the accumulated relative error from the omitted poles. This
+estimates the actual row, while the signed consecutive-row comparison in
+the [uniform proof](../../effective-uniform.md) still needs its common
+contour and correlated adjacent-row error estimates.
+
+The hosted common-pin audit is pending.
