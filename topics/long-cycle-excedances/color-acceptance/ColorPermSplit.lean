@@ -17,11 +17,11 @@ private theorem support_invariant {B : Type*} {π : Equiv.Perm B} {T : Set B} {b
 
 private theorem support_of_transitive {B : Type*} {π : Equiv.Perm B} {T : Set B}
     {b : B} (hb : b ∈ T) (hinv : ∀ x, x ∈ T ↔ π x ∈ T)
-    (ht : Transitive (π.subtypePerm hinv)) : OrbitSupport π T b := by
+    (ht : Transitive (π.subtypePerm (fun x => (hinv x).symm))) : OrbitSupport π T b := by
   intro x
   constructor
   · rintro ⟨j, rfl⟩
-    let y := ((π.subtypePerm hinv) ^ j) ⟨b, hb⟩
+    let y := ((π.subtypePerm (fun x => (hinv x).symm)) ^ j) ⟨b, hb⟩
     simpa only [y, Equiv.Perm.subtypePerm_zpow, Equiv.Perm.subtypePerm_apply] using y.property
   · intro hx
     exact Equiv.Perm.sameCycle_subtypePerm.mp (ht ⟨b, hb⟩ ⟨x, hx⟩)
@@ -34,7 +34,7 @@ noncomputable def perm_at_support {B : Type*} (T : Set B) (b : B) (hb : b ∈ T)
       {τ : Equiv.Perm T // Transitive τ} × Equiv.Perm (Tᶜ : Set B) := by
   classical
   let left (π : {π : Equiv.Perm B // OrbitSupport π T b}) : Equiv.Perm T :=
-    π.val.subtypePerm (support_invariant π.property)
+    π.val.subtypePerm (fun x => (support_invariant π.property x).symm)
   let join (pair : {τ : Equiv.Perm T // Transitive τ} × Equiv.Perm (Tᶜ : Set B)) :=
     (Equiv.Set.compl pair.1.val).symm pair.2
   let joined (pair : {τ : Equiv.Perm T // Transitive τ} × Equiv.Perm (Tᶜ : Set B)) :
@@ -51,7 +51,7 @@ noncomputable def perm_at_support {B : Type*} (T : Set B) (b : B) (hb : b ∈ T)
             rw [(join pair).property y]
             exact congrArg Subtype.val (pair.1.val.apply_symm_apply _)
           exact ((join pair).val.injective he) ▸ y.property
-    have hr : Equiv.Perm.subtypePerm (join pair).val hmem = pair.1.val := by
+    have hr : Equiv.Perm.subtypePerm (join pair).val (fun x => (hmem x).symm) = pair.1.val := by
       ext x
       exact (join pair).property x
     exact support_of_transitive hb hmem (hr.symm ▸ pair.1.property)

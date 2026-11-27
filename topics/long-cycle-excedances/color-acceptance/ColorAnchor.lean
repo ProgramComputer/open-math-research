@@ -163,13 +163,13 @@ noncomputable def accepted_fixed_orbit_equiv {A B : Type*} (S : Set A)
 /-- Restrict the actual color permutation to the complement of its anchored orbit. -/
 def residualPerm {B : Type*} (π : Equiv.Perm B) (b : B) :
     Equiv.Perm ({y : B | π.SameCycle b y}ᶜ : Set B) :=
-  π.subtypePerm (fun _ => not_congr Equiv.Perm.sameCycle_apply_right.symm)
+  π.subtypePerm (fun _ => not_congr Equiv.Perm.sameCycle_apply_right)
 
 /-- The restriction to the anchored orbit is transitive even for a singleton
 color. Using IsCycle would incorrectly exclude this case. -/
 def anchoredPerm {B : Type*} (π : Equiv.Perm B) (b : B) :
     Equiv.Perm ({y : B | π.SameCycle b y} : Set B) :=
-  π.subtypePerm (fun _ => Equiv.Perm.sameCycle_apply_right.symm)
+  π.subtypePerm (fun _ => Equiv.Perm.sameCycle_apply_right)
 
 theorem anchoredPerm_transitive {B : Type*} (π : Equiv.Perm B) (b : B)
     (c d : ({y : B | π.SameCycle b y} : Set B)) :
