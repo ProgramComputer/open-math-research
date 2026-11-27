@@ -1,0 +1,112 @@
+name: External long-cycle proof audit
+on:
+  pull_request:
+    branches: [research]
+    paths:
+      - '.github/workflows/external-long-cycle-audit.yml'
+      - 'topics/long-cycle-*/external-verification/*.py'
+      - 'topics/long-cycle-*/external-verification/*.sh'
+      - 'topics/long-cycle-*/external-verification/*.lean'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  choose:
+    runs-on: ubuntu-24.04
+    outputs:
+      claims: ${{ steps.select.outputs.claims }}
+    steps:
+      - name: Select supplying releases affected by this update
+        id: select
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BEFORE: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          ACTION: ${{ github.event.action }}
+        shell: python
+        run: |
+          import json
+          import os
+          import subprocess
+          claims = ["ordinary", 4, 5, 6]
+          before, head = os.environ.get("BEFORE"), os.environ.get("HEAD_SHA")
+          if os.environ.get("ACTION") == "synchronize" and before and head:
+              url = f"repos/{os.environ['GITHUB_REPOSITORY']}/compare/{before}...{head}"
+              comparison = json.loads(subprocess.check_output(["gh", "api", url]))
+              changed = [f["filename"] for f in comparison.get("files", [])]
+              changed += [f["previous_filename"] for f in comparison.get("files", []) if "previous_filename" in f]
+              if changed and len(changed) < 300 and not any(p.startswith(".github/workflows/") for p in changed):
+                  ordinary = any(p.startswith("topics/long-cycle-descents/external-verification/") for p in changed)
+                  strict = any(p.startswith("topics/long-cycle-excedances/external-verification/") for p in changed)
+                  if ordinary or strict:
+                      claims = (["ordinary"] if ordinary else []) + ([4, 5, 6] if strict else [])
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              print("claims=" + json.dumps(claims), file=out)
+          print("Supplying releases selected:", claims)
+
+  rebuild:
+    needs: choose
+    name: Pinned release · ${{ matrix.claim }}
+    strategy:
+      fail-fast: false
+      matrix:
+        claim: ${{ fromJSON(needs.choose.outputs.claims) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare ephemeral runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$RUNNER_ENVIRONMENT" = github-hosted ]] && (( $(df -Pk "$RUNNER_TEMP" | awk 'NR==2 {print $4}') < 45*1024*1024 )); then
+            sudo rm -rf -- /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup
+          fi
+          if [[ "$RUNNER_ENVIRONMENT" = github-hosted ]] && (( $(free -m | awk '/^Swap:/ {print $2}') < 8192 )); then
+            sudo fallocate -l 8G "$RUNNER_TEMP/proof.swap"
+            sudo chmod 600 "$RUNNER_TEMP/proof.swap"
+            sudo mkswap "$RUNNER_TEMP/proof.swap"
+            sudo swapon "$RUNNER_TEMP/proof.swap"
+          fi
+          mkdir -p "$RUNNER_TEMP/verification"
+          free -h
+          df -h "$RUNNER_TEMP"
+      - name: Rebuild ordinary descent proof and inspect its declarations
+        if: matrix.claim == 'ordinary'
+        env:
+          ORDINARY_AUDIT_JOBS: '2'
+          ORDINARY_AUDIT_MODE: build
+          ORDINARY_AUDIT_LOG_DIR: ${{ runner.temp }}/verification
+        run: bash topics/long-cycle-descents/external-verification/run-ordinary.sh
+      - name: Install frozen Lean 4.33.1 for excedances
+        if: matrix.claim != 'ordinary'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          curl -fLsS --retry 3 -o pinned.tar.zst https://github.com/leanprover/lean4/releases/download/v4.33.1/lean-4.33.1-linux.tar.zst
+          echo '890afd185370f85666025b883914ab4f4b339136f8c96167b69cfb62aecaf235  pinned.tar.zst' | sha256sum -c
+          tar --zstd -xf pinned.tar.zst
+          rm pinned.tar.zst
+          echo "$RUNNER_TEMP/lean-4.33.1-linux/bin" >> "$GITHUB_PATH"
+      - name: Rebuild the supplying cutoff theorem, compare its type, and inspect axioms
+        if: matrix.claim != 'ordinary'
+        env:
+          CUTOFF: ${{ matrix.claim }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ulimit -Sn 65536
+          python3 -Bu topics/long-cycle-excedances/external-verification/rebuild.py "$CUTOFF" "$RUNNER_TEMP/proof" 2>&1 | tee "$RUNNER_TEMP/verification/lean.log"
+      - name: Preserve reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: external-proof-${{ matrix.claim }}
+          path: ${{ runner.temp }}/verification
+          retention-days: 30
+          if-no-files-found: warn
