@@ -11,7 +11,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 COMMON = HERE.parent / "common-pin"
 LEDGER = HERE.parents[1] / "intermediate/witness-ledger"
-CHECKPOINT_SHA = "963aee35e6e31a98273e318febe73bf4c6a30f05f0009891224d03f01de466bb"
+CHECKPOINT_SHA = "6d80035f444ca9147c4236c777215eb374fe0322e992df67a1fbfc2c38cc73d5"
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 AUDIT = {
     "InsertionTable": {"history_sound", "insertion_coeff", "table_agrees"},
@@ -56,11 +56,16 @@ def main(project, imports):
     for module, expected in AUDIT.items():
         source = project / (module + ".lean")
         if module == "CheckpointReplay":
-            with source.open("wb") as dest:
-                subprocess.run([sys.executable, str(HERE / "generate-checkpoints.py")],
-                               check=True, stdout=dest)
-            if hashlib.sha256(source.read_bytes()).hexdigest() != CHECKPOINT_SHA:
-                raise ValueError("Generated coefficient checkpoint hash changed")
+            folder = project / "generated-checkpoints"
+            subprocess.run([sys.executable, str(HERE / "generate-checkpoints.py"), str(folder)],
+                           check=True)
+            if hashlib.sha256((folder / "SHA256SUMS").read_bytes()).hexdigest() != CHECKPOINT_SHA:
+                raise ValueError("Generated coefficient checkpoint manifest changed")
+            subprocess.run(["sha256sum", "--quiet", "-c", "SHA256SUMS"], cwd=folder, check=True)
+            for part in sorted(folder.glob("CheckpointChunk*.lean")):
+                shutil.copyfile(part, project / part.name)
+                compile_module(project, part.stem, set())
+            shutil.copyfile(folder / source.name, source)
         else:
             shutil.copyfile((LEDGER if module == "CheckedShard" else HERE) / source.name, source)
         compile_module(project, module, expected)

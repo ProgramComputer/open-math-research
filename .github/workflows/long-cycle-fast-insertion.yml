@@ -6,6 +6,10 @@ on:
       - '.github/workflows/long-cycle-fast-insertion.yml'
       - 'topics/long-cycle-excedances/lean/fast-insertion/**'
 
+concurrency:
+  group: integer-insertion-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 permissions:
   actions: read
   contents: read
