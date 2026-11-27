@@ -20,6 +20,8 @@ The full replay used the sharper tail 28 times and did not need the exact retain
 
 Passing `--packed` retains 48 significant bits and a 16-bit shift per stored coefficient. Each row in the recurrence cache occupies 480 bytes. The exact Eulerian weights and temporary products use GMP integers. For each endpoint, positive Horner evaluation with upward integer rounding bounds the coefficient error. The signed evaluation pays that uncertainty in both the rounded and homogeneous tests. Both modes passed the complete authenticated stream. The packed run used the sharp tail 28 times. [Packed output](packed-output.txt) · [Storage and rounding](row-storage.hpp) · [Lean coefficient enclosure](../../lean/compact-rows/README.md)
 
+The [relative margin check](../relative-margins/README.md) determines the sharp power-of-two coefficient tolerance for these endpoint signs.
+
 ## Reproduce
 
 From this directory, with a C++17 compiler and GMP's C++ development library installed, run:

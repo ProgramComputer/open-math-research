@@ -10,6 +10,16 @@ using Z = mpz_class;
 constexpr unsigned width = 60;
 using Row = std::array<Z, width>;
 
+inline Z positive_upper(const Row &row, const Z &p, unsigned bits) {
+    Z positive = row.back();
+    for (int i = width - 2; i >= 0; --i) {
+        positive *= p;
+        mpz_cdiv_q_2exp(positive.get_mpz_t(), positive.get_mpz_t(), bits);
+        positive += row[i];
+    }
+    return positive;
+}
+
 struct ExactStorage {
     using Stored = Row;
 
@@ -51,12 +61,7 @@ struct PackedStorage {
     }
 
     static Z prefix_error(const Row &row, const Z &p, unsigned bits) {
-        Z positive = row.back();
-        for (int i = width - 2; i >= 0; --i) {
-            positive *= p;
-            mpz_cdiv_q_2exp(positive.get_mpz_t(), positive.get_mpz_t(), bits);
-            positive += row[i];
-        }
+        Z positive = positive_upper(row, p, bits);
         mpz_cdiv_q_2exp(positive.get_mpz_t(), positive.get_mpz_t(), 36);
         return positive;
     }

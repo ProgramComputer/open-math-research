@@ -11,13 +11,15 @@ STREAM_BYTES = 63_014_205
 STREAM_SHA256 = "8f8115d4f203840560dd74f7cf12654d0bca00561c8ff473f27ed6af3f20a73e"
 
 
-def run(shards, checker, packed=False):
+def run(shards, checker, packed=False, relative=None):
     started = monotonic()
     digest = sha256()
     size = 0
     command = [checker.resolve()]
     if packed:
         command.append("--packed")
+    if relative:
+        command.append("--" + relative)
     with subprocess.Popen(command, stdin=subprocess.PIPE) as check:
         for part in sorted(shards.glob("part-*.csv.gz")):
             with gzip.open(part, "rb") as stream:
@@ -38,6 +40,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("shards", type=Path)
     parser.add_argument("checker", type=Path)
-    parser.add_argument("--packed", action="store_true", help="use the 48-bit significand recurrence")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--packed", action="store_true", help="use the 48-bit significand recurrence")
+    mode.add_argument("--relative-32", dest="relative", action="store_const",
+                      const="relative-32", help="verify the margin using exact coefficients")
+    mode.add_argument("--relative-32-dyadic", dest="relative", action="store_const",
+                      const="relative-32-dyadic", help="verify the margin with directed dyadic bounds")
     args = parser.parse_args()
-    run(args.shards, args.checker, args.packed)
+    run(args.shards, args.checker, args.packed, args.relative)
