@@ -101,8 +101,7 @@ theorem literal_bin_linear_bound {n k K N i : ℕ} (hK : 193 ≤ K) (hKk : K ≤
       sum_le_sum (fun q hq => sum_le_sum (fun s hs => hpoint q hq s hs))
     _ = ((k:ℝ)*(∑ s ∈ T, |b s|))*(∑ q ∈ A.erase a,W q)/((k:ℝ)*sin θ) := by
       simp only [div_eq_mul_inv,← sum_mul,← mul_sum]
-      field_simp [hk0.ne',hS.ne']
-      ring
+      field_simp [hk0.ne',hS.ne'] <;> ring
     _ ≤ M*V/((k:ℝ)*sin θ) := div_le_div_of_nonneg_right (mul_le_mul hM hstar hW
       ((mul_nonneg hk0.le hB).trans hM)) (by positivity)
     _ ≤ _ := div_le_div_of_nonneg_left (mul_nonneg ((mul_nonneg hk0.le hB).trans hM) hV) hA₀ hA

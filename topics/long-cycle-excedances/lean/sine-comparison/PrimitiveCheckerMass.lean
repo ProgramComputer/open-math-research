@@ -69,7 +69,13 @@ theorem primitive_first_checker_bin_mass {K k N i : ℕ} (hK : 2 ≤ K) (hKk : K
         _ ≤ (k:ℝ)*(1/(4*(k:ℝ)^2)) := mul_le_mul_of_nonneg_left hj hkR.le
         _ = 1/(4*(k:ℝ)) := by field_simp <;> ring
         _ ≤ _ := one_div_le_one_div_of_le (by positivity) (by linarith)
-    · rw [erase_eq_of_not_mem hmem] at hbase
+    · have he : T.erase (2*k) = T := by
+        ext s
+        constructor
+        · exact fun hs => (mem_erase.mp hs).2
+        · intro hs
+          exact mem_erase.mpr ⟨fun heq => hmem (heq ▸ hs),hs⟩
+      rw [he] at hbase
       exact hbase.trans (le_add_of_nonneg_right (by split <;> positivity))
   have hlR : (0:ℝ)<l := by exact_mod_cast (hk.trans_le hkl)
   have huR : (0:ℝ)<u := by exact_mod_cast (hk.trans_le (hkl.trans hlu))
@@ -108,8 +114,9 @@ theorem primitive_first_checker_bin_mass {K k N i : ℕ} (hK : 2 ≤ K) (hKk : K
 
 theorem primitiveDegrees_below_four {k N i : ℕ} (hk : 0 < k) (hi : i < 4) :
     primitiveDegrees k N i = ∅ := by
-  apply eq_empty_iff_forall_not_mem.mpr
-  intro s hs
+  ext s
+  simp only [notMem_empty,iff_false]
+  intro hs
   obtain ⟨hm,he⟩ := mem_filter.mp hs
   have hks := (mem_Icc.mp hm).1
   have hbin : 4 ≤ degreeBin k s := by
@@ -136,8 +143,9 @@ theorem primitive_all_checker_bin_mass {K k N i : ℕ} (hK : 2 ≤ K) (hKk : K �
     by_cases hN : k ≤ N
     · exact (primitive_atom_mass hk hN b hatom).le
     · have hz : primitiveDegrees k N 4 = ∅ := by
-        apply eq_empty_iff_forall_not_mem.mpr
-        intro s hs
+        ext s
+        simp only [notMem_empty,iff_false]
+        intro hs
         have := mem_Icc.mp (mem_filter.mp hs).1
         omega
       simp [hz]
@@ -148,7 +156,9 @@ theorem primitive_all_checker_bin_mass {K k N i : ℕ} (hK : 2 ≤ K) (hKk : K �
   simp only [checkerDegreeMass,if_neg hi,if_neg he,if_neg hi8]
   apply div_le_div_of_nonneg_right _ (by positivity)
   have hK0 : (0:ℝ)<K := Nat.cast_pos.mpr (by omega)
-  exact add_le_add_left (one_div_le_one_div_of_le hK0 (by exact_mod_cast hKk)) _
+  have hcast : (K:ℝ) ≤ k := by exact_mod_cast hKk
+  have hinv : (1:ℝ)/(k:ℝ) ≤ 1/(K:ℝ) := one_div_le_one_div_of_le hK0 hcast
+  linarith only [hinv]
 
 #print axioms primitive_all_checker_bin_mass
 #print axioms checker_degree_floor_le
