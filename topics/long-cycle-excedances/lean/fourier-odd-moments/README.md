@@ -45,3 +45,5 @@ Run the common-pin checker from the repository root with Lean 4.33.1 on the path
     python3 -Bu topics/long-cycle-excedances/lean/fourier-odd-moments/check.py /tmp/fourier-odd-moments
 
 The [workflow](../../../../.github/workflows/long-cycle-discrete-pole-moments.yml) prepares the frozen dependency manifest, compiles the three source modules and audits the named declarations and bundled LeanChecker replays.
+
+The [verification record](verification.md) gives the hosted run, exact hashes, axioms and replay results.
