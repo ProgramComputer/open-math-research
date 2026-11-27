@@ -36,7 +36,12 @@ private theorem norm_on_superset (P : ℝ[X]) {s : Finset ℕ} (hs : P.support �
     (h : ℕ) (L U : ℝ) :
     frontCoefficientNorm P h L U = ∑ j ∈ s, |P.coeff j| * frontCoefficientWeight h L U j := by
   unfold frontCoefficientNorm
-  exact sum_subset hs (fun j _ hj => by simp [not_mem_support_iff.mp hj])
+  apply sum_subset hs
+  intro j _ hj
+  have hz : P.coeff j = 0 := by
+    by_contra h
+    exact hj (mem_support_iff.mpr h)
+  simp [hz]
 
 theorem front_norm_monomial (a : ℝ) (j h : ℕ) (L U : ℝ) :
     frontCoefficientNorm (C a*X^j) h L U = |a| * frontCoefficientWeight h L U j := by

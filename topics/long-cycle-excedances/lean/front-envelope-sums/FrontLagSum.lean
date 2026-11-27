@@ -54,7 +54,10 @@ theorem front_norm_lag (P V : ℝ[X]) {h J : ℕ} {a L U : ℝ}
     apply sum_subset inter_subset_left
     intro j hj hj'
     have hnot : j ∉ P.support := fun h => hj' (mem_inter.mpr ⟨hj,h⟩)
-    simp [p,not_mem_support_iff.mp hnot]
+    have hz : P.coeff j = 0 := by
+      by_contra h
+      exact hnot (mem_support_iff.mpr h)
+    simp [p,hz]
   have hp' : (∑ j ∈ s₀, p j) ≤ frontCoefficientNorm P h L U := by
     rw [he]
     exact sum_le_sum_of_subset_of_nonneg inter_subset_right (fun j _ _ => hp j)
