@@ -21,6 +21,7 @@ MANIFEST = (
 
 
 def compile_moments(project):
+    (project / ".lake/build/lib/lean").mkdir(parents=True, exist_ok=True)
     build = REAL_AXIS["build_local"]
     for source, declarations in MANIFEST:
         build(project, source, source.stem, declarations)
