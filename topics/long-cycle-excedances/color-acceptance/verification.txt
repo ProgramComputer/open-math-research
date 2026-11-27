@@ -1,0 +1,28 @@
+Frozen Lean 4.33.1 common-pin compilation and Lean kernel replay
+proof source 7ecbe9077d64696b19915f50e1c4933b8ca49daa
+run https://github.com/ProgramComputer/open-math-research/actions/runs/45952522343
+Lean 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+
+EulerianColorKernel 01e5e07226cc701208ee98edace66a50008807e849f423b0f610d89aa305de1d compile=0 replay=0 named_declarations=2
+ColorAcceptanceSeries fcd5aa7e6d14dc2aa7d8d0fe9ace71be1746e574182b55a23c4a195b0c3b6c5e compile=0 replay=0 named_declarations=6
+ColorTransformError 855a29c338ea762a2d9e1a7654c805c48510b13699aab1e0453068efd16f1830 compile=0 replay=0 named_declarations=4
+RepositoryColorTransform b51cd878f97c02f280b9f69a1d9f3b7698127faa0a05c0a11eab095d9e11fdfc compile=0 replay=0 named_declarations=4
+
+16 color-acceptance declarations. Transitive axiom reports
+OpenMathResearch.LongCycleExcedances.colorPowerSeries_succ [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_eulerian_kernel [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_convolution_coeff [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.colorTransform_zero [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.colorTransform_mul [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.colorTransform_cycle [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.colorTransform_anchor [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.colorTransform_coeff [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_transform_error_twice [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.bar_choices_le_words [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_extra_bars [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_transform_error [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_color_count_of_recurrence [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_color_transform_anchor [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_color_series_unique [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_color_transform_error [Classical.choice, Quot.sound, propext]

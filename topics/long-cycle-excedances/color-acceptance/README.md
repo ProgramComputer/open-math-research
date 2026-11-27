@@ -42,6 +42,8 @@ Indeed, a term with $r$ surplus bars uses $a_{n,p-r}\le(p-r)^n$, the labeled-run
 
 For $k\ge2$, the Lean sources derive the transformed recurrence from the literal permutation enumerator. They identify any count table satisfying that recurrence and the empty-input convention with the binomial transform. The nonnegativity and geometric-sum bounds use the checked coefficient envelope for the original rows. The $2\eta$ bound additionally assumes that the transformed coefficient is at most $p^n$ for the stated $n,p\ge1$. The counting argument above supplies the recurrence for accepted pairs and the $p^n$ bound. [Eulerian kernel](EulerianColorKernel.lean) · [Transform](ColorAcceptanceSeries.lean) · [Error bounds](ColorTransformError.lean) · [Original enumerator endpoints](RepositoryColorTransform.lean)
 
+All four modules compiled and replayed on the frozen Lean 4.33.1 pin. The audit records the exact source hashes and axiom reports for 16 declarations. [Verification record](verification.txt) · [Common-pin check](../lean/common-pin/check.py)
+
 ## Verification and provenance
 
 Run the following from this folder. The checker enumerates the word and the color permutation directly, erases the bars, checks injectivity, and compares each fiber size with stars and bars. It separately recomputes the anchored recurrence. All 140 triples with $0\le n\le6$, $0\le p\le4$ and $2\le k\le5$ passed, covering 180,248 accepted pairs. [Exact checker](verify.py) · [Output](finite-output.txt)
