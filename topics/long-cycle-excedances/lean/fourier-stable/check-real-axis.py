@@ -20,6 +20,18 @@ ORIGINAL_ROOTS = ("LongCycleBounds.BandMoments", "LongCycleBounds.CycleProfileLo
 ORIGINAL_SUPPORT = ("RepositoryCoherentPoles", "MonomialTiltBounds")
 
 
+CONTINUATION = (
+    ("FourierRealContinuation", ("analytic_eq_off_poles_of_real_ray",)),
+    ("FourierLogisticPoles", ("logistic_denominator_zero_iff", "negative_logistic_slope_analytic")),
+    ("FourierLocalPoleBounds", ("local_pole_ratio",)),
+    ("FourierResolventDerivative", ("anchoredPoleSum_hasDerivAt", "inverseSquarePoleSum_analytic")),
+    ("FourierGeometricRemainder", ("pole_remainder_summable", "anchoredPoleSum_taylor_remainder")),
+    ("FourierAnchoredLogistic", ("rowPole_summable", "rowPole_inverseSquare_of_real", "rowPole_anchored_of_real")),
+    ("FourierCutoffLogSlope", ("finiteFourierLog_deriv", "finiteFourierSlope_remainder", "finiteFourierQuotient_deriv")),
+    ("FourierRowAngularEquation", ("angular_cutoff_remainder", "angular_finite_fourier_row")),
+    ("FourierOriginalAngularRow", ("original_row_angular_equation",)),
+)
+
 def build_local(project, original, module, theorems):
     run = COMMON["run"]
     source = project / (module + ".lean")
@@ -65,7 +77,8 @@ def build_upstream(project, upstream, retained_imports):
         run(project, "lake", "env", "lean", "-o", str(output), str(source))
 
 
-def main(project, original_log, retained_imports):
+def main(project, original_log, retained_imports, continuation=False):
+    original_log = original_log or continuation
     project.mkdir(parents=True)
     COMMON["prepare"](project)
     run = COMMON["run"]
@@ -88,11 +101,34 @@ def main(project, original_log, retained_imports):
         print(f"{package['name']} {revision}", flush=True)
     build_upstream(project, upstream, retained_imports)
     build_local(project, HERE / "FourierRealAxis.lean", *REAL_AXIS)
+    failed = set()
     if original_log:
         for module in ORIGINAL_SUPPORT:
             original = HERE.parent / "common-pin" / (module + ".lean")
             build_local(project, original, module, ())
-        build_local(project, HERE / "FourierOriginalLog.lean", *ORIGINAL_LOG)
+        try:
+            build_local(project, HERE / "FourierOriginalLog.lean", *ORIGINAL_LOG)
+        except subprocess.CalledProcessError:
+            if not continuation:
+                raise
+            failed.add(ORIGINAL_LOG[0])
+
+    if continuation:
+        module = "TiltAnalyticEvaluation"
+        build_local(project, HERE.parent / "common-pin" / (module + ".lean"), module, ())
+        for module, theorems in CONTINUATION:
+            source = HERE / (module + ".lean")
+            imports = set(re.findall(r"^import ([\w.]+)", source.read_text(), re.M))
+            if imports & failed:
+                print(f"Skipped {module}: missing {sorted(imports & failed)}", flush=True)
+                failed.add(module)
+                continue
+            try:
+                build_local(project, source, module, theorems)
+            except subprocess.CalledProcessError:
+                failed.add(module)
+        if failed:
+            raise RuntimeError(f"Incomplete continuation checks: {sorted(failed)}")
 
 
 if __name__ == "__main__":
@@ -100,8 +136,9 @@ if __name__ == "__main__":
     parser.add_argument("project", type=Path, help="a new directory for the check")
     parser.add_argument("--original-log", action="store_true", help="also check the original cutoff logarithm")
     parser.add_argument("--retained-imports", type=Path, help="verified common-pin import archive")
+    parser.add_argument("--continuation", action="store_true", help="also check the original angular equation")
     args = parser.parse_args()
     retained = args.retained_imports.resolve(strict=True) if args.retained_imports else None
-    if retained and not args.original_log:
+    if retained and not (args.original_log or args.continuation):
         parser.error("--retained-imports requires --original-log")
-    main(args.project.resolve(), args.original_log, retained)
+    main(args.project.resolve(), args.original_log, retained, args.continuation)
