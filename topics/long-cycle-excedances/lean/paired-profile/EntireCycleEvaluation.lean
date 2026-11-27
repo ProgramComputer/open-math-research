@@ -47,7 +47,8 @@ theorem CoeffHasSum.mul_series {F G : ℂ⟦X⟧} {v s t : ℂ}
   apply sum_congr rfl
   intro p hp
   dsimp only [f,g]
-  rw [← Finset.mem_antidiagonal.mp hp,pow_add]
+  have he : p.1 + p.2 = n := by simpa using hp
+  rw [← he,pow_add]
   ring
 
 private def atom (m : ℕ) (c : ℂ) : ℂ⟦X⟧ := PowerSeries.C (R := ℂ) c * PowerSeries.X^m
@@ -57,12 +58,12 @@ private theorem coeff_atom_pow (m j n : ℕ) (c : ℂ) :
   rw [atom,mul_pow,←map_pow,←pow_mul,PowerSeries.coeff_C_mul,PowerSeries.coeff_X_pow]
   split <;> simp_all
 
-private theorem atom_vanishes {m : ℕ} (hm : 0<m) (c : ℂ) : VanishesBelow 1 (atom m c) := by
+private theorem atom_vanishes {m : ℕ} (hm : 0 < m) (c : ℂ) : VanishesBelow 1 (atom m c) := by
   intro n hn
   have h := coeff_atom_pow m 1 n c
   simpa [show n≠m by omega] using h
 
-private theorem eval_exp_atom {m : ℕ} (hm : 0<m) (c v : ℂ) :
+private theorem eval_exp_atom {m : ℕ} (hm : 0 < m) (c v : ℂ) :
     CoeffHasSum (cutoffExp (atom m c)) v (Complex.exp (c*v^m)) := by
   let f (n : ℕ) := PowerSeries.coeff (R := ℂ) n (cutoffExp (atom m c))*v^n
   have hi : Function.Injective (fun j : ℕ => m*j) := by
@@ -111,12 +112,12 @@ private theorem cutoff_step (m : ℕ) :
     ext n
     simp only [cutoffLog,map_add,PowerSeries.coeff_mk,atom,PowerSeries.coeff_C_mul,
       PowerSeries.coeff_X_pow]
-    by_cases hn : n=m+1
+    by_cases hn : n = m + 1
     · subst n
-      simp [show ¬m+2≤m+1 by omega]
-    · by_cases h : m+2≤n
-      · simp [h,show m+1≤n by omega,hn]
-      · simp [h,show ¬m+1≤n by omega,hn]
+      simp [show ¬ (m + 2 ≤ m + 1) by omega]
+    · by_cases h : m + 2 ≤ n
+      · simp [h,show m + 1 ≤ n by omega,hn]
+      · simp [h,show ¬ (m + 1 ≤ n) by omega,hn]
   unfold cutoffCycleSeries
   rw [hl]
   apply cutoffExp_add (k:=1) (by decide) _ (atom_vanishes (by omega) _)
@@ -135,9 +136,7 @@ theorem cleared_cutoff_hasSum (m : ℕ) (v : ℂ) :
           (1-PowerSeries.X) = (cutoffCycleSeries (m+1) * (1-PowerSeries.X)) *
           cutoffExp (atom (m+1) (-(1/((m:ℂ)+1)))) by ring]
     rw [sum_range_succ,neg_add,Complex.exp_add]
-    convert CoeffHasSum.mul_series ih (eval_exp_atom (m:=m+1) (by omega) (-(1/((m:ℂ)+1))) v) using 2
-    congr 1
-    ring
+    convert CoeffHasSum.mul_series ih (eval_exp_atom (m:=m+1) (by omega) (-(1/((m:ℂ)+1))) v) using 2 <;> first | ring | (congr 1 <;> ring)
 
 theorem cutoff_numerator_hasSum (m : ℕ) (v : ℂ) :
     CoeffHasSum (cutoffCycleNumerator (m+1)) v
