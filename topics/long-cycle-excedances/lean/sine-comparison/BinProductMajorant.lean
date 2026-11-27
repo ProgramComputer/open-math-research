@@ -165,6 +165,7 @@ theorem bin_rounded_product_bounds {ι : Type*} (s : Finset ι) (p : ι → ℝ[
       refine ⟨by linarith only [hfull,hL (m+1) hn],?_⟩
       simpa only [coeff_sub,hone,sub_zero] using hmulti
 
+#print axioms bin_full_nonconstant_nonnegative
 #print axioms bin_multiple_derivative_le
 #print axioms bin_rounded_product_bounds
 end OpenMathResearch.LongCycleExcedances
