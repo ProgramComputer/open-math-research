@@ -139,10 +139,16 @@ theorem original_contour_coefficient {k : ℕ} (hk : 2 ≤ k) {s R : ℝ}
   have hρpi : (ρ:ℝ) < π := by
     change min π R/2 < π
     linarith [min_le_left π R,Real.pi_pos]
+  let g (w : ℂ) := ∑ j ∈ range (k-1),
+    (cutoffLogCoefficient k (-Real.exp (-s)) (j+1) : ℂ)*w^(j+1)
+  have hfun : contourNumerator k s = fun w => exp (g w) := by
+    funext w
+    exact seriesValue_original_coherentTilt hk _ _
   have hN (z : ℂ) : AnalyticAt ℂ (contourNumerator k s) z := by
-    simp_rw [contourNumerator, seriesValue_original_coherentTilt hk]
-    exact analyticAt_cexp.comp ((range (k-1)).analyticAt_sum fun j _ =>
-      analyticAt_const.mul (analyticAt_id.pow _))
+    rw [hfun]
+    have hg : AnalyticAt ℂ g z :=
+      (range (k-1)).analyticAt_sum (fun j _ => analyticAt_const.mul (analyticAt_id.pow _))
+    exact analyticAt_cexp.comp hg
   exact logistic_contour_coefficient (show 0 < ρ from hρ) hρR P
     (by rintro _ ⟨l,rfl⟩; exact hρpi.trans_le (pi_le_row_pole_norm s l))
     (by rintro _ ⟨l,rfl⟩; exact hregular l) hP hN _ (contour_original_hasSum hk hs) n

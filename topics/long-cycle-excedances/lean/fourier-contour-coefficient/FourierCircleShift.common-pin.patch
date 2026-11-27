@@ -1,0 +1,19 @@
+diff --git a/topics/long-cycle-excedances/lean/fourier-circle/FourierCircleShift.lean b/topics/long-cycle-excedances/lean/fourier-circle/FourierCircleShift.lean
+index c99d64d..f80a422 100644
+--- a/topics/long-cycle-excedances/lean/fourier-circle/FourierCircleShift.lean
++++ b/topics/long-cycle-excedances/lean/fourier-circle/FourierCircleShift.lean
+@@ -62,9 +62,11 @@ theorem shifted_periodic_derivative {f g : ℝ → ℂ} (k j : ℤ)
+   have ht := intervalIntegral.integral_eq_sub_of_hasDerivAt
+     (a:=0) (b:=2*π) (fun x _ => diff x)
+     ((continuous_const.mul (cG.sub (continuous_const.mul cF))).intervalIntegrable _ _)
+-  rw [intervalIntegral.integral_const_mul,intervalIntegral.integral_sub
+-    (cG.intervalIntegrable _ _) ((continuous_const.mul cF).intervalIntegrable _ _),
+-    intervalIntegral.integral_const_mul] at ht
++  have hsub : (∫ x in (0:ℝ)..2*π, G x - (j:ℂ)*F x) =
++      (∫ x in (0:ℝ)..2*π, G x) - (∫ x in (0:ℝ)..2*π, (j:ℂ)*F x) :=
++    intervalIntegral.integral_sub (f := G) (g := fun x => (j:ℂ)*F x)
++      (cG.intervalIntegrable _ _) ((continuous_const.mul cF).intervalIntegrable _ _)
++  rw [intervalIntegral.integral_const_mul, hsub, intervalIntegral.integral_const_mul] at ht
+   have endpt : H (2*π) - H 0=0 := by simp [H,circleWave_period,circleWave_zero,hper]
+   rw [endpt] at ht
+   have he := sub_eq_zero.mp ((mul_eq_zero.mp ht).resolve_left Complex.I_ne_zero)

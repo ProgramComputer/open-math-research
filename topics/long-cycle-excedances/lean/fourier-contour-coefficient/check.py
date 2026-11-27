@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Build and audit the original permutation coefficient contour identity."""
 import argparse
+from hashlib import sha256
 from pathlib import Path
 import runpy
 import subprocess
+import shutil
 
 HERE = Path(__file__).resolve().parent
 HIGH = runpy.run_path(str(HERE.parent / "fourier-high-height" / "check.py"))
@@ -19,6 +21,24 @@ MODULES = (
 )
 
 
+def stage_fourier_shift(project):
+    """Apply the #318 compatibility proof only to its known pre-port source."""
+    folder = project / "contour-inputs"
+    folder.mkdir()
+    source = HERE.parent / "fourier-circle" / "FourierCircleShift.lean"
+    target = folder / source.name
+    shutil.copyfile(source, target)
+    raw = sha256(target.read_bytes()).hexdigest()
+    print(f"FourierCircleShift raw-sha256={raw}", flush=True)
+    if raw == "2aa40e1273e13dbfba41ef771a33927fa9da8324f0167fb4bf723e7e4aeb2cee":
+        subprocess.run(["patch", "--batch", str(target),
+                        str(HERE / "FourierCircleShift.common-pin.patch")], check=True)
+    expected = "5d8db3cd4b1c3f3e3ad92e512b33033387c4de01dfeb7c89b35428e694ff8c80"
+    if sha256(target.read_bytes()).hexdigest() != expected:
+        raise ValueError("Unexpected FourierCircleShift production input")
+    STABLE["build_local"](project, target, "FourierCircleShift", ())
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("project", type=Path)
@@ -32,7 +52,7 @@ def main():
         STABLE["build_local"](project, HERE.parent / folder / (module + ".lean"), module, ())
 
     support("common-pin", "TiltAnalyticEvaluation")
-    support("fourier-circle", "FourierCircleShift")
+    stage_fourier_shift(project)
     for module in ANALYTIC:
         support("fourier-stable", module)
     count = 0
