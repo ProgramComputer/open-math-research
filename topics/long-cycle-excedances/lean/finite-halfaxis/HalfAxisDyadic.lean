@@ -6,13 +6,13 @@ namespace RepositoryQuotientAudit
 open Polynomial LongCycles LongCycleFinite
 
 structure HalfAxisDyadicWindow where
-  lower : Dyadic
-  upper : Dyadic
+  lower : LongCycleFinite.Dyadic
+  upper : LongCycleFinite.Dyadic
 
-private def negDyadic (a : Dyadic) : Dyadic := ⟨-a.numer, a.shift⟩
+private def negDyadic (a : LongCycleFinite.Dyadic) : LongCycleFinite.Dyadic := ⟨-a.numer, a.shift⟩
 
-private theorem value_negDyadic (a : Dyadic) : (negDyadic a).value = -a.value := by
-  simp [negDyadic, Dyadic.value, neg_div]
+private theorem value_negDyadic (a : LongCycleFinite.Dyadic) : (negDyadic a).value = -a.value := by
+  simp [negDyadic, LongCycleFinite.Dyadic.value, neg_div]
 
 private def oddSign (i : ℕ) : Bool := decide (i % 2 = 1)
 
@@ -38,7 +38,7 @@ def halfAxisDyadicOK (n : ℕ) (p q : List ℤ)
     (windows : Fin ((n - 2) / 2) → HalfAxisDyadicWindow) : Bool :=
   (List.finRange ((n - 2) / 2)).all (fun i =>
     let w := windows i
-    Dyadic.zero.less w.lower && w.lower.less w.upper &&
+    LongCycleFinite.Dyadic.zero.less w.lower && w.lower.less w.upper &&
       w.upper.less ⟨1, 0⟩ &&
       roundedSign (oddSign i.val) p (negDyadic w.lower) &&
       roundedSign (!oddSign i.val) p (negDyadic w.upper) &&
@@ -64,14 +64,14 @@ theorem original_strict_and_weak_of_checked_half_axis {n k : ℕ} (hk : 2 ≤ k)
   apply original_strict_and_weak_of_half_axis_windows hk hn
     (fun i => (windows i).lower.value) (fun i => (windows i).upper.value)
   · intro i
-    simpa using (Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.1.1
+    simpa using (LongCycleFinite.Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.1.1
   · intro i
-    simpa [Dyadic.value] using (Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.2
+    simpa [LongCycleFinite.Dyadic.value] using (LongCycleFinite.Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.2
   · intro i j hij
     have hh := (List.all_eq_true.mp (hdata i).2) j (by simp)
-    exact (Dyadic.less_iff _ _).mp (by simpa [hij] using hh)
+    exact (LongCycleFinite.Dyadic.less_iff _ _).mp (by simpa [hij] using hh)
   · intro i
-    refine Or.inr ⟨(Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.1.2, ?_⟩
+    refine Or.inr ⟨(LongCycleFinite.Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.1.2, ?_⟩
     have hl := roundedSign_sound _ _ _ (hdata i).1.1.1.1.2
     have hu := roundedSign_sound _ _ _ (hdata i).1.1.1.2
     simpa only [hp, value_negDyadic] using opposite_signs hl hu
@@ -85,7 +85,7 @@ theorem original_strict_and_weak_of_checked_half_axis {n k : ℕ} (hk : 2 ≤ k)
     have hsign : roundedSign (oddSign ((n - 2) / 2 + 1)) q ⟨-1, 0⟩ = true := by
       simpa [Nat.odd_iff.mp ho] using hc
     have hs := roundedSign_sound _ _ _ hsign
-    simpa [hq, Dyadic.value] using signed_pow_pos ((n - 2) / 2 + 1) hs
+    simpa [hq, LongCycleFinite.Dyadic.value] using signed_pow_pos ((n - 2) / 2 + 1) hs
 
 end RepositoryQuotientAudit
 
