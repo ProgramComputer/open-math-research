@@ -17,7 +17,7 @@ private theorem anchored_pole_deriv {p w : ℂ} (hp : p ≠ 0) (hw : p-w ≠ 0) 
     HasDerivAt (fun z : ℂ => z/(p*(p-z))) (1/(p-w)^2) w := by
   have h := (hasDerivAt_const w p).mul ((hasDerivAt_const w p).sub (hasDerivAt_id w))
   apply ((hasDerivAt_id w).div h (mul_ne_zero hp hw)).congr_deriv
-  dsimp only [id]
+  dsimp only [Pi.mul_apply, Pi.sub_apply, id]
   field_simp [hp,hw]
   ring
 
