@@ -1,0 +1,4 @@
+Generic normalized update H3(cut), H4(cut): -195191/2000000 98109/1000000
+Actual split-compatibility witness: [Fraction(965, 1), Fraction(605, 1), Fraction(100, 1)] discriminant -19975
+Actual full second-difference cone witness discriminant: -10623
+Generic last-row output: [Fraction(9, 1), Fraction(9, 1), Fraction(1, 1)] value at old zero: 1
