@@ -8,7 +8,7 @@ namespace OpenMathResearch.LongCycleExcedances
 
 /-- The squared gap ensures the strict enclosure of the principal pair
 and excludes every boundary pole while preserving the residue cap. -/
-theorem selected_radius_geometry {k : ℕ} (hk : 100 ≤ k) {x r R a : ℝ} (hx : 48 ≤ x)
+theorem selected_radius_geometry {k : ℕ} (hk : 0 < k) {x r R a : ℝ} (hx : 48 ≤ x)
     (hr : 0 < r) (hR : 0 < R) (P : ℤ → ℂ) :
     let c := min (1/25:ℝ) (4/x)
     a ∈ ({2-2*c,2} : Set ℝ) → R^2=r^2*(1+a/(k:ℝ)) →
