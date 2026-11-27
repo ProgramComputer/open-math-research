@@ -13,6 +13,7 @@ def coarseSubtract (slab : Fin 9) (b : ℕ) : ℕ :=
     ⌊(coarseScale:ℚ)*rationalDegreeMass (linearSlabK slab) b*(3/4)/linearSlabLower slab⌋₊
   else 0
 
+set_option maxHeartbeats 1600000 in
 theorem coarse_subtract_le (slab : Fin 9) (b : ℕ) :
     2^24*coarseSubtract slab b ≤ linearSlabTable slab b := by
   by_cases h : slab=0 ∧ 4≤b
@@ -20,7 +21,10 @@ theorem coarse_subtract_le (slab : Fin 9) (b : ℕ) :
     let A := linearSlabLower slab
     let c := linearShape (linearSlabK slab) b (linearSlabX slab)
     have hm : 0 ≤ m := slab_degree_mass_nn slab h.2
-    have hA : 0<A := by dsimp [A]; fin_cases slab <;> norm_num [linearSlabLower,linearSlabQuarter]
+    have hA : 0 < A := by
+      dsimp only [A]
+      rw [h.1]
+      norm_num [linearSlabLower,linearSlabQuarter]
     let x := (coarseScale:ℚ)*m*(3/4)/A
     have hx : 0≤x := by dsimp only [x]; positivity
     have hf : (coarseSubtract slab b:ℚ) ≤ x := by
@@ -28,10 +32,10 @@ theorem coarse_subtract_le (slab : Fin 9) (b : ℕ) :
       exact Nat.floor_le hx
     have hr := linear_head_lower_two_poles c
     have hg : (2:ℚ)^24*coarseScale*(3/4) ≤ ((linearHead c+linearHalfTail c:ℕ):ℚ) := by
-      have hi := hr.trans (Nat.le_add_right _ (linearHalfTail c))
-      norm_num [linearScale] at hi
-      norm_num [coarseScale]
-      exact_mod_cast hi
+      have scale_eq : (2:ℚ)^24*(coarseScale:ℚ)*(3/4) = ((3*linearScale/4:ℕ):ℚ) := by
+        norm_num [coarseScale,linearScale]
+      rw [scale_eq]
+      exact Nat.cast_le.mpr (hr.trans (Nat.le_add_right _ (linearHalfTail c)))
     have hh : ((2:ℚ)^24)*x ≤ m*((linearHead c+linearHalfTail c:ℕ):ℚ)/A := by
       calc
         _ = m*((2:ℚ)^24*coarseScale*(3/4))/A := by dsimp only [x]; ring
