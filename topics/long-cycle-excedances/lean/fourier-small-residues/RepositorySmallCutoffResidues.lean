@@ -1,4 +1,6 @@
 import SmallResidueChord
+import SmallResidueGeometry
+import SmallResidueRadius
 import SmallResidueMass
 import RepositoryWideResidues
 

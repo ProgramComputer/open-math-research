@@ -1,5 +1,5 @@
 import WideOddRadius
-import SmallResidueGeometry
+import WideGeometry
 
 set_option autoImplicit false
 noncomputable section

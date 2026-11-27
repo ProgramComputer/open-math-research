@@ -1,4 +1,4 @@
-import SmallResidueRadius
+import WideOddMass
 
 noncomputable section
 namespace OpenMathResearch.LongCycleExcedances

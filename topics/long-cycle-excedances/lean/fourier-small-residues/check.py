@@ -15,9 +15,15 @@ MODULES = (
 
 def compile_small_residues(project):
     high = runpy.run_path(str(HERE.parent / "fourier-high-height/check.py"))
+    failures = []
     for module in MODULES:
         namespace = high["ORIGINAL"] if module.startswith("Repository") else high["GENERIC"]
-        high["check_module"](project, HERE / (module + ".lean"), namespace)
+        try:
+            high["check_module"](project, HERE / (module + ".lean"), namespace)
+        except (subprocess.CalledProcessError, ValueError):
+            failures.append(module)
+    if failures:
+        raise RuntimeError(f"Incomplete small-cutoff checks: {failures}")
 
 
 if __name__ == "__main__":

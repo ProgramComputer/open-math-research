@@ -17,7 +17,10 @@ theorem small_residue_height_power {k : ℕ} (hk : 8 ≤ k) {s r R : ℝ} (hs : 
     have hdiff : 8*π^2 ≤ r^2*(2/(k:ℝ)) := by
       rw [mul_add, mul_one] at hcap
       linarith only [hminor,hcap,hr]
-    have hz := (le_div_iff₀ hK0).mp (show 8*π^2 ≤ 2*r^2/(k:ℝ) by convert hdiff using 1; ring)
+    have hz := (le_div_iff₀ hK0).mp (show 8*π^2 ≤ 2*r^2/(k:ℝ) by
+      calc
+        _ ≤ r^2*(2/(k:ℝ)) := hdiff
+        _ = _ := by ring)
     nlinarith only [hz,hr]
   have height : 17 ≤ s := by
     apply le_of_sq_le_sq _ hs
@@ -30,7 +33,7 @@ theorem small_residue_height_power {k : ℕ} (hk : 8 ≤ k) {s r R : ℝ} (hs : 
     apply (div_le_iff₀ (sq_pos_of_pos hs')).mpr
     rw [hr] at hcap
     have he : (1+π^2/s^2)*(1+2/(k:ℝ))*s^2=(s^2+π^2)*(1+2/(k:ℝ)) := by
-      field_simp [hs'.ne']; ring
+      field_simp [hs'.ne'] <;> ring
     rwa [he]
   rw [←div_pow] at hf
   have hl := Real.log_le_log (pow_pos (div_pos hR' hs') 2) hf
