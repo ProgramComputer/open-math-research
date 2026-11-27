@@ -33,6 +33,8 @@ SINE_MODULES = (
     "PairedIntegerWindows",
     "PairedSineComparison",
     "PairedSineKernel",
+    "BinProductMajorant",
+    "BinIntegerCertificate",
     "PairedDeflatedCoefficients",
     "RepositoryPairedSine",
 )
@@ -91,6 +93,11 @@ ASPECT_EXPECTED = {
     "RepositoryQuotientAudit.original_residual_count_bound",
 }
 SINE_EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.bin_multiple_derivative_le",
+    "OpenMathResearch.LongCycleExcedances.bin_rounded_product_bounds",
+    "OpenMathResearch.LongCycleExcedances.bin_integer_derivative_certificate",
+    "OpenMathResearch.LongCycleExcedances.bin_integer_multiple_bound",
+    "OpenMathResearch.LongCycleExcedances.bin_ceiling_recurrence",
     "OpenMathResearch.LongCycleExcedances.paired_sine_pole_identity",
     "OpenMathResearch.LongCycleExcedances.paired_sine_ellipse_bound",
     "OpenMathResearch.LongCycleExcedances.paired_sine_pole_bound",
