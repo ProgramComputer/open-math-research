@@ -75,12 +75,32 @@ theorem entry_rowOf (w i : ℕ) (c : ℕ → ℤ) (hi : i < w) :
 
 def start (w : ℕ) : List ℤ := rowOf w fun i => if i=0 then 1 else 0
 
+/-- Coefficient convolution stops when the Eulerian prefix ends. -/
+def convolution : List ℤ → List ℤ → ℕ → ℤ
+  | [], _, _ => 0
+  | a :: _, r, 0 => a * entry r 0
+  | a :: rest, r, i+1 => a * entry r (i+1) + convolution rest r i
+
+theorem convolution_eq (a r : List ℤ) (i : ℕ) :
+    convolution a r i = ∑ j ∈ range (i+1), entry a j * entry r (i-j) := by
+  induction i generalizing a with
+  | zero => cases a <;> simp [convolution,entry]
+  | succ i ih =>
+    cases a with
+    | nil => simp [convolution,entry]
+    | cons v rest =>
+      rw [convolution, ih]
+      conv_rhs => rw [sum_range_succ']
+      simp only [entry, List.getElem?_cons_zero, List.getElem?_cons_succ, Option.getD_some,
+        Nat.sub_zero, Nat.succ_sub_succ_eq_sub]
+      exact add_comm _ _
+
 def next (w k : ℕ) (a : List ℤ) (n : ℕ) (p r : List ℤ) : List ℤ :=
   rowOf w fun
   | 0 => 0
   | i+1 =>
     ((i : ℤ)+1) * entry p (i+1) + ((n : ℤ)-(i : ℤ)) * entry p i +
-      (n.choose (k-1) : ℤ) * ∑ l ∈ range (i+1), entry a l * entry r (i-l)
+      ((n.descFactorial (k-1) / (k-1).factorial : ℕ) : ℤ) * convolution a r i
 
 def agrees (w : ℕ) (r : List ℤ) (p : ℝ[X]) : Prop :=
   ∀ i, i<w → (entry r i : ℝ)=p.coeff i
@@ -99,7 +119,8 @@ theorem next_agrees (w k n : ℕ) (a p r : List ℤ) (A P R Q : ℝ[X])
       ring
     simp [heq]
   | succ i =>
-    rw [insertion_coeff P Q A R _ h i]
+    dsimp only
+    rw [insertion_coeff P Q A R _ h i, convolution_eq, ← Nat.choose_eq_descFactorial_div_factorial]
     simp only [Int.cast_add, Int.cast_mul, Int.cast_sub, Int.cast_natCast, Int.cast_one,
       Int.cast_sum]
     rw [hp (i+1) hi, hp i (by omega)]
@@ -127,6 +148,7 @@ theorem table_agrees (w k : ℕ) (hk : 2 ≤ k) (a : List ℤ) (A : ℝ[X])
     exact next_agrees w k m a p r A _ _ _ ha hp hr (hs m)
   simpa using history_sound k (start w) (next w k a) E (agrees w) init step n 0 (Nat.zero_le _)
 
+#print axioms convolution_eq
 #print axioms table_agrees
 
 end OpenMathResearch.LongCycleExcedances.InsertionTable

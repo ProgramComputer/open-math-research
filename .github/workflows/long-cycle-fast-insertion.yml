@@ -14,32 +14,63 @@ permissions:
   actions: read
   contents: read
 
+env:
+  LEAN_NUM_THREADS: '1'
+  MODULES: topics/long-cycle-excedances/lean/fast-insertion
+
 jobs:
-  audit:
+  arithmetic:
+    name: Six-step coefficient proofs, group ${{ matrix.group }}
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [0, 1, 2]
     runs-on: ubuntu-24.04
-    timeout-minutes: 150
-    env:
-      LEAN_NUM_THREADS: '1'
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
-      - name: Install pinned Lean 4.33.1 and recover the audited imports
+      - name: Install pinned Lean
+        run: bash "$MODULES/ci-prepare.sh"
+      - name: Check coefficient equalities and their proof objects
+        env:
+          GROUP: ${{ matrix.group }}
+        run: |
+          set -euo pipefail
+          ulimit -Sn 65536
+          python3 -Bu "$MODULES/check.py" "$RUNNER_TEMP/common-pin" --group "$GROUP" --objects "$RUNNER_TEMP/row-proofs" 2>&1 | tee "$RUNNER_TEMP/arithmetic.log"
+      - name: Preserve checked objects and transcript
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: row-proofs-${{ matrix.group }}
+          path: |
+            ${{ runner.temp }}/row-proofs/
+            ${{ runner.temp }}/arithmetic.log
+          retention-days: 30
+
+  audit:
+    needs: arithmetic
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean and recover checked components
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          cd "$RUNNER_TEMP"
-          if [[ "$RUNNER_ENVIRONMENT" = github-hosted ]] && (( $(df -Pk "$RUNNER_TEMP" | awk 'NR==2 {print $4}') < 45*1024*1024 )); then
-            sudo rm -rf -- /usr/local/lib/android /usr/share/dotnet /opt/ghc /usr/local/.ghcup
-          fi
-          curl -fLsS --retry 3 -o pinned.tar.zst https://github.com/leanprover/lean4/releases/download/v4.33.1/lean-4.33.1-linux.tar.zst
-          echo '890afd185370f85666025b883914ab4f4b339136f8c96167b69cfb62aecaf235  pinned.tar.zst' | sha256sum -c
-          tar --zstd -xf pinned.tar.zst
-          rm pinned.tar.zst
-          echo "$RUNNER_TEMP/lean-4.33.1-linux/bin" >> "$GITHUB_PATH"
+          bash "$MODULES/ci-prepare.sh"
           gh run download 45917288503 --repo "$GITHUB_REPOSITORY" --name quotient-import-objects --dir "$RUNNER_TEMP" || true
-      - name: Compile and replay original integer endpoints
+          for group in 0 1 2; do
+            gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "row-proofs-$group" --dir "$RUNNER_TEMP/downloads/$group"
+            mkdir -p "$RUNNER_TEMP/checked"
+            mv "$RUNNER_TEMP/downloads/$group/row-proofs" "$RUNNER_TEMP/checked/row-proofs-$group"
+          done
+      - name: Assemble and replay original integer endpoints
         run: |
           set -euo pipefail
           ulimit -Sn 65536
@@ -47,7 +78,7 @@ jobs:
           if [[ -f "$RUNNER_TEMP/quotient-import-objects.tar.zst" ]]; then
             args+=("$RUNNER_TEMP/quotient-import-objects.tar.zst")
           fi
-          python3 -Bu topics/long-cycle-excedances/lean/fast-insertion/check.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/common-pin.log"
+          python3 -Bu "$MODULES/check.py" "${args[@]}" --groups "$RUNNER_TEMP/checked" 2>&1 | tee "$RUNNER_TEMP/common-pin.log"
       - name: Preserve verification report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

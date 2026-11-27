@@ -85,41 +85,54 @@ def generate(output, chunk_size):
     output.mkdir(parents=True)
     a, rows = witness_rows()
     manifest = []
-    previous = "InsertionTable"
-
     def write(module, source):
         path = output / (module + ".lean")
         raw = source.encode("utf-8")
         path.write_bytes(raw)
         manifest.append(f"{hashlib.sha256(raw).hexdigest()}  {path.name}\n")
 
-    for number, first in enumerate(range(0, FINAL_SIZE, chunk_size)):
-        end = min(first + chunk_size, FINAL_SIZE)
-        name = f"CheckpointChunk{number:03d}"
-        lines = [f"import {previous}\n\n", HEADER]
+    data_span = 12
+
+    def data_module(n):
+        return f"CheckpointData{n // data_span:03d}"
+
+    for first in range(0, FINAL_SIZE + 1, data_span):
+        data = ["import InsertionTable\n\n", HEADER]
         if first == 0:
-            lines.extend((
-                f"def checkpoint0 : List ℤ := {literal(rows[0])}\n",
-                f"def checkpointEulerian : List ℤ := {literal(a)}\n",
-                MODEL,
-            ))
-        for n in range(first, end):
-            lines.extend((
-                f"def checkpoint{n+1} : List ℤ := {literal(rows[n+1])}\n",
+            # Out-of-range entries are zero. This Eulerian polynomial has degree eleven.
+            data.append(f"def checkpointEulerian : List ℤ := {literal(a[:CUTOFF-1])}\n")
+        for n in range(first, min(first + data_span, FINAL_SIZE + 1)):
+            data.append(f"def checkpoint{n} : List ℤ := {literal(rows[n])}\n")
+        write(data_module(first), "".join(data) + f"end {NAMESPACE}\n")
+
+    modules = []
+    for first in range(0, FINAL_SIZE, chunk_size):
+        name = f"CheckpointChunk{len(modules):03d}"
+        modules.append(name)
+        indices = range(first, min(first + chunk_size, FINAL_SIZE))
+        dependencies = {data_module(0)}
+        for n in indices:
+            dependencies.update((data_module(n), data_module(n+1), data_module(lag(n))))
+        lines = ["".join(f"import {m}\n" for m in sorted(dependencies)), HEADER]
+        for n in range(first, min(first + chunk_size, FINAL_SIZE)):
+            lines.append(
                 f"theorem checkpoint_step{n} : next 61 13 checkpointEulerian {n} checkpoint{n} "
-                f"checkpoint{lag(n)} = checkpoint{n+1} := by decide\n",
-                model_step(n),
-            ))
+                f"checkpoint{lag(n)} = checkpoint{n+1} := by decide\n"
+            )
         lines.append(f"end {NAMESPACE}\n")
         write(name, "".join(lines))
-        previous = name
-    write("CheckpointReplay", f"import {previous}\n\n{HEADER}{FINAL}end {NAMESPACE}\n")
+
+    imports = "".join(f"import {module}\n" for module in modules)
+    proof = [imports, HEADER, MODEL]
+    proof.extend(model_step(n) for n in range(FINAL_SIZE))
+    proof.append(f"{FINAL}end {NAMESPACE}\n")
+    write("CheckpointReplay", "".join(proof))
     (output / "SHA256SUMS").write_bytes("".join(manifest).encode("ascii"))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path, help="new output directory")
-    parser.add_argument("--chunk-size", type=int, choices=range(20, 33), default=24)
+    parser.add_argument("--chunk-size", type=int, choices=range(1, 13), default=6)
     args = parser.parse_args()
     generate(args.output, args.chunk_size)
