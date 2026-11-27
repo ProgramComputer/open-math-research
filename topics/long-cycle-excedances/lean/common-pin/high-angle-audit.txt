@@ -1,0 +1,36 @@
+Source head 55b765c816459987059a724925fa858403c86bdc
+Hosted run 45934247139, success
+Lean 4.33.1 (compiler 819816b2e0a3bf405af45ae5c7af2491d8f5bee6)
+Mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Authenticated frozen upstream source 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Reproduction: run common-pin/check.py with the prepared directories and authenticated import cache from .github/workflows/long-cycle-common-pin.yml
+Artifact ID 15170272684
+Artifact ZIP SHA-256 0c23b3c13dc8ddc22bb838bcdddf3f31070ce63d47cf79df06b5ec9033391674
+GitHub Markdown preview matched all 73 TeX expressions in high-angle.md.
+
+Compile MonomialTiltBounds input-sha256=f651493a6fd4fe4eaa4772e0e54abfc172a5a83d35b47026f1f9f78a02ec3e9e
+Compile TiltAnalyticEvaluation input-sha256=bf6f64a2a3adabdaee52ecb03e559e50465de1a0f48eeeb85c2744610356bf1a
+Compile HighAngleScalar input-sha256=2be86c3588a6a1f73a851928f0917e3d42d7a25ac7030bcc5e2b2d26897991f5
+Compile HighAngleLattice input-sha256=af95a4f2e0cab5403edb1f1a6eb2a8239dfbd36665832b717f31cb6cc4949172
+Compile HighAngleActualInputs input-sha256=cf1a6f767e6af7fdd4f73fd3733117fc93edf7a52d41004c86e18976b3367971
+Compile HighAngleRowEstimate input-sha256=f748b74203262a45395a72d75cb057bc665010bc07557b7c22169582d6edd6e6
+Compile ActualHighAngleSign input-sha256=b1659cd464aabaf1c51872dc06caafbead0208d789c43386a09b4a37dda1463c
+
+'RepositoryQuotientAudit.original_coherentTilt_coeff_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.seriesValue_original_coherentTilt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.norm_seriesValue_coherentTilt_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.high_angle_geometric_envelope' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.next_sign_of_unit_principal_mode' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.actual_high_angle_log_mass' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.actual_high_angle_row_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.actual_high_angle_normalized_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_high_angle_next_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+kernel_replay_exit=0 MonomialTiltBounds
+kernel_replay_exit=0 TiltAnalyticEvaluation
+kernel_replay_exit=0 HighAngleScalar
+kernel_replay_exit=0 HighAngleLattice
+kernel_replay_exit=0 HighAngleActualInputs
+kernel_replay_exit=0 HighAngleRowEstimate
+kernel_replay_exit=0 ActualHighAngleSign
+PASS: 33 declarations audited

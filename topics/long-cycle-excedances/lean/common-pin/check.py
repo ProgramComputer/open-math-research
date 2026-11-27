@@ -26,6 +26,15 @@ LOGISTIC_IMPORTS = (
     "MarkedLogistic", "CycleProfile", "CycleProfileEGF", "CycleProfileLogistic",
 )
 EXPECTED = {
+    "RepositoryQuotientAudit.original_coherentTilt_coeff_bound",
+    "RepositoryQuotientAudit.seriesValue_original_coherentTilt",
+    "RepositoryQuotientAudit.norm_seriesValue_coherentTilt_ge",
+    "RepositoryQuotientAudit.actual_high_angle_log_mass",
+    "RepositoryQuotientAudit.actual_high_angle_row_error",
+    "RepositoryQuotientAudit.actual_high_angle_normalized_error",
+    "RepositoryQuotientAudit.original_high_angle_next_sign",
+    "OpenMathResearch.LongCycleExcedances.high_angle_geometric_envelope",
+    "OpenMathResearch.LongCycleExcedances.next_sign_of_unit_principal_mode",
     "OpenMathResearch.LongCycleExcedances.norm_far_pole_truncation_le",
     "RepositoryQuotientAudit.original_logistic_coefficient",
     "RepositoryQuotientAudit.original_rescaled_logTilt_coeff",
@@ -105,6 +114,13 @@ def compile_topic(project):
     files.append((HERE / "RepositoryPoleProfile.lean", "RepositoryPoleProfile"))
     files.append((HERE / "RepositoryCoherentPoles.lean", "RepositoryCoherentPoles"))
     files.append((HERE / "FarPoleTruncation.lean", "FarPoleTruncation"))
+    files.append((HERE / "MonomialTiltBounds.lean", "MonomialTiltBounds"))
+    files.append((HERE / "TiltAnalyticEvaluation.lean", "TiltAnalyticEvaluation"))
+    files.append((HERE / "HighAngleScalar.lean", "HighAngleScalar"))
+    files.append((HERE / "HighAngleLattice.lean", "HighAngleLattice"))
+    files.append((HERE / "HighAngleActualInputs.lean", "HighAngleActualInputs"))
+    files.append((HERE / "HighAngleRowEstimate.lean", "HighAngleRowEstimate"))
+    files.append((HERE / "ActualHighAngleSign.lean", "ActualHighAngleSign"))
     observed = {}
     failed = set()
     for source, module in files:
@@ -155,7 +171,8 @@ def compile_topic(project):
                    "ReciprocalHalfWindows", "RepositoryHalfAxisAssembly",
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
-                   "FarPoleTruncation"):
+                   "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign"):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
