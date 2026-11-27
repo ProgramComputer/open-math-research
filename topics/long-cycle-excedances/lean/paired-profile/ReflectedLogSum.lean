@@ -63,5 +63,38 @@ theorem reflected_log_bound_of_pair {f : {q : ℤ // q ≠ 0} → ℝ} (hf : Sum
   rw [tsum_div_const,←add_div]
   exact hbudget
 
+/-- The reflected positive majorant can be applied directly to the absolute
+lattice kernel before introducing the numerator coefficients. -/
+theorem reflected_row_majorant {f : {q:ℤ // q ≠ 0} → ℝ} (hf : Summable f)
+    {h A η : ℝ} (hh : 0 < h) (hA : 0 < A)
+    (hpoint : ∀ q : {q:ℤ // q ≠ 0}, f q ≤
+      ((1+h*(q:ℤ)*((q:ℤ)+1:ℝ))^96)⁻¹/(2*|((q:ℤ):ℝ)| *A))
+    (hnum : (1 + ∑' i, reflectedLogWeight h (i+1))/(2*A) ≤ η) : (∑' q, f q) ≤ η := by
+  apply reflected_log_bound_of_pair hf hh hA _ _ hnum
+  · simpa [negLogIndex] using hpoint (negLogIndex 0)
+  · intro i
+    have hp := hpoint (posLogIndex i)
+    have hm := hpoint (negLogIndex (i+1))
+    apply (add_le_add hp hm).trans_eq
+    simp only [posLogIndex,negLogIndex,Int.cast_add,Int.cast_one,Int.cast_natCast,Int.cast_negSucc,Nat.cast_add,Nat.cast_one,
+      abs_neg,abs_of_nonneg (by positivity : (0:ℝ) ≤ (i:ℝ)+1),
+      abs_of_nonneg (by positivity : (0:ℝ) ≤ (i:ℝ)+1+1)]
+    let t : ℝ := i+1
+    have ht : 0 < t := by dsimp [t]; positivity
+    change ((1+h*t*(t+1))^96)⁻¹ / (2*t*A) +
+      ((1+h*(-(t+1))*(-(t+1)+1))^96)⁻¹ / (2*(t+1)*A) = _
+    rw [show 1+h*(-(t+1))*(-(t+1)+1)=1+h*t*(t+1) by ring]
+    simp only [reflectedLogWeight,Nat.cast_add,Nat.cast_one]
+    change _ = ((1/t+1/(t+1))/(1+h*t*(t+1))^96)/(2*A)
+    generalize (1+h*t*(t+1))^96 = b
+    by_cases hb : b=0
+    · simp [hb]
+    · field_simp [ht.ne',hA.ne',hb,show t+1≠0 by positivity]
+      ring
+
+
+
+#print axioms reflected_row_majorant
+
 #print axioms reflected_log_bound_of_pair
 end OpenMathResearch.LongCycleExcedances

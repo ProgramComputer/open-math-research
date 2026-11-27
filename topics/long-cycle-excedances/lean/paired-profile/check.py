@@ -70,8 +70,40 @@ MODULES = (
     "FinitePrincipalCost",
     "WindowPrincipalLimit",
     "RepositoryAdjacentWindows",
+    "BinProductMajorant",
+    "BinIntegerCertificate",
+    "BivariateBin",
+    "LiteralBin",
+    "LiteralBinSupport",
+    "MarkedCoefficientComparison",
+    "WeightedMarkedBins",
+    "CenteredBinGeometry",
+    "CenteredMarkedProduct",
+    "BinCostTail",
+    "TiltedNumeratorMass",
+    "PrincipalRowKernel",
+    "LiteralPrincipalTilt",
+    "PrincipalBinHeadTail",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.marked_full_nonnegative",
+    "OpenMathResearch.LongCycleExcedances.marked_full_degree_support",
+    "OpenMathResearch.LongCycleExcedances.reflected_row_majorant",
+    "OpenMathResearch.LongCycleExcedances.marked_product_dominates",
+    "OpenMathResearch.LongCycleExcedances.marked_product_geometry",
+    "OpenMathResearch.LongCycleExcedances.weighted_marked_cost",
+    "OpenMathResearch.LongCycleExcedances.centeredBinIndex_valid",
+    "OpenMathResearch.LongCycleExcedances.centered_probability_on_bin",
+    "OpenMathResearch.LongCycleExcedances.centered_marked_partial",
+    "OpenMathResearch.LongCycleExcedances.centered_marked_cost",
+    "OpenMathResearch.LongCycleExcedances.cost_split_head_tail",
+    "OpenMathResearch.LongCycleExcedances.product_tilt_cost_bound",
+    "OpenMathResearch.LongCycleExcedances.symmetric_bin_tail_reserve",
+    "OpenMathResearch.LongCycleExcedances.tilted_numerator_mass",
+    "OpenMathResearch.LongCycleExcedances.finite_principal_row_kernel",
+    "OpenMathResearch.LongCycleExcedances.principal_primitive_norm_majorant",
+    "OpenMathResearch.LongCycleExcedances.literal_principal_tilt",
+    "OpenMathResearch.LongCycleExcedances.principal_bin_head_tail",
     "OpenMathResearch.LongCycleExcedances.finite_principal_cost",
     "OpenMathResearch.LongCycleExcedances.centered_principal_cost",
     "OpenMathResearch.LongCycleExcedances.off_principal_window_cofinal",
@@ -217,7 +249,11 @@ def main(project, imports):
         print(f"Reused verified common-pin archive sha256={digest}", flush=True)
 
     inputs = [(name, TOPIC / folder / f"{name}.lean") for folder, name in SUPPORT]
-    inputs.extend((name, (HERE.parent / "sine-comparison" if name == "PrimitivePoleKernel" else HERE) / f"{name}.lean") for name in MODULES)
+    sine_sources = {"PrimitivePoleKernel", "BinProductMajorant", "BinIntegerCertificate",
+                    "BivariateBin", "LiteralBin", "LiteralBinSupport"}
+    for name in MODULES:
+        directory = HERE.parent / "sine-comparison" if name in sine_sources else HERE
+        inputs.append((name, directory / f"{name}.lean"))
     observed = {}
     for module, original in inputs:
         source = project / original.name

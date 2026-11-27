@@ -21,3 +21,5 @@ To prove this, start the walk at $N$ by evaluating the probability at $\max(s,N)
 For the actual finite product of occupied factors at the principal pole, a summable majorant for its centered degree masses now bounds the error of the full original convolution, including the terms past the row degree. Instantiating that majorant with the binned bounds gives the first of the four determinant costs. [Centered cost theorem](FinitePrincipalCost.lean)
 
 **Verification scope.** Lean 4.33.1 checked the finite coefficient identities, cofinality, convergence of the principal contribution and the factorial probability bounds, including the adapter to the literal permutation enumerators. The replay covered 55 modules and 104 named axiom reports. [Verification record](adjacent-verification.md) The four complete determinant error costs and the final root-list assembly are still being formalized. [Shared checker](check.py) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/4)
+
+The [principal bin estimate](principal-bin-cost.md) reduces the untruncated centered convolution to 241 rounded coefficients and a uniform tail.

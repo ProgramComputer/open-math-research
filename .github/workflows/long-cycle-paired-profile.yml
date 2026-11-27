@@ -6,6 +6,12 @@ on:
       - '.github/workflows/long-cycle-paired-profile.yml'
       - 'topics/long-cycle-excedances/lean/paired-profile/**'
       - 'topics/long-cycle-excedances/lean/sine-comparison/Principal*.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/BinProductMajorant.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/BinIntegerCertificate.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/BivariateBin.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/LiteralBin.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/LiteralBinSupport.lean'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/PrimitivePoleKernel.lean'
 
 concurrency:
   group: paired-profile-${{ github.event.pull_request.number }}

@@ -145,6 +145,18 @@ theorem marked_bin_bounds {ι : Type*} (A : Finset ι) (k N : ℕ)
       exact nn_prod T P (fun q hq => hp q ((mem_powerset.mp (mem_filter.mp hT).1) hq))
     simpa only [forgetDegree_markedMultiple] using coeff_le_forgetDegree hM b d
 
+/-- Nonnegativity of every joint bin/degree of the full marked product. -/
+theorem marked_full_nonnegative {ι : Type*} (A : Finset ι) (k N : ℕ)
+    (c : ι → ℕ→ℝ) (hc : ∀ q ∈ A, ∀ d, 0 ≤ c q d) :
+    ∀ b d, 0 ≤ ((∏ q ∈ A, (1+markDegreeBin k N (c q))).coeff b).coeff d := by
+  classical
+  have hone : NN (1:ℝ[X][X]) := by
+    intro b d
+    by_cases h : b=0 <;> simp [coeff_one,h]
+    split <;> norm_num
+  exact nn_prod A _ (fun q hq => nn_add hone (nn_mark k N _ (hc q hq)))
+#print axioms marked_full_nonnegative
+
 #print axioms markedMultiple_eq
 #print axioms marked_bin_bounds
 #print axioms coeff_markDegreeBin

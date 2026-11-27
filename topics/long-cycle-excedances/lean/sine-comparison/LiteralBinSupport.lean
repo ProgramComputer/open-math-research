@@ -83,6 +83,23 @@ theorem literal_multiple_support (A : Finset ℤ) {k : ℕ} (hk : 0 < k) (N : �
   apply hn
   apply binSupport_sum _ _ (fun T _ => binSupport_prod T _ (fun j _ => binSupport_mark k N hk _)) b d hb
 
+/-- Both integral degree inequalities for the full product, including its constant term. -/
+theorem marked_full_degree_support {ι : Type*} (A : Finset ι) {k : ℕ} (hk : 0 < k) (N : ℕ)
+    (c : ι → ℕ→ℝ) : ∀ b d,
+      ((∏ q ∈ A, (1+markDegreeBin k N (c q))).coeff b).coeff d ≠ 0 → 4*d ≤ k*b ∧ k*b ≤ 5*d := by
+  classical
+  apply binSupport_prod
+  intro q _
+  intro b d hh
+  simp only [coeff_add] at hh
+  by_cases h : ((1:ℝ[X][X]).coeff b).coeff d=0
+  · rw [h,zero_add] at hh
+    exact binSupport_mark k N hk _ b d hh
+  · exact binSupport_one b d h
+
+
+#print axioms marked_full_degree_support
+
 #print axioms degreeBin_bounds
 #print axioms literal_multiple_support
 end OpenMathResearch.LongCycleExcedances
