@@ -128,7 +128,8 @@ theorem original_old_front_weighted_tails {n k h : ℕ} (hn : 10000 ≤ n) (hk :
   have hr := original_front_central_ratios hn hk hkn hh hJt
   dsimp only at hr
   obtain ⟨hmL,hmU⟩ := front_adaptive_multipliers hn hh hH hr.2.1 hr.2.2
-  have hcoefficient (p : ℕ) := RunColors.original_coeff_envelope n k p hk
+  have hcoefficient (p : ℕ) : 0 ≤ (enumerator n k).coeff p ∧
+      (enumerator n k).coeff p ≤ (p:ℝ)^n := RunColors.original_coeff_envelope n k p hk
   refine ⟨⟨hc,ht⟩, ?_, ?_⟩
   · intro j hj
     rw [frontCoefficientWeight,if_neg (not_le_of_gt hj),abs_of_nonneg (hcoefficient j).1]
