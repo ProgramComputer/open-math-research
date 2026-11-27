@@ -39,7 +39,8 @@ private theorem angle_principal_readout {n k : ℕ} (hk : 2 ≤ k) {θ : ℝ}
   dsimp only at hread
   rw [← hz', ← hval] at hread
   refine ⟨hx,by rw [hw]; exact hrad,?_⟩
-  simpa only [Complex.div_ofReal_re, Complex.div_ofReal_im] using hread
+  simpa only [Complex.div_ofReal_re, Complex.div_ofReal_im,
+    highAnglePrincipal, highAngleAmplitude, anglePhase] using hread
 
 theorem signed_original_high_angle_cell_of_displacement {n k j : ℕ} (hn : 0 < n)
     (hk : 7 ≤ k) (hsize : 100*(k:ℝ)*Real.log k ≤ n)

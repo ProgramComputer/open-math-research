@@ -44,7 +44,9 @@ theorem middle_slope_from_moment {n k : ℕ} (hk : 7 ≤ k) (hn : k ≤ n)
     rw [hB]
     simpa only [Function.comp_def, Complex.imCLM_apply, Complex.add_im, Complex.ofReal_im,
       zero_add] using hGi
-  have hphase := ((poleAngle_hasDerivAt x).const_mul ((n:ℝ)+1)).sub hGim
+  have hphase : HasDerivAt (fun u => ((n:ℝ)+1)*poleAngle u - (G u).im)
+      (((n:ℝ)+1)*(-π/(x^2+π^2)) - (B/w).im) x :=
+    ((poleAngle_hasDerivAt x).const_mul ((n:ℝ)+1)).sub hGim
   have he := phase_slope_bound (by exact_mod_cast hk.trans hn) hr hs rfl him hmid
     (all_angle_scaled_remainder x hk)
   change |((n:ℝ)+1)*(-s/r) - (B/w).im + n*s/r| < (32/35)*(n:ℝ)*s/r at he
