@@ -31,13 +31,24 @@ $$
 
 For $p\ne0$, reflection through the circle pairs $p$ with $R^2/\overline p$. Exactly one lies inside. Partial fractions reduce the integral to the difference of their Cauchy integrals. At $p=0$ the integrand is constant. [Pole integral](FourierPoleMoment.lean)
 
+## Weighted pole products
+
+Set $u_p(x)=\sqrt{\bigl||p|^2-R^2\bigr|}/|p-Re^{ix}|$. Each $u_p$ has squared integral $2\pi$. Integrating $(u_p-u_q)^2\ge0$ bounds the integral of $u_pu_q$ by $2\pi$, including poles on opposite sides of the circle. For two finite pole lists and arbitrary nonnegative weights, it follows that
+
+$$
+\int_0^{2\pi}\Big(\sum_i a_i u_{p_i}(x)\Big)\Big(\sum_j b_j u_{q_j}(x)\Big)\mathop{}\mathrm{d}x
+\le 2\pi\Big(\sum_i a_i\Big)\Big(\sum_j b_j\Big).
+$$
+
+The two lists may overlap or include repeated locations. [Two-pole bound](FourierPolePair.lean) · [Weighted finite products](FourierFinitePoleBound.lean)
+
 ## Verification
 
-The research pin is Lean 4.19.0 at `6caaee842e94` and mathlib at `c44e0c8ee63ca166450922a373c7409c5d26b00b`. Each of the four source modules compiled locally. Their ten named axiom reports contain only `propext`, `Classical.choice` and `Quot.sound`. The checker compiles in a fresh directory and verifies the named reports. [Source checker](check.py) · [Dependency manifest](../../../../shared/lean/lake-manifest.json) · [Hosted check](../../../../.github/workflows/long-cycle-fourier-contrast.yml)
+The research pin is Lean 4.19.0 at `6caaee842e94` and mathlib at `c44e0c8ee63ca166450922a373c7409c5d26b00b`. Each of the six source modules compiled locally. Their thirteen named axiom reports contain only `propext`, `Classical.choice` and `Quot.sound`. The checker compiles in a fresh directory and verifies the named reports. [Source checker](check.py) · [Dependency manifest](../../../../shared/lean/lake-manifest.json) · [Hosted check](../../../../.github/workflows/long-cycle-fourier-contrast.yml)
 
 ```sh
 cd shared/lean
-lake exe cache get Mathlib.Analysis.Complex.CauchyIntegral Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.ExpDeriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Tactic.FieldSimp Mathlib.Tactic.LinearCombination Mathlib.Tactic.NormNum Mathlib.Tactic.Ring
+lake exe cache get Mathlib.Analysis.Complex.CauchyIntegral Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.ExpDeriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Tactic.FieldSimp Mathlib.Tactic.LinearCombination Mathlib.Tactic.NormNum Mathlib.Tactic.Ring Mathlib.Tactic.Positivity
 lake env python3 -I ../../topics/long-cycle-excedances/lean/fourier-circle/check.py
 ```
 
