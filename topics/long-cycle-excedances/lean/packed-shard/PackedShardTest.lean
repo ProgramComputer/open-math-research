@@ -7,7 +7,7 @@ open TruncatedRows IntegerSign WitnessLedger
 
 def oldLeftSign (rank : ℕ) : ℤ := if rank % 2 = 1 then 1 else -1
 
-def endpoint (n : ℕ) (d : Dyadic) (s : ℤ) : Bool :=
+def endpoint (n : ℕ) (d : WitnessLedger.Dyadic) (s : ℤ) : Bool :=
   packedPointCheck n width (fun i => (readCount (packedRow n) i : ℤ)) d.num (2^d.bits) s
 
 def gapOK (g : Gap) : Bool :=

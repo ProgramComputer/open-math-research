@@ -18,14 +18,14 @@ theorem packedShard_row (n : ℕ) (hn : n ≤ 256) (i : ℕ) (hi : i < width) :
     packedRow_short packedRow_seed packedSteps n hn i hi
 
 /-- A strict signed value of the original, unweighted reduced row. -/
-def signedAtShard (n : ℕ) (d : Dyadic) (s : ℤ) : Prop :=
+def signedAtShard (n : ℕ) (d : WitnessLedger.Dyadic) (s : ℤ) : Prop :=
   0 < (s : ℝ) * ((enumerator n 13).divX).eval (-(d.value : ℝ))
 
-private theorem signedAtShard_of_check (n : ℕ) (hn : n ≤ 256) (d : Dyadic) (s : ℤ)
+private theorem signedAtShard_of_check (n : ℕ) (hn : n ≤ 256) (d : WitnessLedger.Dyadic) (s : ℤ)
     (h : endpoint n d s = true) : signedAtShard n d s := by
   have h' := original_signed_of_packed_words 13 n width (by decide) (by omega)
     (packedRow n) (d.num : ℤ) (2^d.bits) s (packedShard_row n hn) h
-  simpa [signedAtShard, Dyadic.value] using h'
+  simpa [signedAtShard, WitnessLedger.Dyadic.value] using h'
 
 /-- The actual old and new reduced rows have the four prescribed strict signs
 at each of the 131 archived gaps of cutoff 13 and old sizes 251 through 255. -/
