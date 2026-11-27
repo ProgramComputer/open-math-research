@@ -1,5 +1,4 @@
 import OpenMathResearch.DiskUniqueness
-import Mathlib.Algebra.GeomSum
 import Mathlib.Algebra.BigOperators.Intervals
 
 namespace OpenMathResearch.LongCycleExcedances
@@ -18,8 +17,9 @@ theorem norm_far_pole_truncation_le (T : ℕ → ℂ) (n : ℕ) {A R : ℝ} {w :
   have hratio : R/W < 1 := (div_lt_one hW).2 hw
   have hpos : 0 ≤ A / (R^(n-1)*W^2) := by positivity
   have hgeom : (∑ j ∈ range n, (R/W)^j) ≤ 1/(1-R/W) := by
-    simpa only [Nat.Ico_zero_eq_range, pow_zero] using
-      (geom_sum_Ico_le_of_lt_one (m := 0) (n := n) (by positivity : 0 ≤ R/W) hratio)
+    exact OpenMathResearch.DiskUniqueness.geometric_tail_bound
+      (fun j : ℕ => (R/W)^j) 1 (R/W) (by positivity) hratio (by simp) zero_le_one
+      (fun j => by dsimp only; rw [pow_succ, mul_comm]) n
   calc
     _ ≤ ∑ j ∈ range n, ‖T j * (1 / w^(n-j+1))‖ := norm_sum_le _ _
     _ ≤ ∑ j ∈ range n, (A / (R^(n-1)*W^2)) * (R/W)^(n-1-j) := by
