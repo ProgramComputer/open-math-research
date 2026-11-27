@@ -14,4 +14,4 @@ This component covers the enclosed nonprincipal residues at cutoff $k\ge100$. Th
 
 Run `python3 -I -B check.py /path/to/new/project` with Lean 4.33.1 on Linux and the common-pin dependencies prepared by the driver. The optional `--retained-imports` argument reuses the authenticated import archive. The driver compiles on the common pin and checks the named declarations' axioms and bundled LeanChecker replay.
 
-[Independent statement review](review.md)
+[Independent statement review](review.md) · [Verification record](verification.md)
