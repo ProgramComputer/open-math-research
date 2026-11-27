@@ -35,6 +35,7 @@ theorem paired_single_cycle_normalization (x : ℝ) {R : ℝ} (hR : 0 < R) {p : 
   have hpC : (p:ℂ) ≠ 0 := by exact_mod_cast hp.ne'
   have hmC : ((p-1).factorial:ℂ) ≠ 0 := by exact_mod_cast (p-1).factorial_ne_zero
   rw [hfac]
+  generalize (∑' q : ℤ, 1 / ((x:ℂ)+(2*(q:ℂ)+1)*Real.pi*Complex.I)^p) = T
   field_simp [hpC,hmC] <;> ring
 
 #print axioms paired_scaled_odd_sum
