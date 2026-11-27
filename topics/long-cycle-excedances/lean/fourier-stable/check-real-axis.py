@@ -100,16 +100,21 @@ def main(project, original_log, retained_imports, continuation):
         print(f"{package['name']} {revision}", flush=True)
     build_upstream(project, upstream, retained_imports)
     build_local(project, HERE / "FourierRealAxis.lean", *REAL_AXIS)
+    failed = set()
     if original_log:
         for module in ORIGINAL_SUPPORT:
             original = HERE.parent / "common-pin" / (module + ".lean")
             build_local(project, original, module, ())
-        build_local(project, HERE / "FourierOriginalLog.lean", *ORIGINAL_LOG)
+        try:
+            build_local(project, HERE / "FourierOriginalLog.lean", *ORIGINAL_LOG)
+        except subprocess.CalledProcessError:
+            if not continuation:
+                raise
+            failed.add(ORIGINAL_LOG[0])
 
     if continuation:
         module = "TiltAnalyticEvaluation"
         build_local(project, HERE.parent / "common-pin" / (module + ".lean"), module, ())
-        failed = set()
         for module, theorems in CONTINUATION:
             source = HERE / (module + ".lean")
             imports = set(re.findall(r"^import ([\w.]+)", source.read_text(), re.M))
