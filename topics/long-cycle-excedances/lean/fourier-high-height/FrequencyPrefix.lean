@@ -26,20 +26,31 @@ theorem prefix_frequency_hasSum (k : ℕ) (s : ℝ) (g : ℕ → ℂ) (z : ℂ)
         ((((a+1:ℕ):ℂ)*z)^(i+1)/((i+1).factorial:ℂ))) (g (i+1)*z^(i+1)) := by
     have h := (hG i hi).mul_right (-z^(i+1)/((i+1).factorial:ℂ))
     have hn : ((i+1).factorial:ℂ) ≠ 0 := by exact_mod_cast Nat.factorial_ne_zero (i+1)
-    convert h using 1
-    · funext a
+    have hf : (fun a : ℕ => frequencyWeight s a *
+        ((((a+1:ℕ):ℂ)*z)^(i+1)/((i+1).factorial:ℂ))) =
+        (fun a : ℕ => ((-Real.exp (-s):ℝ):ℂ)^(a+1)*((a+1:ℕ):ℂ)^i *
+          (-z^(i+1)/((i+1).factorial:ℂ))) := by
+      funext a
       have hA : ((a+1:ℕ):ℂ) ≠ 0 := by exact_mod_cast (by omega : a+1≠0)
       rw [frequencyWeight, mul_pow, pow_succ (((a+1:ℕ):ℂ)) i]
       have hA' : (a:ℂ)+1 ≠ 0 := by simpa only [Nat.cast_add,Nat.cast_one] using hA
       field_simp [hA, hA', hn]
       ring
-    · field_simp [hn]
+    have hv : g (i+1)*z^(i+1) =
+        -(g (i+1))*((i+1).factorial:ℂ)*(-z^(i+1)/((i+1).factorial:ℂ)) := by
+      field_simp [hn]
       ring
+    rw [hf,hv]
+    exact h
   have h := hasSum_sum hterm
-  convert h using 1
-  funext a
-  unfold prefixFrequency expWithoutConstantPrefix
-  rw [mul_sum]
+  have hf : prefixFrequency k s z = fun a =>
+      ∑ i ∈ range (k-1), frequencyWeight s a *
+        ((((a+1:ℕ):ℂ)*z)^(i+1)/((i+1).factorial:ℂ)) := by
+    funext a
+    unfold prefixFrequency expWithoutConstantPrefix
+    rw [mul_sum]
+  rw [hf]
+  exact h
 
 #print axioms prefix_frequency_hasSum
 end OpenMathResearch.LongCycleExcedances

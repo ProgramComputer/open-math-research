@@ -34,15 +34,19 @@ theorem log_frequency_hasSum {s : ℝ} (hs : 0 < s) {z : ℂ} (hz : ‖z‖ < s)
     rw [norm_neg, Complex.norm_exp, Real.exp_lt_one_iff]
     simp only [Complex.neg_re,Complex.ofReal_re]
     linarith
-  convert (shifted_neg_log hZ).sub (shifted_neg_log h0) using 1
-  · funext a
+  have h := (shifted_neg_log hZ).sub (shifted_neg_log h0)
+  have hfun : logFrequency s z = fun a : ℕ =>
+      -(-Complex.exp (z-(s:ℂ)))^(a+1)/((a+1:ℕ):ℂ) -
+      -(-Complex.exp (-(s:ℂ)))^(a+1)/((a+1:ℕ):ℂ) := by
+    funext a
     have he : -Complex.exp (z-(s:ℂ)) = (-Complex.exp (-(s:ℂ)))*Complex.exp z := by
       rw [sub_eq_add_neg,Complex.exp_add]
       ring
     simp only [logFrequency,frequencyWeight,he,mul_pow,Complex.exp_nat_mul,←Complex.ofReal_neg,
       ←Complex.ofReal_exp]
     ring
-  · simp only [localLogRatio,sub_neg_eq_add]
+  rw [hfun,localLogRatio]
+  simpa only [sub_neg_eq_add] using h
 
 theorem norm_frequency_weight (s : ℝ) (a : ℕ) :
     ‖frequencyWeight s a‖ = Real.exp (-((a+1:ℕ):ℝ)*s)/((a+1:ℕ):ℝ) := by

@@ -17,9 +17,9 @@ private theorem complex_exp_tail (k : ℕ) (hk : 0 < k) (z : ℂ) :
     nth_rw 1 [←hk']
     rw [sum_range_succ']
     simp [expWithoutConstantPrefix]
-  rw [he]
-  convert h using 1
-  ring
+  rw [he, show Complex.exp z-1-expWithoutConstantPrefix k z+
+      (expWithoutConstantPrefix k z+1) = Complex.exp z by ring]
+  exact h
 
 theorem prefix_tail_frequency_majorant (k : ℕ) (hk : 0 < k) (s : ℝ) (z : ℂ) (a : ℕ) :
     ‖logFrequency s z a-prefixFrequency k s z a‖ ≤ highHeightTail k s ‖z‖ a := by
