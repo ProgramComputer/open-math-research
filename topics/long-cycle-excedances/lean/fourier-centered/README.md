@@ -18,4 +18,4 @@ At a zero of $E_{n,k}(t)$ this yields $|\Im a|>99/100$ and $E_{n+1,k}(t)\Im a>0$
 
 ## Verification
 
-The algebraic composition passed a local Lean 4.19 compatibility check with the four supplying estimates and identities as explicit hypotheses. Compilation against the original permutation objects on the research pin is pending. Run `python3 -Bu check.py /path/to/fresh/project` in this folder with Lean 4.33.1 on Linux.
+The algebraic composition passed a local Lean 4.19 compatibility check with the four supplying estimates and identities as explicit hypotheses. Compilation against the original permutation objects on the research pin is pending. Run `python3 -Bu check.py /path/to/fresh/project` in this folder with Lean 4.33.1 on Linux. [Independent sign and scope review](review.md)
