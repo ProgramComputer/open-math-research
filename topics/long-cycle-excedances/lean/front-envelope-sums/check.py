@@ -26,6 +26,7 @@ SECTOR_MODULES = (
     "RepositoryOldFrontTails",
     "ExteriorScaleOrder",
     "RepositorySparseSector",
+    "SparseSizeThreshold",
 )
 EXPECTED = {
     "OpenMathResearch.LongCycleExcedances." + name
@@ -43,6 +44,9 @@ EXPECTED = {
     )
 } | {"RepositoryQuotientAudit.original_interlacing_of_exterior_weighted_envelopes"}
 SECTOR_EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.sparse_size_log_threshold",
+    "OpenMathResearch.LongCycleExcedances.sparse_sector_from_cutoff_threshold",
+    "RepositoryQuotientAudit.original_sparse_interlacing_from_cutoff",
     "RepositoryQuotientAudit.original_front_scale_cap",
     "OpenMathResearch.LongCycleExcedances.adaptive_front_adjacent_gap",
     "OpenMathResearch.LongCycleExcedances.exterior_alpha_ratio",

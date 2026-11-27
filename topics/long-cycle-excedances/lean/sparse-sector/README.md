@@ -10,6 +10,8 @@ The reduced rows $E_{n,k}(t)/t$ and $E_{n+1,k}(t)/t$ have $n-2$ and $n-1$ simple
 
 The repository’s reviewed written argument already covers this sector and the other admissible sizes. Bowen Zuo also proved eventual interlacing at each fixed cutoff, with an existential size threshold. This package concerns formal coverage of the explicit joint inequality above. The all-size result remains 🟨 Partial · Lean 4. [Reviewed all-cutoff argument](../../all-cutoffs/README.md) · [Zuo’s fixed-cutoff theorem](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/releases/tag/v1.0.0)
 
+For a cutoff-only sufficient threshold, put $A=6000k$ and $y=\log A$. Every integer $n\ge\lceil A(y+\log y+2)\rceil$ satisfies the displayed joint hypothesis. Indeed for $t=n/A\ge v=y+\log y+2$ one has $y\ge4$ and $v/y\le9/4$. Thus $t-t/y\ge v-v/y$, while $\log t\le\log y+t/y-1$. Together these give $\log(At)+2/3<t$. The scalar implication passed a local Lean check. [Explicit threshold and original-row corollary](SparseSizeThreshold.lean)
+
 ## From coefficients to interlacing
 
 Set $H=\lfloor7\sqrt n/20\rfloor$, $J=\lfloor\sqrt n/2\rfloor$ and $c_j=[t^j]E_{n,k}(t)$. The exterior intervals have centers $u_h=c_h/c_{h+1}$ for $1\le h\le H$. Normalizing $c_j$ by $j^n$ gives bounds for $u_h$ and both adjacent coefficient ratios. Bernoulli’s inequality then gives weighted geometric tails on either side of the two central monomials. The resulting separation $20u_h<u_{h+1}$ orders all intervals. Their upper edges lie below the first middle interval. [Tail calculations](coefficient-tails.md) · [Actual coefficient estimates and center cap](RepositoryOldFrontTails.lean) · [Ordering every pair](ExteriorScaleOrder.lean)
