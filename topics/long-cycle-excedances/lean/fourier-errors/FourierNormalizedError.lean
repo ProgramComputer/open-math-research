@@ -26,10 +26,10 @@ theorem normalized_circle_error {n k x r T M B C d f decay : ℝ} (hx : 48 ≤ x
     calc
       _ ≤ (r/(2*T))*(M*d*k*C/(n*(n-k))) :=
         mul_le_mul_of_nonneg_left hv (by positivity)
-      _ = (r*M/T)*(d*k*C/(2*(n*(n-k)))) := by field_simp [hT.ne',hn0.ne',hnk.ne']; ring
+      _ = (r*M/T)*(d*k*C/(2*(n*(n-k)))) := by field_simp [hT.ne',hn0.ne',hnk.ne']
       _ ≤ (k*Real.exp (2997/100)*B)*(d*k*C/(2*(n*(n-k)))) :=
         mul_le_mul_of_nonneg_right hamp (by positivity)
-      _ = _ := by rw [hn]; field_simp [hk.ne',hx0.ne',hxd.ne',hn ▸ hnk.ne']; ring
+      _ = _ := by rw [hn]; field_simp [hk.ne',hx0.ne',hxd.ne',hn ▸ hnk.ne']
   have hw := uniform_normalized_fourier_error hx hC hbudget hB₁ hB₂
   calc
     _ = (r/(2*T)*f)*decay := by ring
