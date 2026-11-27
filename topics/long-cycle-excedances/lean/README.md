@@ -163,4 +163,4 @@ lake env lean ../../topics/long-cycle-excedances/lean/LongCyclePhaseWindows.lean
 The three new theorems report only `propext`, `Classical.choice` and
 `Quot.sound`. The [hosted 4.33.1 check](https://github.com/ProgramComputer/open-math-research/actions/runs/45926344480)
 compiled and replayed both phase modules on the common pin.
-[Audit excerpt](phase-windows-audit.txt)
+[Audit excerpt](phase-windows-audit.txt) · [Independent scope review](phase-windows-review.md)
