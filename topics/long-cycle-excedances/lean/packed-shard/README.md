@@ -22,4 +22,4 @@ uv run --no-project --with python-flint==0.9.0 python -B \
   topics/long-cycle-excedances/intermediate/witness-ledger/shard.csv
 ~~~
 
-The hosted Lean 4.33.1 build passed strict compilation and kernel replay of every module on code commit `bde40d8`. The two exported declarations use only `propext`, `Classical.choice` and `Quot.sound`. [Hosted run](https://github.com/ProgramComputer/open-math-research/actions/runs/45931609250) · [Audit excerpt](hosted-audit.txt)
+The hosted Lean 4.33.1 build passed strict compilation and kernel replay of every module on code commit `bde40d8`. The two exported declarations use only `propext`, `Classical.choice` and `Quot.sound`. [Hosted run](https://github.com/ProgramComputer/open-math-research/actions/runs/45931609250) · [Audit excerpt](hosted-audit.txt) · [Independent scope review](independent-review.md)
