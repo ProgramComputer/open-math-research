@@ -28,6 +28,17 @@ SECTOR_MODULES = (
     "RepositorySparseSector",
     "SparseSizeThreshold",
 )
+ASPECT_MODULES = (
+    "ResidualLagGrid",
+    "SharpLagBudget",
+    "OriginalResidualLag",
+    "TwoGridLag",
+    "ZeroResidualLag",
+    "RepositorySharpNearLag",
+    "ExteriorIntegerSeam",
+    "RepositoryAllAspectExterior",
+    "AllAspectExterior",
+)
 EXPECTED = {
     "OpenMathResearch.LongCycleExcedances." + name
     for name in (
@@ -43,6 +54,34 @@ EXPECTED = {
         "front_cap_lt_half",
     )
 } | {"RepositoryQuotientAudit.original_interlacing_of_exterior_weighted_envelopes"}
+ASPECT_EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.binomial_residual_identity",
+    "OpenMathResearch.LongCycleExcedances.color_lag_residual_grid",
+    "OpenMathResearch.LongCycleExcedances.color_load_grid_mass_sharp",
+    "OpenMathResearch.LongCycleExcedances.exterior_cap_before_integer_seam",
+    "OpenMathResearch.LongCycleExcedances.exterior_integer_seam_geometry",
+    "OpenMathResearch.LongCycleExcedances.exterior_integer_seam_log_pos",
+    "OpenMathResearch.LongCycleExcedances.front_lag_zero_of_residual_count",
+    "OpenMathResearch.LongCycleExcedances.modal_bound_two_grids",
+    "OpenMathResearch.LongCycleExcedances.real_count_below_cutoff",
+    "OpenMathResearch.LongCycleExcedances.sharp_front_lag_of_two_color_grids",
+    "OpenMathResearch.LongCycleExcedances.two_color_load_grids_mass",
+    "OpenMathResearch.LongCycleExcedances.two_grid_relative_lag",
+    "RepositoryQuotientAudit.original_all_aspect_exterior",
+    "RepositoryQuotientAudit.original_exterior_coefficient_tests_all",
+    "RepositoryQuotientAudit.original_exterior_root_witnesses_all",
+    "RepositoryQuotientAudit.original_exterior_roots_before_integer_seam",
+    "RepositoryQuotientAudit.original_far_front_weighted_lag_all",
+    "RepositoryQuotientAudit.original_front_adjacent_gap_all",
+    "RepositoryQuotientAudit.original_front_alpha_ratio_all",
+    "RepositoryQuotientAudit.original_front_lag_relative_of_alpha",
+    "RepositoryQuotientAudit.original_front_lag_zero_at_high_cutoff",
+    "RepositoryQuotientAudit.original_front_scale_cap_all",
+    "RepositoryQuotientAudit.original_lag_residual_grid",
+    "RepositoryQuotientAudit.original_near_lag_all_aspects",
+    "RepositoryQuotientAudit.original_old_front_weighted_tails_all",
+    "RepositoryQuotientAudit.original_residual_count_bound",
+}
 SECTOR_EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.sparse_size_log_threshold",
     "OpenMathResearch.LongCycleExcedances.sparse_sector_from_cutoff_threshold",
@@ -83,10 +122,18 @@ def main(project, imports):
     common.main(project, imports)
 
     observed = {}
-    for module in (*MODULES, *SECTOR_MODULES):
+    failed = set()
+    for module in (*MODULES, *SECTOR_MODULES, *ASPECT_MODULES):
         directory = HERE if module in MODULES else HERE.parent / "sparse-sector"
+        if module in ASPECT_MODULES:
+            directory = HERE.parent / "all-aspect-exterior"
         source = project / (module + ".lean")
         shutil.copyfile(directory / source.name, source)
+        dependencies = re.findall(r"^import ([\w.]+)", source.read_text(), flags=re.M)
+        if failed.intersection(dependencies):
+            failed.add(module)
+            print(f"Skip {module} after an import failed", flush=True)
+            continue
         output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
         print(f"Compile {module} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
         result = subprocess.run(
@@ -97,17 +144,21 @@ def main(project, imports):
             stderr=subprocess.STDOUT,
         )
         print(result.stdout, end="", flush=True)
-        result.check_returncode()
+        if result.returncode:
+            failed.add(module)
+            continue
         for name, axioms in AXIOM_REPORT.findall(result.stdout):
             observed[name] = {axiom.strip() for axiom in axioms.split(",") if axiom.strip()}
 
-    for name in sorted(EXPECTED | SECTOR_EXPECTED):
+    if failed:
+        raise ArithmeticError(f"Modules not compiled: {sorted(failed)}")
+    for name in sorted(EXPECTED | SECTOR_EXPECTED | ASPECT_EXPECTED):
         if name not in observed or observed[name] - common.ALLOWED:
             raise ArithmeticError(f"Missing declaration or unexpected axioms for {name}: {observed.get(name)}")
-    for module in (*MODULES, *SECTOR_MODULES):
+    for module in (*MODULES, *SECTOR_MODULES, *ASPECT_MODULES):
         common.run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
-    print(f"PASS: {len(EXPECTED | SECTOR_EXPECTED)} exterior and sector declarations audited", flush=True)
+    print(f"PASS: {len(EXPECTED | SECTOR_EXPECTED | ASPECT_EXPECTED)} exterior and sector declarations audited", flush=True)
 
 
 if __name__ == "__main__":
