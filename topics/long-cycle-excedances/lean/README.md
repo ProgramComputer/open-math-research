@@ -96,8 +96,8 @@ polynomial supplied by such a factorization equals $P_{n,k}$.
 The checked declarations `canonical_signed_pos_on_window_of_horner` and
 `canonical_interlace_of_prefix_and_mixed_witnesses` apply the sign and interlacing
 criteria to these permutation rows. The coefficient bounds follow from the
-decreasing-run theorem. The Horner margins, root-list and degree data still need
-to be supplied. The same-environment connection to the pinned executable coefficients remains open.
+decreasing-run theorem. The common-pin check below supplies the degree and endpoint
+shape. The numerical margins and full root-list witness data remain inputs.
 
 Zuo's frozen Lean 4.33.1 sources already provide the all-cutoff
 [cycle quotient identity](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/GeneralCycleQuotient.lean#L98)
@@ -105,7 +105,7 @@ and the [insertion recurrence](https://github.com/AlexZander-666/long-cycle-exce
 The research check uses Lean 4.19.0 (compiler commit `6caaee842e94`) with mathlib
 `c44e0c8ee63ca166450922a373c7409c5d26b00b`. The uniqueness theorem applies to a
 quotient of the same enumerator once the external factorization is available on
-a common pin.
+a common pin, as in the bridge below.
 
 After preparing the mixed-witness and prefix-tail objects as above, run from
 `shared/lean`
@@ -122,5 +122,7 @@ The four declarations report only `propext`, `Classical.choice` and `Quot.sound`
 The [executable coefficient adapter](pinned-quotient/README.md) checks the
 identification with the original permutation enumerator in Zuo's pinned Lean
 4.33.1 environment. Its runtime check matches both cutoff-seven coefficient
-vectors. The research sign theorem and the pinned coefficient identity still
-use separate Lean toolchains.
+vectors. The [rational endpoint bridge](common-pin/README.md) compiles the
+research sign theorem and the pinned coefficient identity on the same Lean
+4.33.1 setup. It verifies the shape of the original reduced row and certifies
+each signed value from the corresponding rational margin.
