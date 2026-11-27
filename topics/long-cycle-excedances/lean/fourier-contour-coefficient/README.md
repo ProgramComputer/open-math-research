@@ -20,4 +20,4 @@ The anchored logistic resolvent has a Taylor series obtained by an absolutely su
 
 Run `python3 -I -B check.py /path/to/new/project` on Linux with Lean 4.33.1. The optional `--retained-imports` argument reuses authenticated common-pin import objects. The local Lean 4.19.0 build covers the generic analytic, cutoff-logistic, and algebraic components. The hosted driver checks the literal permutation adapter against the common production pin, including the frozen release supplying the original Eulerian and cycle-profile identities.
 
-[Independent mathematical comparison](review.md)
+[Independent mathematical comparison](review.md) · [Hosted verification record](verification.md)
