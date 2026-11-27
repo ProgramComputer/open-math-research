@@ -14,6 +14,8 @@ Every consecutive pair with cubic or quartic old row strictly interlaces. Togeth
 
 An explicit range allows the old degree to grow with the block threshold. The written bound and the rational constructor both give an explicit cutoff for each old degree. [Growing-degree theorem and checks](effective-degree/README.md)
 
+The [structural obstructions](structural-obstructions/README.md) delimit two all-size approaches using exact renewal determinants and geometric occupancy prefixes.
+
 | Threshold | Proof and verification |
 |---|---|
 | Two | [Proof](threshold-two.md) · [Manuscript](paper.pdf) · [Source](paper.tex) |

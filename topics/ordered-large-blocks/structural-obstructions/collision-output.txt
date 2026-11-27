@@ -1,0 +1,5 @@
+Two counters agree at every threshold 2 through 128.
+Both end discriminants are strictly positive on that range.
+First negative intermediate discriminant at j = 16.
+Primitive polynomial at j = 16: [547901605735920, 231159571069429, 26262204039750]; discriminant -4121667757171163267992893959.
+All four exact initial bounds used for the infinite tail passed.
