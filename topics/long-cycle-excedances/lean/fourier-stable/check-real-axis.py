@@ -12,11 +12,33 @@ import shutil
 HERE = Path(__file__).resolve().parent
 COMMON = runpy.run_path(str(HERE.parent / "common-pin" / "check.py"))
 UPSTREAM = "LongCycleBounds.PartialFractions"
-MODULE = "FourierRealAxis"
-THEOREM = "OpenMathResearch.LongCycleExcedances.fourier_squared_poles_real_axis"
+NAMESPACE = "OpenMathResearch.LongCycleExcedances."
+REAL_AXIS = ("FourierRealAxis", ("fourier_squared_poles_real_axis",))
+ORIGINAL_LOG = ("FourierOriginalLog", ("original_cutoff_log_linear", "original_cutoff_log_poles"))
+ORIGINAL_ROOTS = ("LongCycleBounds.BandMoments", "LongCycleBounds.CycleProfileLogistic")
+ORIGINAL_SUPPORT = ("RepositoryCoherentPoles", "MonomialTiltBounds")
 
 
-def main(project):
+def build_local(project, original, module, theorems):
+    run = COMMON["run"]
+    source = project / (module + ".lean")
+    shutil.copyfile(original, source)
+    output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
+    print(f"Compile {module} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
+    strict = ("-DwarningAsError=true",) if theorems else ()
+    audit = run(project, "lake", "env", "lean", *strict, "-o", str(output), str(source), capture=True)
+    print(audit, end="", flush=True)
+    for theorem in theorems:
+        name = re.escape(NAMESPACE + theorem)
+        match = re.findall(rf"^'{name}' depends on axioms:\s*\[([^\]]*)\]$", audit, re.M)
+        if len(match) != 1 or {axiom.strip() for axiom in match[0].split(",")} - COMMON["ALLOWED"]:
+            raise ValueError(f"Missing declaration or unexpected transitive axiom for {theorem}")
+    if theorems:
+        run(project, "lake", "env", "leanchecker", "--verbose", module)
+        print(f"kernel_replay_exit=0 {module}", flush=True)
+
+
+def main(project, original_log):
     project.mkdir(parents=True)
     COMMON["prepare"](project)
     run = COMMON["run"]
@@ -24,8 +46,9 @@ def main(project):
     if COMMON["COMPILER"] not in compiler:
         raise ValueError(f"Unexpected compiler: {compiler}")
     print(compiler, flush=True)
-    supplier = project / "LongCycleBounds" / "PartialFractions.lean"
-    run(project, "lake", "exe", "cache", "get", str(supplier.relative_to(project)))
+    upstream = (UPSTREAM, *ORIGINAL_ROOTS) if original_log else (UPSTREAM,)
+    suppliers = [Path(*module.split(".")).with_suffix(".lean") for module in upstream]
+    run(project, "lake", "exe", "cache", "get", *map(str, suppliers))
     lock = json.loads((project / "lake-manifest.json").read_text())
     for package in lock["packages"]:
         checkout = ".lake/packages/" + package["name"]
@@ -33,22 +56,21 @@ def main(project):
         if revision != package["rev"]:
             raise ValueError(f"Wrong revision for {package['name']}: {revision}")
         print(f"{package['name']} {revision}", flush=True)
-    print(f"Compile {UPSTREAM} input-sha256={sha256(supplier.read_bytes()).hexdigest()}", flush=True)
-    run(project, "lake", "--wfail", "build", "+" + UPSTREAM)
-    source = project / (MODULE + ".lean")
-    shutil.copyfile(HERE / source.name, source)
-    output = project / ".lake" / "build" / "lib" / "lean" / (MODULE + ".olean")
-    print(f"Compile {MODULE} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
-    audit = run(project, "lake", "env", "lean", "-DwarningAsError=true", "-o", str(output), str(source), capture=True)
-    print(audit, end="", flush=True)
-    match = re.findall(rf"^'{re.escape(THEOREM)}' depends on axioms:\s*\[([^\]]*)\]$", audit, re.M)
-    if len(match) != 1 or {axiom.strip() for axiom in match[0].split(",")} - COMMON["ALLOWED"]:
-        raise ValueError("Missing theorem or unexpected transitive axiom")
-    run(project, "lake", "env", "leanchecker", "--verbose", MODULE)
-    print(f"kernel_replay_exit=0 {MODULE}", flush=True)
+    for module, supplier in zip(upstream, suppliers, strict=True):
+        digest = sha256((project / supplier).read_bytes()).hexdigest()
+        print(f"Compile {module} input-sha256={digest}", flush=True)
+    run(project, "lake", "--wfail", "build", *("+" + module for module in upstream))
+    build_local(project, HERE / "FourierRealAxis.lean", *REAL_AXIS)
+    if original_log:
+        for module in ORIGINAL_SUPPORT:
+            original = HERE.parent / "common-pin" / (module + ".lean")
+            build_local(project, original, module, ())
+        build_local(project, HERE / "FourierOriginalLog.lean", *ORIGINAL_LOG)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("project", type=Path, help="a new directory for the check")
-    main(parser.parse_args().project.resolve())
+    parser.add_argument("--original-log", action="store_true", help="also check the original cutoff logarithm")
+    args = parser.parse_args()
+    main(args.project.resolve(), args.original_log)

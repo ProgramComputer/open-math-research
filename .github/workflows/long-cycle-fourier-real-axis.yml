@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/long-cycle-fourier-real-axis.yml'
       - 'topics/long-cycle-excedances/lean/fourier-stable/**'
+      - 'topics/long-cycle-excedances/lean/common-pin/RepositoryCoherentPoles.lean'
+      - 'topics/long-cycle-excedances/lean/common-pin/MonomialTiltBounds.lean'
   workflow_dispatch:
 
 permissions:
@@ -33,7 +35,7 @@ jobs:
         run: |
           set -euo pipefail
           ulimit -Sn 65536
-          python3 -Bu topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py "$RUNNER_TEMP/fourier-real-axis" 2>&1 | tee "$RUNNER_TEMP/fourier-real-axis.log"
+          python3 -Bu topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py "$RUNNER_TEMP/fourier-real-axis" --original-log 2>&1 | tee "$RUNNER_TEMP/fourier-real-axis.log"
       - name: Preserve verification report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
