@@ -1,0 +1,120 @@
+Independent supplying-release replay, cutoff 4
+job: https://github.com/ProgramComputer/open-math-research/actions/runs/45907318583/job/140207053744
+start_utc: 2026-11-26T22:50:44Z
+finish_utc: 2026-11-27T01:41:06Z
+job_conclusion: success
+artifact: external-proof-4 (id 15164798322)
+artifact_zip_sha256:b4cc5a2cb6227de3c12375ab94382c6a911fda112755d130f40675443b62e74b
+complete_lean_log_sha256: 220ffa86d6bc0d0dfd9602f1afcdd8c2cfffe876fc6e66e365f2a6075513b618
+reproduction: python3 -Bu rebuild.py 4 /tmp/zuo-cutoff-4
+
+v1.0.0 f8fef864286a1bbc59f96484074f28d77b1a027f
+lake-manifest.json 03480b668de5d019c151160440390c5fc4ca380bb5d815eba8791def0a8f206d
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+plausible b7eb3304aeae834b12dda98993a37f6a41f6f0bb
+LeanSearchClient 5f4d51b81cbd3f6b32b156bfad9056621a040404
+importGraph 16f02aa7642864af59f1ff0e384a015994db9118
+proofwidgets 4be2e3d5087eeb272cf5a8853b8f9dd025ef5957
+aesop 3448c0bcc5ce01b2d1546e483ec3620e32df3d0e
+Qq 92c15be17b7caf78c2ad767ec40f89052d908d81
+batteries 4488d40d070b9700d4d5a6aa342f0d40c31b2a2d
+Cli 6130a47896ce867c6a4a55373441e59e565bad0f
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Lake version 5.0.0-src+819816b (Lean version 4.33.1)
+
+Build completed successfully (9128 jobs).
+LongCycleBounds.fixed_four_all_sizes {n : ℕ} (hn : 5 ≤ n) :
+  LongCycleFinite.StrictNegativeInterlacing (LongCycleBounds.Band.generalCycleQuotient (n - 1) 4)
+      (LongCycleBounds.Band.generalCycleQuotient n 4) (n - 3) ∧
+    LongCycles.WeakRealInterlacing (LongCycles.enumerator (n - 1) 4) (LongCycles.enumerator n 4)
+'LongCycleBounds.fixed_four_all_sizes' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleFinite.K4.finite_original_5_511 {n : ℕ} (lo : 5 ≤ n) (hi : n ≤ 511) : LongCycleFinite.K4.OriginalPair n
+'LongCycleFinite.K4.finite_original_5_511' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleFinite.K4.Data.seeds {n : ℕ} (lo : 5 ≤ n) (hi : n ≤ 15) : LongCycleFinite.K4.OriginalPair n
+'LongCycleFinite.K4.Data.seeds' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleFinite.K4.gammaRow_original {n : ℕ} (h : 4 ≤ n) :
+  LongCycles.enumerator n 4 = Polynomial.X * LongCycleFinite.expandGamma (n - 2) (LongCycleFinite.K4.gammaRow n)
+'LongCycleFinite.K4.gammaRow_original' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleFinite.K4.gammaRow_next_of_eq {n : ℕ} (hn : 7 ≤ n) {a b c : List ℤ} (old : LongCycleFinite.K4.gammaRow n = a)
+  (lag : LongCycleFinite.K4.gammaRow (n - 3) = b) (step : LongCycleFinite.K4.gammaNext n a b = c) :
+  LongCycleFinite.K4.gammaRow (n + 1) = c
+'LongCycleFinite.K4.gammaRow_next_of_eq' depends on axioms: [propext, Quot.sound]
+LongCycleFinite.K4.original_of_certificates {n : ℕ} (hn : 5 ≤ n) {old new : LongCycleFinite.K4.RowCertificate}
+  (hp : LongCycleFinite.K4.rowAtOK (n - 1) old = true) (hq : LongCycleFinite.K4.rowAtOK n new = true)
+  (ho : LongCycleFinite.K4.orderAtOK n old new = true) : LongCycleFinite.K4.OriginalPair n
+'LongCycleFinite.K4.original_of_certificates' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleFinite.K4.rowAtOK_of_natural {n : ℕ} {c : LongCycleFinite.K4.RowCertificate} {cs : List ℤ}
+  (hCoeffs : LongCycleFinite.K4.gammaRow n = cs) (hLen : cs.length = (n - 2) / 2 + 1 ∧ c.brackets.length = (n - 2) / 2)
+  (hOrder : LongCycleFinite.orderOK c.outer c.brackets = true)
+  (h : LongCycleFinite.K3.naturalCertificateOK cs c = true) : LongCycleFinite.K4.rowAtOK n c = true
+'LongCycleFinite.K4.rowAtOK_of_natural' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleFinite.K4.Data.range0508_0511 {n : ℕ} (lo : 508 ≤ n) (hi : n ≤ 511) : LongCycleFinite.K4.OriginalPair n
+'LongCycleFinite.K4.Data.range0508_0511' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleFinite.original_pair_of_gamma_checks {n k : ℕ} (hk : 2 ≤ k) (hn : 4 ≤ n) {a b : List ℤ}
+  {old new : LongCycleFinite.K3.RowCertificate}
+  (prev : LongCycles.enumerator (n - 1) k = Polynomial.X * LongCycleFinite.expandGamma (n - 1 - 2) a)
+  (next : LongCycles.enumerator n k = Polynomial.X * LongCycleFinite.expandGamma (n - 2) b)
+  (hp : LongCycleFinite.K3.rowOK ((n - 1 - 2) / 2) a old.outer old.brackets = true)
+  (hq : LongCycleFinite.K3.rowOK ((n - 2) / 2) b new.outer new.brackets = true)
+  (ho : LongCycleFinite.K3.orderAtOK n old new = true) :
+  LongCycleFinite.StrictNegativeInterlacing (LongCycleBounds.Band.generalCycleQuotient (n - 1) k)
+      (LongCycleBounds.Band.generalCycleQuotient n k) (n - 3) ∧
+    LongCycles.WeakRealInterlacing (LongCycles.enumerator (n - 1) k) (LongCycles.enumerator n k)
+'LongCycleFinite.original_pair_of_gamma_checks' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleBounds.FixedFour.original {n : ℕ} (hn : 512 ≤ n) :
+  LongCycleFinite.StrictNegativeInterlacing (LongCycleBounds.Band.generalCycleQuotient (n - 1) 4)
+      (LongCycleBounds.Band.generalCycleQuotient n 4) (n - 3) ∧
+    LongCycles.WeakRealInterlacing (LongCycles.enumerator (n - 1) 4) (LongCycles.enumerator n 4)
+'LongCycleBounds.FixedFour.original' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleBounds.FixedFour.independent_weights {n : ℕ} (hn : 512 ≤ n) (w : ℕ → ℝ) (one : w 1 = 0)
+  (unit : ∀ (a : ℕ), w a ∈ Set.Icc 0 1) (tail : ∀ a ≥ 4, w a = 1) :
+  LongCycleFinite.StrictNegativeInterlacing (LongCycleBounds.CycleProfile.weightedQuotient (n - 1) w)
+      (LongCycleBounds.CycleProfile.weightedQuotient n w) (n - 3) ∧
+    LongCycles.WeakRealInterlacing (LongCycleBounds.CycleProfile.row (n - 1) w) (LongCycleBounds.CycleProfile.row n w)
+'LongCycleBounds.FixedFour.independent_weights' depends on axioms: [propext, Classical.choice, Quot.sound]
+LongCycleBounds.FixedFour.normalized_sign {p : ℕ} (hp : 511 ≤ p) (w : ℕ → ℝ) (one : w 1 = 0)
+  (unit : ∀ (a : ℕ), w a ∈ Set.Icc 0 1) (tail : ∀ a ≥ 4, w a = 1) {x : ℝ} (hx : 0 ≤ x)
+  (zero : LongCycleBounds.CycleProfile.normalizedRow w p x = 0) :
+  0 < LongCycleBounds.CycleProfile.normalizedRow w (p + 1) x * -deriv (LongCycleBounds.CycleProfile.normalizedRow w p) x
+'LongCycleBounds.FixedFour.normalized_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+def LongCycles.Allowed : {n : ℕ} → ℕ → Equiv.Perm (Fin n) → Prop :=
+fun {n} k σ => ∀ (x : Fin n) (j : ℕ), 0 < j → j < k → (σ ^ j) x ≠ x
+def LongCycles.excedances : {n : ℕ} → Equiv.Perm (Fin n) → ℕ :=
+fun {n} σ => {x | x < σ x}.card
+def LongCycles.enumerator : ℕ → ℕ → Polynomial ℝ :=
+fun n k => ∑ σ, if LongCycles.Allowed k σ then Polynomial.X ^ LongCycles.excedances σ else 0
+def LongCycleFinite.StrictNegativeInterlacing : Polynomial ℝ → Polynomial ℝ → ℕ → Prop :=
+fun p q d =>
+  ∃ r s,
+    p.leadingCoeff ≠ 0 ∧
+      q.leadingCoeff ≠ 0 ∧
+        p = Polynomial.C p.leadingCoeff * ∏ i, (Polynomial.X - Polynomial.C (r i)) ∧
+          q = Polynomial.C q.leadingCoeff * ∏ i, (Polynomial.X - Polynomial.C (s i)) ∧
+            StrictMono r ∧
+              StrictMono s ∧
+                (∀ (i : Fin d), r i < 0) ∧
+                  (∀ (i : Fin (d + 1)), s i < 0) ∧ ∀ (i : Fin d), s i.castSucc < r i ∧ r i < s i.succ
+def LongCycles.WeakRealInterlacing : Polynomial ℝ → Polynomial ℝ → Prop :=
+fun p q =>
+  ∃ d r s a b,
+    a ≠ 0 ∧
+      b ≠ 0 ∧
+        p = Polynomial.C a * LongCycles.linearFactors r ∧
+          q = Polynomial.C b * LongCycles.linearFactors s ∧
+            Monotone r ∧ Monotone s ∧ ∀ (i : Fin d), s i.castSucc ≤ r i ∧ r i ≤ s i.succ
+@LongCycleBounds.fixed_four_all_sizes : ∀ {n : ℕ},
+  5 ≤ n →
+    LongCycleFinite.StrictNegativeInterlacing (LongCycleBounds.Band.generalCycleQuotient (n - 1) 4)
+        (LongCycleBounds.Band.generalCycleQuotient n 4) (n - 3) ∧
+      LongCycles.WeakRealInterlacing (LongCycles.enumerator (n - 1) 4) (LongCycles.enumerator n 4)
+@LongCycleBounds.Band.actual_general_cycle_row : ∀ {n k : ℕ},
+  2 ≤ k → 0 < n → LongCycles.enumerator n k = Polynomial.X * LongCycleBounds.Band.generalCycleQuotient n k
+@ExternalExcedanceAudit : ∀ {m : ℕ},
+  4 ≤ m →
+    (∃ p q, enumerator m 4 = X * p ∧ enumerator (m + 1) 4 = X * q ∧ StrictNegativeInterlacing p q (m - 2)) ∧
+      WeakRealInterlacing (enumerator m 4) (enumerator (m + 1) 4)
+'ExternalExcedanceAudit' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+PASS: 423 project modules replayed; 13 declarations audited.
+All 423 imported module file hashes in the fresh project inventory matched both the separate release archive and the tagged Git tree. The supplying verifier runs each module replay with check=True and reached its final PASS line. The v1.0.0 verifier emits no per-module numeric exit-code table.
+Distinct theorem axiom reports in the audit output: 13.
