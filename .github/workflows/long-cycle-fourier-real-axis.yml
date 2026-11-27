@@ -7,6 +7,7 @@ on:
       - 'topics/long-cycle-excedances/lean/fourier-stable/**'
       - 'topics/long-cycle-excedances/lean/common-pin/RepositoryCoherentPoles.lean'
       - 'topics/long-cycle-excedances/lean/common-pin/MonomialTiltBounds.lean'
+      - 'topics/long-cycle-excedances/lean/common-pin/TiltAnalyticEvaluation.lean'
   workflow_dispatch:
 
 permissions:
@@ -36,11 +37,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh run download 45917288503 --repo "$GITHUB_REPOSITORY" --name quotient-import-objects --dir "$RUNNER_TEMP" || true
-      - name: Compile and replay the real-axis and logarithm bridges
+      - name: Compile and replay the original angular equation
         run: |
           set -euo pipefail
           ulimit -Sn 65536
-          args=("$RUNNER_TEMP/fourier-real-axis" --original-log)
+          args=("$RUNNER_TEMP/fourier-real-axis" --continuation)
           if [[ -f "$RUNNER_TEMP/quotient-import-objects.tar.zst" ]]; then
             args+=(--retained-imports "$RUNNER_TEMP/quotient-import-objects.tar.zst")
           fi
