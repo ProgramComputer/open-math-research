@@ -72,10 +72,9 @@ theorem discrete_low_mode {L k a : ℕ} {R x : ℝ} (ha : 1 ≤ a) (hk : 1 ≤ k
     have hv := (hb.trans (exp_le_exp.mpr h3)).trans (Real.exp_one_lt_d9.le.trans (by norm_num : (2.7182818286:ℝ) ≤ 3))
     exact (div_le_div_of_nonneg_right hv hapos.le).trans (le_add_of_nonneg_right (by positivity))
   · have hpow : (2:ℝ)^L ≤ exp ((7/10)*(L:ℝ)) := by
-      convert pow_le_pow_left₀ (by norm_num : (0:ℝ)≤2) two_le_exp_seven_tenths L using 1
-      rw [← Real.exp_nat_mul]
-      congr 1
-      ring
+      calc
+        _ ≤ (exp (7/10))^L := pow_le_pow_left₀ (by norm_num) two_le_exp_seven_tenths L
+        _ = _ := by rw [←Real.exp_nat_mul, mul_comm (L:ℝ)]
     have hbound := mul_le_mul_of_nonneg_left
       ((expPrefix_half_bound L harg).trans (mul_le_mul_of_nonneg_right hpow (exp_pos _).le))
       (exp_pos (-((a:ℝ)*x))).le

@@ -184,7 +184,7 @@ theorem uniform_contour_factor {k ell : ℕ} (hell : ell < k) :
     linarith
   have hsum : (ell:ℝ)*a ≤ 1/50 := by
     have hl : (ell:ℝ) ≤ k := by exact_mod_cast hell.le
-    have hk' : (k:ℝ)*a = 1/50 := by dsimp [a]; field_simp; ring
+    have hk' : (k:ℝ)*a = 1/50 := by dsimp [a]; field_simp <;> ring
     exact (mul_le_mul_of_nonneg_right hl ha).trans_eq hk'
   have hlocal : (1+a)^ell*(1-(ell:ℝ)*a) ≤ 1 := by
     have hB := bernoulli_nat (-a) (by linarith) ell
