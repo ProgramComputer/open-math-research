@@ -22,7 +22,7 @@ $$
 \sum_{a\ge1}\frac{e^{-ax}}a\sum_{j=0}^{L}\frac{(aR)^j}{j!}.
 $$
 
-Write $\delta=R-x$. The circle geometry gives $\delta\le5/x+x/(40k)$ and $R\le53x/50$. If $ax\le2L$, then $a\le k$ and $a\delta\le5/8+1/20<1$. The contribution of that frequency is at most $3/a$. If $ax>2L$, the truncated exponential at $aR$ is at most $2^L e^{aR/2}$ by comparison term by term. As $2\le e^{7/10}$, one has $-ax+(7/10)L+aR/2\le-a$. Each such frequency costs at most $2^{-a}$. Summing gives $3H_k+1\le4+3\log k$, with $H_k=\sum_{a=1}^k1/a$. The linear term costs at most one. This gives $5+8\log k$ in the large-$x$ case and proves the uniform bound. [Radius geometry](RadiusGeometry.lean) · [Frequency estimates](UniformDiscreteTilt.lean) · [Moment sum](LowMomentMass.lean) · [Harmonic summation](UniformMassSum.lean)
+Write $\delta=R-x$. The circle geometry gives $\delta\le5/x+x/(40k)$ and $R\le53x/50$. If $ax\le2L$, then $a\le k$ and $a\delta\le5/8+1/20<1$. The contribution of that frequency is at most $3/a$. If $ax>2L$, the truncated exponential at $aR$ is at most $2^L e^{aR/2}$ by comparison term by term. As $2\le e^{7/10}$, one has $-ax+(7/10)L+aR/2\le-a$. Each such frequency costs at most $2^{-a}$. Summing gives $3H_k+1\le4+3\log k$, with $H_k=\sum_{a=1}^k1/a$. The linear term costs at most one. This gives $5+8\log k$ when $x\ge10$ and proves the uniform bound. [Radius geometry](RadiusGeometry.lean) · [Frequency estimates](UniformDiscreteTilt.lean) · [Moment sum](LowMomentMass.lean) · [Harmonic summation](UniformMassSum.lean)
 
 ## Formal verification
 
