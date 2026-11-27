@@ -30,6 +30,8 @@ EXPECTED = {
     "RepositoryQuotientAudit.strict_of_complete_moduli",
     "RepositoryQuotientAudit.original_weak_of_complete_moduli",
     "RepositoryQuotientAudit.original_weak_of_mixed_windows",
+    "RepositoryQuotientAudit.original_divX_reciprocity",
+    "RepositoryQuotientAudit.original_weak_of_half_axis_windows",
 }
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 
@@ -74,6 +76,9 @@ def compile_topic(project):
         (HERE / "RepositoryActualRationalPoint.lean", "RepositoryActualRationalPoint"),
         (HERE / "StrictRootListTranslation.lean", "StrictRootListTranslation"),
         (HERE / "RepositoryRootAssembly.lean", "RepositoryRootAssembly"),
+        (HERE / "ReciprocalWindowSigns.lean", "ReciprocalWindowSigns"),
+        (HERE / "ReciprocalHalfWindows.lean", "ReciprocalHalfWindows"),
+        (HERE / "RepositoryHalfAxisAssembly.lean", "RepositoryHalfAxisAssembly"),
     ]
     observed = {}
     failed = set()
@@ -121,7 +126,8 @@ def compile_topic(project):
         if name not in observed or observed[name] - ALLOWED:
             raise ArithmeticError(f"Missing declaration or unexpected axioms for {name}: {observed.get(name)}")
     for module in ("RationalPointSound", "RepositoryQuotientShape", "RepositoryActualRationalPoint",
-                   "StrictRootListTranslation", "RepositoryRootAssembly"):
+                   "StrictRootListTranslation", "RepositoryRootAssembly", "ReciprocalWindowSigns",
+                   "ReciprocalHalfWindows", "RepositoryHalfAxisAssembly"):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} original-row declarations audited", flush=True)

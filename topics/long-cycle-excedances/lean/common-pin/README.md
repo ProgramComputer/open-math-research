@@ -39,6 +39,14 @@ to both lists and gives weak interlacing of the literal enumerators. The [hosted
 The three new declarations use only `propext`, `Classical.choice` and
 `Quot.sound`. [Assembly audit excerpt](assembly-audit.txt) · [Independent assembly review](assembly-review.md)
 
+[RepositoryHalfAxisAssembly.lean](RepositoryHalfAxisAssembly.lean) proposes
+a reduced input for the same original result. It uses the frozen quotient
+reciprocity theorem and extends the ordered windows below modulus one to
+all negative root moduli. Reciprocal reflection swaps the endpoints and
+transports the next-row signs with the degree parity. When the old degree
+is odd, reciprocity gives its root at minus one, and only the next-row
+sign at that point remains an input. The common-pin check is pending.
+
 [root-audit]: https://github.com/ProgramComputer/open-math-research/actions/runs/45922634178
 [assembly]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleFinite/Assembly.lean#L8
 [hosted]: https://github.com/ProgramComputer/open-math-research/actions/runs/45921839840
