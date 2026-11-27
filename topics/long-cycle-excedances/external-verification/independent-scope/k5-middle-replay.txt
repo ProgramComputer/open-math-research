@@ -1,0 +1,9 @@
+alpha = 2599961/2500000
+r0 = 21/1250000
+C = 657/10648
+v0 = 1387/78125
+expUpper16v0 = 1660637/1250000
+head = 423943/2500000
+tail = 1669/10000000
+J = 7395613/10000000
+PASS exact middle-region endpoint constants and reserves.
