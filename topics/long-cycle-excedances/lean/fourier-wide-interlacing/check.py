@@ -43,6 +43,11 @@ def main():
     if args.retained_imports:
         command.extend(["--retained-imports", str(args.retained_imports.resolve(strict=True))])
     subprocess.run(command, check=True)
+    supplier = LEAN / "fourier-centered" / f"{SUPPLIED}.lean"
+    staged = project / supplier.name
+    compiled = project / ".lake/build/lib/lean" / f"{SUPPLIED}.olean"
+    if not compiled.is_file() or staged.read_bytes() != supplier.read_bytes():
+        raise ValueError(f"Prepared project lacks the exact centered-row supplier {SUPPLIED}")
     BASE["compile_closure"](project, ordered, frozen, new=NEW, final=FINAL,
                             rename_vertical=False, reuse=True, strict=True)
 
