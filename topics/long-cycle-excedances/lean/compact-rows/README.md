@@ -2,7 +2,7 @@
 
 For a cutoff $k\ge2$, let $c_{n,j}$ count the permitted permutations of $n$ labels with $j+1$ strict excedances. The recurrence in this directory rounds each updated coefficient down to its first $b$ significant binary digits. Write $L_{n,j}$ for the resulting integer. The Eulerian coefficients multiplying the lagged row remain exact.
 
-The formal target is the coefficient enclosure
+Lean checks the coefficient enclosure
 
 $$
 0\le L_{n,j}\le c_{n,j},\qquad (1-n2^{1-b})c_{n,j}\le L_{n,j}.
@@ -21,7 +21,7 @@ The seed at $n=k$ is the ordinary Eulerian row on $k-1$ labels. The proof checks
 
 ## Verification
 
-The three supporting modules passed a local Lean 4.19.0 development check. The literal permutation theorem is pending its frozen release build. The numerical endpoints require additional sign and ledger checks. [Existing exact integer sign verification](../../intermediate/integer-signs/README.md)
+All four modules passed the pinned Lean 4.33.1 build and module replay. The 20 printed axiom reports contained only standard axioms. The first port attempt stopped on a local identifier newly reserved by Lean. Renaming it allowed the same mathematical argument to compile. The two complete C++ sign runs independently reproduced all 2,164,796 strict signs. A kernel check of the complete finite archive and of the analytic joins remains open. [Hosted source and results](hosted-audit.txt) · [Independent agent review](independent-review.md) · [Existing exact integer sign verification](../../intermediate/integer-signs/README.md)
 
 To rebuild from the repository root on Lean 4.33.1, with mathlib at `0df444a360eaa60ab8c11dca51a86af692955474`, use a fresh destination directory.
 
