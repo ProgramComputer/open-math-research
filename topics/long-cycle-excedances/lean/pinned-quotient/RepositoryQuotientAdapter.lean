@@ -81,8 +81,10 @@ theorem exact_coeff_eq_quotient (n k j : ℕ) :
     rw [← ofCoeffs_descentCoeffs, coeff_ofCoeffs]
     simp [exactEulerianCoeff]
   · intro a
+    change orderedCycleFactor a k 0 = _
     rw [orderedCycleFactor]
   · intro a b
+    change orderedCycleFactor b k (a + 1) = _
     rw [orderedCycleFactor]
 
 /-- The output is the coefficient at exponent j+1 of the original permutation sum. -/
