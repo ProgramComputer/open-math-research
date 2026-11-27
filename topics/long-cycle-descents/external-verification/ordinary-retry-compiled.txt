@@ -1,0 +1,141 @@
+Independent supplying-release replay: ordinary descents
+job: https://github.com/ProgramComputer/open-math-research/actions/runs/45925826846/job/140266811471
+workflow head: 9759d1587ab98d6bb844126e3614d4741c3f178c
+start_utc: 2026-11-27T02:01:06Z
+finish_utc: 2026-11-27T04:59:17Z
+job_conclusion: success
+artifact: external-proof-ordinary (id 15173735787)
+artifact_zip_sha256:f87b3739a7f1541a2f5ddbe44b5ffac41c630a608afdec4d85b9cb8f630622de
+release source pin: e632c19bc246b819cd6b882cbf22c2fa9bc453de
+release distribution ZIP SHA-256 (independent download): 9a6adec1f312d874b7716b1393eb45361d8cb78c78058a75bfeb9da895706a97
+Lean distribution archive SHA-256: 890afd185370f85666025b883914ab4f4b339136f8c96167b69cfb62aecaf235
+Frozen Lake manifest SHA-256: e130828f38a395281f51f4cec3ad5f3e08784f5e7dd973aa85d7efb9f2267a21
+Frozen formal source manifest SHA-256: f0026a2f9cf6d39194901672689a92eb2af41fb0127800ee0aaa8868cec6ec81
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Lake version 5.0.0-src+819816b (Lean version 4.33.1)
+Mathlib and dependency source revisions:
+mathlib: 0df444a360eaa60ab8c11dca51a86af692955474
+plausible: b7eb3304aeae834b12dda98993a37f6a41f6f0bb
+LeanSearchClient: 5f4d51b81cbd3f6b32b156bfad9056621a040404
+importGraph: 16f02aa7642864af59f1ff0e384a015994db9118
+proofwidgets: 4be2e3d5087eeb272cf5a8853b8f9dd025ef5957
+aesop: 3448c0bcc5ce01b2d1546e483ec3620e32df3d0e
+Qq: 92c15be17b7caf78c2ad767ec40f89052d908d81
+batteries: 4488d40d070b9700d4d5a6aa342f0d40c31b2a2d
+Cli: 6130a47896ce867c6a4a55373441e59e565bad0f
+Complete hosted log member hashes:
+axioms.log sha256: 275902b423bc123fe3dbdd6eb1ef4778d6765f0be7ca02350bba151a588925d0
+exported-statements.log sha256: 40fe7901574edf2e21c67eec5f6c85a1171a33f96d19cdf16437d1ff51672f51
+formal-audit.log sha256: a2ef1d8bad7674efbb0b74d848c6f19716d8e2be417615462e2b141c0dd5847f
+lake-version.txt sha256: e475ba02fef5717a6caa256e1e25ac50268497b7d1e36955357f37b4701ee4a0
+lean-version.txt sha256: 63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9
+mathlib-cache.log sha256: 23360fe51dda249f7af8b31531e716ff6abcd02f5716d2e761f571bbc4bc4579
+release-artifacts.log sha256: dbe6fc0eb7081eb60afbc05039e9199b446f88880ccec44f5e1b8282b65d5b8e
+source-revision.txt sha256: a5d70c3849771cf5bb6e8e0dcbca108fd60d034114a0bc734de8a5fce76b62ce
+source-status.txt sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+toolchain-checksum.txt sha256: d4d0233eb7f2ade02fba9d2d5e51c31af690a66c7f4235f3b63feead00fa9346
+
+PASS 531 artifact hashes, 499 proof-source receipts and four arXiv members.
+Local literal enumeration and finite arithmetic were rerun against the pinned source. Both logs matched the checked-in outputs byte for byte.
+PASS: 499 unique fresh strict compilation receipts matched by module and source SHA-256 to the frozen source manifest. The top receipt hash matches the axiom report.
+PASS: 22 unique declaration reports matched the upstream print list. Every list contained only propext, Classical.choice and Quot.sound.
+Strict build, axiom report and print wrapper all passed. Tracked source remained clean.
+The hosted job used build mode with two workers and cached dependency objects. It did not run a separate LeanChecker process.
+
+All exports match the first job output after its one option diagnostic.
+
+Actual exported definitions and theorem types:
+def LongCycles.Allowed : {n : ℕ} → ℕ → Equiv.Perm (Fin n) → Prop :=
+fun {n} k σ => ∀ (x : Fin n) (j : ℕ), 0 < j → j < k → (σ ^ j) x ≠ x
+def LongCycles.descents : {m : ℕ} → Equiv.Perm (Fin m) → ℕ :=
+fun {m} σ => {x | ∃ y, ↑y = ↑x + 1 ∧ σ y < σ x}.card
+def LongCycleBounds.DescentTwoLetters.row : ℕ → ℕ → Polynomial ℤ :=
+fun n k => ∑ σ, if LongCycles.Allowed k σ then Polynomial.X ^ LongCycles.descents σ else 0
+def LongCycleBounds.DescentBoundary.realRow : ℕ → ℕ → Polynomial ℝ :=
+fun n k => Polynomial.map (Int.castRingHom ℝ) (LongCycleBounds.DescentTwoLetters.row n k)
+def LongCycleBounds.DescentBoundary.mixture : ℕ → (ℕ → ℝ) → Polynomial ℝ :=
+fun n w => ∑ k ∈ Finset.Icc 1 n, Polynomial.C (w k) * LongCycleBounds.DescentBoundary.realRow n k
+def LongCycleBounds.DescentNecklace.CommonIsolatingIntervals : ℕ → Prop :=
+fun n =>
+  ∃ lower upper,
+    (∀ (i : Fin (n - 3)), upper i < 0) ∧
+      (Pairwise fun i j => Disjoint (Set.Ioo (lower i) (upper i)) (Set.Ioo (lower j) (upper j))) ∧
+        ∀ (w : ℕ → ℝ),
+          (∀ k ∈ Finset.Icc 3 n, 0 ≤ w k) →
+            (∃ k ∈ Finset.Icc 3 n, 0 < w k) →
+              have p :=
+                ∑ k ∈ Finset.Icc 3 n,
+                  Polynomial.C (w k) * Polynomial.map (Int.castRingHom ℝ) (LongCycleBounds.DescentTwoLetters.row n k);
+              (∀ (i : Fin (n - 3)), ∃! y, y ∈ Set.Ioo (lower i) (upper i) ∧ Polynomial.eval y p = 0) ∧
+                p.Splits ∧
+                  p.roots.Nodup ∧
+                    0 ∈ p.roots ∧ p.natDegree = n - 2 ∧ (Multiset.filter (fun x => x < 0) p.roots).card = n - 3
+@LongCycleBounds.DescentNecklace.original_roots_all_sizes : ∀ {n k : ℕ},
+  3 ≤ k →
+    k ≤ n →
+      n ≠ 5 →
+        have p := Polynomial.map (Int.castRingHom ℝ) (LongCycleBounds.DescentTwoLetters.row n k);
+        p.Splits ∧
+          p.roots.Nodup ∧ 0 ∈ p.roots ∧ p.natDegree = n - 2 ∧ (Multiset.filter (fun x => x < 0) p.roots).card = n - 3
+@LongCycleBounds.DescentNecklace.original_splits_all_sizes : ∀ {n k : ℕ},
+  3 ≤ k → k ≤ n → (Polynomial.map (Int.castRingHom ℝ) (LongCycleBounds.DescentTwoLetters.row n k)).Splits
+@LongCycleBounds.DescentNecklace.common_isolating_all_sizes : ∀ {n : ℕ},
+  3 ≤ n → n ≠ 5 → LongCycleBounds.DescentNecklace.CommonIsolatingIntervals n
+@LongCycleBounds.DescentTwoLetters.row_five : ∀ {k : ℕ},
+  3 ≤ k → k ≤ 5 → LongCycleBounds.DescentTwoLetters.row 5 k = 6 * Polynomial.X * (1 + Polynomial.X) ^ 2
+@LongCycleBounds.DescentBoundary.original_descent_splits : ∀ {n k : ℕ},
+  1 ≤ k → k ≤ n → (LongCycleBounds.DescentBoundary.realRow n k).Splits
+@LongCycleBounds.DescentBoundary.all_cutoffs_manuscript : ∀ {n : ℕ},
+  1 ≤ n →
+    ∀ (w : ℕ → ℝ),
+      (∀ k ∈ Finset.Icc 1 n, 0 ≤ w k) →
+        0 < ∑ k ∈ Finset.Icc 1 n, w k →
+          LongCycleBounds.DescentBoundary.mixture n w ≠ 0 ∧
+            (LongCycleBounds.DescentBoundary.mixture n w).Splits ∧
+              (∀ x ∈ (LongCycleBounds.DescentBoundary.mixture n w).roots, x ≤ 0) ∧
+                ((LongCycleBounds.DescentBoundary.mixture n w).roots.Nodup ↔
+                  ¬(n = 4 ∧ w 1 = 0 ∧ w 3 = 0 ∧ w 4 = 0 ∨ n = 5 ∧ w 1 = 0 ∧ w 2 = 0))
+LongCycleBounds.DescentBoundary.four_exception : ∀ (w : ℕ → ℝ),
+  (∀ k ∈ Finset.Icc 1 4, 0 ≤ w k) →
+    (∃ k ∈ Finset.Icc 1 4, 0 < w k) →
+      w 1 + (w 3 + w 4) = 0 →
+        (LongCycleBounds.DescentBoundary.mixture 4 w).Splits ∧
+          (LongCycleBounds.DescentBoundary.mixture 4 w).roots = {0} + 2 • {-2}
+LongCycleBounds.DescentBoundary.five_exception : ∀ (w : ℕ → ℝ),
+  (∀ k ∈ Finset.Icc 1 5, 0 ≤ w k) →
+    (∃ k ∈ Finset.Icc 1 5, 0 < w k) →
+      w 1 + w 2 = 0 →
+        (LongCycleBounds.DescentBoundary.mixture 5 w).Splits ∧
+          (LongCycleBounds.DescentBoundary.mixture 5 w).roots = {0} + 2 • {-1}
+
+Actual transitive axiom audit:
+'LongCycleBounds.DescentNecklace.original_eq_descentTransform' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LongCycleBounds.DescentNecklace.finite_certificate_through127' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LongCycleBounds.DescentNecklace.simple_roots_through127' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentNecklace.splits_through127' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentNecklace.LowerPacked.lower_cutoff_mesh_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LongCycleBounds.DescentNecklace.LowerPacked.lower_cutoff_mesh_through127' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LongCycleBounds.DescentMesh.actual_grid_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentBoundary.unrestricted_grid_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentDerangement.derangement_grid_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentDerangement.all_cutoffs_large' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentNecklace.common_isolating_all_sizes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentNecklace.original_roots_all_sizes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentNecklace.mixture_splits_all_sizes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentNecklace.original_splits_all_sizes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentTwoLetters.row_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentTwoLetters.five_mixture_roots' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentBoundary.all_cutoffs_all_sizes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentBoundary.exceptional_support_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentBoundary.all_cutoffs_manuscript' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentBoundary.original_descent_splits' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentBoundary.four_exception' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.DescentBoundary.five_exception' depends on axioms: [propext, Classical.choice, Quot.sound]
