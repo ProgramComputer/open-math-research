@@ -50,7 +50,9 @@ theorem normalizedPole_pair_integral {p q : ℂ} {R : ℝ} (hR : 0 < R)
   let v := normalizedPole q R
   have cu : Continuous u := normalizedPole_continuous hR hp
   have cv : Continuous v := normalizedPole_continuous hR hq
-  have hs := intervalIntegral.integral_mono_on (μ := volume) Real.two_pi_pos.le
+  have hs : (∫ x in (0:ℝ)..2*π, 2*(u x*v x)) ≤
+      (∫ x in (0:ℝ)..2*π, u x^2+v x^2) :=
+    intervalIntegral.integral_mono_on (μ := volume) Real.two_pi_pos.le
     ((continuous_const.mul (cu.mul cv)).intervalIntegrable _ _)
     (((cu.pow 2).add (cv.pow 2)).intervalIntegrable _ _)
     (fun x _ => (by nlinarith [sq_nonneg (u x - v x)] : 2*(u x*v x) ≤ u x^2+v x^2))
