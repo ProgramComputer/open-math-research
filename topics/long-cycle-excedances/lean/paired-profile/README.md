@@ -1,6 +1,6 @@
 # Lean bridge for the paired-residue profile
 
-The [paired-residue middle proof](../../paired-residues/README.md) uses the original fixed-threshold permutation rows for $n\ge10{,}000$ and $4\le n/k\le48$. This package checks supporting exact identities. The quantitative occupied-degree bounds and the resulting middle signs remain open Lean obligations. This package treats values. Angular differentiation remains a separate proof obligation.
+The [paired-residue middle proof](../../paired-residues/README.md) uses the original fixed-threshold permutation rows for $n\ge10{,}000$ and $4\le n/k\le48$. This package checks supporting exact identities. The occupied-degree product bounds and the resulting middle signs remain open Lean obligations. This package treats values. Angular differentiation remains a separate proof obligation.
 
 Write $x\ge0$, $R\gt0$ and $z_q=R/(x+i(2q+1)\pi)$ for $q\in\mathbb Z$. At cycle size $p\ge2$ the signed Eulerian moment at $t=-\exp(-x)$ contributes
 
@@ -31,4 +31,6 @@ The coefficient is one at degree zero and zero at positive degrees below $k$. Fo
 
 The finite distinguished-pole sum also converges absolutely over all marked occupied tuples at each positive degree for cutoff at least three. This identifies the full lattice sum with the original normalized permutation row through the finite-product limit. [Occupied-value theorem and proof](occupied-values.md)
 
-Run `python3 -Bu topics/long-cycle-excedances/lean/paired-profile/check.py /path/to/scratch-project` from the repository root with Lean 4.33.1 and its Lake executable on PATH. An optional second argument is the authenticated common-pin import archive. The driver delegates dependency authentication and setup to the [common-pin driver](../common-pin/check.py), then compiles and kernel-replays all nineteen modules and checks their named axiom reports. [Hosted receipt](verification.md) [Finite-product receipt](product-verification.md)
+The formal numerator coefficients are the literal cutoff probability differences. The checked bounds give the first-block values, the positive jump at twice the cutoff and the factorial decay on later blocks. [Numerator variation](numerator-variation.md)
+
+Run `python3 -Bu topics/long-cycle-excedances/lean/paired-profile/check.py /path/to/scratch-project` from the repository root with Lean 4.33.1 and its Lake executable on PATH. An optional second argument is the authenticated common-pin import archive. The driver delegates dependency authentication and setup to the [common-pin driver](../common-pin/check.py), then compiles and kernel-replays the profile and supporting modules and checks their named axiom reports. [Hosted receipt](verification.md) [Finite-product receipt](product-verification.md)

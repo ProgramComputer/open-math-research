@@ -11,6 +11,19 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
+TOPIC = HERE.parents[1]
+SUPPORT = (
+    ("color-acceptance", "ColorAnchor"),
+    ("color-acceptance", "ColorPermSplit"),
+    ("color-acceptance", "ColorBlock"),
+    ("color-acceptance", "ColorCycleCount"),
+    ("color-acceptance", "ColorSupportCount"),
+    ("color-load-bounds", "MarkedColorLoads"),
+    ("lean/probability-bands", "CycleProbabilityBands"),
+    ("lean/probability-bands", "AnchoredProbability"),
+    ("lean/probability-bands", "RepositoryProbabilityBands"),
+    ("color-load-bounds", "RepositoryOrbitBaseline"),
+)
 MODULES = (
     "FinitePoleProduct",
     "PairedPoleFamily",
@@ -31,6 +44,9 @@ MODULES = (
     "ActualOccupiedLimit",
     "OccupiedTuple",
     "RepositoryOccupiedValue",
+    "CycleNumeratorVariation",
+    "CutoffCycleSeriesRecurrence",
+    "RepositoryNumeratorVariation",
 )
 EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.finite_pole_partition",
@@ -71,6 +87,30 @@ EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.actual_occupiedCoeff_eq_of_product_limit",
     "OpenMathResearch.LongCycleExcedances.occupiedCoeff_eq_sorted_tuple",
     "RepositoryQuotientAudit.original_scaled_occupied_value",
+    "OpenMathResearch.LongCycleExcedances.cutoffCycleSeries_coeff_recurrence",
+    "OpenMathResearch.LongCycleExcedances.coeff_cutoffCycleSeries_eq_of_spec",
+    "OpenMathResearch.LongCycleExcedances.coeff_cutoffCycleNumerator_eq_of_spec",
+} | {
+    "OpenMathResearch.LongCycleExcedances.CycleProbability." + name
+    for name in (
+        "originalProbability_spec",
+        "Spec.reciprocal_bounds",
+        "Spec.numeratorDiff_at_cutoff",
+        "Spec.numeratorDiff_between",
+        "Spec.numeratorDiff_at_twice",
+        "Spec.numeratorDiff_at_twice_pos_lt",
+        "Spec.mul_numeratorDiff_eq_neg_sum",
+        "Spec.first_block_variation",
+        "Spec.numeratorDiff_factorial_block",
+        "coeff_cutoffCycleSeries_eq_originalProbability",
+        "coeff_cutoffCycleNumerator_eq_original",
+        "originalNumeratorCoeff_at_cutoff",
+        "originalNumeratorCoeff_between",
+        "originalNumeratorCoeff_at_twice",
+        "originalNumeratorCoeff_at_twice_pos_lt",
+        "originalNumeratorCoeff_first_block_variation",
+        "originalNumeratorCoeff_factorial_block",
+    )
 }
 AXIOM_REPORT = re.compile(
     r"^'([^']+)' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])\s*$",
@@ -107,10 +147,12 @@ def main(project, imports):
         common.run(project, "tar", "--zstd", "-xf", str(imports))
         print(f"Reused verified common-pin archive sha256={digest}", flush=True)
 
+    inputs = [(name, TOPIC / folder / f"{name}.lean") for folder, name in SUPPORT]
+    inputs.extend((name, HERE / f"{name}.lean") for name in MODULES)
     observed = {}
-    for module in MODULES:
-        source = project / (module + ".lean")
-        shutil.copyfile(HERE / source.name, source)
+    for module, original in inputs:
+        source = project / original.name
+        shutil.copyfile(original, source)
         output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
         print(f"Compile {module} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
         result = subprocess.run(
@@ -128,7 +170,7 @@ def main(project, imports):
     for name in sorted(EXPECTED):
         if name not in observed or observed[name] - common.ALLOWED:
             raise ArithmeticError(f"Missing declaration or unexpected axioms for {name}: {observed.get(name)}")
-    for module in MODULES:
+    for module, _ in inputs:
         common.run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} paired-profile declarations audited", flush=True)
