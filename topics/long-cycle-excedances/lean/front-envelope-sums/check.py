@@ -4,6 +4,7 @@
 import importlib.util
 import re
 import shutil
+import subprocess
 import sys
 from hashlib import sha256
 from pathlib import Path
@@ -53,9 +54,16 @@ def main(project, imports):
         shutil.copyfile(HERE / source.name, source)
         output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
         print(f"Compile {module} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
-        stdout = common.run(project, "lake", "env", "lean", "-o", str(output), str(source), capture=True)
-        print(stdout, end="", flush=True)
-        for name, axioms in AXIOM_REPORT.findall(stdout):
+        result = subprocess.run(
+            ["lake", "env", "lean", "-o", str(output), str(source)],
+            cwd=project,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+        print(result.stdout, end="", flush=True)
+        result.check_returncode()
+        for name, axioms in AXIOM_REPORT.findall(result.stdout):
             observed[name] = {axiom.strip() for axiom in axioms.split(",") if axiom.strip()}
 
     for name in sorted(EXPECTED):
