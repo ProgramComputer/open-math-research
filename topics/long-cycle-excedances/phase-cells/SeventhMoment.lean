@@ -7,6 +7,7 @@ import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.FieldSimp
 import Mathlib.Tactic.Ring
 
+set_option backward.isDefEq.respectTransparency false
 namespace OpenMathResearch.LongCycleExcedances
 open Real Finset Set
 
@@ -23,12 +24,12 @@ theorem seventhPrimitive_deriv (t : ℝ) :
   have ha := (hasDerivAt_const t (1:ℝ)).add ((hasDerivAt_id t).pow 2)
   have hs := (Real.hasDerivAt_sqrt (by positivity : (1+t^2)≠0)).comp t ha
   have hv : HasDerivAt (fun x : ℝ => x/√(1+x^2)) (1/u^3) t := by
-    convert (hasDerivAt_id t).div hs hu.ne' using 1
+    convert (hasDerivAt_id t).div hs hu.ne' using 1 <;> try rfl'
     change 1/u^3 = (1*u - t*(1/(2*u)*(0+2*t^(2-1)*1)))/u^2
     field_simp [hu.ne']
     linear_combination -2*u^3 * hsq
   have hh := (hv.sub ((hv.pow 3).const_mul (2/3))).add ((hv.pow 5).const_mul (1/5))
-  convert hh using 1
+  convert hh using 1 <;> try rfl'
   change (1/u)^7 = 1/u^3 - 2/3 * (3*(t/u)^(3-1)*(1/u^3)) +
     1/5 * (5*(t/u)^(5-1)*(1/u^3))
   field_simp [hu.ne']
@@ -67,9 +68,9 @@ theorem seventh_mesh_bound (h : ℝ) (hh : 0 < h) (N : ℕ) :
       (by positivity : 0 ≤ h*(j:ℝ)).trans hc.1.le)
       (show h*(j+1:ℕ) ∈ Set.Ici 0 from by simp only [Set.mem_Ici]; positivity) hc.2.le
     rw [he, le_div_iff₀ (sub_pos.mpr hi)] at hd
-    convert hd using 1
-    push_cast
-    ring
+    have hsimp : h*(j+1:ℕ)-h*(j:ℝ) = h := by push_cast; ring
+    rw [hsimp, mul_comm] at hd
+    exact hd
   have accumulated (n : ℕ) : h*(∑ j ∈ range n, seventhDensity (h*(j+1:ℕ))) ≤
       seventhPrimitive (h*n) := by
     induction n with

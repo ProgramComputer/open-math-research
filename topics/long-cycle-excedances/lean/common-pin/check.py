@@ -25,7 +25,9 @@ LOGISTIC_IMPORTS = (
     "MarkedTwoCycles", "MarkedTwoEGF", "MarkedExponentialBias", "MarkedLabelBias",
     "MarkedLogistic", "CycleProfile", "CycleProfileEGF", "CycleProfileLogistic",
 )
-PHASE_MODULES = ("TiltDerivative", "SeventhMoment", "GridSigns", "ActualPhaseDerivative")
+PHASE_MODULES = ("TiltDerivative", "SeventhMoment", "GridSigns", "ActualPhaseDerivative",
+                 "PhaseRemainder", "PhasePoleGeometry", "AngularGeometry", "CellReadout",
+                 "Displacement", "OriginalAngularCell", "AngularDerivative")
 EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.logarithmCoeff_hasDerivAt",
     "OpenMathResearch.LongCycleExcedances.finiteTilt_diagonal_hasDerivAt",
