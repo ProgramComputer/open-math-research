@@ -36,7 +36,7 @@ private theorem cutoff_weight_cast (c : ℚ) (a : ℤ) :
     exact_mod_cast hx
   dsimp only [x] at h
   push_cast at h
-  have hodd : (rationalOdd a:ℝ) = angularOddNumber a := by simp [rationalOdd,angularOddNumber]
+  have hodd : (rationalOdd a:ℝ) = primitiveOddNumber a := by simp [rationalOdd,primitiveOddNumber]
   rw [hodd] at h
   simpa only [oddBinKernel,mul_comm] using h
 
