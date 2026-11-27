@@ -14,4 +14,4 @@ The local Lean 4.19.0 check covers the generic analytic estimates, both scalar b
 
 This work gives only the numerator contraction. The small-cutoff contour choice and bound for the denominator, Cauchy error and residues belong to separate steps.
 
-[Independent scope and arithmetic review](independent-review.md)
+[Independent scope and arithmetic review](independent-review.md) · [Hosted verification record](verification.md)
