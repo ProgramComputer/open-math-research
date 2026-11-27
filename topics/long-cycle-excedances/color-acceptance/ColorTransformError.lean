@@ -76,7 +76,9 @@ theorem color_transform_error (P : ℝ[X]) {n p : ℕ} (hn : 0 < n) (hp : 0 < p)
       (pow_nonneg (pow_nonneg (sub_nonneg.mpr ((div_le_one (by positivity : (0:ℝ)<p)).2
         (by exact_mod_cast hp))) r) n)
     change P.coeff (p-r)*(((n-1+r).choose (n-1)):ℝ)/(p:ℝ)^n ≤ ((n:ℝ)*(1-1/(p:ℝ))^n)^r
-    convert hc using 1 <;> ring
+    rw [mul_div_right_comm, mul_pow, mul_comm ((n:ℝ)^r),
+      pow_right_comm (1-1/(p:ℝ)) n r]
+    exact hc
 
 /-- If the normalized color count is a probability, the approximation has
 a rational bound at every rank, including when the geometric ratio exceeds one. -/
