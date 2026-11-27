@@ -22,6 +22,10 @@ THEOREMS = {
     "FourierPoleUniform": ["normalizedPole_le_two", "normalizedPole_uniform"],
     "FourierInfinitePoleBound": ["infinite_pole_product_bound"],
     "FourierComplexPoleBound": ["norm_pole_term", "complex_pole_product_bound"],
+    "FourierLatticeWeights": ["lattice_inverse_summable", "lattice_eventually_far", "lattice_moment_weights"],
+    "FourierPoleContrast": ["normalized_lattice_contrast"],
+    "FourierOddPoleProduct": ["odd_lattice_pole_product"],
+    "FourierRowPoleProduct": ["row_circle_pole_product"],
 }
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 REPORT = re.compile(r"'OpenMathResearch\.LongCycleExcedances\.(\w+)' depends on axioms:\s*\[([^\]]*)\]")
