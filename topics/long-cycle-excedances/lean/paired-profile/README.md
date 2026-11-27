@@ -1,6 +1,6 @@
 # Lean bridge for the paired-residue profile
 
-The [paired-residue middle proof](../../paired-residues/README.md) uses the original fixed-threshold permutation rows for $n\ge10{,}000$ and $4\le n/k\le48$. This package checks supporting exact identities. The infinite product identity, its differentiated resummation, the quantitative residue bounds, and the resulting middle signs remain open Lean obligations.
+The [paired-residue middle proof](../../paired-residues/README.md) uses the original fixed-threshold permutation rows for $n\ge10{,}000$ and $4\le n/k\le48$. This package checks supporting exact identities. The quantitative occupied-degree bounds and the resulting middle signs remain open Lean obligations. This package treats values. Angular differentiation remains a separate proof obligation.
 
 Write $x\ge0$, $R\gt0$ and $z_q=R/(x+i(2q+1)\pi)$ for $q\in\mathbb Z$. At cycle size $p\ge2$ the signed Eulerian moment at $t=-\exp(-x)$ contributes
 
@@ -21,4 +21,14 @@ $$
 
 Each nonempty occupied set contributes once by the Lagrange partition of unity. The coefficient identity uses $w_q-w_a=2i(q-a)\sin\theta$ in angular coordinates. [Finite Lagrange identity](FinitePoleProduct.lean) · [Odd-pole specialization](PairedPoleFamily.lean) · [Literal cycle normalization](RepositoryPairedCycleLift.lean) · [Literal profile and coefficient limit](RepositoryScaledCycleProfile.lean)
 
-Run `python3 -Bu topics/long-cycle-excedances/lean/paired-profile/check.py /path/to/scratch-project` from the repository root with Lean 4.33.1 and its Lake executable on PATH. An optional second argument is the authenticated common-pin import archive. The driver delegates dependency authentication and setup to the [common-pin driver](../common-pin/check.py), then compiles and kernel-replays all eight new modules and checks their named axiom reports. [Hosted receipt](verification.md)
+The formal cycle factor $D_k(u)=\exp(\sum_{p\ge k}u^p/p)$ converts the coefficient limit into convergence of actual finite products. The exponential addition law uses the finite support of each power-series coefficient in the power indices and the factorial binomial identity. It gives
+
+$$
+[u^n]\prod_{q\in A}D_k(z_qu)=\sum_{h=0}^{\lfloor n/k\rfloor}\frac{[u^n](\sum_{q\in A}\sum_{p\ge k}z_q^p u^p/p)^h}{h!}.
+$$
+
+The coefficient is one at degree zero and zero at positive degrees below $k$. For $k\ge2$, the product coefficients converge along all finite pole subsets to $R^n\mathrm{normalizedEnumerator}(n,k,x)/n!$ using the signed profile above. [Formal exponential](CutoffFormalExp.lean) · [Finite product](PairedExpProduct.lean) · [Original permutation limit](RepositoryPairedProductLimit.lean)
+
+The finite distinguished-pole sum also converges absolutely over all marked occupied tuples at each positive degree for cutoff at least three. This identifies the full lattice sum with the original normalized permutation row through the finite-product limit. [Occupied-value theorem and proof](occupied-values.md)
+
+Run `python3 -Bu topics/long-cycle-excedances/lean/paired-profile/check.py /path/to/scratch-project` from the repository root with Lean 4.33.1 and its Lake executable on PATH. An optional second argument is the authenticated common-pin import archive. The driver delegates dependency authentication and setup to the [common-pin driver](../common-pin/check.py), then compiles and kernel-replays all nineteen modules and checks their named axiom reports. [Hosted receipt](verification.md) [Finite-product receipt](product-verification.md)

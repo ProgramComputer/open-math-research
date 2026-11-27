@@ -11,7 +11,27 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-MODULES = ('FinitePoleProduct', 'PairedPoleFamily', 'PairedPoleConvergence', 'PairedCycleNormalization', 'PairedCoefficientLimit', 'ScaledCycleProfile', 'RepositoryPairedCycleLift', 'RepositoryScaledCycleProfile')
+MODULES = (
+    "FinitePoleProduct",
+    "PairedPoleFamily",
+    "PairedPoleConvergence",
+    "PairedCycleNormalization",
+    "PairedCoefficientLimit",
+    "ScaledCycleProfile",
+    "RepositoryPairedCycleLift",
+    "RepositoryScaledCycleProfile",
+    "CutoffFormalExp",
+    "ExpAdd",
+    "PairedExpProduct",
+    "RepositoryPairedProductLimit",
+    "OccupiedSupportNet",
+    "OccupiedCoefficient",
+    "OccupiedExpansion",
+    "ActualOccupiedValue",
+    "ActualOccupiedLimit",
+    "OccupiedTuple",
+    "RepositoryOccupiedValue",
+)
 EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.finite_pole_partition",
     "OpenMathResearch.LongCycleExcedances.finite_distinguished_pole_product",
@@ -35,6 +55,22 @@ EXPECTED = {
     "RepositoryQuotientAudit.original_hasSum_paired_cycle_log_coeff",
     "RepositoryQuotientAudit.original_scaled_cycle_profile_exp",
     "RepositoryQuotientAudit.tendsto_original_scaled_cycle_profile_exp",
+    "OpenMathResearch.LongCycleExcedances.coeff_cutoffExp",
+    "OpenMathResearch.LongCycleExcedances.cutoffExp_add",
+    "OpenMathResearch.LongCycleExcedances.finite_paired_product_coeff_below_cutoff",
+    "OpenMathResearch.LongCycleExcedances.cutoffExp_rescale",
+    "OpenMathResearch.LongCycleExcedances.finite_paired_product_eq_truncated_exp",
+    "RepositoryQuotientAudit.tendsto_original_scaled_finite_paired_products",
+    "OpenMathResearch.LongCycleExcedances.hasSum_comp_finite_support",
+    "OpenMathResearch.LongCycleExcedances.summable_occupied_finset",
+    "OpenMathResearch.LongCycleExcedances.summable_occupiedCoeff",
+    "OpenMathResearch.LongCycleExcedances.finite_occupiedCoeff_sum",
+    "OpenMathResearch.LongCycleExcedances.tendsto_occupiedCoeff_sum",
+    "OpenMathResearch.LongCycleExcedances.summable_actual_occupiedCoeff",
+    "OpenMathResearch.LongCycleExcedances.finite_actual_occupiedCoeff",
+    "OpenMathResearch.LongCycleExcedances.actual_occupiedCoeff_eq_of_product_limit",
+    "OpenMathResearch.LongCycleExcedances.occupiedCoeff_eq_sorted_tuple",
+    "RepositoryQuotientAudit.original_scaled_occupied_value",
 }
 AXIOM_REPORT = re.compile(
     r"^'([^']+)' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])\s*$",
