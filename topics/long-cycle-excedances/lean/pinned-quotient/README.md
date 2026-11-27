@@ -24,7 +24,7 @@ The [strict hosted run][hosted] passed on adapter commit
 `3d966c5701e57574f2d82748d4b269817fdc3405` and Lean compiler commit
 `819816b2e0a3bf405af45ae5c7af2491d8f5bee6`. Both identities use
 `propext`, `Classical.choice` and `Quot.sound`. The frozen verifier replayed
-65 project dependency modules. [Audit excerpt](strict-audit.txt)
+65 project dependency modules. [Audit excerpt](strict-audit.txt) · [Independent scope review](independent-review.md)
 
 The checker loads just the adapter's upstream import closure and audits both
 identity declarations. It also checks at runtime that all 27 explicit entries
