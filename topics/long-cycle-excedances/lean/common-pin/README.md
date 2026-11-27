@@ -17,7 +17,7 @@ v1.2.0 source and can reuse the [65-module import library][artifact], whose
 exact archive digest matches the [strict coefficient audit][prior].
 The [hosted check][hosted] compiled and replayed all three new local modules.
 The five audited declarations use only `propext`, `Classical.choice` and
-`Quot.sound`. [Audit excerpt](hosted-audit.txt)
+`Quot.sound`. [Audit excerpt](hosted-audit.txt) · [Independent scope review](independent-review.md)
 
 With the pinned toolchain, run from the repository root
 
