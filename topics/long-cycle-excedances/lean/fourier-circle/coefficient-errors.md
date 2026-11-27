@@ -11,9 +11,23 @@ The two tails converge because eventually $|P_\ell|\ge2(R+1)$, where each square
 
 The old-row and adjacent-row inequalities bound Fourier coefficients using two integrations by parts. They take the periodicity, differential identities, amplitude bound, signed split (for the adjacent pair), and the estimates for the two kernel integrals as explicit inputs. The estimate on the common integral is $M(U+V)$ when the supremum of $|f|$ is at most $M$ and the two unnormalized kernel masses are at most $2\pi U$ and $2\pi V$. The adjacent-row theorem retains the two correction terms at frequencies $n+1-k$ and $n+1$. [Coefficient inequalities](FourierNormComparison.lean)
 
+## Two candidate radii
+
+Put $x=n/k$, $r^2=s^2+\pi^2$, $u=k(\pi/r)^2$ and suppose $x\ge44$ and $xu\ge1$. Let $c=\min(1/25,4/x)$. Among the two numbers $2$ and $2-2c$ there is a shift $a$ for which the radius $R=r\sqrt{1+a/k}$ satisfies
+
+$$
+a\ge48/25,\qquad
+\left|R^2-|P_\ell|^2\right|\ge c\frac{r^2}{k}
+\quad\text{for every }\ell\in\mathbb Z.
+$$
+
+In projected coordinates the principal position is zero. The others are $u((2j+3)^2-1)$ for nonnegative integers $j$, since the two signs of each odd height project to the same point. Consecutive distinct nonprincipal positions differ by $(8j+16)u\ge4c$. If both candidates lay strictly within distance $c$ of a pole position, the positions would be distinct and strictly less than $4c$ apart. Both candidates are too far from zero. This proves the closed gap even at equality. It gives $c=1/25$ up to $x=100$ and $c=4/x$ above that point. The earlier proof used $0.039$ and $1/x$ respectively. [Formal statement for every signed pole](FourierCircleChoice.lean) · [Earlier circle selection](../../fourier-circle/README.md)
+
+An independent agent-assisted mathematical review checked the signed indexing, the transition at 100, and the units of the squared-radius bound. It also found the equality example $u=(2-c)/8$: the first nonprincipal pole is the midpoint of the two candidates. A bound on radial distance itself follows by dividing the squared gap by $R+|P_\ell|$.
+
 ## Verification
 
-All eight new declarations compiled on Lean 4.19.0, compiler commit `6caaee842e94`, mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`, with transitive axioms `propext`, `Classical.choice` and `Quot.sound`. The Linux run checks their full import closure and hashes each input. Its receipt is pending. To reproduce from the repository root with the installed research toolchain, run
+All eleven new declarations compiled on Lean 4.19.0, compiler commit `6caaee842e94`, mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`, with transitive axioms `propext`, `Classical.choice` and `Quot.sound`. The Linux run checks their full import closure and hashes each input. Its receipt is pending. To reproduce from the repository root with the installed research toolchain, run
 
 ~~~sh
 cd shared/lean
