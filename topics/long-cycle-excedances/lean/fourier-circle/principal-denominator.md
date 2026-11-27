@@ -21,9 +21,12 @@ $$
 
 This gives a factor at most $2\Delta/\delta$ beyond one whenever $\delta\le1$. To see the denominator estimate, if $|1-e^v|<1$, the principal logarithm of $e^v$ has modulus at most $|1-e^v|/(1-|1-e^v|)$ by its Taylor remainder at one. It equals $v-2\ell\pi i$ for some integer $\ell$. Thus a distance of at least $\delta$ from every period implies $|1-e^v|\ge\delta/(1+\delta)$, also valid when $|1-e^v|\ge1$. Translating by $\pi i$ gives the corresponding odd-pole estimate for $1+e^v$. On the closed left half-plane the exponential is 1-Lipschitz by the derivative bound. Apply that fact directly if both real parts are nonpositive and after division by $e^{w-s}$ if $\Re(\alpha w)\le\Re w$. [Checked contraction theorem](FourierLogarithmicGap.lean)
 
+On the two candidate circles the squared-radius estimate also gives an ordinary distance of at least
+$\delta=(49/100)cr/k$ from every point of the selected circle to every pole, where $c=\min(1/25,4/x)$. Indeed $R\le1.01r$. A pole at distance less than $\delta$ would satisfy $|P_\ell|+R\le 2R+\delta\le2.03r$. Multiplying the radial difference by this sum would give a squared-radius gap strictly below $cr^2/k$. The formal theorem selects the circle and proves the ratio bound for every angle and every contraction on that same circle. [Combined original-circle statement](FourierOriginalDenominators.lean)
+
 ## Verification
 
-The three principal estimates and four logarithm and contraction statements passed Lean 4.19.0 at `6caaee842e94` and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. All seven transitive axiom reports listed `propext`, `Classical.choice` and `Quot.sound`. The [initial hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/46008917250) passed 42 audits across 21 source modules for the principal estimates. The hosted rebuild including the four additional declarations is pending. The numerator contraction enters separately in the comparison.
+The three principal estimates and five logarithm, contraction and circle statements passed Lean 4.19.0 at `6caaee842e94` and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. All eight transitive axiom reports listed `propext`, `Classical.choice` and `Quot.sound`. The [initial hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/46008917250) passed 42 audits across 21 source modules for the principal estimates. The hosted rebuild including the five additional declarations is pending. The numerator contraction enters separately in the comparison.
 
 ~~~sh
 cd shared/lean

@@ -39,6 +39,7 @@ THEOREMS = {
     "FourierCircleChoice": [
         "two_candidate_gap", "original_odd_circle_choice", "original_odd_circle_modulus_gap",
     ],
+    "FourierOriginalDenominators": ["original_circle_uniform_denominators"],
     "FourierLatticeDerivative": [
         "odd_lattice_contrast_first_moment", "lattice_squared_weights", "odd_lattice_contrast_derivative",
     ],
