@@ -14,7 +14,7 @@ MANIFEST = (
         "discrete_pole_decay", "discrete_pole_weighted_prefix", "discrete_pole_unweighted_prefix",
     )),
     (HERE / "LiteralDiscretePoleMoments.lean", (
-        "literal_discrete_pole_decay", "literal_discrete_pole_moments",
+        "literal_pole_norm_sq", "literal_discrete_pole_decay", "literal_discrete_pole_moments",
         "literal_discrete_pole_moments_of_size", "literal_discrete_pole_norm_moments",
     )),
 )

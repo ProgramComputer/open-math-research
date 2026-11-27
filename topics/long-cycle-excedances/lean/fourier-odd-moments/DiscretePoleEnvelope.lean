@@ -157,7 +157,9 @@ private theorem zeroth_step {L p : ℝ} (hL : 0 < L) (hp : 3 ≤ p) :
     ring
   have hstep : 2/(L+p)^2 ≤ (L+p-2)⁻¹-(L+p)⁻¹ := by
     have he : (L+p-2)⁻¹-(L+p)⁻¹ = 2/((L+p-2)*(L+p)) := by
-      field_simp [hprev.ne',hsum.ne']
+      rw [inv_sub_inv hprev.ne' hsum.ne']
+      congr 1
+      ring
     rw [he]
     apply div_le_div_of_nonneg_left (by norm_num) (mul_pos hprev hsum)
     rw [pow_two]

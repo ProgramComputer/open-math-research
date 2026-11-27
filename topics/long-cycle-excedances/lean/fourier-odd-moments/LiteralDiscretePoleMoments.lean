@@ -9,7 +9,7 @@ namespace OpenMathResearch.LongCycleExcedances
 
 open scoped BigOperators Real
 
-private theorem literal_pole_norm_sq (s : ℝ) (l : ℤ) :
+theorem literal_pole_norm_sq (s : ℝ) (l : ℤ) :
     ‖numeratorPole s l‖^2 = s^2+((2*(l:ℝ)+1)*π)^2 := by
   rw [Complex.sq_norm]
   dsimp only [numeratorPole]
@@ -182,6 +182,7 @@ theorem literal_discrete_pole_norm_moments {n k : ℕ} (hk : 100 ≤ k)
   simpa only [norm_div,Complex.norm_real,Real.norm_eq_abs,abs_of_pos hr] using h
 
 #print axioms literal_discrete_pole_norm_moments
+#print axioms literal_pole_norm_sq
 #print axioms literal_discrete_pole_decay
 #print axioms literal_discrete_pole_moments
 #print axioms literal_discrete_pole_moments_of_size
