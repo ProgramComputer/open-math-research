@@ -25,7 +25,16 @@ LOGISTIC_IMPORTS = (
     "MarkedTwoCycles", "MarkedTwoEGF", "MarkedExponentialBias", "MarkedLabelBias",
     "MarkedLogistic", "CycleProfile", "CycleProfileEGF", "CycleProfileLogistic",
 )
+PHASE_MODULES = ("TiltDerivative", "SeventhMoment", "GridSigns", "ActualPhaseDerivative")
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.logarithmCoeff_hasDerivAt",
+    "OpenMathResearch.LongCycleExcedances.finiteTilt_diagonal_hasDerivAt",
+    "OpenMathResearch.LongCycleExcedances.seventh_mesh_bound",
+    "OpenMathResearch.LongCycleExcedances.seventh_far_summable_bound",
+    "OpenMathResearch.LongCycleExcedances.middle_derivative_error",
+    "OpenMathResearch.LongCycleExcedances.signed_cos_grid",
+    "OpenMathResearch.LongCycleExcedances.signed_sin_grid_cell",
+    "RepositoryQuotientAudit.actual_principalLogTilt_derivative",
     "RepositoryQuotientAudit.original_coherentTilt_coeff_bound",
     "RepositoryQuotientAudit.seriesValue_original_coherentTilt",
     "RepositoryQuotientAudit.norm_seriesValue_coherentTilt_ge",
@@ -121,6 +130,7 @@ def compile_topic(project):
     files.append((HERE / "HighAngleActualInputs.lean", "HighAngleActualInputs"))
     files.append((HERE / "HighAngleRowEstimate.lean", "HighAngleRowEstimate"))
     files.append((HERE / "ActualHighAngleSign.lean", "ActualHighAngleSign"))
+    files.extend((TOPIC.parent / "phase-cells" / (name + ".lean"), name) for name in PHASE_MODULES)
     observed = {}
     failed = set()
     for source, module in files:
@@ -172,7 +182,7 @@ def compile_topic(project):
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
                    "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
-                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign"):
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
