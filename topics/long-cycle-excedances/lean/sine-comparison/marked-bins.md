@@ -1,0 +1,11 @@
+# Marked primitive degrees and bin masses
+
+The primitive in the checked [occupied-pole value expansion](../paired-profile/occupied-values.md) is `occupiedPrimitive k C S a q`. For $s\ge k\ge1$ and $S\ne0$, the norm of its coefficient in degree $s$ equals the norm of $b_s z_q^{s-1}/(w_q-w_a)$, where $b_s$ is the coefficient of the cleared cycle numerator.
+
+Each primitive in the finite pole set with the distinguished pole removed is marked in actual degree $s$ and bin $\lceil4s/k\rceil$. The absolute coefficient enters the corresponding monomial of a nested real polynomial. Multiplication adds the degree and bin separately. The truncation in `literalMarkedPrimitive` retains $k\le s\le N$. The coefficients of `markedMultiple` give the absolute mass selected by total primitive degree and summed bin from subsets of size at least two. The exact powerset identity expresses this polynomial as the full product minus its empty and linear terms.
+
+Evaluating the inner degree variable at one gives the univariate bin factors. Nonnegativity bounds the selected coefficient at any degree by the whole bin. The theorem `literal_occupied_bin_integer_bound` gives $q_b/G$ for the full selected coefficient and $(q_b-l_b)/G$ for the multiple-primitive coefficient, given the linear envelope and integer recurrence in `BinIntegerCertificate`. The same rounded linear table enters the recurrence and the subtraction. A nonzero multiple coefficient in total degree $d$ and summed bin $b$ satisfies $4d\le kb\le5d$. Increasing the primitive degree cap beyond $d$ leaves that coefficient unchanged.
+
+The linear table still needs a uniform bound on the sum of absolute primitive coefficients over the signed pole lattice at each bin. The quantitative joins also need the application of the finite inequalities to the full lattice, including the principal carrier, omitted-bin tails, numerator jump, and final comparison. The bridge uses no derivative of a row. It extends the occupied expansion using Bowen Zuo’s authenticated cycle identity and ordered profile.
+
+[Marked factors and subset identity](BivariateBin.lean) · [Literal coefficient and integer wrapper](LiteralBin.lean) · [Bin support](LiteralBinSupport.lean) · [Truncation](LiteralBinTruncation.lean)
