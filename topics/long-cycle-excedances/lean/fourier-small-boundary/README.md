@@ -1,6 +1,6 @@
 # Cauchy bounds for cutoffs eight through ninety-nine
 
-Let $8\le k\le99$, $n\ge10000$, $s\ge0$, $p=s+\pi i$, $r=|p|$, and $S=\pi/r$. Suppose $nS^2\ge1$. The proposed theorem chooses one radius $R$ that separates the contour from every odd pole. If $F_j$ denotes the normalized Fourier coefficient of the original generating function on that circle and $T$ is its numerator, set $W=r(r/R)^n/(2|T(p)|)$. Then
+Let $8\le k\le99$, $n\ge10000$, $s\ge0$, $p=s+\pi i$, $r=|p|$, and $S=\pi/r$. Suppose $nS^2\ge1$. The theorem chooses one radius $R$ that separates the contour from every odd pole. If $F_j$ denotes the normalized Fourier coefficient of the original generating function on that circle and $T$ is its numerator, set $W=r(r/R)^n/(2|T(p)|)$. Then
 
 $$
 W|F_n|<1/25,\qquad W\left|(r/R)F_{n+1}-(s/r)F_n\right|<S/25.
@@ -10,4 +10,4 @@ The squared-radius gap gives distance at least $r/n$ from every pole. The origin
 
 ## Verification
 
-The circle, amplitude, and coefficient estimates passed locally on Lean 4.19. The local composition used the three numerator bounds as explicit hypotheses. The research-pin replay with the original coefficients supplying all three bounds is pending. On Linux, run `python3 -Bu check.py /path/to/fresh/project` in this directory. [Independent mathematical review](review.md)
+Lean 4.33.1 checked both Fourier errors from the original permutation generating function, including all three numerator bounds, for every cutoff from eight through ninety-nine. [Verification record and build command](verification.md) · [Independent mathematical review](review.md)
