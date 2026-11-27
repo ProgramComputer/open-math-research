@@ -96,8 +96,19 @@ MODULES = (
     "PrimitiveNumeratorInputs",
     "LinearSlabs",
     "RepositoryPrincipalSlab",
+    "RoundedProductTable",
+    "PrincipalCostTable",
+    "PrincipalCostBridge",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.original_slab_principal_le_computed_cap",
+    "OpenMathResearch.LongCycleExcedances.rationalCenteredError_cast",
+    "OpenMathResearch.LongCycleExcedances.roundedSlabQ_recurrence",
+    "OpenMathResearch.LongCycleExcedances.principalHeadEstimate_le_computed_cap",
+    "OpenMathResearch.LongCycleExcedances.rationalPrincipalCost_le_millionths",
+    "OpenMathResearch.LongCycleExcedances.qSlabPrefix_get",
+    "OpenMathResearch.LongCycleExcedances.qPrefix_get",
+    "OpenMathResearch.LongCycleExcedances.roundedQ_step",
     "OpenMathResearch.LongCycleExcedances.original_slab_principal_head_tail",
     "OpenMathResearch.LongCycleExcedances.slab_principal_head_tail_of_spec",
     "OpenMathResearch.LongCycleExcedances.marked_full_nonnegative",
@@ -233,6 +244,31 @@ AXIOM_REPORT = re.compile(
 )
 
 
+def replay_principal_arithmetic(project):
+    evaluation_sources = (
+        HERE.parent / "sine-comparison" / "EvalLinearTable.lean",
+        HERE / "RunPrincipal.lean",
+        HERE / "RunCosts.lean",
+    )
+    outputs = []
+    for original in evaluation_sources:
+        source = project / original.name
+        shutil.copyfile(original, source)
+        print(f"Evaluate {source.name} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
+        output = subprocess.check_output(["lake", "env", "lean", str(source)], cwd=project)
+        result = project / f"{source.stem}.txt"
+        result.write_bytes(output)
+        outputs.append(result)
+        print(f"Evaluation output-sha256={sha256(output).hexdigest()}", flush=True)
+    checker = HERE / "check-principal-cost.py"
+    print(f"Independent checker sha256={sha256(checker.read_bytes()).hexdigest()}", flush=True)
+    subprocess.run(
+        [sys.executable, "-I", str(checker), str(outputs[0]), "--lean-q", str(outputs[1]),
+         "--lean-caps", str(outputs[2])],
+        check=True,
+    )
+
+
 def main(project, imports):
     spec = importlib.util.spec_from_file_location(
         "common_pin", HERE.parent / "common-pin" / "check.py"
@@ -320,6 +356,7 @@ def main(project, imports):
     for module, _ in inputs:
         common.run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
+    replay_principal_arithmetic(project)
     print(f"PASS: {len(EXPECTED)} paired-profile declarations audited", flush=True)
 
 
