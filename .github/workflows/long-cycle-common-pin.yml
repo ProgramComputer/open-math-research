@@ -8,6 +8,7 @@ on:
       - 'topics/long-cycle-excedances/phase-cells/*.lean'
       - 'topics/long-cycle-excedances/lean/uniform-log-tilt/*.lean'
       - 'topics/long-cycle-excedances/lean/vertical-tilt/*.lean'
+      - 'topics/long-cycle-excedances/lean/middle-residues/*.lean'
 
 permissions:
   actions: read

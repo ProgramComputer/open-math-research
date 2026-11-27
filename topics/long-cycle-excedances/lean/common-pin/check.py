@@ -61,7 +61,44 @@ VERTICAL_MODULES = (
     "SmallRadius",
     "AllAngleMinorPoles",
 )
+MIDDLE_MODULES = (
+    "NestedPoleRadii",
+    "NestedPoleLattice",
+    "NestedSize",
+    "NestedNormalized",
+    "NeighborPoleGeometry",
+    "ExactPhaseCell",
+    "PolePhaseReadout",
+    "RepositoryNestedRow",
+    "RepositoryEnclosedHalf",
+    "CenteredPoleReadout",
+    "RepositoryCenteredRows",
+    "RepositoryMiddleCells",
+)
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.centered_pole_readout",
+    "OpenMathResearch.LongCycleExcedances.fixed_nested_radius_budget",
+    "OpenMathResearch.LongCycleExcedances.logarithmic_principal_unit",
+    "OpenMathResearch.LongCycleExcedances.neighbor_pole_displacement",
+    "OpenMathResearch.LongCycleExcedances.nested_decay_at_size",
+    "OpenMathResearch.LongCycleExcedances.nested_far_pole_error",
+    "OpenMathResearch.LongCycleExcedances.nested_near_pole_error",
+    "OpenMathResearch.LongCycleExcedances.nested_pole_lattice_error",
+    "OpenMathResearch.LongCycleExcedances.nested_pole_radii_error",
+    "OpenMathResearch.LongCycleExcedances.nested_pole_radii_error_uniform",
+    "OpenMathResearch.LongCycleExcedances.nested_size_envelope",
+    "OpenMathResearch.LongCycleExcedances.normalized_nested_budget",
+    "OpenMathResearch.LongCycleExcedances.signed_true_phase_cell",
+    "OpenMathResearch.LongCycleExcedances.signed_true_phase_cell_anti",
+    "RepositoryQuotientAudit.mem_positiveEnclosedPoles",
+    "RepositoryQuotientAudit.nested_approximation_positive_half",
+    "RepositoryQuotientAudit.nested_enclosed_minor_mode_mass",
+    "RepositoryQuotientAudit.original_middle_centered_rows",
+    "RepositoryQuotientAudit.original_middle_nested_row_error",
+    "RepositoryQuotientAudit.original_middle_nested_row_error_positive_half",
+    "RepositoryQuotientAudit.original_middle_phase_readout",
+    "RepositoryQuotientAudit.original_middle_true_phase_cell",
+    "RepositoryQuotientAudit.original_nested_row_error",
     "OpenMathResearch.LongCycleExcedances.small_log_radius_excludes",
     "RepositoryQuotientAudit.enclosed_poles_empty_of_small",
     "RepositoryQuotientAudit.all_angle_enclosed_minor_poles_le_fifth",
@@ -247,6 +284,7 @@ def compile_topic(project):
     files.extend((TOPIC.parent / "phase-cells" / (name + ".lean"), name) for name in PHASE_MODULES)
     files.extend((TOPIC / "uniform-log-tilt" / (m + ".lean"), m) for m in UNIFORM_MODULES)
     files.extend((TOPIC / "vertical-tilt" / (m + ".lean"), m) for m in VERTICAL_MODULES)
+    files.extend((TOPIC / "middle-residues" / (m + ".lean"), m) for m in MIDDLE_MODULES)
     observed = {}
     failed = set()
     for source, module in files:
@@ -298,7 +336,7 @@ def compile_topic(project):
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
                    "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
-                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES):
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES, *MIDDLE_MODULES):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
