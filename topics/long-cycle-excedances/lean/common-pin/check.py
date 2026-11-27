@@ -71,6 +71,7 @@ def compile_topic(project):
         (HERE / "RepositoryActualRationalPoint.lean", "RepositoryActualRationalPoint"),
     ]
     observed = {}
+    failed = set()
     for source, module in files:
         target = project / (module + ".lean")
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -81,13 +82,27 @@ def compile_topic(project):
                 subprocess.run(["patch", "--batch", str(target)], stdin=edits, text=True, check=True)
         if module == "LongCycleRunColors":
             target.write_text(target.read_text().replace("Polynomial.finset_sum_coeff", "Polynomial.finsetSum_coeff"))
+        if module == "LongCyclePrefixTail":
+            # add_le_add_left changed orientation in the pinned Mathlib.
+            target.write_text(target.read_text().replace(
+                "add_le_add_left hlo _, add_le_add_left hhi _",
+                "add_le_add (le_refl (c 0)) hlo, add_le_add (le_refl (c 0)) hhi",
+            ))
+        module_name = module.replace("/", ".")
+        imports = re.findall(r"^import ([\w.]+)", target.read_text(), flags=re.M)
+        if failed.intersection(imports):
+            failed.add(module_name)
+            print(f"Skip {module_name} after an import failed", flush=True)
+            continue
         out = project / ".lake/build/lib/lean" / (module + ".olean")
         out.parent.mkdir(parents=True, exist_ok=True)
         print(f"Compile {module} input-sha256={sha256(target.read_bytes()).hexdigest()}", flush=True)
         command = ["lake", "env", "lean", "-o", str(out), str(target)]
         result = subprocess.run(command, cwd=project, text=True, stdout=subprocess.PIPE)
         print(result.stdout, end="", flush=True)
-        result.check_returncode()
+        if result.returncode:
+            failed.add(module_name)
+            continue
         records = re.findall(
             r"^'(RepositoryQuotientAudit\.[^']+)' "
             r"(?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])\s*$",
@@ -95,6 +110,8 @@ def compile_topic(project):
         )
         for name, axioms in records:
             observed[name] = {axiom.strip() for axiom in axioms.split(",") if axiom.strip()}
+    if failed:
+        raise ArithmeticError(f"Modules not compiled: {sorted(failed)}")
     for name in EXPECTED:
         if name not in observed or observed[name] - ALLOWED:
             raise ArithmeticError(f"Missing declaration or unexpected axioms for {name}: {observed.get(name)}")
