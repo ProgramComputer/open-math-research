@@ -19,7 +19,7 @@ theorem coarse_subtract_le (slab : Fin 9) (b : ℕ) :
   · let m := rationalDegreeMass (linearSlabK slab) b
     let A := linearSlabLower slab
     let c := linearShape (linearSlabK slab) b (linearSlabX slab)
-    have hm : 0≤m := slab_degree_mass_nn slab h.2
+    have hm : 0 ≤ m := slab_degree_mass_nn slab h.2
     have hA : 0<A := by dsimp [A]; fin_cases slab <;> norm_num [linearSlabLower,linearSlabQuarter]
     let x := (coarseScale:ℚ)*m*(3/4)/A
     have hx : 0≤x := by dsimp only [x]; positivity
