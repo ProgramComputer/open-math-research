@@ -81,8 +81,9 @@ theorem coeff_le_forgetDegree {P : ℝ[X][X]} (hP : NN P) (b d : ℕ) :
 
 /-- The finite sum over configurations with two or more occupied indices
 is exactly the full polynomial less its empty and one-index parts. -/
-theorem markedMultiple_eq {ι : Type*} (A : Finset ι) (P : ι → ℝ[X][X]) :
-    markedMultiple A P = (∏ q ∈ A, (1+P q))-1-∑ q ∈ A, P q := by
+theorem sum_multiple_subsets_eq {ι R : Type*} [CommRing R] (A : Finset ι) (P : ι → R) :
+    (∑ T ∈ A.powerset.filter (fun U => 2 ≤ U.card), ∏ q ∈ T, P q) =
+      (∏ q ∈ A, (1+P q))-1-∑ q ∈ A, P q := by
   classical
   let g := fun T : Finset ι => ∏ q ∈ T, P q
   have hpartition := sum_filter_add_sum_filter_not A.powerset (fun T => 2 ≤ T.card) g
@@ -105,11 +106,14 @@ theorem markedMultiple_eq {ι : Type*} (A : Finset ι) (P : ι → ℝ[X][X]) :
   rw [hsmall, sum_insert (by simp), sum_image] at hpartition
   · simp only [g,prod_empty,prod_singleton] at hpartition
     rw [prod_one_add]
-    unfold markedMultiple
     rw [← hpartition]
     ring
   · intro q _ r _ he
     simpa using he
+
+theorem markedMultiple_eq {ι : Type*} (A : Finset ι) (P : ι → ℝ[X][X]) :
+    markedMultiple A P = (∏ q ∈ A, (1+P q))-1-∑ q ∈ A, P q :=
+  sum_multiple_subsets_eq A P
 
 theorem forgetDegree_markedMultiple {ι : Type*} (A : Finset ι) (P : ι → ℝ[X][X]) :
     forgetDegree (markedMultiple A P) = binMultiple A (fun q => forgetDegree (P q)) := by
@@ -144,6 +148,13 @@ theorem marked_bin_bounds {ι : Type*} (A : Finset ι) (k N : ℕ)
       intro T hT
       exact nn_prod T P (fun q hq => hp q ((mem_powerset.mp (mem_filter.mp hT).1) hq))
     simpa only [forgetDegree_markedMultiple] using coeff_le_forgetDegree hM b d
+
+theorem marked_multiple_nonnegative {ι : Type*} (A : Finset ι) (k N : ℕ)
+    (c : ι → ℕ→ℝ) (hc : ∀ v ∈ A, ∀ t, 0 ≤ c v t) (b t : ℕ) :
+    0 ≤ ((markedMultiple A (fun v => markDegreeBin k N (c v))).coeff b).coeff t := by
+  apply nn_sum
+  intro T hT
+  exact nn_prod T _ (fun v hv => nn_mark _ _ _ (hc v ((mem_powerset.mp (mem_filter.mp hT).1) hv)))
 
 /-- Nonnegativity of every joint bin/degree of the full marked product. -/
 theorem marked_full_nonnegative {ι : Type*} (A : Finset ι) (k N : ℕ)

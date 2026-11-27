@@ -34,4 +34,6 @@ jobs:
           diff -u nonprincipal-output.txt "$RUNNER_TEMP/nonprincipal.txt"
           python3 -I -B check-regular.py > "$RUNNER_TEMP/regular.txt"
           diff -u regular-output.txt "$RUNNER_TEMP/regular.txt"
+          python3 -I -B check-cutoff-jump.py > "$RUNNER_TEMP/cutoff-jump.txt"
+          diff -u cutoff-jump-output.txt "$RUNNER_TEMP/cutoff-jump.txt"
           python3 -I -B obstruction.py

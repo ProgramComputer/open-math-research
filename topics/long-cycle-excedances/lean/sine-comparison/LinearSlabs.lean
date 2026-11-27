@@ -49,25 +49,25 @@ theorem linearSlabInputs (j : Fin 9) {n k : ℕ} (hn : 10000 ≤ n)
   refine ⟨hK,le_of_mul_le_mul_right ?_ hXR⟩
   convert ht using 1 <;> ring
 
-theorem literal_slab_linear_envelope_of_spec (j : Fin 9) {n k N : ℕ}
+theorem literal_slab_scaled_linear_envelope_of_spec (j : Fin 9) {n k N : ℕ}
     (hn : 10000 ≤ n) (hnX : n ≤ linearSlabX j*k)
     {θ : ℝ} (hS : 0 < sin θ) (hUs : (6/5:ℝ) ≤ (n:ℝ)*sin θ^2)
     {d : ℕ → ℝ} (hd : CycleProbability.Spec k d)
     (A : Finset ℤ) (a : ℤ) (i : ℕ) :
     (binLinear (A.erase a)
       (fun q => forgetDegree (literalMarkedPrimitive k N (cos θ) (sin θ) a q))).coeff i ≤
-      (linearSlabTable j i:ℝ)/linearScale := by
+      ((linearSlabLower j:ℝ)/((k:ℝ)*sin θ))*((linearSlabTable j i:ℝ)/linearScale) := by
   obtain ⟨hX,hX48,hK208,hA, _⟩ := linearSlabConstants j
-  obtain ⟨hKk,hA₀⟩ := linearSlabInputs j hn hnX hS hUs
+  have hKk := (linearSlabInputs j hn hnX hS hUs).1
   have hk : 2 ≤ k := by omega
   obtain ⟨hb,ha,hfirst,hjump,hblock⟩ := primitive_checker_numerator_inputs hd hk
   let c := fun v => linearShape (linearSlabK j) v (linearSlabX j)
   let V := fun v => (linearHead (c v):ℝ)/linearScale
   let T := fun v => 2*(linearHalfTail (c v):ℝ)/linearScale
   have shape (v : ℕ) := cast_linearShape (linearSlabK j) v (linearSlabX j)
-  refine literal_checker_linear_envelope (J:=31) (cap:=i) (G:=linearScale)
+  refine literal_checker_scaled_linear_envelope (J:=31) (cap:=i) (G:=linearScale)
     (X:=(linearSlabX j:ℝ)) (by omega) hKk (by omega)
-    (by exact_mod_cast hX) (by exact_mod_cast hnX) hS (by norm_num) hUs hA hA₀ _
+    (by exact_mod_cast hX) (by exact_mod_cast hnX) hS (by norm_num) hUs hA _
     hb ha hfirst hjump hblock (linearSlabTable j) V T ?_ ?_ ?_ ?_ ?_ A a i le_rfl
   · intro v hv _
     exact checker_shape_tail_guard hK208 hv (by decide) (by exact_mod_cast hX) (by exact_mod_cast hX48)
@@ -85,6 +85,19 @@ theorem literal_slab_linear_envelope_of_spec (j : Fin 9) {n k N : ℕ}
       (div_nonneg (div_nonneg (mul_nonneg (by norm_num) (Nat.cast_nonneg _)) hG) (by norm_num))
   · intro v hv _
     exact linearTable_rounding (linearSlabK j) (linearSlabX j) (linearSlabLower j) v hv hA.ne'
+theorem literal_slab_linear_envelope_of_spec (j : Fin 9) {n k N : ℕ}
+    (hn : 10000 ≤ n) (hnX : n ≤ linearSlabX j*k)
+    {θ : ℝ} (hS : 0 < sin θ) (hUs : (6/5:ℝ) ≤ (n:ℝ)*sin θ^2)
+    {d : ℕ → ℝ} (hd : CycleProbability.Spec k d)
+    (A : Finset ℤ) (a : ℤ) (i : ℕ) :
+    (binLinear (A.erase a)
+      (fun q => forgetDegree (literalMarkedPrimitive k N (cos θ) (sin θ) a q))).coeff i ≤
+      (linearSlabTable j i:ℝ)/linearScale := by
+  have hAS := (linearSlabInputs j hn hnX hS hUs).2
+  have hA := (linearSlabConstants j).2.2.2.1
+  have hKS : 0 < (k:ℝ)*sin θ := hA.trans_le hAS
+  exact (literal_slab_scaled_linear_envelope_of_spec j hn hnX hS hUs hd A a i).trans
+    (mul_le_of_le_one_left (by positivity) ((div_le_one hKS).mpr hAS))
 
 /-- The linear input to the literal rounded-product theorem, instantiated
 for every actual slab. No finite numerical head, tail, or rounding input remains. -/
@@ -101,6 +114,7 @@ theorem original_slab_linear_envelope (j : Fin 9) {n k N : ℕ}
   exact literal_slab_linear_envelope_of_spec j hn hnX hS hUs
     (CycleProbability.originalProbability_spec hk) A a i
 
+#print axioms literal_slab_scaled_linear_envelope_of_spec
 #print axioms original_slab_linear_envelope
 #print axioms linearSlabInputs
 #print axioms literal_slab_linear_envelope_of_spec

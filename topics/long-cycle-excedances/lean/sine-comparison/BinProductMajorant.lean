@@ -95,6 +95,10 @@ private theorem bin_product_differential_bounds {ι : Type*} (s : Finset ι) (p 
       convert hterm using 1 <;> dsimp [P,E,B] <;> ring
   exact go
 
+theorem bin_full_nonconstant_nonnegative {ι : Type*} (s : Finset ι) (p : ι → ℝ[X])
+    (hp : ∀ i ∈ s, ∀ j, 0 ≤ (p i).coeff j) (j : ℕ) : 0 ≤ (binFull s p-1).coeff j := by
+  simpa only [coeff_zero] using (bin_product_differential_bounds s p hp).1 j
+
 theorem bin_multiple_derivative_le {ι : Type*} (s : Finset ι) (p : ι → ℝ[X])
     (hp : ∀ i ∈ s, ∀ j, 0 ≤ (p i).coeff j) (j : ℕ) :
     (derivative (binMultiple s p)).coeff j ≤
