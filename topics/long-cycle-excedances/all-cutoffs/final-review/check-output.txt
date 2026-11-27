@@ -1,0 +1,7 @@
+Hosted ZIP sha256:b4cc5a2cb6227de3c12375ab94382c6a911fda112755d130f40675443b62e74b
+Lean console sha256 220ffa86d6bc0d0dfd9602f1afcdd8c2cfffe876fc6e66e365f2a6075513b618
+@ExternalExcedanceAudit : ∀ {m : ℕ},
+  4 ≤ m →
+    (∃ p q, enumerator m 4 = X * p ∧ enumerator (m + 1) 4 = X * q ∧ StrictNegativeInterlacing p q (m - 2)) ∧
+      WeakRealInterlacing (enumerator m 4) (enumerator (m + 1) 4)
+423 unique exported source hashes, 423 replayed module names, 13 declarations, 9 lock pins.

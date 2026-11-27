@@ -5,8 +5,8 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | Result | Outcome | Formal verification |
 |---|---|---|
 | [A prism-slice split can destroy interlacing](topics/prism-splitting/README.md) | Disproof by an infinite family | 🟩 Full · Lean 4<br>🟩 Full · Rocq |
+| [Consecutive interlacing for permutations with every minimum cycle length](topics/long-cycle-excedances/all-cutoffs/README.md) | Proof for every $n\ge k\ge3$ by combining the repository and Bowen Zuo’s cutoff theorems | 🟨 Partial · Lean 4 (fixed cutoffs and general sign-witness theorems) |
 | [Real-rootedness and interlacing for strict peaks in Catalan words](topics/catalan-word-peaks/README.md) | Proof for every word length | 🟩 Full · Lean 4 |
-| [Strict consecutive interlacing for every minimum cycle length at least seven](topics/long-cycle-excedances/all-large-cutoffs/README.md) | Independently reviewed computer-assisted proof for every old size $n\ge k\ge7$ | 🟨 Partial · Lean 4 (interlacing from mixed root witnesses) |
 | [Eventual simple negative zeros for balanced arrays in every dimension](topics/balanced-arrays/eventual-all/README.md) | One eventual row threshold works for every dimension $d\ge2$ and every cap | 🟨 Partial · Lean 4 (support, degree, one-column identity, sign reduction, phase first-hit radii and quantitative tilt) |
 | [Uniform eventual interlacing for ordered large-block partitions](topics/ordered-large-blocks/uniform-eventual/README.md) | Reviewed partial theorem with one eventual cutoff across every threshold and rank | ⬜ None |
 | [Sharp coefficient thresholds for counting polynomial zeros in disks](topics/balanced-arrays/root-distributions/single-sign/README.md) | Sharp angular thresholds and disk-count bounds independent of degree, with optimal order at weak curvature | ⬜ None |

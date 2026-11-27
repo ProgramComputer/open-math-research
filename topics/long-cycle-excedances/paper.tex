@@ -11,7 +11,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-Let $E_{n,k}(t)$ count permutations of $n$ letters by excedances subject to a minimum cycle length $k$. We give a proposed proof that, for every $n\ge k\ge7$, the polynomials $E_{n,k}/t$ and $E_{n+1,k}/t$ have strictly interlacing simple negative zeros. For large sizes the proof uses estimates of principal poles and a common Fourier contour. A decreasing-run model controls the exterior roots. Grouped pole estimates and two finite sign verifiers join the exterior to the middle in the remaining parameter range. The finite join comprises 541,199 intervening gaps. We also prove the all-length statement for $k=3$. Bowen Zuo has separately supplied proofs for the three intervening cutoffs $k=4,5,6$.
+Let $E_{n,k}(t)$ count permutations of $n$ letters by excedances subject to a minimum cycle length $k$. We prove that, for every $n\ge k\ge7$, the polynomials $E_{n,k}/t$ and $E_{n+1,k}/t$ have strictly interlacing simple negative zeros. For large sizes the proof uses estimates of principal poles and a common Fourier contour. A decreasing-run model controls the exterior roots. Grouped pole estimates and two finite sign verifiers join the exterior to the middle in the remaining parameter range. The finite join comprises 541,199 intervening gaps. We also prove the all-length statement for $k=3$. Bowen Zuo proves the three intervening cutoffs $k=4,5,6$. Together the results establish the conjecture for every cutoff and every admissible pair of sizes.
 \end{abstract}
 \textbf{Theorem 1.} Let $E_{n,k}(t)$ count permutations of $[n]$ with all cycles of length at least $k$, by their number of excedances. For $k=3$ and every $n\ge3$, the $n-2$ nonzero zeros of $E_{n,3}$ are simple and negative. They strictly interlace the nonzero zeros of $E_{n+1,3}$, with the next row supplying both outer roots. More generally, for every fixed $k\ge3$ the same assertions hold for all sufficiently large $n$. Theorem 2 gives these conclusions for all $n\ge Bk^2$ with one absolute constant $B$. In all these rows zero itself is simple. This treats the first conjectured threshold in Alexandersson’s statement and reduces every other fixed threshold to finitely many rows. The proof gives an explicit analytic cutoff of 400 at $k=3$. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#conjLongCycleExcedances}{Original conjecture} · \href{https://github.com/PerAlexandersson/RealRooted/issues/2590\#issuecomment-7059794955}{Author’s derivation and computations}
 
@@ -504,6 +504,33 @@ This argument uses the established exact run encoding, the labelled-cycle Euleri
 \clearpage
 \input{paired-fourier-cutoff}
 \input{all-large-cutoffs}
+
+\section{All cutoffs and the original conjecture}
+
+\textbf{Theorem.} Fix integers $n\ge k\ge3$. Both $E_{n,k}/t$ and
+$E_{n+1,k}/t$ have simple negative zeros. The zeros interlace strictly,
+with the larger row providing the two outer zeros. Consequently the
+original polynomials are real-rooted and interlace consecutively in the
+weak sense of Alexandersson's conjecture.
+
+\emph{Proof.} Theorem 1 supplies the result at $k=3$. Bowen Zuo also
+proved this case independently. At $k=4,5,6$ apply, respectively, Zuo's
+\href{https://github.com/AlexZander-666/long-cycle-excedance-interlacing/releases/tag/v1.0.0}{fixed-four theorem},
+\href{https://github.com/AlexZander-666/long-cycle-excedance-interlacing/releases/tag/v1.1.0}{fixed-five theorem}
+and \href{https://github.com/AlexZander-666/long-cycle-excedance-interlacing/releases/tag/v1.2.0}{fixed-six theorem}.
+These statements use the upper size $N=n+1$ and apply from
+$N=k+1$. Their reduced rows are obtained by removing one factor $t$
+from the original unweighted strict-excedance polynomials.
+For $k\ge7$ the preceding section gives the result for every $n\ge k$.
+Each reduced row has constant term one, so adjoining zero at the right
+end of each ordered negative-root list restores the simple common zero
+and gives weak interlacing. \hfill$\square$
+
+The \href{https://github.com/ProgramComputer/open-math-research/pull/216}{independent Lean rebuilds}
+compare Zuo's three released theorems with the original permutation
+enumerator, including the first adjacent pair at each cutoff.
+The general proof uses the analytic estimates and finite computations
+above. Its end-to-end formal verification remains open.
 
 \section*{Reproducibility and scope}
 The cutoff at size $10{,}000$ uses rational scalar replays and written proofs with independent agent-assisted reviews. \href{https://github.com/ProgramComputer/open-math-research/tree/main/topics/long-cycle-excedances/paired-residues}{Paired residues} and \href{https://github.com/ProgramComputer/open-math-research/tree/main/topics/long-cycle-excedances/fourier-circle}{Fourier contrast}.

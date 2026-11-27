@@ -1,7 +1,7 @@
-\section{A proposed proof for all minimum cycle lengths at least seven}
+\section{All minimum cycle lengths at least seven}
 \label{sec:all-cutoffs}
 
-\textbf{Proposed theorem.}
+\textbf{Theorem.}
 For every pair of integers $n\ge k\ge7$, the polynomials $P_n=E_{n,k}/t$
 and $P_{n+1}=E_{n+1,k}/t$ have respectively $n-2$ and $n-1$ simple,
 strictly negative roots, and they interlace strictly.
@@ -18,16 +18,17 @@ For the parameter decomposition put $x=n/k$. The insertion argument
 already gives the theorem for $x<4$. At $x\ge4$ the two common-pole
 comparisons treat all old sizes $n\ge10{,}000$ (with overlapping
 aspect intervals $[4,48]$ and $[44,\infty)$). Through $n=250$, the
-remaining 7,021 old-size and threshold pairs in the finite-prefix
-certificate include every required pair.
+finite-prefix certificate covers all 6,328 required pairs with $k\ge7$
+and 693 additional smaller-cutoff pairs, for a total of 7,021.
 For $251\le n<10{,}000$ and $x\ge20$, use the phase
 $\Psi=(n+1)\theta-\Im G_s(s+i\pi)$ and the actual consecutive normalized
 rows $Y_n,Y_{n+1}$. In the angular range $n\sin^2\theta\ge1$ the
 bounds $|Y_n-\cos\Psi|<1/20$ and
 $|Y_{n+1}-\cos\theta\,Y_n+\sin\theta\sin\Psi|<3\sin\theta/25$
-give the next sign at an old zero. First hits of the phase levels give
-ordered gaps, while the exterior estimate places the innermost ranks
-before the first required hit. The precise contour, constants and
+give the next sign at an old zero. For two successive levels, take the
+first hit of the upper level and the last hit of the lower level before it.
+Between these points the phase stays strictly between the levels.
+The exterior estimate places the innermost ranks before the first required hit. The precise contour, constants and
 first-hit comparison are in the
 \href{https://github.com/ProgramComputer/open-math-research/tree/research/topics/long-cycle-excedances/aspect-20}{large-aspect proof}.
 
@@ -89,11 +90,4 @@ root $-1$ accounts for the remaining old degree and the high-angle
 comparison gives its next sign. Thus exactly $n-2$ old roots have been
 located, proving simplicity. The signs at zero and at the far negative
 end complete the $n-1$ complementary gaps of the next polynomial, counting
-both outer gaps. This concludes the proposed proof for $k\ge7$.
-
-The all-size result at threshold three is Theorem~1. Bowen Zuo's supplying
-releases separately state all-size interlacing for $k=4,5,6$, starting
-with the old sizes $4,5,6$, respectively. Those are external inputs; their
-pinned proof audits are recorded
-\href{https://github.com/ProgramComputer/open-math-research/pull/216}{separately}.
-There is no end-to-end Lean or Rocq formalization of the argument for $k\ge7$.
+both outer gaps. This concludes the proof for $k\ge7$.
