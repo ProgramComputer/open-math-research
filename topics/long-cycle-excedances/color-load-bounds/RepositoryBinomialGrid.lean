@@ -20,9 +20,10 @@ theorem original_color_load_grid_mass {n d p : ℕ} (hp : 0 < p)
     (hd : 0 < d) (half : 2*d ≤ n) :
     (∑ j ∈ range (p+1), colorLoad n d ((j:ℝ)/(p:ℝ))) ≤
       (p:ℝ)/((n:ℝ)+1)+1/√(d:ℝ) := by
+  let atom := frozen_band_binomial_atom
   apply color_load_grid_mass hp hd (by omega)
   simpa only [colorLoad, binomialDensity, mul_comm ((n.choose d:ℕ):ℝ), mul_assoc] using
-    binomial_peak_from_uniform_atom hd half frozen_band_binomial_atom
+    binomial_peak_from_uniform_atom hd half (fun {A B N} hA hB hN {u v} hu hv => @atom A B N hA hB hN u v hu hv)
 
 #print axioms original_color_load_grid_mass
 end RepositoryQuotientAudit

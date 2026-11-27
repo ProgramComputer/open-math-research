@@ -68,7 +68,7 @@ theorem actual_load_upper_budget {n p k b : ℕ} (hp : 0 < p) (hb : 0 < b)
     have hh := (mul_le_mul_of_nonneg_right ht hap.le).trans
       (mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hc (exp_pos _).le) hap.le)
     nlinarith only [hh,he]
-  exact (actual_color_probability_comparison n p k b hp).2.trans (add_le_add_left hnew _)
+  exact (actual_color_probability_comparison n p k b hp).2.trans (add_le_add (le_refl _) hnew)
 
 #print axioms actual_load_lower_budget
 #print axioms actual_load_upper_budget

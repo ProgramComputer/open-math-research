@@ -206,13 +206,13 @@ theorem original_front_acceptance_upper {n p k : ℕ} (hp : 0 < p) (hk : 0 < k)
     rw [accepted_probability_eq_realCount] at hload
     have hmass := (baselinePairs_probability_bounds (n:=n) hb hble).2
     have hfront : f ≤ 1/(b:ℝ)+(9/1000:ℝ)/a :=
-      hload.trans (add_le_add_right hmass _)
+      hload.trans (add_le_add hmass (le_refl _))
     have hratio : 1/(b:ℝ) ≤ (3/2:ℝ)/a := by
       calc
         _ ≤ 1/((2/3:ℝ)*a) := div_le_div_of_nonneg_left (by norm_num) (by positivity) hbc
         _ = _ := by field_simp [hap.ne']
     calc
-      _ ≤ (3/2:ℝ)/a+(9/1000:ℝ)/a := hfront.trans (add_le_add_right hratio _)
+      _ ≤ (3/2:ℝ)/a+(9/1000:ℝ)/a := hfront.trans (add_le_add hratio (le_refl _))
       _ = (1509/1000:ℝ)/a := by ring
       _ ≤ _ := by
         rw [div_mul_eq_div_div]
