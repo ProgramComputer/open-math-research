@@ -20,7 +20,7 @@ $$
 
 The two bounds involving $T_j$ use $R/r\le101/100$. For $A$ use $|r/P_l|\le1$ and $r/R\le1$. The checked theorem also supplies summability of the four nonnegative kernels and absolute summability in the endpoint sum, as well as nonnegativity of the two scaled $S_j$ terms.
 
-[Pointwise coefficient and gap estimates](FourierPolePointwiseBudget.lean) · [Literal row budget theorem](FourierLiteralKernelBudgets.lean)
+[Pointwise coefficient and gap estimates](FourierPolePointwiseBudget.lean) · [Literal row budget theorem](FourierLiteralKernelBudgets.lean) · [Verification record](verification.md)
 
 The [common-pin checker](check.py) uses the original pole-definition driver, checked discrete moments, and the nine direct Fourier dependencies at the authenticated #318 source commit. The checker compares each staged source with its expected hash. [Exact direct dependency sources](https://github.com/ProgramComputer/open-math-research/tree/ade4acc68e05cf882f3733308e18b61477a381d4/topics/long-cycle-excedances/lean/fourier-circle). Run from the repository root with Lean 4.33.1 first on the path.
 
