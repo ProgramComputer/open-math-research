@@ -1,0 +1,3 @@
+80 adjacent-size triples and 200 marked color-cycle sizes passed.
+The literal lag was bounded in all 80 triples; equality in 53.
+Old sizes 0..6, 1..4 colors, 2 <= cutoff <= min(6, old size + 1).

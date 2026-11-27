@@ -48,6 +48,8 @@ The combinatorial modules through the rational recurrence originally compiled wi
 
 All four modules compiled and replayed on the frozen Lean 4.33.1 pin. The audit records the exact source hashes and axiom reports for 16 declarations. [Verification record](verification.txt) · [Common-pin check](../lean/common-pin/check.py)
 
+The successor recurrence transports the actual polynomial insertion law to the color transform. Its marked-cycle convolution gives the exact successive difference and dominates the literal nonnegative lag coefficient. [Successor recurrence and lag comparison](successor.md)
+
 ## Verification and provenance
 
 Run the following from this folder. The checker enumerates the word and the color permutation directly, erases the bars, checks injectivity, and compares each fiber size with stars and bars. It separately recomputes the anchored recurrence. All 140 triples with $0\le n\le6$, $0\le p\le4$ and $2\le k\le5$ passed, covering 180,248 accepted pairs. [Exact checker](verify.py) · [Output](finite-output.txt)
