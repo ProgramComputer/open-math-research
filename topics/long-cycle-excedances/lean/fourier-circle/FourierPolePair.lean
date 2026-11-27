@@ -56,8 +56,11 @@ theorem normalizedPole_pair_integral {p q : ℂ} {R : ℝ} (hR : 0 < R)
     ((continuous_const.mul (cu.mul cv)).intervalIntegrable _ _)
     (((cu.pow 2).add (cv.pow 2)).intervalIntegrable _ _)
     (fun x _ => (by nlinarith [sq_nonneg (u x - v x)] : 2*(u x*v x) ≤ u x^2+v x^2))
-  rw [intervalIntegral.integral_const_mul, intervalIntegral.integral_add
-    ((cu.pow 2).intervalIntegrable _ _) ((cv.pow 2).intervalIntegrable _ _)] at hs
+  have hadd : (∫ x in (0:ℝ)..2*π, u x^2+v x^2) =
+      (∫ x in (0:ℝ)..2*π, u x^2) + (∫ x in (0:ℝ)..2*π, v x^2) :=
+    intervalIntegral.integral_add (f := fun x => u x^2) (g := fun x => v x^2)
+      ((cu.pow 2).intervalIntegrable _ _) ((cv.pow 2).intervalIntegrable _ _)
+  rw [intervalIntegral.integral_const_mul, hadd] at hs
   dsimp only [u,v] at hs
   rw [normalizedPole_second_moment hR hp,normalizedPole_second_moment hR hq] at hs
   linarith
