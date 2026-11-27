@@ -82,8 +82,10 @@ theorem principal_bin_head_tail {j n lower G : ℕ} {d : ℕ→ℝ} (hd : Spec (
     have h := cost_split_head_tail (forgetDegree P) P.natDegree 240 natDegree_map_le E (fun t => (q t:ℝ)/G)
       (H:=4/7) (base:=9/8) (by norm_num) (by norm_num) hp (fun _ => by positivity)
       (fun b => ⟨centeredErrorBound_nonneg _,centeredErrorBound_le _⟩) (heq ▸ hh)
-    exact h.trans (add_le_add_left (mul_le_mul_of_nonneg_left
-      (heq.symm ▸ literal_principal_tilt hd hn hkn hS hangle A N) (by positivity)) _)
+    have ht : (4/7:ℝ)/(9/8:ℝ)^240*(forgetDegree P).eval (9/8) ≤ tail :=
+      mul_le_mul_of_nonneg_left (heq.symm ▸ literal_principal_tilt hd hn hkn hS hangle A N)
+        (by positivity : 0 ≤ (4/7:ℝ)/(9/8:ℝ)^240)
+    exact h.trans (add_le_add (le_refl head) ht)
   have h := centered_marked_cost (m:=j+1) (n:=n) T F hd (by omega) hlo hF hw hQ hcost
   dsimp only
   have hscale : (((j+1:ℕ):ℝ)+1:ℂ)=((j+2:ℕ):ℂ) := by push_cast; ring
