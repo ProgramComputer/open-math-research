@@ -1,18 +1,15 @@
-import FirstPairWeights
+import FirstPairRecurrence
 import CheckpointReplay
 
 namespace RepositoryQuotientAudit
-open LongCycles
+open LongCycles Polynomial
 open OpenMathResearch.LongCycleExcedances.InsertionTable
 
 /-- The literal permutation sum and the supplying Eulerian polynomial
 instantiate the checked consecutive insertion tables. -/
-noncomputable def firstPairOriginal : CheckpointModel where
-  A := eulerian 12
-  E := fun n => enumerator n 13
-  a_agrees := firstPairWeightAgrees
-  zero_row := enumerator_empty 13
-  successor := fun _ => LongCycleBounds.Insertion.enumerator_succ (by decide)
+noncomputable def firstPairOriginal : CheckpointModel :=
+  CheckpointModel.mk (eulerian 12) (fun n => enumerator n 13)
+    firstPairWeightAgrees (enumerator_empty 13) firstPairSuccessor
 
 end RepositoryQuotientAudit
 

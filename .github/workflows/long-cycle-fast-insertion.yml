@@ -81,6 +81,8 @@ jobs:
           set -euo pipefail
           bash "$MODULES/ci-prepare.sh"
           gh run download 45917288503 --repo "$GITHUB_REPOSITORY" --name quotient-import-objects --dir "$RUNNER_TEMP" || true
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/15173224004/zip" > "$RUNNER_TEMP/first-pair-cache.zip" ||
+            rm -f "$RUNNER_TEMP/first-pair-cache.zip"
           for group in 0 1 2; do
             gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "row-proofs-$group" --dir "$RUNNER_TEMP/downloads/$group"
             mkdir -p "$RUNNER_TEMP/checked"
@@ -93,6 +95,9 @@ jobs:
           args=("$RUNNER_TEMP/common-pin")
           if [[ -f "$RUNNER_TEMP/quotient-import-objects.tar.zst" ]]; then
             args+=("$RUNNER_TEMP/quotient-import-objects.tar.zst")
+          fi
+          if [[ -f "$RUNNER_TEMP/first-pair-cache.zip" ]]; then
+            args+=(--pair-cache "$RUNNER_TEMP/first-pair-cache.zip")
           fi
           python3 -Bu "$MODULES/check.py" "${args[@]}" --groups "$RUNNER_TEMP/checked" --pair-objects "$RUNNER_TEMP/first-pair-objects" 2>&1 | tee "$RUNNER_TEMP/common-pin.log"
       - name: Preserve verification report
