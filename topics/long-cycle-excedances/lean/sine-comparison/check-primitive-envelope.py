@@ -159,9 +159,16 @@ def production(project, ordered, mathlib_roots, upstream, archive):
                 common.run(project, "lake", "--wfail", "build", "+"+module)
     stage(project, ordered)
     observed = {}
+    failed = set()
     for module, _ in ordered:
         relative = module.replace(".", "/")
         source = project / (relative + ".lean")
+        dependencies = {name for line in IMPORT.findall(source.read_text())
+                        for name in line.partition("--")[0].split()}
+        if blocked := failed & dependencies:
+            print(f"Skip {module}: failed dependencies {sorted(blocked)}", flush=True)
+            failed.add(module)
+            continue
         output = project / ".lake" / "build" / "lib" / "lean" / (relative + ".olean")
         output.parent.mkdir(parents=True, exist_ok=True)
         print(f"Compile {module} input-sha256={digest(source)}", flush=True)
@@ -170,9 +177,13 @@ def production(project, ordered, mathlib_roots, upstream, archive):
             text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
         )
         print(result.stdout, end="", flush=True)
-        result.check_returncode()
+        if result.returncode:
+            failed.add(module)
+            continue
         for name, axioms in AXIOMS.findall(result.stdout):
             observed[name] = {axiom.strip() for axiom in axioms.split(",") if axiom.strip()}
+    if failed:
+        raise RuntimeError(f"Module compilation failed or was blocked: {sorted(failed)}")
     for name in AUDITED:
         fq = NAMESPACE + name
         if fq not in observed or observed[fq] - common.ALLOWED:

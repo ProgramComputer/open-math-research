@@ -67,7 +67,7 @@ theorem primitive_first_checker_bin_mass {K k N i : ℕ} (hK : 2 ≤ K) (hKk : K
       apply add_le_add hbase
       calc
         _ ≤ (k:ℝ)*(1/(4*(k:ℝ)^2)) := mul_le_mul_of_nonneg_left hj hkR.le
-        _ = 1/(4*(k:ℝ)) := by field_simp; ring
+        _ = 1/(4*(k:ℝ)) := by field_simp <;> ring
         _ ≤ _ := one_div_le_one_div_of_le (by positivity) (by linarith)
     · rw [erase_eq_of_not_mem hmem] at hbase
       exact hbase.trans (le_add_of_nonneg_right (by split <;> positivity))

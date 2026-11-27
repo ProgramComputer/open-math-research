@@ -40,7 +40,7 @@ theorem finite_star_dyadic_bound (A : Finset ℤ) (a : ℤ) {c : ℝ} {G : ℕ}
       have hvR : (w q:ℝ) ≤ (oddGap q a:ℝ)*(v q:ℝ) := by exact_mod_cast hv q hq
       calc
         _ ≤ _ := hvR
-        _ = _ := by field_simp [hGR.ne']; ring
+        _ = _ := by field_simp [hGR.ne'] <;> ring
     _ = (↑(∑ q ∈ A.erase a,v q):ℝ)/G := by
       push_cast
       simp only [div_eq_mul_inv,sum_mul]

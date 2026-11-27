@@ -88,7 +88,7 @@ theorem primitive_factorial_bin_mass {k N i : ℕ} (hk : 0 < k) (hi : 9 ≤ i)
     _ ≤ (k:ℝ)*((k:ℝ)/4+1)*(1/(2*(j.factorial:ℝ)*(k:ℝ)^2)) :=
       mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_left (primitive_bin_card hk (by omega : 0 < i)) hkR.le) nn
-    _ = _ := by change _ = (1/4+1/(k:ℝ))/(2*(j.factorial:ℝ)); field_simp; ring
+    _ = _ := by change _ = (1/4+1/(k:ℝ))/(2*(j.factorial:ℝ)); field_simp <;> ring
 
 #print axioms degreeBin_iff
 #print axioms primitive_atom_mass

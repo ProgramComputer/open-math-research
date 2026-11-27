@@ -1,6 +1,6 @@
 # Linear envelopes for the literal occupied primitive
 
-The marked-bin bound starts from the actual primitive factor in the [paired-profile expansion](../paired-profile/occupied-values.md). Its degree $s$ coefficient has absolute value $|b_s|\,|z_q|^{s-1}/(|a_q-a|S)$ for signed odd indices $a_q$ and $a$. The [bivariate bridge](marked-bins.md) marks primitive degree and summed bin separately. This package gives the input `hL` to its rounded product estimate.
+The marked-bin bound starts from the actual primitive factor in the [paired-profile expansion](../paired-profile/occupied-values.md). Its degree $s$ coefficient has absolute value $|b_s|\cdot|z_q|^{s-1}/(|a_q-a|S)$ for signed odd indices $a_q$ and $a$. The [bivariate bridge](marked-bins.md) marks primitive degree and summed bin separately. This package gives the input `hL` to its rounded product estimate.
 
 `original_checker_linear_envelope` uses the [literal numerator verification](../paired-profile/numerator-verification.md) to supply the coefficient identity and all size-block bounds, including the atom in bin four and the jump in bin eight. The width-four bin holds only degree $k$ at bin four. For bins five through eight the integer floor endpoints telescope. In later bins the factorial index is $\lfloor(i-1)/4\rfloor$ and the bin has at most $k/4+1$ sizes. No primitive beyond the chosen cap enters those coefficients.
 
