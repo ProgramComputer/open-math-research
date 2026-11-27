@@ -38,13 +38,19 @@ theorem hasSum_weightedPow_coeff {F : ℂ⟦X⟧} {k : ℕ} (hk : 0 < k)
     (hF : VanishesBelow k F) (n : ℕ) :
     HasSum (fun j => PowerSeries.coeff (R := ℂ) n (weightedPow F j))
       (∑ j ∈ range (n/k+1), PowerSeries.coeff (R := ℂ) n (F^j)/(j.factorial:ℂ)) := by
-  convert hasSum_sum_of_ne_finset_zero (s := range (n/k+1)) (f := fun j =>
-      PowerSeries.coeff (R := ℂ) n (weightedPow F j)) (fun j hj => ?_) using 1
-  · apply sum_congr rfl
+  let s := range (n/k+1)
+  let f := fun j => PowerSeries.coeff (R := ℂ) n (weightedPow F j)
+  have hfinite : HasSum f (∑ j ∈ s, f j) := hasSum_sum_of_ne_finset_zero (by
+    intro j hj
+    apply coeff_weightedPow_of_lt_cutoff hF
+    exact (Nat.div_lt_iff_lt_mul hk).mp (by simpa [s] using hj))
+  have he : (∑ j ∈ s, f j) =
+      ∑ j ∈ range (n/k+1), PowerSeries.coeff (R := ℂ) n (F^j)/(j.factorial:ℂ) := by
+    apply sum_congr rfl
     intro j _
-    rw [weightedPow, PowerSeries.coeff_C_mul, div_eq_mul_inv, mul_comm]
-  · apply coeff_weightedPow_of_lt_cutoff hF
-    exact (Nat.div_lt_iff_lt_mul hk).mp (by simpa using hj)
+    rw [show f j = PowerSeries.coeff (R := ℂ) n (weightedPow F j) from rfl,
+      weightedPow, PowerSeries.coeff_C_mul, div_eq_mul_inv, mul_comm]
+  exact he ▸ hfinite
 
 def cutoffExp (F : ℂ⟦X⟧) : ℂ⟦X⟧ := ∑' j, weightedPow F j
 

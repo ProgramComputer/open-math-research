@@ -18,7 +18,11 @@ private theorem summable_weightedPow_product {F G : ℂ⟦X⟧} {k : ℕ} (hk : 
     PowerSeries.coeff (R := ℂ) n (weightedPow F a.1 * weightedPow G a.2)), ?_⟩
   rw [HasSum, PowerSeries.WithPiTopology.tendsto_iff_coeff_tendsto]
   intro n
-  have hfinite := hasSum_sum_of_ne_finset_zero
+  have hfinite : HasSum
+      (fun a : ℕ × ℕ => PowerSeries.coeff (R := ℂ) n (weightedPow F a.1 * weightedPow G a.2))
+      (∑ a ∈ (range (n/k+1)).product (range (n/k+1)),
+        PowerSeries.coeff (R := ℂ) n (weightedPow F a.1 * weightedPow G a.2)) :=
+    hasSum_sum_of_ne_finset_zero
     (s := (range (n/k+1)).product (range (n/k+1)))
     (f := fun a : ℕ × ℕ => PowerSeries.coeff (R := ℂ) n (weightedPow F a.1 * weightedPow G a.2))
     (by
