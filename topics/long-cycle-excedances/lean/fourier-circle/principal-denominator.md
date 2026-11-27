@@ -26,7 +26,7 @@ $\delta=(49/100)cr/k$ from every point of the selected circle to every pole, whe
 
 ## Verification
 
-The three principal estimates and five logarithm, contraction and circle statements passed Lean 4.19.0 at `6caaee842e94` and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. All eight transitive axiom reports listed `propext`, `Classical.choice` and `Quot.sound`. The [initial hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/46008917250) passed 42 audits across 21 source modules for the principal estimates. The hosted rebuild including the five additional declarations is pending. The numerator contraction enters separately in the comparison.
+The three principal estimates and five logarithm, contraction and circle statements passed Lean 4.19.0 at `6caaee842e94` and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. All eight transitive axiom reports listed `propext`, `Classical.choice` and `Quot.sound`. The [initial hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/46008917250) passed 42 audits across 21 source modules for the principal estimates. The [complete hosted rebuild](https://github.com/ProgramComputer/open-math-research/actions/runs/46010722281) passed all 47 declaration audits across 23 modules. Each compiler input hash matched the source at `6fa7b3d`, including the simultaneous circle-selection and denominator-ratio theorem. The numerator contraction enters separately in the comparison.
 
 ~~~sh
 cd shared/lean
