@@ -29,6 +29,26 @@ THEOREMS = {
     "FourierSquaredSum": ["infinite_squared_pole_integral"],
     "FourierPoleDifferentiation": ["norm_squared_pole_term", "complexPoleKernel_angular_deriv"],
     "FourierDerivativeBound": ["complexPoleKernel_derivative_bound"],
+    "FourierLogarithmicGap": [
+        "exponential_period_gap", "odd_logistic_denominator_gap",
+        "odd_logistic_contraction", "original_contracted_circle_ratio",
+    ],
+    "FourierExponentialGap": [
+        "exp_principal_denominator", "uniform_principal_denominator", "original_principal_denominator",
+    ],
+    "FourierCircleChoice": [
+        "two_candidate_gap", "original_odd_circle_choice", "original_odd_circle_modulus_gap",
+    ],
+    "FourierOriginalDenominators": ["original_circle_uniform_denominators"],
+    "FourierLatticeDerivative": [
+        "odd_lattice_contrast_first_moment", "lattice_squared_weights", "odd_lattice_contrast_derivative",
+    ],
+    "FourierNormComparison": [
+        "fourier_old_coefficient_bound", "fourier_adjacent_coefficient_bound", "fourier_kernel_error",
+    ],
+    "FourierLatticeSplit": [
+        "odd_lattice_contrast_split", "circle_contrast_sum",
+    ],
 }
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 REPORT = re.compile(r"'OpenMathResearch\.LongCycleExcedances\.(\w+)' depends on axioms:\s*\[([^\]]*)\]")

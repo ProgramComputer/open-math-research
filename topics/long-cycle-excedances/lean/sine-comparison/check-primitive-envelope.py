@@ -17,6 +17,7 @@ ROOTS = (
     "LiteralLinearTable",
     "BivariateBin",
     "BinProductMajorant",
+    "CutoffCycleSeriesRecurrence",
     "DiscreteOddTail",
     "DyadicStarCertificate",
     "LiteralBin",
@@ -33,6 +34,7 @@ ROOTS = (
 )
 NAMESPACE = "OpenMathResearch.LongCycleExcedances."
 AUDITED = (
+    "coeff_original_cutoff_weight",
     "bin_full_nonconstant_nonnegative",
     "literal_slab_scaled_linear_envelope_of_spec",
     "linearHead_upper",

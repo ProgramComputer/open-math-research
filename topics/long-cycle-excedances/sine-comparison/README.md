@@ -45,4 +45,6 @@ The successor degree shift gives a stronger factorial bound for the regular nume
 
 The isolated cutoff jump splits into its exact single-primitive contribution and a sum over products with at least two primitives. [Cutoff-jump proof and exact bounds](cutoff-jump.md)
 
+The symmetric-window proof joins all four errors and reduces the indicated numerical margin to nine explicit finite inequalities. [Conjugate-pole calculation and determinant assembly](four-error-assembly.md)
+
 The [nine-interval determinant calculation](coarse-certificate.md) uses eight shared pole-weight vectors and gives a reproducible positive margin after rounding all four errors upward.

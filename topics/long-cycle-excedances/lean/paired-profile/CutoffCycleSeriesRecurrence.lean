@@ -141,21 +141,26 @@ theorem coeff_cutoffCycleSeries_eq_of_spec {k : ℕ} {d : ℕ → ℝ}
 def cutoffCycleNumerator (k : ℕ) : ℂ⟦X⟧ :=
   (cutoffCycleSeries k-1)*(1-PowerSeries.X)
 
+/-- Subtracting the empty coefficient produces the literal cutoff weight. -/
+theorem coeff_original_cutoff_weight {k : ℕ} {d : ℕ → ℝ} (hd : CycleProbability.Spec k d)
+    (hk : 0 < k) (p : ℕ) :
+    PowerSeries.coeff (R := ℂ) p (cutoffCycleSeries k-1) =
+      (CycleProbability.cutoffWeight k d p:ℂ) := by
+  rw [map_sub,coeff_cutoffCycleSeries_eq_of_spec hd hk,PowerSeries.coeff_one,
+    CycleProbability.cutoffWeight]
+  by_cases hp : k ≤ p
+  · simp [hp,show p ≠ 0 by omega]
+  · by_cases hz : p = 0
+    · simp [hz,hd.zero,show ¬k ≤ 0 by omega]
+    · simp [hp,hz,hd.small p (Nat.pos_of_ne_zero hz) (by omega)]
+
 /-- The numerator coefficients are the differences after removing the
 constant probability mass. -/
 theorem coeff_cutoffCycleNumerator_eq_of_spec {k s : ℕ} {d : ℕ → ℝ}
     (hd : CycleProbability.Spec k d) (hk : 0 < k) :
     PowerSeries.coeff (R := ℂ) s (cutoffCycleNumerator k) =
       (CycleProbability.numeratorDiff k d s:ℂ) := by
-  have he (p : ℕ) : PowerSeries.coeff (R := ℂ) p (cutoffCycleSeries k-1) =
-      (CycleProbability.cutoffWeight k d p:ℂ) := by
-    rw [map_sub,coeff_cutoffCycleSeries_eq_of_spec hd hk,PowerSeries.coeff_one,
-      CycleProbability.cutoffWeight]
-    by_cases hp : k ≤ p
-    · simp [hp,show p ≠ 0 by omega]
-    · by_cases hz : p = 0
-      · simp [hz,hd.zero,show ¬k ≤ 0 by omega]
-      · simp [hp,hz,hd.small p (Nat.pos_of_ne_zero hz) (by omega)]
+  have he := coeff_original_cutoff_weight hd hk
   have hX := PowerSeries.coeff_mul_X_pow' (cutoffCycleSeries k-1) 1 s
   simp only [pow_one] at hX
   rw [cutoffCycleNumerator,mul_sub,mul_one,map_sub,hX,he,
@@ -167,5 +172,6 @@ theorem coeff_cutoffCycleNumerator_eq_of_spec {k s : ℕ} {d : ℕ → ℝ}
 
 #print axioms cutoffCycleSeries_coeff_recurrence
 #print axioms coeff_cutoffCycleSeries_eq_of_spec
+#print axioms coeff_original_cutoff_weight
 #print axioms coeff_cutoffCycleNumerator_eq_of_spec
 end OpenMathResearch.LongCycleExcedances

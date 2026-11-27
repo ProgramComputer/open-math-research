@@ -46,6 +46,8 @@ jobs:
           Mathlib.MeasureTheory.Integral.DominatedConvergence
           Mathlib.Analysis.NormedSpace.FunctionSeries
           Mathlib.Analysis.PSeries Mathlib.Data.Real.Pi.Bounds Mathlib.Tactic.Linarith
+          Mathlib.Analysis.SpecialFunctions.Integrals Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
+          Mathlib.Analysis.SpecialFunctions.Complex.LogBounds
           Mathlib.Analysis.Calculus.SmoothSeries
       - name: Compile Fourier lemmas and audit axioms
         run: lake env python3 -I ../../topics/long-cycle-excedances/lean/fourier-circle/check.py
