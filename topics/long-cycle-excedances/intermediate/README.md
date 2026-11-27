@@ -2,6 +2,8 @@
 
 Fix $`251\le n\le1000`$ and $`7\le k`$ with $`4\le n/k<20`$. Put $`P_N=E_{N,k}/t`$, where the enumerator counts excedances in permutations whose cycles have length at least $`k`$. The finite calculation supplies a root and its actual next-row sign in each angular gap between the exterior and high-angle inputs.
 
+The [coefficient-free witness ledger](witness-ledger/README.md) stores the separating dyadic points, with independent coverage and order checks and a Lean metadata replay for one genuine shard.
+
 ## Selecting the entrance
 
 Let $`H=\lfloor7\sqrt n/20\rfloor`$ and set $`\theta_j=j\pi/n`$. The [exterior certificate](../aspect-20/finite-exterior/README.md) verifies $`H`$ negative simple roots, their signs in the actual $`P_{n+1}`$, and their position before $`(H+5/6)\pi/n`$. From the [high-angle table](../bounded-aspect/high-251.md) use cutoff $`A=7`$ for $`4\le n/k\le15/2`$, $`A=5`$ for $`15/2<n/k\le10`$, and for $`10<n/k<20`$ use $`A=5`$ if $`k\le100`$ and $`A=6`$ otherwise. Let $`J`$ be the first tested integer $`j\ge H+1`$ for which
