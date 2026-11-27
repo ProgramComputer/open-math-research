@@ -55,8 +55,10 @@ theorem original_interlacing_of_exterior_weighted_envelopes {n k : ℕ}
     rw [hi]
     ring
   have hcap' (i : Fin H) : (9/8:ℝ)*u i ≤ (459/40:ℝ)*((H:ℝ)/((H:ℝ)+1))^n := by
-    have hi := mul_le_mul_of_nonneg_left (hcap i) (by norm_num : (0:ℝ) ≤ 9/8)
-    convert hi using 1 <;> ring
+    calc
+      _ ≤ (9/8:ℝ)*((51/5:ℝ)*((H:ℝ)/((H:ℝ)+1))^n) :=
+        mul_le_mul_of_nonneg_left (hcap i) (by norm_num)
+      _ = _ := by ring
   have hsmall (i : Fin H) : (9/8:ℝ)*u i ≤ 1/2 := by
     obtain ⟨hp,hb⟩ : 0 < (H:ℝ) ∧ ((H:ℝ)+1)^2 ≤ (9/25:ℝ)^2*n :=
       exterior_floor_budget hn

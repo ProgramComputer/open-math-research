@@ -111,8 +111,10 @@ theorem front_certificates_of_weighted_envelopes (P Q V : ℝ[X]) {h J : ℕ} {a
     apply (hfar j hj).trans
     change 36*a*(l:ℝ)*((l:ℝ)+1)*(1/300)^l ≤ 36*a*(1/75)^l
     rw [show (1/75:ℝ)=4*(1/300) by norm_num, mul_pow]
-    convert mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hq' (by positivity : 0 ≤ 36*a))
-      (by positivity : 0 ≤ (1/300:ℝ)^l) using 1 <;> ring
+    calc
+      _ = (36*a)*((l:ℝ)*((l:ℝ)+1)*(1/300)^l) := by ring
+      _ ≤ _ := mul_le_mul_of_nonneg_left
+        (mul_le_mul_of_nonneg_right hq' (by positivity)) (by positivity)
   have hV := front_norm_lag P V ha hL hU hJ hP hnear hf
   refine ⟨hold.trans (by linarith),?_⟩
   rw [front_next_residual_eq P Q V h a n hrec]
