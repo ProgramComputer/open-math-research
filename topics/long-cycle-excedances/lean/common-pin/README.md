@@ -122,4 +122,4 @@ modulus in the denominator, which allows summing over the far lattice.
 The [successful hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/45930971642)
 compiled and replayed both modules on Lean 4.33.1. The audited declarations
 use only `propext`, `Classical.choice` and `Quot.sound`.
-[Audit excerpt](coherent-poles-audit.txt)
+[Audit excerpt](coherent-poles-audit.txt) · [Independent scope review](coherent-poles-review.md)
