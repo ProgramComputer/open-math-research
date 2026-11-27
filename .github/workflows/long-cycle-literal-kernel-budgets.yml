@@ -8,7 +8,6 @@ on:
       - 'topics/long-cycle-excedances/lean/fourier-odd-moments/**'
       - 'topics/long-cycle-excedances/lean/fourier-circle/Fourier*.lean'
       - 'topics/long-cycle-excedances/lean/fourier-circle/NumeratorLogDefinitions.lean'
-      - 'topics/long-cycle-excedances/lean/fourier-stable/check-original-coefficients.py'
       - 'topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py'
   workflow_dispatch:
 
