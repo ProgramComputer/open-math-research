@@ -71,4 +71,6 @@ python3 -I topics/long-cycle-excedances/color-load-bounds/check-marks.py
 python3 -I topics/long-cycle-excedances/lean/common-pin/check.py /tmp/orbit-load-research
 ~~~
 
+An independent exact calculation checked 44 positive ranks across four large rows. The case $(n,k)=(10^6,8)$ lies in the logarithmic interlacing sector. The other cases exercise the coefficient estimates, including cutoffs 150 and 300. Each calculation recovers the lag in two ways, and the generating series agreed with literal enumeration on 39 complete small rows. [Generating series and input ranges](coefficient-check.md) · [Exact output](coefficient-output.txt)
+
 The large-size interlacing theorem also needs the two weighted old-row tails, the weighted far-lag bound, and positivity, order and size control for consecutive coefficient-ratio centers. [Remaining hypotheses on the original rows](../lean/front-envelope-sums/RepositoryExteriorEnvelopes.lean) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/4)
