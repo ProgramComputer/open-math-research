@@ -106,7 +106,6 @@ theorem numerator_series_hasSum_disk_log {s : ℝ} (hs : 0 ≤ s)
   unfold finiteFourierLog
   apply sum_congr rfl
   intro j _
-  change numeratorLogSeries s (j+1)*z^(j+1) = b (j+1)*((r:ℂ)*z)^(j+1)
   rw [mul_pow]
   dsimp only [b]
   field_simp [hrc]
