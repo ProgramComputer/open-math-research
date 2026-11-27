@@ -6,6 +6,7 @@ on:
       - ".github/workflows/long-cycle-fourier-centered.yml"
       - "topics/long-cycle-excedances/lean/fourier-centered/*.lean"
       - "topics/long-cycle-excedances/lean/fourier-centered/check.py"
+      - "topics/long-cycle-excedances/lean/fourier-original-errors/*.lean"
   pull_request:
     branches: [research]
     paths:
