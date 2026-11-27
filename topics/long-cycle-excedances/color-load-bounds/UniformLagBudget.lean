@@ -69,7 +69,7 @@ theorem uniform_front_lag_budget {n k p : ℕ} {L α : ℝ} (hn : 10000 ≤ n)
     have hsmall : (p:ℝ)/((n:ℝ)+1) ≤ x :=
       div_le_div_of_nonneg_left hpR.le hnR (by linarith)
     have hLM : L ≤ x+M :=
-      hL.trans ((hlarge hbig).trans (add_le_add_right hsmall _))
+      hL.trans ((hlarge hbig).trans (add_le_add hsmall (le_refl M)))
     apply sparse_lag_large_budget hbigR hscale hx hxsmall hgrid hmode hLM
     simpa only [a, mul_assoc] using hα'
   · have hkle : (k:ℝ) ≤ 150 := by exact_mod_cast (le_of_lt (not_le.mp hbig))

@@ -63,11 +63,14 @@ theorem hasDerivAt_binomialPrimitive (n d : ℕ) (t : ℝ) :
     HasDerivAt (binomialPrimitive n d) (binomialDensity n d t) t := by
   have hf := ((bernsteinPrefix n d).hasDerivAt t).div_const (-((n:ℝ)+1))
   have hne : -((n:ℝ)+1) ≠ 0 := neg_ne_zero.mpr (by positivity)
-  convert hf using 1
-  rw [derivative_bernsteinPrefix]
-  simp only [eval_mul, eval_neg, eval_add, eval_one, eval_natCast, Nat.cast_add, Nat.cast_one]
-  rw [mul_div_cancel_left₀ _ hne]
-  simp [bernsteinPolynomial, binomialDensity]
+  have he : (bernsteinPrefix n d).derivative.eval t / (-((n:ℝ)+1)) =
+      binomialDensity n d t := by
+    rw [derivative_bernsteinPrefix]
+    simp only [eval_mul, eval_neg, eval_add, eval_one, eval_natCast, Nat.cast_add, Nat.cast_one]
+    rw [mul_div_cancel_left₀ _ hne]
+    simp [bernsteinPolynomial, binomialDensity]
+  rw [he] at hf
+  exact hf
 
 theorem binomialPrimitive_mass {n d : ℕ} (hd : d ≤ n) :
     binomialPrimitive n d 1 - binomialPrimitive n d 0 = 1 / ((n:ℝ)+1) := by
@@ -83,15 +86,25 @@ private theorem hasDerivAt_binomialDensity_succ (a b : ℕ) (t : ℝ) :
   have hp := (hasDerivAt_id t).pow (a+1)
   have hq := ((hasDerivAt_const t (1:ℝ)).sub (hasDerivAt_id t)).pow (b+1)
   have hpq := (hp.mul hq).const_mul (((a+b+2).choose (a+1):ℝ))
-  unfold binomialDensity
-  rw [hd]
-  convert hpq using 1
-  · funext y
-    simp only [id_eq]
-    ring
-  · simp only [id_eq, Nat.add_sub_cancel, Nat.cast_add, Nat.cast_one, zero_sub]
+  let c : ℝ := ((a+b+2).choose (a+1) : ℝ)
+  change HasDerivAt (fun y : ℝ => c*(y^(a+1)*(1-y)^(b+1)))
+    (c*((↑(a+1:ℕ)*t^(a+1-1)*1)*(1-t)^(b+1) +
+      t^(a+1)*(↑(b+1:ℕ)*(1-t)^(b+1-1)*(0-1)))) t at hpq
+  have hf : (fun y : ℝ => c*(y^(a+1)*(1-y)^(b+1))) =
+      binomialDensity (a+b+2) (a+1) := by
+    funext y
+    unfold binomialDensity
+    rw [hd]
+    exact (mul_assoc c _ _).symm
+  have he :
+      c*((↑(a+1:ℕ)*t^(a+1-1)*1)*(1-t)^(b+1) +
+        t^(a+1)*(↑(b+1:ℕ)*(1-t)^(b+1-1)*(0-1))) =
+      c*(t^a*(1-t)^b)*((a:ℝ)+1-((a:ℝ)+(b:ℝ)+2)*t) := by
+    simp only [Nat.add_sub_cancel, Nat.cast_add, Nat.cast_one, zero_sub]
     rw [pow_succ t a, pow_succ (1-t) b]
     ring
+  rw [hf, he] at hpq
+  exact hpq
 
 /-- Unimodality on the closed unit interval, including degenerate grid spacing. -/
 theorem binomialDensity_unimodal {n d : ℕ} (hd : 0 < d) (hnd : d < n) :

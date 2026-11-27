@@ -15,7 +15,7 @@ private theorem bounded_subtype_sum (N : ℕ) (P : ℕ → Prop) [DecidablePred 
   exact Fin.sum_univ_eq_sum_range (fun i => if P i then F i else 0) N
 
 /-- Separate the finite ranges of marked orbit lengths and binomial loads. -/
-theorem expected_color_marks_product (n p : ℕ) (S T : ℕ → Prop) :
+theorem expected_color_marks_product (n p : ℕ) (S T : ℕ → Prop) [DecidablePred S] [DecidablePred T] :
     expectedColorMarks n p (fun j i => S j ∧ T i) =
       ∑ j ∈ (range (p+1)).filter (fun j => 0 < j ∧ S j),
       (∑ i ∈ (range (n+1)).filter T, colorLoad n i ((j:ℝ)/p))/(j:ℝ) := by
@@ -58,7 +58,7 @@ theorem color_short_load_budget (n p k b : ℕ) (hp : 0 < p)
     simpa only [Nat.card_Ico] using card_le_card hh
   have hcast : (s.card:ℝ)≤((b-1:ℕ):ℝ) := by exact_mod_cast hsize
   calc
-    _ ≤ ∑ _j ∈ s, exp (-(k:ℝ)/15) := by convert sum_le_sum hpoint using 1; congr! 5
+    _ ≤ ∑ _j ∈ s, exp (-(k:ℝ)/15) := sum_le_sum hpoint
     _ = (s.card:ℝ)*exp (-(k:ℝ)/15) := by simp
     _ ≤ _ := mul_le_mul_of_nonneg_right hcast (exp_pos _).le
 
@@ -97,7 +97,7 @@ theorem color_long_load_budget (n p k b : ℕ) (hp : 0 < p) (hn : 0 < n) (hb : 0
   have hge : (1-r)*(∑ i ∈ range p, r^i) ≤ 1 := by nlinarith [pow_nonneg hr.le p]
   have hfin : (∑ i ∈ range p, r^i) ≤ 1/(1-r) := (le_div_iff₀ (sub_pos.mpr hr1)).2 (by linarith)
   calc
-    _ ≤ ∑ j ∈ s, U j := by convert sum_le_sum hjj using 1; congr! 5
+    _ ≤ ∑ j ∈ s, U j := sum_le_sum hjj
     _ ≤ ∑ j ∈ range (p+1), U j := sum_le_sum_of_subset_of_nonneg (filter_subset _ _) (fun j _ _ => by
       dsimp [U]; split <;> positivity)
     _ = _ := hsum
