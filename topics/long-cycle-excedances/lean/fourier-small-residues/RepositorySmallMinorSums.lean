@@ -20,6 +20,7 @@ theorem original_small_cutoff_minor_sums {n k : ℕ} (hn : 10000 ≤ n) (hk : 8 
     ‖∑ i ∈ I, u i‖ ≤ 1/12 ∧ ‖∑ i ∈ I, ((r:ℂ)/w i-(s/r:ℝ))*u i‖ ≤ (π/r)/4 := by
   intro p r w T u hcap hm henc
   have hr2 : r^2=s^2+π^2 := by
+    change ‖numeratorPole s 0‖^2 = s^2+π^2
     simpa only [Int.cast_zero,mul_zero,zero_add,one_mul] using literal_pole_norm_sq s 0
   have hr : 0 < r := by nlinarith [sq_nonneg s,norm_nonneg p,sq_pos_of_pos Real.pi_pos]
   have hc (i : ℕ) (_hi : i ∈ I) : ‖(r:ℂ)/w i-((s/r:ℝ):ℂ)‖ ≤ (2*(i+1:ℕ)+1:ℝ)*(π/r) := by
