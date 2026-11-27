@@ -109,7 +109,7 @@ def rebuild(project, checkpoint):
                 SUPPLIER_COMPARATOR=CLAIM,
             )
         subprocess.run([sys.executable, "-Bu", "verify_lean.py", str(project), AUDIT,
-                        "--jobs", "2"], cwd=project, check=True, env=env)
+                        "--jobs", "1"], cwd=project, check=True, env=env)
 
 
 if __name__ == "__main__":
