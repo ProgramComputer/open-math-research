@@ -10,6 +10,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 | [Uniform eventual interlacing for ordered large-block partitions](topics/ordered-large-blocks/uniform-eventual/README.md) | Partial theorem with one eventual old-size cutoff across all thresholds and ranks | ⬜ None |
 | [Sharp coefficient thresholds for counting polynomial zeros in disks](topics/balanced-arrays/root-distributions/single-sign/README.md) | Sharp angular thresholds and disk-count bounds independent of degree, with optimal order at weak curvature | ⬜ None |
 | [Binomial normalization for weighted binary matrices](topics/balanced-arrays/weighted-normalization/README.md) | Partial theorem for arbitrary cell weights and row intervals, giving an explicit real-rootedness range | ⬜ None |
+| [Strict interlacing through the first cubic ordered-partition row](topics/ordered-large-blocks/quadratic-rows/README.md) | Partial theorem for every threshold and every linear or quadratic old row | ⬜ None |
 | [All-size coefficient inequalities for ordered large-block partitions](topics/ordered-large-blocks/likelihood-ratio/README.md) | Partial theorem on Newton inequalities and likelihood-ratio order for every threshold | ⬜ None |
 | [Sharp likelihood bounds for the size of a marked row](topics/balanced-arrays/marked-row-likelihood/README.md) | Sharp coefficientwise likelihood bound for weighted arrays and sharp binomial odds under row exchangeability | 🟨 Partial · Lean 4 (array pairings, refinements and overlap counts) |
 | [Explicit dimension bounds for every balanced-array row cap](topics/balanced-arrays/effective-sublinear/README.md) | Simple negative zeros above explicit thresholds for $d\ge n^{99/100}$ or $d\ge100n/\log n$, with respective height cutoffs | ⬜ None |
@@ -33,6 +34,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 ## Partial work
 
+- The [linear-row theorem for ordered partitions](topics/ordered-large-blocks/first-degree-increase/README.md) gives strict interlacing through the first quadratic row and all-size growth of marked-block factorial moments.
 - The [uniform outer-rank theorem for ordered partitions](topics/ordered-large-blocks/outer-ranks/README.md) gives one eventual cutoff across all block thresholds for each fixed number of outer ranks.
 - A [linear dimension bound for every row cap](topics/balanced-arrays/adjacent-quotas/README.md) gives simple negative zeros when $200d\ge59n$ at the lower height $n\ge10^{200}$.
 - Earlier balanced-array bounds: [five-thirds row bound and polynomial cap or corank range](topics/balanced-arrays/fifth-thirds/README.md), [all fixed quadratic aspects](topics/balanced-arrays/critical-aspect/README.md), [absolute quadratic cutoff](topics/balanced-arrays/quadratic/README.md), [quartic-log cutoff](topics/balanced-arrays/very-tall/README.md), and [dimension-uniform fixed-cap threshold](topics/balanced-arrays/fixed-cap/README.md).

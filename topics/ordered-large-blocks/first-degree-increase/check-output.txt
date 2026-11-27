@@ -1,0 +1,10 @@
+Rational contour comparisons passed.
+Small unrestricted ratios passed.
+First carry j=2: -83/196
+First carry j=3: -29097/33124
+First carry j=4: -953589239/569995968
+First carry j=5: -10000312371727/3167046813888
+First carry j=6: -5362501706619440777/897940150216761600
+First carry j=7: -19138052210074853783249/1685450566538197482240
+First carry j=8: -170653328076058168187533784287/7858075310515961387071488000
+28 equal-degree signs matched the independent recurrence.
