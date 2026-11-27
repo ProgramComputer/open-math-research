@@ -48,11 +48,10 @@ theorem squared_pole_partial_fractions {p w : ℂ} {R : ℝ} (hp : p≠0) (hw : 
   have hbar : conj (p-w) ≠ 0 := (map_ne_zero conj).mpr (sub_ne_zero.mpr hwp.symm)
   rw [Complex.ofReal_sub,square_norm_cast,square_norm_cast,Complex.ofReal_pow]
   change (conj p*p-(R:ℂ)^2)*(conj (p-w)*(p-w))⁻¹ = w*((w-z)⁻¹-(w-p)⁻¹)
-  have hden := mul_ne_zero hbar (sub_ne_zero.mpr hwp.symm)
   have hz' : w-z≠0 := sub_ne_zero.mpr hwi
-  field_simp [hden,hz',sub_ne_zero.mpr hwp]
   have hconj : conj p - conj w ≠ 0 := by simpa only [map_sub] using hbar
-  apply (div_eq_iff (mul_ne_zero hconj (sub_ne_zero.mpr hwp.symm))).2
+  rw [map_sub conj]
+  field_simp [hconj, hz', sub_ne_zero.mpr hwp, sub_ne_zero.mpr hwp.symm]
   linear_combination (norm := ring_nf) (w-p)*((p-z)*hww + (w-p)*hz)
 
 /-- The angular square-integral of a single pole, on either side of the circle. -/
@@ -67,7 +66,7 @@ theorem angular_inverse_square {p : ℂ} {R : ℝ} (hR : 0 < R) (hg : ‖p‖ �
   have hnz : ‖z‖ = R^2/‖p‖ := invertedPole_norm p hR
   have hzlt : ‖z‖ < R ↔ R < ‖p‖ := by
     rw [hnz, div_lt_iff₀ hp0, pow_two]
-    exact mul_lt_mul_left hR
+    exact mul_lt_mul_iff_of_pos_left hR
   have hzg : ‖z‖ ≠ R := by
     rw [hnz, ne_eq, div_eq_iff hp0.ne', pow_two]
     exact fun h => hg ((mul_left_cancel₀ hR.ne' h).symm)

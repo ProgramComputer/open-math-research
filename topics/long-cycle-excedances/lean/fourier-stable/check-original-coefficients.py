@@ -2,7 +2,9 @@
 """Verify the twice-integrated coefficient bounds for the original row."""
 import argparse
 from pathlib import Path
+import re
 import runpy
+import subprocess
 
 
 HERE = Path(__file__).resolve().parent
@@ -16,18 +18,34 @@ CIRCLE = (
     "FourierLatticeSplit", "FourierNormComparison", "FourierPoleContrast",
 )
 CHECKED = (
-    ("FourierOddKernelCalculus", "odd_kernel_calculus"),
-    ("FourierOriginalCoefficientBounds", "original_fourier_coefficient_bounds"),
+    ("FourierOddKernelCalculus", ("odd_kernel_calculus",)),
+    ("FourierOddKernelMoments", ("odd_kernel_moment_integrals",)),
+    ("FourierOriginalCoefficientBounds", (
+        "original_fourier_contrast_weight", "original_fourier_coefficient_bounds",
+        "original_fourier_bounds_of_moments",
+    )),
 )
 
 
 def main(project, retained_imports):
     BASE["main"](project, original_log=True, retained_imports=retained_imports, continuation=True)
     build = BASE["build_local"]
-    for module in CIRCLE:
-        build(project, HERE.parent / "fourier-circle" / (module + ".lean"), module, ())
-    for module, theorem in CHECKED:
-        build(project, HERE / (module + ".lean"), module, (theorem,))
+    inputs = [(HERE.parent / "fourier-circle", module, ()) for module in CIRCLE]
+    inputs += [(HERE, module, theorems) for module, theorems in CHECKED]
+    failed = set()
+    for folder, module, theorems in inputs:
+        source = folder / (module + ".lean")
+        imports = set(re.findall(r"^import ([\w.]+)", source.read_text(), re.M))
+        if imports & failed:
+            print(f"Skipped {module}: missing {sorted(imports & failed)}", flush=True)
+            failed.add(module)
+            continue
+        try:
+            build(project, source, module, theorems)
+        except subprocess.CalledProcessError:
+            failed.add(module)
+    if failed:
+        raise RuntimeError(f"Incomplete original coefficient checks: {sorted(failed)}")
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 import FourierOriginalAngularRow
-import FourierOddKernelCalculus
+import FourierOddKernelMoments
 import FourierLatticeSplit
 import FourierNormComparison
 import FourierPoleContrast
@@ -14,6 +14,34 @@ open RepositoryQuotientAudit
 def originalFourierTrace (k : ℕ) (s R x : ℝ) : ℂ :=
   let w := circleMap 0 R x
   seriesValue (coherentTilt k (-Real.exp (-s))) w / (1 + Complex.exp (w - s))
+
+/-- The literal odd pole contrast has the first-moment weight. -/
+theorem original_fourier_contrast_weight {s r : ℝ} (hr : 0 < r)
+    (hr2 : r^2 = s^2+π^2) (l : ℤ) :
+    ‖(r:ℂ)/fourierRowPole s l-(s/r:ℝ)‖ ≤ |2*(l:ℝ)+1| * (π/r) := by
+  let C := s/r
+  let S := π/r
+  let m := 2*(l:ℝ)+1
+  let z : ℂ := ⟨C,m*S⟩
+  have him : (fourierRowPole s l).im = (2*(l:ℝ)+1)*π := by
+    simp [fourierRowPole,Complex.add_im,Complex.mul_re,Complex.add_re]
+  have hCS : C^2+S^2=1 := by
+    dsimp only [C,S]
+    rw [div_pow,div_pow,←add_div,←hr2,div_self (pow_ne_zero _ hr.ne')]
+  have he : fourierRowPole s l = (r:ℂ)*z := by
+    apply Complex.ext
+    · simp [fourierRowPole,z,Complex.mul_re,C,hr.ne']; field_simp
+    · rw [him]
+      simp [z,Complex.mul_im,S,m]
+      field_simp
+  have hratio : (r:ℂ)/fourierRowPole s l = 1/z := by
+    calc
+      _ = ((r:ℂ)*1)/((r:ℂ)*z) := by rw [mul_one,←he]
+      _ = _ := mul_div_mul_left _ _ (Complex.ofReal_ne_zero.mpr hr.ne')
+  change ‖(r:ℂ)/fourierRowPole s l-(C:ℂ)‖ ≤ |m| * S
+  rw [hratio]
+  exact normalized_lattice_contrast hCS (div_nonneg Real.pi_pos.le hr.le)
+    (odd_lattice_height_one_le l)
 
 set_option maxHeartbeats 2500000 in
 /-- Both signed Fourier estimates for the actual original numerator. The
@@ -52,28 +80,8 @@ theorem original_fourier_coefficient_bounds {k : ℕ} (hk : 3 ≤ k)
       exact hg l ((congrArg norm hl).trans ((norm_circleMap_zero R x).trans (abs_of_pos hR)))
     simpa only [f,originalFourierTrace,D,c,P,circleWave,Int.cast_natCast] using
       original_row_angular_equation (by omega : 2 ≤ k) hs R x hw
-  have hT (l : ℤ) : ‖t l‖ ≤ |2*(l:ℝ)+1| * (π/r) := by
-    let C := s/r
-    let S := π/r
-    let m := 2*(l:ℝ)+1
-    let z : ℂ := ⟨C,m*S⟩
-    have hCS : C^2+S^2=1 := by
-      dsimp only [C,S]
-      rw [div_pow,div_pow,←add_div,←hr2,div_self (pow_ne_zero _ hr.ne')]
-    have he : P l = (r:ℂ)*z := by
-      apply Complex.ext
-      · simp [P,fourierRowPole,z,Complex.mul_re,C,hr.ne']; field_simp
-      · rw [hP l]
-        simp [z,Complex.mul_im,S,m]
-        field_simp
-    have hratio : (r:ℂ)/P l = 1/z := by
-      calc
-        _ = ((r:ℂ)*1)/((r:ℂ)*z) := by rw [mul_one,←he]
-        _ = _ := mul_div_mul_left _ _ (Complex.ofReal_ne_zero.mpr hr.ne')
-    change ‖(r:ℂ)/P l-(C:ℂ)‖ ≤ |m| * S
-    rw [hratio]
-    exact normalized_lattice_contrast hCS (div_nonneg Real.pi_pos.le hr.le)
-      (odd_lattice_height_one_le l)
+  have hT (l : ℤ) : ‖t l‖ ≤ |2*(l:ℝ)+1| * (π/r) :=
+    original_fourier_contrast_weight hr hr2 l
   obtain ⟨hs₀,hs₁⟩ := lattice_moment_weights P hP hR hk
   have hsD : Summable fun l => poleWeight (d l) (P l) R := by
     apply Summable.of_nonneg_of_le (fun l => div_nonneg (norm_nonneg _) (Real.sqrt_nonneg _)) _
@@ -102,5 +110,35 @@ theorem original_fourier_coefficient_bounds {k : ℕ} (hk : 3 ≤ k)
   exact ⟨fun j => fourier_old_coefficient_bound j k hf0 hd0 ce₀ hf hd hM hmax hu₀ hv₀,
     fourier_adjacent_coefficient_bound n k a (s/r:ℝ) A hf0 hb0 cd ce₁ hf hb hsplit hM hmax hu₁ hv₁⟩
 
+/-- The original Fourier bounds expressed directly in the pole moments. -/
+theorem original_fourier_bounds_of_moments {k : ℕ} (hk : 3 ≤ k)
+    {s r R : ℝ} (hs : 0 ≤ s) (hr : 0 < r) (hR : 0 < R) (hr2 : r^2 = s^2+π^2)
+    (hg : ∀ l : ℤ, ‖fourierRowPole s l‖ ≠ R)
+    (n : ℤ) {M : ℝ} (hM : 0 ≤ M)
+    (hmax : ∀ x, ‖originalFourierTrace k s R x‖ ≤ M) :
+    let f := originalFourierTrace k s R
+    let P := fourierRowPole s
+    let c := fun l => (R:ℂ)^k / (P l)^(k-1)
+    let S := π/r
+    let S₀ := ∑' l, poleWeight (c l) (P l) R
+    let S₁ := ∑' l : ℤ, |2*(l:ℝ)+1| * poleWeight (c l) (P l) R
+    let T₀ := ∑' l, squaredPoleWeight (c l) (P l) R
+    let T₁ := ∑' l : ℤ, |2*(l:ℝ)+1| * squaredPoleWeight (c l) (P l) R
+    let a := (r:ℂ)/(R:ℂ)
+    let A := (∑' l, ((r:ℂ)/P l)*c l)/(R:ℂ)
+    (∀ j : ℤ, ‖((j-k : ℤ):ℂ)*(j:ℂ)*normalizedFourierIntegral f j‖ ≤ M*(S₀^2+R*T₀)) ∧
+    ‖((n-k : ℤ):ℂ)*(n:ℂ)*(a*normalizedFourierIntegral f (n+1)-
+      (s/r:ℝ)*normalizedFourierIntegral f n)‖ ≤ M*(S*S₀*S₁+R*S*T₁) +
+        ‖((n-k : ℤ):ℂ)*A*normalizedFourierIntegral f (n+1-k)‖ +
+        ‖((n-k : ℤ):ℂ)*a*normalizedFourierIntegral f (n+1)‖ := by
+  have hP (l : ℤ) : (fourierRowPole s l).im = (2*(l:ℝ)+1)*π := by
+    simp [fourierRowPole,Complex.add_im,Complex.mul_re,Complex.add_re]
+  obtain ⟨hu₀,hv₀,hu₁,hv₁⟩ := odd_kernel_moment_integrals (fourierRowPole s)
+    (fun l => (r:ℂ)/fourierRowPole s l-(s/r:ℝ)) hP hR hg
+    (original_fourier_contrast_weight hr hr2) hk
+  exact original_fourier_coefficient_bounds hk hs hr hR hr2 hg n hM hmax hu₀ hv₀ hu₁ hv₁
+
+#print axioms original_fourier_contrast_weight
+#print axioms original_fourier_bounds_of_moments
 #print axioms original_fourier_coefficient_bounds
 end OpenMathResearch.LongCycleExcedances

@@ -4,7 +4,9 @@ on:
     branches: [research]
     paths:
       - '.github/workflows/long-cycle-original-fourier-coefficients.yml'
+      - 'topics/long-cycle-excedances/lean/fourier-circle/FourierPoleMoment.lean'
       - 'topics/long-cycle-excedances/lean/fourier-stable/FourierOddKernelCalculus.lean'
+      - 'topics/long-cycle-excedances/lean/fourier-stable/FourierOddKernelMoments.lean'
       - 'topics/long-cycle-excedances/lean/fourier-stable/FourierOriginalCoefficientBounds.lean'
       - 'topics/long-cycle-excedances/lean/fourier-stable/check-original-coefficients.py'
       - 'topics/long-cycle-excedances/lean/fourier-circle/NumeratorLogDefinitions.lean'
