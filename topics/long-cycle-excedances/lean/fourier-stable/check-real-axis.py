@@ -82,7 +82,7 @@ def build_upstream(project, upstream, retained_imports):
         run(project, "lake", "env", "lean", "-o", str(output), str(source))
 
 
-def main(project, original_log, retained_imports, continuation):
+def main(project, original_log, retained_imports, continuation=False):
     original_log = original_log or continuation
     project.mkdir(parents=True)
     COMMON["prepare"](project)
