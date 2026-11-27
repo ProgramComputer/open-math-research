@@ -77,8 +77,8 @@ theorem original_normalized_fourier_errors {k n : ℕ} (hk : 100 ≤ k)
     obtain ⟨hm1,hm2⟩ := hAmplitude (circleMap 0 R y) hw
     have h : r*‖originalFourierTrace k s R y‖/‖T p‖ ≤ (k:ℝ)*Real.exp (2997/100)*B := by
       by_cases h : x ≤ 100
-      · simpa only [B,if_pos h] using hm1 h
-      · simpa only [B,if_neg h] using hm2 (le_of_not_ge h)
+      · simpa only [B,if_pos h,r,p,T,originalFourierTrace] using hm1 h
+      · simpa only [B,if_neg h,r,p,T,originalFourierTrace] using hm2 (le_of_not_ge h)
     exact (le_div_iff₀ hr).mpr (by linarith only [(div_le_iff₀ hT).mp h])
   have hamp : r*M/‖T p‖ ≤ (k:ℝ)*Real.exp (2997/100)*B := by
     dsimp only [M]; apply le_of_eq; field_simp
