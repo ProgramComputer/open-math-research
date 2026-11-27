@@ -28,6 +28,13 @@ SECTOR_MODULES = (
     "RepositorySparseSector",
     "SparseSizeThreshold",
 )
+SINE_MODULES = (
+    "PairedSineCoordinates",
+    "PairedIntegerWindows",
+    "PairedSineComparison",
+    "PairedDeflatedCoefficients",
+    "RepositoryPairedSine",
+)
 ASPECT_MODULES = (
     "ResidualLagGrid",
     "SharpLagBudget",
@@ -82,6 +89,17 @@ ASPECT_EXPECTED = {
     "RepositoryQuotientAudit.original_old_front_weighted_tails_all",
     "RepositoryQuotientAudit.original_residual_count_bound",
 }
+SINE_EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.paired_log_derivative",
+    "OpenMathResearch.LongCycleExcedances.paired_integer_windows",
+    "OpenMathResearch.LongCycleExcedances.paired_sine_sample",
+    "OpenMathResearch.LongCycleExcedances.paired_sine_at_root",
+    "OpenMathResearch.LongCycleExcedances.paired_sine_principal",
+    "OpenMathResearch.LongCycleExcedances.paired_sine_step",
+    "OpenMathResearch.LongCycleExcedances.paired_sine_partial_sum",
+    "RepositoryQuotientAudit.original_paired_row_factor",
+    "RepositoryQuotientAudit.original_interlacing_of_paired_sine",
+}
 SECTOR_EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.sparse_size_log_threshold",
     "OpenMathResearch.LongCycleExcedances.sparse_sector_from_cutoff_threshold",
@@ -122,10 +140,12 @@ def main(project, imports):
     common.main(project, imports)
 
     observed = {}
-    for module in (*MODULES, *SECTOR_MODULES, *ASPECT_MODULES):
+    for module in (*MODULES, *SECTOR_MODULES, *ASPECT_MODULES, *SINE_MODULES):
         directory = HERE if module in MODULES else HERE.parent / "sparse-sector"
         if module in ASPECT_MODULES:
             directory = HERE.parent / "all-aspect-exterior"
+        if module in SINE_MODULES:
+            directory = HERE.parent / "sine-comparison"
         source = project / (module + ".lean")
         shutil.copyfile(directory / source.name, source)
         output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
@@ -142,13 +162,13 @@ def main(project, imports):
         for name, axioms in AXIOM_REPORT.findall(result.stdout):
             observed[name] = {axiom.strip() for axiom in axioms.split(",") if axiom.strip()}
 
-    for name in sorted(EXPECTED | SECTOR_EXPECTED | ASPECT_EXPECTED):
+    for name in sorted(EXPECTED | SECTOR_EXPECTED | ASPECT_EXPECTED | SINE_EXPECTED):
         if name not in observed or observed[name] - common.ALLOWED:
             raise ArithmeticError(f"Missing declaration or unexpected axioms for {name}: {observed.get(name)}")
-    for module in (*MODULES, *SECTOR_MODULES, *ASPECT_MODULES):
+    for module in (*MODULES, *SECTOR_MODULES, *ASPECT_MODULES, *SINE_MODULES):
         common.run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
-    print(f"PASS: {len(EXPECTED | SECTOR_EXPECTED | ASPECT_EXPECTED)} exterior and sector declarations audited", flush=True)
+    print(f"PASS: {len(EXPECTED | SECTOR_EXPECTED | ASPECT_EXPECTED | SINE_EXPECTED)} exterior and sector declarations audited", flush=True)
 
 
 if __name__ == "__main__":

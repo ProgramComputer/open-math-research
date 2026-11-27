@@ -7,6 +7,7 @@ on:
       - 'topics/long-cycle-excedances/lean/front-envelope-sums/**'
       - 'topics/long-cycle-excedances/lean/sparse-sector/**'
       - 'topics/long-cycle-excedances/lean/all-aspect-exterior/**'
+      - 'topics/long-cycle-excedances/lean/sine-comparison/**'
 
 permissions:
   actions: read
