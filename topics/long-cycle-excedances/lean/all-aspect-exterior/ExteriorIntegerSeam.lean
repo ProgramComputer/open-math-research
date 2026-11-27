@@ -53,7 +53,7 @@ theorem exterior_integer_seam_geometry {n : ℕ} (hn : 10000 ≤ n) :
     have hθsq : θ^2 ≤ (1/50:ℝ)^2 :=
       pow_le_pow_left₀ hθpos.le hθsmall.le 2
     have hθcube := mul_le_mul_of_nonneg_left hθsq hθpos.le
-    have ht := sin_gt_sub_cube hθpos (by linarith only [hθsmall] : θ ≤ 1)
+    have ht := sin_gt_sub_cube hθpos
     nlinarith only [ht,hθcube,hθpos]
   have hzsin : (137/125:ℝ) < sin θ*z := by
     have h := mul_lt_mul_of_pos_right hs₁ hz₀

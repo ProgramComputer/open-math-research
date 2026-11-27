@@ -40,8 +40,9 @@ theorem two_color_load_grids_mass (atom : ScaledBinomialAtom)
   have h0 := color_load_grid_mass_sharp atom hd (by omega : 2*d ≤ n) hp
   have h1 := color_load_grid_mass_sharp atom hd half hp
   rw [Nat.cast_sub hn, Nat.cast_one, sub_add_cancel] at h1
-  exact ⟨h0.trans (add_le_add_right
-    (div_le_div_of_nonneg_left (Nat.cast_nonneg p) (Nat.cast_pos.mpr hn) (by linarith)) _), h1⟩
+  have hmono : (p:ℝ)/((n:ℝ)+1) ≤ (p:ℝ)/n :=
+    div_le_div_of_nonneg_left (Nat.cast_nonneg p) (Nat.cast_pos.mpr hn) (by linarith)
+  exact ⟨h0.trans (add_le_add hmono le_rfl), h1⟩
 
 theorem sharp_front_lag_of_two_color_grids (atom : ScaledBinomialAtom)
     {n k p : ℕ} {L α : ℝ} (hn : 10000 ≤ n) (hk : 2 ≤ k)
@@ -66,9 +67,10 @@ theorem sharp_front_lag_of_two_color_grids (atom : ScaledBinomialAtom)
     nlinarith only [h]
   by_cases hd : 150 ≤ k-1
   · obtain ⟨h0, h1⟩ := two_color_load_grids_mass atom hd hhalf hp
+    have hmesh : (p:ℝ)/n+29/500 ≤ 1/200+29/500 := add_le_add hpn le_rfl
     exact two_grid_relative_lag ha hα'
-      (hL.trans (h0.trans (add_le_add_right hpn _)))
-      (hres.trans (mul_le_mul_of_nonneg_left (h1.trans (add_le_add_right hpn _)) (by norm_num)))
+      (hL.trans (h0.trans hmesh))
+      (hres.trans (mul_le_mul_of_nonneg_left (h1.trans hmesh) (by norm_num)))
   · have hkR : (k:ℝ) ≤ 150 := by exact_mod_cast (show k ≤ 150 by omega)
     have ha' : a ≤ 3/4 := by
       dsimp [a]
