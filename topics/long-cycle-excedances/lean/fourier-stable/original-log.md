@@ -13,3 +13,5 @@ Use the [same pinned build](README.md) with the extra flag to verify both module
 ```sh
 python3 -Bu topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py /tmp/fourier-original-log-check --original-log
 ```
+
+The first Linux job reached its 30-minute limit while compiling mathlib dependencies after a targeted cache download. The proof itself had not yet elaborated. The retry uses the full pinned mathlib cache and the authenticated common-pin proof objects, then builds the remaining eight supplied logistic modules. [Cold-build timeout](https://github.com/ProgramComputer/open-math-research/actions/runs/46005139024)

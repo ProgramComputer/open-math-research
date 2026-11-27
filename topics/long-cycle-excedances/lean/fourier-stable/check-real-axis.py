@@ -38,7 +38,28 @@ def build_local(project, original, module, theorems):
         print(f"kernel_replay_exit=0 {module}", flush=True)
 
 
-def main(project, original_log):
+def build_upstream(project, upstream, retained_imports):
+    run = COMMON["run"]
+    for module in upstream:
+        supplier = project / Path(*module.split(".")).with_suffix(".lean")
+        print(f"Upstream {module} input-sha256={sha256(supplier.read_bytes()).hexdigest()}", flush=True)
+    if retained_imports is None:
+        run(project, "lake", "--wfail", "build", *("+" + module for module in upstream))
+        return
+    digest = sha256(retained_imports.read_bytes()).hexdigest()
+    if digest != COMMON["IMPORT_SHA"]:
+        raise ValueError(f"Unexpected retained object archive: {digest}")
+    run(project, "tar", "--zstd", "-xf", str(retained_imports))
+    print(f"Reused verified 65-module archive sha256={digest}", flush=True)
+    for name in COMMON["LOGISTIC_IMPORTS"]:
+        file = Path("LongCycleBounds") / (name + ".lean")
+        source = project / file
+        output = (project / ".lake/build/lib/lean" / file).with_suffix(".olean")
+        print(f"Compile LongCycleBounds.{name} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
+        run(project, "lake", "env", "lean", "-o", str(output), str(source))
+
+
+def main(project, original_log, retained_imports):
     project.mkdir(parents=True)
     COMMON["prepare"](project)
     run = COMMON["run"]
@@ -47,8 +68,11 @@ def main(project, original_log):
         raise ValueError(f"Unexpected compiler: {compiler}")
     print(compiler, flush=True)
     upstream = (UPSTREAM, *ORIGINAL_ROOTS) if original_log else (UPSTREAM,)
-    suppliers = [Path(*module.split(".")).with_suffix(".lean") for module in upstream]
-    run(project, "lake", "exe", "cache", "get", *map(str, suppliers))
+    if original_log:
+        run(project, "lake", "exe", "cache", "get")
+    else:
+        supplier = Path(*UPSTREAM.split(".")).with_suffix(".lean")
+        run(project, "lake", "exe", "cache", "get", str(supplier))
     lock = json.loads((project / "lake-manifest.json").read_text())
     for package in lock["packages"]:
         checkout = ".lake/packages/" + package["name"]
@@ -56,10 +80,7 @@ def main(project, original_log):
         if revision != package["rev"]:
             raise ValueError(f"Wrong revision for {package['name']}: {revision}")
         print(f"{package['name']} {revision}", flush=True)
-    for module, supplier in zip(upstream, suppliers, strict=True):
-        digest = sha256((project / supplier).read_bytes()).hexdigest()
-        print(f"Compile {module} input-sha256={digest}", flush=True)
-    run(project, "lake", "--wfail", "build", *("+" + module for module in upstream))
+    build_upstream(project, upstream, retained_imports)
     build_local(project, HERE / "FourierRealAxis.lean", *REAL_AXIS)
     if original_log:
         for module in ORIGINAL_SUPPORT:
@@ -72,5 +93,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("project", type=Path, help="a new directory for the check")
     parser.add_argument("--original-log", action="store_true", help="also check the original cutoff logarithm")
+    parser.add_argument("--retained-imports", type=Path, help="verified common-pin import archive")
     args = parser.parse_args()
-    main(args.project.resolve(), args.original_log)
+    retained = args.retained_imports.resolve(strict=True) if args.retained_imports else None
+    if retained and not args.original_log:
+        parser.error("--retained-imports requires --original-log")
+    main(args.project.resolve(), args.original_log, retained)
