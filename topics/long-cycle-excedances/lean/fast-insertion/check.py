@@ -153,9 +153,9 @@ def main(project, imports, groups=None):
     else:
         recover_groups(project, folder, groups)
     source_module(project, folder / "CheckpointReplay.lean")
-    for module in ("FirstPairChecks", "FirstPairChecks0", "FirstPairChecks6", "FirstPairChecks12",
-                   "FirstPairChecks18", "FirstPairChecks24", "FirstPairArithmetic",
-                   "FirstPairModel", "FirstPairOriginal"):
+    for module in ("FirstPairModel", "FirstPairChecks", "FirstPairChecks0", "FirstPairChecks6",
+                   "FirstPairChecks12", "FirstPairChecks18", "FirstPairChecks24",
+                   "FirstPairArithmetic", "FirstPairOriginal"):
         source_module(project, HERE / (module + ".lean"))
     print("PASS: original permutation signs for 26 gaps, 2 rows, 2 endpoints", flush=True)
 
