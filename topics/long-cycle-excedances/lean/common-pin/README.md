@@ -123,3 +123,34 @@ The [successful hosted check](https://github.com/ProgramComputer/open-math-resea
 compiled and replayed both modules on Lean 4.33.1. The audited declarations
 use only `propext`, `Classical.choice` and `Quot.sound`.
 [Audit excerpt](coherent-poles-audit.txt) · [Independent scope review](coherent-poles-review.md)
+
+## Strict next-row sign at high-angle old zeros
+
+[ActualHighAngleSign.lean](ActualHighAngleSign.lean) gives the strict sign of
+the literal next row at an actual old zero for $k\ge7$,
+$n\ge100k\log k$ and principal pole angle with sine at least $1/2$.
+More precisely, `original_high_angle_next_sign` gives a positive product of
+the next row and the imaginary part of the old coherent principal mode.
+The modulus and old-zero hypotheses refer to the same real value of
+the original permutation variable. Removing the factor of the variable
+reverses the row sign.
+
+[MonomialTiltBounds.lean](MonomialTiltBounds.lean) checks the coefficient
+majorant from the finite exponential tilt. [TiltAnalyticEvaluation.lean](TiltAnalyticEvaluation.lean)
+identifies the convergent power series with the complex exponential of
+the actual finite logarithm and supplies its amplitude lower bound.
+[HighAngleRowEstimate.lean](HighAngleRowEstimate.lean) bounds the error for
+the original normalized row, including the principal Taylor tail, the
+remaining odd poles and the zero-order logistic term. The proof uses
+conjugate pairing and a telescoping squared-pole majorant.
+[Written proof and scope](high-angle.md)
+
+This is a pointwise Lean result on the stated infinite range. Existence,
+ordering and counting of the old roots, as well as the comparison below
+the stated angle or size thresholds, are separate inputs to the full
+interlacing proof.
+
+The [successful hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/45934247139)
+compiled and replayed the seven new modules on Lean 4.33.1.
+The nine new audited declarations use only `propext`, `Classical.choice`
+and `Quot.sound`. [Audit excerpt](high-angle-audit.txt)
