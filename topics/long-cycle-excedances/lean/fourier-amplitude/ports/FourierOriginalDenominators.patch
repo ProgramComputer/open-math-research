@@ -1,0 +1,5 @@
+--- FourierOriginalDenominators.lean
++++ FourierOriginalDenominators.lean
+@@ -50 +50 @@
+-    have he := mul_le_mul_of_nonneg_left (add_le_add_left haK 1) (sq_nonneg r)
++    have he := mul_le_mul_of_nonneg_left (add_le_add_right haK 1) (sq_nonneg r)

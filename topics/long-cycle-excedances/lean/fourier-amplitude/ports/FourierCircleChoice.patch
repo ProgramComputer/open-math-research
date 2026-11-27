@@ -1,0 +1,8 @@
+--- FourierCircleChoice.lean
++++ FourierCircleChoice.lean
+@@ -20 +20 @@
+-  push_neg at h
++  push Not at h
+@@ -80 +80 @@
+-  | succ j => right; refine ⟨j,?_⟩; simp only [Int.ofNat_eq_natCast, Int.cast_natCast, Nat.cast_succ, Int.cast_negSucc]; push_cast; ring
++  | succ j => right; refine ⟨j,?_⟩; simp only [Int.ofNat_eq_natCast, Nat.cast_succ, Int.cast_negSucc]; push_cast; ring

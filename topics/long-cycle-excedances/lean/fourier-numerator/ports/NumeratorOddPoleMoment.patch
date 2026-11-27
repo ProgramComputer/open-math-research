@@ -1,0 +1,6 @@
+--- NumeratorOddPoleMoment.lean
++++ NumeratorOddPoleMoment.lean
+@@ -35,2 +35,3 @@
+   field_simp [hh,hr.ne']
++  push_cast
+   linear_combination -hrs

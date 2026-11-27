@@ -39,7 +39,8 @@ THEOREMS = {
     "FourierCircleChoice": [
         "two_candidate_gap", "original_odd_circle_choice", "original_odd_circle_modulus_gap",
     ],
-    "FourierOriginalDenominators": ["original_circle_uniform_denominators"],
+    "FourierOriginalDenominators": ["original_circle_kernel_gap_and_denominators",
+                                    "original_circle_uniform_denominators"],
     "FourierLatticeDerivative": [
         "odd_lattice_contrast_first_moment", "lattice_squared_weights", "odd_lattice_contrast_derivative",
     ],
@@ -50,13 +51,14 @@ THEOREMS = {
         "odd_lattice_contrast_split", "circle_contrast_sum",
     ],
     "NumeratorPoleVolume": ["cauchy_lattice_prefix", "normalized_pole_moment_prefix", "normalized_pole_moment"],
+    "NumeratorLogDefinitions": [],
     "NumeratorOddPoleMoment": ["numerator_actual_pole_moment"],
     "NumeratorRadialScalars": [
         "numerator_small_height_scale", "numerator_small_height_budget", "numerator_radial_power",
         "numerator_geometric_prefactor",
     ],
     "NumeratorTaylorContraction": ["numerator_small_height_contraction"],
-    "NumeratorLogSeries": ["numerator_logarithm_series_contraction"],
+    "NumeratorLogSeries": ["numerator_log_series_envelope", "numerator_logarithm_series_contraction"],
 }
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 REPORT = re.compile(r"'OpenMathResearch\.LongCycleExcedances\.(\w+)' depends on axioms:\s*\[([^\]]*)\]")
