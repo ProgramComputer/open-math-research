@@ -1,0 +1,5 @@
+--- FourierLogarithmicGap.lean
++++ FourierLogarithmicGap.lean
+@@ -62 +62 @@
+-    _ ≤ _ := add_le_add_left (div_le_div_of_nonneg_left ((norm_nonneg _).trans hΔ) hg hd) _
++    _ ≤ _ := add_le_add_right (div_le_div_of_nonneg_left ((norm_nonneg _).trans hΔ) hg hd) _
