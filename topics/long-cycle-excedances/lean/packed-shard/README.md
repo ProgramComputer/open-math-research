@@ -1,6 +1,6 @@
 # The first packed endpoint shard
 
-The proposed Lean theorem `RepositoryQuotientAudit.firstShard_original_signs` checks four strict signs for each of the 131 records in the existing [witness shard](../../intermediate/witness-ledger/shard.csv). The old sizes are 251 through 255 and the cutoff stays at 13. At each record the original reduced row at size $n$ has opposite signs at the two endpoints, and the original reduced row at size $n+1$ has the prescribed common sign at both endpoints. The claim comprises 524 signs. Root selection, the joins with the analytic windows, and the other finite shards are separate obligations.
+The Lean theorem `RepositoryQuotientAudit.firstShard_original_signs` checks four strict signs for each of the 131 records in the existing [witness shard](../../intermediate/witness-ledger/shard.csv). The old sizes are 251 through 255 and the cutoff stays at 13. At each record the original reduced row at size $n$ has opposite signs at the two endpoints, and the original reduced row at size $n+1$ has the prescribed common sign at both endpoints. The claim comprises 524 signs. Root selection, the joins with the analytic windows, and the other finite shards are separate obligations.
 
 The generator stores 50 words per row. Each word holds its significand and binary shift. Lean checks the recorded shift and quotient using powers of two, then proves that decoding gives the rounded coefficient. The fast step uses the 12 nonzero Eulerian weights and the descending-factorial form of the binomial coefficient. Its agreement with the rounded recurrence is proved in Lean. The seed and consecutive steps through size 256 establish all coefficients used by the endpoint proof. [Rounded row enclosure](../compact-rows/README.md) · [Endpoint sign implication](../packed-endpoints/README.md)
 
@@ -22,4 +22,4 @@ uv run --no-project --with python-flint==0.9.0 python -B \
   topics/long-cycle-excedances/intermediate/witness-ledger/shard.csv
 ~~~
 
-The generic packed provenance proof, seed, final row transition and all four tests for the last archive gap passed strict local checks on Lean 4.19.0. The full pinned build is pending.
+The hosted Lean 4.33.1 build passed strict compilation and kernel replay of every module on code commit `bde40d8`. The two exported declarations use only `propext`, `Classical.choice` and `Quot.sound`. [Hosted run](https://github.com/ProgramComputer/open-math-research/actions/runs/45931609250) · [Audit excerpt](hosted-audit.txt)
