@@ -26,3 +26,5 @@ The Linux run at PR head `7f16689d7d2f1fb353b83ad45f611204e50c80fa` built the or
 The continuation argument extends the squared-pole identity from the real ray to complex arguments and applies it to the angular derivative of the original generating function. [Argument, formal statement and verification status](continuation.md)
 
 The same package checks the [original cutoff logarithm coefficients](original-log.md) at the linear term and every retained nonlinear term.
+
+The all-degree coefficients in the numerator comparison sum absolutely to the analytic logarithm throughout the nearest-pole disk. [Argument and verification record](analytic-log-series.md)

@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/long-cycle-fourier-real-axis.yml'
       - 'topics/long-cycle-excedances/lean/fourier-stable/**'
+      - 'topics/long-cycle-excedances/lean/fourier-circle/NumeratorLogDefinitions.lean'
       - 'topics/long-cycle-excedances/lean/common-pin/RepositoryCoherentPoles.lean'
       - 'topics/long-cycle-excedances/lean/common-pin/MonomialTiltBounds.lean'
       - 'topics/long-cycle-excedances/lean/common-pin/TiltAnalyticEvaluation.lean'
