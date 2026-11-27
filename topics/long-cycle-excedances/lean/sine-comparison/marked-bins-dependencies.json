@@ -1,0 +1,15 @@
+{
+  "ActualOccupiedValue": "ae0d1eac196261fbeb6344954e49b175c2a246a776d0ed335267b04087dc21ea",
+  "BinIntegerCertificate": "86ee28fef6ef4f1c0c243b5d401d47be7e911a92dcdaca5fe3114d3d0ab66aa6",
+  "BinProductMajorant": "7f6b638a42bb6215f993e9104a758ced81caadc30f76222035b8353d7ab78e6f",
+  "CutoffFormalExp": "b6718e18865eb407f6b5a98a96e45f9adc4b2b196ea69dd79a0b29837e753911",
+  "ExpAdd": "750ac2a79e905f9e194109dc80f6498ab6ddbfebd3d56ca43cee4da8de524939",
+  "FinitePoleProduct": "7534e4efe9287b70b30ea414d1f0cdfbb759d8f504510c39511799c9c12bfaaf",
+  "OccupiedCoefficient": "1fc0666e094ef865e279bd99567049fcad822bb6e49fb82a7f98bc74f16538a7",
+  "OccupiedExpansion": "3a8d03cfd8f046607f0e2ff4e95b19b0ef0c83f0ad49cbd59d1a2c1dc7879327",
+  "OccupiedSupportNet": "c89d3760a351784b833903f60291665d34748713b3845954090d337c590960ad",
+  "PairedCoefficientLimit": "b324c076b7c13467d74afa385fd2184cd32de1ec7897c467a0d8efcaf82fe203",
+  "PairedExpProduct": "b6b6d10d895c410efc8dc01e59087d518526533cd386157b85aac76518638680",
+  "PairedPoleConvergence": "60b72ee27977c3bbbb1306ec8406b164798b21e76f49fe8b1e8c5508e895580d",
+  "PairedPoleFamily": "3498761bdd741f44266ffc8d034c7074c5f1f5c21a4cb788824a44eeb56214cd"
+}
