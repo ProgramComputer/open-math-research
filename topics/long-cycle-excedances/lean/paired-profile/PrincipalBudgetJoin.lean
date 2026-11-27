@@ -50,7 +50,7 @@ theorem principal_angular_budget {n j : ℕ} (hn : 0 < n) (hr : 192 ≤ j+1)
   apply reflected_log_bound_of_pair (principal_log_lattice_summable j (cos θ) hS.ne')
     hh hA _ _ hnum
   · have h := weighted_log_bound hn hr hS hangle hh hyr hA hAS (negLogIndex 0)
-    simpa [negLogIndex] using h
+    simpa [principalAngularLogNorm,negLogIndex] using h
   · intro i
     have hp := weighted_log_bound hn hr hS hangle hh hyr hA hAS (posLogIndex i)
     have hm := weighted_log_bound hn hr hS hangle hh hyr hA hAS (negLogIndex (i+1))
@@ -68,8 +68,7 @@ theorem principal_angular_budget {n j : ℕ} (hn : 0 < n) (hr : 192 ≤ j+1)
     generalize (1+h*t*(t+1))^96 = b
     by_cases hb : b=0
     · simp [hb]
-    · field_simp [ht.ne',hA.ne',hb,show t+1 ≠ 0 by positivity]
-      ring
+    · field_simp [ht.ne',hA.ne',hb,show t+1 ≠ 0 by positivity] <;> ring
 
 private theorem size_budgets {n j : ℕ} {X h A θ : ℝ}
     (hn : 10000 ≤ n) (hX : 0 < X) (hkn : (n:ℝ) ≤ X*((j:ℝ)+2))
@@ -95,7 +94,7 @@ private theorem size_budgets {n j : ℕ} {X h A θ : ℝ}
   calc
     _ ≤ (5477/50)*(((j:ℝ)+1)/n) := mul_le_mul_of_nonneg_left hy (by norm_num)
     _ ≤ ((n:ℝ)*sin θ)*(((j:ℝ)+1)/n) := mul_le_mul_of_nonneg_right hns hpos
-    _ = _ := by field_simp; ring
+    _ = _ := by field_simp <;> ring
 
 theorem actual_principal_real_bound_all {n j : ℕ} {θ : ℝ}
     (hn : 10000 ≤ n) (hkn : n ≤ 48*(j+2)) (hS : 0 < sin θ)

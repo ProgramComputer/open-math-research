@@ -8,7 +8,7 @@ $$
 
 For $n\le10k$ the stronger lower bound is $54/55$. The two estimates require eleven positive-index terms each. The [formal result](../lean/paired-profile/PrincipalScaledBudget.lean) refers to the literal occupied primitives of the cycle series. The [infinite-product identity](../lean/paired-profile/PrincipalLatticeProduct.lean) includes the conjugate endpoint.
 
-**Reflection.** Set $r=k-1$. The radial logarithm of the $q$th factor has norm at most $|w_q|^{-r}/(2|q|rS)$. The term $q=-1$ therefore contributes at most $1/(2rS)$. Pair $q=t$ with $q=-(t+1)$ for $t\ge1$. Their squared denominators are equal to $1+4t(t+1)S^2$. The [Bernoulli estimate](../lean/sine-comparison/PrimitivePoleKernel.lean) implies $|w_t|^{-r}\le(1+ht(t+1))^{-96}$ if $192\le r$ and $40h\le r/n$. The dimension bounds here imply $r\ge192$. If $A\le rS$, the sum of all logarithm norms is at most
+**Reflection.** Set $r=k-1$. The radial logarithm of the factor indexed by $q$ has norm at most $|w_q|^{-r}/(2|q|rS)$. The term $q=-1$ therefore contributes at most $1/(2rS)$. Pair $q=t$ with $q=-(t+1)$ for $t\ge1$. Their squared denominators are equal to $1+4t(t+1)S^2$. The [Bernoulli estimate](../lean/sine-comparison/PrimitivePoleKernel.lean) implies $|w_t|^{-r}\le(1+ht(t+1))^{-96}$ if $192\le r$ and $40h\le r/n$. The dimension bounds here imply $r\ge192$. If $A\le rS$, the sum of all logarithm norms is at most
 
 $$
 \frac1{2A}\left(1+\sum_{t\ge1}W_h(t)\right),\qquad W_h(t)=\frac{1/t+1/(t+1)}{(1+ht(t+1))^{96}}.
