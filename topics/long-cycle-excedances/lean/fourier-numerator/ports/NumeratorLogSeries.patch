@@ -1,0 +1,5 @@
+--- NumeratorLogSeries.lean
++++ NumeratorLogSeries.lean
+@@ -31 +31 @@
+-    simp [f,norm_pow,norm_div,Complex.norm_real,Real.norm_eq_abs,
++    simp only [f,norm_pow,norm_div,Complex.norm_real,Real.norm_eq_abs,

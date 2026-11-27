@@ -1,3 +1,4 @@
+import NumeratorLogDefinitions
 import NumeratorOddPoleMoment
 import NumeratorTaylorContraction
 
@@ -5,13 +6,6 @@ set_option autoImplicit false
 noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
 open scoped BigOperators Real
-
-/-- Degree-normalized coefficients of the logistic logarithm, expressed by
-its linear logistic value and the full odd-pole sum at every higher degree. -/
-def numeratorLogSeries (s : ℝ) (j : ℕ) : ℂ :=
-  if j = 0 then 0
-  else if j = 1 then (numeratorRadius s/(1+Real.exp s):ℝ)
-  else -(∑' l : ℤ, ((numeratorRadius s:ℂ)/numeratorPole s l)^j)/(j:ℂ)
 
 private theorem numerator_linear_bound {s : ℝ} (hs : 0 ≤ s) :
     ‖numeratorLogSeries s 1‖ ≤ 4 := by
@@ -27,7 +21,7 @@ private theorem numerator_linear_bound {s : ℝ} (hs : 0 ≤ s) :
   have h := Real.add_one_le_exp s
   linarith only [hr,h,Real.pi_lt_four,hs]
 
-private theorem numerator_log_series_envelope (s : ℝ) {j : ℕ} (hj : 2 ≤ j) :
+theorem numerator_log_series_envelope (s : ℝ) {j : ℕ} (hj : 2 ≤ j) :
     ‖numeratorLogSeries s j‖ ≤
       (2+9/(4*(π/numeratorRadius s)*Real.sqrt j))/(j:ℝ) := by
   have hj0 : j ≠ 0 := by omega
@@ -65,5 +59,6 @@ theorem numerator_logarithm_series_contraction {s : ℝ} (hs : 0 ≤ s)
   exact numerator_small_height_contraction hk _ hS hU hR hRu hξ hη
     (numerator_linear_bound hs) (fun _ hj => numerator_log_series_envelope s hj)
 
+#print axioms numerator_log_series_envelope
 #print axioms numerator_logarithm_series_contraction
 end OpenMathResearch.LongCycleExcedances
