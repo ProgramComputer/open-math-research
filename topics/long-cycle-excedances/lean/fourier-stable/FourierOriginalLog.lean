@@ -36,7 +36,6 @@ theorem original_cutoff_log_poles {k j : ℕ} (hj : 2 ≤ j) (hjk : j < k)
     (j.factorial : ℂ)) = -LongCycleBounds.oddPoleSum j s
   rw [LongCycleBounds.Band.moment_poles j hj s hs, hfac, Nat.cast_mul]
   field_simp [hj0,hf0]
-  ring
 
 #print axioms original_cutoff_log_linear
 #print axioms original_cutoff_log_poles

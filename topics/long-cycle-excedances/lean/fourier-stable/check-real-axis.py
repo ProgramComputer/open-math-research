@@ -39,12 +39,13 @@ def build_local(project, original, module, theorems):
     output = project / ".lake" / "build" / "lib" / "lean" / (module + ".olean")
     print(f"Compile {module} input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
     strict = ("-DwarningAsError=true",) if theorems else ()
-    try:
-        audit = run(project, "lake", "env", "lean", *strict, "-o", str(output), str(source), capture=True)
-    except subprocess.CalledProcessError as error:
-        print(error.stdout or "", end="", flush=True)
-        raise
+    result = subprocess.run(
+        ["lake", "env", "lean", *strict, "-o", str(output), str(source)],
+        cwd=project, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+    )
+    audit = result.stdout
     print(audit, end="", flush=True)
+    result.check_returncode()
     for theorem in theorems:
         name = re.escape(NAMESPACE + theorem)
         match = re.findall(rf"^'{name}' depends on axioms:\s*\[([^\]]*)\]$", audit, re.M)
