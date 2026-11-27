@@ -42,7 +42,51 @@ UNIFORM_MODULES = (
     "RepositoryUniformHighDegree",
     "RepositoryUniformMass",
 )
+VERTICAL_MODULES = (
+    "UnimodalMesh",
+    "GammaDensity",
+    "GammaPeak",
+    "AllCutoffMesh",
+    "VerticalTransport",
+    "VerticalRadius",
+    "VerticalMeshSum",
+    "PoleModeIdentity",
+    "PoleChord",
+    "ComplexDiscreteMoment",
+    "RepositoryLogTiltDiscrete",
+    "RepositoryPoleTransport",
+    "MinorPoleMass",
+    "MinorPoleRadius",
+    "RepositoryMinorPoles",
+)
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.all_cutoff_vertical_density_budget",
+    "OpenMathResearch.LongCycleExcedances.coherent_log_chord_bound",
+    "OpenMathResearch.LongCycleExcedances.coherent_vertical_transport",
+    "OpenMathResearch.LongCycleExcedances.complex_exp_negative_odd_pole",
+    "OpenMathResearch.LongCycleExcedances.complex_hasSum_discrete_moment",
+    "OpenMathResearch.LongCycleExcedances.conjugate_logPolyAt",
+    "OpenMathResearch.LongCycleExcedances.cutoffExp_deriv",
+    "OpenMathResearch.LongCycleExcedances.enclosed_radius_decay",
+    "OpenMathResearch.LongCycleExcedances.gamma_mesh_peak",
+    "OpenMathResearch.LongCycleExcedances.log_difference_from_modes",
+    "OpenMathResearch.LongCycleExcedances.long_cycle_vertical_density_budget",
+    "OpenMathResearch.LongCycleExcedances.poisson_peak_le_ninth",
+    "OpenMathResearch.LongCycleExcedances.shifted_complex_geometric",
+    "OpenMathResearch.LongCycleExcedances.unimodal_density_mesh",
+    "OpenMathResearch.LongCycleExcedances.vertical_mode_transport",
+    "OpenMathResearch.LongCycleExcedances.vertical_radius_power",
+    "OpenMathResearch.LongCycleExcedances.weighted_minor_poles_le_fifth",
+    "OpenMathResearch.LongCycleExcedances.weighted_odd_mode_bound",
+    "RepositoryQuotientAudit.actualLogTiltAt_principal",
+    "RepositoryQuotientAudit.actual_enclosed_minor_poles_le_fifth",
+    "RepositoryQuotientAudit.actual_logTilt_far_exp_ratio",
+    "RepositoryQuotientAudit.actual_logTilt_far_pole",
+    "RepositoryQuotientAudit.actual_logTilt_pole_chord",
+    "RepositoryQuotientAudit.coherentPole_exp_neg",
+    "RepositoryQuotientAudit.cutoffLogCoefficient_hasSum",
+    "RepositoryQuotientAudit.enclosed_coherent_radial_decay",
+    "RepositoryQuotientAudit.principalLogTilt_im_bound",
     "OpenMathResearch.LongCycleExcedances.discrete_low_frequency_sum",
     "OpenMathResearch.LongCycleExcedances.discrete_low_mode",
     "OpenMathResearch.LongCycleExcedances.expPrefix_half_bound",
@@ -196,6 +240,7 @@ def compile_topic(project):
     files.append((HERE / "ActualHighAngleSign.lean", "ActualHighAngleSign"))
     files.extend((TOPIC.parent / "phase-cells" / (name + ".lean"), name) for name in PHASE_MODULES)
     files.extend((TOPIC / "uniform-log-tilt" / (m + ".lean"), m) for m in UNIFORM_MODULES)
+    files.extend((TOPIC / "vertical-tilt" / (m + ".lean"), m) for m in VERTICAL_MODULES)
     observed = {}
     failed = set()
     for source, module in files:
@@ -247,7 +292,7 @@ def compile_topic(project):
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
                    "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
-                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES):
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
