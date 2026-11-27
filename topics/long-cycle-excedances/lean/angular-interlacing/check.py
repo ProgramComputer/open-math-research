@@ -66,7 +66,7 @@ def read_source(path):
     return subprocess.check_output(["git", "show", f":{relative}"], cwd=REPO)
 
 
-def plan():
+def plan(root=ROOT, new=NEW, source_dirs=SOURCE_DIRS, provided=()):
     tracked = {
         REPO / Path(path) for path in subprocess.check_output(
             ["git", "ls-files", "-z", "--", "*.lean"], cwd=REPO
@@ -81,12 +81,12 @@ def plan():
         if prefix in FROZEN:
             frozen.add(module)
             return
-        if prefix in EXTERNAL or module in ordered:
+        if prefix in EXTERNAL or module in ordered or module in provided:
             return
         if module in visiting:
             raise ValueError(f"Cyclic repository import at {module}")
         filename = module_filename(module)
-        matches = [directory / filename for directory in SOURCE_DIRS if directory / filename in tracked]
+        matches = [directory / filename for directory in source_dirs if directory / filename in tracked]
         if len(matches) != 1:
             raise ValueError(f"Expected one source for {module}, found {matches}")
         path, = matches
@@ -97,17 +97,17 @@ def plan():
         visiting.remove(module)
         ordered[module] = (path, data)
 
-    visit(ROOT)
-    if NEW - ordered.keys() or len({path for path, _ in ordered.values()}) != len(ordered):
+    visit(root)
+    if new - ordered.keys() or len({path for path, _ in ordered.values()}) != len(ordered):
         raise ValueError("Missing proof module or a source assigned to more than one module")
     return ordered, frozen
 
 
-def stage(project, module, data):
+def stage(project, module, data, *, rename_vertical=True):
     target = project / module_filename(module)
     target.parent.mkdir(parents=True, exist_ok=True)
     original_imports = imports(data)
-    if module in VERTICAL_EXP_PORT:
+    if rename_vertical and module in VERTICAL_EXP_PORT:
         digest, count = VERTICAL_EXP_PORT[module]
         if sha256(data).hexdigest() != digest:
             raise ValueError(f"Unexpected source for the composition-only vertical port of {module}")
@@ -158,8 +158,14 @@ def start(project, archive, common):
 
 def production(project, archive, ordered, frozen):
     common = runpy.run_path(str(LEAN / "common-pin/check.py"))
-    paired = runpy.run_path(str(LEAN / "paired-profile/check.py"))
     start(project, archive, common)
+    compile_closure(project, ordered, frozen)
+
+
+def compile_closure(project, ordered, frozen, *, new=NEW, final=FINAL,
+                    rename_vertical=True, reuse=False, strict=False):
+    common = runpy.run_path(str(LEAN / "common-pin/check.py"))
+    paired = runpy.run_path(str(LEAN / "paired-profile/check.py"))
     objects = project / ".lake/build/lib/lean"
     run = common["run"]
     upstream_order = tuple("LongCycleBounds." + m for m in (*common["LOGISTIC_IMPORTS"], "UniversalRecurrence"))
@@ -187,34 +193,47 @@ def production(project, archive, ordered, frozen):
             failed.add(module)
             print(f"Skip {module} after failed imports {sorted(blocked)}", flush=True)
             continue
-        source = stage(project, module, data)
         out = objects / module_filename(module, ".olean")
+        target = project / module_filename(module)
+        previous = None
+        if reuse and module not in new and out.is_file():
+            previous = target.read_bytes()
+        source = stage(project, module, data, rename_vertical=rename_vertical)
+        compiled = source.read_bytes()
+        audit = (f"{module} path={original.relative_to(REPO)} source-sha256={sha256(data).hexdigest()} "
+                 f"input-sha256={sha256(compiled).hexdigest()}")
+        if previous is not None:
+            if previous != compiled:
+                raise ValueError(f"Prepared project already compiled {module} with different bytes")
+            print(f"Reuse {audit}", flush=True)
+            continue
         out.parent.mkdir(parents=True, exist_ok=True)
-        print(f"Compile {module} path={original.relative_to(REPO)} source-sha256={sha256(data).hexdigest()} "
-              f"input-sha256={sha256(source.read_bytes()).hexdigest()}", flush=True)
-        result = subprocess.run(["lake", "env", "lean", "-o", str(out), str(source)],
+        print(f"Compile {audit}", flush=True)
+        options = ["-DwarningAsError=true"] if strict and module in new else []
+        result = subprocess.run(["lake", "env", "lean", *options, "-o", str(out), str(source)],
                                 cwd=project, capture_output=True, text=True)
         print(result.stdout, end="", flush=True)
         print(result.stderr, end="", flush=True)
         if result.returncode:
             failed.add(module)
-        if module in NEW:
+        if module in new:
             namespace, = NAMESPACE.findall(data.decode())
             expected.update(f"{namespace}.{name}" for name in AXIOM_COMMAND.findall(data.decode()))
             seen.update({name: {a.strip() for a in axioms.split(",") if a.strip()}
                          for name, axioms in paired["AXIOM_REPORT"].findall(result.stdout)})
     if failed:
         raise RuntimeError(f"Module compilation failed or was blocked: {sorted(failed)}")
-    if FINAL not in expected:
-        raise ValueError(f"Missing axiom command for {FINAL}")
+    if final not in expected:
+        raise ValueError(f"Missing axiom command for {final}")
     for name in sorted(expected):
         if name not in seen or seen[name] - common["ALLOWED"]:
             raise ValueError(f"Missing declaration or unexpected axioms for {name}: {seen.get(name)}")
     for module in ordered:
-        if module in NEW:
+        if module in new:
             run(project, "lake", "env", "leanchecker", "--verbose", module)
             print(f"kernel_replay_exit=0 {module}", flush=True)
-    print(f"PASS: {len(ordered)} repository modules compiled, {len(NEW)} replayed, "
+    action = "checked" if reuse else "compiled"
+    print(f"PASS: {len(ordered)} repository modules {action}, {len(new)} replayed, "
           f"{len(expected)} original-proof declarations audited", flush=True)
 
 
