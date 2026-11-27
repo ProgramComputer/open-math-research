@@ -70,7 +70,10 @@ theorem high_angle_finite_log_bound {k : ℕ} (hk : 2 ≤ k)
     have hi' := mem_range.mp hi
     have h := hrest (i+1+1) (by omega) (by omega)
     rw [mul_one_div]
-    simpa only [Nat.cast_add, Nat.cast_one, add_assoc, one_add_one_eq_two] using h
+    have hcast : (((i+1+1:ℕ):ℝ)) = (i:ℝ)+2 := by
+      push_cast
+      ring
+    rwa [hcast] at h
   have hh := shifted_harmonic_sum (k-2)
   have hk' : (k-2)+1 ≤ k := by omega
   have hp' : (0:ℝ) < (((k-2)+1:ℕ):ℝ) := by positivity
