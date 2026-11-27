@@ -27,8 +27,8 @@ CHECKED = (
 )
 
 
-def main(project, retained_imports):
-    BASE["main"](project, original_log=True, retained_imports=retained_imports, continuation=True)
+def compile_coefficients(project):
+    """Stage the Fourier imports and targets in an already initialized project."""
     build = BASE["build_local"]
     inputs = [(HERE.parent / "fourier-circle", module, ()) for module in CIRCLE]
     inputs += [(HERE, module, theorems) for module, theorems in CHECKED]
@@ -46,6 +46,11 @@ def main(project, retained_imports):
             failed.add(module)
     if failed:
         raise RuntimeError(f"Incomplete original coefficient checks: {sorted(failed)}")
+
+
+def main(project, retained_imports):
+    BASE["main"](project, original_log=True, retained_imports=retained_imports, continuation=True)
+    compile_coefficients(project)
 
 
 if __name__ == "__main__":
