@@ -43,7 +43,8 @@ jobs:
           if [[ -f "$RUNNER_TEMP/quotient-import-objects.tar.zst" ]]; then
             args+=("$RUNNER_TEMP/quotient-import-objects.tar.zst")
           fi
-          python3 -Bu topics/long-cycle-excedances/lean/fast-packed-checks/check.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/fast-packed-checks.log"
+          lean -DwarningAsError=true topics/long-cycle-excedances/lean/fast-packed-checks/RowWordStorage.lean 2>&1 | tee "$RUNNER_TEMP/fast-packed-checks.log"
+          python3 -Bu topics/long-cycle-excedances/lean/fast-packed-checks/check.py "${args[@]}" 2>&1 | tee -a "$RUNNER_TEMP/fast-packed-checks.log"
       - name: Preserve verification report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
