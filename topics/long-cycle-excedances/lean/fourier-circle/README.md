@@ -65,4 +65,6 @@ lake exe cache get Mathlib.Analysis.Complex.CauchyIntegral Mathlib.Analysis.Comp
 lake env python3 -I ../../topics/long-cycle-excedances/lean/fourier-circle/check.py
 ```
 
+The hosted Linux check at `63c4e95` passed all eighteen named theorem audits. Each of the nine source digests in its log matches the corresponding Git blob. [Hosted verification record](https://github.com/ProgramComputer/open-math-research/actions/runs/46000239509)
+
 The verification still requires the differential equations for the original permutation rows, the numeric bounds on their pole weights, and their use in the large-aspect interlacing theorem.
