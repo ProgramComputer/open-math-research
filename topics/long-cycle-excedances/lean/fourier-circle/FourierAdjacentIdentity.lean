@@ -39,10 +39,10 @@ theorem fourier_adjacent_twice {f D B E : ℝ→ℂ} (n k : ℤ) (a C A : ℂ)
     funext x
     have h := congrArg (fun y : ℂ => f x*y) (hsplit x)
     dsimp only [b,d,w]
-    dsimp only at h
+    try dsimp only at h
     linear_combination h
   have h := congrArg (fun g : ℝ→ℂ => normalizedFourierIntegral g (n-k)) hid
-  dsimp only at h
+  try dsimp only at h
   rw [fourier_linear_pair (cw.mul cd) cd, fourier_linear_pair (cf.mul cb) (cw.mul cf),one_mul] at h
   dsimp only [w] at h
   rw [fourier_modulation,fourier_modulation,show n-k-(-1) = n+1-k by omega,
