@@ -17,3 +17,7 @@ uv run --no-project --with python-flint==0.9.0 python -I verify.py rebuilt.jsonl
 ~~~
 
 Both scripts report the SHA-256 of the uncompressed JSON lines, `95f445fa4e7864984c33ca44eb2f83a8295a628721e0b65bf523fb55265490e8`. The largest endpoint numerator uses 25 bits and the largest denominator is $2^{250}$. Lean coverage of these particular certificate records is pending.
+
+## Independent review
+
+An agent who did not write these scripts extracted the certificate package from `4c3b591` and reran its verifier on python-flint 0.9.0. The result matched all 60,773 signs and the file digest. The reviewer also checked the distinguished-cycle count directly. Starting its cyclic word at its smallest label gives one forced ascent, followed by the ascents of the remaining word. Choosing the remaining labels accounts for the binomial factor. When the reduced degree $n-2$ is even, the successor has the central root at $-1$. When it is odd, the old row has that root and the additional successor sign gives the innermost gap. [Research review](https://github.com/ProgramComputer/open-math-research/pull/331) · [Formal verification in progress](https://github.com/ProgramComputer/open-math-research/pull/332)
