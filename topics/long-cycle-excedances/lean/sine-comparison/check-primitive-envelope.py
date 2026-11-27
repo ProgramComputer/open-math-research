@@ -16,6 +16,7 @@ ROOTS = (
     "LinearSlabs",
     "LiteralLinearTable",
     "BivariateBin",
+    "BinProductMajorant",
     "DiscreteOddTail",
     "DyadicStarCertificate",
     "LiteralBin",
@@ -32,6 +33,8 @@ ROOTS = (
 )
 NAMESPACE = "OpenMathResearch.LongCycleExcedances."
 AUDITED = (
+    "bin_full_nonconstant_nonnegative",
+    "literal_slab_scaled_linear_envelope_of_spec",
     "linearHead_upper",
     "linearTail_upper",
     "linearTable_rounding",

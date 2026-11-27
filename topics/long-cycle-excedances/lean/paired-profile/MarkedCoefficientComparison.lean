@@ -78,5 +78,30 @@ theorem marked_product_dominates {ι : Type*} (A : Finset ι) (k N : ℕ)
   · simp [mem_Icc,h,hd]
   · simp [mem_Icc,h,hF q hq d (lt_of_not_ge h)]
 
+/-- At a positive degree, the residual of the actual coefficient after
+subtracting its one-primitive part is bounded by the marked multiple product. -/
+theorem marked_multiple_dominates {ι : Type*} (A : Finset ι) (k N : ℕ)
+    (F : ι → PowerSeries ℂ) (hF : ∀ i ∈ A, ∀ s < k, PowerSeries.coeff (R := ℂ) s (F i)=0)
+    {t : ℕ} (ht : t ≤ N) :
+    let P := fun i => markDegreeBin k N (fun s => ‖PowerSeries.coeff (R := ℂ) s (F i)‖)
+    ‖PowerSeries.coeff (R := ℂ) t ((∏ q ∈ A, (1+F q))-1-∑ q ∈ A, F q)‖ ≤
+      ((markedMultiple A P).eval 1).coeff t := by
+  classical
+  dsimp only
+  let P (i:ι) := markDegreeBin k N (fun s => ‖PowerSeries.coeff (R := ℂ) s (F i)‖)
+  rw [←sum_multiple_subsets_eq]
+  simp only [map_sum,markedMultiple,eval_finsetSum,eval_prod,finsetSum_coeff]
+  apply (norm_sum_le _ _).trans
+  apply sum_le_sum
+  intro T hT
+  apply dominates_prod T N _ _ _ t ht
+  intro q hq s hs
+  rw [eval_mark_degree]
+  have hqA := (mem_powerset.mp (mem_filter.mp hT).1) hq
+  by_cases h : k ≤ s
+  · simp [mem_Icc,h,hs]
+  · simp [mem_Icc,h,hF q hqA s (lt_of_not_ge h)]
+
+#print axioms marked_multiple_dominates
 #print axioms marked_product_dominates
 end OpenMathResearch.LongCycleExcedances
