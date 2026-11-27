@@ -63,9 +63,9 @@ theorem original_small_height_numerator_at_points {k : ℕ} (hk : 100 ≤ k)
   have hR₀ : 1 ≤ R := (le_div_iff₀ hr).2 (by simpa using hwp)
   have hR₁ : R ≤ 1+1/(k:ℝ) := (div_le_iff₀ hr).2 hwr
   have hξ : ‖ξ‖ = 1 := by
-    simp [ξ,norm_div,Complex.norm_real,Real.norm_eq_abs,abs_of_pos hw,hw.ne']
+    simp only [ξ,norm_div,Complex.norm_real,Real.norm_eq_abs,abs_of_pos hw,div_self hw.ne']
   have hη : ‖η‖ = 1 := by
-    simp [η,norm_div,Complex.norm_real,Real.norm_eq_abs,abs_of_pos hr,hp,hr.ne']
+    simp only [η,norm_div,Complex.norm_real,Real.norm_eq_abs,abs_of_pos hr,hp,div_self hr.ne']
   have hρ0 : 0 ≤ ρ := sub_nonneg.mpr ((div_le_one hkr).2 (by
     exact_mod_cast (show 1 ≤ k by omega)))
   have hρ1 : ρ < 1 := by
@@ -75,13 +75,15 @@ theorem original_small_height_numerator_at_points {k : ℕ} (hk : 100 ≤ k)
   have ht (u : ℂ) (hu : ‖u‖ = 1) : ‖(ρ:ℂ)*u‖ < 1 := by
     simpa only [norm_mul,hu, mul_one,Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg hρ0] using hρ1
   have hW : (r:ℂ)*((R:ℂ)*ξ) = w := by
-    unfold R ξ
-    rw [Complex.ofReal_div]
-    field_simp [hrc,hwc]
-    ring
+    have hscale : (r:ℂ)*(R:ℂ) = (‖w‖:ℂ) := by
+      unfold R
+      rw [Complex.ofReal_div, ← mul_div_assoc, mul_div_cancel_left₀ _ hrc]
+    rw [← mul_assoc, hscale]
+    change (‖w‖:ℂ)*(w/(‖w‖:ℂ)) = w
+    rw [← mul_div_assoc, mul_div_cancel_left₀ _ hwc]
   have hP : (r:ℂ)*η = p := by
     dsimp only [η]
-    field_simp [hrc]
+    rw [← mul_div_assoc, mul_div_cancel_left₀ _ hrc]
   have hW' : (r:ℂ)*((ρ:ℂ)*ξ) = ((ρ*r/‖w‖:ℝ):ℂ)*w := by
     dsimp only [ξ]
     rw [Complex.ofReal_div,Complex.ofReal_mul]

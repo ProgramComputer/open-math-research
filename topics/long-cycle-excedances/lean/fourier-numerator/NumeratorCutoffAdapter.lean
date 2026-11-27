@@ -22,12 +22,13 @@ theorem numerator_log_coeff_eq_original {s : ℝ} (hs : 0 ≤ s) {k j : ℕ} (hj
       Complex.exp_neg, ← Complex.ofReal_exp, ← Complex.ofReal_inv,
       ← Complex.ofReal_one, ← Complex.ofReal_add, ← Complex.ofReal_div, ← Complex.ofReal_mul]
     congr 1
-    have hEpos := Real.exp_pos s
-    have hE : Real.exp s ≠ 0 := hEpos.ne'
-    have hEp : 1 + Real.exp s ≠ 0 := (by positivity : 0 < 1+Real.exp s).ne'
-    have hEi : 1 + (Real.exp s)⁻¹ ≠ 0 := (by positivity : 0 < 1+(Real.exp s)⁻¹).ne'
-    field_simp [hE,hEp,hEi]
-    exact Or.inl (add_comm _ _)
+    let E := Real.exp s
+    have hE : E ≠ 0 := (Real.exp_pos s).ne'
+    have hden : 1+E⁻¹ = (1+E)/E := by
+      rw [add_div, div_self hE, one_div]
+      exact add_comm _ _
+    change numeratorRadius s / (1+E) = numeratorRadius s*(E⁻¹/(1+E⁻¹))
+    rw [hden, inv_eq_one_div, div_div_div_cancel_right₀ hE, one_div, div_eq_mul_inv]
   · have hj : 2 ≤ j := by omega
     have hj0 : (j:ℂ) ≠ 0 := by exact_mod_cast hzero
     let f : ℤ → ℂ := fun l => 1/numeratorPole s l^j
@@ -42,9 +43,11 @@ theorem numerator_log_coeff_eq_original {s : ℝ} (hs : 0 ≤ s) {k j : ℕ} (hj
       rw [← tsum_mul_left]
       apply tsum_congr
       intro l
-      simp [f,div_pow,div_eq_mul_inv,mul_pow]
+      change ((numeratorRadius s:ℂ)/numeratorPole s l)^j =
+        (numeratorRadius s:ℂ)^j * (1 / numeratorPole s l ^ j)
+      rw [div_pow, div_eq_mul_inv, one_div]
     rw [heq,← mul_neg,← h]
-    field_simp [hj0]
+    apply (div_eq_iff hj0).2
     ring
 
 /-- The finite polynomial in normalized coordinates is the literal cutoff
