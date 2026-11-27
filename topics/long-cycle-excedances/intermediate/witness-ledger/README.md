@@ -6,7 +6,7 @@ The upstream checker is the file `topics/long-cycle-excedances/intermediate/cros
 
 - `export.py` verifies the upstream file hash and adds one emitter immediately after the upstream bracket acceptance tests. FLINT produces exact binary floating-point endpoints. The emitter uses their exact mantissas and exponents, with zero decimal rounding. It sends existing diagnostics to stderr.
 - `metadata.py` verifies every expected key, structure, uniqueness, endpoint range and exact bracket order. It does not import FLINT or the upstream checker. For each admissible pair it calculates the expected ranks independently, starting at the exact exterior integer and taking the first sample satisfying both high-angle entrance inequalities. It uses Machin's formula with alternating arctangent bounds for π, then exact alternating Taylor bounds for sine and monotonicity on the first quadrant. For each candidate before the entrance it proves at least one inequality fails. At the entrance it proves both hold. Impossible-to-decide cases fail the verifier. Pairs with no intermediate gaps are included in the counts. Omissions, duplicates and extra records fail strict matching against the expected ordered stream.
-- `WitnessLedger.lean` defines exact natural-number cross multiplication for dyadic order. Its soundness theorem proves agreement with the supplied rank list, absence of repeated keys, rational bounds $`0<a<b<1`$, and $`b<a'`$ for consecutive brackets in the same pair. `lean_fixture.py` generates a literal test from a ledger and computes the expected list independently through `metadata.py`. The included `CheckedShard.lean` uses ordinary `by decide`.
+- `WitnessLedger.lean` defines exact natural-number cross multiplication for dyadic order. Its soundness theorem proves agreement with the supplied rank list, absence of repeated keys, rational bounds $`0\lt a\lt b\lt 1`$, and $`b\lt a'`$ for consecutive brackets in the same pair. `lean_fixture.py` generates a literal test from a ledger and computes the expected list independently through `metadata.py`. The included `CheckedShard.lean` uses ordinary `by decide`.
 
 ## Reproduction
 
@@ -17,7 +17,7 @@ python3 -B export.py ../cross-check/verify.py --nmax 255 --kmin 13 --kmax 13 > s
 python3 -B metadata.py --nmax 255 --kmin 13 --kmax 13 < shard.csv
 python3 -B lean_fixture.py shard.csv --nmin 251 --nmax 255 --kmin 13 --kmax 13 > CheckedShard.lean
 # Run the next command from the repository’s shared/lean directory.
-lake env lean /absolute/path/to/topics/long-cycle-excedances/intermediate/witness-ledger/CheckedShard.lean
+lake env lean ../../topics/long-cycle-excedances/intermediate/witness-ledger/CheckedShard.lean
 ~~~
 
 The full range needs no large checkout or resident ledger. Use a pipeline with failure propagation enabled:
