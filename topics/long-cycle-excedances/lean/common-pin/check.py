@@ -110,6 +110,7 @@ COLOR_MODULES = (
     "ColorInsertion",
     "RepositoryColorInsertion",
 )
+BAND_MODULES = ("CycleProbabilityBands", "AnchoredProbability", "RepositoryProbabilityBands")
 LOAD_MODULES = (
     "BinomialColorLoad",
     "LoadEnvelope",
@@ -120,8 +121,60 @@ LOAD_MODULES = (
     "ColorLagGrid",
     "SparseLagBudget",
     "RepositoryLoadLag",
+    "RepositoryOrbitBaseline",
+    "RepositoryColorAlpha",
+    "FiniteUnimodalMesh",
+    "BernsteinProbability",
+    "BinomialGridMesh",
+    "BinomialPeakAdapter",
+    "ColorLoadGrid",
+    "RepositoryBinomialGrid",
+    "SmallLagGrid",
+    "UniformLagBudget",
+    "RepositoryUniformLag",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.accepted_probability_eq_realCount",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.baselinePairs_card",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.baselinePairs_probability",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.baselinePairs_probability_bounds",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.orbitSize_eq_lengthAt",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.originalProbability_one",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.originalProbability_reciprocal_bounds",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_one_color",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.Spec.reciprocal_bounds",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.from_anchored_counts",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.from_anchored_polynomials",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.lower547",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.lower548",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.originalProbability_spec",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.original_lower547",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.original_lower548",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.original_upper47",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.original_upper59",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.original_upper61",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.upper47",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.upper59",
+    "OpenMathResearch.LongCycleExcedances.CycleProbability.upper61",
+    "OpenMathResearch.LongCycleExcedances.binomialDensity_unimodal",
+    "OpenMathResearch.LongCycleExcedances.binomialPrimitive_mass",
+    "OpenMathResearch.LongCycleExcedances.binomial_grid_mass",
+    "OpenMathResearch.LongCycleExcedances.binomial_grid_mass_complement",
+    "OpenMathResearch.LongCycleExcedances.binomial_peak_from_scaled_bound",
+    "OpenMathResearch.LongCycleExcedances.binomial_peak_from_uniform_atom",
+    "OpenMathResearch.LongCycleExcedances.color_load_grid_mass",
+    "OpenMathResearch.LongCycleExcedances.finite_unimodal_mesh",
+    "OpenMathResearch.LongCycleExcedances.front_grid_scale",
+    "OpenMathResearch.LongCycleExcedances.hasDerivAt_binomialPrimitive",
+    "OpenMathResearch.LongCycleExcedances.small_lag_grid_mass",
+    "OpenMathResearch.LongCycleExcedances.uniform_front_lag_budget",
+    "RepositoryQuotientAudit.original_color_load_grid_mass",
+    "RepositoryQuotientAudit.original_front_acceptance_upper",
+    "RepositoryQuotientAudit.original_front_alpha_lower",
+    "RepositoryQuotientAudit.original_front_alpha_one",
+    "RepositoryQuotientAudit.original_front_alpha_upper",
+    "RepositoryQuotientAudit.original_uniform_front_lag",
+
     "OpenMathResearch.LongCycleExcedances.color_lag_grid_upper",
     "OpenMathResearch.LongCycleExcedances.sparse_lag_large_budget",
     "OpenMathResearch.LongCycleExcedances.sparse_lag_small_budget",
@@ -433,6 +486,7 @@ def compile_topic(project):
     files.extend((TOPIC / "middle-residues" / (m + ".lean"), m) for m in MIDDLE_MODULES)
     files.extend((TOPIC / "front-middle-join" / (m + ".lean"), m) for m in JOIN_MODULES)
     files.extend((TOPIC.parent / "color-acceptance" / (m + ".lean"), m) for m in COLOR_MODULES)
+    files.extend((TOPIC / "probability-bands" / (m + ".lean"), m) for m in BAND_MODULES)
     files.extend((TOPIC.parent / "color-load-bounds" / (m + ".lean"), m) for m in LOAD_MODULES)
     observed = {}
     failed = set()
@@ -485,7 +539,7 @@ def compile_topic(project):
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
                    "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
-                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES, *MIDDLE_MODULES, *JOIN_MODULES, *COLOR_MODULES, *LOAD_MODULES):
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES, *MIDDLE_MODULES, *JOIN_MODULES, *COLOR_MODULES, *BAND_MODULES, *LOAD_MODULES):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)

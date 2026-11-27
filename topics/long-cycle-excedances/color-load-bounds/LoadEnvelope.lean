@@ -30,7 +30,7 @@ theorem color_load_small_orbit_budget {a μ : ℝ} (ha : 3/2 ≤ a) (hm : 100 �
   apply (div_le_iff₀ (exp_pos x)).2
   nlinarith [mul_nonneg (sq_nonneg a) (sub_nonneg.mpr ha)]
 
-private theorem color_load_geom_small : exp (-(25/4):ℝ) < 1/501 := by
+theorem color_load_geom_small : exp (-(25/4):ℝ) < 1/501 := by
   rw [Real.exp_neg,one_div,inv_lt_inv₀ (exp_pos _) (by norm_num : (0:ℝ) < 501)]
   have h1 : (2718/1000:ℝ) < exp 1 := by linarith [Real.exp_one_gt_d9]
   have hp := pow_le_pow_left₀ (by norm_num : (0:ℝ)≤2718/1000) h1.le 6

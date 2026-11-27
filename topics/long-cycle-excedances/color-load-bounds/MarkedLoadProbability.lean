@@ -24,12 +24,12 @@ theorem marked_load_probability {n p i j : ℕ} (hj : 0 < j) (hjp : j ≤ p) (hi
   rw [marked_color_load_card]
   unfold colorLoad
   rw [hx,div_pow,div_pow]
-  push_cast
-  apply (div_eq_div_iff (mul_ne_zero (by positivity) (pow_ne_zero _ hpos.ne')) hjpos.ne').2
+  simp only [Nat.cast_mul, Nat.cast_pow]
   have hpow : (p:ℝ)^i*(p:ℝ)^(n-i)=(p:ℝ)^n := by rw [←pow_add,Nat.add_sub_of_le hin]
+  rw [div_mul_div_comm,hpow,div_mul_eq_mul_div,div_div]
+  apply (div_eq_div_iff (by positivity) (by positivity)).2
   rw [←hc,←hf]
-  field_simp [hpos.ne']
-  linear_combination (p.choose j:ℝ)*(n.choose i:ℝ)*((j-1).factorial:ℝ)*((p-j).factorial:ℝ)*(j:ℝ)^(i+1)*(((p:ℝ)-(j:ℝ))^(n-i))*hpow
+  ring
 
 private instance markedColorLoadFinite (n p i j : ℕ) (hj : 0 < j) :
     Finite (MarkedColorLoad n p i j hj) := by
