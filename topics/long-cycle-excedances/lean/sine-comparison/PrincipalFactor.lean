@@ -27,6 +27,7 @@ private theorem radial_slit {v : ℂ} (hv : ‖v‖ ≤ 1) (hv1 : v ≠ 1)
   · simp [←h]
   · nlinarith only [mul_lt_mul_of_pos_left hre h,ht1]
 
+set_option backward.isDefEq.respectTransparency false in
 private theorem radial_primitive_deriv (m : ℕ) (z v : ℂ)
     (hz : 1-z*v ∈ Complex.slitPlane) :
     HasDerivAt (fun u : ℂ => -Complex.log (1-u*v) - logPrefix m (u*v))
@@ -43,9 +44,7 @@ private theorem radial_primitive_deriv (m : ℕ) (z v : ℂ)
         ((z*v)^m*v) z := by
       convert ((((hasDerivAt_id z).mul_const v).pow (m+1)).div_const ((m:ℂ)+1)) using 1
       push_cast
-      simp only [Nat.add_sub_cancel,one_mul]
-      field_simp
-      ring
+      simp only [Nat.add_sub_cancel,one_mul] <;> field_simp <;> ring
     convert ih.sub hb using 1
     · funext u
       simp only [logPrefix,Finset.sum_range_succ]
