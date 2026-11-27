@@ -1,5 +1,7 @@
 name: Long-cycle finite cutoff Cauchy bounds
 on:
+  push:
+    branches: [review/long-cycle-finite-cutoff-cauchy]
   pull_request:
     branches: [research]
     paths:
