@@ -57,11 +57,11 @@ Both complex series converge absolutely at every angle and define continuous fun
 
 ## Verification
 
-The research pin is Lean 4.19.0 at `6caaee842e94` and mathlib at `c44e0c8ee63ca166450922a373c7409c5d26b00b`. Each of the nine source modules compiled locally. Their eighteen named axiom reports contain only `propext`, `Classical.choice` and `Quot.sound`. The checker compiles in a fresh directory and verifies the named reports. [Source checker](check.py) · [Dependency manifest](../../../../shared/lean/lake-manifest.json) · [Hosted check](../../../../.github/workflows/long-cycle-fourier-contrast.yml)
+The research pin is Lean 4.19.0 at `6caaee842e94` and mathlib at `c44e0c8ee63ca166450922a373c7409c5d26b00b`. The nine common-circle modules compiled locally. Their eighteen named axiom reports contain only `propext`, `Classical.choice` and `Quot.sound`. The checker compiles in a fresh directory and verifies the named reports. [Source checker](check.py) · [Dependency manifest](../../../../shared/lean/lake-manifest.json) · [Hosted check](../../../../.github/workflows/long-cycle-fourier-contrast.yml)
 
 ```sh
 cd shared/lean
-lake exe cache get Mathlib.Analysis.Complex.CauchyIntegral Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.ExpDeriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Tactic.FieldSimp Mathlib.Tactic.LinearCombination Mathlib.Tactic.NormNum Mathlib.Tactic.Ring Mathlib.Tactic.Positivity Mathlib.MeasureTheory.Integral.DominatedConvergence Mathlib.Analysis.NormedSpace.FunctionSeries
+lake exe cache get Mathlib.Analysis.Complex.CauchyIntegral Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.ExpDeriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Tactic.FieldSimp Mathlib.Tactic.LinearCombination Mathlib.Tactic.NormNum Mathlib.Tactic.Ring Mathlib.Tactic.Positivity Mathlib.MeasureTheory.Integral.DominatedConvergence Mathlib.Analysis.NormedSpace.FunctionSeries Mathlib.Analysis.PSeries Mathlib.Data.Real.Pi.Bounds Mathlib.Tactic.Linarith
 lake env python3 -I ../../topics/long-cycle-excedances/lean/fourier-circle/check.py
 ```
 
@@ -70,3 +70,5 @@ The hosted Linux check at `63c4e95` passed all eighteen named theorem audits. Ea
 The verification still requires the differential equations for the original permutation rows, the numeric bounds on their pole weights, and their use in the large-aspect interlacing theorem.
 
 An independent agent compared the signed identity and the complex pole-product estimate at `63c4e95` with the common-circle argument. The reviewer recovered the $n+1-k$ correction with positive sign and the $n+1$ correction with negative sign, checked both pole locations under inversion, and verified that normalized Fourier measure cancels the integral's factor of $2\pi$. The product estimate supplies the paper's products of first-order kernels. The differentiated kernels with squared denominators and the outer row normalization still require their own estimates. The reviewer checked the statements and derivation by inspection. [Comparison argument](../../fourier-circle/README.md)
+
+The integral product estimate also has a specialization to the actual odd lattice, including the signed contrast multiplier and absolute convergence for every cutoff at least three. [Statement, proof and remaining obligations](lattice.md)
