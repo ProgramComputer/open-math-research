@@ -12,10 +12,12 @@ MODULES = (
     ("FourierKernelScalars", ("scaled_fourier_kernel_bounds",)),
     ("FourierAdjacentBudget", ("absorb_adjacent_fourier_corrections",)),
     ("FourierNormalizedError", ("normalized_circle_error",)),
+    ("FourierNumericCoefficients", ("numerical_fourier_coefficient_pair",)),
 )
 
 
 def compile_errors(project):
+    (project / ".lake/build/lib/lean").mkdir(parents=True, exist_ok=True)
     for module, names in MODULES:
         DRIVER["build_local"](project, HERE / f"{module}.lean", module, names)
 
@@ -34,7 +36,8 @@ if __name__ == "__main__":
     print(compiler, flush=True)
     run(project, "lake", "exe", "cache", "get",
         "Mathlib.Analysis.SpecialFunctions.Log.Deriv", "Mathlib.Tactic.Positivity",
-        "Mathlib.Tactic.NormNum", "Mathlib.Tactic.Linarith", "Mathlib.Tactic.FieldSimp")
+        "Mathlib.Tactic.NormNum", "Mathlib.Tactic.Linarith", "Mathlib.Tactic.FieldSimp",
+        "Mathlib.Analysis.Complex.Basic")
     for package in json.loads((project / "lake-manifest.json").read_text())["packages"]:
         rev = run(project, "git", "-C", ".lake/packages/" + package["name"],
                   "rev-parse", "HEAD", capture=True).strip()
