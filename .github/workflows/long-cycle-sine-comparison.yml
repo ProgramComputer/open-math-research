@@ -36,4 +36,6 @@ jobs:
           diff -u regular-output.txt "$RUNNER_TEMP/regular.txt"
           python3 -I -B check-cutoff-jump.py > "$RUNNER_TEMP/cutoff-jump.txt"
           diff -u cutoff-jump-output.txt "$RUNNER_TEMP/cutoff-jump.txt"
+          python3 -I -B check-four-errors.py > "$RUNNER_TEMP/four-errors.txt"
+          diff -u four-errors-output.txt "$RUNNER_TEMP/four-errors.txt"
           python3 -I -B obstruction.py

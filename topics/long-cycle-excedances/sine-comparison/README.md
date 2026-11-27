@@ -44,3 +44,5 @@ The [nonprincipal value estimate](nonprincipal-value.md) reduces the full second
 The successor degree shift gives a stronger factorial bound for the regular numerator contribution in three aspect intervals. [Proof and numerical comparison](regular-numerator.md)
 
 The isolated cutoff jump splits into its exact single-primitive contribution and a sum over products with at least two primitives. [Cutoff-jump proof and exact bounds](cutoff-jump.md)
+
+The symmetric-window proof joins all four errors and reduces the indicated numerical margin to nine explicit finite inequalities. [Conjugate-pole calculation and determinant assembly](four-error-assembly.md)
