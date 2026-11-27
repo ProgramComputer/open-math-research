@@ -42,10 +42,13 @@ def prepare(directory):
     packages = json.loads(manifest)["packages"]
     assert any(p["name"] == "mathlib" and p["rev"] == MATHLIB for p in packages)
     assert (directory / "lean-toolchain").read_text().strip() == "leanprover/lean4:v4.33.1"
-    shutil.copyfile(Path(__file__).with_name("OriginalClaim.lean"), directory / "OriginalClaim.lean")
+    # Lake builds local imports using the supplying libraries. Keep its
+    # configuration frozen and place the comparator in an existing library.
+    comparison = directory / "LongCycleBounds" / "IndependentCutoffSevenClaim.lean"
+    shutil.copyfile(Path(__file__).with_name("OriginalClaim.lean"), comparison)
     supplied_audit = (directory / "SevenCutoffAudit.lean").read_text()
     (directory / "CombinedAudit.lean").write_text(
-        "import OriginalClaim\n" + supplied_audit +
+        "import LongCycleBounds.IndependentCutoffSevenClaim\n" + supplied_audit +
         "\n#print LongCycles.Allowed\n#print LongCycles.excedances\n#print LongCycles.enumerator\n"
         "#print LongCycleFinite.StrictNegativeInterlacing\n#print LongCycles.WeakRealInterlacing\n"
         "#check @LongCycleBounds.SevenCutoff.all_sizes\n#check @IndependentCutoffSeven.from_lower_size\n"
