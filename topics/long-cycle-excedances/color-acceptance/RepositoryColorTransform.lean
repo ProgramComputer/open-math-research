@@ -47,7 +47,7 @@ theorem original_color_count_of_recurrence {k : ℕ} (hk : 2 ≤ k) (D : ℕ →
   have hz : F 0=1 := by
     ext q
     simp only [F,coeff_mk,coeff_one,hzero]
-  have hr (m : ℕ) (hm : 0<m) : F m=∑ a ∈ Icc k m,
+  have hr (m : ℕ) (hm : 0 < m) : F m=∑ a ∈ Icc k m,
       C (R := ℝ) (((m-1).choose (a-1)):ℝ)*colorPowerSeries (a-1)*F (m-a) := by
     ext q
     simp only [F,coeff_mk,map_sum,color_convolution_coeff]
