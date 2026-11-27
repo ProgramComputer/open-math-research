@@ -1,5 +1,5 @@
 import Mathlib.Data.Nat.Choose.Sum
-import Mathlib.Data.Complex.ExponentialBounds
+import Mathlib.Analysis.Complex.ExponentialBounds
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Tactic.Positivity
 import Mathlib.Tactic.Linarith

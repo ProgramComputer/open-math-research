@@ -1,4 +1,4 @@
-import Mathlib.Data.Complex.ExponentialBounds
+import Mathlib.Analysis.Complex.ExponentialBounds
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Algebra.Ring.GeomSum
 import Mathlib.Tactic.Positivity
