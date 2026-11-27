@@ -94,7 +94,7 @@ jobs:
           if [[ -f "$RUNNER_TEMP/quotient-import-objects.tar.zst" ]]; then
             args+=("$RUNNER_TEMP/quotient-import-objects.tar.zst")
           fi
-          python3 -Bu "$MODULES/check.py" "${args[@]}" --groups "$RUNNER_TEMP/checked" 2>&1 | tee "$RUNNER_TEMP/common-pin.log"
+          python3 -Bu "$MODULES/check.py" "${args[@]}" --groups "$RUNNER_TEMP/checked" --pair-objects "$RUNNER_TEMP/first-pair-objects" 2>&1 | tee "$RUNNER_TEMP/common-pin.log"
       - name: Preserve verification report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -102,3 +102,12 @@ jobs:
           name: fast-insertion-report
           path: ${{ runner.temp }}/common-pin.log
           retention-days: 30
+
+      - name: Preserve checked first-pair modules
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: first-pair-checked-modules
+          path: ${{ runner.temp }}/first-pair-objects/
+          retention-days: 30
+          if-no-files-found: ignore

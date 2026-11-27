@@ -6,7 +6,7 @@ The integer table starts at the unique empty permutation. The frozen insertion r
 
 [Insertion recurrence](InsertionTable.lean) · [Rounding bound](RoundedHorner.lean) · [Tail bound](IntegerTail.lean) · [Connection to the original sum](OriginalInsertionSigns.lean) · [First-pair theorem](FirstPairOriginal.lean)
 
-The endpoint reductions are split into five short blocks, separate from the model that connects the checkpoint entries to the literal permutation rows. The final theorem combines the checked blocks with that model.
+The endpoint reductions are split into five short blocks, separate from the model that connects the checkpoint entries to the literal permutation rows. The final theorem combines the checked blocks with that model. The Eulerian seed is checked in twelve literal recurrence steps. The driver bounds each local compiler and kernel replay process in time and uses a host-memory-based address-space limit on Linux. The workflow saves the successfully replayed first-pair objects and their source and object digests even if a later module fails.
 
 The hosted workflow can reuse the three arithmetic artifacts from run 45930417212. Before importing any object, it checks the producing ZIP, insertion source, generator and generated source hashes, compiler and dependency pins, producer kernel receipts and object digests. Each reused artifact retains its original unmodified compiler log. If reuse is unavailable, the workflow builds and replays the arithmetic modules from source. [Producing run](https://github.com/ProgramComputer/open-math-research/actions/runs/45930417212)
 

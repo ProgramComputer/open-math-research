@@ -2,9 +2,12 @@
 
 import argparse
 import hashlib
+import json
+import os
 import re
 import runpy
 import shutil
+import signal
 import subprocess
 import sys
 from pathlib import Path
@@ -13,6 +16,7 @@ HERE = Path(__file__).resolve().parent
 COMMON = HERE.parent / "common-pin"
 LEDGER = HERE.parents[1] / "intermediate/witness-ledger"
 CHECKPOINT_SHA = "06ed91603ca8a9186e35efcd075aab2eb67152251007e6e8e8ac5d065b49a5ce"
+CHILD_SECONDS = 300
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 AUDIT = {
     "InsertionTable": {"history_sound", "insertion_coeff", "convolution_eq", "table_agrees"},
@@ -31,18 +35,57 @@ AUDIT = {
 }
 
 
+def linux_memory_limit():
+    """Keep a reserve for the runner and its logging process."""
+    if sys.platform != "linux":
+        return None
+    info = Path("/proc/meminfo").read_text()
+    limits = [1024 * int(re.search(r"^MemTotal:\s+(\d+)", info, re.M)[1])]
+    for path in (Path("/sys/fs/cgroup/memory.max"),
+                 Path("/sys/fs/cgroup/memory/memory.limit_in_bytes")):
+        if path.is_file():
+            value = path.read_text().strip()
+            if value.isdecimal():
+                limits.append(int(value))
+    available = min(limits)
+    return min(available * 3 // 4, available - 1024**3)
+
+
+def run_lean(project, name, argv):
+    limit = linux_memory_limit()
+    command = argv
+    if limit is not None:
+        if limit <= 0:
+            raise RuntimeError(f"Not enough runner memory for {name}: cap {limit} bytes")
+        command = ["prlimit", f"--as={limit}", "--", *argv]
+    with subprocess.Popen(command, cwd=project, text=True, stdout=subprocess.PIPE,
+                          stderr=subprocess.STDOUT, start_new_session=True) as child:
+        try:
+            log, _ = child.communicate(timeout=CHILD_SECONDS)
+        except subprocess.TimeoutExpired:
+            try:
+                os.killpg(child.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            log, _ = child.communicate()
+            print(log, end="", flush=True)
+            raise RuntimeError(f"{name} exceeded {CHILD_SECONDS} seconds (address-space cap: {limit})")
+        print(log, end="", flush=True)
+        if child.returncode:
+            raise RuntimeError(f"{name} exited {child.returncode} (address-space cap: {limit})")
+    return log
+
+
 def compile_module(project, module, expected):
     source = project / (module + ".lean")
     output = project / ".lake/build/lib/lean" / (module + ".olean")
     print(f"Compile {module} sha256={hashlib.sha256(source.read_bytes()).hexdigest()}", flush=True)
-    result = subprocess.run(["lake", "env", "lean", "-j1", "-DwarningAsError=true", "-o", str(output),
-                             str(source)], cwd=project, text=True, capture_output=True)
-    print(result.stdout, result.stderr, end="", flush=True)
-    result.check_returncode()
+    log = run_lean(project, f"compile {module}",
+                   ["lake", "env", "lean", "-j1", "-DwarningAsError=true", "-o", str(output), str(source)])
     observed = set()
     for name, axioms in re.findall(
         r"^'([^']+)' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])",
-        result.stdout, flags=re.M,
+        log, flags=re.M,
     ):
         used = {v.strip() for v in axioms.split(",") if v.strip()}
         if used - ALLOWED:
@@ -50,8 +93,8 @@ def compile_module(project, module, expected):
         observed.add(name.rsplit(".", 1)[-1])
     if expected - observed:
         raise ArithmeticError(f"Missing axiom reports for {expected - observed}")
-    subprocess.run(["lake", "env", "leanchecker", "--verbose", module.replace("/", ".")],
-                   cwd=project, check=True)
+    run_lean(project, f"replay {module}",
+             ["lake", "env", "leanchecker", "--verbose", module.replace("/", ".")])
     print(f"kernel_replay_exit=0 {module}", flush=True)
 
 
@@ -142,7 +185,29 @@ def recover_groups(project, folder, groups):
         print(f"Recovered {len(sources)} checked modules from group {group}", flush=True)
 
 
-def main(project, imports, groups=None):
+def preserve_module(project, output, module):
+    source = project / (module + ".lean")
+    obj = project / ".lake/build/lib/lean" / (module + ".olean")
+    folder = output / module
+    folder.mkdir(parents=True)
+    shutil.copyfile(obj, folder / obj.name)
+    receipt = {
+        "module": module,
+        "source_head": subprocess.check_output(
+            ["git", "-C", str(HERE), "rev-parse", "HEAD"], text=True
+        ).strip(),
+        "witness_shard_sha256": hashlib.sha256((LEDGER / "CheckedShard.lean").read_bytes()).hexdigest(),
+        "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
+        "olean_sha256": hashlib.sha256(obj.read_bytes()).hexdigest(),
+        "checkpoint_manifest_sha256": CHECKPOINT_SHA,
+        "compiler": "819816b2e0a3bf405af45ae5c7af2491d8f5bee6",
+        "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+        "kernel_replay_exit": 0,
+    }
+    (folder / "receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
+
+
+def main(project, imports, groups=None, pair_objects=None):
     runpy.run_path(str(COMMON / "check.py"))["main"](project, imports)
     compile_module(project, "LongCycleBounds/UniversalRecurrence", set())
     for module in ("InsertionTable", "RoundedHorner", "IntegerTail", "CheckedShard", "OriginalInsertionSigns"):
@@ -158,6 +223,8 @@ def main(project, imports, groups=None):
                    "FirstPairChecks12", "FirstPairChecks18", "FirstPairChecks24",
                    "FirstPairArithmetic", "FirstPairOriginal"):
         source_module(project, HERE / (module + ".lean"))
+        if pair_objects is not None:
+            preserve_module(project, pair_objects, module)
     print("PASS: original permutation signs for 26 gaps, 2 rows, 2 endpoints", flush=True)
 
 
@@ -168,9 +235,10 @@ if __name__ == "__main__":
     parser.add_argument("--group", choices=range(3), type=int)
     parser.add_argument("--objects", type=Path)
     parser.add_argument("--groups", type=Path)
+    parser.add_argument("--pair-objects", type=Path)
     args = parser.parse_args()
     if args.group is None:
-        main(args.project.resolve(), args.imports.resolve() if args.imports else None, args.groups)
+        main(args.project.resolve(), args.imports.resolve() if args.imports else None, args.groups, args.pair_objects)
     else:
         if args.objects is None:
             parser.error("--group requires --objects")
