@@ -36,6 +36,13 @@ TEXT_PORTS = {
         b"add_le_add (le_refl (c 0)) hlo, add_le_add (le_refl (c 0)) hhi",
     ),
 }
+# The independently checked vertical and paired developments use the same
+# identifier for different definitions. Change only the vertical spelling in
+# this combined build. Both raw hashes and exact occurrence counts are pinned.
+VERTICAL_EXP_PORT = {
+    "VerticalTransport": ("e60a138bf24d6019d43e281d7761ffb80bd09794453d880aa2232f935df57885", 8),
+    "PoleModeIdentity": ("eb92a3c5bdc67dc0ab185926cd63912fa6b980df50153529841e79001f5cf255", 3),
+}
 IMPORT_LINE = re.compile(r"^(?:(?:public|meta|private)[ \t]+)*import[ \t]+([^\n]+)", re.MULTILINE)
 AXIOM_COMMAND = re.compile(r"^#print axioms ([\w.]+)$", re.MULTILINE)
 NAMESPACE = re.compile(r"^namespace ([\w.]+)$", re.MULTILINE)
@@ -99,6 +106,16 @@ def plan():
 def stage(project, module, data):
     target = project / module_filename(module)
     target.parent.mkdir(parents=True, exist_ok=True)
+    original_imports = imports(data)
+    if module in VERTICAL_EXP_PORT:
+        digest, count = VERTICAL_EXP_PORT[module]
+        if sha256(data).hexdigest() != digest:
+            raise ValueError(f"Unexpected source for the composition-only vertical port of {module}")
+        renamed, replacements = re.subn(rb"\bcutoffExp\b", b"verticalCutoffExp", data)
+        if replacements != count or re.sub(rb"\bverticalCutoffExp\b", b"cutoffExp", renamed) != data:
+            raise ValueError(f"Unexpected token changes in the vertical port of {module}")
+        data = renamed
+        print(f"Port {module} cutoffExp to verticalCutoffExp token-count={count}", flush=True)
     if module in TEXT_PORTS:
         old, new = TEXT_PORTS[module]
         if old not in data:
@@ -111,7 +128,7 @@ def stage(project, module, data):
         edits = read_source(patch)
         print(f"Port {module} patch-sha256={sha256(edits).hexdigest()}", flush=True)
         subprocess.run(["patch", "--batch", str(target)], input=edits, check=True)
-    if imports(target.read_bytes()) != imports(data):
+    if imports(target.read_bytes()) != original_imports:
         raise ValueError(f"Port changes the planned imports of {module}")
     return target
 
