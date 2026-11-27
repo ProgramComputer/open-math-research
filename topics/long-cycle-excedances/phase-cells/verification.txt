@@ -1,0 +1,56 @@
+Frozen Lean 4.33.1 common-pin compilation and Lean kernel replay
+proof source 01a76e86308312654858e14f2f87c7e2fcbf1eaa
+run https://github.com/ProgramComputer/open-math-research/actions/runs/45938560929
+Lean 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+
+TiltDerivative 0759147ea6d5bc6f98b09b56425023ad86e8858d713e88fe3043d8bca980891d compile=0 replay=0 named_declarations=2
+SeventhMoment dae9bcb9d96f5734e3609fa90bb60628161100ac90734b30bba5befb5b70a1eb compile=0 replay=0 named_declarations=3
+GridSigns 9e6d8a9731137d8c597f851a1d6b0055873058679046caf03de43e2f972ee7f5 compile=0 replay=0 named_declarations=2
+ActualPhaseDerivative 0cf2a12fc1ec1fcf504454455ef03e13699059268b6d477e2b0d41310e28b96a compile=0 replay=0 named_declarations=1
+PhaseRemainder 2222a3ddd89441617938adbf5e3327832a9838e312e5df74994390f18ac48559 compile=0 replay=0 named_declarations=3
+PhasePoleGeometry 7dd408b92294bfeca8c048cfdfd11c47a7bca2855298e457c2658e87bcdd9b8d compile=0 replay=0 named_declarations=4
+AngularGeometry fdbf1d324a307298b71e4eeaa2559fdf9da59eb5b5f08c75ef8285d05736db5f compile=0 replay=0 named_declarations=2
+CellReadout 5da0e306f82e565640099809f9ae8d9691e301db65ade106988cce41290c838f compile=0 replay=0 named_declarations=1
+Displacement d73755552019c9e9d6188a90762ea3acbc2456db34196ea43f2c2709078b751d compile=0 replay=0 named_declarations=3
+OriginalAngularCell c5e3b59cb3d0f31b94850c835f0d6e67fab0fbe302d707fb98a186a3e41af947 compile=0 replay=0 named_declarations=1
+AngularDerivative cc303090a80c0c501b6dc0067cd06d2f076cd33cabc8beef4fd50108f713093f compile=0 replay=0 named_declarations=1
+OriginalAngularDerivative 523c4c9f58830f2e49d3ce123edfbc65a6f8b95f45380f053395510b350e51af compile=0 replay=0 named_declarations=4
+PhaseMiddle 8f7df27ca0749dc841c12247ef68c8d21fbf965d8e3a9f66d348e0d2f4cea0ec compile=0 replay=0 named_declarations=1
+MiddleAssembly 00f849d685e5f98eae5a6133f1944300c2998775e8c806917923d4657cd22758 compile=0 replay=0 named_declarations=2
+CellRootSelection eb1a56a898639aea7aa353246603e373f9241a339ca73f71a95a1dfe34cceb3a compile=0 replay=0 named_declarations=1
+OriginalRootCount 4405679d87188e878156a2613064c13a2c5c7e125e9433c7bd7946e185144059 compile=0 replay=0 named_declarations=1
+
+32 phase declarations. Transitive axiom reports
+OpenMathResearch.LongCycleExcedances.finiteTilt_diagonal_hasDerivAt [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.logarithmCoeff_hasDerivAt [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.seventh_mesh_bound [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.seventh_far_summable_bound [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.middle_derivative_error [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.signed_cos_grid [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.signed_sin_grid_cell [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.actual_principalLogTilt_derivative [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.two_sided_far_remainder [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.poleAngle_hasDerivAt [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.phase_slope_bound [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.principal_far_geometry [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.all_angle_far_lattice [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.all_angle_scaled_remainder [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.high_angle_scaled_far_bound [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.phase_readout_cis [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.angular_pole_geometry [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.signed_grid_cell_of_row_estimates [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.cosecant_oscillation_variation [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.high_angle_displacement [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.high_angle_displacement_of_deriv [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.signed_original_high_angle_cell [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.angular_phase_remainder [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.angleLogTilt_center [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_angular_phase_remainder [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.signed_original_high_angle_cell_of_pole_tail [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_high_angle_cells [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.middle_slope_from_moment [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_middle_phase_slope [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_middle_phase_strictAnti [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ordered_grid_roots [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_ordered_high_angle_roots [Classical.choice, Quot.sound, propext]

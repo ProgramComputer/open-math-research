@@ -25,6 +25,10 @@ LOGISTIC_IMPORTS = (
     "MarkedTwoCycles", "MarkedTwoEGF", "MarkedExponentialBias", "MarkedLabelBias",
     "MarkedLogistic", "CycleProfile", "CycleProfileEGF", "CycleProfileLogistic",
 )
+PHASE_MODULES = ("TiltDerivative", "SeventhMoment", "GridSigns", "ActualPhaseDerivative",
+                 "PhaseRemainder", "PhasePoleGeometry", "AngularGeometry", "CellReadout",
+                 "Displacement", "OriginalAngularCell", "AngularDerivative", "OriginalAngularDerivative",
+                 "PhaseMiddle", "MiddleAssembly", "CellRootSelection", "OriginalRootCount")
 UNIFORM_MODULES = (
     "UniformDiscreteTilt",
     "LowMomentMass",
@@ -40,29 +44,61 @@ UNIFORM_MODULES = (
 )
 EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.discrete_low_frequency_sum",
-    "OpenMathResearch.LongCycleExcedances.expPrefix_half_bound",
     "OpenMathResearch.LongCycleExcedances.discrete_low_mode",
-    "OpenMathResearch.LongCycleExcedances.low_moment_absolute_mass",
-    "OpenMathResearch.LongCycleExcedances.uniform_outer_radius",
-    "OpenMathResearch.LongCycleExcedances.shifted_moment_input",
-    "OpenMathResearch.LongCycleExcedances.lowCut_scale",
-    "OpenMathResearch.LongCycleExcedances.uniform_mass_from_split",
-    "OpenMathResearch.LongCycleExcedances.small_linear_cost",
+    "OpenMathResearch.LongCycleExcedances.expPrefix_half_bound",
     "OpenMathResearch.LongCycleExcedances.large_linear_cost",
+    "OpenMathResearch.LongCycleExcedances.lowCut_scale",
+    "OpenMathResearch.LongCycleExcedances.low_moment_absolute_mass",
     "OpenMathResearch.LongCycleExcedances.pole_monomial_bound",
-    "OpenMathResearch.LongCycleExcedances.uniform_high_degree_lattice",
+    "OpenMathResearch.LongCycleExcedances.shifted_moment_input",
+    "OpenMathResearch.LongCycleExcedances.small_linear_cost",
     "OpenMathResearch.LongCycleExcedances.square_majorized_lattice",
     "OpenMathResearch.LongCycleExcedances.uniform_contour_factor",
     "OpenMathResearch.LongCycleExcedances.uniform_high_degree_contour_factor",
+    "OpenMathResearch.LongCycleExcedances.uniform_high_degree_lattice",
     "OpenMathResearch.LongCycleExcedances.uniform_high_degree_odd_poles",
-    "OpenMathResearch.LongCycleExcedances.uniform_small_modulus_odd_poles",
     "OpenMathResearch.LongCycleExcedances.uniform_high_degree_scale_of_cut",
-    "RepositoryQuotientAudit.uniform_high_degree_coherent_poles",
-    "RepositoryQuotientAudit.uniform_high_degree_coherent_multiplier",
-    "RepositoryQuotientAudit.uniform_small_modulus_coherent_poles",
-    "RepositoryQuotientAudit.uniform_small_modulus_coherent_multiplier",
-    "RepositoryQuotientAudit.original_uniform_tilt_envelope",
+    "OpenMathResearch.LongCycleExcedances.uniform_mass_from_split",
+    "OpenMathResearch.LongCycleExcedances.uniform_outer_radius",
+    "OpenMathResearch.LongCycleExcedances.uniform_small_modulus_odd_poles",
     "RepositoryQuotientAudit.original_uniform_log_mass",
+    "RepositoryQuotientAudit.original_uniform_tilt_envelope",
+    "RepositoryQuotientAudit.uniform_high_degree_coherent_multiplier",
+    "RepositoryQuotientAudit.uniform_high_degree_coherent_poles",
+    "RepositoryQuotientAudit.uniform_small_modulus_coherent_multiplier",
+    "RepositoryQuotientAudit.uniform_small_modulus_coherent_poles",
+    "RepositoryQuotientAudit.original_ordered_high_angle_roots",
+    "OpenMathResearch.LongCycleExcedances.ordered_grid_roots",
+    "OpenMathResearch.LongCycleExcedances.phase_slope_bound",
+    "OpenMathResearch.LongCycleExcedances.poleAngle_hasDerivAt",
+    "OpenMathResearch.LongCycleExcedances.two_sided_far_remainder",
+    "RepositoryQuotientAudit.high_angle_scaled_far_bound",
+    "RepositoryQuotientAudit.all_angle_scaled_remainder",
+    "RepositoryQuotientAudit.all_angle_far_lattice",
+    "RepositoryQuotientAudit.principal_far_geometry",
+    "RepositoryQuotientAudit.middle_slope_from_moment",
+    "RepositoryQuotientAudit.original_high_angle_cells",
+    "RepositoryQuotientAudit.signed_original_high_angle_cell_of_pole_tail",
+    "RepositoryQuotientAudit.original_angular_phase_remainder",
+    "RepositoryQuotientAudit.angleLogTilt_center",
+    "RepositoryQuotientAudit.signed_original_high_angle_cell",
+    "RepositoryQuotientAudit.original_middle_phase_strictAnti",
+    "RepositoryQuotientAudit.original_middle_phase_slope",
+    "OpenMathResearch.LongCycleExcedances.high_angle_displacement_of_deriv",
+    "OpenMathResearch.LongCycleExcedances.high_angle_displacement",
+    "OpenMathResearch.LongCycleExcedances.cosecant_oscillation_variation",
+    "OpenMathResearch.LongCycleExcedances.signed_grid_cell_of_row_estimates",
+    "OpenMathResearch.LongCycleExcedances.angular_pole_geometry",
+    "OpenMathResearch.LongCycleExcedances.phase_readout_cis",
+    "OpenMathResearch.LongCycleExcedances.angular_phase_remainder",
+    "OpenMathResearch.LongCycleExcedances.logarithmCoeff_hasDerivAt",
+    "OpenMathResearch.LongCycleExcedances.finiteTilt_diagonal_hasDerivAt",
+    "OpenMathResearch.LongCycleExcedances.seventh_mesh_bound",
+    "OpenMathResearch.LongCycleExcedances.seventh_far_summable_bound",
+    "OpenMathResearch.LongCycleExcedances.middle_derivative_error",
+    "OpenMathResearch.LongCycleExcedances.signed_cos_grid",
+    "OpenMathResearch.LongCycleExcedances.signed_sin_grid_cell",
+    "RepositoryQuotientAudit.actual_principalLogTilt_derivative",
     "RepositoryQuotientAudit.original_coherentTilt_coeff_bound",
     "RepositoryQuotientAudit.seriesValue_original_coherentTilt",
     "RepositoryQuotientAudit.norm_seriesValue_coherentTilt_ge",
@@ -158,6 +194,7 @@ def compile_topic(project):
     files.append((HERE / "HighAngleActualInputs.lean", "HighAngleActualInputs"))
     files.append((HERE / "HighAngleRowEstimate.lean", "HighAngleRowEstimate"))
     files.append((HERE / "ActualHighAngleSign.lean", "ActualHighAngleSign"))
+    files.extend((TOPIC.parent / "phase-cells" / (name + ".lean"), name) for name in PHASE_MODULES)
     files.extend((TOPIC / "uniform-log-tilt" / (m + ".lean"), m) for m in UNIFORM_MODULES)
     observed = {}
     failed = set()
@@ -210,7 +247,7 @@ def compile_topic(project):
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
                    "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
-                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *UNIFORM_MODULES):
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
