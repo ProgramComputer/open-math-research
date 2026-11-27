@@ -1,0 +1,53 @@
+Frozen Lean 4.33.1 common-pin compilation and Lean kernel replay
+proof source f6b7d8e014eccf97644690523312fd4dbee3bd5f
+run https://github.com/ProgramComputer/open-math-research/actions/runs/45948370622
+Lean 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+
+FrontModulusJoin 2ca9754bbf4c1b5f495136426a107fd1f09243738f97de373f00dc3102d58f48 compile=0 replay=0 named_declarations=4
+FrontMiddleWitnesses 98fa6430bb2f5194f6493df882b4aa1bdcd19e4d0175947d6bcece7b286ee36f compile=0 replay=0 named_declarations=1
+JoinAngle 622cd0a0c8910b7ecfe9ca0e7925425bb3d726ba55f6fd31752cd4334fa4a5ed compile=0 replay=0 named_declarations=5
+RepositoryJoinAngle 7bf68ad7c565e20d9399c392c8ff52861cc215437205b5901ecc11b671cd0a6f compile=0 replay=0 named_declarations=3
+MiddleLevelSelection d456aad417c65670afa0f1dbefb31993daddf01fa90e775ce78abe66ba36d854 compile=0 replay=0 named_declarations=1
+RepositoryMiddleLevelSelection 64f0b9eb2cd5b676519a278b9682883443726315e43304090c3e1cf47f5f2a76 compile=0 replay=0 named_declarations=2
+RealFront 96179fb4dcc71a0f50ba516df696fd30e0330cbed24536b7047e311b27267ab4 compile=0 replay=0 named_declarations=6
+OriginalLiteralHalfRoots 662e58f80b3d3f9db3e23e0d5a19cf82f62e32f4af18e9e780fff688e00e082f compile=0 replay=0 named_declarations=1
+RepositoryExteriorReduction 1fdf98934f110ec18e3558f26f503a8d4e70ef575ded9a520e149b0dcbde2de5 compile=0 replay=0 named_declarations=1
+FrontCoefficientNorm 3bd22bbb01fe78e08237ce616d6614c25a31685e301970f6f0de167884e7c579 compile=0 replay=0 named_declarations=1
+CoefficientFrontWindow 986f572218408d441b22a9c6349c3048bad374a932cc6d7b024c949398e2ab97 compile=0 replay=0 named_declarations=1
+PolynomialFront a44ad035697cb6f355f8fc7afff3d18b9a328185ad2048e2d5ad88d705ab519a compile=0 replay=0 named_declarations=2
+RepositoryPolynomialFront f5208cde9d73e7287bcda84bb2faaac08192df3faf1004964094e715e924d680 compile=0 replay=0 named_declarations=1
+RepositoryExteriorCertificates 5d318f1eec58694b6fb32cab7fc38b3004aebe5ea9d422294efe231059ebc427 compile=0 replay=0 named_declarations=2
+
+31 front-middle-join declarations. Transitive axiom reports
+OpenMathResearch.LongCycleExcedances.front_log_midpoint [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_separation_log [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.exterior_modulus_lt_phase_boundary [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.exterior_floor_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.join_signed_root_moduli [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_join_geometry [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_join_cutoff_separation [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.arctan_uniform_join [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_join_radius_sq [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_join_phase_from_imag [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.poleAngle_uniform_join [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_uniform_join_middle [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_uniform_join_phase [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ordered_middle_level_roots [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_principal_phase_at_zero [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_ordered_middle_roots [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.adjacent_front_centers [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.effective_front_adjacent_centers [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_boxes_ordered [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_successor_sign [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_normalize_insertion [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_singleton_witness [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_interlacing_of_literal_half_roots [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_interlacing_of_exterior_roots [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_coefficient_bound [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.signed_root_of_front_coefficients [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.polynomial_front_singleton [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.polynomial_front_ordered [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_front_of_polynomial_bounds [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_interlacing_of_exterior_coefficient_bounds [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_interlacing_of_exterior_box_bounds [Classical.choice, Quot.sound, propext]

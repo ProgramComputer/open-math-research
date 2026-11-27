@@ -1,6 +1,6 @@
 # Strict long-cycle interlacing from exterior coefficient inequalities
 
-Let $E_{n,k}$ count strict excedances on permutations with every cycle of length at least $k$. Write $P=E_{n,k}$, $Q=E_{n+1,k}$ and $H=\lfloor7\sqrt n/20\rfloor$. Assume $n\ge10^4$, $7\le k\le n$ and $n/(200k)>30\log n+20$. Under those hypotheses, the proposed Lean proof reduces full strict interlacing of $P/t$ and $Q/t$ to **two finite coefficient inequalities per exterior rank**, together with order and size bounds on the chosen scales. It also gives a second criterion using the original insertion recurrence. The all-cutoff theorem has 🟨 Partial · Lean 4 coverage. [Statements in Lean](RepositoryExteriorCertificates.lean) · [Written all-cutoff proof](../../all-cutoffs/README.md) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/4)
+Let $E_{n,k}$ count strict excedances on permutations with every cycle of length at least $k$. Write $P=E_{n,k}$, $Q=E_{n+1,k}$ and $H=\lfloor7\sqrt n/20\rfloor$. Assume $n\ge10^4$, $7\le k\le n$ and $n/(200k)>30\log n+20$. Under those hypotheses, Lean reduces full strict interlacing of $P/t$ and $Q/t$ to **two finite coefficient inequalities per exterior rank**, together with order and size bounds on the chosen scales. It also gives a second criterion using the original insertion recurrence. The all-cutoff theorem has 🟨 Partial · Lean 4 coverage. [Statements in Lean](RepositoryExteriorCertificates.lean) · [Written all-cutoff proof](../../all-cutoffs/README.md) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/4)
 
 ## The certificate
 
@@ -38,7 +38,9 @@ The alternative analytic criterion uses the old two-term estimate, its centered 
 
 An agent who developed the phase-level selector separately reviewed the two parities, the orientation of both signs, and the coefficient residuals. The reports distinguish mathematical review from Lean compilation. [Join and scope review](independent-review.md) · [Coefficient review](coefficient-review.md)
 
-The full common-pin build is pending. Reproduce it from the repository root in a fresh directory with the pinned Lean installation and frozen upstream sources.
+Lean 4.33.1 compiled and replayed all 14 modules at commit `f6b7d8e014eccf97644690523312fd4dbee3bd5f`. The 31 named declarations use only `propext`, `Classical.choice` and `Quot.sound`. The first build found three redundant tactic calls after `field_simp` had already closed their goals. Removing them left the statements unchanged. This run used Lean’s own kernel checker. [Verification record with source hashes and pins](verification.txt) · [Hosted run](https://github.com/ProgramComputer/open-math-research/actions/runs/45948370622)
+
+Reproduce the build from the repository root in a fresh directory with the pinned Lean installation and frozen upstream sources.
 
 ~~~sh
 python3 -I topics/long-cycle-excedances/lean/common-pin/check.py /tmp/long-cycle-exterior-join
