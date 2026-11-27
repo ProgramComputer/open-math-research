@@ -146,12 +146,14 @@ private theorem cycle_pole_nearest_error (x : ℝ) (hx : 0 ≤ x) (a : ℕ) (ha 
   have hre := complete_normalization x a a ha' hs (by linarith : (a:ℝ) ≤ 2*(a:ℝ))
   rw [← Complex.ofReal_pow] at hre
   have hreal := congrArg Complex.re hre
-  simp [Complex.mul_re] at hreal
+  simp only [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero,
+    Complex.ofNat_re, Complex.ofNat_im] at hreal
   have hfac : 0 ≤ cycleMomentScale x a :=
     div_nonneg (by positivity) (pow_nonneg (radius_pos x).le _)
   have heq : cyclePoleMoment x a = cycleMomentScale x a * (total (c x) (s x) a).re := by
     unfold cyclePoleMoment cycleMomentScale
-    field_simp [(radius_pos x).ne']
+    rw [div_mul_eq_mul_div]
+    apply (eq_div_iff (pow_ne_zero _ (radius_pos x).ne')).2
     linear_combination ((a-1).factorial : ℝ) * hreal
   have hprincipal : ‖pole (c x) (s x) 1 ^ a‖ = 1 := by
     rw [norm_pole_pow _ _ _ (circle x) (by norm_num)]
@@ -184,7 +186,7 @@ theorem original_nonprincipal_profile_bound (n k : ℕ) (hk : 8 ≤ k)
   rw [← mul_sub, abs_mul, abs_of_nonneg (by positivity)]
   apply mul_le_mul_of_nonneg_left _ (by positivity)
   simpa only [show (1:ℝ) + 1/9 = 10/9 by norm_num] using
-    (orderedMomentRow_approximation (k := k) (ε := (1:ℝ)/9) (by positivity)
+    (orderedMomentRow_approximation (k := k) (F := cycleMomentScale x) (ε := (1:ℝ)/9) (by positivity)
       (fun _ _ => div_nonneg (by positivity) (pow_nonneg (radius_pos x).le _))
       (fun a hak => (hcycle a hak).1) (fun a hak => (hcycle a hak).2) n h).2
 
