@@ -30,6 +30,8 @@ At an old root the first bound implies $|\sin\Psi|\ge\sqrt{15}/4$. The second fi
 
 ## Verification
 
+An independent agent reviewed the original permutation definition, both row normalizations, the pole estimates and the successor sign. [Independent review](independent-review.md)
+
 The generic bounds have local Lean 4.19 checks. The genuine shared-pin build of the full assembly is pending. The all-cutoff interlacing theorem retains 🟨 Partial · Lean 4 coverage. The common driver stages the frozen upstream source and checks the declarations and their axioms.
 
 ~~~sh
