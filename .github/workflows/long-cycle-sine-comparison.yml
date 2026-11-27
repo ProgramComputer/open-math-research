@@ -39,3 +39,5 @@ jobs:
           python3 -I -B check-four-errors.py > "$RUNNER_TEMP/four-errors.txt"
           diff -u four-errors-output.txt "$RUNNER_TEMP/four-errors.txt"
           python3 -I -B obstruction.py
+          python3 -I -B check-coarse-cost.py > "$RUNNER_TEMP/coarse-cost.txt"
+          diff -u coarse-cost-output.txt "$RUNNER_TEMP/coarse-cost.txt"
