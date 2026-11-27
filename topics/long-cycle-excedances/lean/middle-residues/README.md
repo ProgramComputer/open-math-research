@@ -6,7 +6,7 @@ $$
 \Psi=(n+1)\theta-\Im G(x+i\pi).
 $$
 
-At every old zero $E_{n,k}(-e^{-x})=0$ in this region, the proposed Lean proof gives $E_{n+1,k}(-e^{-x})(-\sin\Psi)>0$. A complete interval between consecutive multiples of $\pi$ in the decreasing phase contains an old zero. All old zeros in that interval give the same strict successor sign. This supplies the middle signs in the [uniform interlacing proof](../../effective-uniform.md). The exterior roots still require separate estimates. [Literal row theorem](RepositoryCenteredRows.lean) · [Phase cells](RepositoryMiddleCells.lean)
+At every old zero $E_{n,k}(-e^{-x})=0$ in this region, Lean proves $E_{n+1,k}(-e^{-x})(-\sin\Psi)>0$. A complete interval between consecutive multiples of $\pi$ in the decreasing phase contains an old zero. All old zeros in that interval give the same strict successor sign. This supplies the middle signs in the [uniform interlacing proof](../../effective-uniform.md). The exterior roots still require separate estimates. [Literal row theorem](RepositoryCenteredRows.lean) · [Phase cells](RepositoryMiddleCells.lean)
 
 ## A coefficient proof of the middle signs
 
@@ -32,7 +32,11 @@ At an old root the first bound implies $|\sin\Psi|\ge\sqrt{15}/4$. The second fi
 
 An independent agent reviewed the original permutation definition, both row normalizations, the pole estimates and the successor sign. [Independent review](independent-review.md)
 
-The generic bounds have local Lean 4.19 checks. The genuine shared-pin build of the full assembly is pending. The all-cutoff interlacing theorem retains 🟨 Partial · Lean 4 coverage. The common driver stages the frozen upstream source and checks the declarations and their axioms.
+Lean 4.33.1 compiled and replayed all 12 modules with the frozen upstream proofs. All 23 named declarations passed the transitive axiom audit, including `original_middle_centered_rows` and `original_middle_true_phase_cell`. [Compiler receipts, source hashes and axioms](verification.txt) · [Hosted build and replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45945511617)
+
+The first two hosted attempts exposed Lean porting errors in simplification and ordered addition. Fixing those steps preserved the theorem statements. The last run rebuilt the actual dependencies and replayed the proof. [First attempt](https://github.com/ProgramComputer/open-math-research/actions/runs/45943530838) · [Second attempt](https://github.com/ProgramComputer/open-math-research/actions/runs/45944362627)
+
+The all-cutoff interlacing theorem retains 🟨 Partial · Lean 4 coverage. The common driver stages the frozen upstream source and checks the declarations and their axioms.
 
 ~~~sh
 python3 -I topics/long-cycle-excedances/lean/common-pin/check.py /tmp/long-cycle-middle-proof

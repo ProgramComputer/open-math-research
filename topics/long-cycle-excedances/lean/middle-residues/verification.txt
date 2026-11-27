@@ -1,0 +1,46 @@
+Frozen Lean 4.33.1 common-pin compilation and Lean kernel replay
+proof source 2028ea4e0be3a7349ad880fc141a598f4cb18d49
+run https://github.com/ProgramComputer/open-math-research/actions/runs/45945511617
+Lean 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+
+NestedPoleRadii 56badd6f267eadba70a352b8755486522930551b63b2dd356e37a56f35e5f228 compile=0 replay=0 named_declarations=4
+NestedPoleLattice 2c7dfbf80d1fadd2d974df41e821d4252a19c30a0deca0d6d74ac8aff37c03cb compile=0 replay=0 named_declarations=2
+NestedSize 3b78c9bb769951f9d616d7548d65ad24725c8591609a13e59614ccd4997ac0e1 compile=0 replay=0 named_declarations=2
+NestedNormalized 48feafd31e35303a35c50adedef13306ce7e6aacd78ea430760357d1a08f8fe7 compile=0 replay=0 named_declarations=1
+NeighborPoleGeometry cbb18f92262b41d711703a1abac8ba605d02620da1a0654d13ca7ed19b91fd8f compile=0 replay=0 named_declarations=1
+ExactPhaseCell 9504736c773cb8c29c800d1be9efe5fa8e7788e4a7e2af4d1953b511ca2b8c5f compile=0 replay=0 named_declarations=2
+PolePhaseReadout 7f9cf377ee68a3e2c5962b26e385b1bb3e68687d88919dc49cf9dc616bf791c4 compile=0 replay=0 named_declarations=1
+RepositoryNestedRow d0b52776692977c6e47d3fcc60ccfe1b8496c00352e3554da0cc3066e8e50350 compile=0 replay=0 named_declarations=2
+RepositoryEnclosedHalf 3d0941e882cb326d36f8d293850893f81ae0dc57a116203330443044477a1a6f compile=0 replay=0 named_declarations=4
+CenteredPoleReadout 524e6fa34523f9a03bbf920302f8173eb0dd545abbf79e1c1fe0925c06bf387e compile=0 replay=0 named_declarations=1
+RepositoryCenteredRows 277912cc5a6422b4444d727d8c1e431b08135886bff65514abd214467228fbb2 compile=0 replay=0 named_declarations=1
+RepositoryMiddleCells 661547b2fecc41b0aaa92e009305c9dff324b82c2ed8ff5046568e844549f424 compile=0 replay=0 named_declarations=2
+
+23 middle-residues declarations. Transitive axiom reports
+OpenMathResearch.LongCycleExcedances.nested_near_pole_error [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.nested_far_pole_error [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.nested_pole_radii_error [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.nested_pole_radii_error_uniform [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.nested_pole_lattice_error [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.fixed_nested_radius_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.nested_decay_at_size [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.nested_size_envelope [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.normalized_nested_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.neighbor_pole_displacement [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.signed_true_phase_cell [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.signed_true_phase_cell_anti [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.logarithmic_principal_unit [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_nested_row_error [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_middle_nested_row_error [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.mem_positiveEnclosedPoles [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.nested_approximation_positive_half [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_middle_nested_row_error_positive_half [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.nested_enclosed_minor_mode_mass [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.centered_pole_readout [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_middle_centered_rows [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_middle_phase_readout [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_middle_true_phase_cell [Classical.choice, Quot.sound, propext]
+
+The common driver audited 143 named declarations, including the 23 listed above.
+An independent agent also compared each of the twelve hosted input digests against the corresponding Git blob in the tested commit. All twelve matched.
