@@ -1,0 +1,3 @@
+k=4 first analytic pair (511,512): 509 exact gamma brackets, strict order.
+k=5 first analytic pair (48,49): 46 exact positive signed remainder drops.
+k=6 first analytic pair (48,49): 46 exact positive signed remainder drops.
