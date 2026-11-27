@@ -12,6 +12,8 @@ The paired-profile job compiled and separately replayed 98 modules with the pinn
 
 The audited theorems include `single_cutoff_primitive_lattice`, `single_cutoff_slab_of_spec`, `cutoff_jump_split` and `original_cutoff_jump_head`. Their transitive axioms are `propext`, `Classical.choice` and `Quot.sound`. The primitive-envelope job independently checked 41 source hashes, replayed 17 roots and audited 37 declarations. Its report ZIP, artifact `15194469286`, matched SHA-256 `efaca53d638ae0376024a9ffda17b4d1bb635152516298e776f69beedc1cda08`. The exact arithmetic job reproduced the stored interval bounds. [Primitive-envelope job](https://github.com/ProgramComputer/open-math-research/actions/runs/45994181744) · [Exact arithmetic job](https://github.com/ProgramComputer/open-math-research/actions/runs/45994182131)
 
+The combined cutoff and principal-cost driver passed from PR head `721de6ef75f86eee3bbaf2438924a497d94d1c02`. GitHub checked out the identical tree at merge commit `d72fb25b2924ab1d8269623e888a3f0188b7d7be`. All 103 source hashes, all 103 kernel replay markers and all 172 named axiom reports matched. The combined report ZIP, artifact `15197586973`, matched SHA-256 `8d535ac6fce02b929b4c97d67247f0138a26e4f2ee7afc5677565b5826958d04`. The primitive-envelope and exact arithmetic jobs also passed on this head. [Combined paired-profile job](https://github.com/ProgramComputer/open-math-research/actions/runs/45997691035) · [Primitive-envelope job](https://github.com/ProgramComputer/open-math-research/actions/runs/45997690957) · [Exact arithmetic job](https://github.com/ProgramComputer/open-math-research/actions/runs/45997690969)
+
 With the pinned Linux toolchain on PATH, run from the repository root using fresh output directories.
 
 ```sh
