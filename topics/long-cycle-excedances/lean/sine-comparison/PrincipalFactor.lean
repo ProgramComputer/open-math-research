@@ -33,21 +33,25 @@ private theorem radial_primitive_deriv (m : ℕ) (z v : ℂ)
     HasDerivAt (fun u : ℂ => -Complex.log (1-u*v) - logPrefix m (u*v))
       (v^(m+1)*z^m/(1-z*v)) z := by
   have ha : HasDerivAt (fun u : ℂ => 1-u*v) (-v) z := by
-    simpa using (hasDerivAt_const z (1:ℂ)).sub ((hasDerivAt_id z).mul_const v)
+    convert (hasDerivAt_const z (1:ℂ)).sub ((hasDerivAt_id z).mul_const v) using 1 <;> try rfl'
+    simp
   induction m with
   | zero =>
-    simpa [logPrefix,div_eq_mul_inv,mul_comm] using
-      ((Complex.hasDerivAt_log hz).comp z ha).neg
+    convert ((Complex.hasDerivAt_log hz).comp z ha).neg using 1 <;> try rfl'
+    · funext u
+      simp [logPrefix,Function.comp_def,Pi.neg_apply]
+    · simp [div_eq_mul_inv,mul_comm]
   | succ m ih =>
     have hc : (m:ℂ)+1 ≠ 0 := by exact_mod_cast (Nat.succ_ne_zero m)
     have hb : HasDerivAt (fun u : ℂ => (u*v)^(m+1)/((m:ℂ)+1))
         ((z*v)^m*v) z := by
-      convert ((((hasDerivAt_id z).mul_const v).pow (m+1)).div_const ((m:ℂ)+1)) using 1
+      convert ((((hasDerivAt_id z).mul_const v).pow (m+1)).div_const ((m:ℂ)+1)) using 1 <;> try rfl'
       push_cast
-      simp only [Nat.add_sub_cancel,one_mul] <;> field_simp <;> ring
-    convert ih.sub hb using 1
+      try simp only [Nat.add_sub_cancel,one_mul]
+      field_simp <;> ring
+    convert ih.sub hb using 1 <;> try rfl'
     · funext u
-      simp only [logPrefix,Finset.sum_range_succ]
+      simp only [logPrefix,Finset.sum_range_succ,Pi.sub_apply]
       ring
     · field_simp [Complex.slitPlane_ne_zero hz]
       simp only [pow_succ,mul_pow]
