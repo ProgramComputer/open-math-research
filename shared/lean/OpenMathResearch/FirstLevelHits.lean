@@ -79,4 +79,48 @@ theorem exists_ordered_positive_phase_radii {phase : ℝ → ℝ} {l u : ℝ}
 #print axioms exists_ordered_firstLevelHits
 #print axioms exists_ordered_positive_phase_radii
 
+/-- The first hit inside a compact interval can occur at its right endpoint. -/
+theorem exists_firstLevelHitOn {f : ℝ → ℝ} {a b y : ℝ}
+    (hf : ContinuousOn f (Icc a b)) (hab : a ≤ b) (ha : f a ≤ y) (hb : y ≤ f b) :
+    ∃ x, IsLeast (Icc a b ∩ f ⁻¹' {y}) x := by
+  obtain ⟨z, hz, hzy⟩ := intermediate_value_Icc hab hf ⟨ha, hb⟩
+  have hc : IsCompact (Icc a b ∩ f ⁻¹' {y}) :=
+    isCompact_Icc.of_isClosed_subset
+      (hf.preimage_isClosed_of_isClosed isClosed_Icc isClosed_singleton) inter_subset_left
+  exact hc.exists_isLeast ⟨z, hz, hzy⟩
+
+/-- Between the last lower hit before the first upper hit and that upper
+hit, a continuous phase lies strictly between the levels. -/
+theorem exists_lastLower_before_firstUpper {f : ℝ → ℝ} {a b l u q : ℝ}
+    (hf : ContinuousOn f (Icc a b)) (ha : f a ≤ l) (hlu : l < u)
+    (hq : IsLeast (Icc a b ∩ f ⁻¹' {u}) q) :
+    ∃ p, IsGreatest (Icc a q ∩ f ⁻¹' {l}) p ∧ p < q ∧
+      ∀ x ∈ Ioo p q, l < f x ∧ f x < u := by
+  classical
+  have hqv : f q = u := hq.1.2
+  have hsub : Icc a q ⊆ Icc a b := fun _ hx => ⟨hx.1, hx.2.trans hq.1.1.2⟩
+  have hfq := hf.mono hsub
+  obtain ⟨z, hz, hzv⟩ := intermediate_value_Icc hq.1.1.1 hfq ⟨ha, hqv.symm ▸ hlu.le⟩
+  have hc : IsCompact (Icc a q ∩ f ⁻¹' {l}) :=
+    isCompact_Icc.of_isClosed_subset
+      (hfq.preimage_isClosed_of_isClosed isClosed_Icc isClosed_singleton) inter_subset_left
+  obtain ⟨p, hp⟩ := hc.exists_isGreatest ⟨z, hz, hzv⟩
+  have hpv : f p = l := hp.1.2
+  refine ⟨p, hp, lt_of_le_of_ne hp.1.1.2 ?_, ?_⟩
+  · intro he
+    exact hlu.ne (hpv.symm.trans (he ▸ hqv))
+  intro x hx
+  have hax := hp.1.1.1.trans hx.1.le
+  constructor
+  · by_contra h
+    have hcont := hfq.mono (show Icc x q ⊆ Icc a q from fun _ hy => ⟨hax.trans hy.1, hy.2⟩)
+    obtain ⟨w, hw, hwv⟩ := intermediate_value_Icc hx.2.le hcont ⟨le_of_not_gt h, hqv.symm ▸ hlu.le⟩
+    exact (not_le_of_gt (hx.1.trans_le hw.1)) (hp.2 ⟨⟨hax.trans hw.1, hw.2⟩, hwv⟩)
+  · by_contra h
+    have hcont := hfq.mono (show Icc a x ⊆ Icc a q from fun _ hy => ⟨hy.1, hy.2.trans hx.2.le⟩)
+    obtain ⟨w, hw, hwv⟩ := intermediate_value_Icc hax hcont ⟨ha.trans hlu.le, le_of_not_gt h⟩
+    exact (not_le_of_gt (hw.2.trans_lt hx.2)) (hq.2 ⟨⟨hw.1, hw.2.trans (hx.2.le.trans hq.1.1.2)⟩, hwv⟩)
+
+#print axioms exists_firstLevelHitOn
+#print axioms exists_lastLower_before_firstUpper
 end OpenMathResearch.FirstLevelHits

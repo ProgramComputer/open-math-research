@@ -16,7 +16,7 @@ namespace OpenMathResearch.AlternatingSignRoots
 
 open Polynomial Set Filter
 
-private theorem opposite_signs {a b : ℝ} {k : ℕ}
+theorem opposite_signs {a b : ℝ} {k : ℕ}
     (ha : 0 < (-1 : ℝ) ^ k * a) (hb : 0 < (-1 : ℝ) ^ (k + 1) * b) :
     a * b < 0 := by
   have hs : ((-1 : ℝ) ^ k) ^ 2 = 1 := by

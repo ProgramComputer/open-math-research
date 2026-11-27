@@ -22,6 +22,9 @@ IMPORT_SHA = "000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05"
 MATHLIB = "0df444a360eaa60ab8c11dca51a86af692955474"
 COMPILER = "819816b2e0a3bf405af45ae5c7af2491d8f5bee6"
 EXPECTED = {
+    "OpenMathResearch.FirstLevelHits.exists_firstLevelHitOn",
+    "OpenMathResearch.FirstLevelHits.exists_lastLower_before_firstUpper",
+    "OpenMathResearch.LongCycleExcedances.singleton_windows_of_phase",
     "RepositoryQuotientAudit.generalCycleQuotient_eq_divX",
     "RepositoryQuotientAudit.original_divX_shape",
     "RepositoryQuotientAudit.exact_coeff_eq_divX",
@@ -66,7 +69,9 @@ def prepare(project):
 
 def compile_topic(project):
     files = [
+        (SHARED / "OpenMathResearch/FirstLevelHits.lean", "OpenMathResearch/FirstLevelHits"),
         (SHARED / "OpenMathResearch/AlternatingSignRoots.lean", "OpenMathResearch/AlternatingSignRoots"),
+        (TOPIC / "LongCyclePhaseWindows.lean", "LongCyclePhaseWindows"),
         (SHARED / "OpenMathResearch/OrientedNegativeInterlace.lean", "OpenMathResearch/OrientedNegativeInterlace"),
         (SHARED / "OpenMathResearch/DiskUniqueness.lean", "OpenMathResearch/DiskUniqueness"),
         (TOPIC / "LongCycleMixedRootWitnesses.lean", "LongCycleMixedRootWitnesses"),
@@ -119,7 +124,7 @@ def compile_topic(project):
             failed.add(module_name)
             continue
         records = re.findall(
-            r"^'(RepositoryQuotientAudit\.[^']+)' "
+            r"^'((?:RepositoryQuotientAudit|OpenMathResearch)\.[^']+)' "
             r"(?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])\s*$",
             result.stdout, flags=re.M,
         )
@@ -133,10 +138,11 @@ def compile_topic(project):
     for module in ("RationalPointSound", "RepositoryQuotientShape", "RepositoryActualRationalPoint",
                    "StrictRootListTranslation", "RepositoryRootAssembly", "ReciprocalWindowSigns",
                    "ReciprocalHalfWindows", "RepositoryHalfAxisAssembly",
-                   "ReciprocalCenterSign", "RepositoryCenterSign"):
+                   "ReciprocalCenterSign", "RepositoryCenterSign",
+                   "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows"):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
-    print(f"PASS: {len(EXPECTED)} original-row declarations audited", flush=True)
+    print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
 
 
 def main(project, imports):

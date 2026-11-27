@@ -126,3 +126,38 @@ vectors. The [rational endpoint bridge](common-pin/README.md) compiles the
 research sign theorem and the pinned coefficient identity on the same Lean
 4.33.1 setup. It verifies the shape of the original reduced row and certifies
 each signed value from the corresponding rational margin.
+
+
+## Continuous phase crossings
+
+[LongCyclePhaseWindows.lean](LongCyclePhaseWindows.lean) checks the
+nonmonotone phase selection used in the [aspect-20 join](../aspect-20/README.md)
+and [uniform comparison](../effective-uniform.md). For each rising pair
+of target levels, it selects the last lower hit before the first upper
+hit. The selected old zero lies in the open phase band. For increasing
+parameters and increasing moduli, the singleton windows are strictly
+ordered.
+
+For the aspect-20 join the offset is the number of exterior witnesses
+and the levels are the integer multiples of pi from the first middle
+sample through the half-axis terminal sample. The old sample parity is a
+separate input, since removing the factor of the variable changes the
+sign of the normalized old enumerator at negative arguments. The next
+sign is required only at old zeros in the given open phase band. The
+[bounded-aspect estimates](../bounded-aspect/grouped-proof.md) give the
+sign inputs in the integer-angle case. The numerical phase bounds,
+normalization and exterior-to-middle separation for the actual analytic
+functions remain inputs.
+
+The shared first- and last-hit lemmas and the window theorem compile
+with the research pin, Lean 4.19.0 and mathlib
+`c44e0c8ee63ca166450922a373c7409c5d26b00b`. From the repository root, run
+
+~~~sh
+cd shared/lean
+lake build OpenMathResearch.FirstLevelHits OpenMathResearch.AlternatingSignRoots
+lake env lean ../../topics/long-cycle-excedances/lean/LongCyclePhaseWindows.lean
+~~~
+
+The three new theorems report only `propext`, `Classical.choice` and
+`Quot.sound`. The hosted 4.33.1 check is pending.
