@@ -1,6 +1,6 @@
 # Positive adjacent sine comparison when the scaled angle is at least ten
 
-Let $n\ge10000$, $4\le x=n/k\le48$, $S=\sin\theta>0$, $0<\theta\le\pi/2$, $U=6/5\le nS^2$ and $A=kS\ge10$. Use the literal normalized row $F_m$ and determinant $D_n$ defined in the [topic note](README.md). The claim is $kD_n/S>473268/10^6$. This is a proposed supporting estimate for verification of the bounded-aspect proof.
+Let $n\ge10000$, $4\le x=n/k\le48$, $S=\sin\theta>0$, $0<\theta\le\pi/2$, $U=6/5\le nS^2$ and $A=kS\ge10$. Use the literal normalized row $F_m$ and determinant $D_n$ defined in the [topic note](README.md). The claim is $kD_n/S>473268/10^6$. This supplies the large-angle estimate for verification of the bounded-aspect proof.
 
 Use the [small-angle occupied-term identity](small-angle.md), retaining the two principal terms with distinguished degree $n$ and residual degree zero. Their exact contribution to $kD_n/S$ in the value part is $2kd_n\ge1094/1000$. The numerator-difference part for these poles is included in the error. Every other value term of residual degree $T$ has size bounded by $kd_r |a|\rho_a^{r+1}|q_{a,T}|$ at $r=n-T\ge k$. A numerator term has size at most $(k/S)|b_s|\rho_a^s|q_{a,T}|$ for $s=n+1-T\ge k$. Here $a$ is any signed odd number, $w_a=\cos\theta+iaS$, $\rho_a=|w_a|^{-1}$, and $q_{a,T}$ is a product coefficient in the occupied expansion. [Occupied-pole and bin definitions](../degree-blocks/README.md) · [Lattice certificate](../paired-residues/check.py)
 
