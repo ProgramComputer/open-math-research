@@ -78,7 +78,7 @@ and `Quot.sound`. [Audit excerpt](center-audit.txt) · [Independent review](cent
 
 ## The original-row pole expansion
 
-[RepositoryPoleProfile.lean](RepositoryPoleProfile.lean) proposes an exact
+[RepositoryPoleProfile.lean](RepositoryPoleProfile.lean) checks an exact
 expansion of the normalized original permutation row for every cutoff at
 least two. The expansion sums over the allowed cycle counts, with each
 cycle moment represented by the full signed odd-pole series. It uses the
@@ -94,4 +94,7 @@ estimates the actual row, while the signed consecutive-row comparison in
 the [uniform proof](../../effective-uniform.md) still needs its common
 contour and correlated adjacent-row error estimates.
 
-The hosted common-pin audit is pending.
+The [hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/45928282511)
+compiled and replayed the module with Lean 4.33.1. The two added
+declarations use only `propext`, `Classical.choice` and `Quot.sound`.
+[Audit excerpt](pole-profile-audit.txt)
