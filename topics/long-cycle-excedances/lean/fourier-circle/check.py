@@ -29,6 +29,10 @@ THEOREMS = {
     "FourierSquaredSum": ["infinite_squared_pole_integral"],
     "FourierPoleDifferentiation": ["norm_squared_pole_term", "complexPoleKernel_angular_deriv"],
     "FourierDerivativeBound": ["complexPoleKernel_derivative_bound"],
+    "FourierLogarithmicGap": [
+        "exponential_period_gap", "odd_logistic_denominator_gap",
+        "odd_logistic_contraction", "original_contracted_circle_ratio",
+    ],
     "FourierExponentialGap": [
         "exp_principal_denominator", "uniform_principal_denominator", "original_principal_denominator",
     ],
