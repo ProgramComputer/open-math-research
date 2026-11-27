@@ -30,4 +30,6 @@ jobs:
           diff -u carrier-output.txt "$RUNNER_TEMP/sine-carrier.txt"
           python3 -I -B independent-carrier.py > "$RUNNER_TEMP/sine-independent-carrier.txt"
           diff -u independent-carrier-output.txt "$RUNNER_TEMP/sine-independent-carrier.txt"
+          python3 -I -B check-nonprincipal.py > "$RUNNER_TEMP/nonprincipal.txt"
+          diff -u nonprincipal-output.txt "$RUNNER_TEMP/nonprincipal.txt"
           python3 -I -B obstruction.py

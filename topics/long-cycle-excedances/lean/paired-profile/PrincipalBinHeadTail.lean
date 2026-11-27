@@ -19,6 +19,36 @@ private theorem bin_head_bound {ι : Type*} (A : Finset ι) (p : ι→ℝ[X])
     rw [prod_eq_one (fun i hi => by simp [constantCoeff_apply,hz i hi]),hq,div_self (by exact_mod_cast hG.ne')]
   · exact (bin_integer_multiple_bound A p hp hz hG l q hl hq hL hrec (by omega : 0 < b) hb).1
 
+/-- The two marked-product arguments use the same ceiling-rounded product bound. -/
+theorem literal_rounded_head_bound (A : Finset ℤ) (a : ℤ) {k N G J : ℕ} (hk : 0 < k) (C S : ℝ)
+    (hG : 0 < G) (l q : ℕ→ℕ) (hl : l 0=0) (hq : q 0=G)
+    (hL : ∀ i ≤ J, (binLinear (A.erase a) (fun v => forgetDegree (literalMarkedPrimitive k N C S a v))).coeff i
+      ≤ (l i:ℝ)/G)
+    (hrec : ∀ m < J, ∑ ij ∈ antidiagonal m, (ij.1+1)*l (ij.1+1)*q ij.2 ≤ (m+1)*q (m+1)*G) :
+    ∀ b ≤ J, (binFull (A.erase a) (fun v => forgetDegree (literalMarkedPrimitive k N C S a v))).coeff b
+      ≤ (q b:ℝ)/G := by
+  apply bin_head_bound _ _ _ _ hG l q hl hq hL hrec
+  · intro v _ b
+    rw [literalMarkedPrimitive,coeff_forgetDegree_markDegreeBin]
+    exact sum_nonneg (fun _ _ => by split <;> positivity)
+  · intro v _
+    rw [literalMarkedPrimitive,coeff_forgetDegree_markDegreeBin]
+    apply sum_eq_zero
+    intro t ht
+    have hs := (mem_Icc.mp ht).1
+    have hh := (degreeBin_bounds hk hs).1
+    apply if_neg
+    intro he
+    rw [he,Nat.mul_zero] at hh
+    omega
+
+theorem forget_marked_absolute_product (T : Finset ℤ) (k N : ℕ) (C S : ℝ) (a : ℤ) :
+    forgetDegree (markedAbsoluteProduct T k N (occupiedPrimitive k C S a)) =
+      binFull T (fun v => forgetDegree (literalMarkedPrimitive k N C S a v)) := by
+  change (mapRingHom (evalRingHom 1)) (∏ v ∈ T, (1+literalMarkedPrimitive k N C S a v)) = _
+  simp only [map_prod,map_add,map_one]
+  rfl
+
 /-- The complete scaled principal convolution is controlled by the first
 241 finite bin budgets and a fixed analytic tail, uniformly in the finite pole set. -/
 theorem principal_bin_head_tail {j n lower G : ℕ} {d : ℕ→ℝ} (hd : Spec (j+2) d)
@@ -50,27 +80,8 @@ theorem principal_bin_head_tail {j n lower G : ℕ} {d : ℕ→ℝ} (hd : Spec (
   have hcost (N : ℕ) : markedCost (markedAbsoluteProduct T k N F) lower ≤ head+tail := by
     let P := markedAbsoluteProduct T k N F
     let p (v:ℤ) := forgetDegree (literalMarkedPrimitive k N (cos θ) (sin θ) 0 v)
-    have heq : forgetDegree P = binFull T p := by
-      change (mapRingHom (evalRingHom 1)) (∏ v ∈ T, (1+literalMarkedPrimitive k N (cos θ) (sin θ) 0 v)) = _
-      simp only [map_prod,map_add,map_one]
-      rfl
-    have hpos (v:ℤ) (_ : v ∈ T) (b:ℕ) : 0 ≤ (p v).coeff b := by
-      dsimp [p,literalMarkedPrimitive]
-      rw [coeff_forgetDegree_markDegreeBin]
-      exact sum_nonneg (fun s _ => by split <;> positivity)
-    have hzero (v:ℤ) (_ : v ∈ T) : (p v).coeff 0=0 := by
-      dsimp [p,literalMarkedPrimitive]
-      rw [coeff_forgetDegree_markDegreeBin]
-      apply sum_eq_zero
-      intro s hs
-      have hs' := (mem_Icc.mp hs).1
-      have hh := (degreeBin_bounds (k:=k) (s:=s) (by dsimp [k]; omega) hs').1
-      apply if_neg
-      intro he
-      rw [he,Nat.mul_zero] at hh
-      dsimp [k] at hs'
-      omega
-    have hh := bin_head_bound T p hpos hzero hG l q hl hq (hL N) hrec
+    have heq : forgetDegree P = binFull T p := forget_marked_absolute_product ..
+    have hh := literal_rounded_head_bound A 0 (by omega : 0 < j+2) (cos θ) (sin θ) hG l q hl hq (hL N) hrec
     have hp (b:ℕ) : 0 ≤ (forgetDegree P).coeff b := by
       rw [forgetDegree,coeff_map]
       have hgeom := marked_product_geometry T (k:=k) (by dsimp [k]; omega) N
@@ -96,5 +107,6 @@ theorem principal_bin_head_tail {j n lower G : ℕ} {d : ℕ→ℝ} (hd : Spec (
   change 2*_ < 2*head+1/10000
   linarith only [h,ht]
 
+#print axioms literal_rounded_head_bound
 #print axioms principal_bin_head_tail
 end OpenMathResearch.LongCycleExcedances
