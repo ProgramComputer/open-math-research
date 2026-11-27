@@ -1,0 +1,58 @@
+name: Long-cycle original Fourier coefficients
+on:
+  pull_request:
+    branches: [research]
+    paths:
+      - '.github/workflows/long-cycle-original-fourier-coefficients.yml'
+      - 'topics/long-cycle-excedances/lean/fourier-stable/FourierOddKernelCalculus.lean'
+      - 'topics/long-cycle-excedances/lean/fourier-stable/FourierOriginalCoefficientBounds.lean'
+      - 'topics/long-cycle-excedances/lean/fourier-stable/check-original-coefficients.py'
+      - 'topics/long-cycle-excedances/lean/fourier-circle/NumeratorLogDefinitions.lean'
+      - 'topics/long-cycle-excedances/lean/common-pin/RepositoryCoherentPoles.lean'
+      - 'topics/long-cycle-excedances/lean/common-pin/MonomialTiltBounds.lean'
+      - 'topics/long-cycle-excedances/lean/common-pin/TiltAnalyticEvaluation.lean'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    env:
+      LEAN_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Install pinned Lean 4.33.1
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          curl -fLsS --retry 3 -o pinned.tar.zst https://github.com/leanprover/lean4/releases/download/v4.33.1/lean-4.33.1-linux.tar.zst
+          echo '890afd185370f85666025b883914ab4f4b339136f8c96167b69cfb62aecaf235  pinned.tar.zst' | sha256sum -c
+          tar --zstd -xf pinned.tar.zst
+          rm pinned.tar.zst
+          echo "$RUNNER_TEMP/lean-4.33.1-linux/bin" >> "$GITHUB_PATH"
+      - name: Retrieve authenticated common-pin import objects
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 45917288503 --repo "$GITHUB_REPOSITORY" --name quotient-import-objects --dir "$RUNNER_TEMP" || true
+      - name: Compile and replay the original coefficient bounds
+        run: |
+          set -euo pipefail
+          ulimit -Sn 65536
+          args=("$RUNNER_TEMP/fourier-real-axis")
+          if [[ -f "$RUNNER_TEMP/quotient-import-objects.tar.zst" ]]; then
+            args+=(--retained-imports "$RUNNER_TEMP/quotient-import-objects.tar.zst")
+          fi
+          python3 -Bu topics/long-cycle-excedances/lean/fourier-stable/check-original-coefficients.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/original-fourier-coefficients.log"
+      - name: Preserve verification report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: original-fourier-coefficients-report
+          path: ${{ runner.temp }}/original-fourier-coefficients.log
+          retention-days: 30
