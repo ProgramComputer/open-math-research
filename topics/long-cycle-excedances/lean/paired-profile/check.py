@@ -145,6 +145,9 @@ MODULES = (
     "CoarseProductProof8",
     "CoarseLedger",
     "CoarseOriginalLedger",
+    "CoarseMomentCertificate",
+    "CoarseMomentTables",
+    "CoarseBinMoments",
 )
 EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.coarseStar_bound",
@@ -190,6 +193,12 @@ EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.cutoff_jump_split",
     "OpenMathResearch.LongCycleExcedances.cutoff_jump_head_of_spec",
     "OpenMathResearch.LongCycleExcedances.original_cutoff_jump_head",
+    "OpenMathResearch.LongCycleExcedances.coarse_zeroth_moment_cap",
+    "OpenMathResearch.LongCycleExcedances.coarse_first_moment_cap",
+    "OpenMathResearch.LongCycleExcedances.coarse_moment_tables",
+    "OpenMathResearch.LongCycleExcedances.coarse_moment_pair",
+    "OpenMathResearch.LongCycleExcedances.coarse_shape_le",
+    "OpenMathResearch.LongCycleExcedances.coarse_bin_moments",
     "OpenMathResearch.LongCycleExcedances.regular_numerator_strict_bin",
     "OpenMathResearch.LongCycleExcedances.regular_term_on_bin",
     "OpenMathResearch.LongCycleExcedances.regular_one_pole",
