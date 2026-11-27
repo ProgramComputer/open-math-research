@@ -36,7 +36,7 @@ theorem uncertainty_upper (p : ℤ) (d : ℕ) (c : ℕ → ℤ) (w : ℕ) (hy : 
   refine hdiv.trans ?_
   have h := Int.le_ceil ((upperHorner p d cs : ℚ) / (2^36:ℕ))
   rw [Rat.ceil_intCast_div_natCast] at h
-  simpa [uncertainty, cs] using h
+  simpa only [uncertainty, cs, Nat.cast_pow, Nat.cast_ofNat] using h
 
 /-- The integer lower bound pays for both signed Horner rounding and the full
 coefficient uncertainty in a compressed row. -/
