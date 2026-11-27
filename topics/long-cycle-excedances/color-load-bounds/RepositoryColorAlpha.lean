@@ -68,7 +68,7 @@ private theorem alpha_front_transform_loss {n p : ℕ} (hp : 0 < p) :
 
 private theorem alpha_front_ceil_pos {x : ℝ} (hx : 0 < x) : 0 < ⌈x⌉₊ := by
   by_contra! h
-  exact hx.not_le (Nat.ceil_eq_zero.mp (by omega))
+  exact (not_le_of_gt hx) (Nat.ceil_eq_zero.mp (by omega))
 
 /-- Exact endpoint for the single-color sample. -/
 theorem original_front_alpha_one {n k : ℕ} (hn : 0 < n) (hk : 2 ≤ k) (hkn : k ≤ n) :
