@@ -27,7 +27,7 @@ An independent agent-assisted mathematical review checked the signed indexing, t
 
 ## Verification
 
-All eleven new declarations compiled on Lean 4.19.0, compiler commit `6caaee842e94`, mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`, with transitive axioms `propext`, `Classical.choice` and `Quot.sound`. The Linux run checks their full import closure and hashes each input. Its receipt is pending. To reproduce from the repository root with the installed research toolchain, run
+All eleven new declarations compiled on Lean 4.19.0, compiler commit `6caaee842e94`, mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`, with transitive axioms `propext`, `Classical.choice` and `Quot.sound`. The [hosted Linux check](https://github.com/ProgramComputer/open-math-research/actions/runs/46007850295) passed all 39 named axiom audits across 20 repository modules. Each compiled source digest matched the Git input at `bef8d14`, including the original-pole radius theorem. The report uses the repository research toolchain and its pinned mathlib cache. To reproduce from the repository root with the installed research toolchain, run
 
 ~~~sh
 cd shared/lean
