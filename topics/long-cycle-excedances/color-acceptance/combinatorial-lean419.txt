@@ -1,0 +1,74 @@
+10 uncached modules
+Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)
+286626efd868d54e0e189e02da465e5f32b4e209047525493f68459846637ffb  ColorAnchor.lean
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.mem_acceptedFinset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.splitWords' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.card_splitWords' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.accepted_fixed_orbit_equiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.residualGood_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.anchoredPerm_transitive' depends on axioms: [propext, Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.card_accepted_fixed_orbit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.partitionWordsAtAnchor' depends on axioms: [propext, Quot.sound]
+0fbc2e4e21dbb3b9a2ad973923207d08e706662b69ee4ca23d5a2bed5aa64dbd  ColorPermSplit.lean
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.perm_at_support' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+17d5cd7566cd43c0b3998423820bfad986f9599ca298dd953152c26aeddd81eb  ColorCycleCount.lean
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.card_transitive_perms' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+4fabd1060dde8b935a0ebe3c7d34f8f58fd3760aea8d5f9f09ff3625dddc34c6  ColorBlock.lean
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.accepted_at_supports' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+bcf468a469f8cac404bd1707ba2c16612153e9f1f5acf95df4912173e41e5534  ColorSupportCount.lean
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.card_accepted_at_supports' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.card_color_supports' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.card_label_supports' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+5afd26376366c35e15c97d848595c60753830b0161650f6c28f19491fb9fdc49  ColorDoubleCount.lean
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.acceptedSupportDecomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.card_goodPairs_support_sum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+076c69e9bcb8506215d97e689df4a1c6014e596deef559436ae3810b2b3230b2  ColorRelabel.lean
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.goodPairsRelabel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+617a7db629f90534f92627dc591ea5f4f300e0beadad4507b5f5eb9696300753  ColorRecurrence.lean
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.taggedCount_succ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+15f8e340d97e05c1c2ef112745c66bc8996c316807c501578abad88c7f3d0b7b  NormalizedColorRecurrence.lean
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.taggedCount_eq_finset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.taggedCount_zero_left' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.taggedCount_zero_right' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.normalizedCount_zero_left' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.ColorAnchor.normalizedCount_succ' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
