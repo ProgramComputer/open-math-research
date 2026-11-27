@@ -1,0 +1,43 @@
+Frozen Lean 4.33.1 common-pin compilation and Lean kernel replay
+proof source fa96f0d08619534bbbffa2e76ef0ebc1a85fba16
+run https://github.com/ProgramComputer/open-math-research/actions/runs/45940174981
+Lean 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+
+UniformDiscreteTilt 3760c71480723523f6350730b3b1de68ea809a9fc473be5f62c36e93d30105bf compile=0 replay=0 named_declarations=3
+LowMomentMass 243aca7ac7eb207deda7d7a11aa8545206ed737ae6d67fe6e70815489cdfe443 compile=0 replay=0 named_declarations=1
+RadiusGeometry b1a1222a4d7066c442a3bc283358d95654a53476800720af9bf193c5e8f97a25 compile=0 replay=0 named_declarations=1
+LowMomentInput c1737fe2bc2525c038d9d047f8c6876cc45a3aca7f081203798ae3faf866f40b compile=0 replay=0 named_declarations=2
+UniformMassSum f6619fd9c07836283968f8182881c1fa401830921709ec058ac28a0db76b423c compile=0 replay=0 named_declarations=1
+LinearTilt 22ee223a3aa6173f4e716a7f8de73b00246e98b4f51b2374f66c2ae9138e1e2f compile=0 replay=0 named_declarations=2
+PoleMonomial 840f12a38d15f25165b61628fb01e73ebff27413cc3d9d1cadb784a18fe8da55 compile=0 replay=0 named_declarations=1
+UniformHighDegreeLattice 55b097758383fcbc770aa4d0da63a6f9302d1b482df81d66efdf594ec8198bc4 compile=0 replay=0 named_declarations=4
+UniformHighDegreeOddPoles 7834eb55f4b1ad0a8e4e6c21aef545532f9d737b0cdcc3ec0f9f92eb88e57843 compile=0 replay=0 named_declarations=3
+RepositoryUniformHighDegree 8dfee39ffb370211af9224a14ebfbf02139bb2559e69a3d18fe46bf7d8d72e43 compile=0 replay=0 named_declarations=4
+RepositoryUniformMass cf7825004d361729f8c85d03ded504e672d39ed2f2a5e5f92d7199553354e1a7 compile=0 replay=0 named_declarations=2
+
+24 uniform-tilt declarations. Transitive axiom reports
+OpenMathResearch.LongCycleExcedances.discrete_low_frequency_sum [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.expPrefix_half_bound [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.discrete_low_mode [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.low_moment_absolute_mass [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_outer_radius [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.shifted_moment_input [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.lowCut_scale [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_mass_from_split [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.small_linear_cost [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.large_linear_cost [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.pole_monomial_bound [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_high_degree_lattice [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.square_majorized_lattice [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_contour_factor [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_high_degree_contour_factor [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_high_degree_odd_poles [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_small_modulus_odd_poles [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_high_degree_scale_of_cut [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.uniform_high_degree_coherent_poles [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.uniform_high_degree_coherent_multiplier [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.uniform_small_modulus_coherent_poles [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.uniform_small_modulus_coherent_multiplier [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_uniform_tilt_envelope [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_uniform_log_mass [Classical.choice, Quot.sound, propext]

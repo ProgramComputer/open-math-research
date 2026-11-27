@@ -26,4 +26,10 @@ Write $\delta=R-x$. The circle geometry gives $\delta\le5/x+x/(40k)$ and $R\le53
 
 ## Formal verification
 
-The supporting estimates were checked on the local Lean 4.19.0 toolchain. A specialization using the exact statement of each upstream moment identity as a premise also compiled. Verification against the upstream proofs on their shared Lean 4.33.1 pin is pending. The result is part of the formalization of the [all-cutoff theorem](../../all-cutoffs/README.md). Its overall status is 🟨 Partial · Lean 4.
+On Lean 4.33.1 at `819816b2e0a3bf405af45ae5c7af2491d8f5bee6` with Mathlib `0df444a360eaa60ab8c11dca51a86af692955474`, all 11 modules compiled against the upstream moment identities and replayed with Lean’s `leanchecker`. The 24 named declarations use only `propext`, `Classical.choice` and `Quot.sound`. An independent agent checked the moment indices, both radial estimates, source hashes and replay logs. The [all-cutoff interlacing theorem](../../all-cutoffs/README.md) retains 🟨 Partial · Lean 4 coverage. [Source and axiom receipt](verification.txt) · [Independent review](independent-review.md) · [Hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/45940174981)
+
+To reproduce the check from the repository root with a fresh upstream build, use the pinned Lean toolchain and run the common driver with a new destination directory.
+
+~~~sh
+python3 -I topics/long-cycle-excedances/lean/common-pin/check.py /tmp/long-cycle-uniform-proof
+~~~
