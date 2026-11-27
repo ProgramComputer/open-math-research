@@ -36,7 +36,8 @@ theorem original_exterior_coefficient_tests_all {n k h : ℕ}
   have hu : 0 < u := div_pos ha hb
   have hc : P.coeff (h+1) = a/u := by
     change P.coeff (h+1) = a/(a/P.coeff (h+1))
-    field_simp [ha.ne',hb.ne']
+    have ha' : a ≠ 0 := ha.ne'
+    rw [div_div_eq_mul_div, mul_comm a, mul_div_cancel_right₀ _ ha']
   have hrec : Q = C (n:ℝ)*X*P+(1-X)*(X*P.derivative)+V := by
     have hi := (LongCycleBounds.Insertion.enumerator_succ hk : FrontInsertion P Q V (n:ℝ))
     change Q = C (n:ℝ)*X*P+X*(1-X)*P.derivative+V at hi

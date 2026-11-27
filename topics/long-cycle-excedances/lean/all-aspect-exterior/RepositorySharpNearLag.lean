@@ -38,7 +38,7 @@ theorem original_front_lag_relative_of_alpha {n k p : ℕ} (hn : 10000 ≤ n)
     · rw [original_front_lag_zero_at_high_cutoff hk hkn (by omega), zero_div]
       exact mul_pos (by norm_num) (lt_of_lt_of_le (by positivity) hα)
   rw [←mul_div_assoc] at hnrm
-  exact (div_lt_div_right hpow).mp hnrm
+  exact (div_lt_div_iff_of_pos_right hpow).mp hnrm
 
 #print axioms original_front_lag_zero_at_high_cutoff
 #print axioms original_front_lag_relative_of_alpha
