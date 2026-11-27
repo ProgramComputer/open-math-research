@@ -2,6 +2,8 @@
 
 **Independent Lean rebuilds passed for cutoffs four, five and six.** Bowen Zuo supplies the following Lean proofs for strict excedances. The adjacent pair in each release has lower size $m$ and upper size $N=m+1$. All three all-size statements concern unweighted original rows. The separate weighted bounds start at different sizes. [Alexandersson's original claim](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Tracking issue](https://github.com/ProgramComputer/open-math-research/issues/4)
 
+Bowen Zuo subsequently released an independent all-size proof at cutoff seven. The tagged sources and dependency lock passed authentication. The repository’s pinned compilation and scope check are pending. [Cutoff-seven verification](cutoff-seven/README.md)
+
 | Minimum cycle length | Supplying release and commit | All-size theorem | First pair |
 | --- | --- | --- | --- |
 | 4 | [v1.0.0](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/releases/tag/v1.0.0), `f8fef864286a1bbc59f96484074f28d77b1a027f` | `LongCycleBounds.fixed_four_all_sizes` | 4 and 5 |
