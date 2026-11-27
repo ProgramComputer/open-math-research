@@ -32,3 +32,5 @@ Reproduce in a checkout at the verified commit with the pinned toolchain, separa
 python3 -Bu topics/long-cycle-excedances/lean/paired-profile/check.py /tmp/four-errors-profile "$IMPORT_ARCHIVE"
 python3 -Bu topics/long-cycle-excedances/lean/sine-comparison/check-primitive-envelope.py /tmp/four-errors-primitive --import-archive "$IMPORT_ARCHIVE"
 ~~~
+
+On the source revision integrating the verified cutoff-jump and principal-cost modules, all 113 input digests matched their Git blobs, all 113 kernel replays passed, and the 192 named axiom reports contained only the standard axioms. The paired report ZIP has SHA-256 `0e8db79565cd98cdcd4f7e8d2de7b9e3a060c9df7ceb1a2b4fef2a12f9594ce0`. The same commands above reproduce the combined check at `953a222a2610a2d22b89fda48cc2c9a44ce4b39b`. [Combined run](https://github.com/ProgramComputer/open-math-research/actions/runs/45998725306) · [Report archive](https://github.com/ProgramComputer/open-math-research/actions/runs/45998725306/artifacts/15197529067)
