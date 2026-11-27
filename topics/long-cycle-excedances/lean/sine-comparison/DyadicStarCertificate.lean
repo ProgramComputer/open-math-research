@@ -12,7 +12,7 @@ theorem oddGap_cast (q a : ℤ) : (oddGap q a:ℝ)=|primitiveOddNumber q-primiti
     push_cast
     simp only [primitiveOddNumber]
     ring
-  rw [h,oddGap,Nat.cast_natAbs]
+  rw [h,oddGap,Nat.cast_natAbs, Int.cast_abs]
 
 /-- Each checked ceiling may be supplied as its integer product inequality. -/
 theorem finite_star_dyadic_bound (A : Finset ℤ) (a : ℤ) {c : ℝ} {G : ℕ}
