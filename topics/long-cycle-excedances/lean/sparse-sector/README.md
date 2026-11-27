@@ -1,6 +1,6 @@
 # Consecutive interlacing in the large-size sector
 
-Let $E_{n,k}(t)$ enumerate permutations of $[n]$ by strict excedances, allowing only cycles of length at least $k$. The proposed formal theorem covers every pair of original sizes $n,n+1$ satisfying
+Let $E_{n,k}(t)$ enumerate permutations of $[n]$ by strict excedances, allowing only cycles of length at least $k$. The Lean theorem covers every pair of original sizes $n,n+1$ satisfying
 
 $$
 n\ge10000,\qquad k\ge8,\qquad 30\log n+20<\frac{n}{200k}.
@@ -22,7 +22,7 @@ Let $V$ be the full lag polynomial in the insertion recurrence. At $j\le J$ the 
 
 A fresh-context agent referee compared the proof with the original claim, traced all seven hypotheses of the exterior reduction, and checked the direction of the adjacent root lists. [Independent review](independent-review.md)
 
-The final implication and the actual center-cap algebra passed local Lean 4.19 checks with the imported statements supplied as explicit hypotheses. A production run must build the entire composition from its imports on Lean 4.33.1, mathlib revision `0df444a360eaa60ab8c11dca51a86af692955474`, audit its axiom sets and replay the resulting modules. This build is pending. [Verification driver](../front-envelope-sums/check.py)
+Lean 4.33.1, compiler commit `819816b2e0a3bf405af45ae5c7af2491d8f5bee6`, and mathlib `0df444a360eaa60ab8c11dca51a86af692955474` built the theorem from the literal permutation rows. The receipt verifies 38 module hashes and successful Lean checker replays, with 100 axiom reports in those files. The composed driver audited 319 distinct named declarations. All audited declarations used at most `propext`, `Classical.choice` and `Quot.sound`. The first build stopped at two rewrites across equivalent names for the same enumerator. Giving the coefficient inequality the literal enumerator type fixed both. This run checked the explicit sector. The full conjecture retains partial formal coverage. [Theorem, source hashes and axiom reports](verification.txt) · [Verification run](https://github.com/ProgramComputer/open-math-research/actions/runs/45968416539) · [Proof driver](../front-envelope-sums/check.py)
 
 ~~~sh
 python3 -I topics/long-cycle-excedances/lean/front-envelope-sums/check.py /tmp/long-cycle-sparse-sector
