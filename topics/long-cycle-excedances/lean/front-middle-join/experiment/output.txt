@@ -1,0 +1,54 @@
+Each norm bracket has denominator 1000000 and bounds M/a inclusively.
+ n   k  h     T lower     T upper     W lower     W upper   T   W
+ 12   3  1       30840       30841       54546       54547   True  True
+ 12   7  1       46975       46976       47322       47323   True  True
+ 12  12  1       46975       46976       47322       47323   True  True
+ 24   3  1        1262        1263        1285        1286   True  True
+ 24   6  1        1102        1103        4059        4060   True  True
+ 24   7  1         971         972       10243       10244   True  True
+ 24  24  1        1689        1690        1689        1690   True  True
+ 40   3  1          12          13          12          13   True  True
+ 40   3  2       11386       11387       11436       11437   True  True
+ 40   7  1          12          13          16          17   True  True
+ 40   7  2       10481       10482       17245       17246   True  True
+ 40  10  1          11          12         291         292   True  True
+ 40  10  2        8745        8746       69510       69511   True  True
+ 40  40  1          16          17          16          17   True  True
+ 40  40  2       12824       12825       12851       12852   True  True
+ 64   3  1           0           1           0           1   True  True
+ 64   3  2         673         674         673         674   True  True
+ 64   7  1           0           1           0           1   True  True
+ 64   7  2         672         673         680         681   True  True
+ 64  16  1           0           1           9          10   True  True
+ 64  16  2         470         471       31614       31615   True  True
+ 64  64  1           0           1           0           1   True  True
+ 64  64  2         758         759         758         759   True  True
+ 96   3  1           0           1           0           1   True  True
+ 96   3  2          15          16          15          16   True  True
+ 96   3  3        2593        2594        2607        2608   True  True
+ 96   7  1           0           1           0           1   True  True
+ 96   7  2          15          16          15          16   True  True
+ 96   7  3        2593        2594        2609        2610   True  True
+ 96  24  1           0           1           0           1   True  True
+ 96  24  2          10          11       14774       14775   True  True
+ 96  24  3        2789        2790      122246      122247   True  True
+ 96  96  1           0           1           0           1   True  True
+ 96  96  2          17          18          17          18   True  True
+ 96  96  3        2767        2768        2783        2784   True  True
+128   3  1           0           1           0           1   True  True
+128   3  2           0           1           0           1   True  True
+128   3  3         327         328         327         328   True  True
+128   7  1           0           1           0           1   True  True
+128   7  2           0           1           0           1   True  True
+128   7  3         327         328         327         328   True  True
+128  32  1           0           1           0           1   True  True
+128  32  2           0           1        7491        7492   True  True
+128  32  3         348         349       98903       98904   True  True
+128 128  1           0           1           0           1   True  True
+128 128  2           0           1           0           1   True  True
+128 128  3         349         350         349         350   True  True
+Both strict tests passed in 47/47 windows across 23 row pairs.
+All old and successor rows agree with the independent anchored-cycle recurrence.
+Literal permutation enumeration independently matched 27 small rows.
+Maximum T norm ratio is in [46975, 46976]/1000000, attained up to bracket precision at n=12, k=7, h=1.
+Maximum W norm ratio is in [122246, 122247]/1000000, attained up to bracket precision at n=96, k=24, h=3.

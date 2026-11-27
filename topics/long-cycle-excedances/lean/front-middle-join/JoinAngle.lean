@@ -50,7 +50,7 @@ theorem uniform_join_geometry {n : ℕ} (hn : 10^4 ≤ n) :
   have hθz : θ*z = (a/z)*π := by
     change a*π/(n:ℝ)*z = _
     rw [← hz₂]
-    field_simp [hz₀.ne']; ring
+    field_simp [hz₀.ne']
   have hθz₁ : (17/50:ℝ)*π < θ*z := by
     rw [hθz]
     exact mul_lt_mul_of_pos_right ((lt_div_iff₀ hz₀).mpr ha₁) pi_pos
@@ -94,7 +94,7 @@ theorem uniform_join_geometry {n : ℕ} (hn : 10^4 ≤ n) :
     have hinv : π/θ = (n:ℝ)/a := by
       change π/(a*π/(n:ℝ)) = _
       rw [div_div_eq_mul_div]
-      field_simp [ha₀.ne', pi_ne_zero]; ring
+      field_simp [ha₀.ne', pi_ne_zero]
     rw [← hinv]
     exact htan
   exact ⟨hθpos,hθsmall,hmid,hlog,hxUpper⟩
@@ -122,7 +122,7 @@ theorem arctan_uniform_join {n : ℕ} (hn : 10^4 ≤ n) :
   have ht : 0 < tan (uniformJoinAngle n) := hpos.trans (lt_tan hpos hhalf)
   have he : uniformJoinLog n/π = tan (π/2-uniformJoinAngle n) := by
     rw [uniformJoinLog,tan_pi_div_two_sub]
-    field_simp [pi_ne_zero,ht.ne']; ring
+    field_simp [pi_ne_zero,ht.ne']
   rw [he,arctan_tan (by linarith only [hhalf,pi_pos]) (by linarith only [hpos])]
 
 theorem uniform_join_radius_sq {n : ℕ} (hn : 10^4 ≤ n) :

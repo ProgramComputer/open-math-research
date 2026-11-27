@@ -85,8 +85,20 @@ JOIN_MODULES = (
     "RealFront",
     "OriginalLiteralHalfRoots",
     "RepositoryExteriorReduction",
+    "FrontCoefficientNorm",
+    "CoefficientFrontWindow",
+    "PolynomialFront",
+    "RepositoryPolynomialFront",
+    "RepositoryExteriorCertificates",
 )
 EXPECTED = {
+    "RepositoryQuotientAudit.original_interlacing_of_exterior_box_bounds",
+    "RepositoryQuotientAudit.original_interlacing_of_exterior_coefficient_bounds",
+    "RepositoryQuotientAudit.original_front_of_polynomial_bounds",
+    "OpenMathResearch.LongCycleExcedances.polynomial_front_ordered",
+    "OpenMathResearch.LongCycleExcedances.polynomial_front_singleton",
+    "OpenMathResearch.LongCycleExcedances.signed_root_of_front_coefficients",
+    "OpenMathResearch.LongCycleExcedances.front_coefficient_bound",
     "OpenMathResearch.LongCycleExcedances.adjacent_front_centers",
     "OpenMathResearch.LongCycleExcedances.arctan_uniform_join",
     "OpenMathResearch.LongCycleExcedances.effective_front_adjacent_centers",
@@ -399,7 +411,7 @@ def main(project, imports):
             raise ValueError(f"unexpected retained object archive {digest}")
         run(project, "tar", "--zstd", "-xf", str(imports))
         print(f"Reused verified 65-module archive sha256={digest}", flush=True)
-    for module in LOGISTIC_IMPORTS:
+    for module in (*LOGISTIC_IMPORTS, "UniversalRecurrence"):
         name = "LongCycleBounds/" + module
         source = project / (name + ".lean")
         out = project / ".lake/build/lib/lean" / (name + ".olean")
