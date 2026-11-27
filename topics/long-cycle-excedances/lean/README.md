@@ -151,7 +151,7 @@ normalization and exterior-to-middle separation for the actual analytic
 functions remain inputs.
 
 The shared first- and last-hit lemmas and the window theorem compile
-with the research pin, Lean 4.19.0 and mathlib
+with the research pin, Lean 4.19.0 (compiler commit `6caaee842e94`) and mathlib
 `c44e0c8ee63ca166450922a373c7409c5d26b00b`. From the repository root, run
 
 ~~~sh
@@ -161,4 +161,6 @@ lake env lean ../../topics/long-cycle-excedances/lean/LongCyclePhaseWindows.lean
 ~~~
 
 The three new theorems report only `propext`, `Classical.choice` and
-`Quot.sound`. The hosted 4.33.1 check is pending.
+`Quot.sound`. The [hosted 4.33.1 check](https://github.com/ProgramComputer/open-math-research/actions/runs/45926344480)
+compiled and replayed both phase modules on the common pin.
+[Audit excerpt](phase-windows-audit.txt)
