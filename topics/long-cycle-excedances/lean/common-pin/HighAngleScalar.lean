@@ -1,6 +1,7 @@
 import OpenMathResearch.FirstLevelHits
 import OpenMathResearch.DiskUniqueness
 import Mathlib.Analysis.SpecificLimits.Normed
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 
 noncomputable section

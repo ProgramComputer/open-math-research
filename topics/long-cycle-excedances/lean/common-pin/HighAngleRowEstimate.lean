@@ -128,7 +128,7 @@ theorem actual_high_angle_row_error {q k : ℕ} (hq : 0 < q) (hk : 7 ≤ k)
         field_simp [hR.ne', hW.ne', hneq] <;> ring
       _ ≤ (5*A*ρ^(q-1))*oddSquareMajorant i := by
         have hmul := mul_le_mul (show (r/W)^2 ≤ oddSquareMajorant i from hgeo.1)
-          hb (by positivity) (by unfold oddSquareMajorant; positivity)
+          hb (div_nonneg zero_le_one (by linarith)) (by unfold oddSquareMajorant; positivity)
         have h := mul_le_mul_of_nonneg_left hmul (show 0 ≤ A*ρ^(q-1) by positivity)
         convert h using 1 <;> ring
   have hfarS : Summable far :=
@@ -151,7 +151,7 @@ theorem actual_high_angle_row_error {q k : ℕ} (hq : 0 < q) (hk : 7 ≤ k)
     rw [tsum_mul_left]
     simpa using mul_le_mul_of_nonneg_left oddSquareSum_le_one
       (show 0 ≤ 5*A*ρ^(q-1) by positivity)
-  have htpos : 0 < 1-t := by dsimp [t]; positivity
+  have htpos : 0 < 1-t := by dsimp [t]; linarith [Real.exp_pos (-x)]
   have hzeroTerm : |r^(q+1)/2 * (coeff q T/(1-t))| ≤ 4*A*ρ^q := by
     have hr8 : r/2 ≤ 4 := by linarith [Real.pi_lt_four]
     have hdiv : 1/(1-t) ≤ 1 := by
@@ -173,6 +173,7 @@ theorem actual_high_angle_row_error {q k : ℕ} (hq : 0 < q) (hk : 7 ≤ k)
   have hcoef := (original_coherent_row_pair q k (by omega) x hx).1
   have hreal := congrArg Complex.re hcoef
   simp only [Complex.ofReal_re, Complex.add_re] at hreal
+  rw [show 1 + Real.exp (-x) = 1-t by simp [t]] at hreal
   change (enumerator q k).eval t / ((1-t)^(q+1)*q.factorial) =
     coeff q T/(1-t) + (∑' l : ℤ, u l).re at hreal
   rw [hpair] at hreal

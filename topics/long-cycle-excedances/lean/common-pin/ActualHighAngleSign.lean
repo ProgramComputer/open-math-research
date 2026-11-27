@@ -19,7 +19,7 @@ theorem original_high_angle_next_sign {n k : ℕ} (hn : 0 < n) (hk : 7 ≤ k)
   let r := ‖w‖
   let R := highAngleRadius x k
   let T := coherentTilt k t
-  let λ := (1 + 1/(k:ℝ))⁻¹
+  let ξ := (1 + 1/(k:ℝ))⁻¹
   let B := 5 + 18*Real.log k
   let A := Real.exp B
   let M := ‖seriesValue T w‖
@@ -28,11 +28,11 @@ theorem original_high_angle_next_sign {n k : ℕ} (hn : 0 < n) (hk : 7 ≤ k)
   have hk' : (7:ℝ) ≤ k := by exact_mod_cast hk
   have hk0 : 0 < (k:ℝ) := by positivity
   have hr : 0 < r := coherentPole_near_pos x
-  have hλ : 0 < λ := by dsimp [λ]; positivity
-  have hλ1 : λ ≤ 1 := by
+  have hξ : 0 < ξ := by dsimp [ξ]; positivity
+  have hξ1 : ξ ≤ 1 := by
     change (1 + 1/(k:ℝ))⁻¹ ≤ 1
     exact inv_le_one_of_one_le₀ (by have := one_div_pos.mpr hk0; linarith)
-  have hre : r/R = λ := by
+  have hre : r/R = ξ := by
     change r / (r*(1+1/(k:ℝ))) = _
     rw [div_mul_eq_div_div, div_self hr.ne', one_div]
   have hA : 0 < A := Real.exp_pos _
@@ -70,10 +70,10 @@ theorem original_high_angle_next_sign {n k : ℕ} (hn : 0 < n) (hk : 7 ≤ k)
     change |highAngleRow q k x - (highAnglePrincipal q k x).re| ≤
       A*(((k:ℝ)+1)*(r/R)^q + 10*(r/R)^(q-1) + 4*(r/R)^q) at hb
     rw [hre] at hb
-    have hd := pow_le_pow_of_le_one hλ.le hλ1 (show n-1 ≤ q by omega)
-    have hd' := pow_le_pow_of_le_one hλ.le hλ1 (show n-1 ≤ q-1 by omega)
-    have h₁ : ((k:ℝ)+1)*λ^q + 10*λ^(q-1) + 4*λ^q ≤ 4*(k:ℝ)*λ^(n-1) := by
-      have h := mul_le_mul_of_nonneg_right (show (k:ℝ)+15 ≤ 4*(k:ℝ) by linarith) (pow_nonneg hλ.le _)
+    have hd := pow_le_pow_of_le_one hξ.le hξ1 (show n-1 ≤ q by omega)
+    have hd' := pow_le_pow_of_le_one hξ.le hξ1 (show n-1 ≤ q-1 by omega)
+    have h₁ : ((k:ℝ)+1)*ξ^q + 10*ξ^(q-1) + 4*ξ^q ≤ 4*(k:ℝ)*ξ^(n-1) := by
+      have h := mul_le_mul_of_nonneg_right (show (k:ℝ)+15 ≤ 4*(k:ℝ) by linarith) (pow_nonneg hξ.le (n-1))
       have h' := mul_le_mul_of_nonneg_left hd (show 0 ≤ (k:ℝ)+1 by positivity)
       nlinarith only [hd, hd', h, h']
     rw [← sub_div, abs_div, abs_of_pos hM, div_eq_mul_inv]
@@ -81,22 +81,22 @@ theorem original_high_angle_next_sign {n k : ℕ} (hn : 0 < n) (hk : 7 ≤ k)
       (Real.exp_one_lt_d9.trans (by norm_num)) hsize
     apply le_of_lt
     calc
-      _ ≤ (A*(4*(k:ℝ)*λ^(n-1)))*A := by
+      _ ≤ (A*(4*(k:ℝ)*ξ^(n-1)))*A := by
         apply mul_le_mul (hb.trans (mul_le_mul_of_nonneg_left h₁ hA.le)) hiM
-          (inv_nonneg.mpr hM.le) hA.le
-      _ = 4*Real.exp 10*(k:ℝ)^37*λ^(n-1) := by
-        rw [show A*(4*(k:ℝ)*λ^(n-1))*A = 4*(k:ℝ)*λ^(n-1)*A^2 by ring, hA2]
+          (inv_nonneg.mpr hM.le) (by positivity)
+      _ = 4*Real.exp 10*(k:ℝ)^37*ξ^(n-1) := by
+        rw [show A*(4*(k:ℝ)*ξ^(n-1))*A = 4*(k:ℝ)*ξ^(n-1)*A^2 by ring, hA2]
         ring
       _ < _ := hgeo
   have hz_im : z.im = -π/r := by
     have he : w.normSq = r^2 := (Complex.sq_norm w).symm
     change (((r:ℝ):ℂ)/w).im = _
-    rw [Complex.div_im, Complex.ofReal_re, Complex.ofReal_im, zero_mul, zero_sub, he]
+    rw [Complex.div_im, Complex.ofReal_re, Complex.ofReal_im, zero_mul, zero_div, zero_sub, he]
     change _ = _
     rw [show w.im = π by simpa [w] using coherentPole_im x 0]
     field_simp [hr.ne'] <;> ring
   have hS : (1:ℝ)/2 ≤ -z.im := by
-    rw [hz_im, neg_neg]
+    rw [hz_im, neg_div, neg_neg]
     apply (le_div_iff₀ hr).2
     linarith
   have hc : |z.re| ≤ 1 := (Complex.abs_re_le_norm z).trans_eq hz
@@ -108,7 +108,7 @@ theorem original_high_angle_next_sign {n k : ℕ} (hn : 0 < n) (hk : 7 ≤ k)
       a.im = (highAnglePrincipal n k x).im / M := by
     dsimp only [a]
     rw [div_eq_mul_inv, ← Complex.ofReal_inv, Complex.mul_im, Complex.ofReal_re,
-      Complex.ofReal_im, mul_zero, add_zero, ← div_eq_mul_inv]
+      Complex.ofReal_im, mul_zero, zero_add, ← div_eq_mul_inv]
   have hnextmode : highAnglePrincipal (n+1) k x / (M:ℂ) = a*z := by
     dsimp only [a, z, highAnglePrincipal]
     rw [show n+1+1 = (n+1)+1 by rfl, pow_succ]
@@ -124,7 +124,7 @@ theorem original_high_angle_next_sign {n k : ℕ} (hn : 0 < n) (hk : 7 ≤ k)
     (show |highAngleRow (n+1) k x/M - (z.re*a.re+(-z.im)*a.im)| ≤ 1/6 by
       convert hnext using 1 <;> ring)
   rw [him_div] at hsign
-  have ht : 0 < 1-t := by dsimp [t]; positivity
+  have ht : 0 < 1-t := by dsimp [t]; linarith [Real.exp_pos (-x)]
   let C := (r^(n+1+1)/2)/((1-t)^(n+1+1)*(n+1).factorial)
   have hC : 0 < C := by dsimp [C]; positivity
   have hprod : 0 < (C/(M*M)) *

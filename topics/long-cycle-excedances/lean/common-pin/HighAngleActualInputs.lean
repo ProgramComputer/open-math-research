@@ -27,7 +27,7 @@ theorem actual_high_angle_log_mass {k : ℕ} (hk : 7 ≤ k) {x : ℝ} (hx : 0 �
   let R := highAngleRadius x k
   let γ := 1+(1:ℝ)/k
   have hγ : 0 < γ := by dsimp [γ]; positivity
-  have hr := coherentPole_near_pos x
+  have hr : 0 < r := coherentPole_near_pos x
   have hR := highAngleRadius_pos x k
   have hk' : (7:ℝ) ≤ k := by exact_mod_cast hk
   have hγ' : γ ≤ 8/7 := by
@@ -36,12 +36,14 @@ theorem actual_high_angle_log_mass {k : ℕ} (hk : 7 ≤ k) {x : ℝ} (hx : 0 �
     linarith
   have hR' : R ≤ 10 := by
     change r * γ ≤ 10
-    have h := mul_le_mul hangle hγ' hγ.le (by positivity : 0 ≤ 2*π)
-    linarith [Real.pi_lt_four]
+    have h : r * γ ≤ 2*π*(8/7) := mul_le_mul hangle hγ' hγ.le (by positivity)
+    refine h.trans ((mul_le_mul_of_nonneg_right
+      (show 2*π ≤ 8 by linarith only [Real.pi_lt_four]) (by norm_num : (0:ℝ) ≤ 8/7)).trans ?_)
+    norm_num
   have ht0 : t ≤ 0 := neg_nonpos.mpr (Real.exp_pos _).le
   have ht : -1 ≤ t := neg_le_neg (Real.exp_le_one_iff.mpr (neg_nonpos.mpr hx))
   apply high_angle_finite_log_bound (by omega : 2 ≤ k)
-  · simpa [cutoffLogCoefficient] using coherentLinearTilt_bound ht ht0 hR.le hR'
+  · simpa [cutoffLogCoefficient, t] using coherentLinearTilt_bound ht ht0 hR.le hR'
   · intro j hj hjk
     have hj1 : j ≠ 1 := by omega
     have hj0 : (0:ℝ)<j := by positivity
@@ -63,10 +65,9 @@ theorem actual_high_angle_log_mass {k : ℕ} (hk : 7 ≤ k) {x : ℝ} (hx : 0 �
         |-(↑(j-1).factorial * (LongCycleBounds.oddPoleSum j x).re) /
             ((j:ℝ)*↑(j-1).factorial) * R^j| =
           |(LongCycleBounds.oddPoleSum j x).re * r^j| * γ^j / (j:ℝ) := by
-      rw [show R=r*γ by rfl, mul_pow, abs_div, abs_mul, abs_neg, abs_mul,
-        abs_of_pos hf0, abs_of_pos (mul_pos hj0 hf0),
-        abs_of_nonneg (by positivity : 0 ≤ r^j*γ^j), abs_mul,
-        abs_of_nonneg (pow_nonneg hr.le _)]
+      rw [show R=r*γ by rfl, mul_pow]
+      simp only [abs_mul, abs_div, abs_neg, abs_of_pos hf0, abs_of_pos hj0,
+        abs_of_nonneg (pow_nonneg hr.le _), abs_of_nonneg (pow_nonneg hγ.le _)]
       field_simp [ne_of_gt hf0, ne_of_gt hj0] <;> ring
     rw [hre]
     apply (div_le_div_iff_of_pos_right hj0).2
