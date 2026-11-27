@@ -67,3 +67,5 @@ Both complete replays certify all 7,021 pairs with $4\le k\le \lfloor n/4\rfloor
 The rolling engine takes the rows at threshold $k+1$ and adds $h$ cycles all of size $k$ with multiplicity $\binom{n}{hk}(hk)!/((k!)^h h!)$. Raise the cycle gamma polynomial to power $h$, multiply by the residual gamma row, and shift the result by $h$. If the residual is empty the shift is $h-1$, accounting for removing the common $t$. Updating row sizes in descending order keeps the residual at threshold $k+1$ until it is used. Both runs matched the pair counts, root counts and sign-query counts separately at all 59 thresholds. The coefficient generation and ordinary-vector cross-check are distinct from the root certificate, which both benchmark runs share.
 
 In the rolling run the sum of reported generation times is a small fraction of total time. The outstanding cost is repeated signed evaluation, and the measurement at 250 does not establish feasibility through the published analytic cutoff.
+
+The cutoff-eight pairs with $32\le n\le250$ also have a [dyadic certificate in the original polynomial variable](dyadic-windows/README.md), with a separate exact verifier.
