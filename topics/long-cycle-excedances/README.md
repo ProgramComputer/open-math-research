@@ -1,6 +1,8 @@
 # Excedance zeros for permutations with long cycles
 
-For every $3\le k\le n$ with $n\le250$ or $n\ge10{,}000$, the nonzero roots of the minimum-cycle-length excedance polynomial are simple, negative and strictly interlace those of the next row at the same $k$. Together with the three-cycle and threshold-three theorems, this leaves $251\le n<10{,}000$, $k\ge4$, and $n\ge4k$ as necessary conditions for a counterexample. [Large-size manuscript](paper.pdf) · [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances)
+For every $3\le k\le n$ with $n\le250$ or $n\ge10{,}000$, the nonzero roots of the minimum-cycle-length excedance polynomial are simple, negative and strictly interlace those of the next row at the same $k$. The three-cycle and threshold-three proofs also give all sizes $n<4k$ and all sizes at $k=3$. [Large-size manuscript](paper.pdf) · [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances)
+
+Bowen Zuo’s independently rebuilt Lean theorems cover every old size at each cutoff $k=4,5,6$. The comparison theorems use the original unweighted permutation rows, including their single common zero and the strict order of all remaining roots. The first pairs are $(4,5)$, $(5,6)$ and $(6,7)$. [Frozen releases, theorem statements, dependency pins and independent receipts](external-verification/README.md)
 
 The exact finite prefix checks 7,021 pairs beyond the three-cycle range and the all-size $k=3$ theorem. An independent replay checks the full certificate and uses Sturm chains in the original polynomial coordinate on ten sample pairs. [Finite prefix, replay and independent review](finite-prefix/README.md)
 

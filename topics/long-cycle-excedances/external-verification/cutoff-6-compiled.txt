@@ -1,0 +1,90 @@
+Independent supplying-release replay, cutoff 6
+job: https://github.com/ProgramComputer/open-math-research/actions/runs/45907318583/job/140207053842
+start_utc: 2026-11-26T22:50:43Z
+finish_utc: 2026-11-26T23:54:15Z
+job_conclusion: success
+artifact: external-proof-6 (id 15160494936)
+artifact_zip_sha256:4db477416b6f3be22f673f87d58f416c7dc2be9c36295f61f5321a720c5282eb
+complete_lean_log_sha256: 539014f466c7b31b54eb8a3514c3eeb185d4f0f93db9e254f9715e8971e15206
+reproduction: python3 -Bu rebuild.py 6 /tmp/zuo-cutoff-6
+
+v1.2.0 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+cutoff-six-all-accepted.zip 37ec19f48e46eddcaa7a59efb6026b006a61b2a8f753835c585af950bf245527
+source.zip 605cd388a15d43d5c557605007b9f9e12e1db9cebd11ca80cb9abc33d67004c1
+lake-manifest.json baa9bca94f285968d119941f92d946a2b4be4a212e342e8d599f401f42f90ac6
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+plausible b7eb3304aeae834b12dda98993a37f6a41f6f0bb
+LeanSearchClient 5f4d51b81cbd3f6b32b156bfad9056621a040404
+importGraph 16f02aa7642864af59f1ff0e384a015994db9118
+proofwidgets 4be2e3d5087eeb272cf5a8853b8f9dd025ef5957
+aesop 3448c0bcc5ce01b2d1546e483ec3620e32df3d0e
+Qq 92c15be17b7caf78c2ad767ec40f89052d908d81
+batteries 4488d40d070b9700d4d5a6aa342f0d40c31b2a2d
+Cli 6130a47896ce867c6a4a55373441e59e565bad0f
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Lake version 5.0.0-src+819816b (Lean version 4.33.1)
+
+Build completed successfully (8887 jobs).
+LongCycleBounds.SixCutoff.all_sizes {n : ℕ} (hn : 7 ≤ n) : LongCycleFinite.K6Prefix.OriginalPair n
+LongCycleBounds.SixCutoff.independent_weights {n : ℕ} (hn : 49 ≤ n) (w : ℕ → ℝ) (one : w 1 = 0)
+  (unit : ∀ (a : ℕ), w a ∈ Set.Icc 0 1) (tail : ∀ a ≥ 6, w a = 1) :
+  LongCycleFinite.StrictNegativeInterlacing (LongCycleBounds.CycleProfile.weightedQuotient (n - 1) w)
+      (LongCycleBounds.CycleProfile.weightedQuotient n w) (n - 3) ∧
+    LongCycles.WeakRealInterlacing (LongCycleBounds.CycleProfile.row (n - 1) w) (LongCycleBounds.CycleProfile.row n w)
+LongCycleFinite.K6Prefix.finite_original {n : ℕ} (lo : 7 ≤ n) (hi : n ≤ 48) : LongCycleFinite.K6Prefix.OriginalPair n
+LongCycleBounds.SixCutoff.normalized_sign {p : ℕ} (hp : 48 ≤ p) (w : ℕ → ℝ) (one : w 1 = 0)
+  (unit : ∀ (a : ℕ), w a ∈ Set.Icc 0 1) (tail : ∀ a ≥ 6, w a = 1) {x : ℝ} (hx : 0 ≤ x)
+  (zero : LongCycleBounds.CycleProfile.normalizedRow w p x = 0) :
+  0 < LongCycleBounds.CycleProfile.normalizedRow w (p + 1) x * -deriv (LongCycleBounds.CycleProfile.normalizedRow w p) x
+'LongCycleBounds.SixCutoff.all_sizes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.SixCutoff.independent_weights' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.SixCutoff.original' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.SixCutoff.normalized_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.SixCutoff.compact_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.SixCutoff.middle_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.SixCutoff.exterior_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleFinite.K6Prefix.finite_original' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleFinite.K6Prefix.pair7' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleFinite.K6Prefix.pair48' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.CycleProfile.independent_interlacing_of_normalized_sign' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'LongCycleBounds.CycleProfile.row_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.Band.actual_general_cycle_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+def LongCycles.Allowed : {n : ℕ} → ℕ → Equiv.Perm (Fin n) → Prop :=
+fun {n} k σ => ∀ (x : Fin n) (j : ℕ), 0 < j → j < k → (σ ^ j) x ≠ x
+def LongCycles.excedances : {n : ℕ} → Equiv.Perm (Fin n) → ℕ :=
+fun {n} σ => {x | x < σ x}.card
+def LongCycles.enumerator : ℕ → ℕ → Polynomial ℝ :=
+fun n k => ∑ σ, if LongCycles.Allowed k σ then Polynomial.X ^ LongCycles.excedances σ else 0
+def LongCycleFinite.StrictNegativeInterlacing : Polynomial ℝ → Polynomial ℝ → ℕ → Prop :=
+fun p q d =>
+  ∃ r s,
+    p.leadingCoeff ≠ 0 ∧
+      q.leadingCoeff ≠ 0 ∧
+        p = Polynomial.C p.leadingCoeff * ∏ i, (Polynomial.X - Polynomial.C (r i)) ∧
+          q = Polynomial.C q.leadingCoeff * ∏ i, (Polynomial.X - Polynomial.C (s i)) ∧
+            StrictMono r ∧
+              StrictMono s ∧
+                (∀ (i : Fin d), r i < 0) ∧
+                  (∀ (i : Fin (d + 1)), s i < 0) ∧ ∀ (i : Fin d), s i.castSucc < r i ∧ r i < s i.succ
+def LongCycles.WeakRealInterlacing : Polynomial ℝ → Polynomial ℝ → Prop :=
+fun p q =>
+  ∃ d r s a b,
+    a ≠ 0 ∧
+      b ≠ 0 ∧
+        p = Polynomial.C a * LongCycles.linearFactors r ∧
+          q = Polynomial.C b * LongCycles.linearFactors s ∧
+            Monotone r ∧ Monotone s ∧ ∀ (i : Fin d), s i.castSucc ≤ r i ∧ r i ≤ s i.succ
+@LongCycleBounds.SixCutoff.all_sizes : ∀ {n : ℕ}, 7 ≤ n → LongCycleFinite.K6Prefix.OriginalPair n
+@LongCycleBounds.Band.actual_general_cycle_row : ∀ {n k : ℕ},
+  2 ≤ k → 0 < n → LongCycles.enumerator n k = Polynomial.X * LongCycleBounds.Band.generalCycleQuotient n k
+@ExternalExcedanceAudit : ∀ {m : ℕ},
+  6 ≤ m →
+    (∃ p q, enumerator m 6 = X * p ∧ enumerator (m + 1) 6 = X * q ∧ StrictNegativeInterlacing p q (m - 2)) ∧
+      WeakRealInterlacing (enumerator m 6) (enumerator (m + 1) 6)
+'ExternalExcedanceAudit' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+PASS: 182 project modules replayed; 14 declarations audited.
+Distinct zero-exit module replay receipts counted: 182.
+Distinct theorem axiom reports in the audit output: 14.

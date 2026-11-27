@@ -1,0 +1,88 @@
+Independent supplying-release replay, cutoff 5
+job: https://github.com/ProgramComputer/open-math-research/actions/runs/45907318583/job/140207053507
+start_utc: 2026-11-26T22:50:43Z
+finish_utc: 2026-11-26T23:58:07Z
+job_conclusion: success
+artifact: external-proof-5 (id 15161277881)
+artifact_zip_sha256:71fa0f6b72688bd39c52e890d1c361254a46caa1a02729708154722645904b2a
+complete_lean_log_sha256: e77083b83cdb6ec92367307f3e824660b38cfadbd15f55a7ff3422c0e9388529
+reproduction: python3 -Bu rebuild.py 5 /tmp/zuo-cutoff-5
+
+v1.1.0 70cad373bce521d78d6de9bcff3d29d07fc7fe9f
+lake-manifest.json 7f8b473955b472feb802c68d9e049c547ab88859ee243a337d5cc77a9026f780
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+plausible b7eb3304aeae834b12dda98993a37f6a41f6f0bb
+LeanSearchClient 5f4d51b81cbd3f6b32b156bfad9056621a040404
+importGraph 16f02aa7642864af59f1ff0e384a015994db9118
+proofwidgets 4be2e3d5087eeb272cf5a8853b8f9dd025ef5957
+aesop 3448c0bcc5ce01b2d1546e483ec3620e32df3d0e
+Qq 92c15be17b7caf78c2ad767ec40f89052d908d81
+batteries 4488d40d070b9700d4d5a6aa342f0d40c31b2a2d
+Cli 6130a47896ce867c6a4a55373441e59e565bad0f
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Lake version 5.0.0-src+819816b (Lean version 4.33.1)
+
+Build completed successfully (8884 jobs).
+'LongCycleBounds.FiveCutoff.all_sizes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.independent_weights' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.original' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.normalized_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.compact_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.middle_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.exterior_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.middle_bias' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.middle_drift_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.middle_costs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.compact_gap_of_cell' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.Exterior.fifth_power' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.Exterior.reserve' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.Exterior.zero_label' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.Exterior.positive_label' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.FiveCutoff.Exterior.insertion_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleFinite.K5Prefix.finite_original' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.AdjustablePoleRadius.physical_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.AdjustablePoleRadius.profile_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleFinite.K5CompactCert.covers' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleFinite.K5CompactCert.cell_valid' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleFinite.K5MiddleCert.head_prefactor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.CycleProfile.normalizedRow_insertion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'LongCycleBounds.CycleProfile.independent_interlacing_of_normalized_sign' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+def LongCycles.Allowed : {n : ℕ} → ℕ → Equiv.Perm (Fin n) → Prop :=
+fun {n} k σ => ∀ (x : Fin n) (j : ℕ), 0 < j → j < k → (σ ^ j) x ≠ x
+def LongCycles.excedances : {n : ℕ} → Equiv.Perm (Fin n) → ℕ :=
+fun {n} σ => {x | x < σ x}.card
+def LongCycles.enumerator : ℕ → ℕ → Polynomial ℝ :=
+fun n k => ∑ σ, if LongCycles.Allowed k σ then Polynomial.X ^ LongCycles.excedances σ else 0
+def LongCycleFinite.StrictNegativeInterlacing : Polynomial ℝ → Polynomial ℝ → ℕ → Prop :=
+fun p q d =>
+  ∃ r s,
+    p.leadingCoeff ≠ 0 ∧
+      q.leadingCoeff ≠ 0 ∧
+        p = Polynomial.C p.leadingCoeff * ∏ i, (Polynomial.X - Polynomial.C (r i)) ∧
+          q = Polynomial.C q.leadingCoeff * ∏ i, (Polynomial.X - Polynomial.C (s i)) ∧
+            StrictMono r ∧
+              StrictMono s ∧
+                (∀ (i : Fin d), r i < 0) ∧
+                  (∀ (i : Fin (d + 1)), s i < 0) ∧ ∀ (i : Fin d), s i.castSucc < r i ∧ r i < s i.succ
+def LongCycles.WeakRealInterlacing : Polynomial ℝ → Polynomial ℝ → Prop :=
+fun p q =>
+  ∃ d r s a b,
+    a ≠ 0 ∧
+      b ≠ 0 ∧
+        p = Polynomial.C a * LongCycles.linearFactors r ∧
+          q = Polynomial.C b * LongCycles.linearFactors s ∧
+            Monotone r ∧ Monotone s ∧ ∀ (i : Fin d), s i.castSucc ≤ r i ∧ r i ≤ s i.succ
+@LongCycleBounds.FiveCutoff.all_sizes : ∀ {n : ℕ}, 6 ≤ n → LongCycleFinite.K5Prefix.OriginalPair n
+@LongCycleBounds.Band.actual_general_cycle_row : ∀ {n k : ℕ},
+  2 ≤ k → 0 < n → LongCycles.enumerator n k = Polynomial.X * LongCycleBounds.Band.generalCycleQuotient n k
+@ExternalExcedanceAudit : ∀ {m : ℕ},
+  5 ≤ m →
+    (∃ p q, enumerator m 5 = X * p ∧ enumerator (m + 1) 5 = X * q ∧ StrictNegativeInterlacing p q (m - 2)) ∧
+      WeakRealInterlacing (enumerator m 5) (enumerator (m + 1) 5)
+'ExternalExcedanceAudit' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+PASS: 179 project modules replayed; 25 declarations audited.
+Distinct zero-exit module replay receipts counted: 179.
+Distinct theorem axiom reports in the audit output: 25.

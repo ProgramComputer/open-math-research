@@ -1,0 +1,2 @@
+middle printed budgets passed with v_* = 13/1000
+exterior scalar checks passed for 1/(6n), r/(6n), and W/4
