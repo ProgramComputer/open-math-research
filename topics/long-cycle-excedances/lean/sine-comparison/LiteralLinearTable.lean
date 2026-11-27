@@ -31,11 +31,38 @@ private def linearWeights (c : ℚ) : Array ℕ :=
 
 private def linearHeadIndex (q : ℤ) : Fin 64 := ⟨(q+32).toNat%64, Nat.mod_lt _ (by decide)⟩
 
-private def linearHeadPoles : Finset ℤ := Icc (-32) 31
-private def linearCenters : Finset ℤ := Icc (-33) 32
+private def linearNonnegativeInterval (count : ℕ) (start : ℤ) : Finset ℤ :=
+  (range count).map ⟨fun j : ℕ => start+(j:ℤ), fun _ _ h => by exact_mod_cast add_left_cancel h⟩
 
-private theorem linearHeadPoles_eq : linearHeadPoles = signedHead 31 := rfl
-private theorem linearCenters_eq : linearCenters = signedCenters 31 := rfl
+private theorem mem_linearNonnegativeInterval (count : ℕ) (start q : ℤ) :
+    q ∈ linearNonnegativeInterval count start ↔ start ≤ q ∧ q < start+(count:ℤ) := by
+  rw [linearNonnegativeInterval,mem_map]
+  constructor
+  · rintro ⟨j,hj,rfl⟩
+    have hh := mem_range.mp hj
+    change start ≤ start+(j:ℤ) ∧ start+(j:ℤ) < start+(count:ℤ)
+    omega
+  · intro h
+    let j := (q-start).toNat
+    have hj : (j:ℤ)=q-start := Int.toNat_of_nonneg (by omega)
+    refine ⟨j,mem_range.mpr (by omega),?_⟩
+    change start+(j:ℤ)=q
+    omega
+
+private def linearHeadPoles : Finset ℤ := linearNonnegativeInterval 64 (-32)
+private def linearCenters : Finset ℤ := linearNonnegativeInterval 66 (-33)
+
+private theorem linearHeadPoles_eq : linearHeadPoles = signedHead 31 := by
+  ext q
+  simp only [linearHeadPoles,mem_linearNonnegativeInterval,signedHead,mem_Icc]
+  norm_num
+  omega
+
+private theorem linearCenters_eq : linearCenters = signedCenters 31 := by
+  ext q
+  simp only [linearCenters,mem_linearNonnegativeInterval,signedCenters,mem_Icc]
+  norm_num
+  omega
 
 def linearHead (c : ℚ) : ℕ :=
   let W := linearWeights c
