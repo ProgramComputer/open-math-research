@@ -1,6 +1,6 @@
 # Identifying the all-degree numerator series
 
-Put $r=\sqrt{s^2+\pi^2}$ for $s\ge0$ and $p_\ell=s+(2\ell+1)\pi i$. Let $c_0=0$, $c_1=r/(1+e^s)$ and $c_j=-\sum_\ell(r/p_\ell)^j/j$ for $j\ge2$. These are the normalized coefficients used in the small-height numerator estimate. For every complex $z$ with $|z|<1$ the claimed identity is
+Put $r=\sqrt{s^2+\pi^2}$ for $s\ge0$ and $p_\ell=s+(2\ell+1)\pi i$. Let $c_0=0$, $c_1=r/(1+e^s)$ and $c_j=-\sum_\ell(r/p_\ell)^j/j$ for $j\ge2$. These are the normalized coefficients used in the small-height numerator estimate. For every complex $z$ with $|z|<1$ the series sums absolutely and satisfies
 
 $$
 \sum_{j\ge0}c_j z^j=\log(1+e^{rz-s})-\log(1+e^{-s}).
@@ -18,7 +18,7 @@ The mean-value inequality applied on that disk gives uniform convergence of the 
 
 ## Verification record
 
-The analytic argument and identification with the actual normalized coefficient definition compiled on Lean 4.19.0, mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. At that stage the final theorem has two hypotheses from the supplying proof, the real-ray formula and inverse-square summability. The production adapter discharges these using the frozen real-axis release and full odd lattice on Lean 4.33.1, compiler `819816b2e0a3bf405af45ae5c7af2491d8f5bee6`, mathlib `0df444a360eaa60ab8c11dca51a86af692955474`. The hosted audit of the composed theorem is pending. [Original theorem](FourierOriginalLogSeries.lean) · [Real-axis source](README.md) · [Small-height estimate](../fourier-circle/numerator-small-height-verification.md)
+The analytic argument and identification with the actual normalized coefficient definition compiled on Lean 4.19.0, mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`. At that stage the final theorem has two hypotheses from the supplying proof, the real-ray formula and inverse-square summability. The production adapter discharges these using the frozen real-axis release and full odd lattice on Lean 4.33.1, compiler `819816b2e0a3bf405af45ae5c7af2491d8f5bee6`, mathlib `0df444a360eaa60ab8c11dca51a86af692955474`. The [production rebuild](https://github.com/ProgramComputer/open-math-research/actions/runs/46015393010) matched all 20 repository inputs at `b567c86d81fea475e488e6ba7110ae3c9ba1b75e`. All 26 named transitive axiom reports used only `propext`, `Classical.choice` and `Quot.sound`. The bundled checker replayed 16 modules, including `FourierOriginalLogSeries`. The final `original_log_series_hasSum` needs only nonnegative height and a point in the open unit disk. The [separate Fourier inventory](https://github.com/ProgramComputer/open-math-research/actions/runs/46015392740) also passed. [Original theorem](FourierOriginalLogSeries.lean) · [Real-axis source](README.md) · [Small-height estimate](../fourier-circle/numerator-small-height-verification.md)
 
 From the repository root, use the production toolchain and a fresh output directory.
 

@@ -27,4 +27,4 @@ The continuation argument extends the squared-pole identity from the real ray to
 
 The same package checks the [original cutoff logarithm coefficients](original-log.md) at the linear term and every retained nonlinear term.
 
-The all-degree coefficients in the numerator comparison have a proposed identification with the analytic logarithm throughout the nearest-pole disk. [Argument and verification record](analytic-log-series.md)
+The all-degree coefficients in the numerator comparison sum absolutely to the analytic logarithm throughout the nearest-pole disk. [Argument and verification record](analytic-log-series.md)
