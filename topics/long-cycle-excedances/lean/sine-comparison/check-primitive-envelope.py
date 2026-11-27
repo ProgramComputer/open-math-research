@@ -13,6 +13,8 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 ROOTS = (
+    "LinearSlabs",
+    "LiteralLinearTable",
     "BivariateBin",
     "DiscreteOddTail",
     "DyadicStarCertificate",
@@ -30,6 +32,12 @@ ROOTS = (
 )
 NAMESPACE = "OpenMathResearch.LongCycleExcedances."
 AUDITED = (
+    "linearHead_upper",
+    "linearTail_upper",
+    "linearTable_rounding",
+    "linearSlabInputs",
+    "literal_slab_linear_envelope_of_spec",
+    "original_slab_linear_envelope",
     "markedMultiple_eq",
     "marked_bin_bounds",
     "coeff_markDegreeBin",

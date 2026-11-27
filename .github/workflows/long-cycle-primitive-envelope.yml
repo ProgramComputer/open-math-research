@@ -55,6 +55,13 @@ jobs:
           folder=topics/long-cycle-excedances/lean/sine-comparison
           python3 -BI "$folder/verify-linear.py" > "$RUNNER_TEMP/linear-output.txt"
           diff -u "$folder/linear-output.txt" "$RUNNER_TEMP/linear-output.txt"
+      - name: Evaluate the proved linear table and compare every entry
+        run: |
+          set -euo pipefail
+          folder="$GITHUB_WORKSPACE/topics/long-cycle-excedances/lean/sine-comparison"
+          cd "$RUNNER_TEMP/common-pin"
+          lake env lean "$folder/EvalLinearTable.lean" > "$RUNNER_TEMP/linear-lean-output.txt"
+          python3 -BI "$folder/compare-linear-table.py" "$RUNNER_TEMP/linear-lean-output.txt"
       - name: Preserve verification report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -63,4 +70,5 @@ jobs:
           path: |
             ${{ runner.temp }}/primitive-envelope.log
             ${{ runner.temp }}/linear-output.txt
+            ${{ runner.temp }}/linear-lean-output.txt
           retention-days: 30
