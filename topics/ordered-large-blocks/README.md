@@ -65,3 +65,5 @@ In the [shared Lean project](../../shared/lean/README.md), run `lake build Order
 Giving every block the same positive weight can destroy real-rootedness already in degree two. The first critical weight at size $2j$ is asymptotic to $\sqrt{\pi j}(4/9)^j/4$. [Proof and integer certificates for the weighted obstruction](block-weight/README.md)
 
 [Finite-alphabet renewal states](finite-alphabet-states/README.md) gives a conditional interlacing update for the normalized long states and exact obstructions to extending it by a split compatibility argument.
+
+A proposed argument covers every consecutive pair with a quadratic old row, including the first step into degree three. [Proof and exact checks](quadratic-rows/README.md)
