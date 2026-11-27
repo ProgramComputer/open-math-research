@@ -29,17 +29,19 @@ private theorem circle_coefficient_fourier (f : ℂ → ℂ) {R : ℝ} (hR : 0 <
       fun x : ℝ => (I/(R:ℂ)^n) * (circleWave (-(n:ℤ)) x * f (circleMap 0 R x)) := by
     funext x
     rw [deriv_circleMap, smul_eq_mul]
-    rw [pow_succ, div_mul_eq_div_div, mul_comm _ I, ←mul_assoc]
-    rw [←mul_div_assoc]
-    field_simp [hp0 x]
-    have hwave : circleWave (-(n:ℤ)) x * (exp ((x:ℂ)*I))^n = 1 := by
-      rw [← he, inv_pow, inv_mul_cancel₀ (pow_ne_zero _ (exp_ne_zero _))]
-    have hw : (circleMap 0 R x)^n = (R:ℂ)^n*(exp ((x:ℂ)*I))^n := by rw [hp,mul_pow]
-    rw [hw]
-    calc
-      _ = I * f (circleMap 0 R x) * circleMap 0 R x * (R:ℂ)^n := by ring
-      _ = _ := by
-        linear_combination (-(I * f (circleMap 0 R x) * circleMap 0 R x * (R:ℂ)^n)) * hwave
+    let w := circleMap 0 R x
+    change (w*I) * (f w / w^(n+1)) =
+      (I/(R:ℂ)^n) * (circleWave (-(n:ℤ)) x * f w)
+    have hcancel : (w*I) * (f w / w^(n+1)) = I*(w⁻¹)^n*f w := by
+      rw [pow_succ, div_eq_mul_inv, mul_inv_rev, ←inv_pow]
+      calc
+        _ = (w*w⁻¹)*(I*(w⁻¹)^n*f w) := by ring
+        _ = _ := by rw [mul_inv_cancel₀ (hp0 x), one_mul] <;> ring
+    have hpow : (w⁻¹)^n = ((R:ℂ)^n)⁻¹ * circleWave (-(n:ℤ)) x := by
+      dsimp only [w]
+      rw [hp,mul_inv_rev,mul_pow,he,inv_pow,mul_comm]
+    rw [hcancel,hpow,div_eq_mul_inv]
+    ring
   unfold circleIntegral normalizedFourierIntegral
   rw [hfun, intervalIntegral.integral_const_mul]
   field_simp [hR',hpi]

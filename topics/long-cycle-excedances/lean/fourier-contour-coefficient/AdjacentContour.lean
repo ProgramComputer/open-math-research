@@ -1,4 +1,6 @@
-import LogisticContour
+import Mathlib.Analysis.Complex.Basic
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.Ring
 
 set_option autoImplicit false
 noncomputable section

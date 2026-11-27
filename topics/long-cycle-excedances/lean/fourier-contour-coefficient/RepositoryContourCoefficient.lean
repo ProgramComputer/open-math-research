@@ -1,4 +1,5 @@
 import AdjacentContour
+import LogisticContour
 import ScalarLogisticTaylor
 import FourierAnchoredLogistic
 import FourierRealAxis

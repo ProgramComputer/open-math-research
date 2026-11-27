@@ -39,22 +39,8 @@ def stage_fourier_shift(project):
     STABLE["build_local"](project, target, "FourierCircleShift", ())
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("project", type=Path)
-    parser.add_argument("--retained-imports", type=Path)
-    args = parser.parse_args()
-    project = args.project.resolve()
-    imports = args.retained_imports.resolve(strict=True) if args.retained_imports else None
-    STABLE["main"](project, True, imports)
-
-    def support(folder, module):
-        STABLE["build_local"](project, HERE.parent / folder / (module + ".lean"), module, ())
-
-    support("common-pin", "TiltAnalyticEvaluation")
-    stage_fourier_shift(project)
-    for module in ANALYTIC:
-        support("fourier-stable", module)
+def compile_contour_coefficients(project):
+    """Compile and replay the contour declarations in a prepared common-pin project."""
     count = 0
     failed = set()
     for module in MODULES:
@@ -73,6 +59,26 @@ def main():
     if failed:
         raise RuntimeError(f"Incomplete contour checks: {sorted(failed)}")
     print(f"PASS: {count} contour coefficient declarations audited", flush=True)
+    return count
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("project", type=Path)
+    parser.add_argument("--retained-imports", type=Path)
+    args = parser.parse_args()
+    project = args.project.resolve()
+    imports = args.retained_imports.resolve(strict=True) if args.retained_imports else None
+    STABLE["main"](project, True, imports)
+
+    def support(folder, module):
+        STABLE["build_local"](project, HERE.parent / folder / (module + ".lean"), module, ())
+
+    support("common-pin", "TiltAnalyticEvaluation")
+    stage_fourier_shift(project)
+    for module in ANALYTIC:
+        support("fourier-stable", module)
+    compile_contour_coefficients(project)
 
 
 if __name__ == "__main__":
