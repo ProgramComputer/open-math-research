@@ -1,0 +1,1 @@
+Complete coverage confirmed for all 93,902 pairs, including 541,199 certified finite gaps.

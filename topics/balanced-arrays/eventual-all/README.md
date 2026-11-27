@@ -8,7 +8,7 @@ Per Alexandersson’s original conjecture asks for real-rootedness at every row 
 
 **Fixed-profile review.** An anonymous, agent-assisted independent referee checked the fixed-profile enumeration formula. [Fixed-profile referee report](fixed-profile-review.md) [Editorial follow-up to both reports](editorial.md)
 
-**Formal verification**　🟨 Partial · Lean 4. The research build verifies the exact coefficient support and degree directly from labeled arrays, the one-column identity, and the transfer from an ordered alternating sign sequence to the full multiset of simple negative complex roots. Constructing that sign sequence uniformly remains open in Lean. [Checked components, pins and axiom reports](lean/README.md)
+**Formal verification**　🟨 Partial · Lean 4. The research build verifies the exact coefficient support and degree directly from labeled arrays, the one-column identity, and the transfer from an ordered alternating sign sequence to the full multiset of simple negative complex roots. For proper caps it also checks the continuity and endpoint limits of the actual occupied-cell phase, the resulting strictly ordered first-hit radii, and the unconditional quantitative tilt bound using the verified truncated-binomial variance estimates. The analytic signs and the joins between geometric and phase radii needed to construct the complete sign sequence uniformly remain outside Lean. [Checked components, pins and axiom reports](lean/README.md)
 
 ## Proof and supporting estimates
 

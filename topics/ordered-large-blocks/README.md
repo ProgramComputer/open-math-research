@@ -2,7 +2,19 @@
 
 Give an ordered set partition of $[n]$ weight $t^k$ when exactly $k$ blocks have size at least $j$. Write $O_{n,j}(t)$ for the sum.
 
-**Theorem.** For each fixed $j\ge2$, every sufficiently large row has only simple negative zeros and strictly interlaces its successor. The distribution of the zero moduli has an explicit limit with uniform error $O_j(1/n)$. For $j=2,3,4$, strict interlacing holds in every size. The general proof leaves the cutoff dependent on $j$ and undetermined. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsSetPartitions)
+For every threshold, all consecutive pairs with a linear old row strictly interlace in the specified direction, including the first step into degree two. [Proof, exact checks and the continuous-age calculation](first-degree-increase/README.md)
+
+**Theorem.** For each fixed $`j\ge2`$, every sufficiently large row has only simple negative zeros and strictly interlaces its successor. The distribution of the zero moduli has an explicit limit with uniform error $`O_j(1/n)`$. For $`j=2,3,4`$, strict interlacing holds in every size. The fixed-threshold proof has an undetermined cutoff that may depend on $`j`$. [Original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#openProblemsSetPartitions)
+
+**Reviewed partial theorem.** One eventual old-size cutoff suffices for simple negative zeros and strict consecutive interlacing at all thresholds and ranks. The cutoff is existential. Formal verification is ⬜ None. A fresh-context mathematical review checked the complete assembly. [Uniform eventual proof package](uniform-eventual/README.md)
+
+At every size, ordered partitions satisfy a fractional Newton inequality with top parameter $n/j$, and their tilted large-block counts admit a coupling with jumps at least $j$ positions apart. The Newton inequality has the exact polynomial degree whenever $j$ divides $n$. [Coefficient theorem, proof and checks](likelihood-ratio/README.md)
+
+Every consecutive pair with cubic or quartic old row strictly interlaces. Together with the earlier low-degree theorem this covers every old size $n<5j$ at all thresholds. [Uniform certificates and independent review](bounded-degree/README.md)
+
+An explicit range allows the old degree to grow with the block threshold. The written bound and the rational constructor both give an explicit cutoff for each old degree. [Growing-degree theorem and checks](effective-degree/README.md)
+
+The [structural obstructions](structural-obstructions/README.md) delimit two all-size approaches using exact renewal determinants and geometric occupancy prefixes.
 
 | Threshold | Proof and verification |
 |---|---|
@@ -12,6 +24,10 @@ Give an ordered set partition of $[n]$ weight $t^k$ when exactly $k$ blocks have
 | Every fixed $j\ge2$ | [Eventual strict interlacing and distribution](all-fixed-thresholds.md) · [Proof of the outer root count](fixed-threshold-outer-interface.md) · [Manuscript](all-fixed-thresholds.pdf) · [Source](all-fixed-thresholds.tex) |
 | Threshold and degree both growing | [Proposed partial theorem for the smallest-modulus zeros](joint-inner-zeros.md) · [Bounded proportional window](proportional-window.md) |
 | Edges at every threshold | [Sharp zero-free interval for every row](lower-spectral-edge.md) · [Strict interlacing for an initial positive fraction in sufficiently large rows](fixed-threshold-inner-zeros.md) · [Outermost complex zeros and their scales](fixed-threshold-outer-zeros.md) |
+
+For each fixed number of outer ranks, a single old-size cutoff works for every threshold. Beyond it, those available roots are simple and negative, and the old and new outer ranks alternate strictly in the order determined by the degree step. Formal verification of this result is ⬜ None. [Uniform outer ranks, proof and independent checks](outer-ranks/README.md)
+
+Two further joint-growth regimes give strict interlacing at growing outer ranks. The theta limit gives an explicit ratio of neighboring moduli, and the pole comparison covers larger defects when both $h/\sqrt m$ and $hj/m$ tend to infinity. Formal verification is ⬜ None. [Growing outer ranks, proofs and reviews](growing-outer-ranks/README.md)
 
 The proposed joint-growth argument gives an interval containing a positive fraction of the smallest-modulus zeros, all simple and negative, with strict consecutive interlacing when both $j$ and $n/j$ are sufficiently large. It also gives the sharp first-zero scale. For each fixed $K$, the first $K$ ranks by modulus, or all available ranks if the degree is smaller, have this property outside a finite set of pairs $(j,n)$. The upper comparison is omitted at the last available rank if the next row has the same degree. The original all-size conjecture remains open in general. This is a proposed partial theorem under review. [Joint-growth argument](joint-inner-zeros.md) · [Research issue #1](https://github.com/ProgramComputer/open-math-research/issues/1)
 
@@ -51,3 +67,9 @@ python -I -O topics/ordered-large-blocks/code/threshold_four_independent.py topi
 In the [shared Lean project](../../shared/lean/README.md), run `lake build OrderedThresholdTwoSigns OrderedThresholdTwoPhase OrderedThresholdThreeSigns OrderedGlobalAngular OrderedThresholdFourSigns`.
 
 [Production matrices and Toeplitz kernels](production-obstructions.md) records exact obstructions to a fixed transition, its canonical Riordan lift, and component-kernel total positivity.
+
+Giving every block the same positive weight can destroy real-rootedness already in degree two. The first critical weight at size $2j$ is asymptotic to $\sqrt{\pi j}(4/9)^j/4$. [Proof and integer certificates for the weighted obstruction](block-weight/README.md)
+
+[Finite-alphabet renewal states](finite-alphabet-states/README.md) gives a conditional interlacing update for the normalized long states and exact obstructions to extending it by a split compatibility argument.
+
+The reviewed theorem covers every consecutive pair with a quadratic old row, including the first step into degree three. [Proof and exact checks](quadratic-rows/README.md)

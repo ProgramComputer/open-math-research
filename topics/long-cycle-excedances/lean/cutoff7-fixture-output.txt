@@ -1,0 +1,2 @@
+n=14, k=7: matched 13 exact coefficients and both endpoint signs.
+n=15, k=7: matched 14 exact coefficients and both endpoint signs.

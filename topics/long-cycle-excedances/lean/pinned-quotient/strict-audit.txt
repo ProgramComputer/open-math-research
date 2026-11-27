@@ -1,0 +1,15 @@
+GitHub Actions run 45918517895, audit job
+https://github.com/ProgramComputer/open-math-research/actions/runs/45918517895
+Checked commit 3d966c5701e57574f2d82748d4b269817fdc3405
+Selected audit lines, with timestamps removed
+
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+fa33e1464e91ca21444e571c1de43b9b21b3c25a5b289b9b4966f3cf6c3a5e21 RepositoryQuotientAdapter.lean
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+'RepositoryQuotientAudit.exact_coeff_eq_quotient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.exact_coeff_eq_original' depends on axioms: [propext, Classical.choice, Quot.sound]
+cutoff seven, size 14: all 13 fixture coefficients match
+cutoff seven, size 15: all 14 fixture coefficients match
+kernel_replay_exit=0 LongCycleBounds.GeneralCycleQuotient
+kernel_replay_exit=0 LongCycleFinite.CoefficientRows
+PASS: 65 project modules replayed; 2 declarations audited.

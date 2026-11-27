@@ -1,0 +1,9 @@
+# Middle signs from size 1,000 through aspect 7.5
+
+At each threshold $`k`$ and old size $`n\ge1{,}000`$ with $`4\le n/k\le15/2`$, put $`t=-\exp(-\pi\cot\theta)`$ and $`S=\sin\theta`$. The [published joint-vector criterion](../degree-blocks/README.md) gives the old integer sample signs in the half-axis range $`nS^2\ge6/5`$, and both signed insertion signs at every old root in that range. In particular the actual next row has the required middle signs. This statement concerns the angular middle.
+
+Use intervals $`[\ell,X]=[i/4,(i+1)/4]`$ for integers $`16\le i\le29`$. In the degree-block majorants set $`K=\lceil1{,}000/X\rceil`$, bound $`A=kS\ge\sqrt{1200}/X`$ from below on a hundredth grid, and keep the signed odd lattice through modulus 81 with outward rounding on a $`2^{-60}`$ grid. All $`K\ge134`$, so the cycle probability bounds requiring $`K\ge100`$ apply.
+
+Use the ordinary kernel exponent $`E=\lfloor(K-1)/2\rfloor`$ and off-diagonal exponent $`F=\lfloor E/2\rfloor`$. Bernoulli gives the kernel $`(1+c(p^2-1))^{-e}`$ if the exponent in the original power of $`\rho_p`$ is at least $`2e`$ and its product with $`S^2`$ is at least $`2ec`$. In particular the off-diagonal factor uses $`\rho_p^{r/2}`$ with $`r\ge K\ge4F`$. Thus the general weighted tail at lattice endpoint $`P`$ is $`(1+c(P^2-1))^{1-e}/(2c(e-1))`$ when $`(2e-1)cP^2>1-c`$. The off-diagonal factor outside the kernel is at most $`|p|/\sqrt{1{,}000}`$. Its checker upper bound uses $`\lfloor\sqrt{1{,}000}\rfloor`$ in the denominator. The old single-pole pair's nonprincipal tail norm, scaled by $`kd_n`$, is below $`0.038`$ on every slab by the same lattice estimate.
+
+The replay certifies a disk margin above $`28/1000`$ on all fourteen slabs. Run the standalone [checker](check-narrow.py) with `python3 -I -B check-narrow.py`. [Exact output](narrow-output.txt)

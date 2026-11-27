@@ -1,0 +1,18 @@
+'OpenMathResearch.LongCycleExcedances.signed_pos_on_window_of_horner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.cutoff7_next_negative_on_window' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.cutoff7_first_window_14_15' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.interlace_of_prefix_and_mixed_witnesses' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.abs_eval_sub_prefix_le_tail' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.signed_eval_pos_of_prefix_margin' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

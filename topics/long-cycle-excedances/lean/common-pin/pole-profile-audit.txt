@@ -1,0 +1,14 @@
+GitHub Actions run 45928282511, audit job
+https://github.com/ProgramComputer/open-math-research/actions/runs/45928282511
+Checked adapter commit 27a15ac
+Selected audit lines, with timestamps removed
+
+Frozen upstream source 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Reused verified 65-module archive sha256=000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05
+Compile RepositoryPoleProfile input-sha256=7e72b2b2131f4f84ea089eebd1768bc207e1f52b319d823d2b78fe18a5675e3e
+'RepositoryQuotientAudit.original_normalized_pole_profile' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_nonprincipal_profile_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+kernel_replay_exit=0 RepositoryPoleProfile
+PASS: 18 declarations audited

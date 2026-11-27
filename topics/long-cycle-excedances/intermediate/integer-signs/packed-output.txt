@@ -1,0 +1,24 @@
+part-01.csv.gz 1.26
+part-02.csv.gz 2.66
+part-03.csv.gz 4.22
+part-04.csv.gz 5.91
+part-05.csv.gz 7.67
+part-06.csv.gz 9.65
+part-07.csv.gz 11.66
+part-08.csv.gz 13.84
+part-09.csv.gz 16.05
+part-10.csv.gz 18.28
+part-11.csv.gz 20.75
+part-12.csv.gz 23.15
+part-13.csv.gz 25.68
+part-14.csv.gz 28.3
+part-15.csv.gz 31.11
+part-16.csv.gz 34.18
+part-17.csv.gz 37.6
+part-18.csv.gz 41.44
+part-19.csv.gz 45.98
+part-20.csv.gz 51.62
+part-21.csv.gz 64.07
+part-22.csv.gz 64.07
+pairs=82395 gaps=541199 exact_signs=2164796 sharp_tail=28 exact_prefix=0
+63014205 8f8115d4f203840560dd74f7cf12654d0bca00561c8ff473f27ed6af3f20a73e seconds 68.22

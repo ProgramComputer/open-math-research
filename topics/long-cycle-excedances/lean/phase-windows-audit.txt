@@ -1,0 +1,20 @@
+GitHub Actions run 45926344480, audit job
+https://github.com/ProgramComputer/open-math-research/actions/runs/45926344480
+Checked commit 482f6c4380acc241c50aaa629e971a362204db6b
+Selected audit lines, with timestamps removed
+
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Reused verified 65-module archive sha256=000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05
+Compile OpenMathResearch/FirstLevelHits input-sha256=2418bebdd924597b077e3ce0235267046ab9976a592057695c12b97c68d5dbc3
+'OpenMathResearch.FirstLevelHits.exists_firstLevelHitOn' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OpenMathResearch.FirstLevelHits.exists_lastLower_before_firstUpper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Compile LongCyclePhaseWindows input-sha256=dbe5ef2d061f695e8fbadfca8bc35ab6be9de80dac02341f129ba8d433c0a916
+'OpenMathResearch.LongCycleExcedances.singleton_windows_of_phase' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+kernel_replay_exit=0 OpenMathResearch.FirstLevelHits
+kernel_replay_exit=0 LongCyclePhaseWindows
+PASS: 16 declarations audited

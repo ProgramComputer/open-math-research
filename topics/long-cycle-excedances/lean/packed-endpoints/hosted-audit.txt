@@ -1,0 +1,57 @@
+Combined GitHub Actions run 45930492151, job 140281734205, succeeded 2026-11-27 UTC.
+https://github.com/ProgramComputer/open-math-research/actions/runs/45930492151
+Pinned source eb759868c47d885933af7c6f01265de654c4d738.
+Lean 4.33.1, compiler 819816b2e0a3bf405af45ae5c7af2491d8f5bee6.
+mathlib revision 0df444a360eaa60ab8c11dca51a86af692955474.
+The underlying four compact-row modules rebuilt with 20 axiom reports.
+The following five numerical modules added 12 reports and five successful replays.
+
+Compile RoundedHorner sha256=024c1645e91a8e54d1a9e563117b784e7f974c689cd36d9249940875109eb02c
+'OpenMathResearch.LongCycleExcedances.IntegerSign.roundedRatio_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.IntegerSign.rounded_error' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.IntegerSign.signed_lower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.IntegerSign.horner_first' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+replaying RoundedHorner
+kernel_replay_exit=0 RoundedHorner
+Compile IntegerTail sha256=54087397cba42da15554f17b06e973774656903b865ef1b5f3f311d5d71b6742
+'OpenMathResearch.LongCycleExcedances.IntegerSign.integer_tail_margin' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+replaying IntegerTail
+kernel_replay_exit=0 IntegerTail
+Compile PositiveCeilHorner sha256=5971e6b21b8a10c2e89c7b714de620882526c800189c9085bd256c0685f9e2b8
+'OpenMathResearch.LongCycleExcedances.IntegerSign.compressed_integer_margin' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.IntegerSign.upperHorner_cons' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.IntegerSign.horner_positive_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.IntegerSign.uncertainty_upper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'OpenMathResearch.LongCycleExcedances.IntegerSign.compressed_lower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+replaying PositiveCeilHorner
+kernel_replay_exit=0 PositiveCeilHorner
+Compile CompactPoint sha256=ffbaa85ee85ac4b25cfef263698156d8fff6d9fbacd4900f448858952a81998f
+'OpenMathResearch.LongCycleExcedances.IntegerSign.original_signed_of_packed_margin' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+replaying CompactPoint
+kernel_replay_exit=0 CompactPoint
+Compile RepositoryPackedPoint sha256=174e85a0b223e0b8d420b3ef7a734e422277cb574b2e6ebba46fd31e61082f55
+'RepositoryQuotientAudit.original_signed_of_packed_words' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying RepositoryPackedPoint
+kernel_replay_exit=0 RepositoryPackedPoint

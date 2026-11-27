@@ -1,0 +1,23 @@
+GitHub Actions run 45921839840, audit job
+https://github.com/ProgramComputer/open-math-research/actions/runs/45921839840
+Checked commit ffb40adf86115ed42a9c9ed429a7be8ed9b25be3
+Selected audit lines, with timestamps removed
+
+Frozen upstream source 46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554
+Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Reused verified 65-module archive sha256=000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05
+Compile RationalPointSound input-sha256=47a65a8c0823317c45f231fd56c66fff9c90234865886a53ec3ea366dff7405f
+Compile RepositoryQuotientShape input-sha256=a5b038dc449865b1910899ba5a509f63611455f2ba532568587467c8d10550fe
+'RepositoryQuotientAudit.generalCycleQuotient_eq_divX' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_divX_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.exact_coeff_eq_divX' depends on axioms: [propext, Classical.choice, Quot.sound]
+Compile RepositoryActualRationalPoint input-sha256=29881b1f988f2d7a90931ab8364d83dbc474f6a03ce8a348f9659d10f8023751
+'RepositoryQuotientAudit.canonical_eq_external_divX' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RepositoryQuotientAudit.original_signed_point_of_rational_margin' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+kernel_replay_exit=0 RationalPointSound
+kernel_replay_exit=0 RepositoryQuotientShape
+kernel_replay_exit=0 RepositoryActualRationalPoint
+PASS: 5 original-row declarations audited
