@@ -25,7 +25,7 @@ theorem original_logistic_coefficient (n k : ℕ) (hk : 2 ≤ k) (t : ℝ)
   apply (eq_div_iff (mul_ne_zero (pow_ne_zero _ ht) hf)).mpr
   have hcross := (eq_div_iff (mul_ne_zero (pow_ne_zero _ ht) hf)).mp heq
   unfold coherentTilt
-  rw [pow_succ]
+  rw [mul_assoc, pow_succ]
   linear_combination hcross
 
 /-- Past degree one, the logarithm removes exactly the inadmissible cycle moments. -/
@@ -38,7 +38,7 @@ theorem original_rescaled_logTilt_coeff (k a : ℕ) (t : ℝ) :
   · simp [ha, not_le_of_gt ha]
   · have h₂ : 2 ≤ a := le_of_not_gt ha
     by_cases hk : a < k
-    · simp [ha, h₂, hk, profile, Band.moment, div_pow]
+    · simp [ha, h₂, hk, profile, Band.moment]
       ring
     · simp [ha, h₂, hk, profile]
 
@@ -86,10 +86,10 @@ private theorem logistic_coeff_zero (t : ℝ) :
     coeff 0 (logistic t) = 1/(1-t) := by simp [logistic, logisticMoment]
 
 private theorem finite_to_pole_sum (T : PowerSeries ℝ) (x : ℝ) {n q : ℕ} (hnq : n ≤ q) :
-    (∑ j ∈ range n, (coeff j T : ℂ) * oddPoleSum (q-j+1) x) =
-      ∑' l : ℤ, ∑ j ∈ range n, (coeff j T : ℂ) * (1 / coherentPole x l ^ (q-j+1)) := by
+    (∑ j ∈ range n, ((coeff j T : ℝ) : ℂ) * oddPoleSum (q-j+1) x) =
+      ∑' l : ℤ, ∑ j ∈ range n, ((coeff j T : ℝ) : ℂ) * (1 / coherentPole x l ^ (q-j+1)) := by
   have hs (j : ℕ) (hj : j ∈ range n) :
-      Summable (fun l : ℤ => (coeff j T : ℂ) * (1 / coherentPole x l ^ (q-j+1))) :=
+      Summable (fun l : ℤ => ((coeff j T : ℝ) : ℂ) * (1 / coherentPole x l ^ (q-j+1))) :=
     (summable_coherentPole_pow x (by have := mem_range.mp hj; omega)).mul_left _
   rw [Summable.tsum_finsetSum hs]
   apply sum_congr rfl
@@ -102,7 +102,7 @@ absolutely convergent sum carries the same truncated multiplier at each pole. -/
 theorem coherent_product_coefficient (T : PowerSeries ℝ) (x : ℝ) (hx : 0 ≤ x) (n : ℕ) :
     ((coeff n (T * logistic (-Real.exp (-x))) : ℝ) : ℂ) =
       ((coeff n T / (1 + Real.exp (-x)) : ℝ) : ℂ) +
-        ∑' l : ℤ, ∑ j ∈ range n, (coeff j T : ℂ) * (1 / coherentPole x l ^ (n-j+1)) := by
+        ∑' l : ℤ, ∑ j ∈ range n, ((coeff j T : ℝ) : ℂ) * (1 / coherentPole x l ^ (n-j+1)) := by
   rw [coeff_mul, Finset.Nat.sum_antidiagonal_eq_sum_range_succ_mk,
     sum_range_succ, Nat.sub_self, logistic_coeff_zero, Complex.ofReal_add]
   simp only [sub_neg_eq_add, mul_one_div]
@@ -118,8 +118,8 @@ new coefficient has the two separately displayed highest tilt terms. -/
 theorem coherent_successor_coefficient (T : PowerSeries ℝ) (x : ℝ) (hx : 0 ≤ x) (n : ℕ) :
     ((coeff (n+1) (T * logistic (-Real.exp (-x))) : ℝ) : ℂ) =
       ((coeff (n+1) T / (1 + Real.exp (-x)) : ℝ) : ℂ) +
-        (coeff n T : ℂ) * oddPoleSum 2 x +
-        ∑' l : ℤ, ∑ j ∈ range n, (coeff j T : ℂ) * (1 / coherentPole x l ^ ((n+1)-j+1)) := by
+        ((coeff n T : ℝ) : ℂ) * oddPoleSum 2 x +
+        ∑' l : ℤ, ∑ j ∈ range n, ((coeff j T : ℝ) : ℂ) * (1 / coherentPole x l ^ ((n+1)-j+1)) := by
   rw [coherent_product_coefficient T x hx, ← finite_to_pole_sum T x le_rfl, sum_range_succ,
     show n+1-n+1 = 2 by omega, finite_to_pole_sum T x (Nat.le_succ n)]
   ring
@@ -131,11 +131,11 @@ theorem original_coherent_row_pair (n k : ℕ) (hk : 2 ≤ k) (x : ℝ) (hx : 0 
     let T := coherentTilt k t
     (((enumerator n k).eval t / ((1-t)^(n+1)*n.factorial) : ℝ) : ℂ) =
       ((coeff n T / (1 + Real.exp (-x)) : ℝ) : ℂ) +
-        (∑' l : ℤ, ∑ j ∈ range n, (coeff j T : ℂ) * (1 / coherentPole x l ^ (n-j+1))) ∧
+        (∑' l : ℤ, ∑ j ∈ range n, ((coeff j T : ℝ) : ℂ) * (1 / coherentPole x l ^ (n-j+1))) ∧
     (((enumerator (n+1) k).eval t / ((1-t)^(n+1+1)*(n+1).factorial) : ℝ) : ℂ) =
       ((coeff (n+1) T / (1 + Real.exp (-x)) : ℝ) : ℂ) +
-        (coeff n T : ℂ) * oddPoleSum 2 x +
-        ∑' l : ℤ, ∑ j ∈ range n, (coeff j T : ℂ) * (1 / coherentPole x l ^ ((n+1)-j+1)) := by
+        ((coeff n T : ℝ) : ℂ) * oddPoleSum 2 x +
+        ∑' l : ℤ, ∑ j ∈ range n, ((coeff j T : ℝ) : ℂ) * (1 / coherentPole x l ^ ((n+1)-j+1)) := by
   dsimp only
   have hlo : -1 ≤ -Real.exp (-x) :=
     neg_le_neg (Real.exp_le_one_iff.mpr (neg_nonpos.mpr hx))
