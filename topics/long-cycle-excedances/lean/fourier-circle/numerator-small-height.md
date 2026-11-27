@@ -74,3 +74,5 @@ The pinned [Fourier workflow](../../../../.github/workflows/long-cycle-fourier-c
     lake env python3 -I ../../topics/long-cycle-excedances/lean/fourier-circle/check.py
 
 The workflow lists the exact cache modules and checks the axiom reports.
+
+The [verification record](numerator-small-height-verification.md) gives the exact hosted commit, hashes and axiom results.
