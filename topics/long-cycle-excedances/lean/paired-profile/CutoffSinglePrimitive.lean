@@ -39,12 +39,12 @@ theorem cutoff_single_weight {n k lower : ℕ} {d : ℕ → ℝ} (hd : Spec k d)
 
 private theorem cutoff_single_gap (C : ℝ) {S : ℝ} (hS : 0 ≤ S) (q a : ℤ) :
     ‖pairedPoleDenom C S q-pairedPoleDenom C S a‖ =
-      |angularOddNumber q-angularOddNumber a| * S := by
+      |primitiveOddNumber q-primitiveOddNumber a| * S := by
   rw [pairedPoleDenom_sub,norm_mul,norm_mul,Complex.norm_I,one_mul,norm_mul,
     show ‖(2:ℂ)‖ = 2 by norm_num,← Int.cast_sub,Complex.norm_intCast,Complex.norm_real,
     Real.norm_eq_abs,abs_of_nonneg hS]
-  have h : angularOddNumber q-angularOddNumber a = 2*((q:ℝ)-(a:ℝ)) := by
-    unfold angularOddNumber
+  have h : primitiveOddNumber q-primitiveOddNumber a = 2*((q:ℝ)-(a:ℝ)) := by
+    unfold primitiveOddNumber
     ring
   rw [h,abs_mul,abs_of_nonneg (by norm_num : (0:ℝ) ≤ 2), Int.cast_sub]
 
@@ -52,7 +52,7 @@ private theorem cutoff_single_gap (C : ℝ) {S : ℝ} (hS : 0 ≤ S) (q a : ℤ)
 triangle bound retains its genuine degree and all off-diagonal divisors. -/
 def singleCutoffPrimitiveCost (k n : ℕ) (d : ℕ → ℝ) (θ : ℝ) (A : Finset ℤ) : ℝ :=
   ∑ a ∈ A, ((k:ℝ)/sin θ*|numeratorDiff k d k| *
-    ‖angularPairedPole a θ‖^k*|sin ((n:ℝ)*θ)|) *
+    ‖(pairedPoleDenom (cos θ) (sin θ) a)⁻¹‖^k*|sin ((n:ℝ)*θ)|) *
     (∑ q ∈ A.erase a,
       ‖PowerSeries.coeff (R := ℂ) (n+1-k) (occupiedPrimitive k (cos θ) (sin θ) a q)‖)
 
@@ -102,8 +102,8 @@ theorem single_cutoff_primitive_lattice {n k K lower : ℕ} {d : ℕ → ℝ} (h
     have hr := primitive_bin_kernel hK hKk hn hs hX hnX hg hgT hS hU hUs q
     rw [literalPrimitive_norm_formula hk hs _ hS.ne',hb,norm_mul,norm_div,norm_pow,
       Complex.norm_real,Real.norm_eq_abs,cutoff_single_gap _ hS.le]
-    change ‖angularPairedPole q θ‖^(T-1)/
-        (|angularOddNumber q-angularOddNumber a| * sin θ)*|numeratorDiff k d T| ≤ _
+    change ‖(pairedPoleDenom (cos θ) (sin θ) q)⁻¹‖^(T-1)/
+        (|primitiveOddNumber q-primitiveOddNumber a| * sin θ)*|numeratorDiff k d T| ≤ _
     apply (mul_le_mul_of_nonneg_right
       (div_le_div_of_nonneg_right hr (mul_nonneg (abs_nonneg _) hS.le)) (abs_nonneg _)).trans_eq
     dsimp only [oddStarTerm]
@@ -116,13 +116,13 @@ theorem single_cutoff_primitive_lattice {n k K lower : ℕ} {d : ℕ → ℝ} (h
     rw [←mul_sum]
     exact mul_le_mul_of_nonneg_left (hstar a) (div_nonneg (abs_nonneg _) hS.le)
   have houter (a : ℤ) :
-      (k:ℝ)/sin θ*|numeratorDiff k d k| *‖angularPairedPole a θ‖^k*|sin ((n:ℝ)*θ)| ≤
+      (k:ℝ)/sin θ*|numeratorDiff k d k| *‖(pairedPoleDenom (cos θ) (sin θ) a)⁻¹‖^k*|sin ((n:ℝ)*θ)| ≤
         (sin θ)⁻¹*oddBinKernel c₀ a := by
     have hyk : 1/X ≤ (k:ℝ)/n :=
       (div_le_div_iff₀ hX (Nat.cast_pos.mpr hn)).2 (by simpa [mul_comm] using hnX)
     have h := (angular_paired_bernoulli_kernels hn (by omega : 192 ≤ k) a hS
       (by positivity : 0 ≤ 1/X) hyk hU hUs).1
-    have hker : ‖angularPairedPole a θ‖^k ≤ oddBinKernel c₀ a := by
+    have hker : ‖(pairedPoleDenom (cos θ) (sin θ) a)⁻¹‖^k ≤ oddBinKernel c₀ a := by
       have he : 1/X*U/192 = U/(192*X) := by ring
       simpa only [oddBinKernel,c₀,he] using h
     have hbn : |numeratorDiff k d k| = 1/(k:ℝ) := by
@@ -130,7 +130,7 @@ theorem single_cutoff_primitive_lattice {n k K lower : ℕ} {d : ℕ → ℝ} (h
     have he : (k:ℝ)/sin θ*(1/(k:ℝ)) = (sin θ)⁻¹ := by
       field_simp [hkr.ne',hS.ne'] <;> ring
     rw [hbn,he]
-    apply (mul_le_of_le_one_right (by positivity) (abs_sin_le_one _)).trans
+    apply (mul_le_of_le_one_right (by positivity) (abs_le.mpr ⟨neg_one_le_sin _,sin_le_one _⟩)).trans
     exact mul_le_mul_of_nonneg_left hker (by positivity)
   let B := 1/(2*((lower-1).factorial:ℝ))
   have hs₂ : 0 < sin θ^2 := sq_pos_of_pos hS

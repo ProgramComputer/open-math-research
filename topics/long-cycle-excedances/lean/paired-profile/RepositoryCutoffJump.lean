@@ -8,7 +8,7 @@ open Finset Real CycleProbability
 
 def finiteCutoffJump (k n : ℕ) (d : ℕ→ℝ) (θ : ℝ) (A : Finset ℤ) : ℝ :=
   ∑ a ∈ A, ((k:ℝ)/sin θ*|numeratorDiff k d k| *
-    ‖angularPairedPole a θ‖^k*|sin ((n:ℝ)*θ)|) *
+    ‖(pairedPoleDenom (cos θ) (sin θ) a)⁻¹‖^k*|sin ((n:ℝ)*θ)|) *
     ‖PowerSeries.coeff (R := ℂ) (n+1-k) (∏ v ∈ A.erase a,
       (1+occupiedPrimitive k (cos θ) (sin θ) a v))‖
 
@@ -38,7 +38,7 @@ theorem cutoff_jump_split {k n : ℕ} {d : ℕ→ℝ} (hd : Spec k d) (hk : 2 �
   have hsplit : ‖PowerSeries.coeff (R := ℂ) T H‖ ≤ (∑ v ∈ A.erase a, ‖PowerSeries.coeff (R := ℂ) T (F v)‖)+‖M‖ := by
     rw [he]
     exact (norm_add_le _ _).trans (add_le_add hB le_rfl)
-  let ρ := ‖angularPairedPole a θ‖^k
+  let ρ := ‖(pairedPoleDenom (cos θ) (sin θ) a)⁻¹‖^k
   let w := (k:ℝ)/sin θ*|numeratorDiff k d k| *ρ*|sin ((n:ℝ)*θ)|
   have hw : 0 ≤ w := by dsimp [w,ρ]; positivity
   have hkR : 0 < (k:ℝ) := by exact_mod_cast (show 0 < k by omega)
