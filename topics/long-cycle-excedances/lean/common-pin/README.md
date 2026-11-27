@@ -153,4 +153,4 @@ interlacing proof.
 The [successful hosted check](https://github.com/ProgramComputer/open-math-research/actions/runs/45934247139)
 compiled and replayed the seven new modules on Lean 4.33.1.
 The nine new audited declarations use only `propext`, `Classical.choice`
-and `Quot.sound`. [Audit excerpt](high-angle-audit.txt)
+and `Quot.sound`. [Audit excerpt](high-angle-audit.txt) · [Independent scope review](high-angle-review.md)
