@@ -1,4 +1,4 @@
-import Mathlib.Data.Real.Pi.Bounds
+import Mathlib.Analysis.Real.Pi.Bounds
 import Mathlib.Tactic.Positivity
 import Mathlib.Tactic.FieldSimp
 import Mathlib.Tactic.Linarith
@@ -46,12 +46,12 @@ theorem selected_ratio_factor {c q Δ : ℝ} (hc : 0 < c) (hq : 0 < q)
     1+Δ*(1+δ)/δ ≤ 1+(425/98)/c := by
   let δ := (49/100)*(c*q)
   have hd : 0 < δ := by dsimp [δ]; positivity
-  apply add_le_add_left
+  apply add_le_add_right
   apply (div_le_div_iff₀ hd hc).mpr
   calc
     _ ≤ (2*q)*(1+δ)*c := mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_right hΔ (by linarith)) hc.le
     _ ≤ (2*q)*(1+1/16)*c := mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_left (add_le_add_left hδ 1) (by positivity)) hc.le
+      (mul_le_mul_of_nonneg_left (add_le_add_right hδ 1) (by positivity)) hc.le
     _ = _ := by dsimp [δ]; ring
 
 /-- The selected-circle factor is at most 110 throughout the bounded interval

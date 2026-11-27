@@ -1,9 +1,11 @@
 """Check the simultaneous numerator and denominator estimates on the selected circle."""
 import argparse
+from hashlib import sha256
 from pathlib import Path
 import re
 import runpy
 import subprocess
+from tempfile import TemporaryDirectory
 
 HERE = Path(__file__).resolve().parent
 STABLE = HERE.parent / "fourier-stable"
@@ -31,7 +33,20 @@ def compile_amplitude(project):
             failed.add(name)
             continue
         try:
-            DRIVER["build_local"](project, source, name, reports)
+            patch = HERE / "ports" / f"{name}.patch"
+            if patch.is_file():
+                with TemporaryDirectory() as staging:
+                    target = Path(staging) / source.name
+                    data = source.read_bytes()
+                    target.write_bytes(data)
+                    edits = patch.read_bytes()
+                    print(f"Prepare {name} source-sha256={sha256(data).hexdigest()} "
+                          f"patch-sha256={sha256(edits).hexdigest()}", flush=True)
+                    subprocess.run(["patch", "--batch", "--silent", "--fuzz=0", "-p0"],
+                                   input=edits, cwd=staging, check=True)
+                    DRIVER["build_local"](project, target, name, reports)
+            else:
+                DRIVER["build_local"](project, source, name, reports)
         except subprocess.CalledProcessError:
             failed.add(name)
     if failed:
