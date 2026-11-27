@@ -7,3 +7,5 @@ All 125 compiled or evaluated source hashes match the corresponding Git blobs. T
 The independent Python checker at SHA-256 `8cf0eeee96e7eed7d6e663910116147597f9f6a95fe08d6f6c1dfa6c021a1519` reproduced both coefficient arrays in all nine slabs. The `paired-profile.log` console record has SHA-256 `bbee71187cc8657d8171cc00cd6ed3920d35ff956bb7c881d353ea56769b1b23`. The [primitive-envelope run](https://github.com/ProgramComputer/open-math-research/actions/runs/45994848770) passed on the same proof source.
 
 This certificate bounds the product-coefficient recurrence. The four determinant costs and sign proof use additional declarations.
+
+The [combined replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45998741835) passed on `0318cd80573e255b4fdd8a087680cc90674e42c4`, including the cutoff-jump and coarse-moment declarations. All 137 compiled or evaluated Lean inputs match the integrated Git sources. The report contains 133 successful kernel replays and 204 audited declarations, and the independent coarse ledger regeneration passed again. Its console SHA-256 is `41ef969f97c12f688c6dac93ce20b117d0894eb83666a0d1a5d38a8472ad5673`.
