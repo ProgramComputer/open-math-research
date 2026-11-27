@@ -30,7 +30,9 @@ AUDIT = {
     "CheckpointReplay": {"checkpoint_step0", "checkpoint_step251", "checkpoint_first_pair"},
     "FirstPairChecks": {"firstPairRanks"},
     "FirstPairEulerian": {"descentCoeffsSnapshot12"},
-    "FirstPairModel": {"firstPairOldAgrees", "firstPairNewAgrees"},
+    "FirstPairWeights": {"firstPairWeights", "firstPairWeightAgrees"},
+    "FirstPairModel": {"firstPairOriginal"},
+    "FirstPairAgreement": {"firstPair_agreement"},
     "FirstPairArithmetic": {"firstPairAllChecks"},
     "FirstPairOriginal": {"firstPair_original_signs"},
 }
@@ -239,9 +241,9 @@ def main(project, imports, groups=None, pair_objects=None):
     else:
         recover_groups(project, folder, groups)
     source_module(project, folder / "CheckpointReplay.lean")
-    for module in ("FirstPairEulerian", "FirstPairModel", "FirstPairChecks", "FirstPairChecks0", "FirstPairChecks6",
-                   "FirstPairChecks12", "FirstPairChecks18", "FirstPairChecks24",
-                   "FirstPairArithmetic", "FirstPairOriginal"):
+    for module in ("FirstPairEulerian", "FirstPairWeights", "FirstPairChecks", "FirstPairChecks0",
+                   "FirstPairChecks6", "FirstPairChecks12", "FirstPairChecks18", "FirstPairChecks24",
+                   "FirstPairArithmetic", "FirstPairModel", "FirstPairAgreement", "FirstPairOriginal"):
         source_module(project, HERE / (module + ".lean"))
         if pair_objects is not None:
             preserve_module(project, pair_objects, module)

@@ -1,5 +1,5 @@
 import FirstPairArithmetic
-import FirstPairModel
+import FirstPairAgreement
 
 namespace RepositoryQuotientAudit
 open Polynomial LongCycles
@@ -22,8 +22,8 @@ theorem firstPair_original_signs (g : Gap) (hg : g ∈ firstPairGaps) :
     signedAt 252 (-(oldLeftSign g.rank)) g.a ∧ signedAt 252 (-(oldLeftSign g.rank)) g.b := by
   have pass := List.all_eq_true.mp firstPairAllChecks g hg
   obtain ⟨a,b,c,d⟩ := of_decide_eq_true (show firstPairCheck g = true from pass)
-  have old : agrees 61 checkpoint251 (enumerator 251 13) := firstPairOldAgrees
-  have newRow : agrees 61 checkpoint252 (enumerator 252 13) := firstPairNewAgrees
+  have old : agrees 61 checkpoint251 (enumerator 251 13) := firstPair_agreement.1
+  have newRow : agrees 61 checkpoint252 (enumerator 252 13) := firstPair_agreement.2
   exact ⟨signedAt_of_pass (by decide) old _ _ a, signedAt_of_pass (by decide) old _ _ b,
     signedAt_of_pass (by decide) newRow _ _ c, signedAt_of_pass (by decide) newRow _ _ d⟩
 
