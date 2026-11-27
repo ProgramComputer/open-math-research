@@ -74,7 +74,7 @@ theorem odd_lattice_contrast_split (P : ℤ → ℂ)
       div_eq_mul_inv,one_mul,norm_mul,norm_inv] using h
   have htail := lattice_eventually_far P hP (R:=R+1) (by linarith)
   apply circle_contrast_sum P c r C hR x hp (fun l he => hg l ((congrArg norm he).trans hw))
-  · apply Summable.of_norm_bounded_eventually _ (hs.mul_left (‖r‖+‖C‖))
+  · apply summable_of_cofinite_norm_le (hs.mul_left (‖r‖+‖C‖))
     filter_upwards [htail] with l hl
     have hp1 : 1 ≤ ‖P l‖ := by linarith
     have hd : 1 ≤ ‖P l-w‖ := by linarith [norm_sub_norm_le (P l) w]
@@ -84,8 +84,8 @@ theorem odd_lattice_contrast_split (P : ℤ → ℂ)
     change ‖((r/P l-C)*c l)/(P l-w)‖ ≤ _
     rw [norm_div,norm_mul]
     exact (div_le_self (mul_nonneg (norm_nonneg _) (norm_nonneg _)) hd).trans
-      (mul_le_mul_of_nonneg_right ((norm_sub_le _ _).trans (add_le_add_right hr _)) (norm_nonneg _))
-  · apply Summable.of_norm_bounded_eventually _ (hs.mul_left ‖r‖)
+      (mul_le_mul_of_nonneg_right ((norm_sub_le _ _).trans (add_le_add hr le_rfl)) (norm_nonneg _))
+  · apply summable_of_cofinite_norm_le (hs.mul_left ‖r‖)
     filter_upwards [htail] with l hl
     rw [norm_mul,norm_div]
     exact mul_le_mul_of_nonneg_right (div_le_self (norm_nonneg _) (by linarith)) (norm_nonneg _)

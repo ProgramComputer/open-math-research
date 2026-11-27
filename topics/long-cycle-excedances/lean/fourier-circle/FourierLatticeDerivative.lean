@@ -12,7 +12,7 @@ theorem lattice_squared_weights (P d : ℤ → ℂ)
     (hP : ∀ l, (P l).im = (2*(l:ℝ)+1)*π) {R : ℝ} (hR : 0 < R)
     (hs : Summable (fun l => poleWeight (d l) (P l) R)) :
     Summable (fun l => squaredPoleWeight (d l) (P l) R) := by
-  apply Summable.of_norm_bounded_eventually _ hs
+  apply summable_of_cofinite_norm_le hs
   filter_upwards [lattice_eventually_far P hP (R := R+1) (by linarith)] with l hl
   have hpos : 0 ≤ ‖P l‖^2-R^2 := by
     nlinarith [sq_nonneg (‖P l‖-R), mul_nonneg (by linarith : 0 ≤ ‖P l‖-R-1)
