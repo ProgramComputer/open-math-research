@@ -9,11 +9,12 @@ The baseline is the public research release at commit `312293aa850010e9d9509d685
 | [Strict peaks in Catalan words](../../../topics/catalan-word-peaks/verification.json) | Passed, 178 declarations | Passed, 55,664 declarations |
 | [Splitting a prism-slice bound](../../../topics/prism-splitting/verification.json) | Passed, 64 declarations | Passed, 28,385 declarations |
 | [Balanced binary arrays](../../../topics/balanced-arrays/verification.json) | Passed, 30 declarations | Outside the Partial audit |
+| [Marked-row likelihood bounds](../../../topics/balanced-arrays/marked-row-likelihood/lean/README.md#stable-build) | Passed, 22 declarations | Outside the Partial audit |
 | [Ordered partitions with large blocks](../../../topics/ordered-large-blocks/verification.json) | Passed, 30 declarations | Outside the Partial audit |
 | [Eulerian matrix square](../../../topics/eulerian-matrix-square/verification.json) | Passed, 5 declarations | Outside the Partial audit |
 | [Ribbon matroids](../../../topics/ribbon-matroids/verification.json) | Passed, 97 declarations | Passed, 24,717 declarations |
 
-The baseline audit covered 320 named declarations across the six topics, including 13 supporting ribbon-graph declarations. The later ribbon audit checks 97 declarations for the end-to-end theorem. The three Partial rows cover the components identified in their topic records. A separate [upstream source rebuild](https://github.com/ProgramComputer/open-math-research/actions/runs/45762866977/job/139716713982) completed all 5,930 Lake jobs for the 75 distinct direct mathlib imports and their prerequisites. The manifest records 2,671 rebuilt mathlib objects. [Import list](upstream/roots.txt) · [Object hashes](upstream/olean-sha256.txt.gz)
+The original audit covered 320 named declarations across six topics, including 13 supporting ribbon-graph declarations. The table includes the later 97-declaration audit of the full ribbon theorem and the separate 22-declaration marked-row audit. It tracks three Full and four Partial results. The [upstream source rebuild for that baseline](https://github.com/ProgramComputer/open-math-research/actions/runs/45762866977/job/139716713982) completed all 5,930 Lake jobs for the 75 distinct direct mathlib imports and their prerequisites. The manifest records 2,671 rebuilt mathlib objects. [Import list](upstream/roots.txt) · [Object hashes](upstream/olean-sha256.txt.gz)
 
 ## Reproduction
 
@@ -35,9 +36,11 @@ python3 shared/lean/publication/audit_axioms.py "$topic" "$build_dir"
 
 The staging script reads published sources from Git, applies the stable-version ports, and records a SHA-256 digest for each file it hands to Lean. The build compiles the repository modules and their local imports from source. The fast replay fetches exact-version mathlib objects. The separate upstream rebuild compiles the union of the imported mathlib modules and their prerequisites from source. The release toolchain supplies Lean's standard library. [Package audit workflow](../../../.github/workflows/publication-lean.yml) · [Upstream rebuild](../../../.github/workflows/publication-dependencies.yml)
 
-Each named declaration has a fresh `#print axioms` report. The check fails on a missing report or an axiom outside `propext`, `Classical.choice` and `Quot.sound`. A narrower axiom set is recorded verbatim. [Declaration inventory](declarations.json)
+Each named declaration has a fresh `#print axioms` report. The check fails on a missing report or an axiom outside `propext`, `Classical.choice` and `Quot.sound`. A narrower axiom set is recorded verbatim. [Shared audit declaration inventory](declarations.json)
 
-For the three Full entries, use the Linux release's exporter and both checkers. Use a fresh artifact directory. The exported roots include the original public theorem and the separate statement-comparison declarations.
+The marked-row audit uses the same stable toolchain and mathlib pin. Its dedicated `stable/audit.py` script stages the two modules and audits their named declarations after `lake build MarkedPairing ArrayOrientation`. [Marked-row reproduction and archived receipts](../../../topics/balanced-arrays/marked-row-likelihood/lean/README.md#stable-build) · [Marked-row audit workflow](../../../.github/workflows/balanced-marked-row-stable.yml)
+
+For the three Full entries, use the Linux release's exporter and both checkers with `topic` set to `catalan`, `prism`, or `ribbon-foundation`. Use a fresh artifact directory. The exported roots include the original public theorem and the separate statement-comparison declarations.
 
 ~~~sh
 artifact_dir=$(mktemp -d)
