@@ -132,8 +132,16 @@ LOAD_MODULES = (
     "SmallLagGrid",
     "UniformLagBudget",
     "RepositoryUniformLag",
+    "FrontLagNormalization",
+    "RepositoryExteriorLag",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.front_rank_square",
+    "OpenMathResearch.LongCycleExcedances.front_sparse_of_large_size",
+    "OpenMathResearch.LongCycleExcedances.front_remove_lag_normalization",
+    "RepositoryQuotientAudit.original_global_lag_bound",
+    "RepositoryQuotientAudit.original_exterior_near_lag",
+
     "OpenMathResearch.LongCycleExcedances.ColorAnchor.accepted_probability_eq_realCount",
     "OpenMathResearch.LongCycleExcedances.ColorAnchor.baselinePairs_card",
     "OpenMathResearch.LongCycleExcedances.ColorAnchor.baselinePairs_probability",
