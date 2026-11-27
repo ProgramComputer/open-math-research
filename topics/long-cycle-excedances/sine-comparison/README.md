@@ -41,4 +41,6 @@ The [reflected signed-pole estimate](reflected-carrier.md) proves two lower boun
 
 The [nonprincipal value estimate](nonprincipal-value.md) reduces the full second error term to a finite bin sum and a first-moment calculation over the signed odd poles.
 
+The successor degree shift gives a stronger factorial bound for the regular numerator contribution in three aspect intervals. [Proof and numerical comparison](regular-numerator.md)
+
 The [nine-interval determinant calculation](coarse-certificate.md) uses eight shared pole-weight vectors and gives a reproducible positive margin after rounding all four errors upward.
