@@ -11,7 +11,20 @@ from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
-MODULES = ('FinitePoleProduct', 'PairedPoleFamily', 'PairedPoleConvergence', 'PairedCycleNormalization', 'PairedCoefficientLimit', 'ScaledCycleProfile', 'RepositoryPairedCycleLift', 'RepositoryScaledCycleProfile')
+MODULES = (
+    "FinitePoleProduct",
+    "PairedPoleFamily",
+    "PairedPoleConvergence",
+    "PairedCycleNormalization",
+    "PairedCoefficientLimit",
+    "ScaledCycleProfile",
+    "RepositoryPairedCycleLift",
+    "RepositoryScaledCycleProfile",
+    "CutoffFormalExp",
+    "ExpAdd",
+    "PairedExpProduct",
+    "RepositoryPairedProductLimit",
+)
 EXPECTED = {
     "OpenMathResearch.LongCycleExcedances.finite_pole_partition",
     "OpenMathResearch.LongCycleExcedances.finite_distinguished_pole_product",
@@ -35,6 +48,12 @@ EXPECTED = {
     "RepositoryQuotientAudit.original_hasSum_paired_cycle_log_coeff",
     "RepositoryQuotientAudit.original_scaled_cycle_profile_exp",
     "RepositoryQuotientAudit.tendsto_original_scaled_cycle_profile_exp",
+    "OpenMathResearch.LongCycleExcedances.coeff_cutoffExp",
+    "OpenMathResearch.LongCycleExcedances.cutoffExp_add",
+    "OpenMathResearch.LongCycleExcedances.finite_paired_product_coeff_below_cutoff",
+    "OpenMathResearch.LongCycleExcedances.cutoffExp_rescale",
+    "OpenMathResearch.LongCycleExcedances.finite_paired_product_eq_truncated_exp",
+    "RepositoryQuotientAudit.tendsto_original_scaled_finite_paired_products",
 }
 AXIOM_REPORT = re.compile(
     r"^'([^']+)' (?:does not depend on any axioms|depends on axioms:\s*\[([^\]]*)\])\s*$",
