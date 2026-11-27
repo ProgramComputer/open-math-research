@@ -23,7 +23,7 @@ theorem normalized_lattice_contrast {C S m : ℝ} (h : C^2+S^2=1) (hS : 0 ≤ S)
     intro e
     rw [e,norm_zero,zero_pow (by decide : 2≠0)] at hs
     nlinarith [mul_nonneg (sub_nonneg.mpr hm2) (sq_nonneg S)]
-  have hd : 1/z-(C:ℂ)=(1-(C:ℂ)*z)/z := by field_simp [hz]; ring
+  have hd : 1/z-(C:ℂ)=(1-(C:ℂ)*z)/z := by field_simp [hz] <;> ring
   have hn : ‖1-(C:ℂ)*z‖^2 = (1-C^2)^2+C^2*m^2*S^2 := by
     rw [Complex.sq_norm, Complex.normSq_apply]
     simp [z,Complex.mul_re,Complex.mul_im]

@@ -26,9 +26,12 @@ theorem fourier_linear_pair {f g : ℝ→ℂ} (hf : Continuous f) (hg : Continuo
   change (∫ x in (0:ℝ)..2*π,w x*(a*f x+b*g x))/(2*(π:ℂ)) = _
   simp_rw [h]
   have cw : Continuous w := circleWave_continuous _
-  rw [intervalIntegral.integral_add ((continuous_const.mul (cw.mul hf)).intervalIntegrable _ _)
-        ((continuous_const.mul (cw.mul hg)).intervalIntegrable _ _),
-    intervalIntegral.integral_const_mul,intervalIntegral.integral_const_mul]
+  have hadd : (∫ x in (0:ℝ)..2*π, a*(w x*f x)+b*(w x*g x)) =
+      (∫ x in (0:ℝ)..2*π, a*(w x*f x)) + (∫ x in (0:ℝ)..2*π, b*(w x*g x)) :=
+    intervalIntegral.integral_add (f := fun x => a*(w x*f x)) (g := fun x => b*(w x*g x))
+      ((continuous_const.mul (cw.mul hf)).intervalIntegrable _ _)
+      ((continuous_const.mul (cw.mul hg)).intervalIntegrable _ _)
+  rw [hadd,intervalIntegral.integral_const_mul,intervalIntegral.integral_const_mul]
   unfold normalizedFourierIntegral
   dsimp only [w]
   ring
