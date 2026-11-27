@@ -1,0 +1,13 @@
+--- NumeratorRadialScalars.lean
++++ NumeratorRadialScalars.lean
+@@ -1,8 +1,8 @@
+ import Mathlib.Analysis.Convex.Deriv
+ import Mathlib.Analysis.Convex.SpecificFunctions.Basic
+ import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+-import Mathlib.Data.Complex.ExponentialBounds
+-import Mathlib.Data.Real.Pi.Bounds
++import Mathlib.Analysis.Complex.ExponentialBounds
++import Mathlib.Analysis.Real.Pi.Bounds
+ import Mathlib.Tactic.Linarith
+ import Mathlib.Tactic.NormNum
+ import Mathlib.Tactic.Positivity

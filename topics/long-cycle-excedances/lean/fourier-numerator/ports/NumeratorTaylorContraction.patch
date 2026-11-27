@@ -1,0 +1,11 @@
+--- NumeratorTaylorContraction.lean
++++ NumeratorTaylorContraction.lean
+@@ -163,7 +163,7 @@
+       have hdec : (9:ℝ)/(4*S*Real.sqrt ((i+k:ℕ):ℝ)) ≤ 9/(4*S*Real.sqrt k) :=
+         div_le_div_of_nonneg_left (by norm_num) (by positivity)
+           (mul_le_mul_of_nonneg_left hBs (by positivity))
+-      exact div_le_div₀ hC (add_le_add_left hdec 2) hk0 hkiR
++      exact div_le_div₀ hC (by linarith only [hdec]) hk0 hkiR
+     have hpow := pow_le_pow_left₀ hρ hρq (i+k)
+     dsimp only [f,major]
+     rw [norm_mul,norm_pow,hz]

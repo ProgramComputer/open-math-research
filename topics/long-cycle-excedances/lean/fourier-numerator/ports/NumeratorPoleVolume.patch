@@ -1,0 +1,12 @@
+--- NumeratorPoleVolume.lean
++++ NumeratorPoleVolume.lean
+@@ -1,7 +1,7 @@
+ import Mathlib.Analysis.Convex.SpecificFunctions.Basic
+ import Mathlib.Analysis.SumIntegralComparisons
+-import Mathlib.Analysis.SpecialFunctions.Integrals
+-import Mathlib.Data.Real.Pi.Bounds
++import Mathlib.Analysis.SpecialFunctions.Integrals.Basic
++import Mathlib.Analysis.Real.Pi.Bounds
+ import Mathlib.Tactic.Linarith
+ import Mathlib.Tactic.NormNum
+ import Mathlib.Tactic.Positivity
