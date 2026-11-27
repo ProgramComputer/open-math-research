@@ -66,10 +66,14 @@ MODULES = (
     "ExactCycleProbabilityLimit",
     "FactorialProbabilityTail",
     "ProbabilityErrorBands",
+    "CenteredPrincipalCost",
+    "FinitePrincipalCost",
     "WindowPrincipalLimit",
     "RepositoryAdjacentWindows",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.finite_principal_cost",
+    "OpenMathResearch.LongCycleExcedances.centered_principal_cost",
     "OpenMathResearch.LongCycleExcedances.off_principal_window_cofinal",
     "OpenMathResearch.LongCycleExcedances.finite_scaled_principal_tends",
     "OpenMathResearch.LongCycleExcedances.determinant_of_window_errors",
