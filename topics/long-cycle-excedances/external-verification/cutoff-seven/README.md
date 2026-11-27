@@ -19,3 +19,7 @@ A second calculation checks $(7,8)$, $(94,95)$ and $(95,96)$ directly, including
 ~~~sh
 python3 -IB check-endpoints.py
 ~~~
+
+## First independent attempt
+
+The first job cold-compiled the supplying finite-prefix modules through Rows95. Lake then rejected the independently added comparator because it was placed outside the registered libraries. The job stopped before the consolidated declaration audit and independent replay. This is partial build evidence. The retry keeps the supplier inputs intact, places the generated files under the registered LongCycleBounds library, and checks that layout with the pinned Lake before the full build. Its workflow retains the supplier's compiler outputs and source hashes at the comparator boundary if a later check fails. [First build log](https://github.com/ProgramComputer/open-math-research/actions/runs/45952201222/job/140350418998)

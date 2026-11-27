@@ -50,7 +50,7 @@ jobs:
         run: |
           set -euo pipefail
           ulimit -Sn 65536
-          python3 -Bu topics/long-cycle-excedances/external-verification/cutoff-seven/check.py "$RUNNER_TEMP/cutoff-seven" 2>&1 | tee "$RUNNER_TEMP/verification/lean.log"
+          python3 -Bu topics/long-cycle-excedances/external-verification/cutoff-seven/check.py "$RUNNER_TEMP/cutoff-seven" --checkpoint "$RUNNER_TEMP/supplier-checkpoint.tar.zst" 2>&1 | tee "$RUNNER_TEMP/verification/lean.log"
       - name: Preserve reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -59,3 +59,12 @@ jobs:
           path: ${{ runner.temp }}/verification
           retention-days: 30
           if-no-files-found: warn
+      - name: Preserve supplier checkpoint on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cutoff-seven-supplier-checkpoint
+          path: ${{ runner.temp }}/supplier-checkpoint.tar.zst
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: ignore
