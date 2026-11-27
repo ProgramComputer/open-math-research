@@ -27,5 +27,5 @@ Run `python3 -Bu topics/long-cycle-excedances/lean/finite-halfaxis/check.py /tmp
 from the repository root with Lean 4.33.1 available. The optional second argument
 is the authenticated common-pin import archive. The runner logs source hashes,
 the frozen pins, named axiom audits and bundled LeanChecker replay.
-Exact-source hosted verification is pending. The archive also covers larger
-sizes outside this first-pair verification target.
+See the [exact-source Lean verification receipt](verification.md). The archive
+also covers larger sizes outside this first-pair verification.
