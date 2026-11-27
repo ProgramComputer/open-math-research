@@ -1,0 +1,833 @@
+% SPDX-License-Identifier: ISC
+% Copyright 2026 ProgramComputer
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[cmex10]{amsmath}
+\usepackage{amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\DeclareFontShape{OMX}{cmex}{m}{n}{<->cmex10}{}
+\hypersetup{pdftitle={Uniform eventual interlacing for ordered set partitions counted by large blocks},pdfauthor={ProgramComputer}}
+\title{Uniform eventual interlacing for ordered set partitions counted by large blocks}
+\author{ProgramComputer}
+\date{November 26, 2026}
+\newtheorem{theorem}{Theorem}
+\setlength{\emergencystretch}{2em}
+\allowdisplaybreaks[1]
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove that one absolute old-size threshold suffices for strict consecutive interlacing of ordered set partition polynomials marked by blocks of size at least \(j\), simultaneously for every \(j\ge2\). The proof uses a compact-modulus rank count, and two alternative descriptions near the highest degrees. Sparse and transition estimates use a signed local limit for positive renewal coefficients. The dense estimates use pole pairs, with an exact residue-phase join between the bounded and diverging radius ranges. The cutoff is existential and the all-size question remains open.
+\end{abstract}
+
+\section{Enumerator and theorem}
+Let \([n]=\{1,\ldots,n\}\). An ordered set partition is a sequence of pairwise disjoint nonempty subsets with union \([n]\). Within each subset the labels are unordered. Let \(O_{n,j}(t)\) give weight \(t\) to every block of size at least \(j\), and give each other block weight one. This is the ordered problem in Alexandersson's catalog~\cite{alex}. A large block contributes the exponential series \(C_j\) and a small block contributes \(S_j\), where
+\[
+ S_j(z)=\sum_{a=1}^{j-1}\frac{z^a}{a!},
+ \qquad C_j(z)=\sum_{a\ge j}\frac{z^a}{a!}.
+\]
+Summing by sequence length and using the labeled product rule gives
+\begin{equation}
+ \sum_{n\ge0} O_{n,j}(t)\frac{z^n}{n!}
+   =\frac{1}{1-S_j(z)-t C_j(z)}.\label{eq:egf}
+\end{equation}
+The empty partition gives \(O_{0,j}=1\). For every \(n\) the singleton partition gives a positive constant coefficient. The degree is \(m=\lfloor n/j\rfloor\), since a configuration of \(m\) blocks of size \(j\) and \(n-mj\) singletons realizes this bound. All coefficients through the degree are positive by the same construction with fewer large blocks.
+
+\begin{theorem}\label{thm:main}
+There exists an integer \(N\) such that, for every \(n\ge N\) and every \(j\ge2\), all roots of \(O_{n,j}\) and \(O_{n+1,j}\) are simple and negative. In increasing modulus the two rows obey
+\[
+ 0<b_1<a_1<b_2<a_2<\cdots<b_m<a_m,
+\]
+where \(a_k\) and \(b_k\) are the old and new moduli. If \(n\equiv-1\pmod j\), then the next row also has a last modulus \(b_{m+1}>a_m\), with the evident empty-list convention at \(m=0\).
+\end{theorem}
+
+The proof in Section~\ref{sec:assembly} first applies earlier theorems for fixed thresholds, bounded \(n/j\), and fixed largest-modulus ranks~\cite{fixed,window,outer}. All are used with their consecutive-order conclusions, including degree changes. The sparse arm also uses the positive renewal coefficient estimates from the fixed outer-rank argument~\cite{outer,renewal,comparable}. For the small-modulus start we use the sharp lower-edge theorem~\cite{edge} in the following form. There is a positive \(q_j^*\) below and at which \(O_{n,j}(-q)>0\) for every \(n\) and \(0\le q\le q_j^*\). The denominator at \(q=q_j^*\) has a positive double zero. The subsequent contour analysis is included below. A symbol for a radius, scale or index may be local to a section. In particular the positive double pole and the positive renewal pole solve different equations, and the ratio \(n/j\) and its integer part are interchangeable only in asymptotic estimates when both tend to infinity.
+
+The local root comparisons use genuine rank among all complex roots. For the exterior estimates a zero-based rank \(h\) in increasing modulus of the reversed polynomial corresponds to the old one-based rank \(m-h\) in increasing original modulus. The classification parameter is the ratio \(j/\sigma_h\), where \(\sigma_h\) is the positive coefficient saddle standard deviation in Section~\ref{sec:theta}. The case tending to infinity uses the sparse result of Section~\ref{sec:sparse}, and a positive finite limit uses the theta result. A ratio tending to zero uses either Section~\ref{sec:moving-poles} or Section~\ref{sec:dense}, distinguished by whether \(hj/m\) diverges or stays bounded. Section~\ref{sec:compact-start} starts the root count for the pole arguments.
+
+Fang's ordinary set-partition polynomial uses the exponential of the marked block series~\cite{fang}. The present reciprocal enumerator is specific to ordered blocks. The external right- and left-edge arguments for the ordered problem treat fixed thresholds~\cite{right,left}.
+
+\section{The lower spectral edge and the first zeros}
+\label{sec:joint}
+
+Let \(O_{n,j}(t)\) enumerate ordered set partitions by the number of blocks of size at least \(j\), with degree \(\lfloor n/j\rfloor\). Let \(q_{n,j,k}\) be the \(k\)th positive real zero of \(q\mapsto O_{n,j}(-q)\), whenever it exists. The sharp lower-edge theorem~\cite{edge} gives a parameter \(q_j^*>0\) below which every row is positive, including at \(q_j^*\). Its generating-function denominator has a double zero at \(\rho_j>0\) at that parameter.
+
+\textbf{Theorem.} There are constants \(J,M,c,\eta>0\) such that whenever \(j\ge J\) and \(m=n/j\ge M\), each row has at least \(cm\) simple negative real zeros with moduli in
+
+\begin{equation*}
+q_j^{\ast}<q<q_j^{\ast}+(1+q_j^{\ast})\eta^2.
+\end{equation*}
+
+Every zero of the row whose complex modulus is at most \(q_j^*+4(1+q_j^*)\eta^2\) is simple and negative. The zeros in the smaller interval therefore include a positive fraction of the smallest-modulus complex zeros. At each such zero of rank \(k\),
+
+\begin{equation*}
+q_{n+1,j,k}<q_{n,j,k}<q_{n+1,j,k+1}.
+\end{equation*}
+
+For every fixed \(k\ge1\), as \(j\to\infty\) and \(n/j\to\infty\) with arbitrary relative growth,
+
+\begin{equation*}
+\frac{(n/j)^2}{1+q_j^{\ast}}(q_{n,j,k}-q_j^{\ast})\longrightarrow\frac{\pi^2 k^2}{2}.
+\end{equation*}
+
+In particular, for every fixed \(K\) the first \(K\) complex roots by modulus, or all available ranks if the degree is smaller, are simple negative and have the stated consecutive order outside a finite set of pairs \((j,n)\). The upper comparison is omitted at the last available rank if the next row has the same degree. The existing fixed-threshold theorem~\cite{fixed} applies for each bounded \(j\) as \(n\) grows. For large \(j\) and bounded \(n/j\) use the proportional-range theorem~\cite{window}, with a bound slightly larger than \(M\) to include both rows. For the remaining pairs use the joint theorem with \(M\) large enough to include the first \(K\) ranks. This argument yields a finite exception set without specifying its size.
+
+\subsection{Rescaling the double pole}
+\label{sec:rescaling-the-double-pole}
+
+Write \(T_j(z)=\sum_{a\ge j}z^a/a!\), \(b_j(z)=j!z^{-j}T_j(z)\) including the removable value at zero, and \(B(z)=2-e^z\). The coefficient formula is
+
+\begin{equation*}
+f_{n,j}(q):=\frac{O_{n,j}(-q)}{n!}=[z^n]\frac{1}{B(z)+(1+q)T_j(z)}.
+\end{equation*}
+
+Put \(\lambda=\log 2\), \(\rho=\rho_j\), \(Q=1+q_j^*\), and \(q=q_j^*+Qt^2\). The double-zero equations give \(QT_j(\rho)=e^\rho-2\) and \(QT_j'(\rho)=e^\rho\). Subtracting gives \(Q\rho^{j-1}/(j-1)!=2\). Hence \(e^{\rho-\lambda}=1+T_j(\rho)/[\rho^{j-1}/(j-1)!]=1+\rho/j+O(j^{-2})\), so \(\rho=\lambda(1+j^{-1})+O(j^{-2})\) and \(j(e^\rho-2)/(2\rho)\to1\). Rescale \(z=\rho e^{u/j}\) and denote the denominator by \(D_j(z,t)\). On compact sets of complex \(u,t\),
+
+\begin{equation*}
+\mathcal D_j(u,t):=\frac{j}{2\rho}D_j(\rho e^{u/j},t)
+\longrightarrow (1+t^2)e^u-1-u .
+\end{equation*}
+
+Indeed the coefficient bound \(j!/(j+a)!\le(j+1)^{-a}\) gives \(b_j=1+O(1/j)\) and \(b_j'=O(1/j)\) on any fixed disk of radius less than two. On the scaled compact sets, \(T_j(\rho e^{u/j})/T_j(\rho)=e^u(1+O(j^{-2}))\). Taylor expansion of \(e^{\rho e^{u/j}}\) and the critical equation give the claimed limit. All derivatives converge locally uniformly by holomorphy.
+
+At \(t=0\) the double zero of \(\mathcal D_j\) is exactly \(u=0\). Solve \(\mathcal D_j(u,t)=0\) for \(t^2=P_j(u)\) near zero. The functions \(-P_j(u)/u^2\) extend analytically across zero and converge locally uniformly to a function with value \(1/2\) at zero. On a fixed small disk, their positive-at-zero square roots give \(v_j(u)=u\sqrt{-P_j(u)/u^2}\) with derivative uniformly close to \(1/\sqrt2\). These functions are injective there, since the integral of their derivative on the segment between any two points differs from \((u_1-u_2)/\sqrt2\) by a smaller term. Their images contain a common disk about zero by Rouché's theorem on the boundary. Inverting \(v_j(u)=it\) gives the upper branch \(u_j(t)=i\kappa_j t+O(t^2)\), where \(\kappa_j\to\sqrt2\). All branches and expansions hold on a fixed complex \(t\) disk with uniform constants. Conjugation gives \(u_j(-t)=\overline{u_j(t)}\) for real \(t\).
+
+Set
+
+\begin{equation*}
+a_j(t)=\frac{u_j(t)+u_j(-t)}2,\qquad b_j^{\ast}(t)=\frac{u_j(t)-u_j(-t)}{2i},\qquad
+r_j(t)=\rho e^{a_j(t)/j},\qquad \varphi_j(t)=b_j^{\ast}(t)/j.
+\end{equation*}
+
+The two poles are \(z_\pm(t)=r_j(t)e^{\pm i\varphi_j(t)}\). Here \(a_j(t)=O(t^2)\) is even, \(b_j^*(t)=\kappa_j t+O(t^3)\) is odd, and for small real \(t>0\) the angle satisfies \(\varphi_j(t)\asymp t/j\). The notation \(\asymp\) denotes upper and lower bounds by fixed positive multiples.
+
+\subsection{A contour uniform in the threshold}
+\label{sec:a-contour-uniform-in-the-threshold}
+
+There is a fixed \(d>0\) such that \(e^u-1-u\) has no zero with \(\Re u\le2d\) except the double zero at zero. Indeed a root satisfies \(e^x\sin y=y\) for \(u=x+iy\). If \(x\le0\) and \(y\ne0\), the strict inequality \(|\sin y|<|y|\) is a contradiction. On the real line \(e^x>1+x\) for \(x\ne0\). For \(x\le1\), the same equation bounds \(|y|\le e\) at a root and its real part bounds \(x\ge-1-e\). Discreteness now gives \(d\).
+
+Use \(R_j=\rho e^{d/j}\). For all sufficiently large \(j\) and all \(t\) in a fixed small complex disk, there are just the two small continuations inside this circle, counted with multiplicity. To check this globally, the term \((1+t^2)QT_j(z)\) is \(O(1/j)\) throughout \(|z|\le R_j\), by the coefficient bound on \(b_j\), the ratio \((R_j/\rho)^j=e^d\), and the critical equation. Also \(|B(z)|\ge c_0|z-\lambda|\) on a fixed disk containing these circles, since the other zeros of \(B\) are \(\lambda+2\pi i k\) for nonzero integers \(k\). Hence every zero inside the circle lies \(O(1/j)\) from \(\lambda\), and so has \(|u|=|j\log(z/\rho)|\) bounded and \(\Re u\le d\). Outside a small disk at \(u=0\), the limiting denominator \(e^u-1-u\) has a positive minimum on this compact set. By shrinking the \(t\) disk and increasing \(J\), uniform convergence excludes every zero there. Rouché's theorem in the small disk counts the two local branches from the preceding section. Shrink the \(t\) disk again so that \(|u_j(\pm t)|<d/2\), which gives \(|r_j(t)|/R_j\le e^{-d/(2j)}\).
+
+Write \(z=R_j e^{i\theta}\), \(-\pi\le\theta\le\pi\), and \(\Delta_j(\theta)=j^{-1}+|\theta|\). Uniformly on the circle one has
+
+\begin{equation*}
+|B(z)|,\ |D_j(z,t)|\ \ge c_1\Delta_j(\theta),\qquad
+|\partial_\theta B(z)|,\ |\partial_\theta D_j(z,t)|\ \le c_2.
+\end{equation*}
+
+For \(B\), use \(|z-\lambda|^2=(R_j-\lambda)^2+2R_j\lambda(1-\cos\theta)\) with \(R_j-\lambda\ge \lambda d/j\). The bound on the long-block term then gives the same lower bound for \(D_j\) when \(|\theta|\ge A/j\) with a fixed sufficiently large \(A\). When \(|\theta|\le A/j\), use \(u=d+ij\theta\) and the uniform lower bound for \(\mathcal D_j\) on this compact vertical segment. The derivative estimates follow from the form \(T_j(z)=z^jb_j(z)/j!\), the coefficient bounds on \(b_j,b_j'\), and \(QT_j(R_j)=O(1/j)\).
+
+Let \(J_{n,j}(t)\) be the coefficient contour integral on \(|z|=R_j\) after enlarging from the origin. It is analytic and even in \(t\). In the angular integral, integration by parts at frequency \(n\) gives
+
+\begin{equation*}
+|J_{n,j}(t)|\le C R_j^{-n}\frac{1}{n}\int_{-\pi}^{\pi}\Delta_j(\theta)^{-2}\thinspace d\theta
+\le C R_j^{-n}\frac{j}{n}.
+\end{equation*}
+
+Periodicity removes the boundary term. The important stronger consecutive-row estimate is
+
+\begin{equation*}
+|r_j(t)J_{n+1,j}(t)-J_{n,j}(t)|\le C\frac{R_j^{-n}}{n-j}\qquad(n>j).
+\end{equation*}
+
+The difference inserts \(s(z)=r_j(t)/z-1\) in the angular integrand. On the circle \(|s|=O(\Delta_j)\) and \(|\partial_\theta s|=O(1)\). Write \(C_j(z,t)=(1+t^2)QT_j(z)\) and decompose
+
+\begin{equation*}
+\frac{s}{D_j}=\frac{s}{B}-\frac{sC_j}{B D_j}.
+\end{equation*}
+
+For the first term move the contour to a fixed radius \(R_0>1\) smaller than \(|\lambda+2\pi i|\). No zero of \(B\) lies between the circles, so this term is \(O(R_0^{-n})\). For the second term factor \(C_j=e^{ij\theta} c_j(\theta,t)\), with \(|c_j|=O(1/j)\) and \(|\partial_\theta c_j|=O(1/j^2)\) by the derivative bound for \(b_j\). The angular derivative of \(s c_j/(B D_j)\) has absolute value at most
+
+\begin{equation*}
+C\left(\frac{1}{j\Delta_j^2}+\frac{1}{j^2\Delta_j}\right),
+\end{equation*}
+
+whose integral is bounded uniformly. Integration by parts at frequency \(n-j\) gives \(O(R_j^{-n}/(n-j))\). The fixed-radius term is absorbed in this bound since \(R_j/R_0\) is bounded away from one.
+
+\subsection{Residues and strict order}
+\label{sec:residues-and-strict-order}
+
+On a fixed smaller \(t\) disk there is a uniform analytic representation
+
+\begin{equation*}
+\partial_zD_j(z_+(t),t)=it\thinspace  d_j(t),qquad d_j(0)>0,
+\end{equation*}
+
+with \(d_j,d_j^{-1}\) uniformly bounded. In fact \(\partial_zD_j=(2\rho/z)\partial_u\mathcal D_j\) and its first nonzero term at the pole is \(2i\kappa_j t\) in the limit as \(j\to\infty\). Define \(A_j(t)\) and \(B_j(t)\) from the even and odd parts of the analytic logarithm of \(d_j\):
+
+\begin{equation*}
+A_j(t)=\exp\left(\frac{\log d_j(t)+\log d_j(-t)}2\right),\qquad
+B_j(t)=\frac{\log d_j(t)-\log d_j(-t)}{2i}.
+\end{equation*}
+
+For real \(t\), \(A_j>0\), \(B_j\) is real, and \(B_j(t)=O(t)\) with uniformly bounded derivative. Subtracting the two pole residues in the contour enlargement gives
+
+\begin{equation*}
+\begin{aligned}
+C_{n,j}(t)&:=\frac{t A_j(t)r_j(t)^{n+1}}{2}\thinspace f_{n,j}(q_j^{\ast}+Qt^2) \\
+&=\sin U_{n,j}(t)+E_{n,j}(t),\qquad
+U_{n,j}(t)=\frac{n+1}{j} b_j^{\ast}(t)+B_j(t),\\
+E_{n,j}(t)&=\frac{t A_j(t)r_j(t)^{n+1}}2 J_{n,j}(t).
+\end{aligned}
+\end{equation*}
+
+These identities extend across zero by analyticity. The contour bounds give, with \(m=n/j\),
+
+\begin{equation*}
+|E_{n,j}(t)|\le C|t|e^{-dm/2}/m,
+\qquad
+|E_{n+1,j}(t)-E_{n,j}(t)|\le C|t|e^{-dm/2}/(n-j).
+\end{equation*}
+
+On a smaller disk \(|\partial_t E_{n,j}|=O(e^{-dm/2}/m)\) by Cauchy's inequality.
+
+Choose a small \(\eta>0\) with \([0,2\eta]\) inside that disk. Uniformly there for all large \(j,m\), \(U_{n,j}\) is increasing, starts at zero, and has derivative bounded above and below by positive multiples of \(m\), since \((b_j^*)'(t)\) stays uniformly close to \(\sqrt2\). Full phase bands of width \(\pi/6\) on either side of \(k\pi\) each contain one simple real zero, from opposite signs at the endpoints and a monotone normalized function inside. The gaps contain none. The initial half-band has only its zero at the origin from the normalizer. Positivity for \(q\le q_j^*\) identifies the ranks of the real zeros starting at \(k=1\). Counting full bands in \(0<t<\eta\) gives at least \(cm\) for an absolute \(c>0\).
+
+At an old positive \(t\) zero, use \(\Phi=\pi/2+U_{n,j}\) and \(\varphi=\varphi_j(t)\). Then the next normalized value, after subtracting the old normalized value zero, is
+
+\begin{equation*}
+\sin\Phi\sin\varphi+\cos\Phi(1-\cos\varphi)+(E_{n+1,j}-E_{n,j}).
+\end{equation*}
+
+In the \(k\)th band \(\sin\Phi\) has sign \((-1)^k\) and absolute value at least \(\sqrt3/2\). Since \(\varphi\asymp t/j\), the error difference divided by \(\sin\varphi\) is \(O(e^{-dm/2}/(m-1))\), uniformly even when \(j\) grows arbitrarily faster than \(m\). The cosine term costs at most \(1-\cos\varphi=O(\varphi^2)\). Thus the sign is \((-1)^k\) for all sufficiently large \(j,m\). The next phase differs by \(\varphi\), so it lies within \(\pi/3\) of the same \(k\pi\) at the old zero. The band signs and uniqueness place that point just after the next \(k\)th crossing and before the next \((k+1)\)st crossing. The larger interval \(0<t<2\eta\) supplies the comparison for the final old root below \(\eta\).
+
+\subsection{Excluding other complex zeros of smaller modulus}
+\label{sec:excluding-other-complex-zeros-of-smaller-modulus}
+
+Use the complex parameter \(\tau=(1+q)/Q\). The rescaled denominator converges on compact sets of \(u,\tau\) to \(\tau e^u-1-u\). First fix \(|\tau_0|\le1\), \(\tau_0\ne1\). The limit pole equation in \(w=1+u\) is \(we^{-w}=\tau_0/e\). On \(|w|=1\) the left side has modulus \(e^{-\Re w}\ge1/e\), with equality only at \(w=1\). Under the homotopy replacing \(\tau_0\) by \(s\tau_0\), \(0\le s\le1\), no zero crosses this circle. There is therefore a unique root inside it, and it is simple since the only critical point of \(we^{-w}\) is \(w=1\). If \(\tau_0\ne0\), all other roots have strictly larger real part by
+
+\begin{equation*}
+\Re w=1+\log |w|-\log|\tau_0|.
+\end{equation*}
+
+If \(\tau_0=0\), the only root is \(w=0\).
+
+Choose a real \(d_0\) strictly between the real part of this principal \(u\) root and all the others, with a positive margin at the principal root. On a small neighborhood of \(\tau_0\) the contour \(|z|=\rho e^{d_0/j}\) has exactly one pole inside it, and this pole satisfies \(|z_\star|\le\rho e^{(d_0-\epsilon)/j}\) for some \(\epsilon>0\). Here are the details of the transfer. Every candidate pole in the disk has \(|z-\lambda|=O(1/j)\), by the same long-block bound as before. Thus the \(u\) variable lies in a fixed compact set with \(\Re u\le d_0\). The limiting denominator at \(\tau_0\) is nonzero there outside a small disk around the principal root. Uniformity on this compact set and Rouché's theorem on the small disk yield the claim after shrinking the neighborhood. The proof of the contour estimate \(|J_{n,j}|=O(R_j^{-n}/m)\) also applies here with \(R_j=\rho e^{d_0/j}\). For \(|\theta|\ge A/j\) use \(|2-e^z|\ge c|\theta|\) and the long-block bound. For \(|\theta|\le A/j\) use the lower bound on the scaled compact vertical segment \(\Re u=d_0\). In both regions these give \(|D_j|\gtrsim j^{-1}+|\theta|\) and the same uniform angular derivative bound. The derivative at the single pole is nonzero and bounded above, by the scaled simple-root equation and its convergent derivatives. The contour term is exponentially smaller in \(m\) than the single residue \(-1/(z_\star^{n+1}D'_j(z_\star))\). Thus there are no row zeros in this neighborhood of \(\tau_0\) once \(j\) and \(m\) are large enough.
+
+It remains to treat a fixed small neighborhood of \(\tau=1\). Choose a radius \(T>0\) whose closed complex \(t\) disk lies inside the analytic region used for the sine estimate. Shrink \(T\) so that \(\Re (b_j^*)'(t)\) is bounded below by a fixed positive constant throughout. For all sufficiently large \(j,m\), \(\Re U'_{n,j}(t)\ge c m\) throughout this disk. In particular \(U=U_{n,j}\) is univalent there, and integration along straight segments gives
+
+\begin{equation*}
+|U(t_1)-U(t_2)|\ge c m|t_1-t_2|.
+\end{equation*}
+
+Suppose \(|t|\le T/2\) is a zero of the normalized row. Then \(|\sin U(t)|\) is at most the uniform error, which tends to zero. Since \(|\sin(x+iy)|^2=\sin^2 x+\sinh^2 y\), the value \(U(t)\) is within \(o(1)\) of a point \(k\pi\) for some integer \(k\). The entire disk \(|w-k\pi|\le1/4\) belongs to the image of the larger open \(t\) disk for large \(m\). Indeed \(|U(\zeta)-U(t)|\ge c m T/2\) for \(|\zeta|=T\), so Rouché's theorem applied to \(U(\zeta)-w\) transfers the single solution at \(w=U(t)\) to every such \(w\). On that image disk the normalized equation is \(\sin w+E_{n,j}(U^{-1}(w))=0\). The second term is uniformly small and the sine has a fixed positive minimum in modulus on the boundary because it is periodic up to sign. There is exactly one zero, which is real by conjugation and simple by the count. Consequently \(t\) is real, since the inverse branch commutes with conjugation. The zero with \(k=0\) is the forced zero \(t=0\) of the normalizer, while a real nonzero \(t\) gives a simple real row zero at \(q=q_j^*+Qt^2>q_j^*\).
+
+Apply the one-pole argument on a finite cover of \(\{|\tau|\le1,\ |\tau-1|\ge T^2/8\}\). This yields a fixed neighborhood of the compact set on which there are no zeros. Hence some \(\delta>0\) suffices to cover all \(|\tau|\le1+\delta\) with \(|\tau-1|\ge T^2/4\), by projecting radially to the closed unit disk and taking \(\delta\) small enough. The remaining points satisfy \(|t|=|\tau-1|^{1/2}<T/2\) and are covered by the sine argument. Shrink \(\eta\) so that \(4\eta^2\le\delta\). Every \(|q|\le q_j^*+4Q\eta^2\) then satisfies \(|\tau|\le1+4\eta^2\), so every row zero of such modulus is simple and real in the \(q\) variable. It is positive there, hence negative for \(O_{n,j}\). This also identifies the initial real orders already proved with complex-modulus orders, including the comparisons in the window \(0<t<2\eta\).
+
+\subsection{Microscopic limit and prior scope}
+\label{sec:microscopic-limit-and-prior-scope}
+
+With \(x=y^2\) and \(t=y/m\), uniformly on each compact complex \(y\) disk we have \(U_{n,j}(y/m)\to\sqrt2 y\) and \(r_j(y/m)^{n+1}/\rho^{n+1}\to1\). The latter uses evenness and \(a_j(t)=O(t^2)\). The analytic expression \(\sin U_{n,j}(t)/t\) extends at zero, where its value is \((n+1)\kappa_j/j+B_j'(0)\sim\sqrt2 m\). The remainder divided by \(t\) tends to zero uniformly, so the normalized limit becomes
+
+\begin{equation*}
+\frac{O_{n,j}(-q_j^{\ast}-Qx/m^2)}{O_{n,j}(-q_j^{\ast})}
+\longrightarrow \frac{\sin\sqrt{2x}}{\sqrt{2x}}.
+\end{equation*}
+
+Both sides are even in \(y\), which gives local uniform convergence in \(x\). The limit has simple positive zeros \(\pi^2k^2/2\). Rouché's theorem on small disjoint disks around the first fixed number and uniform convergence on the intervening real compact segments give the stated limits for the first real zeros.
+
+\section{Compact scaled moduli and their rank count}
+\label{sec:compact-start}
+
+This argument supplies the starting bands for the moving pole proof (Section~\ref{sec:moving-poles}). Let \(Q_j=1+q_j^*\) for the sharp lower edge~\cite{edge}, and let \(m=n/j\). For each fixed \(T>1\), the zeros of \(O_{n,j}\) with modulus at most \(Q_jT-1\) are simple and negative for large \(j\) and \(m\). They lie in consecutive principal-pole phase bands with common old and new rank labels, as described below. In particular their count differs by \(O(1)\) from the phase at \(T\) divided by \(\pi\). The argument extends the tracked joint inner-edge proof (Section~\ref{sec:joint}) from the fold to fixed compact sets of the scaled parameter.
+
+\subsection{The nearest poles of the limit denominator}
+\label{sec:the-nearest-poles-of-the-limit-denominator}
+
+Write \(\rho=\rho_j\), \(\lambda=\log 2\), \(B(z)=2-e^z\), and \(D_j(z,\tau)=B(z)+\tau Q_j T_j(z)\), where \(T_j(z)=\sum_{a\ge j}z^a/a!\) and \(\tau=(1+q)/Q_j\). The scaling \(z=\rho e^{u/j}\) gives \(jD_j/(2\rho)\to \tau e^u-1-u\) locally uniformly in \(u,\tau\), as proved in the joint inner-edge theorem. The limiting equation in \(w=1+u\) is
+
+\begin{equation*}
+w e^{-w}=\tau/e.
+\end{equation*}
+
+Least real part of \(u\) determines least modulus after lifting the poles to \(z\).
+
+For \(\tau\ne0\), all roots satisfy \(|w|=|\tau|e^{\Re w-1}\). Hence roots in any left half-plane lie in a compact set. For nonreal \(\tau\), at least one root exists by continuing the root from \(w=0\) along \(s\tau\), \(0\le s\le1\). The implicit derivative for \(s>0\) is \(w/(s(1-w))\). Once \(|w|\ge2\) it is bounded on every interval away from \(s=0\). The branch therefore cannot escape to infinity at a finite parameter. The only critical point is \(w=1\), and approaching it would force \(s\tau\to1\), which is excluded on the segment. The derivative stays bounded near any proposed terminal parameter, so the branch has a limit there and continues by the implicit function theorem. If two roots had the same real part, their moduli would coincide, so the two roots would be conjugate. This would force \(\tau\) real. Thus at nonreal \(\tau\) there is a unique simple root of least real part, with a strict gap to the others.
+
+For real \(\tau<0\), the unique negative real \(w_0\) exists since \(we^{-w}\) is strictly increasing from \(-\infty\) to zero on that line. Any root of modulus at most \(|w_0|\) satisfies \(|we^{-w}|\le |w|e^{|w|}\le |w_0|e^{|w_0|}\) with equality only at \(w_0\), proving that it alone has least real part. For \(0<\tau<1\), homotopy on \(|w|=1\) keeps exactly one root within the circle, since \(|we^{-w}|\ge1/e\) there. All other roots have larger real part by the modulus identity. At \(\tau=0\) the only root is zero. At \(\tau=1\) the unique least root is double and the fold analysis (Section~\ref{sec:rescaling-the-double-pole}) applies.
+
+For real \(\tau>1\) there are no real roots, since the maximum of \(we^{-w}\) on the positive real line is \(1/e\). An upper root \(w=x+iy\) satisfies \(\sin y>0\) and \(x=y\cot y\). The equation is then
+
+\begin{equation*}
+f(y):=y\cot y-\log(y/\sin y)=1-\log\tau.
+\end{equation*}
+
+On \((0,\pi)\) the function decreases from \(1\) to \(-\infty\), because \(f'(y)=-y-(y\cot y-1)^2/y<0\). This gives exactly one upper root \(w_1\) with angle parameter \(y_1\) in that interval. Any other upper root has \(y_2>2\pi\). If its real part satisfied \(x_2\le x_1\le0\), then its modulus would be larger, contrary to the modulus identity. If \(x_2\le x_1\) and \(x_1>0\), use \(x_1\le1\) and \(y_1<\pi/2\) to get \(|w_1|<2\pi<|w_2|\), again a contradiction. Therefore the principal conjugate pair has strictly least real part. The parameter \(y(\tau)=y_1\) increases strictly and analytically from zero to \(\pi\) on \(\tau>1\).
+
+\subsection{Uniform residue estimates on fixed parameter neighborhoods}
+\label{sec:uniform-residue-estimates-on-fixed-parameter-neighborhoods}
+
+Around any fixed \(\tau_0\) away from the fold, choose a real separator \(d_0\) between the least real part of the model roots in \(u\) and all the others, with \(d_0\ne-1\). In a small complex neighborhood of \(\tau_0\), the physical contour \(R_j=\rho e^{d_0/j}\) encloses exactly the continuations of the selected simple roots and no others. Indeed the long-block term is \(O(1/j)\) on the disk. Any possible zero therefore lies \(O(1/j)\) from \(\lambda\), so it is in a fixed compact set in the \(u\) coordinate. Uniform convergence on that set and Rouché's theorem isolate the selected root or pair. Their moduli are at most \(R_j e^{-\delta/j}\) for some fixed \(\delta>0\). The same angular bounds as in the joint contour estimate (Section~\ref{sec:a-contour-uniform-in-the-threshold}) give \(|D_j|\gtrsim j^{-1}+|\theta|\) and \(|\partial_\theta D_j|=O(1)\) on \(z=R_j e^{i\theta}\). For \(|\theta|\ge A/j\) use \(|B(z)|\gtrsim |\theta|\) and choose \(A\) large. On \(|\theta|\le A/j\) use the scaled vertical segment \(\Re u=d_0\). Integration by parts gives a contour remainder \(J_{n,j}=O(R_j^{-n}/m)\).
+
+If the model selected only one pole, its physical residue is nonzero and dominates the contour remainder by a factor exponential in \(m\). The derivative at that simple pole has fixed positive lower and upper bounds by the local scaled equation. Therefore the row polynomial has no zero throughout this parameter neighborhood for large \(j,m\).
+
+If \(\tau_0>1\) is real, let \(u_{j,+},u_{j,-}\) be the two continuing scaled branches, conjugate on the real axis. Put \(r=\rho\exp((u_{j,+}+u_{j,-})/(2j))\) and \(\varphi=(u_{j,+}-u_{j,-})/(2ij)\), so the two poles are \(r e^{\pm i\varphi}\). From the two analytic logarithms of their nonzero \(z\) derivatives form a positive real normalizer \(A\) and phase \(\beta\) on the real axis, such that the two derivatives are \(Ae^{\pm i\beta}\). Then, with \(N=n+1\) and \(f_{n,j}=O_{n,j}(-q)/n!\), the residue formula is
+
+\begin{equation*}
+C_{n,j}:=\frac{A r^N}{2} f_{n,j}=-\cos\Phi_{n,j}+E_{n,j},\qquad
+\Phi_{n,j}=N\varphi+\beta,\qquad E_{n,j}=\frac{A r^N}{2}J_{n,j}.
+\end{equation*}
+
+On each smaller complex parameter disk, \(|E_{n,j}|+|\partial_\tau E_{n,j}|=O(e^{-\delta m}/m)\) after decreasing \(\delta\) if necessary. This follows from the contour bound and Cauchy's inequality. The simple roots \(u_{j,+},u_{j,-}\) converge with derivatives to their model branches. On the real interval \(j\varphi\to y(\tau)\) with derivatives, and \(\beta\) has bounded derivative. In particular \(\Re\partial_\tau\Phi_{n,j}\ge c m\) on a sufficiently small complex disk around \(\tau_0\), since \(y'(\tau_0)>0\).
+
+The univalence argument in the joint inner-edge theorem now applies to this cosine equation. Explicitly, a complex zero in a disk of half the radius maps under \(\Phi_{n,j}\) to \(o(1)\) distance of a real zero of the cosine. The derivative lower bound gives injectivity and ensures that the phase image of the larger disk contains the radius-\(1/4\) circle about this real center. On that circle the cosine exceeds the uniform error in modulus. Rouché's theorem gives exactly one simple zero, which is real by conjugation. The inverse phase map preserves conjugation, identifying the original zero as real.
+
+For any fixed \(T>1\), cover the compact set \(|\tau|\le T+1\) by finitely many of these single-pole, two-pole, and fold neighborhoods, using smaller disks in the two-pole and fold cases. Consequently every row zero with \(|q|\le Q_j(T+1)-1\) is real and simple, since such a \(q\) has \(|\tau|\le T+1\). The nonnegative coefficients of \(O_{n,j}\) with positive constant term handle \(q<0\), and the exact positivity theorem handles \(0\le q\le q_j^*\). Thus these zeros have \(q>q_j^*\).
+
+\subsection{Sign comparison and rank count}
+\label{sec:sign-comparison-and-rank-count}
+
+On every compact real interval \(1<\tau_1\le\tau\le T+1\) the phase and remainder can be assembled from the preceding neighborhoods. The upper physical pole stays in the upper half-plane. The argument of its derivative can be chosen in \((0,\pi)\) on this interval, since the scaled derivative converges to \(2u_{+}\) with positive imaginary part. Its branch agrees with the fold phase by the local derivative expansion, so there is no phase ambiguity. The real phase starts at \(\pi/2\) at the fold and increases thereafter for all large \(j,m\). Near the fold this is the preceding estimate in \(t=\sqrt{\tau-1}\). Away from the fold it follows from \(\partial_\tau\Phi_{n,j}\asymp m\) on compact intervals. The signs in each full band of width \(\pi/6\) around \((k+1/2)\pi\), \(k\ge1\), give one simple root, and the gaps contain none, by the derivative error estimate. At the fold the half-band has only its forced zero in the sine normalization. Thus the count at \(q=Q_jT-1\) differs by \(O(1)\) from \(\Phi_{n,j}(T)/\pi\). Dividing by \(\lfloor m\rfloor\) gives \(y(T)/\pi\).
+
+For strict consecutive order away from the fold, the contour difference continues to gain a factor \(1/j\). As before, the difference \(r J_{n+1,j}-J_{n,j}\) includes \(s(z)=r/z-1\) on the contour. There \(|s|\lesssim j^{-1}+|\theta|\). Our choice \(d_0\ne-1\) implies \(|R_j-\lambda|\gtrsim1/j\), since \(j\log(\lambda/\rho)\to-1\). Thus \(B\) has the same lower angular bound as \(D_j\). Split
+
+\begin{equation*}
+\frac{s}{D_j}=\frac{s}{B}-\frac{s\tau Q_j T_j(z)}{B D_j}.
+\end{equation*}
+
+For the second term, factor out \(e^{ij\theta}\) and integrate by parts at frequency \(n-j\) exactly as in the joint inner-edge theorem. Its size is \(O(R_j^{-n}/(n-j))\). Move the first term to a fixed circle \(R_0>1\) containing no other pole of \(1/B\). If \(R_j<\lambda\), this move crosses \(\lambda\) and contributes a residue bounded by \(O(j^{-1}\lambda^{-n})\), because \(|r/\lambda-1|=O(1/j)\). In this case \(d_0<-1\), so \(r/\lambda\le e^{-\delta'/j}\) for some \(\delta'>0\). After multiplication by the positive normalizer \(A r^N/2\), the total consecutive error is therefore \(O(e^{-c m}/j)\) for \(m\ge2\). Finite covers make these estimates uniform on the compact real interval.
+
+At an old root in rank \(k\), subtract its normalized zero value from the next normalized value. The principal terms give \(\sin\Phi\sin\varphi+\cos\Phi(1-\cos\varphi)\). Here \(\sin\Phi\) has sign \((-1)^k\) and absolute value bounded below, and \(\sin\varphi\asymp1/j\) away from the fold. The second term is \(O(1/j^2)\) and the consecutive contour error is \(O(e^{-c m}/j)\), proving the sign \((-1)^k\). Near the fold use the earlier consecutive bound of order \(t e^{-c m}/(n-j)\) against the principal sign of order \(t/j\). The next phase is \(\Phi+\varphi\), with \(\varphi=O(1/j)\) in the full range. As in the inner proof, the next sign and monotonicity within each band place the next \(k\)th root strictly before the old root and the next \((k+1)\)st root strictly after it. The interval up to \(T+1\) includes this last comparison for every old rank up to \(T\): the phase gap to \(T+1\) grows linearly in \(m\). Complex exclusion on that larger disk makes these comparisons genuine modulus ranks.
+
+\section{The critical theta transition}
+\label{sec:theta}
+
+Let \(O_{n,j}\) count ordered set partitions of \([n]\) by the number of blocks of size at least \(j\). Write \(n=mj+s\), \(0\le s<j\). Number the complex roots of the reversed polynomial \(D_n(y)=y^m O_{n,j}(1/y)/n!\) in increasing order of modulus, counting multiplicity and giving the smallest modulus rank zero.
+
+Consider a sequence with \(m,j,h\to\infty\), \(h=o(m)\). At index \(h\) define the saddle radius \(r\) and standard deviation \(\sigma\) below. Suppose \(j/\sigma\to a\) with \(0<a<\infty\). Then for each fixed integer \(b\), the reversed root of rank \(h+b\) is eventually simple and negative. At equal degrees the old root of rank \(h+b\) has modulus strictly between the new moduli of ranks \(h+b-1\) and \(h+b\). At a degree increase it lies strictly between new ranks \(h+b\) and \(h+b+1\). The modulus ratio between successive old roots tends to \(\exp(a^2)\). The result concerns ranks among all complex zeros.
+
+\subsection{Renewal representation and a centered tilt}
+\label{sec:renewal-representation-and-a-centered-tilt}
+
+Use \(S_j(x)=\sum_{i=1}^{j-1}x^i/i!\), \(S_j(\rho)=1\), \(T(z)=(1-S_j(\rho z))^{-1}\), \(U(z)=\sum_{i\ge0}j!(\rho z)^i/(i+j)!\), \(V=T U\). Decomposing at the large blocks gives, with \(p_t=m-t\), \(e_t=s+tj\), \(F_p=T V^p\), the exact coefficient
+
+\begin{equation*}
+d_t=[y^t]D_n(y)=(j!)^{-p_t}\rho^{-e_t}[z^{e_t}]F_{p_t}(z).
+\end{equation*}
+
+For completeness, an ordered sequence with \(p\) marked large blocks has \(p+1\) gaps of small blocks. After the \(p\) forced groups of \(j\) labels are removed from the exponential generating function the remaining factors are precisely \(T^{p+1}U^p\). For a fixed \(R>1\), both \(T,V\) have coefficient sequences of the form \(c_j+O(R^{-i})\) with \(c_j\) bounded above and below by positive constants (a different \(c_j\) for each function). Indeed \((1-z)T\) and \(U\) are uniformly analytic on a slightly larger disk, since \(\rho\to\log 2\) and the removable divided difference \((1-S_j(\rho z))/(1-z)\) converges to \((2-e^{(\log2)z})/(1-z)\) there without zeros for \(R\) close to one. Finite-index positive limits give uniform upper and positive lower bounds on *every* coefficient, using the pole estimate at high indices.
+
+At \(0<r<1\) tilt each coefficient sequence of \(T,V\) by \(r^i\) and normalize to get an integer-valued variable. Let \(X_{p,r}\) be the independent sum of one \(T\) variable and \(p\) copies of the \(V\) variable, and let \(L_{p,r}(x)\) be its mass at the integer \(x\), extended by zero off the support. Write \(\mu_V\) for one tilted \(V\) mean. Choose \(r\) to give \(X_{p_h,r}\) the mean \(e_h\) and let \(\sigma^2\) be its variance. The mean increases strictly from zero to infinity because its derivative in \(\log r\) is the variance. Define
+
+\begin{equation*}
+\omega_t(r)=(j!)^{-p_t}(\rho r)^{-e_t}F_{p_t}(r),\qquad K(r)=\omega_{t+1}(r)/\omega_t(r).
+\end{equation*}
+
+\(K(r)\) is independent of \(t\) and \(d_t=\omega_t(r)L_{p_t,r}(e_t)\). A tilted single variable has mass between fixed positive multiples of the geometric law \((1-r)r^i\). Its mean is comparable to \(r/(1-r)\) and its variance to \(\kappa=r/(1-r)^2\) (use half the mean squared difference of two independent copies for the lower bound). Its third absolute centered moment is \(O(r/(1-r)^3)\). In particular \(\mu_V/j=O((h+1)/m)=o(1)\). The variance \(\sigma^2\) is comparable to \(m\kappa\) and \(mr\to\infty\): if \(r\to0\), \(mr\) is comparable to \(e_h\to\infty\).
+
+When \(e_h/m\to\infty\), the mean bound forces \(r\to1\). The uniformly analytic and nonzero numerators in \(T\) and \(V\) have bounded first and second log-radius derivatives. Each summand therefore has mean \(r/(1-r)+O(1)\) and variance \(r/(1-r)^2+O(1)\) from the simple pole part. As \(p_h\sim m\) and \(e_h\sim jh\), this gives
+
+\begin{equation*}
+\sigma\sim\frac{e_h}{\sqrt m}\sim\frac{jh}{\sqrt m},\qquad\frac{j}{\sigma}\sim\frac{\sqrt m}{h}.
+\end{equation*}
+
+In particular, if \(j/\sqrt m\to\infty\) and \(h/\sqrt m\to c\in(0,\infty)\), then \(e_h/m\to\infty\) and the theorem applies with \(a=1/c\).
+
+\subsection{Two local limit estimates}
+\label{sec:two-local-limit-estimates}
+
+For \(p/m\to1\) write \(b_{p,r}=\mathbb E X_{p,r}\) and \(\sigma_p^2=\mathrm{Var}(X_{p,r})\). For integer targets with \((x-b_{p,r})/\sigma_p\to u\),
+
+\begin{equation*}
+\sigma_p L_{p,r}(x)\longrightarrow\phi(u),\qquad
+\sigma_p^2\Delta L_{p,r}(x)\longrightarrow-u\phi(u),\qquad
+\Delta L(x)=L(x+1)-L(x).
+\end{equation*}
+
+Here \(\phi(u)=e^{-u^2/2}/\sqrt{2\pi}\). The sum of third absolute centered moments divided by \(\sigma_p^3\) is \(O((mr)^{-1/2})\). Thus the centered characteristic function at \(\theta/\sigma_p\) tends to \(e^{-\theta^2/2}\). Fourier inversion for the difference inserts \(e^{-i\theta}-1\), which after scaling tends to \(-i\theta\) and differentiates the limiting Gaussian density. The required integrable tails follow as follows. If \(G\) is the geometric law with parameter \(r\), then for either single variable \(Z\),
+
+\begin{equation*}
+1-|\mathbb E e^{i\theta Z}|^2
+\ \ge c(1-|\mathbb E e^{i\theta G}|^2)
+=c\frac{4r\sin^2(\theta/2)}{(1-r)^2+4r\sin^2(\theta/2)} .
+\end{equation*}
+
+This follows by comparison in the double expectation of \(1-\cos(\theta(Z-Z'))\). When \(r\) is bounded away from one the product of the characteristic functions is bounded by \(\exp(-c(p+1)\kappa\theta^2)\) throughout \([-\pi,\pi]\). For \(r\to1\) the same estimate holds on \(|\theta|\le M(1-r)\) for each fixed \(M\), with \(c\) depending only on \(M\). Outside this arc each characteristic function is at most \(C(1-r)/|\theta|\), by the pole representation and the uniform analytic numerator. Choose \(M>2C\). For \(p\ge3\) the integral over this remaining arc against \(|\theta|^b\), \(b=0,1\), is \(O((1-r)^{b+1}2^{-p})\). This comparison supplies dominated tails after rescaling in both inversion integrals.
+
+The same estimates without centering give, uniformly in the integer \(x\), for \(p\ge3\),
+
+\begin{equation*}
+L_{p,r}(x)\le C((p+1)\kappa)^{-1/2},\qquad
+|\Delta L_{p,r}(x)|\le C((p+1)\kappa)^{-1}.
+\end{equation*}
+
+They also hold for \(p=0,1,2\) when \(r\) is bounded away from one. For \(r\to1\) the first inequality still holds for these \(p\) by the geometric comparison and convolution. For \(p=1,2\) the \(\ell^1\) norm of the first difference of a single tilted variable is \(O(1-r)\), including the edge at zero. This follows by writing its unnormalized coefficients as \(c_j+O(R^{-i})\) and summing the absolute differences after tilting. Convolution with a second variable of supremum norm \(O(1-r)\) gives the second bound. At \(p=0\) its difference at the actual target \(x=e_m\) is \(O((1-r)^2+(1-r)R^{-e_m})\). In our application \(1-r\ge c/j\) when \(r\to1\), since \(e_h\le mj\) and the mean is comparable to \(m r/(1-r)\). Thus \(R^{-e_m}=o(1-r)\) even when \(j\) grows faster than every exponential function of \(m\).
+
+\subsection{The limiting series at a balance}
+\label{sec:the-limiting-series-at-a-balance}
+
+Write \(y_h=d_h/d_{h+1}\) and normalize the polynomial as \(B(z)=D_n(y_hz)/(d_h(y_hz)^h)\). At the common tilt \(r\), the coefficient of \(z^\ell\) is
+
+\begin{equation*}
+(y_hK(r))^\ell\frac{L_{p_{h+\ell},r}(e_{h+\ell})}{L_{p_h,r}(e_h)}.
+\end{equation*}
+
+Its standardized target differs from the anchor by \(\ell(j+\mu_V)/\sigma\to a\ell\) for fixed \(\ell\). Thus \(y_hK(r)\to e^{a^2/2}\) and this coefficient tends to \(q^{\ell(\ell-1)/2}\) for \(q=e^{-a^2}\).
+
+For the adjacent row write \(I=1\) when \(s=j-1\), and \(I=0\) otherwise. The Laurent coefficients of \((\rho r)y^{-I}D_{n+1}(y)-D_n(y)\) in degree \(t\) are exactly \(\omega_t(r)\Delta L_{p_t,r}(e_t)\), for \(0\le t\le m\). At a carry this includes \(t=-1\) with \(p_{-1}=m+1\), \(e_{-1}=-1\). Indeed \(L(-1)=0\), \(L(0)=1/F_{m+1}(r)\) for that sum, giving the required extra term \((\rho r)(j!)^{-(m+1)}y^{-1}\). Normalize this contrast by \(\sigma/(d_h(y_h z)^h)\) at \(y=y_hz\) to obtain \(H(z)\). The second local limit gives the coefficient limit \(-a\ell q^{\ell(\ell-1)/2}\).
+
+We justify both Laurent limits on every compact annulus. Fix a signed integer \(b\). Recenter the tilt at \(h+b\) by solving for \(r_b\) as before. Along \(\log r+\lambda/\sigma\) for bounded \(\lambda\), the variances of \(X_{p_{h+b}}\) divided by \(\sigma^2\) tend uniformly to one. At \(\lambda=0\) adding or removing \(|b|\) variables changes the relative variance by \(O_b(1/m)\). Along the interval, \(r'/r\to1\) and \((1-r')/(1-r)\to1\) (near one use \((1-r)\sigma\asymp\sqrt m\)). Integrating the third cumulant bound \(O(mr/(1-r)^3)\) for change of variance gives relative error \(O((mr)^{-1/2})\). Integration once more and strict monotonicity give \(\sigma\log(r_b/r)\to ab\), since the target-mean difference at \(r\) is \(b(j+\mu_V)\). In particular the variance at the new tilt is asymptotic to \(\sigma^2\) and \(\sigma|r/r_b-1|=O_b(1)\). Centering at \(h+b\) now gives
+
+\begin{equation*}
+y_h K(r_b)=\frac{L_{p_h,r_b}(e_h)}{L_{p_{h+1},r_b}(e_{h+1})}\longrightarrow \exp(a^2(1-2b)/2),\qquad
+L_{p_h,r_b}(e_h)\asymp_b \sigma^{-1}.
+\end{equation*}
+
+For a given annulus \(0<c_1\le |z|\le c_2\), choose a large positive \(b\) so \(|y_hK(r_b)z|<1/2\) throughout, and a large negative \(b\) so the same modulus exceeds \(2\). Use the former on \(\ell\ge0\), the latter on \(\ell<0\). For the contrast, changing tilt in its numerator replaces \(\Delta L\) by \((r/r_b)\Delta L+(r/r_b-1)L\) at the new tilt. Since \(\kappa(r_b)\asymp\sigma^2/m\), the uniform bounds above dominate both series termwise by \(C_b2^{-|\ell|}(1+m/(p_t+1))\). If \(\ell\le m/2\), this ratio is bounded for large \(m\); if \(\ell>m/2\) it is \(O(1+\ell)\). The bound at the possible left index \(t=-1\) uses \(p_t=m+1\) and holds for every target. We have proved compact uniform convergence in \(\mathbb C^\times\):
+
+\begin{equation*}
+B(z)\longrightarrow \Theta_q(z)=\sum_{\ell\in\mathbb Z}q^{\ell(\ell-1)/2}z^\ell,\qquad
+H(z)\longrightarrow -a z\Theta_q'(z).
+\end{equation*}
+
+\subsection{Rank and strictness}
+\label{sec:rank-and-strictness}
+
+Jacobi's triple product factors \(\Theta_q\) as \(\prod_{v\ge1}(1-q^v)(1+q^{v-1}z)(1+q^v/z)\). On \(|z|=q^{1/2}\) the winding number is zero; on \(|z|=q^{-1/2}\) it is one. On the first circle each varying factor traces a circle about \(1\) of radius less than one. On the second the factor \(1+z\) is the only one with positive winding. Uniform convergence and the argument principle, restoring the power \(z^h\), give precisely \(h\) and \(h+1\) roots of \(D_n(y_h z)\) inside the two circles. The intervening root tends to \(-1\), is simple, and is real by conjugation. Repeating at \(h+b\) gives the adjacent ranks and \(y_{h+1}/y_h\to q^{-1}\) from the same coefficient limits. Jacobi triple product~\cite{dlmf}
+
+For the new row its corresponding index is \(h+I\), with the same number of summands as the old anchor and target \(e_h+1\). Its new saddle has log-radius change \(O(1/\sigma^2)\) by the variance estimate, so it satisfies the same hypotheses. Its corresponding balance divided by \(y_h\) tends to one by the first local limit at targets \(e_h+1,e_{h+1}+1\). At the actual negative old root \(y=y_h z\) we have \(z\to-1\) and \(H(z)\to a\Theta_q'(-1)>0\) by the product. Hence \(D_{n+1}(y)\) has sign \((-1)^{h+I}\). In this annulus the unique new root is simple and negative. To read its side from this sign, the number of new negative real roots before the annulus has parity \(h+I\) since nonreal roots inside the smaller circle occur in conjugate pairs and positive coefficients exclude positive roots. The new polynomial is positive at zero. Thus its sign at the old root places the old modulus strictly below the new modulus with rank \(h+I\). The previous new rank is strictly below the old modulus by the limiting factor \(q\), which finishes the proof.
+
+\section{Sparse moving outer ranks}
+\label{sec:sparse}
+
+Let \(O_{n,j}\) mark blocks of size at least \(j\) in all ordered partitions of \([n]\). Write \(n=jm+s\), \(0\le s<j\), and let \(h\) be a zero-based rank in decreasing original modulus. Suppose
+
+\begin{equation*}
+h\to\infty,\qquad h/j\to0,\qquad h^2/m\to0.
+ \tag{1}
+\end{equation*}
+
+The old and new roots at this rank and neighboring ranks are simple and negative, with these ranks counted among all complex roots. Write \(a_h,b_h\) for the old and new original moduli. At equal degrees \(a_h>b_h>a_{h+1}\). At the carry \(b_h>a_h>b_{h+1}\). The conditions in (1) are precisely \(j/\sigma_h\to\infty\) in this moving-rank setting, where \(\sigma_h\) is the coefficient saddle standard deviation. The argument allows arbitrary relative growth of \(j,m\).
+
+The inputs are the published reciprocal ordered-block generating function and the positive coefficient and fixed-rank carry estimates in the two reviewed outer-rank arguments~\cite{outer}. Use the notation of their renewal proof. Let \(\rho_j\) be the positive root of \(S_j(\rho_j)=1\) and set
+
+\begin{equation*}
+T(z)=(1-S_j(\rho_j z))^{-1},\qquad
+ U(z)=\sum_{a\ge0}\frac{j!(\rho_j z)^a}{(j+a)!},\qquad
+ F_p=T^{p+1}U^p,\quad C_p(e)=[z^e]F_p(z).
+\end{equation*}
+
+The old reversed coefficients before common positive rescaling are
+
+\begin{equation*}
+d_t=(j!)^{-(m-t)}\rho_j^{-(s+jt)} C_{m-t}(s+jt).
+\end{equation*}
+
+Use \(p_t=m-t\), \(e_t=s+jt\). The reciprocal variable of this reversed row is denoted by \(y\); a zero \(-y\) with \(y>0\) corresponds to original modulus \(1/y\).
+
+\subsection{Tilt estimates with a signed difference}
+\label{sec:tilt-estimates-with-a-signed-difference}
+
+For a series with nonnegative coefficients and radius of convergence at least 1, tilt at \(r\in(0,1)\) by taking the probability of degree \(e\) proportional to its coefficient times \(r^e\). Denote the point mass of the tilted \(F_p\) by \(P_{p,r}(e)\), its mean by \(\mu_p(r)\), and its variance by \(\sigma_p(r)^2\). Let \(w=r/(1-r)\). Uniformly in sufficiently large \(j\), all \(p\ge1\), and \(r\in(0,1)\),
+
+\begin{equation*}
+\mu_p(r)\asymp p w,\qquad \sigma_p(r)^2\asymp p w(1+w).
+ \tag{2}
+\end{equation*}
+
+For \(p=0\) replace \(p\) by 1. Near the pole use \(T(z)=A(z)/(1-z)\) with bounded analytic \(A\) and logarithmic derivatives in a fixed neighborhood of the closed unit disk, as in the renewal proof. Its geometric factor supplies the mean \(w\) and variance \(w(1+w)\); analytic contributions are bounded. On each compact radius interval below 1 the moments of each factor are \(O(r)\), and probabilities of degrees zero and one in \(T\) are bounded below by \(c\) and \(cr\).
+
+The following point-mass estimates hold along \(p\to\infty\) with \(pw\to\infty\), at an integer mean \(e=\mu_p(r)\):
+
+\begin{equation*}
+P_{p,r}(e)\asymp 1/\sigma_p(r),\qquad
+ |P_{p,r}(e+1)-P_{p,r}(e)|
+   \le C(1+w)/\sigma_p(r)^3 .
+ \tag{3}
+\end{equation*}
+
+The supremum of all point masses is at most \(C/\sigma_p(r)\) in this regime. For any \(p\ge0\), including nonlarge \(p\), the single factor \(T\) gives the separate bound \(C/(1+w)\) on the point masses: its coefficients are uniformly bounded and \(T(r)\asymp1+w\), and convolution cannot increase the maximal mass.
+
+Here are details that preserve the scale in (3) when \(w\) is arbitrarily large. Away from the pole the zero and one masses of \(T\) give \(|\phi_T(\theta)|\le \exp(-cr\theta^2)\) for \(|\theta|\le\pi\). Near the pole, the ratio of the absolute values of the analytic factors is at most \(\exp(C\theta^2)\). Its logarithm has zero linear term because the coefficients are real and the real-axis logarithmic derivative is real. The geometric factor gives modulus \((1+4w(1+w)\sin^2(\theta/2))^{-1/2}\). If \(w\) is sufficiently large, half its logarithmic decay absorbs \(C\theta^2\) uniformly on \([-\pi,\pi]\), since \(\log(1+c w^2\theta^2)/\theta^2\) decreases with \(|\theta|\) and its value at \(\pi\) tends to infinity. Thus \(|\phi_T(\theta)|\le (1+c w^2\theta^2)^{-1/4}\) there. The \(U\) factors have modulus at most one. Integrating the resulting product bounds gives the point-mass supremum estimate.
+
+Write \(\varphi\) for the centered characteristic function of \(F_p\). On \(|\theta|\le c_0/(1+w)\), its logarithm equals
+
+\begin{equation*}
+-\sigma^2\theta^2/2+O(pw(1+w)^2|\theta|^3).
+\end{equation*}
+
+The third derivative bound follows by differentiating the geometric logarithm and the bounded analytic logarithms; their compact-radius bounds are \(O(r)\) when \(r\to0\). Choose \(c_0\) small enough that the error costs at most a fixed fraction of the Gaussian decay. Interpolation between the exponentials bounds the difference from the Gaussian by \(Cpw(1+w)^2|\theta|^3 e^{-c\sigma^2\theta^2}\). Thus Fourier inversion gives the first estimate of (3), since \((1+w)/\sigma=o(1)\). For the difference insert the factor \(e^{-i\theta}-1\). Its linear term integrates to zero on the symmetric Gaussian interval; the quadratic term costs \(O(\sigma^{-3})\) and the product with the characteristic-function error costs \(O(pw(1+w)^2/\sigma^5)\). On the remaining arc, the compact-radius Gaussian bound is exponentially small in \(pw\). Near the pole change variables \(v=(1+w)\theta\); integrating with the factor \(|\theta|\) bounds that tail by \(C(1+w)^{-2}e^{-cp}\). These are bounded by the claimed signed error. In particular, letting \(r_t\) satisfy \(\mu_{p_t}(r_t)=e_t\), for \(t\) comparable to \(h\) we have
+
+\begin{equation*}
+\log \frac{C_{p_t}(e_t+1)}{C_{p_t}(e_t)}
+    =-\log r_t+O(1/e_t).
+ \tag{4}
+\end{equation*}
+
+
+Write \(\sigma_h=\sigma_{p_h}(r_h)\), \(K=j^2/\sigma_h^2\) and \(\Delta=j/\sigma_h^2\). Formula (2) gives
+
+\begin{equation*}
+K^{-1}\asymp h/j+h^2/m,\qquad
+ \Delta\asymp \frac1{h(1+jh/m)}.
+\end{equation*}
+
+For \(h/2\le t\le 2h\), the saddle values \(w_t\) and variances are comparable to their values at \(h\). Between consecutive saddles the difference in mean for the same law is \(j+O(w_h)\sim j\): decreasing \(p\) by one removes one \(T\) and one \(U\) factor. Integrating the variance with respect to log-radius gives \(\log(r_{t+1}/r_t)\asymp\Delta\) throughout this range. In particular it is positive and \(1/e_h=o(\Delta)\) by (1).
+
+\subsection{Two-term localization with all coefficients included}
+\label{sec:two-term-localization-with-all-coefficients-included}
+
+Let \(y_h=d_h/d_{h+1}\) and \(D(r)=j!\rho_j^{-j}r^{-j}/(T(r)U(r))\). At any fixed tilt \(r\) the ratios of reversed coefficients obey
+
+\begin{equation*}
+d_t/d_v=D(r)^{t-v}P_{p_t,r}(e_t)/P_{p_v,r}(e_v).
+ \tag{5}
+\end{equation*}
+
+At \(r_{h+1}\) the old law \(p_h\) is displaced from its mean by \(\asymp j\); at \(r_h\) the other law is displaced by the same amount. Moving each law back to its own saddle gives the exact change-of-tilt factor
+\(\exp(\log F_p(r)-\log F_p(\tilde r)-e\log(r/\tilde r))\) when converting a point mass at \(r\) to its value at \(\tilde r\). Equivalently the off-mean point mass equals the at-mean one times the exponential of the negative tangent discrepancy of \(\log F_p\) in log-radius. The variance comparison between the two tilts gives discrepancy \(\ge c j^2/\sigma_h^2\). Crucially, the at-mean bound in (3) supplies the same \(1/\sigma_h\) at the displaced point as at the corresponding neighboring saddle. Therefore
+
+\begin{equation*}
+y_h D(r_{h+1})\le C e^{-cK},\qquad (y_h D(r_h))^{-1}\le C e^{-cK}.
+\end{equation*}
+
+Use the first tilt for \(t\ge h+2\) and the second for \(t\le h-1\) in (5), always dividing by the central term at that tilt. If \(p_t\ge m/2\) the supremum of point masses at the fixed tilt has size \(O(1/\sigma_h)\) by (3)'s supremum argument. For \(p_t<m/2\) the single-factor bound \(C/(1+w_h)\) loses at most \(O(\sqrt m)\) after division by a central mass. This latter range is at distance \(\asymp m\) and its polynomial loss is absorbed by the geometric ratio. As a result, throughout \(1/2\le |z|\le2\), the normalized off-central tail at \(y=y_h z\), after division by \(d_h(y_hz)^h\), tends to zero exponentially in \(K\). The bound per index is \(Ce^{-cK l}\), with \(l\) the distance to the central pair, except for the absorbable distant loss just described. The normalized central pair is \(1+z\).
+
+Rouché on \(|z|=1/2,2\) gives respectively \(h\) and \(h+1\) roots inside the contours with multiplicity, by comparison with the corresponding dominant monomials. On a small disk about \(-1\) inside the annulus it gives exactly one root, which is real by conjugacy and simple. It is negative and has modulus \(y_h(1+o(1))\). This is rank \(h\) under the zero-based original-modulus convention. Applying the same reasoning to \(h\pm1\) gives exponentially separated neighboring balances: use the first right-tail term at \(h\) to obtain \(y_h/y_{h+1}\le Ce^{-cK}\).
+
+\subsection{Consecutive sign with the exceptional leading coefficient}
+\label{sec:consecutive-sign-with-the-exceptional-leading-coefficient}
+
+Put \(\gamma_t=C_{p_t}(e_t+1)/C_{p_t}(e_t)\). The same-degree next coefficients, up to their common positive factor, are \(d_t\gamma_t\). From (4),
+
+\begin{equation*}
+\gamma_h-\gamma_{h+1}\asymp \gamma_h\Delta\asymp m/(jh^2)>0.
+\end{equation*}
+
+Indeed \(\gamma_h\asymp(1+w_h)/w_h\), \(w_h\asymp jh/m\), and the error \(O(1/e_h)\) in the logarithm is \(o(\Delta)\). For indices in \([h/2,2h]\), summing consecutive log-radius gaps and using (4) gives \(|\gamma_t-\gamma_{h+1}|\le C(|t-h|+1)\gamma_h\Delta\). The exponential tails therefore dominate the cost of these signed differences relative to \(\gamma_h\Delta\).
+
+For other \(t\ge1\), use the renewal estimate \(0\le\gamma_t-1\le C p_t/(e_t+1)\) for \(p_t\ge1\), and its exponentially small \(p_t=0\) replacement. This bounds the signed cost relative to \(\gamma_h\Delta\) by \(C(h+h^2/t)\). Since these terms are at distance at least a positive multiple of \(h\), the geometric tails absorb the cost, including the \(O(\sqrt m)\) prefactor when \(p_t<m/2\).
+
+The exceptional index \(t=0\) has signed relative cost at most \(Cjh^2/(s+1)+Ch\). If \(j\le m\), the distance-\(h\) bound suffices: \(hK\asymp \min(j,m/h)\), which grows faster than \(\log(jh^2)\) because \(h=o(j)\), \(h^2=o(m)\), and \(j\le m\). If \(j>m\), use the coefficient comparison (1) in the renewal proof directly. At the anchor indices \(h,h+1\), replace the respective binomial coefficients by their leading powers with log error \(O(1+m^2/(jh))\). At index zero use \(\binom{s+m}{m}\le (s+m)^m/m!\) and log error \(O(m)\). In the ratio \(d_0d_{h+1}^h/d_h^{h+1}\) the linear normalizations cancel and the total log error is \(O(m+h+m^2/j)=O(m)\). With \(u=s/j\), the power factors satisfy
+
+\begin{equation*}
+\frac{(u+h+1)^{h(m-h-1)}}{(u+h)^{(h+1)(m-h)}}\le
+ (u+h)^{-m}e^m,
+\end{equation*}
+
+and the factorial ratio \((m-h)!^{h+1}/(m!(m-h-1)!^h)\) is at most one. Thus \(d_0d_{h+1}^h/d_h^{h+1}\le(C(s+m)/(jh))^m\). The bound absorbs \(2^h\) and the signed cost, since \(x=(s+m)/(jh)\to0\) and \(jh^2/(s+1)\le mh/x\). This treatment has no upper limit on \(j\).
+
+At the actual old root subtract \(\gamma_{h+1}\) times the old reversed row, which vanishes there. The surviving central term has sign \((-1)^h\) and absolute size \((\gamma_h-\gamma_{h+1})d_h |y|^h\). All other terms are little-oh of this size by the signed estimates. Both old and new balances at the matching rank differ by a factor tending to one, from (4); the neighboring balances are exponentially separated. At equal degrees the inner disk of the matching next annulus contains \(h\) roots with multiplicity. Nonreal roots occur in conjugate pairs and positive coefficients exclude positive real roots. The count of negative real roots in the disk therefore has parity \(h\). The next reversed row is positive at zero, so its sign before the unique annular root is \((-1)^h\) and its sign after that root is opposite. The sign at the old root places it before the matching next root. Exponential separation places it after the preceding next root. Applying the same comparison at \(h+1\), or using its separated balance, gives the fixed-degree order claimed above.
+
+\subsection{Carry}
+\label{sec:carry}
+
+At \(s=j-1\), the next reversed row is \(d^*+\rho_j^{-1} y\sum_t d_t\gamma_t y^t\), \(d^*=(j!)^{-(m+1)}\). On old rank \(h\), the comparison's signed scale after stripping the factor \(y/\rho_j\) is \(\asymp m/(jh^2)\,d_h|y|^h\). We have \(|y|>y_0\) eventually: the rank-\(h\) Rouché count puts the fixed smallest reciprocal root inside \(y_h/2\), the fixed-rank theorem places it at \(y_0(1+o(1))\), and the moving root is at \(y_h(1+o(1))\). The unweighted off-central estimate at the moving root gives \(d_0=o(d_h|y|^h)\). Consequently it suffices that \(\rho_j d^*/(y_0d_0)=o(m/(jh^2))\).
+
+If \(j/m\to\infty\), the renewal carry calculation bounds this last ratio by \((m/j)(C m/j)^m\), which suffices. On any subsequence with \(j/m\le C\), use the reviewed comparable-threshold first two balances: the extra new balance is exponentially smaller in \(j\) than the following new balance, which is \(O(j)\) times the old first balance. The ratio \(\rho_j d^*/(y_0 d_0)\) is \(\gamma_0\) times the extra new balance divided by \(y_0\). Since \(\gamma_0=O(1+m/j)\), this is again \(o(m/(jh^2))\). These cases exhaust arbitrary growth by subsequences.
+
+The carry constant therefore preserves the strict signed comparison, with the sign reversed by the extra negative reciprocal factor. The matching next rank is \(h+1\), since its two central coefficients are the old ones shifted by one and altered by \(\gamma_h,\gamma_{h+1}\). The moving-rank Rouché argument applies also there with the new degree and residue, and the preceding new rank is exponentially closer to zero. The next inner disk count is now \(h+1\), so the same parity argument gives sign \((-1)^{h+1}\) before the matching root. The old reciprocal root therefore lies strictly between the next roots at ranks \(h\) and \(h+1\). Inverting yields the asserted carry bracket.
+
+\section{Dense regime with diverging scaled modulus}
+\label{sec:moving-poles}
+
+\textbf{Theorem.} Let \(O_{n,j}\) sum over all ordered partitions of \([n]\), marking each block of size at least \(j\). Put \(m=\lfloor n/j\rfloor\). Suppose \(m,j\to\infty\), and the integer defect \(h\) satisfies \(h/m\to0\), \(h/\sqrt m\to\infty\), and \(hj/m\to\infty\). Write \(q_{n,j,k}\) for the modulus of the \(k\)th root of \(O_{n,j}\) in increasing modulus, counting multiplicity. The roots at and immediately around \(k=m-h\) are simple and negative, and
+
+\begin{equation*}
+q_{n+1,j,k}<q_{n,j,k}<q_{n+1,j,k+1}.
+\end{equation*}
+
+The argument is uniform in the remainder \(n-mj\). It handles a whole window of defect indices. Section~\ref{sec:theta} treats the finite positive limit of \(j/\sigma_h\), which corresponds to \(h\asymp\sqrt m\) when \(hj/m\to\infty\). The modulus rank assertion uses the compact-parameter argument (Section~\ref{sec:compact-start}) to start the count.
+
+\subsection{Denominator and pole coordinate}
+\label{sec:denominator-and-pole-coordinate}
+
+Set \(\lambda=\log 2\) and \(U_j(z)=\sum_{b\ge0}j!z^b/(j+b)!\). For the parameter \(q\) corresponding to the original variable \(-q\), let \(Q=1+q\) and write
+
+\begin{equation*}
+B(z)=1-z,\qquad H(z)=\frac{2-e^{\lambda z}}{1-z},\qquad G(z)=H(z)^{-1},\qquad
+V_j(z)=\frac{\lambda^j}{j!}U_j(\lambda z)G(z).
+\end{equation*}
+
+The ordered-block generating function gives
+
+\begin{equation*}
+f_n(q):=\lambda^n O_{n,j}(-q)/n!=[z^n]\frac{G(z)}{D(z)},\qquad D(z)=B(z)+Qz^j V_j(z).
+\end{equation*}
+
+The functions \(G\) and \(V_j/V_j(1)\) are analytic and nonzero on a fixed disk \(|z|<R_f'\) for some \(R_f'>1\) and large \(j\). Their inverses and any fixed number of derivatives are uniformly bounded on a slightly smaller disk. Indeed \(H\) has removed its zero at 1 and the other zeros of \(2-e^{\lambda z}\) lie well outside that disk. The series \(U_j(\lambda z)\) tends to 1 uniformly, with derivatives on smaller disks.
+
+Write \(\log(QjV_j(1))=A+i\psi\) with \(A\) real and \(-\pi\le\psi\le\pi\), and define \(u>0\) by \(u+\log u=A\). For \(z=e^{-w/j}\) put
+
+\begin{equation*}
+C_j(w)=\frac{1-e^{-w/j}}{w/j},\qquad
+\alpha_j(w)=\log\left(\frac{V_j(e^{-w/j})}{V_j(1)C_j(w)}\right),\qquad F(w)=w+\log w-\alpha_j(w).
+\end{equation*}
+
+The first logarithm is the branch zero at \(w=0\). On \(|w|\le\epsilon j\) it obeys \(\alpha_j^{(a)}=O(j^{-a})\) for each fixed \(a\ge1\) on a smaller disk. The second logarithm is real on the positive real axis. The equation for a pole in the right half-plane is \(F(w)=A+ib\), where \(b=\psi+(2\ell+1)\pi\). More precisely,
+
+\begin{equation*}
+jD(e^{-w/j})=wC_j(w)\bigl(1+e^{A+i\psi-F(w)}\bigr).
+\end{equation*}
+
+Write \(M=n/j\) and \(\mu=M/u^2\). In the moving windows below \(u\) is at least a sufficiently large absolute constant and at most \(u_{\max}=o(\sqrt M)\). We take \(u_{\max}=3m/h\). Since \(h=o(m)\), this endpoint tends to infinity. The minimum of \(\mu\) on the window is of order \(h^2/m\), which tends to infinity. Also \(u_{\max}/j=3m/(hj)\to0\). These bounds persist under fixed padding in \(A\) since \(du/dA=u/(u+1)\). Constants in the following bounds are absolute after a fixed choice of the compact analytic disk and a fixed lower bound for \(u\).
+
+\subsection{A circle beyond many pole pairs}
+\label{sec:a-circle-beyond-many-pole-pairs}
+
+Choose a fixed large \(K\) and on \(|v|\le Ku\) solve \(\Re F(x(v)+iv)=A\) for \(x(v)\). The solution is unique in a strip \(x=u+O_K(1)\). This follows from \(\partial_x\Re F=1+O_K(1/u)\) and comparison on \(x=u\pm L_K\) for a large fixed \(L_K\). It is even in \(v\), and \(x(0)=u+O(u/j)\). For \(v\ge0\), the imaginary part of \(\alpha_j'(x+iv)\) is \(O(v/j^2)\) by conjugation and the second derivative bound. Thus implicit differentiation gives
+
+\begin{equation*}
+-x'(v)=\frac{-\Im F'(x(v)+iv)}{\Re F'(x(v)+iv)}\asymp_K \frac{v}{u^2},\qquad
+\frac{d}{dv}\Im F(x(v)+iv)=\frac{|F'(x(v)+iv)|^2}{\Re F'(x(v)+iv)}\asymp_K1.
+\end{equation*}
+
+Consequently \(v\) and the positive target \(b=\Im F\) are comparable. If \(0\le |b_1|\le |b_2|\) are realized in this interval, then
+
+\begin{equation*}
+x_{b_1}-x_{b_2}\asymp_K\frac{b_2^2-b_1^2}{u^2},
+\qquad x_b:=\Re w_b.
+\end{equation*}
+
+To choose a zero-free circle, vary \(d\) over \([u-2,u-1]\). The equation \(\Re F(d+iv_*)=A\) has a unique \(v_*>0\), with \(v_*\asymp u\). For example, writing \(d=u-a\) with \(1\le a\le2\), the limiting expression for \(\Re F(d+ivu)-A\) is \(-a+\tfrac12\log(1+v^2)\), uniformly for bounded \(v\). Its derivative with respect to the unscaled vertical variable is \(\asymp1/u\) near \(v_*\). Implicit differentiation gives \(v_*'(d)\asymp-u\), and the derivative of \(\Im F(d+iv_*(d))\) has the same order with negative sign. Its range therefore traverses a full period for large \(u\). Choose \(d\) so that this phase stays a fixed distance from both target classes \(\pi+\psi\) and \(\pi-\psi\) modulo \(2\pi\). The midpoint of a larger complementary arc has clearance at least \(\pi/2\), including coincident classes.
+
+Set \(R=e^{-d/j}\). For \(|v|\le Ku\) the circle is the line \(w=d+iv\) with \(v=-j\theta\). Within a fixed small distance of \(\pm v_*\) the phase clearance persists. Elsewhere \(|\Re F(d+iv)-A|\gg 1/u\) by monotonicity in \(|v|\) and the derivative lower bound near \(v_*\). In either case \(|1+e^{A+i\psi-F(w)}|\gg1/u\). As \(|wC_j(w)|\gg u\), this gives \(|D(Re^{i\theta})|\gg 1/j\). For \(|\theta|\ge Ku/j\), one has \(|1-Re^{i\theta}|\gg|\theta|\) on \([-\pi,\pi]\), while \(|Q|R^j\sup|V_j|\ll u/j\). Taking \(K\) large yields an outer bound \(|D(Re^{i\theta})|\gg|\theta|\). Also \(|D_\theta|\ll u\) everywhere on the contour.
+
+Every zero inside the circle satisfies \(|1-z|\le |Q|R^j\sup|V_j|\ll u/j\). Its principal \(w=-j\log z\) thus obeys \(|w|\le Ku\) on increasing \(K\) if necessary. Since \(\Re w\ge d\), the mean-value bound in \(x\) places it on the curve above. This lists all enclosed poles and shows that they are simple. The first one or two poles have bounded \(|b|\), so \(x_b=u+O(u/j+u^{-2})\) and \(x_b-d\ge1/2\) for large parameters. The separator can be much farther from the principal poles than the spacing between the closest pole pairs.
+
+\subsection{Value error and consecutive error}
+\label{sec:value-error-and-consecutive-error}
+
+The residue theorem yields
+
+\begin{equation*}
+f_n(q)=\sum_{w_b\ \mathrm{inside}}K_j(w_b)e^{Mw_b}+J_n,
+\qquad K_j(w)=\frac{G(e^{-w/j})}{w C_j(w)F'(w)},\qquad
+J_n=\frac{R^{-n}}{2\pi}\int_{-\pi}^{\pi}e^{-in\theta}\frac{G(z)}{D(z)}\mathrm{d}\theta .
+\end{equation*}
+
+Here \(z=Re^{i\theta}\). The sign and power follow from \(D_z'=-w C_j(w)F'(w)/z\) at the pole and from subtracting the residues when moving the coefficient contour out. Each enclosed \(K_j\) has modulus between constant multiples of \(1/u\).
+
+An integration by parts bounds \(J_n=O(R^{-n}u^2/M)\). On \(|\theta|\le Ku/j\), the derivative of \(G/D\) costs \(O(uj^2)\) on an interval of length \(O(u/j)\). Outside this interval integrate \(O(u/\theta^2)\), which costs \(O(j)\), and then divide by \(n\). After normalization by a principal residue, the gap \(x_b-d\ge1/2\) makes the circle error \(O(e^{-cM})\).
+
+For real positive \(Q\) let \(w_+=x+iv\) correspond to \(b=\pi\), with \(r=e^{-x/j}\). Use the same contour for \(f_n\) and \(f_{n+1}\). Thus \(rJ_{n+1}-J_n\) has multiplier \(S(z)=r/z-1\). Estimating this multiplier against the circle directly can introduce a factor \(\log j\). Instead split exactly
+
+\begin{equation*}
+\frac{SG}{D}=\frac{SG}{B}-\frac{SG Qz^j V_j}{BD}.
+\end{equation*}
+
+Move the first term to a fixed radius \(1<R_f<R_f'\) crossing \(z=1\). The residue gives \(O(u/j)\) since \(|S(1)|=|r-1|=O(u/j)\), and the new circle gives \(O(R_f^{-n})\). The possible Laurent term of \(S\) at zero causes no extra contribution when deforming one positive-radius circle to the other. The bound \(R_f^{-n}\ll1/j\) is uniform in \(j\).
+
+For the second term factor \(e^{ij\theta}\) out of \(z^j\) and integrate the remaining periodic amplitude by parts at frequency \(n-j\). To check the variation, in the inner interval use \(|B|\gg u/j\), \(|D|\gg1/j\), \(|S|\ll u/j\), \(|Q|R^j|V_j|\ll u/j\), \(|D_\theta|\ll u\), and \(S_\theta,B_\theta,G_\theta=O(1)\). The derivative of the remaining amplitude is \(O(u^2j)\) and its integral is \(O(u^3)\). In the outer interval use \(|B|,|D|\gg|\theta|\), \(|S|\ll|\theta|\), and a derivative bound \(O(u^2/(j\theta^2))\). This contributes \(O(u)\) to the variation. Thus the second term is \(O(R^{-n}u^3/(Mj))\). Both parts, after the positive principal normalization \(r^n/(2|K_j(w_+)|)\), are \(O(e^{-cM}/j)\) after absorbing polynomial factors in \(u,M\). In the first part use \(r^n=e^{-Mx}\).
+
+For real \(Q\), the normalized residue sum beyond the principal pair is \(O(e^{-c\mu})\). Indeed the \(b\)th term is bounded by \(C\exp[-c\mu(b^2-\pi^2)]\) and the sum over odd multiples starting at \(3\pi\) keeps the same scale without a factor depending on the number of enclosed poles. Each term in the normalized consecutive difference gains
+
+\begin{equation*}
+|re^{w_b/j}-1|\ll\frac{|b|}{j}.
+\end{equation*}
+
+This uses \(|\Im w_b|\ll|b|\) and \(|x_b-x|\ll(b^2-\pi^2)/u^2\); all enclosed \(|b|\) are \(O(u)\). The weighted Gaussian sum is still \(O(e^{-c\mu})\). The consecutive error is therefore \(O(e^{-c\mu}/j)\), even if \(j\) is superexponential in \(M\) or if \(\mu\) diverges arbitrarily slowly.
+
+\subsection{Complex exclusion and simple real roots}
+\label{sec:complex-exclusion-and-simple-real-roots}
+
+For complex \(Q\) the targets remain \(b=\psi+(2\ell+1)\pi\) on the same real-level curve. When \(|\psi|\ge\delta/2\) for a fixed small \(\delta>0\), precisely one target has least absolute value. The two smallest absolute values are \(\pi-|\psi|\) and \(\pi+|\psi|\). Their squared difference is \(4\pi|\psi|\). The normalized sum of other terms is then \(O(e^{-c\delta\mu})\) by the same separation and Gaussian summation. The absolute circle bound gives a still smaller error. The principal residue is nonzero, so there is no polynomial zero in this part of the complex parameter annulus.
+
+For \(|\psi|\le\delta\), keep the two analytic continuations \(w_\pm(L)\) of the \(\pm\pi\) poles, where \(L=A+i\psi\). They solve \(F(w_\pm(L))=L\pm i\pi\). Their existence on fixed small disks about the real axis is uniform since \(F'=1+O(1/u)\) near both roots. For instance on a fixed small circle about an old pole, \(F(w)-F(w_\pm(A))\) differs from \(w-w_\pm(A)\) by a relative \(O(1/u)\), and Rouché gives the inverse on the smaller parameter disk. Write
+
+\begin{equation*}
+\begin{aligned}
+X(L)&=\frac{w_+(L)+w_-(L)}2, &
+K_\pm(L)&=K_j(w_\pm(L)),\\
+\gamma(L)&=\frac{\log K_+(L)-\log K_-(L)}{2i}, &
+\Phi(L)&=M\frac{w_+(L)-w_-(L)}{2i}+\gamma(L).
+\end{aligned}
+\end{equation*}
+
+The logarithms are conjugate along the real axis. Their choices can be made continuously along that axis with \(\gamma(A)=O(1)\), since \(K_j(w_+(A))=(G(1)/u)(1+O(u^{-1}+u/j))\). Put \(\mathcal K(L)=\exp((\log K_++\log K_-)/2)\), positive on the real axis. The exact normalized equation is
+
+\begin{equation*}
+\frac{f_n(q)}{2\mathcal K(L)e^{MX(L)}}=\cos\Phi(L)+E_n(L),\qquad |E_n(L)|\le C e^{-c\mu}.
+\end{equation*}
+
+In fact both principal targets have modulus at most \(\pi+\delta\), all later ones have modulus at least \(3\pi-\delta\), and the real part of \(X\) is the mean of the two principal real parts. This gives the required suppression of every nonprincipal residue relative to this normalization, even when the two main terms are not balanced in absolute value. The circle bound persists because both principal real parts exceed \(d+1/2\). The positive-radius circle can vary pointwise with \(L\) in these bounds. The normalized error is an analytic function of \(L\) by its definition after subtracting the analytic principal terms. Thus Cauchy's estimate gives the same exponential bound for \(E_n'\) on fixed smaller log-parameter disks, using comparability of \(\mu\) across a fixed disk.
+
+On the real axis, \(v=\Im w_+\) satisfies
+
+\begin{equation*}
+v'=\Im(1/F'(w_+))\asymp u^{-2}>0,
+\qquad
+\Phi'=Mv'+O(u^{-1})\asymp\mu .
+\end{equation*}
+
+The derivative bounds follow from \(w_+'=1/F'(w_+)\) and \(F''=O(u^{-2})\). In particular \(\Phi''=O(\mu)\) on fixed sufficiently small complex disks after using \(w_\pm''=-F''(w_\pm)/(F'(w_\pm))^3\) and the derivative bounds on \(K_j\). Shrink \(\delta\) by an absolute factor to obtain \(\Re\Phi'\ge c\mu\) on each disk of radius \(\delta\) centered at a real \(A\) in the range. These disks may use a fixed padding at the outer edge of the range.
+
+If \(L_0=A+i\psi\) with \(|\psi|\le\delta/2\) is a zero, then \(\Phi(L_0)\) lies within \(O(e^{-c\mu})\) of a real member of \(\pi/2+\pi\mathbb Z\), by \(|\cos(a+ib)|^2=\cos^2 a+\sinh^2 b\). On the log-parameter disk of radius \(\delta\) about \(A\), integrating the lower real derivative bound along straight segments gives \(|\Phi(L)-\Phi(L_0)|\ge c\mu|L-L_0|\). The map is injective there, and its image contains the radius-\(1/4\) disk about the indicated half-integer multiple of \(\pi\). The inclusion follows by applying Rouché to \(\Phi(L)-\Phi(L_0)\) on the disk boundary and shifting the target by less than the boundary minimum. In that image disk, Rouché against the cosine gives exactly one simple zero. The original parameter disk and the target disk are both symmetric under conjugation, and the inverse phase commutes with conjugation. Hence the zero is real and simple. This excludes every nonreal or multiple zero with scaled log modulus \(A\) in the range. It covers both the near-real strip and the complementary arguments handled by one-pole dominance.
+
+\subsection{Consecutive signs and exact ranks}
+\label{sec:consecutive-signs-and-exact-ranks}
+
+On real \(A\), set \(r=e^{-\Re w_+/j}\) and use the positive normalization \(r^n/(2|K_j(w_+)|)\) for \(f_n\). In the next row the normalized pole contribution is \(\cos(\Phi+\varphi)\) with \(\varphi=v/j\asymp1/j\). Evaluating at an old zero and subtracting its normalized zero value, one obtains the next-row sign from
+
+\begin{equation*}
+\cos(\Phi+\varphi)-\cos\Phi+O(e^{-c\mu}/j)
+=-\sin\Phi\sin\varphi+\cos\Phi(\cos\varphi-1)+O(e^{-c\mu}/j).
+\end{equation*}
+
+At that point \(|\cos\Phi|\le C e^{-c\mu}\) and \(|\sin\Phi|\) is bounded below. The sign is \(-\mathrm{sgn}(\sin\Phi)\), the sign of the normalized derivative inside the old root's phase band. The same derivative sign holds for the next row in that band, since \(\Phi_{n+1}=\Phi+\varphi\), the band centers differ by \(O(1/j)\), and \(E_{n+1}'=O(e^{-c\mu})\). To use fixed phase bands, one may locate each old and new root within \(O(e^{-c\mu})\) of its half-integer phase level, then use the derivative on the larger band of width \(\pi/6\) about that level. Each full band has exactly one root by the endpoint signs and strict derivative sign, and the gaps have none. At the old root the new value has the same sign as the derivative of the new row in the band. Thus the neighboring new root in this band lies at a strictly smaller positive \(q\), and the one in the following band lies at a strictly larger \(q\).
+
+The phase labels agree for both rows on overlap with the fixed-scaled-modulus proof. To see this concretely, \(Q_j jV_j(1)\to e^{-1}\) for the sharp-edge scale \(Q_j=1+q_j^*\), since \(q_j^*\sim2(j-1)!/(e\lambda^{j-1})\). Therefore a fixed interval of large \(A\) corresponds to a fixed compact interval of the parameter \(\tau=Q/Q_j\) from that proof. The principal physical radii there are the same poles, since the changes of coordinates differ by a real translation and sign. The older residue normalization uses \(-\cos((n+1)\varphi+\beta)\), where \(\beta\) is an argument of the original denominator derivative at the upper physical pole. The present formula uses \(+\cos(Mv+\gamma)\). At the lower physical pole one has \(K_j=-G/(zD_z')\), so conjugation shows that the phases differ by a constant odd multiple of \(\pi\) on any connected overlap. This difference is the same in both rows since the change of argument is independent of \(n\). Hence a band has the same rank in both rows by the fixed-scaled-modulus theorem, and the consecutive band count preserves this correspondence throughout the range. The complex exclusion in the annulus of \(|Q|\) combines with the compact exclusion below it because \(|1+q|\le1+|q|\). Thus the ranks are also ranks in modulus among all complex roots.
+
+For clarity on the last rank claim, the bounded-target pole equation gives
+
+\begin{equation*}
+\pi-v=\arg(w_+)-\Im\alpha_j(w_+)=\frac{\pi}{u}+O(u^{-2}+j^{-1}).
+\end{equation*}
+
+Here \(x=u+O(u/j+u^{-2})\), \(v=\pi+O(u^{-1}+j^{-1})\), and the imaginary part of \(\alpha_j\) is \(O(1/j)\) by conjugation. The band count together with its compact starting value gives a cumulative count \(K(A)=\Phi(A)/\pi+O(1)\), for both rows, and hence
+
+\begin{equation*}
+m-K(A)=\frac m u+O(m/u^2+m/j+1).
+\end{equation*}
+
+Choose endpoints with \(u=m/(2h)\) and \(u=2m/h\). The first has fewer than \(m-h\) roots and the second has more, by margins of order \(h\). The uniform contour proof applies from a fixed large \(u\) up to a padded endpoint, for instance \(3m/h\), where the infimum of \(\mu\) still tends to infinity. This leaves complete bands at and around rank \(m-h\) for all large parameters, and the comparisons above prove the proposed strict order, including a degree carry in \(n\mapsto n+1\).
+
+\subsection{Uniformity in the threshold growth}
+\label{sec:uniformity-in-the-threshold-growth}
+
+The three parameters needed in the moving range are \(u/j=o(1)\), \(u^2/M=o(1)\), and a sufficiently large fixed lower bound on \(u\). In the level-curve derivative, the imaginary perturbation \(O(v/j^2)\) is of relative order \(O((u/j)^2)\) compared with \(v/(x^2+v^2)\). Thus the nearby pairs are compared on a common real-level curve even when the displacement of that curve from the limiting Lambert curve exceeds the gap between two pairs. The circle and residue estimates use \(u/j=o(1)\) for the local variable change and \(u^2/M=o(1)\) for summability. The fixed-radius contribution uses \(R_f^{-n}=O(1/j)\) directly. The compact start needs only joint growth of \(j\) and \(m\).
+
+At the two rank-bracketing endpoints, \(m/u^2=O(h^2/m)=o(h)\) and \(m/j=o(h)\), so the errors in the defect count are \(o(h)\). The hypotheses therefore suffice in the full range \(h\gg\max(\sqrt m,m/j)\), in the sense that both ratios tend to infinity.
+
+The contour and phase estimates also hold on a padded window with \(u\le\varepsilon j\) for a sufficiently small fixed \(\varepsilon>0\), provided the infimum of \(M/u^2\) still tends to infinity. Choose the nonvanishing disk first, the constant \(K\) in the angular bounds next, and then \(\varepsilon\) small enough for both the local coordinate and the derivative comparison. On the separator \(d=u-a\) the scaled crossing comparison is \(-a+\tfrac12\log(1+v^2)+O_K(1/u+\varepsilon)\) at height \(uv\). Fixed test heights enclose the crossing. The outer circle and signed residue estimates retain the same bounds. In this larger window the defect error \(O(m/j)\) can affect integer ranks, so a separate saddle calculation would need an exact overlapping rank count to make a join.
+
+\section{Dense regime at bounded coefficient radius}
+\label{sec:dense}
+
+Consider \(n=mj+s\), \(0\le s<j\), with \(j,m\to\infty\) and \(h=o(m)\). This note treats \(h/j\to\infty\) and \(hj/m\) bounded above. It proves simplicity, negativity and the consecutive interlacing comparisons for the root with one-based rank \(k=m-h\) in *increasing* original modulus, including the degree-increasing step. The parameters imply \(m/j^2\to\infty\). The conclusion is \(b_k<a_k<b_{k+1}\) for old and new moduli \(a_k,b_k\). We allow fixed shifts of \(h\) throughout.
+
+\subsection{The positive real radius for a complex modulus}
+\label{sec:the-positive-real-radius-for-a-complex-modulus}
+
+Use the renewal notation \(S_j(\rho)=1\), \(T=(1-S_j(\rho z))^{-1}\), \(U=\sum_{i\ge0}j!(\rho z)^i/(i+j)!\), \(V=TU\). For a complex variable \(q\) we have
+
+\begin{equation*}
+f_n(q)=\rho^n O_{n,j}(-q)/n!
+=[z^n]\thinspace \frac{T(z)}{1+Qz^j V(z)},\qquad Q=q\rho^j/j!.
+\end{equation*}
+
+Define \(r\) by \(|Q|r^j V(r)=1\). It decreases from one to zero as \(|Q|\) increases. We work at \(r\le r_*<1\) for fixed \(r_*\), with \(m r/j^2\to\infty\) uniformly over any parameter intervals under consideration. Write \(\mathcal M(z)=zV'(z)/V(z)\) and \(\mathcal W(z)=z\mathcal M'(z)\). At a positive real \(r\), these are the mean and variance of the \(r\)-tilted coefficients of \(V\). On this compact radius range both are comparable to \(r\), uniformly in \(j\). Indeed \(V\) has nonnegative coefficients bounded above and below on the entire sequence, and tilted probabilities of zero and one are at least \(c\) and \(cr\). All positive-order logarithmic derivatives \((z\partial_z)^a\log V\) on a slightly larger closed disk are \(O_a(|z|)\) for each fixed \(a\). The same bound holds for \(T\). These facts follow from uniform analytic logarithms on the larger disk, using the zero-free renewal representation. Constants may depend on \(r_*\).
+
+\subsection{The pole circle and its residues}
+\label{sec:the-pole-circle-and-its-residues}
+
+Choose a constant \(D>2\) large enough that on \(|z|=R=r e^{D/j}\), \(|Qz^j V(z)|\ge2\). The same \(D\) works throughout \(r\le r_*\) since \(|V|\) is bounded above and below on the slightly larger disk. Rouché gives \(j\) zeros of the denominator inside \(R\). The Cauchy integral on this circle is \(O(R^{-n})\). To describe all the zeros, put \(z=r\exp(x/j+i\theta)\). The real modulus equation is
+
+\begin{equation*}
+x+\log|V(r e^{x/j+i\theta})|-\log V(r)=0 .
+\end{equation*}
+
+For every \(\theta\) there is a unique solution \(x=x(\theta)\) in \(|x|\le C r\). Indeed the left side has derivative \(1+\Re\mathcal M(z)/j=1+O(r/j)\) and opposite signs at \(\pm C r\) by the logarithm bounds. All functions of \(\theta\) here are periodic, except the unwrapped phase. The solution is even, \(x(0)=0\), and the phase \(b(\theta)=j\theta+\Im\log V(z)\) is odd with derivative \(j+O(r)>0\). Over a full circle its increment is \(2\pi j\). Selecting \(b=(2v+1)\pi-\arg q\) gives exactly the \(j\) simple poles, taking representatives modulo \(2\pi j\). Equivalently their logarithmic denominator derivatives are \(-(j+\mathcal M(z))\), which never vanish. Each has residue contribution \(K(z)z^{-n}\) with \(K(z)=T(z)/(j+\mathcal M(z))\), of modulus comparable to \(1/j\).
+
+There is a fixed small \(\delta_0>0\) such that for \(0\le\theta\le\delta_0\),
+
+\begin{equation*}
+x'(\theta)=\frac{\Im\mathcal M(z)}{1+\Re\mathcal M(z)/j}\asymp r\theta.
+\end{equation*}
+
+Indeed at radius \(|z|\) the imaginary part is \(\mathcal W(|z|)\theta+O(r\theta^2)\) and \(\mathcal W(|z|)\ge cr\). This gives, for \(0\le |b_1|\le |b_2|\) on that arc,
+
+\begin{equation*}
+x_{b_2}-x_{b_1}\asymp\frac r{j^2}(b_2^2-b_1^2).
+\end{equation*}
+
+For \(\delta_0\le|\theta|\le\pi\) one has \(x\ge c_{\delta_0}r\). To see this, compare the tilted characteristic function at \(t=|z|\): \(1-|V(t e^{i\theta})/V(t)|^2\ge 2p_0p_1(1-\cos\theta)\ge c_{\delta_0}r\). Also \(|\log V(t)-\log V(r)|\le C r |x|/j\). Substitution into the modulus equation gives the assertion. The principal poles with bounded \(|b|\) have \(x=O(r/j^2)\).
+
+Write \(M=n/j\) and \(\mu=Mr/j^2\). On positive real \(q\) the closest poles are the conjugate pair for \(b=\pm\pi\). Relative to either principal residue, the sum beyond the pair is \(O(e^{-c\mu})\). On the small arc, sum \(C\exp(-c\mu(b^2-\pi^2))\) over the remaining odd targets. Off that arc the bound is \(Cj e^{-cMr}\). For the consecutive difference at real \(q\) normalize each row with the common principal radius \(r_0=|z_\pi|\), thus replacing each remaining residue by its product with \(r_0/z_b-1\). This factor is \(O(|b|/j)\) in the small arc, since \(\theta=O(|b|/j)\) and \(|x_b-x_\pi|\le Cr\). Elsewhere it is bounded. As \(Mr=\mu j^2\), the whole normalized difference of nonprincipal residues is \(O(e^{-c'\mu}/j)\). The circle errors in the individual normalized rows are at most \(Cj\exp(-M(D-x_\pi))\). They too are \(O(e^{-c'\mu}/j)\) since \(m/j^2\to\infty\) and \(x_\pi=O(r/j^2)\).
+
+\subsection{Reality, multiplicities and row comparison}
+\label{sec:reality-multiplicities-and-row-comparison}
+
+For complex \(q\) outside \(|\arg q|<\delta/2\) with fixed small \(\delta>0\), one closest pole dominates by \(O(e^{-c\delta\mu})\) relative error. The squared gap between the smallest two absolute targets is \(4\pi|\arg q|\), and the preceding far-arc and circle bounds still apply. Thus the polynomial does not vanish there.
+
+In \(L=\log q\) near positive real \(q\), select analytic conjugate pole branches \(z_\pm\) with \(z_+\) upper on the real axis. The implicit derivative \(d\log z_\pm/dL=-1/(j+\mathcal M(z_\pm))\) continues them throughout fixed small disks around each real \(L\). For example the map \(j\log(z/z_0)+\log(V(z)/V(z_0))\) is univalent and covers a fixed parameter disk on a log-radius disk of radius \(C/j\) about each starting pole, by comparison with its linear first term. Let \(\Phi\) be the analytic continuation of \(n\arg z_+-\arg K(z_+)\), using half the difference of conjugate logs. Normalize by the geometric mean of the two principal absolute continuations as in the moving pole proof. The two main terms sum to \(\cos\Phi\) in this normalization. The analytic error and its first derivative on smaller disks are \(O(e^{-c\mu})\): throughout a small complex disk all other pole targets have size at least \(3\pi-\delta\), while the two principal ones have size at most \(\pi+\delta\), and the horizontal bounded changes of \(L\) alter \(r\) by a relative \(O(1/j)\). Cauchy's derivative estimate applies to the error written as the analytic normalized polynomial minus the cosine.
+
+On the real axis,
+
+\begin{equation*}
+\Phi'=n\thinspace \frac{\Im\mathcal M(z_+)}{|j+\mathcal M(z_+)|^2}+O(r/j)\asymp \mu>0 .
+\end{equation*}
+
+Here the principal angle is comparable to \(1/j\), and \(\Im\mathcal M(z_+)\asymp r/j\). The derivative error follows from the analytic logarithmic derivative of \(K\). On the small disks \(|d^2\log z_\pm/dL^2|=O(r/j^3)\) and \(|d^2\log K/dL^2|=O(r/j^2)\), so \(|\Phi''|=O(\mu)\). Choose \(\delta\) small to retain \(\Re\Phi'\ge c\mu\). If a complex zero occurs, its phase is within \(O(e^{-c\mu})\) of a real cosine zero, using the identity for \(|\cos(a+ib)|^2\). The phase is injective on the padded disk by integration of its derivative on line segments, and its image contains a disk of radius \(1/4\) about that real cosine zero by the argument principle on the boundary. In this image disk Rouché gives just one simple preimage zero of the perturbed cosine, real by conjugation. Hence all polynomial zeros in these modulus windows are real and simple. Each full band of width \(\pi/6\) on either side of a half-integer cosine level has one real root and the intervening gaps have none, by the real derivative estimate and signs.
+
+The adjacent row phase is \(\Phi+\arg z_+\), with \(\arg z_+\asymp 1/j\). At an old root, the next normalized value has sign \(-\mathrm{sgn}(\sin\Phi)\) by subtracting the old value, using the consecutive error \(O(e^{-c\mu}/j)\). This agrees with the sign of the derivative of the next row in that band. Consequently its root in the same band comes strictly before the old one as \(q\) increases, and the root in the next band lies strictly after it.
+
+\subsection{Joining to genuine ranks}
+\label{sec:joining-to-genuine-ranks}
+
+The compact scaled-modulus theorem (Section~\ref{sec:compact-start}) fixes the initial rank labels. Its sharp-edge location is \(\rho_*\), the positive double pole at the sharp lower edge. The renewal scale \(\rho\) solves \(S_j(\rho)=1\). The moving-pole proof (Section~\ref{sec:moving-poles}) continues the count to \(u\le\epsilon j\) for fixed sufficiently small \(\epsilon>0\), as justified by the \href{https://github.com/ProgramComputer/open-math-research/blob/8624d14aef697bf2b515881bdda873228c0b5b50/topics/ordered-large-blocks/growing-outer-ranks/review-pole-overlap.md}{overlap audit}. Since \(m/j^2\to\infty\), the infimum of \(M/u^2\) tends to infinity on this continuation.
+
+Near \(r=e^{-\epsilon/2}\), the saddle scale \(q=(j!/\rho^j)r^{-j}/V(r)\) and the moving scale \(\log((1+q)jV_j(1))=u+\log u\) give \(u/j=-\log r+o(1)\). In the physical spatial coordinate \(w\) the common denominator is
+
+\begin{equation*}
+P_q(w)=1-S_j(w)+qC_j(w)=2-e^w+(1+q)C_j(w),
+\qquad C_j(w)=\sum_{b\ge j}\frac{w^b}{b!}.
+\end{equation*}
+
+Under a spatial dilation \(w=az\) with \(a>0\), a simple pole at \(w_0=az_0\) contributes \(z_0^{-n}\) times the coefficient amplitude
+
+\begin{equation*}
+-\frac{1}{az_0P_q'(az_0)}=-\frac{1}{w_0P_q'(w_0)}.
+\end{equation*}
+
+The minus sign comes from enlarging the coefficient contour. This amplitude is independent of the dilation, and the angle is unchanged. Both arguments select the nearest physical conjugate pair. The upper physical pole corresponds to the conjugate of the positive-imaginary branch in the moving logarithmic coordinate. On the overlap the upper amplitude is \(T(r)/j\) times \(1+O(1/j)\), so both arguments use the same branch of its argument near zero. Their phases are exactly \(n\) times the common upper-pole angle minus this residue argument, for both row sizes. Both proofs isolate one zero per full band and exclude intervening complex zeros. The compact labels therefore transfer through common bands. Below the seam, \(|1+q|\le1+|q|\) and the padded moving-pole interval cover all smaller moduli.
+
+The two descriptions have an interval of overlap containing many consecutive full bands: \(d\log q/d\log r=-(j+\mathcal M(r))\), while the real phase derivative in \(\log q\) is comparable to \(m/j^2\) there. Thus a fixed open interval of matching radii has phase length comparable to \(m/j\), tending to infinity. The count of all roots up to real \(q\) in the continued range differs by \(O(1)\) from \(\Phi/\pi\) by the compact start and band exhaustion. The constant is bounded uniformly in \(j,m\) because the argument branches stay bounded.
+
+At the bounded target \(b=\pi\) let \(v=j\arg z_+\). From \(v+\Im\log V(z_+)=\pi\) one gets
+
+\begin{equation*}
+\pi-v=\frac{\pi\mathcal M(r)}j+O(r/j^2).
+\end{equation*}
+
+Indeed \(|z_+|/r=1+O(r/j^3)\), and the imaginary log on the small arc is \(\mathcal M(|z_+|)\arg z_++O(r(\arg z_+)^2)\). The count \(K\) consequently satisfies \(m-K=m\mathcal M(r)/j+O(mr/j^2+1)\). The mean \(\mathcal M\) is continuous strictly increasing from zero to infinity. Choose two radii by \(\mathcal M(r)=hj/(2m)\) and \(\mathcal M(r)=2hj/m\). Both are uniformly below one since \(hj/m\) stays bounded and the single-variable tilted mean is uniformly comparable to \(r/(1-r)\). At either radius \(mr/j^2\asymp h/j\to\infty\). If necessary enlarge the bounded-radius range from the overlap to reach the larger of these endpoints, keeping some fixed \(r_*<1\) and padding the interval by using target multipliers \(1/3,3\) instead of \(1/2,2\). The intervals connect continuously to the overlap while preserving the uniform lower bound on \(\mu\). The two counts have defects \(h/2+o(h)\) and \(2h+o(h)\). Thus the requested rank and its comparator lie strictly inside the established range. This proves the bounded-radius assertion.
+
+\section{Exhaustion of all ranks and thresholds}
+\label{sec:assembly}
+
+Suppose failures occur along old sizes \(n\to\infty\). Write \(n=mj+s\), \(0\le s<j\). Constant polynomials have empty root lists. A carry from degree zero to one has a simple negative zero since both coefficients of the new row are positive. If \(j\) is bounded on a subsequence, pass to a constant threshold and use the fixed-threshold eventual result~\cite{fixed}. Otherwise pass to \(j\to\infty\). If \(m\) stays bounded on a subsequence, the bounded proportional-window theorem~\cite{window} applies to both sizes, including a carry. Thus we may take \(j,m\to\infty\).
+
+An old one-based modulus rank \(k\) can be chosen that witnesses the failure, including any required neighboring new rank. Each multiset is ordered by increasing modulus, with ties broken arbitrarily. At every old rank the desired local claims are simplicity, negativity, \(b_k<a_k\), and \(a_k<b_{k+1}\) whenever the latter index exists. The required comparisons include simplicity and negativity for both named new roots whenever their indices exist. These claims, if all valid, imply the theorem, so a bad rank can be chosen. Put \(h=m-k\). If \(h\) remains bounded use the uniform fixed-outer-rank result~\cite{outer} with two extra ranks. If \(h/m\) stays bounded below on a subsequence, the compact root distribution theorem (Section~\ref{sec:compact-start}) applies: each prescribed proportion less than one of the smallest-modulus ranks is eventually covered, including its new neighbor. A fixed fraction can be chosen strictly between the upper limit of \(k/m\) on this subsequence and one. We may therefore take \(h\to\infty\) with \(h/m\to0\).
+
+The positive coefficient saddle for \(p=m-h\) large blocks and residual \(s+hj\) has variance comparable to \(m w(1+w)\) and mean comparable to \(mw\), where \(w=r/(1-r)\). Consequently
+
+\begin{equation*}
+\frac{\sigma_h^2}{j^2}\asymp \frac{h}{j}+\frac{h^2}{m}.
+\end{equation*}
+
+After passing to a subsequence, \(j/\sigma_h\) has a limit in \([0,\infty]\). The sparse two-term argument (Section~\ref{sec:sparse}) covers the infinite limit. The signed theta-function limit (Section~\ref{sec:theta}) covers every positive finite limit. For the zero limit, \(h/j+h^2/m\to\infty\). On a further subsequence, \(hj/m\) either tends to infinity or remains bounded. In the first case \(h^2/m\) dominates \(h/j\), so \(h/\sqrt m\to\infty\) and \(h/(m/j)\to\infty\). The moving-pole theorem (Section~\ref{sec:moving-poles}) applies. In the bounded case \(h/j\) dominates up to a constant, hence \(h/j\to\infty\), and the bounded-radius dense argument (Section~\ref{sec:dense}) applies. All four arguments include the prescribed neighboring ranks across a carry and establish ranks among *all* complex roots. This rules out the chosen failure.
+
+Finally, potential exceptional parameter pairs really are finite: below the asserted \(N\), each \(j>n+1\) gives two constant rows. The proof does not compute \(N\). A finite check through any separately chosen limit therefore does not by itself settle the all-size conjecture.
+
+
+\paragraph{Verification and availability.}
+The complete asymptotic argument and its scope underwent a fresh-context agent-assisted mathematical review. The angular inequalities in the fixed-threshold input have exact rational checks. The growing-rank sample uses exact interval-endpoint signs and illustrates the consecutive orientations. These records and commands are available with the reviewed proof~\cite{package}. The uniform theorem has no Lean or Rocq verification.
+
+\begingroup
+\small
+\begin{thebibliography}{99}
+\setlength{\itemsep}{0pt}
+\bibitem{alex} P. Alexandersson, \emph{Open problems regarding real-rootedness, set partitions and trees}. \href{https://www.symmetricfunctions.com/realRootedOpenProblems.htm\#openProblemsSetPartitions}{SymCat, ordered set partitions by large blocks}.
+\bibitem{dlmf} NIST Digital Library of Mathematical Functions, \emph{Jacobi's triple product}, \href{https://dlmf.nist.gov/20.5.E9}{equation 20.5.9}.
+\bibitem{fang} C. Fang, \emph{Eventual interlacing of large-block set-partition polynomials}, version 1, \href{https://hexagonmath.org/pdf/2611.01129v1}{Theorem 1, p.~1}, 26 November 2026.
+\bibitem{right} C. Davis, \emph{Initial negative zeros for ordered set partitions}, \href{https://github.com/1337isnot1337/solved-conjectures/blob/f1a5ac298febcfd20b19e1ef3465325eb62e18d6/research/alexandersson-ordered-set-partitions/edge.md}{solved-conjectures, fixed-threshold right-edge argument}, 26 November 2026.
+\bibitem{left} C. Davis, \emph{Largest-modulus zeros of ordered set partition polynomials}, \href{https://github.com/1337isnot1337/solved-conjectures/blob/e39bd018c0f980ff394daa7764272226890c6d14/research/alexandersson-ordered-set-partitions/left-edge.md}{solved-conjectures, fixed-threshold left-edge argument}, 26 November 2026.
+
+\bibitem{fixed} ProgramComputer, \emph{Eventual interlacing for each fixed block threshold}. \href{https://github.com/ProgramComputer/open-math-research/blob/8624d14aef697bf2b515881bdda873228c0b5b50/topics/ordered-large-blocks/all-fixed-thresholds.md}{Reviewed repository version}, 2026.
+
+\bibitem{window} ProgramComputer, \emph{Ordered partitions in a bounded proportional window}. \href{https://github.com/ProgramComputer/open-math-research/blob/8624d14aef697bf2b515881bdda873228c0b5b50/topics/ordered-large-blocks/proportional-window.md}{Reviewed repository version}, 2026.
+
+\bibitem{edge} ProgramComputer, \emph{The sharp lower spectral edge}. \href{https://github.com/ProgramComputer/open-math-research/blob/8624d14aef697bf2b515881bdda873228c0b5b50/topics/ordered-large-blocks/lower-spectral-edge.md}{Reviewed repository version}, 2026.
+
+\bibitem{outer} ProgramComputer, \emph{Uniform eventual interlacing at fixed outer ranks}. \href{https://github.com/ProgramComputer/open-math-research/blob/8624d14aef697bf2b515881bdda873228c0b5b50/topics/ordered-large-blocks/outer-ranks/README.md}{Reviewed repository version}, 2026.
+
+\bibitem{renewal} ProgramComputer, \emph{The fixed outer ranks by positive renewal coefficients}. \href{https://github.com/ProgramComputer/open-math-research/blob/8624d14aef697bf2b515881bdda873228c0b5b50/topics/ordered-large-blocks/outer-ranks/renewal.md}{Reviewed repository version}, 2026.
+
+\bibitem{comparable} ProgramComputer, \emph{Fixed outer ranks at comparable threshold and degree}. \href{https://github.com/ProgramComputer/open-math-research/blob/8624d14aef697bf2b515881bdda873228c0b5b50/topics/ordered-large-blocks/outer-ranks/comparable.md}{Reviewed repository version}, 2026.
+
+\bibitem{package} ProgramComputer, \emph{Uniform eventual interlacing: proofs, reviews and checks}. \href{https://github.com/ProgramComputer/open-math-research/blob/8624d14aef697bf2b515881bdda873228c0b5b50/topics/ordered-large-blocks/uniform-eventual/verification.md}{Reviewed repository version}, 2026.
+
+\end{thebibliography}
+\endgroup
+\end{document}

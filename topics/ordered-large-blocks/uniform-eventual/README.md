@@ -9,3 +9,11 @@ The [uniform assembly](assembly.md) exhausts all possible sequences of failing r
 [Fresh-context independent review of the complete assembly](review-assembly.md)
 
 [Verification record and replay commands](verification.md)
+
+[Manuscript source](paper.tex) · [Compiled manuscript](paper.pdf)
+
+From this directory, build with Tectonic 0.17.0.
+
+~~~sh
+SOURCE_DATE_EPOCH=1795651200 tectonic paper.tex
+~~~
