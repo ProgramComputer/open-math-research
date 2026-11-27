@@ -15,7 +15,7 @@ theorem original_numerator_hasSum (m : ℕ) (v : ℂ) :
   have h := cutoff_numerator_hasSum (m+1) v
   unfold CoeffHasSum at h
   exact h.congr_fun (fun s => by rw [cutoffCycleNumerator,
-    CycleProbability.coeff_cutoffCycleNumerator_eq_original (by omega : 2≤m+2)])
+    CycleProbability.coeff_cutoffCycleNumerator_eq_original (by omega : 2 ≤ m+2)])
 
 private theorem hasSum_one_add {F : ℂ⟦X⟧} {v s : ℂ} (h : CoeffHasSum F v s) :
     CoeffHasSum (1+F) v (1+s) := by
@@ -62,7 +62,7 @@ theorem occupied_product_hasSum_integral (j : ℕ) (C : ℝ) {S : ℝ} (hS : S �
   induction T using Finset.induction_on with
   | empty => simpa using CoeffHasSum.one (pairedPoleDenom C S a)
   | @insert q T hq ih =>
-    have hne : a≠q := by intro e; exact ha (e ▸ mem_insert_self ..)
+    have hne : a ≠ q := by intro e; exact ha (e ▸ mem_insert_self ..)
     have haT : a ∉ T := fun h => ha (mem_insert_of_mem h)
     rw [prod_insert hq,sum_insert hq,Complex.exp_add]
     exact CoeffHasSum.mul_series

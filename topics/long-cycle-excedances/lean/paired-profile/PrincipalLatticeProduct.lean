@@ -19,7 +19,7 @@ theorem principal_pole_ratio_norm_le (C : ℝ) {S : ℝ} (hS : S ≠ 0) (q : ℤ
     ring
   have ho : (1:ℤ) ≤ |2*q+1| := Int.add_one_le_iff.mpr (abs_pos.mpr (by omega))
   have hr : (1:ℝ) ≤ |2*(q:ℝ)+1| := by exact_mod_cast ho
-  have hs := pow_le_pow_left₀ (by norm_num : (0:ℝ)≤1) hr 2
+  have hs := pow_le_pow_left₀ (by norm_num : (0:ℝ) ≤ 1) hr 2
   rw [sq_abs] at hs
   have hq : ‖pairedPoleDenom C S 0‖^2 ≤ ‖pairedPoleDenom C S q‖^2 := by
     rw [hreal,hreal]
@@ -28,7 +28,7 @@ theorem principal_pole_ratio_norm_le (C : ℝ) {S : ℝ} (hS : S ≠ 0) (q : ℤ
   nlinarith only [hq,norm_nonneg (pairedPoleDenom C S 0),norm_nonneg (pairedPoleDenom C S q),
     sq_nonneg (‖pairedPoleDenom C S 0‖-‖pairedPoleDenom C S q‖)]
 
-private theorem pole_gap_norm_lower (C : ℝ) {S : ℝ} {a q : ℤ} (hqa : q≠a) :
+private theorem pole_gap_norm_lower (C : ℝ) {S : ℝ} {a q : ℤ} (hqa : q ≠ a) :
     2*|S| ≤ ‖pairedPoleDenom C S q-pairedPoleDenom C S a‖ := by
   have hp : (1:ℝ) ≤ |((q-a:ℤ):ℝ)| := by
     rw [←Int.cast_abs]
@@ -38,22 +38,22 @@ private theorem pole_gap_norm_lower (C : ℝ) {S : ℝ} {a q : ℤ} (hqa : q≠a
   nlinarith only [mul_nonneg (sub_nonneg.mpr hp) (abs_nonneg S)]
 
 /-- All nonprincipal logarithms in the +1 residue form an absolutely summable family. -/
-theorem principal_log_lattice_summable (j : ℕ) (C : ℝ) {S : ℝ} (hS : S≠0) :
-    Summable (fun q : {q : ℤ // q≠0} =>
+theorem principal_log_lattice_summable (j : ℕ) (C : ℝ) {S : ℝ} (hS : S ≠ 0) :
+    Summable (fun q : {q : ℤ // q ≠ 0} =>
       ‖principalLogIntegral j (pairedPoleDenom C S 0 / pairedPoleDenom C S q)‖) := by
   let A := pairedPoleDenom C S 0
   let K := 1+‖A‖/(2*|S|)
   have hsep : 0 < 2*|S| := mul_pos (by norm_num) (abs_pos.mpr hS)
   have hpow := (summable_paired_pole_power_norm C hS (p:=j+2) (by omega)).subtype
-    (fun q : ℤ => q≠0)
+    (fun q : ℤ => q ≠ 0)
   refine Summable.of_nonneg_of_le (fun _ => norm_nonneg _)
-    ?_ (show Summable (fun q : {q : ℤ // q≠0} =>
+    ?_ (show Summable (fun q : {q : ℤ // q ≠ 0} =>
       (K*‖A‖^(j+2))*‖(pairedPoleDenom C S q)⁻¹‖^(j+2)) from hpow.mul_left _)
   intro q
   let B := pairedPoleDenom C S q
-  have hb : B≠0 := pairedPoleDenom_ne_zero C hS q
-  have ha : A≠B := (pairedPoleDenom_injective C hS).ne q.property.symm
-  have hv1 : A/B≠1 := by intro h; exact ha (by simpa using (div_eq_iff hb).mp h)
+  have hb : B ≠ 0 := pairedPoleDenom_ne_zero C hS q
+  have ha : A ≠ B := (pairedPoleDenom_injective C hS).ne q.property.symm
+  have hv1 : A/B ≠ 1 := by intro h; exact ha (by simpa using (div_eq_iff hb).mp h)
   have hba : B-A ≠ 0 := sub_ne_zero.mpr ha.symm
   have hd : 0 < ‖1-A/B‖ := norm_pos_iff.mpr (sub_ne_zero.mpr hv1.symm)
   have hgap : 2*|S| ≤ ‖B-A‖ := pole_gap_norm_lower C q.property
@@ -75,10 +75,10 @@ theorem principal_log_lattice_summable (j : ℕ) (C : ℝ) {S : ℝ} (hS : S≠0
       exact mul_le_mul_of_nonneg_left (by simpa only [one_div] using hrecip) (by positivity)
     _ = _ := by rw [div_eq_mul_inv,norm_mul,mul_pow]; ring
 
-theorem principal_lattice_factors_hasProd (j : ℕ) (C : ℝ) {S : ℝ} (hS : S≠0) :
+theorem principal_lattice_factors_hasProd (j : ℕ) (C : ℝ) {S : ℝ} (hS : S ≠ 0) :
     let A := pairedPoleDenom C S 0
-    let L := fun q : {q : ℤ // q≠0} => principalLogIntegral j (A / pairedPoleDenom C S q)
-    HasProd (fun q : {q : ℤ // q≠0} =>
+    let L := fun q : {q : ℤ // q ≠ 0} => principalLogIntegral j (A / pairedPoleDenom C S q)
+    HasProd (fun q : {q : ℤ // q ≠ 0} =>
       ∑' n, PowerSeries.coeff (R := ℂ) n (1+occupiedPrimitive (j+2) C S 0 q) * A^n)
       (Complex.exp (∑' q, L q)) := by
   dsimp only
@@ -90,15 +90,15 @@ theorem principal_lattice_factors_hasProd (j : ℕ) (C : ℝ) {S : ℝ} (hS : S�
 
 
 /-- At unit principal radius one power of the pole denominator cancels exactly. -/
-theorem principal_log_lattice_single_bound (j : ℕ) (C : ℝ) {S : ℝ} (hS : S≠0)
-    (hunit : ‖pairedPoleDenom C S 0‖=1) {q : ℤ} (hq : q≠0) :
+theorem principal_log_lattice_single_bound (j : ℕ) (C : ℝ) {S : ℝ} (hS : S ≠ 0)
+    (hunit : ‖pairedPoleDenom C S 0‖=1) {q : ℤ} (hq : q ≠ 0) :
     ‖principalLogIntegral j (pairedPoleDenom C S 0 / pairedPoleDenom C S q)‖ ≤
       ‖(pairedPoleDenom C S q)⁻¹‖^(j+1)/(((j:ℝ)+1)*(2*|(q:ℝ)| * |S|)) := by
   let A := pairedPoleDenom C S 0
   let B := pairedPoleDenom C S q
-  have hb : B≠0 := pairedPoleDenom_ne_zero C hS q
-  have ha : A≠B := (pairedPoleDenom_injective C hS).ne hq.symm
-  have hv1 : A/B≠1 := by intro h; exact ha (by simpa using (div_eq_iff hb).mp h)
+  have hb : B ≠ 0 := pairedPoleDenom_ne_zero C hS q
+  have ha : A ≠ B := (pairedPoleDenom_injective C hS).ne hq.symm
+  have hv1 : A/B ≠ 1 := by intro h; exact ha (by simpa using (div_eq_iff hb).mp h)
   have hBA : ‖B-A‖=2*|(q:ℝ)| * |S| := by
     dsimp only [A,B]
     rw [pairedPoleDenom_sub,norm_mul,norm_mul,norm_mul,Complex.norm_I,one_mul,
@@ -119,12 +119,12 @@ theorem principal_log_lattice_single_bound (j : ℕ) (C : ℝ) {S : ℝ} (hS : S
 /-- A scalar upper bound on the weighted signed-pole sum supplies the
 lower bound for the real part of the actual principal product. -/
 theorem principal_product_re_of_lattice_majorant (j : ℕ) (C : ℝ) {S η : ℝ}
-    (hS : S≠0) (hunit : ‖pairedPoleDenom C S 0‖=1) (he : η≤81/100)
-    (hmajor : Summable (fun q : {q : ℤ // q≠0} =>
+    (hS : S ≠ 0) (hunit : ‖pairedPoleDenom C S 0‖=1) (he : η ≤ 81/100)
+    (hmajor : Summable (fun q : {q : ℤ // q ≠ 0} =>
       ‖(pairedPoleDenom C S q)⁻¹‖^(j+1)/(((j:ℝ)+1)*(2*|((q:ℤ):ℝ)| * |S|))))
-    (hbound : (∑' q : {q : ℤ // q≠0},
+    (hbound : (∑' q : {q : ℤ // q ≠ 0},
       ‖(pairedPoleDenom C S q)⁻¹‖^(j+1)/(((j:ℝ)+1)*(2*|((q:ℤ):ℝ)| * |S|))) ≤ η) :
-    Real.exp (-η) ≤ (∏' q : {q : ℤ // q≠0}, ∑' n,
+    Real.exp (-η) ≤ (∏' q : {q : ℤ // q ≠ 0}, ∑' n,
       PowerSeries.coeff (R := ℂ) n (1+occupiedPrimitive (j+2) C S 0 q) *
         (pairedPoleDenom C S 0)^n).re := by
   rw [(principal_lattice_factors_hasProd j C hS).tprod_eq]
