@@ -1,0 +1,102 @@
+Hosted load audit
+Run https://github.com/ProgramComputer/open-math-research/actions/runs/45962395508/job/140383048823
+Source commit fe49dc0d879b6ff53fe3fbc343bd598d85b01a25
+Lean 4.33.1 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+Artifact 15181448924, ZIP SHA-256 55b2542e6abc9d910f094033a5f83bea289cc433eaedb8f549063f7d5b326517
+common-pin.log SHA-256 2ef30e639ec956eb971612d700d756d4a1f23e162f2553a08505ce1bee679102
+285 distinct named declarations verified across the composed driver.
+
+Module / source SHA-256 / compile and Lean checker replay
+BinomialColorLoad fa2f2c20d994b3d7f8f8206c2004ad1c50a8a0d0a7304a649b04b5dc9e4ee160 compile=0 replay=0
+LoadEnvelope d5bc491f726ae98ffc16837ea7ef7cae45e6fb9b33d1fd34fd05a9f0a475970b compile=0 replay=0
+MarkedColorLoads 5530b0d5638d0e651c41b566f8174444a4b915ba0de0391be531a3276bb106a0 compile=0 replay=0
+MarkedLoadProbability 9c9be2c7d117b96e1960de277f783663fc7d03d038b9896165262f38e634afa0 compile=0 replay=0
+ColorLoadRanges 80b533bd087211d01717fb9b0142d61b9dadc818f2bccdee3e823ef5cacac9e6 compile=0 replay=0
+CutoffAcceptanceBudget d010de36ba6cedccb68d94216431ce4dee04716b7a43b6449cd5e443e1fdf035 compile=0 replay=0
+ColorLagGrid d0f90f41c98033811546d076e4a038b5c39f74a2937f7ca8dd9259386c100075 compile=0 replay=0
+SparseLagBudget 54914e1d78e32cb1597f093974e3975d06f8fdea506d886d4243d926dc4ad47e compile=0 replay=0
+RepositoryLoadLag 804ac9c8a7831f089f51c0b6f77164ec6ba372c1a0255acd5cd7d159d90b13e0 compile=0 replay=0
+RepositoryOrbitBaseline 291927367f964cd570c4243f10b4c4e5d8bb50d2c3c2e048351ae1e564f47519 compile=0 replay=0
+RepositoryColorAlpha 1929c3a9baa6d1053eb50ac5a8b08274a72c01ec8fbc81ccc486ef90e574988a compile=0 replay=0
+FiniteUnimodalMesh 8f63e0519e041968d4a82cfd68922a8306aa957a7eae7370e7c16cb58d17d244 compile=0 replay=0
+BernsteinProbability 36d01ff3a0a97666db1da953e3842c0a0cecd418466bf123d3d8271835ef00d4 compile=0 replay=0
+BinomialGridMesh c7966ea2068296c2e4a7144944fa1391d47e5a3546490e958528bbacf567ad42 compile=0 replay=0
+BinomialPeakAdapter 950debe3a650610ce0d2d1770f3fc8502f3cf645a6d05efe8a6005e05b2b878d compile=0 replay=0
+ColorLoadGrid eacb16aae83f172d05d81cc9fba06788e10cdbf2f95fe072947f8bafee9ad68a compile=0 replay=0
+RepositoryBinomialGrid 19d570dbb883b9d256ae808b75d027fce26bf7291c4176d07bd87306d6c2b45f compile=0 replay=0
+SmallLagGrid bfbe1c0e5a32eca14ccd5c934e89b714797e4d0dd7d50d31baebe58b13eb4bd0 compile=0 replay=0
+UniformLagBudget cfe9398e045c904edb5839a1a50a68647f09a941a9545c5573e00dd509299593 compile=0 replay=0
+RepositoryUniformLag 2f06049bf3171b389613cd55aa940e0e39f53b6ff0b10b379c691816daca0e23 compile=0 replay=0
+FrontLagNormalization 736943393d63df4a1fb9bc3be5a6e1a431aad5e56f7a5d7899584fe543982321 compile=0 replay=0
+RepositoryExteriorLag 5ca258cbcb1f3c12542e5773b4b56fec5c474de9f85dae37fc8713c1fcc1aaf1 compile=0 replay=0
+CycleProbabilityBands 6e1ab04a6f7ab922f33a0e2d3536bc29fd4dfb78080e90a715a48ddfe09f891c compile=0 replay=0
+AnchoredProbability 88204327b2d69210c9b399273ac351730b21b4c4933155443842d3a22c9571bf compile=0 replay=0
+RepositoryProbabilityBands ce50800208e20fc84c5561edfbd34582634ed374f7ed0a7c0db30ce26a035cad compile=0 replay=0
+
+65 declarations printed by the listed modules. Transitive axiom reports
+OpenMathResearch.LongCycleExcedances.color_load_lower_tail [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_load_upper_tail [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_load_transform_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_load_small_orbit_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_load_large_orbit_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.color_load_cutoff_comparison [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.exceptional_color_pairs_le_marks [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.marked_color_load_card [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.actual_color_probability_comparison [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.total_marked_probability [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.marked_load_probability [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.color_long_load_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.expected_color_marks_product [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.color_short_load_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.actual_load_lower_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.actual_load_upper_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_lag_grid_upper [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.sparse_lag_large_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.sparse_lag_small_budget [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_lag_le_color_grid [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.Spec.reciprocal_bounds [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.orbitSize_eq_lengthAt [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.baselinePairs_card [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.baselinePairs_probability [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.originalProbability_one [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.originalProbability_reciprocal_bounds [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.baselinePairs_probability_bounds [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.accepted_probability_eq_realCount [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.ColorAnchor.realCount_one_color [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_front_alpha_one [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_front_alpha_lower [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_front_acceptance_upper [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_front_alpha_upper [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.finite_unimodal_mesh [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.hasDerivAt_binomialPrimitive [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.binomialPrimitive_mass [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.binomialDensity_unimodal [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.binomial_grid_mass [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.binomial_grid_mass_complement [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.binomial_peak_from_scaled_bound [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.binomial_peak_from_uniform_atom [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.color_load_grid_mass [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_color_load_grid_mass [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.small_lag_grid_mass [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_grid_scale [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.uniform_front_lag_budget [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_uniform_front_lag [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_rank_square [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_sparse_of_large_size [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.front_remove_lag_normalization [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_global_lag_bound [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.original_exterior_near_lag [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.from_anchored_counts [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.upper61 [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.upper59 [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.upper47 [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.lower547 [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.lower548 [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.from_anchored_polynomials [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.originalProbability_spec [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.original_upper61 [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.original_upper59 [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.original_upper47 [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.original_lower547 [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.CycleProbability.original_lower548 [Classical.choice, Quot.sound, propext]
