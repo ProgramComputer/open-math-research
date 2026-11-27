@@ -5,6 +5,13 @@ on:
     paths:
       - '.github/workflows/long-cycle-small-height-common-pin.yml'
       - 'topics/long-cycle-excedances/lean/fourier-numerator/**'
+      - 'topics/long-cycle-excedances/lean/fourier-circle/Numerator*.lean'
+      - 'topics/long-cycle-excedances/lean/fourier-circle/check.py'
+      - 'topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py'
+      - 'topics/long-cycle-excedances/lean/fourier-stable/FourierOriginalLog.lean'
+      - 'topics/long-cycle-excedances/lean/common-pin/check.py'
+      - 'topics/long-cycle-excedances/lean/common-pin/MonomialTiltBounds.lean'
+      - 'topics/long-cycle-excedances/lean/common-pin/RepositoryCoherentPoles.lean'
   workflow_dispatch:
 
 permissions:
