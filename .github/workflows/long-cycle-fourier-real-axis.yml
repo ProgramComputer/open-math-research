@@ -5,15 +5,18 @@ on:
     paths:
       - '.github/workflows/long-cycle-fourier-real-axis.yml'
       - 'topics/long-cycle-excedances/lean/fourier-stable/**'
+      - 'topics/long-cycle-excedances/lean/common-pin/RepositoryCoherentPoles.lean'
+      - 'topics/long-cycle-excedances/lean/common-pin/MonomialTiltBounds.lean'
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
 
 jobs:
   audit:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 50
     env:
       LEAN_NUM_THREADS: '1'
     steps:
@@ -29,11 +32,19 @@ jobs:
           tar --zstd -xf pinned.tar.zst
           rm pinned.tar.zst
           echo "$RUNNER_TEMP/lean-4.33.1-linux/bin" >> "$GITHUB_PATH"
-      - name: Compile and replay the real-axis bridge
+      - name: Retrieve authenticated common-pin import objects
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 45917288503 --repo "$GITHUB_REPOSITORY" --name quotient-import-objects --dir "$RUNNER_TEMP" || true
+      - name: Compile and replay the real-axis and logarithm bridges
         run: |
           set -euo pipefail
           ulimit -Sn 65536
-          python3 -Bu topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py "$RUNNER_TEMP/fourier-real-axis" 2>&1 | tee "$RUNNER_TEMP/fourier-real-axis.log"
+          args=("$RUNNER_TEMP/fourier-real-axis" --original-log)
+          if [[ -f "$RUNNER_TEMP/quotient-import-objects.tar.zst" ]]; then
+            args+=(--retained-imports "$RUNNER_TEMP/quotient-import-objects.tar.zst")
+          fi
+          python3 -Bu topics/long-cycle-excedances/lean/fourier-stable/check-real-axis.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/fourier-real-axis.log"
       - name: Preserve verification report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
