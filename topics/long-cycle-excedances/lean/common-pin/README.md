@@ -49,7 +49,7 @@ sign at that point remains an input. The [hosted half-axis check][half-audit]
 compiled and replayed the three new modules. Both additional declarations
 use only `propext`, `Classical.choice` and `Quot.sound`. [Audit excerpt](half-axis-audit.txt) · [Independent half-axis review](half-axis-review.md)
 
-[RepositoryCenterSign.lean](RepositoryCenterSign.lean) proposes an algebraic
+[RepositoryCenterSign.lean](RepositoryCenterSign.lean) checks an algebraic
 proof of the remaining odd-old-degree center sign. Distinct simple negative
 roots of an even-degree Eulerian polynomial pair by inversion. Each pair
 contributes a negative factor to its value at minus one. In the anchored
@@ -57,9 +57,12 @@ cycle expansion, odd cycle lengths contribute zero, while the even terms
 have one common sign after normalization. The summand for a single
 full-size cycle makes the sign strict whenever the cutoff fits. The
 full weak-interlacing implication then needs only the left-hand windows.
-The common-pin check is pending. [Eulerian roots][eulerian-roots] ·
+The [hosted center check][center-audit] compiled and replayed both new modules.
+The three additional declarations use only `propext`, `Classical.choice`
+and `Quot.sound`. [Audit excerpt](center-audit.txt) · [Eulerian roots][eulerian-roots] ·
 [Eulerian reciprocity][eulerian-reciprocity] · [Anchored expansion][anchored]
 
+[center-audit]: https://github.com/ProgramComputer/open-math-research/actions/runs/45924858448
 [eulerian-roots]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/EulerianSturm.lean#L74
 [eulerian-reciprocity]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/Reciprocity.lean#L43
 [anchored]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/AnchoredRows.lean#L158
