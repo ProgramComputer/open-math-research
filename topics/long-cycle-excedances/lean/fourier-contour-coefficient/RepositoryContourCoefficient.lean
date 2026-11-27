@@ -116,11 +116,17 @@ theorem contour_original_hasSum {k : ℕ} (hk : 2 ≤ k) {s : ℝ} (hs : 0 ≤ s
     hTabs.of_norm.hasSum
   have he := scalar_taylor_cauchy hT hL hTabs hLabs
   change HasSum _ (contourNumerator k s w * (1/(1+exp (w-(s:ℂ))))) at he
-  have hcoeff (n : ℕ) : (∑ i ∈ Finset.antidiagonal n, b i.1*c i.2) = contourCoeff n k s := by
-    have h0 := original_logistic_coefficient n k hk t ht1 ht0
-    rw [coeff_mul] at h0
-    simpa [contourCoeff,b,c,T,L,t,map_sum,map_mul] using congrArg Complex.ofReal h0
-  simpa only [hcoeff, contourRow, mul_one_div] using he
+  have hcoeff (n : ℕ) : ((coeff n (T*L) : ℝ) : ℂ) = contourCoeff n k s := by
+    simpa [contourCoeff,T,L,t] using
+      congrArg Complex.ofReal (original_logistic_coefficient n k hk t ht1 ht0)
+  convert he using 1
+  · funext n
+    rw [←hcoeff n, coeff_mul, Complex.ofReal_sum]
+    congr 1
+    apply sum_congr rfl
+    intro i _
+    exact Complex.ofReal_mul _ _
+  · simp only [contourRow, mul_one_div]
 
 /-- On one regular positive radius, the actual permutation coefficient is the
 Fourier integral plus the signed-pole residues. The normalization is literal. -/
