@@ -61,7 +61,7 @@ The research pin is Lean 4.19.0 at `6caaee842e94` and mathlib at `c44e0c8ee63ca1
 
 ```sh
 cd shared/lean
-lake exe cache get Mathlib.Analysis.Complex.CauchyIntegral Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.ExpDeriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Tactic.FieldSimp Mathlib.Tactic.LinearCombination Mathlib.Tactic.NormNum Mathlib.Tactic.Ring Mathlib.Tactic.Positivity Mathlib.MeasureTheory.Integral.DominatedConvergence Mathlib.Analysis.NormedSpace.FunctionSeries Mathlib.Analysis.PSeries Mathlib.Data.Real.Pi.Bounds Mathlib.Tactic.Linarith
+lake exe cache get Mathlib.Analysis.Complex.CauchyIntegral Mathlib.Analysis.Complex.RealDeriv Mathlib.Analysis.SpecialFunctions.ExpDeriv Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus Mathlib.Tactic.FieldSimp Mathlib.Tactic.LinearCombination Mathlib.Tactic.NormNum Mathlib.Tactic.Ring Mathlib.Tactic.Positivity Mathlib.MeasureTheory.Integral.DominatedConvergence Mathlib.Analysis.NormedSpace.FunctionSeries Mathlib.Analysis.PSeries Mathlib.Data.Real.Pi.Bounds Mathlib.Tactic.Linarith Mathlib.Analysis.Calculus.SmoothSeries
 lake env python3 -I ../../topics/long-cycle-excedances/lean/fourier-circle/check.py
 ```
 
@@ -72,3 +72,5 @@ The verification still requires the differential equations for the original perm
 An independent agent compared the signed identity and the complex pole-product estimate at `63c4e95` with the common-circle argument. The reviewer recovered the $n+1-k$ correction with positive sign and the $n+1$ correction with negative sign, checked both pole locations under inversion, and verified that normalized Fourier measure cancels the integral's factor of $2\pi$. The product estimate supplies the paper's products of first-order kernels. The differentiated kernels with squared denominators and the outer row normalization still require their own estimates. The reviewer checked the statements and derivation by inspection. [Comparison argument](../../fourier-circle/README.md)
 
 The integral product estimate also has a specialization to the actual odd lattice, including the signed contrast multiplier and absolute convergence for every cutoff at least three. [Statement, proof and remaining obligations](lattice.md)
+
+The differentiated kernel has a termwise angular derivative with an integrated bound in terms of the squared pole factors. [Differentiation and angular integral](derivative.md)
