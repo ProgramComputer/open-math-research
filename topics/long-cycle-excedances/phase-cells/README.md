@@ -12,7 +12,14 @@ $$
 
 The derivative estimate gives an invertible phase coordinate on the full middle interval. The cell statement additionally locates witnesses at named grid ranks in the range where the repository has a quantitative bound for the actual row. [Alexandersson’s original conjecture](https://www.symmetricfunctions.com/realRootedOpenProblems.htm#conjLongCycleExcedances) · [Common coefficient expansion](../lean/common-pin/RepositoryCoherentPoles.lean) · [High-angle sign and error estimate](https://github.com/ProgramComputer/open-math-research/pull/265)
 
-**Formal coverage.** The generic Eulerian derivative, cancellation, positive lattice bound and trigonometric sign tests compiled on the shared Lean 4.19.0 research pin. The original-row specialization on the common Lean 4.33.1 pin is under verification. [Derivative](TiltDerivative.lean) · [Lattice bound](SeventhMoment.lean) · [Cell signs](GridSigns.lean) · [Original-row specialization](ActualPhaseDerivative.lean) · [Independent mathematical review](independent-review.md)
+**Formal verification.** Lean 4.33.1 compiled and replayed all 16 phase modules on the common research pin. The 32 named declarations use only the standard axioms. The final declarations prove the logarithmic-coordinate slope and strict decrease, existence and successor signs in each complete angular cell, and an explicitly ordered family of distinct negative zeros of the literal permutation polynomial. The root selector has domain $\mathrm{Fin}(\lfloor n/2\rfloor-\lceil n/6\rceil)$ and takes values strictly between $-1$ and $0$. Its order is decreasing because $-e^{-\pi\cot\theta}$ decreases with the angle. [Phase declarations](MiddleAssembly.lean) · [Cell declarations](OriginalAngularDerivative.lean) · [Ordered literal roots](OriginalRootCount.lean) · [Independent source and scope review](specification-review.md) · [Independent mathematical review](independent-review.md)
+
+The proof source is commit `01a76e86308312654858e14f2f87c7e2fcbf1eaa`. Lean is pinned to compiler `819816b2e0a3bf405af45ae5c7af2491d8f5bee6` and mathlib to `0df444a360eaa60ab8c11dca51a86af692955474`. The common driver builds the upstream dependencies, checks the named axioms, and invokes Lean’s `leanchecker` on each module. From the repository root, with the pinned Linux toolchain available, run the following command against an empty directory. The combined all-cutoff interlacing theorem retains partial formal coverage. [Exact verification record](verification.txt) · [Hosted replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45938560929) · [Common build instructions](../lean/common-pin/README.md)
+
+```sh
+ulimit -Sn 65536
+python3 -Bu topics/long-cycle-excedances/lean/common-pin/check.py /tmp/long-cycle-phase-check
+```
 
 ## Proof of the derivative formula
 
