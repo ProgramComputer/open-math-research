@@ -11,6 +11,8 @@ Give an ordered set partition of $[n]$ weight $t^k$ when exactly $k$ blocks have
 
 At every size, ordered partitions satisfy a fractional Newton inequality with top parameter $n/j$, and their tilted large-block counts admit a coupling with jumps at least $j$ positions apart. The Newton inequality has the exact polynomial degree whenever $j$ divides $n$. [Coefficient theorem, proof and checks](likelihood-ratio/README.md)
 
+Every consecutive pair with cubic or quartic old row strictly interlaces. Together with the earlier low-degree theorem this covers every old size $n<5j$ at all thresholds. [Uniform certificates and independent review](bounded-degree/README.md)
+
 | Threshold | Proof and verification |
 |---|---|
 | Two | [Proof](threshold-two.md) · [Manuscript](paper.pdf) · [Source](paper.tex) |
