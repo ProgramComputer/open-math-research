@@ -105,7 +105,8 @@ theorem coherent_product_coefficient (T : PowerSeries ℝ) (x : ℝ) (hx : 0 ≤
         ∑' l : ℤ, ∑ j ∈ range n, ((coeff j T : ℝ) : ℂ) * (1 / coherentPole x l ^ (n-j+1)) := by
   rw [coeff_mul, Finset.Nat.sum_antidiagonal_eq_sum_range_succ_mk,
     sum_range_succ, Nat.sub_self, logistic_coeff_zero, Complex.ofReal_add]
-  simp only [sub_neg_eq_add, mul_one_div]
+  simp only [sub_neg_eq_add]
+  rw [mul_one_div (coeff n T) (1 + Real.exp (-x))]
   rw [add_comm, Complex.ofReal_sum, ← finite_to_pole_sum T x le_rfl]
   congr 1
   apply sum_congr rfl

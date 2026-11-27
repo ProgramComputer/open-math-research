@@ -26,6 +26,7 @@ LOGISTIC_IMPORTS = (
     "MarkedLogistic", "CycleProfile", "CycleProfileEGF", "CycleProfileLogistic",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.norm_far_pole_truncation_le",
     "RepositoryQuotientAudit.original_logistic_coefficient",
     "RepositoryQuotientAudit.original_rescaled_logTilt_coeff",
     "RepositoryQuotientAudit.coherent_product_coefficient",
@@ -103,6 +104,7 @@ def compile_topic(project):
     ]
     files.append((HERE / "RepositoryPoleProfile.lean", "RepositoryPoleProfile"))
     files.append((HERE / "RepositoryCoherentPoles.lean", "RepositoryCoherentPoles"))
+    files.append((HERE / "FarPoleTruncation.lean", "FarPoleTruncation"))
     observed = {}
     failed = set()
     for source, module in files:
@@ -152,7 +154,8 @@ def compile_topic(project):
                    "StrictRootListTranslation", "RepositoryRootAssembly", "ReciprocalWindowSigns",
                    "ReciprocalHalfWindows", "RepositoryHalfAxisAssembly",
                    "ReciprocalCenterSign", "RepositoryCenterSign",
-                   "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles"):
+                   "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
+                   "FarPoleTruncation"):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)

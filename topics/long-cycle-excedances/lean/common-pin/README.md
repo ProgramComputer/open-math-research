@@ -115,4 +115,8 @@ coefficient sum with the infinite pole sum.
 This is a prerequisite for estimating the actual consecutive-row contrast
 in the [uniform comparison](../../effective-uniform.md). The analytic
 bounds for the truncated multipliers, the highest-degree terms and the
-resulting sign are separate. The common-pin audit is pending.
+resulting sign are separate. [FarPoleTruncation.lean](FarPoleTruncation.lean)
+checks the geometric tail step from a coefficient envelope at radius
+strictly below the pole modulus. The bound keeps a square of the pole
+modulus in the denominator, which allows summing over the far lattice.
+The common-pin audit is pending.
