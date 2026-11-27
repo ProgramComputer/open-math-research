@@ -30,7 +30,7 @@ theorem original_fourier_contrast_weight {s r : ℝ} (hr : 0 < r)
     rw [div_pow,div_pow,←add_div,←hr2,div_self (pow_ne_zero _ hr.ne')]
   have he : fourierRowPole s l = (r:ℂ)*z := by
     apply Complex.ext
-    · simp [fourierRowPole,z,Complex.mul_re,C,hr.ne']; field_simp
+    · simp [fourierRowPole,z,Complex.mul_re,C]; field_simp
     · rw [him]
       simp [z,Complex.mul_im,S,m]
       field_simp
@@ -78,7 +78,8 @@ theorem original_fourier_coefficient_bounds {k : ℕ} (hk : 3 ≤ k)
     have hw : circleMap 0 R x ∉ Set.range P := by
       rintro ⟨l,hl⟩
       exact hg l ((congrArg norm hl).trans ((norm_circleMap_zero R x).trans (abs_of_pos hR)))
-    simpa only [f,originalFourierTrace,D,c,P,circleWave,Int.cast_natCast] using
+    unfold f originalFourierTrace
+    simpa only [D,c,P,circleWave,Int.cast_natCast] using
       original_row_angular_equation (by omega : 2 ≤ k) hs R x hw
   have hT (l : ℤ) : ‖t l‖ ≤ |2*(l:ℝ)+1| * (π/r) :=
     original_fourier_contrast_weight hr hr2 l
