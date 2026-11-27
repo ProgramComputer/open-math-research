@@ -45,6 +45,7 @@ theorem original_wide_phase_cell_of_centered {n k j : ℕ} (hk : 7 ≤ k) (hkn :
     have hs := ha.trans hxin.1
     have hr := coherentPole_near_pos x
     have he : ‖coherentPole x 0‖^2=x^2+π^2 := by
+      change ‖numeratorPole x 0‖^2 = x^2+π^2
       simpa only [Int.cast_zero,mul_zero,zero_add,one_mul] using literal_pole_norm_sq x 0
     have hmid : 1 ≤ (n:ℝ)*(π/‖coherentPole x 0‖)^2 := by
       rw [div_pow,←mul_div_assoc,le_div_iff₀ (sq_pos_of_pos hr),one_mul,he]
