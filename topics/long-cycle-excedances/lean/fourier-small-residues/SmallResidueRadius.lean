@@ -23,7 +23,7 @@ theorem small_enclosed_radius_decay {r W p S t : ℝ} {n : ℕ}
   have hlog : z/(1+z) ≤ log (1+z) := by
     have h := log_le_sub_one_of_pos (inv_pos.mpr hpos)
     rw [log_inv] at h
-    have hrw : z/(1+z) = 1-(1+z)⁻¹ := by field_simp
+    have hrw : z/(1+z) = 1-(1+z)⁻¹ := by field_simp <;> ring
     rw [hrw]
     linarith only [h]
   have hs : (4/5)*z ≤ log (1+z) := by
