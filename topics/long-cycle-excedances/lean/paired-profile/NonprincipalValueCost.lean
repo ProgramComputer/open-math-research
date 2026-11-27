@@ -19,7 +19,7 @@ private theorem bin_budget_nonneg (lower upper b : ℕ) (q : ℤ) : 0 ≤ valueB
     exact mul_nonneg (mul_nonneg h (abs_nonneg _)) (inv_nonneg.mpr (Even.pow_nonneg (by decide) _))
   · rfl
 
-private theorem value_bin_active {k n upper b t : ℕ} (hk : 0 < k) (hX : n ≤ upper*k)
+theorem value_bin_active {k n upper b t : ℕ} (hk : 0 < k) (hX : n ≤ upper*k)
     (ht : k*b ≤ 5*t) (hr : k ≤ n-t) : b+5 ≤ 5*upper := by
   have hn : t+k ≤ n := by omega
   exact Nat.le_of_mul_le_mul_left (show k*(b+5) ≤ k*(5*upper) by nlinarith) hk

@@ -40,3 +40,5 @@ The November 27, 2026 method search used GitHub code search for “excedance” 
 The [reflected signed-pole estimate](reflected-carrier.md) proves two lower bounds for the entire principal product with eleven paired terms in each certificate.
 
 The [nonprincipal value estimate](nonprincipal-value.md) reduces the full second error term to a finite bin sum and a first-moment calculation over the signed odd poles.
+
+The successor degree shift gives a stronger factorial bound for the regular numerator contribution in three aspect intervals. [Proof and numerical comparison](regular-numerator.md)

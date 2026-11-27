@@ -101,8 +101,18 @@ MODULES = (
     "NonprincipalValueCost",
     "NonprincipalMoment",
     "RepositoryNonprincipalCost",
+    "RegularNumeratorBin",
+    "RegularValueCost",
+    "RepositoryRegularCost",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.regular_numerator_strict_bin",
+    "OpenMathResearch.LongCycleExcedances.regular_term_on_bin",
+    "OpenMathResearch.LongCycleExcedances.regular_one_pole",
+    "OpenMathResearch.LongCycleExcedances.original_regular_numerator_head",
+    "OpenMathResearch.LongCycleExcedances.all_pole_zeroth_moment",
+    "OpenMathResearch.LongCycleExcedances.regular_bin_lattice",
+    "OpenMathResearch.LongCycleExcedances.regular_slab_head_of_spec",
     "OpenMathResearch.LongCycleExcedances.literal_rounded_head_bound",
     "OpenMathResearch.LongCycleExcedances.finite_weighted_bin_cost",
     "OpenMathResearch.LongCycleExcedances.angular_pole_sine_difference",
