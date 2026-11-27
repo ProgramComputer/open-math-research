@@ -32,7 +32,7 @@ theorem reflected_log_weight_step {h : ℝ} (hh : 0 < h) {L t : ℕ} (hL : 0 < L
   have hLt' : (L:ℝ) ≤ t := by exact_mod_cast hLt
   have hB (u : ℕ) : 0 < B u := by dsimp [B]; positivity
   have hmono : B L ≤ B t := by
-    apply add_le_add_left
+    apply add_le_add le_rfl
     exact mul_le_mul (mul_le_mul_of_nonneg_left hLt' hh.le) (by linarith)
       (by positivity) (by positivity)
   have hden : B L^95*(h*t*((t:ℝ)+1)) ≤ B t^96 := by
@@ -85,7 +85,7 @@ theorem reflected_log_all {h : ℝ} (hh : 0 < h) (N : ℕ) :
     simpa only [Nat.succ_eq_add_one,Nat.add_assoc,Nat.add_comm,Nat.add_left_comm] using htail.1
   refine ⟨hs,?_⟩
   rw [←hs.sum_add_tsum_nat_add N]
-  apply add_le_add_left
+  apply add_le_add le_rfl
   simpa only [Nat.succ_eq_add_one,Nat.add_assoc,Nat.add_comm,Nat.add_left_comm] using htail.2
 
 #print axioms reflected_log_all

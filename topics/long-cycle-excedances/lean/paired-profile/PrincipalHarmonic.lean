@@ -17,7 +17,7 @@ private theorem harmonic_log_step (x : ℝ) (hx : 0 < x) :
   have hp : 0 < x+1 := by positivity
   have hh := log_le_sub_one_of_pos (div_pos hx hp)
   rw [Real.log_div hx.ne' hp.ne'] at hh
-  have hfrac : x/(x+1)-1= -(1/(x+1)) := by field_simp
+  have hfrac : x/(x+1)-1= -(1/(x+1)) := by field_simp <;> ring
   linarith
 
 private theorem harmonic_anchor {m : ℕ} (hm : 20 ≤ m) :
