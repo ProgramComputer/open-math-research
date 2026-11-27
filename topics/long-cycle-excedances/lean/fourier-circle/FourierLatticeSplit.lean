@@ -6,18 +6,15 @@ noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
 open Real Filter MeasureTheory
 
-private theorem circle_inv_wave {R : ℝ} (hR : 0 < R) (x : ℝ) :
+private theorem circle_inv_wave (R x : ℝ) :
     (circleMap 0 R x)⁻¹ = circleWave (-1) x / (R:ℂ) := by
   have he : circleMap 0 R x = (R:ℂ)*circleWave 1 x := by
     simp [circleMap,circleWave,mul_comm]
   have hi : circleWave (1:ℤ) x * circleWave (-1) x = 1 := by
     rw [circleWave_add]
     norm_num [circleWave]
-  have hRc : (R:ℂ) ≠ 0 := Complex.ofReal_ne_zero.mpr hR.ne'
-  rw [he]
-  have h1 : circleWave (1:ℤ) x ≠ 0 := fun h => one_ne_zero (hi.symm.trans (by rw [h,zero_mul]))
-  field_simp
-  linear_combination -(R:ℂ) * hi
+  have hinv : (circleWave 1 x)⁻¹ = circleWave (-1) x := inv_eq_of_mul_eq_one_right hi
+  rw [he, mul_inv_rev, hinv, div_eq_mul_inv]
 
 /-- Sum the signed partial fraction before taking norms. Absolute convergence
 of its two separated terms justifies the addition of the infinite sums. -/
@@ -35,7 +32,7 @@ theorem circle_contrast_sum {ι : Type*} (P c : ι → ℂ) (r C : ℂ) {R : ℝ
     change ‖w‖ = _ at hn
     rw [h,norm_zero,abs_of_pos hR] at hn
     linarith
-  have hinv : w⁻¹ = circleWave (-1) x/(R:ℂ) := circle_inv_wave hR x
+  have hinv : w⁻¹ = circleWave (-1) x/(R:ℂ) := circle_inv_wave R x
   have he : ((r/(R:ℂ))*circleWave (-1) x-C) = r/w-C := by
     rw [div_eq_mul_inv r w,hinv]
     ring
