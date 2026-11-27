@@ -32,7 +32,7 @@ private theorem checked32 :
 theorem original_weak_cutoff8_size32 :
     WeakRealInterlacing (enumerator 32 8) (enumerator 33 8) := by
   refine original_weak_of_checked_half_axis (n := 32) (k := 8) (by decide) (by decide)
-    _ _ _ _ firstWindows checked32
+    _ _ ?_ ?_ firstWindows checked32
   · exact ofCoeffs_eq_original_of_reads (width := 32) (by decide) (by decide) (by decide)
       _ (by decide) (rows_original 32 (by decide))
   · exact ofCoeffs_eq_original_of_reads (width := 32) (by decide) (by decide) (by decide)

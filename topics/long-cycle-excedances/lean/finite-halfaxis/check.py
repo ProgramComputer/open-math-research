@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import re
 import runpy
+import shutil
 import urllib.request
 
 HERE = Path(__file__).resolve().parent
@@ -28,6 +29,7 @@ TOPIC_INPUTS = ("LongCyclePhaseWindows", "LongCycleMixedRootWitnesses", "LongCyc
 MODULES = {
     "ExactInsertionTable": {"exactListTable_reads", "ofCoeffs_eq_original_of_reads"},
     "HalfAxisDyadic": {"original_weak_of_checked_half_axis"},
+    "HalfAxisBlock": {"original_weak_block_of_checked_half_axis"},
     "CutoffEightRows": {"rows_original"},
     "CutoffEightFirstPair": {"original_weak_cutoff8_size32"},
 }
@@ -46,8 +48,10 @@ def verify_fixture():
     entries = [json.loads(line) for line in raw.splitlines()[:15]]
     source = (HERE / "CutoffEightFirstPair.lean").read_text()
     literals = re.findall(r"^  \| (\d+|_) => ⟨⟨(\d+), (\d+)⟩, ⟨(\d+), (\d+)⟩⟩$", source, re.M)
+    if [entry[:2] for entry in entries] != [[32, i] for i in range(15)]:
+        raise ValueError("Unexpected fixture row or window index")
     expected = [(str(i) if i < 14 else "_", str(a), str(e), str(b), str(f))
-                for n, i, a, e, b, f in entries if n == 32]
+                for _, i, a, e, b, f in entries]
     if len(expected) != 15 or expected != literals:
         raise ValueError("Lean window literals differ from checked archive")
     print(f"Verified 15 stored brackets against #331 sha256={ARCHIVE_SHA}", flush=True)
@@ -81,15 +85,23 @@ def check(project, imports):
         run(project, "tar", "--zstd", "-xf", str(imports))
         print(f"Authenticated import objects sha256={digest}", flush=True)
         run(project, "lake", "--wfail", "build", "+LongCycleBounds.UniversalRecurrence")
+    def stage(source, module):
+        target = project / (module + ".lean")
+        out = project / ".lake/build/lib/lean" / (module + ".olean")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, target)
+        print(f"Compile {module} sha256={sha256(target.read_bytes()).hexdigest()}", flush=True)
+        run(project, "lake", "env", "lean", "-o", str(out), str(target))
+
     shared = COMMON["SHARED"] / "OpenMathResearch"
     for name in ("FirstLevelHits", "AlternatingSignRoots", "OrientedNegativeInterlace", "DiskUniqueness"):
-        AUDIT(project, "OpenMathResearch/" + name, set(), shared / (name + ".lean"))
+        stage(shared / (name + ".lean"), "OpenMathResearch/" + name)
     for name in TOPIC_INPUTS:
-        AUDIT(project, name, set(), TOPIC / (name + ".lean"))
-    AUDIT(project, "RepositoryQuotientAdapter", set(),
-          TOPIC / "pinned-quotient" / "RepositoryQuotientAdapter.lean")
+        stage(TOPIC / (name + ".lean"), name)
+    stage(TOPIC / "pinned-quotient" / "RepositoryQuotientAdapter.lean", "RepositoryQuotientAdapter")
     for name in COMMON_INPUTS:
-        AUDIT(project, name, set(), TOPIC / "common-pin" / (name + ".lean"))
+        stage(TOPIC / "common-pin" / (name + ".lean"), name)
     for name, theorems in COMPACT["AUDITS"].items():
         AUDIT(project, name, theorems, TOPIC / "compact-rows" / (name + ".lean"))
     for name, theorems in MODULES.items():

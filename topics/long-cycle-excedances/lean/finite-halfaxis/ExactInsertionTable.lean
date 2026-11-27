@@ -41,9 +41,10 @@ theorem exactListTable_reads {k limit width : ℕ} (hk : 2 ≤ k)
   induction n using Nat.strong_induction_on with
   | h n ih =>
     intro hn i hi
-    rcases lt_trichotomy n k with h | rfl | h
+    rcases lt_trichotomy n k with h | heq | h
     · rw [short n h i hi, originalReducedCount_short n k i h]
-    · rw [seed i hi, compact_seed_count k hk]
+    · subst n
+      rw [seed i hi, compact_seed_count k hk]
     · obtain ⟨m, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : n ≠ 0)
       rw [step m (by omega) (by omega) i hi, exactListStep_eq,
           original_count_step m k hk (by omega) (eulerian (k-1)) (compactCycleWeight k)

@@ -63,14 +63,14 @@ theorem original_weak_of_checked_half_axis {n k : ℕ} (hk : 2 ≤ k) (hn : k �
   apply original_weak_of_half_axis_windows hk hn
     (fun i => (windows i).lower.value) (fun i => (windows i).upper.value)
   · intro i
-    simpa using Dyadic.less_iff.mp (hdata i).1.1.1.1.1.1.1
+    simpa using (Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.1.1
   · intro i
-    simpa [Dyadic.value] using Dyadic.less_iff.mp (hdata i).1.1.1.1.1.2
+    simpa [Dyadic.value] using (Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.2
   · intro i j hij
     have hh := (List.all_eq_true.mp (hdata i).2) j (by simp)
-    exact Dyadic.less_iff.mp (by simpa [hij] using hh)
+    exact (Dyadic.less_iff _ _).mp (by simpa [hij] using hh)
   · intro i
-    refine Or.inr ⟨Dyadic.less_iff.mp (hdata i).1.1.1.1.1.1.2, ?_⟩
+    refine Or.inr ⟨(Dyadic.less_iff _ _).mp (hdata i).1.1.1.1.1.1.2, ?_⟩
     have hl := roundedSign_sound _ _ _ (hdata i).1.1.1.1.2
     have hu := roundedSign_sound _ _ _ (hdata i).1.1.1.2
     simpa only [hp, value_negDyadic] using opposite_signs hl hu

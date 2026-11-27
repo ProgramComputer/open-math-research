@@ -13,6 +13,8 @@ window with its corresponding archive record.
 - [Dyadic consumer](HalfAxisDyadic.lean) uses Bowen Zuo's verified directed
   Horner arithmetic and the existing
   [half-axis assembly](../common-pin/RepositoryHalfAxisAssembly.lean).
+- [Block consumer](HalfAxisBlock.lean) applies one certified table and a
+  family of checked window lists to an interval of old sizes.
 - [First-pair specialization](CutoffEightFirstPair.lean) targets
   `WeakRealInterlacing (enumerator 32 8) (enumerator 33 8)`.
   The reduced old and next rows have degrees 30 and 31, respectively.
