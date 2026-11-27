@@ -60,9 +60,7 @@ theorem wide_residue_height_power {k : ℕ} (hk : 100 ≤ k)
     calc
       _ ≤ ((k-1:ℕ):ℝ) * (113/100/(k:ℝ)) := mul_le_mul_of_nonneg_left hlog hn
       _ ≤ (k:ℝ) * (113/100/(k:ℝ)) := mul_le_mul_of_nonneg_right hnk (by positivity)
-      _ = _ := by
-        field_simp
-        ring
+      _ = _ := by field_simp <;> ring
   have hE : exp (113/100:ℝ) ≤ 31/10 := by
     rw [show (113/100:ℝ) = 113/200+113/200 by norm_num, exp_add, ←pow_two]
     exact (pow_le_pow_left₀ (exp_pos _).le wide_exp_bound 2).trans (by norm_num)

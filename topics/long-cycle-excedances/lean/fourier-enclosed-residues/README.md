@@ -13,3 +13,5 @@ The existence of an enclosed nonprincipal pole gives $s\ge125/2$ and $R^{k-1}\le
 This component covers the enclosed nonprincipal residues at cutoff $k\ge100$. The phase at the initial angle, outer-circle integral, and sign composition are separate.
 
 Run `python3 -I -B check.py /path/to/new/project` with Lean 4.33.1 on Linux and the common-pin dependencies prepared by the driver. The optional `--retained-imports` argument reuses the authenticated import archive. The driver compiles on the common pin and checks the named declarations' axioms and bundled LeanChecker replay.
+
+[Independent statement review](review.md)
