@@ -68,6 +68,7 @@ theorem finiteFourierQuotient_deriv (s : ℝ) (m : ℕ) (b : ℕ→ℂ)
     simpa using ((hasDerivAt_id w).sub_const (s:ℂ)).cexp
   have hn : 1+Complex.exp (w-s) ≠ 0 := fun h => hw ((logistic_denominator_zero_iff s w).mp h)
   apply ((finiteFourierLog_deriv m b w).cexp.div ((hasDerivAt_const w (1:ℂ)).add he) hn).congr_deriv
+  dsimp only [Pi.add_apply]
   rw [←finiteFourierSlope_remainder s m b hreal hb1 hb hw]
   field_simp [hn]
   ring

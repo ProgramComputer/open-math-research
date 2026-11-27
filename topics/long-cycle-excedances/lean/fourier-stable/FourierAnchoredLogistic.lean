@@ -12,7 +12,7 @@ abbrev fourierRowPole (s : ℝ) (l : ℤ) : ℂ := (s:ℂ)+(2*(l:ℂ)+1)*π*I
 
 private theorem fourierRowPole_im (s : ℝ) (l : ℤ) :
     (fourierRowPole s l).im=(2*(l:ℝ)+1)*π := by
-  simp [fourierRowPole,Complex.add_im,Complex.mul_I_im,Complex.mul_re,Complex.add_re]
+  simp [fourierRowPole,Complex.add_im,Complex.mul_re,Complex.add_re]
 
 private theorem signed_odd_im_ne_zero (l : ℤ) : (2*(l:ℝ)+1)*π ≠ 0 := by
   apply mul_ne_zero _ Real.pi_ne_zero
@@ -75,8 +75,11 @@ theorem rowPole_anchored_of_real (s : ℝ)
       simpa using ((hasDerivAt_id v).sub_const (s:ℂ)).cexp
     have hn : 1+Complex.exp (v-s) ≠ 0 := fun h => hv ((logistic_denominator_zero_iff s v).mp h)
     apply ((hasDerivAt_const v (H 0)).sub (he.div ((hasDerivAt_const v (1:ℂ)).add he) hn)).congr_deriv
+    dsimp only [Pi.add_apply]
     ring
-  have hz : (0:ℂ) ∈ U := by simpa only [Complex.ofReal_zero] using real_not_fourierRowPole s 0
+  have hz : (0:ℂ) ∈ U := by
+    change (0:ℂ) ∉ range (fourierRowPole s)
+    simpa only [Complex.ofReal_zero] using real_not_fourierRowPole s 0
   have heq := hU.eqOn_of_deriv_eq hconn
     (fun v hv => (hp v hv).differentiableAt.differentiableWithinAt)
     (fun v hv => (hH v hv).differentiableAt.differentiableWithinAt)
