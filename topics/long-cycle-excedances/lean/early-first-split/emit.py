@@ -29,7 +29,7 @@ open Polynomial LongCycleFinite
 
 private def p : List ℤ := {int_list(row["p"])}
 private def q : List ℤ := {int_list(row["q"])}
-private def outer : Dyadic := {dyadic(row["outer"])}
+private def outer : LongCycleFinite.Dyadic := {dyadic(row["outer"])}
 private def windows : List Window := [
   {windows}]
 
