@@ -57,3 +57,5 @@ python -I -O topics/ordered-large-blocks/code/threshold_four_independent.py topi
 In the [shared Lean project](../../shared/lean/README.md), run `lake build OrderedThresholdTwoSigns OrderedThresholdTwoPhase OrderedThresholdThreeSigns OrderedGlobalAngular OrderedThresholdFourSigns`.
 
 [Production matrices and Toeplitz kernels](production-obstructions.md) records exact obstructions to a fixed transition, its canonical Riordan lift, and component-kernel total positivity.
+
+Giving every block the same positive weight can destroy real-rootedness already in degree two. The first critical weight at size $2j$ is asymptotic to $\sqrt{\pi j}(4/9)^j/4$. [Proof and integer certificates for the weighted obstruction](block-weight/README.md)
