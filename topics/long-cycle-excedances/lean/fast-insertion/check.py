@@ -53,7 +53,21 @@ def compile_module(project, module, expected):
 def main(project, imports):
     runpy.run_path(str(COMMON / "check.py"))["main"](project, imports)
     compile_module(project, "LongCycleBounds/UniversalRecurrence", set())
+    passed = set()
+    for module in ("InsertionTable", "RoundedHorner", "IntegerTail", "CheckedShard"):
+        source = project / (module + ".lean")
+        shutil.copyfile((LEDGER if module == "CheckedShard" else HERE) / source.name, source)
+        try:
+            compile_module(project, module, AUDIT[module])
+        except (subprocess.CalledProcessError, ArithmeticError) as error:
+            print(error, flush=True)
+        else:
+            passed.add(module)
+    if len(passed) != 4:
+        raise ArithmeticError(f"Foundational modules passing: {sorted(passed)}")
     for module, expected in AUDIT.items():
+        if module in passed:
+            continue
         source = project / (module + ".lean")
         if module == "CheckpointReplay":
             folder = project / "generated-checkpoints"

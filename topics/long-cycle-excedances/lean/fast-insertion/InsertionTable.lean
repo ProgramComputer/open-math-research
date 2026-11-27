@@ -55,7 +55,7 @@ theorem insertion_coeff {n : ℕ} (p q a r : ℝ[X]) (b : ℝ)
   simp only [coeff_add, coeff_C_mul, coeff_X_mul, coeff_sub, coeff_derivative, conv]
   cases i with
   | zero =>
-    simp only [coeff_X_mul_zero, Nat.cast_zero, Nat.cast_one, Nat.zero_add, sub_zero]
+    simp only [coeff_X_mul_zero, Nat.cast_zero, Nat.zero_add, sub_zero]
     ring
   | succ i =>
     rw [coeff_X_mul, coeff_derivative]
