@@ -46,7 +46,7 @@ for $0\le y\le B$ and a positive denominator. The comparison uses the decreasing
 
 The declaration `interlace_of_prefix_and_mixed_witnesses` supplies the endpoint signs to the mixed root-list theorem above. It accepts exact old roots, whole-row signs already proved by other means, and prefix-certified signs in the same witness family. The canonical specialization below supplies the coefficient envelope for the original permutation rows. The row degrees and the analytic or finite data placing all the windows remain inputs. In particular the Lean proof has not replayed all the recorded windows of the reviewed result for $k\ge7$.
 
-The example uses cutoff seven and sizes 14 and 15, which both admit two cycles. The dyadic endpoints are $6/65536$ and $7/65536$. Lean checks opposite old signs and a strictly negative next-row value throughout the window using four low coefficients. The [exact fixture reconstruction](check-cutoff7-fixture.py) separately obtains all 27 coefficients from the one- and two-cycle formulas and compares them to the Lean vectors. That reconstruction is an exact integer calculation. The original-permutation identification is not part of the Lean fixture theorem. [Fixture output](cutoff7-fixture-output.txt)
+The example uses cutoff seven and sizes 14 and 15, which both admit two cycles. The dyadic endpoints are $6/65536$ and $7/65536$. Lean checks opposite old signs and a strictly negative next-row value throughout the window using four low coefficients. The [exact fixture reconstruction](check-cutoff7-fixture.py) separately obtains all 27 coefficients from the one- and two-cycle formulas and compares them to the Lean vectors. That reconstruction is an exact integer calculation. The pinned coefficient adapter below separately checks the general original-permutation identification and compares the same two coefficient vectors at runtime. [Fixture output](cutoff7-fixture-output.txt)
 
 With the pinned research toolchain and mixed-witness objects above, run
 
@@ -74,7 +74,7 @@ The proof follows downward edges to the end of each decreasing run. It proves th
 
 Tagging a permutation with a bijection of its $p$ run ends to $p$ colors yields a word on the original labels and a permutation of the colors. Lean proves that these two pieces recover the tagged permutation. A downward edge goes to the next smaller label in its color, and an upward edge goes to the largest label of the successor color. There are $p!$ labelings of the run ends. The checked injection into the product of words and color permutations gives the claimed bound after cancellation of $p!$.
 
-The declaration `OpenMathResearch.LongCycleExcedances.RunColors.original_coeff_envelope` concerns the original permutation polynomial. The declaration `reduced_coeff_envelope` uses the identity $E_{n,k}=tP$ to give the bound $(j+1)^n$ at exponent $j$ of the reduced row. This supplies the coefficient-envelope input from the preceding section. Applying the external quotient identity in a common Lean environment and replaying all required root windows remain separate.
+The declaration `OpenMathResearch.LongCycleExcedances.RunColors.original_coeff_envelope` concerns the original permutation polynomial. The declaration `reduced_coeff_envelope` uses the identity $E_{n,k}=tP$ to give the bound $(j+1)^n$ at exponent $j$ of the reduced row. This supplies the coefficient-envelope input from the preceding section. The executable quotient bridge below shares its pin with the external quotient identity. Replaying all the required root windows remains open.
 
 With Lean 4.19.0 (compiler commit `6caaee842e94`) and mathlib `c44e0c8ee63ca166450922a373c7409c5d26b00b`, run from the repository root
 
@@ -97,8 +97,7 @@ The checked declarations `canonical_signed_pos_on_window_of_horner` and
 `canonical_interlace_of_prefix_and_mixed_witnesses` apply the sign and interlacing
 criteria to these permutation rows. The coefficient bounds follow from the
 decreasing-run theorem. The Horner margins, root-list and degree data still need
-to be supplied. The repo's literal cutoff-seven fixture and the low-coefficient
-engine have yet to be linked to these rows in one Lean environment.
+to be supplied. The same-environment connection to the pinned executable coefficients remains open.
 
 Zuo's frozen Lean 4.33.1 sources already provide the all-cutoff
 [cycle quotient identity](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/GeneralCycleQuotient.lean#L98)
@@ -106,7 +105,7 @@ and the [insertion recurrence](https://github.com/AlexZander-666/long-cycle-exce
 The research check uses Lean 4.19.0 (compiler commit `6caaee842e94`) with mathlib
 `c44e0c8ee63ca166450922a373c7409c5d26b00b`. The uniqueness theorem applies to a
 quotient of the same enumerator once the external factorization is available on
-a common pin. This check uses the research pin.
+a common pin.
 
 After preparing the mixed-witness and prefix-tail objects as above, run from
 `shared/lean`
@@ -119,3 +118,9 @@ lake env lean --root="$topic" "$topic/LongCycleReducedRow.lean"
 
 The four declarations report only `propext`, `Classical.choice` and `Quot.sound`.
 [Axiom output](reduced-row-axioms.txt)
+
+The [executable coefficient adapter](pinned-quotient/README.md) checks the
+identification with the original permutation enumerator in Zuo's pinned Lean
+4.33.1 environment. Its runtime check matches both cutoff-seven coefficient
+vectors. The research sign theorem and the pinned coefficient identity still
+use separate Lean toolchains.

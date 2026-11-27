@@ -20,6 +20,12 @@ cache. The destination must be new.
 python3 -Bu topics/long-cycle-excedances/lean/pinned-quotient/check.py /tmp/quotient-audit
 ~~~
 
+The [strict hosted run][hosted] passed on adapter commit
+`3d966c5701e57574f2d82748d4b269817fdc3405` and Lean compiler commit
+`819816b2e0a3bf405af45ae5c7af2491d8f5bee6`. Both identities use
+`propext`, `Classical.choice` and `Quot.sound`. The frozen verifier replayed
+65 project dependency modules. [Audit excerpt](strict-audit.txt)
+
 The checker loads just the adapter's upstream import closure and audits both
 identity declarations. It also checks at runtime that all 27 explicit entries
 in the cutoff-seven fixture match the executable output. The fixture check
@@ -29,5 +35,6 @@ the reviewed $k\ge7$ result. It supplies neither the root windows nor a replay o
 the full finite certificates. The local research Lean 4.19 build cannot import
 a Lean 4.33.1 object.
 
+[hosted]: https://github.com/ProgramComputer/open-math-research/actions/runs/45918517895
 [quotient]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/GeneralCycleQuotient.lean#L98
 [eulerian]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleFinite/CoefficientRows.lean
