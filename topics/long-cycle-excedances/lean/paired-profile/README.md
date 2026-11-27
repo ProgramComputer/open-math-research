@@ -34,3 +34,5 @@ The finite distinguished-pole sum also converges absolutely over all marked occu
 The formal numerator coefficients are the literal cutoff probability differences. The checked bounds give the first-block values, the positive jump at twice the cutoff and the factorial decay on later blocks. [Numerator variation](numerator-variation.md)
 
 Run `python3 -Bu topics/long-cycle-excedances/lean/paired-profile/check.py /path/to/scratch-project` from the repository root with Lean 4.33.1 and its Lake executable on PATH. An optional second argument is the authenticated common-pin import archive. The driver delegates dependency authentication and setup to the [common-pin driver](../common-pin/check.py), then compiles and kernel-replays the profile and supporting modules and checks their named axiom reports. [Hosted receipt](verification.md) [Finite-product receipt](product-verification.md)
+
+The eight coarse shapes bound the two real moment functions at every bin for upper aspect at most 48. [Moment theorem and verification receipt](coarse-moment-verification.md)
