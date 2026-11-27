@@ -38,7 +38,7 @@ theorem principal_radius_le_minor (s : ℝ) (i : ℕ) :
   apply (sq_le_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
   rw [literal_pole_norm_sq,literal_pole_norm_sq]
   simp only [Int.cast_zero,mul_zero,zero_add,one_mul]
-  apply add_le_add_left
+  apply add_le_add (le_refl _)
   apply (sq_le_sq₀ pi_pos.le (by positivity)).mpr
   calc
     π = 1*π := (one_mul _).symm
