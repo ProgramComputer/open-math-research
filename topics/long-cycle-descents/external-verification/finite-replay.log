@@ -1,0 +1,28 @@
+Extracted anc/ordinary-descent-certificate.zip fba265d194ce88a2fd97560c74a940cc672b798701b33ae9c836da42a031b72d
+Direct one-line permutation enumeration: 36 rows, 2 <= n <= 9
+Sturm n=4 k=2 degree=3 mesh_signs=0 distinct_nonzero=1 gcd_degree=1
+Completed through n=16, 64 representative rows
+Completed through n=32, 256 representative rows
+Completed through n=48, 576 representative rows
+Completed through n=64, 1024 representative rows
+Completed through n=80, 1600 representative rows
+Completed through n=96, 2304 representative rows
+Completed through n=112, 3136 representative rows
+Completed through n=127, 4032 representative rows
+Completed 8001 nonempty rows represented by 4032: {'monomial': 2, 'sturm': 1, 'mesh': 4028, 'factor': 1}; failed real-rootedness checks [].
+PASS byte-stable certificate content independently matched.
+Exact shared-grid signs: 327451 evaluations.
+Failed expected signs: 0.
+All adjacent interior angle brackets shared by all cutoff rows at each n, except the n=5 factor.
+PASS rational endpoint bounds for n>=64 and the global n>=8192 cutoff proposition.
+PASS all-cutoffs endpoint n>=128, with distinct residual and true-reflection margins.
+Extracted anc/boundary-certificate.zip 33a45de7b5561a3f1f422300772110aadba598141c5c944604c85f45fa3107fc
+n= 4 all raw rows at replacement nodes, after positive denominator clearing: [[-15, 15], [-9, 0], [-6, 6], [-6, 6]]
+n= 5 all raw rows at replacement nodes, after positive denominator clearing: [[-455, 16, -455], [-176, 4, -416], [-216, 0, -216], [-216, 0, -216], [-216, 0, -216]]
+Original permutation rows through eight and all 15740 new common-node signs passed.
+All rational tail, derivative-free Taylor mass and outer-node margins passed.
+4 [(-1, 1), (-2, 0)] [[-1, 1], [-1, 0], [-1, 1], [-1, 1]]
+5 [(-1, 2), (-1, 0), (-4, 0)] [[-1, 1, -1], [-1, 1, -1], [-1, 0, -1], [-1, 0, -1], [-1, 0, -1]]
+PASS 15740 strict common signs for the two boundary families on the original nodes.
+PASS exceptional weak nodes at n=4,5; literal original permutations through 8.
+PASS exact 1/5 ratio, 2084/2625 tail, 166/2625 margin, both q=1 parities and q=2 units.
