@@ -11,3 +11,11 @@ Run on the stable Lean 4.33.1 pin from the repository root with a fresh output d
 ```sh
 python3 -Bu topics/long-cycle-excedances/lean/fourier-stable/check-original-coefficients.py /tmp/fourier-original-coefficients
 ```
+
+The stable job passed at PR head `edca56be001970ca5fdc867c39284994dc03e0af` and GitHub checkout `215b1aabd0527a9c854bf5f7e59e384baaaa2c36`. Lean was pinned to 4.33.1 at `819816b2e0a3bf405af45ae5c7af2491d8f5bee6` and mathlib to `0df444a360eaa60ab8c11dca51a86af692955474`. All 52 compiler input digests matched the checkout or the authenticated cutoff-six archive, and all 19 bundled replay markers were present. The 95 axiom reports, including the five new declarations, use only `propext`, `Classical.choice`, and `Quot.sound`. The report ZIP, artifact `15211444995`, matched SHA-256 `23e72fa247c67570b6e0a56b98173aa88f1a0e0ad5091ab99675bd029667ddf2`. [Compiler, dependency, axiom and replay report](https://github.com/ProgramComputer/open-math-research/actions/runs/46026934213)
+
+| Source | Compiler input SHA-256 |
+| --- | --- |
+| `FourierOddKernelCalculus.lean` | `07afc0575f8a01b056c5163f27d4fb6df41c92e6035a2ca77d26554724d4b691` |
+| `FourierOddKernelMoments.lean` | `d12b3ae8fed907c6c81067dae662d70fc9f8139265af6e3aa34dedca3f85d402` |
+| `FourierOriginalCoefficientBounds.lean` | `135057615acc1f23af5c7bac8c6bc12db57114b5c3cdac9e8c8b43404eb91715` |
