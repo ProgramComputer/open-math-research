@@ -1,6 +1,6 @@
 import Mathlib.Analysis.Convex.Deriv
 import Mathlib.Analysis.Convex.SpecificFunctions.Basic
-import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
 import Mathlib.Analysis.Complex.ExponentialBounds
 import Mathlib.Analysis.Real.Pi.Bounds
 import Mathlib.Tactic.Linarith
@@ -57,7 +57,7 @@ theorem small_band_radial_power {k j : ℕ} (hk : 10 ≤ k) (hjk : j < k) :
   have hlog : -(u/(1-u)) ≤ Real.log (1-u) := by
     have hx := Real.log_le_sub_one_of_pos (inv_pos.mpr hz)
     rw [Real.log_inv] at hx
-    have h := show (1-u)⁻¹ - 1 = u/(1-u) by field_simp [ne_of_gt hz]
+    have h := show (1-u)⁻¹ - 1 = u/(1-u) by field_simp [ne_of_gt hz] <;> ring
     linarith only [hx,h]
   have hu : (j:ℝ) * (-(u/(1-u))) = -t-d := by
     dsimp only [u,t,d]

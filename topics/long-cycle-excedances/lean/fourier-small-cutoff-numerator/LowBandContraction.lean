@@ -52,7 +52,8 @@ private theorem moment_prefix {k : ℕ} (hk : 2 ≤ k) {S : ℝ} (hS : 0 < S) :
         (mul_le_mul_of_nonneg_left hsum' (by positivity))
     _ = _ := by
       field_simp [ne_of_gt hS, ne_of_gt hsqrt0]
-      linear_combination (36*S) * Real.sq_sqrt hk0.le
+      ring_nf
+      simp only [Real.sq_sqrt hk0.le]
 
 private theorem low_band_radial_prefix {k : ℕ} (hk : 10 ≤ k)
     (c : ℕ → ℂ) {S R A : ℝ} (hS : 0 < S) (hA : 0 ≤ A)
@@ -104,15 +105,14 @@ private theorem low_band_radial_prefix {k : ℕ} (hk : 10 ≤ k)
             (sub_nonneg.mpr (pow_le_pow_left₀ hρ hρR (2+i))) (by positivity)
           refine h.trans_eq ?_
           rw [Nat.add_comm 2 i]
-          field_simp [ne_of_gt hj0, ne_of_gt hk0]
-          ring
+          field_simp [ne_of_gt hj0, ne_of_gt hk0] <;> ring
       _ = (A/(k:ℝ)) * (∑ i ∈ Finset.range (k-2),
         (2+9/(4*S*Real.sqrt ((i+2:ℕ):ℝ)))) := (Finset.mul_sum _ _ _).symm
       _ ≤ _ := by
         calc
           _ ≤ (A/(k:ℝ))*((k:ℝ)*(2+9/(2*S*Real.sqrt k))) :=
             mul_le_mul_of_nonneg_left (moment_prefix (by omega) hS) (by positivity)
-          _ = _ := by field_simp [ne_of_gt hk0]; ring
+          _ = _ := by field_simp [ne_of_gt hk0] <;> ring
   calc
     ‖∑ j ∈ Finset.range k, f j‖ ≤ ∑ j ∈ Finset.range k, ‖f j‖ := norm_sum_le _ _
     _ = ‖f 1‖ + (∑ i ∈ Finset.range (k-2), ‖f (2+i)‖) := by
@@ -140,7 +140,8 @@ private theorem low_band_taylor_tail {k : ℕ} (hk : 10 ≤ k)
     linarith [show (0:ℝ) < 1/(k:ℝ) by positivity]
   have hq0 : 0 ≤ q := hρ
   have hρq : ρ ≤ q := le_rfl
-  have hz : ‖z‖ = ρ := by simp [z,norm_mul,hξ, Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg hρ]
+  have hz : ‖z‖ = ρ := by
+    simp only [z,norm_mul,hξ,Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg hρ,mul_one]
   have hqk : q^k ≤ Real.exp (-1) := by
     have ha : q ≤ Real.exp (-(1/(k:ℝ))) := by
       simpa only [q,ρ,sub_eq_add_neg,add_comm] using Real.add_one_le_exp (-(1/(k:ℝ)))
@@ -162,7 +163,7 @@ private theorem low_band_taylor_tail {k : ℕ} (hk : 10 ≤ k)
       have hdec : (9:ℝ)/(4*S*Real.sqrt ((i+k:ℕ):ℝ)) ≤ 9/(4*S*Real.sqrt k) :=
         div_le_div_of_nonneg_left (by norm_num) (by positivity)
           (mul_le_mul_of_nonneg_left hBs (by positivity))
-      exact div_le_div₀ hC (add_le_add_left hdec 2) hk0 hkiR
+      exact div_le_div₀ hC (by linarith only [hdec]) hk0 hkiR
     have hpow := pow_le_pow_left₀ hρ hρq (i+k)
     dsimp only [f,major]
     rw [norm_mul,norm_pow,hz]

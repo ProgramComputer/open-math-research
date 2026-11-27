@@ -4,7 +4,7 @@ on:
     branches: [research]
     paths:
       - '.github/workflows/long-cycle-small-cutoff-numerator.yml'
-      - 'topics/long-cycle-excedances/lean/small-cutoff-numerator/**'
+      - 'topics/long-cycle-excedances/lean/fourier-small-cutoff-numerator/**'
       - 'topics/long-cycle-excedances/lean/fourier-high-height/**'
       - 'topics/long-cycle-excedances/lean/fourier-numerator/**'
       - 'topics/long-cycle-excedances/lean/fourier-stable/**'
@@ -49,7 +49,7 @@ jobs:
           if [[ -f "$RUNNER_TEMP/quotient-import-objects.tar.zst" ]]; then
             args+=(--retained-imports "$RUNNER_TEMP/quotient-import-objects.tar.zst")
           fi
-          python3 -Bu topics/long-cycle-excedances/lean/small-cutoff-numerator/check.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/small-cutoff-numerator.log"
+          python3 -Bu topics/long-cycle-excedances/lean/fourier-small-cutoff-numerator/check.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/small-cutoff-numerator.log"
       - name: Preserve verification report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

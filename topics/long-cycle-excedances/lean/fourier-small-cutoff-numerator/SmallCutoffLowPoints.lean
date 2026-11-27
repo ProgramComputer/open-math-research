@@ -58,12 +58,15 @@ theorem original_low_band_at_points {k : ℕ} (hk : 10 ≤ k)
   have ht (u : ℂ) (hu : ‖u‖ = 1) : ‖(ρ:ℂ)*u‖ < 1 := by
     simpa only [norm_mul,hu, mul_one,Complex.norm_real,Real.norm_eq_abs,abs_of_nonneg hρ0] using hρ1
   have hW : (r:ℂ)*((R:ℂ)*ξ) = w := by
-    unfold R ξ
-    rw [Complex.ofReal_div]
-    field_simp [hrc,hwc] <;> ring
+    have hscale : (r:ℂ)*(R:ℂ) = (‖w‖:ℂ) := by
+      unfold R
+      rw [Complex.ofReal_div, ← mul_div_assoc, mul_div_cancel_left₀ _ hrc]
+    rw [← mul_assoc, hscale]
+    change (‖w‖:ℂ)*(w/(‖w‖:ℂ)) = w
+    rw [← mul_div_assoc, mul_div_cancel_left₀ _ hwc]
   have hP : (r:ℂ)*η = p := by
     dsimp only [η]
-    field_simp [hrc]
+    rw [← mul_div_assoc, mul_div_cancel_left₀ _ hrc]
   have hW' : (r:ℂ)*((ρ:ℂ)*ξ) = ((ρ*r/‖w‖:ℝ):ℂ)*w := by
     dsimp only [ξ]
     rw [Complex.ofReal_div,Complex.ofReal_mul]
