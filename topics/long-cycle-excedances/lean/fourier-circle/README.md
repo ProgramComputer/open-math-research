@@ -76,3 +76,5 @@ The integral product estimate also has a specialization to the actual odd lattic
 The differentiated kernel has a termwise angular derivative with an integrated bound in terms of the squared pole factors. [Differentiation and angular integral](derivative.md)
 
 The differentiated contrast kernel satisfies the first-moment bound over the full odd lattice. Both integrations by parts now give coefficient inequalities under their stated inputs. [Coefficient errors and verification record](coefficient-errors.md)
+
+A segment integral gives the three lower bounds on the principal denominator used in the large-aspect estimates. [Theorem and verification](principal-denominator.md)
