@@ -28,8 +28,10 @@ LOGISTIC_IMPORTS = (
 PHASE_MODULES = ("TiltDerivative", "SeventhMoment", "GridSigns", "ActualPhaseDerivative",
                  "PhaseRemainder", "PhasePoleGeometry", "AngularGeometry", "CellReadout",
                  "Displacement", "OriginalAngularCell", "AngularDerivative", "OriginalAngularDerivative",
-                 "PhaseMiddle", "MiddleAssembly")
+                 "PhaseMiddle", "MiddleAssembly", "CellRootSelection", "OriginalRootCount")
 EXPECTED = {
+    "RepositoryQuotientAudit.original_ordered_high_angle_roots",
+    "OpenMathResearch.LongCycleExcedances.ordered_grid_roots",
     "OpenMathResearch.LongCycleExcedances.phase_slope_bound",
     "OpenMathResearch.LongCycleExcedances.poleAngle_hasDerivAt",
     "OpenMathResearch.LongCycleExcedances.two_sided_far_remainder",

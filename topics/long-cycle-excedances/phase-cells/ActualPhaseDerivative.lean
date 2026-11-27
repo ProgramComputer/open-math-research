@@ -26,7 +26,7 @@ theorem principalLogTilt_eq (k : ℕ) (x : ℝ) :
   congr 2
   cases j with
   | zero =>
-    simp [cutoffLogCoefficient, logarithmCoeff, momentOf, LongCycleBounds.longEulerian_zero]
+    simp [cutoffLogCoefficient, logarithmCoeff, momentOf, LongCycleBounds.longEulerian_zero, neg_div]
   | succ j =>
     have h1 : j+1+1 ≠ 1 := by omega
     have hd : 2 ≤ j+1+1 ∧ j+1+1 < k := by omega
@@ -58,8 +58,7 @@ theorem actual_principalLogTilt_derivative {k : ℕ} (hk : 2 ≤ k) (x : ℝ) (h
     change (k:ℂ) * (-(LongCycleBounds.Band.moment k (-Real.exp (-x)) : ℂ) /
       (k.factorial:ℂ)) = _
     rw [LongCycleBounds.Band.moment_poles k hk x hx, fac, Nat.cast_mul]
-    field_simp [hkn, hfac]
-    <;> ring
+    field_simp [hkn, hfac] <;> first | rfl | ring
   rw [hn', he']
   simp [coherentPole]
 

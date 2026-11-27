@@ -20,7 +20,9 @@ private theorem variation_of_derivative_bound {a b : ℝ} (hab : a ≤ b)
     · intro x hx
       rw [interior_Icc] at hx
       have hx' := Ioo_subset_Icc_self hx
-      rw [((hB x hx').add ((hF x hx').const_mul s)).deriv]
+      have hd : HasDerivAt (fun y => B y+s*F y) (g x+s*f x) x :=
+        (hB x hx').add ((hF x hx').const_mul s)
+      rw [hd.deriv]
       have hb := abs_le.mp (h x hx')
       rcases hs with hs | hs <;> rw [hs] <;> linarith
   have left := (mono 1 (Or.inl rfl)) (left_mem_Icc.mpr hab) (right_mem_Icc.mpr hab) hab

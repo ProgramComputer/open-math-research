@@ -44,10 +44,10 @@ theorem poleAngle_hasDerivAt (x : ℝ) :
     HasDerivAt poleAngle (-π/(x^2+π^2)) x := by
   have h := (hasDerivAt_const x (π/2)).sub ((Real.hasDerivAt_arctan (x/π)).comp x
     ((hasDerivAt_id x).div_const π))
-  convert h using 1
-  have hp : π ≠ 0 := Real.pi_ne_zero
-  field_simp [hp]
-  ring
+  change HasDerivAt poleAngle (0 - 1/(1+(x/π)^2)*(1/π)) x at h
+  have he : 0 - 1/(1+(x/π)^2)*(1/π) = -π/(x^2+π^2) := by
+    field_simp [Real.pi_ne_zero] <;> ring
+  rwa [he] at h
 
 /-- Turning a dimensionless pole bound into an error relative to the
 derivative of the principal angle. -/
@@ -67,9 +67,9 @@ theorem phase_slope_bound {n r s : ℝ} {C w : ℂ} (hn : 7 ≤ n) (hr : 0 < r)
   rw [abs_of_nonneg (by positivity)] at hcoef
   have h' : (1+8/(15*s)) / r < (32/35)*n*s/r := by
     apply (div_lt_div_iff_of_pos_right hr).2
-    convert mul_lt_mul_of_pos_right hcoef hs using 1
-    field_simp
-    ring
+    have he : (1/s+8/(15*s^2))*s = 1+8/(15*s) := by
+      field_simp [hs.ne'] <;> ring
+    simpa only [he] using mul_lt_mul_of_pos_right hcoef hs
   exact hnorm.trans_lt ((div_le_div_of_nonneg_right tail hr.le).trans_lt h')
 
 #print axioms two_sided_far_remainder

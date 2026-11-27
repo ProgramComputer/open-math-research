@@ -47,6 +47,9 @@ theorem angular_pole_geometry {θ : ℝ} (ha : π/6 ≤ θ) (hb : θ ≤ π/2) :
   have hx : 0 ≤ x := by
     exact mul_nonneg pi_pos.le (div_nonneg
       (cos_nonneg_of_mem_Icc ⟨by linarith [pi_pos], hb⟩) hsin₀.le)
+  have hπre : ((π:ℂ)*Complex.I).re = 0 := by
+    simp only [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im,
+      mul_zero, zero_mul, sub_zero]
   have hw : w = (r:ℂ)*Complex.exp ((θ:ℂ)*Complex.I) := by
     rw [Complex.exp_mul_I, ← Complex.ofReal_cos, ← Complex.ofReal_sin]
     apply Complex.ext
@@ -54,6 +57,7 @@ theorem angular_pole_geometry {θ : ℝ} (ha : π/6 ≤ θ) (hb : θ ≤ π/2) :
         Complex.ofReal_im, neg_zero, add_zero, Complex.mul_re,
         Complex.add_im, Complex.mul_I_im, Complex.I_re, Complex.I_im, zero_mul, sub_zero]
       dsimp [x,r,angleCoordinate,w]
+      try simp only [hπre, add_zero]
       ring
     · simp only [Complex.add_im, Complex.ofReal_im, Complex.mul_I_im,
         Complex.ofReal_re, zero_add, Complex.mul_im, zero_mul, add_zero]
