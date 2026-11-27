@@ -59,7 +59,8 @@ full-size cycle makes the sign strict whenever the cutoff fits. The
 full weak-interlacing implication then needs only the left-hand windows.
 The [hosted center check][center-audit] compiled and replayed both new modules.
 The three additional declarations use only `propext`, `Classical.choice`
-and `Quot.sound`. [Audit excerpt](center-audit.txt) · [Eulerian roots][eulerian-roots] ·
+and `Quot.sound`. [Audit excerpt](center-audit.txt) · [Independent review](center-review.md) ·
+[Eulerian roots][eulerian-roots] ·
 [Eulerian reciprocity][eulerian-reciprocity] · [Anchored expansion][anchored]
 
 [center-audit]: https://github.com/ProgramComputer/open-math-research/actions/runs/45924858448
