@@ -11,14 +11,14 @@ HERE = Path(__file__).resolve().parent
 FOURIER = HERE.parent / "fourier-circle"
 REAL_AXIS = runpy.run_path(str(HERE.parent / "fourier-stable" / "check-real-axis.py"))
 REPORTS = runpy.run_path(str(FOURIER / "check.py"))["THEOREMS"]
-NUMERATOR = (
-    "NumeratorPoleVolume",
-    "NumeratorLogDefinitions",
-    "NumeratorOddPoleMoment",
-    "NumeratorRadialScalars",
-    "NumeratorTaylorContraction",
-    "NumeratorLogSeries",
-)
+NUMERATOR = {
+    "NumeratorPoleVolume": (),
+    "NumeratorLogDefinitions": (),
+    "NumeratorOddPoleMoment": ("NumeratorPoleVolume", "NumeratorLogDefinitions"),
+    "NumeratorRadialScalars": (),
+    "NumeratorTaylorContraction": ("NumeratorRadialScalars",),
+    "NumeratorLogSeries": ("NumeratorLogDefinitions", "NumeratorOddPoleMoment", "NumeratorTaylorContraction"),
+}
 ADAPTER = (
     "numerator_log_coeff_eq_original",
     "numerator_taylor_eq_original",
@@ -28,9 +28,14 @@ ADAPTER = (
 
 def compile_numerator(project):
     build = REAL_AXIS["build_local"]
+    failed = set()
     with TemporaryDirectory() as directory:
         staging = Path(directory)
-        for module in NUMERATOR:
+        for module, dependencies in NUMERATOR.items():
+            if any(dependency in failed for dependency in dependencies):
+                print(f"Skip {module}: an import did not build", flush=True)
+                failed.add(module)
+                continue
             source = FOURIER / f"{module}.lean"
             target = staging / source.name
             shutil.copyfile(source, target)
@@ -46,10 +51,17 @@ def compile_numerator(project):
                 )
             else:
                 print(f"Prepare {module} source-sha256={source_hash}", flush=True)
-            build(project, target, module, REPORTS[module])
+            try:
+                build(project, target, module, REPORTS[module])
+            except subprocess.CalledProcessError:
+                failed.add(module)
+    if failed:
+        raise SystemExit("Numerator modules did not build: " + ", ".join(sorted(failed)))
     build(project, HERE / "NumeratorCutoffAdapter.lean", "NumeratorCutoffAdapter", ADAPTER)
-    print(f"PASS: {len(NUMERATOR)+1} numerator modules and "
-          f"{sum(len(REPORTS[m]) for m in NUMERATOR)+len(ADAPTER)} numerator declaration audits")
+    points = "NumeratorSmallHeightPoints"
+    build(project, HERE / f"{points}.lean", points, ("original_small_height_numerator_at_points",))
+    print(f"PASS: {len(NUMERATOR)+2} numerator modules and "
+          f"{sum(len(REPORTS[m]) for m in NUMERATOR)+len(ADAPTER)+1} numerator declaration audits")
 
 
 if __name__ == "__main__":
