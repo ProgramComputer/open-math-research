@@ -32,7 +32,8 @@ theorem neighbor_pole_displacement {x h r p : ℝ} (hh : 0 < h) (hr : 0 < r)
   change ‖(r:ℂ)/w-((x/r:ℝ):ℂ)‖ ≤ _
   rw [hid,norm_div,norm_mul,Complex.norm_real,Real.norm_eq_abs,abs_of_pos hr]
   apply (div_le_iff₀ (mul_pos hW hr)).mpr
-  have hc : p*(h/r)*(‖w‖*r) = (p*h)*‖w‖ := by field_simp;ring
+  have hc : p*(h/r)*(‖w‖*r) = (p*h)*‖w‖ := by
+    field_simp <;> ring
   rw [hc]
   apply le_of_sq_le_sq _ (mul_nonneg (mul_pos hp0 hh).le hW.le)
   have hnum : ‖((h^2:ℝ):ℂ)-((x*p*h:ℝ):ℂ)*Complex.I‖^2 = (h^2)^2+(x*p*h)^2 := by

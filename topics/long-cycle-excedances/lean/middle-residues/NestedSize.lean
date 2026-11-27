@@ -19,7 +19,9 @@ theorem nested_decay_at_size {q n k : ℕ} (hn : 100 ≤ n) (hk : 7 ≤ k) (hnq 
   have hqm : ((q-1:ℕ):ℝ)=(q:ℝ)-1 := by rw [Nat.cast_sub (by omega : 1 ≤ q),Nat.cast_one]
   let ρ := (1+1/(100*K))⁻¹
   have hρ : 0 < ρ := by dsimp [ρ]; positivity
-  have he : ρ-1 = -1/(100*K+1) := by dsimp [ρ]; field_simp
+  have he : ρ-1 = -1/(100*K+1) := by
+    dsimp [ρ]
+    field_simp <;> ring
   have hl := log_le_sub_one_of_pos hρ
   rw [he] at hl
   have hg : (n:ℝ)/(200*K) ≤ ((q:ℝ)-1)/(100*K+1) := by
