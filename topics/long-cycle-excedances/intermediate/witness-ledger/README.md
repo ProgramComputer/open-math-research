@@ -38,6 +38,8 @@ Rebuild the compressed archive with `python3 -B archive.py /path/to/new-director
 
 ## Checks and scope
 
+An independent reviewer reproduced the archive digest and checked all four endpoint signs in every recorded gap with a separately written integer program. [Independent review](independent-review.md) · [Pull request review](https://github.com/ProgramComputer/open-math-research/pull/248#issuecomment-7207238812)
+
 The full streaming run exited successfully. The exporter and independent metadata totals agree on 93,902 pairs, 82,395 nonempty pairs, 541,199 gaps and highest entrance 33. The exact CSV size is 63,014,205 bytes, the largest denominator exponent is 283, and the stream SHA-256 is `8f8115d4f203840560dd74f7cf12654d0bca00561c8ff473f27ed6af3f20a73e`. No full CSV was stored. The full exporter and metadata verifier completed in about 170 seconds on the local arm64 host. [Machine-readable receipt](full-metadata.json) · [Exporter diagnostics](full-export.progress)
 
 The $`k=13`$ shard at sizes 251–255 has 5 pairs and 131 gaps, occupies 15,226 bytes as CSV and 7,514 bytes with reproducible gzip, and has SHA-256 `e6b756647fcde23d8047abf9968340c6787f22a62cba54d59b3a917e43c628d0`. A fresh export reproduced those bytes. A separate 320-bit interval check placed all 131 shard brackets strictly inside their stated angular gaps. The independent verifier rejected seven mutations covering missing, duplicate, swapped and extra records, reversed endpoints, same-pair overlap and noncanonical decimal encoding.
