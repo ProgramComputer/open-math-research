@@ -110,7 +110,32 @@ COLOR_MODULES = (
     "ColorInsertion",
     "RepositoryColorInsertion",
 )
+LOAD_MODULES = (
+    "BinomialColorLoad",
+    "LoadEnvelope",
+    "MarkedColorLoads",
+    "MarkedLoadProbability",
+    "ColorLoadRanges",
+    "CutoffAcceptanceBudget",
+)
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.actual_color_probability_comparison",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.actual_load_lower_budget",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.actual_load_upper_budget",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.color_load_cutoff_comparison",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.color_long_load_budget",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.color_short_load_budget",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.exceptional_color_pairs_le_marks",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.expected_color_marks_product",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.marked_color_load_card",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.marked_load_probability",
+    "OpenMathResearch.LongCycleExcedances.ColorAnchor.total_marked_probability",
+    "OpenMathResearch.LongCycleExcedances.color_load_large_orbit_budget",
+    "OpenMathResearch.LongCycleExcedances.color_load_lower_tail",
+    "OpenMathResearch.LongCycleExcedances.color_load_small_orbit_budget",
+    "OpenMathResearch.LongCycleExcedances.color_load_transform_budget",
+    "OpenMathResearch.LongCycleExcedances.color_load_upper_tail",
+
     "OpenMathResearch.LongCycleExcedances.color_lag_coefficients_nonneg",
     "OpenMathResearch.LongCycleExcedances.color_lag_comparison",
     "OpenMathResearch.LongCycleExcedances.color_transform_successor",
@@ -400,6 +425,7 @@ def compile_topic(project):
     files.extend((TOPIC / "middle-residues" / (m + ".lean"), m) for m in MIDDLE_MODULES)
     files.extend((TOPIC / "front-middle-join" / (m + ".lean"), m) for m in JOIN_MODULES)
     files.extend((TOPIC.parent / "color-acceptance" / (m + ".lean"), m) for m in COLOR_MODULES)
+    files.extend((TOPIC.parent / "color-load-bounds" / (m + ".lean"), m) for m in LOAD_MODULES)
     observed = {}
     failed = set()
     for source, module in files:
@@ -451,7 +477,7 @@ def compile_topic(project):
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
                    "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
-                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES, *MIDDLE_MODULES, *JOIN_MODULES, *COLOR_MODULES):
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES, *MIDDLE_MODULES, *JOIN_MODULES, *COLOR_MODULES, *LOAD_MODULES):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)

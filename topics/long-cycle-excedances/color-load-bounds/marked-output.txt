@@ -1,0 +1,3 @@
+137883 literal word-permutation pairs, 280 exact marked-load masses.
+Both comparison inequalities passed for 588 parameter quadruples.
+0 <= n <= 6, 1 <= p <= 4, 1 <= k <= 6, 1 <= b <= p+1.
