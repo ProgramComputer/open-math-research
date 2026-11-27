@@ -1,0 +1,7 @@
+# Independent scope review
+
+An independent agent checked the source at `eb759868c47d885933af7c6f01265de654c4d738`. The conclusion of `original_signed_of_packed_words` concerns the literal polynomial $(E_{n,k}/X)(-p/D)$, for $k\ge2$ and $n\le1001$. The inputs are equality of the decoded prefix with the computable rounded recurrence and success of the strict integer check. At positive size and $p>0$, the unreduced polynomial has the opposite sign because its factor $X$ evaluates to $-p/D$.
+
+The reviewer checked floor rounding with negative intermediate values, the ceiling bound for the positive sum, and the final ceiling for rounding uncertainty. For $U=(w+1)^n$, $V=(w+2)^n$ and $Z=DU-pV>0$, the strict comparison $DU^2p^w<MD^wZ$ makes the geometric tail smaller than the signed lower margin $M$. The argument permits any positive integer denominator and any finite prefix width. A concrete endpoint additionally needs its row and integer witnesses.
+
+The reviewer authenticated both hosted artifacts, compared all nine relevant modules with their Git source hashes and found standard axioms in all 32 reports from the combined build. Nine module replays passed. The separate compact-row build reproduced its 20 axiom reports and four module replays. [Combined run](https://github.com/ProgramComputer/open-math-research/actions/runs/45930492151) · [Separate coefficient check](https://github.com/ProgramComputer/open-math-research/actions/runs/45930492097)
