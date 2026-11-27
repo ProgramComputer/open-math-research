@@ -34,12 +34,10 @@ theorem prefix_frequency_hasSum (k : ℕ) (s : ℝ) (g : ℕ → ℂ) (z : ℂ)
       have hA : ((a+1:ℕ):ℂ) ≠ 0 := by exact_mod_cast (by omega : a+1≠0)
       rw [frequencyWeight, mul_pow, pow_succ (((a+1:ℕ):ℂ)) i]
       have hA' : (a:ℂ)+1 ≠ 0 := by simpa only [Nat.cast_add,Nat.cast_one] using hA
-      field_simp [hA, hA', hn]
-      ring
+      field_simp [hA, hA', hn] <;> ring
     have hv : g (i+1)*z^(i+1) =
         -(g (i+1))*((i+1).factorial:ℂ)*(-z^(i+1)/((i+1).factorial:ℂ)) := by
-      field_simp [hn]
-      ring
+      field_simp [hn] <;> ring
     rw [hf,hv]
     exact h
   have h := hasSum_sum hterm
