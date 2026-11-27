@@ -26,4 +26,8 @@ jobs:
           diff -u bounds-output.txt "$RUNNER_TEMP/sine-bounds.txt"
           python3 -I -B independent-check.py > "$RUNNER_TEMP/sine-independent.txt"
           diff -u independent-output.txt "$RUNNER_TEMP/sine-independent.txt"
+          python3 -I -B check-carrier.py > "$RUNNER_TEMP/sine-carrier.txt"
+          diff -u carrier-output.txt "$RUNNER_TEMP/sine-carrier.txt"
+          python3 -I -B independent-carrier.py > "$RUNNER_TEMP/sine-independent-carrier.txt"
+          diff -u independent-carrier-output.txt "$RUNNER_TEMP/sine-independent-carrier.txt"
           python3 -I -B obstruction.py

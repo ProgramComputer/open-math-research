@@ -12,6 +12,8 @@ For a pair of principal waves $F_m=a\cos(m\theta)+b\sin(m\theta)$ the sine compa
 
 A fresh-context agent independently derived the determinant and its boundary term and reran all sixteen slabs. The independent checker uses a different lattice cutoff and rounding precision and directly computes powers of the positive majorant. It gives the same lower bounds to six decimal places. [Independent review](independent-review.md) · [Independent checker](independent-check.py) · [Independent output](independent-output.txt)
 
+A single principal-residue estimate now gives the stronger lower bound $322338/10^6$ throughout the same sector. It covers all angles, including the conjugate pole on the unit circle, and removes the earlier Poisson and differentiated-tilt estimates from the middle argument. [Uniform principal-residue proof and checks](uniform-carrier.md)
+
 **Formal status: ⬜ None for the displayed uniform lower bound.** Local Lean 4.19 checks cover the telescoping identity, the signs at samples and old zeros, and the conditional root-list assembly with the exterior and degree theorems supplied as inputs. The quantitative pole estimates remain on paper with a rational checker. The all-size proof retains its separate verification record. [All-cutoff argument and scope](../all-cutoffs/README.md)
 
 ## Computational checks
@@ -34,3 +36,5 @@ The interval calculation uses an independent generating function. Set $G(u)=(1-t
 Alexandersson asks for consecutive interlacing at all admissible sizes. This work concerns a bounded-aspect step of the repository’s existing all-size argument. It draws on the reviewed residue expansion, binomial envelopes for cycle probabilities, and signed odd-pole identity, including Bowen Zuo’s Eulerian-series formalization. Rakotoson and Rakotondrajao study the related associated Stirling Eulerian numbers and their generating functions. [Tracking issue and attribution](https://github.com/ProgramComputer/open-math-research/issues/4) · [Zuo’s source](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/EulerianSeries.lean) · [Rakotoson and Rakotondrajao, 2025](https://cs.uwaterloo.ca/journals/JIS/VOL28/Rakotoson/rakoto12.html)
 
 The November 27, 2026 method search used GitHub code search for “excedance” with “sine determinant”, a web search for “cycle length”, “interlacing”, “sine determinant”, and the authors’ names, and domain-restricted searches of arXiv, GitHub and indexed X posts for long-cycle excedance interlacing. GitHub code search returned no match for that phrase. Public indexing is incomplete, particularly for X. Priority for the sine estimate is undetermined.
+
+The [reflected signed-pole estimate](reflected-carrier.md) proves two lower bounds for the entire principal product with eleven paired terms in each certificate.
