@@ -42,14 +42,14 @@ many monomial exponentials, gives $|\tau_j|\le A R^{-j}$ where
 $A=\exp(5+18\log k)$. This follows by taking absolute values in the
 monomial exponential factors and evaluating the resulting nonnegative
 coefficient series at $R$. At the principal pole,
-$|T(w_1)|=e^{\operatorname{Re}G(w_1)}\ge A^{-1}$. Write $M=|T(w_1)|$.
+$|T(w_1)|=e^{\mathrm{Re}G(w_1)}\ge A^{-1}$. Write $M=|T(w_1)|$.
 The real parts of conjugate terms give the nearest-pair sum.
 
 Normalize the row by setting $Y_q=r^{q+1}C_q/(2M)$ and
 $a_q=T(w_1)z^{q+1}/M$. Then
 
 $$
-|Y_q-\operatorname{Re}a_q|
+|Y_q-\mathrm{Re}a_q|
 \le\frac{A}{M}\left((k+1)\rho^q+10\rho^{q-1}+4\rho^q\right).
 $$
 
@@ -70,15 +70,15 @@ displayed error is at most
 $4e^{10}k^{37}e^{-(n-1)/(2k)}\le4\cdot3^{11}k^{-13}<1/6$.
 
 At an actual old zero $E_{n,k}(t)=0$ we have $Y_n=0$. Since $|a_n|=1$,
-$|\operatorname{Re}a_n|\le 1/6$ and $|\operatorname{Im}a_n|>2/3$.
+$|\mathrm{Re}a_n|\le 1/6$ and $|\mathrm{Im}a_n|>2/3$.
 The consecutive principal part is
-$\operatorname{Re}(a_n z)=c\operatorname{Re}a_n+S\operatorname{Im}a_n$.
+$\mathrm{Re}(a_n z)=c\mathrm{Re}a_n+S\mathrm{Im}a_n$.
 The absolute error consisting of the first summand and the new-row
-remainder is at most $1/3$, strictly below $S|\operatorname{Im}a_n|$.
+remainder is at most $1/3$, strictly below $S|\mathrm{Im}a_n|$.
 Consequently
 
 $$
-Y_{n+1}\operatorname{Im}a_n>0.
+Y_{n+1}\mathrm{Im}a_n>0.
 $$
 
 The normalizing factor for $Y_{n+1}$ is positive. The actual reduced next
