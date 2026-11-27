@@ -53,7 +53,9 @@ theorem actual_logTilt_pole_chord {k : ℕ} (hk : 7 ≤ k) {x : ℝ}
       HasSum (fun i : ℕ => t^(i+1)*((i+1:ℕ):ℂ)^j)
         (-g (j+1)*((j+1).factorial:ℂ)) := by
     have hjk : j+1 < k := by have := mem_range.mp hj; omega
-    simpa only [Nat.add_sub_cancel] using cutoffLogCoefficient_hasSum (Nat.succ_pos j) hjk hx₀
+    have hm := cutoffLogCoefficient_hasSum (d := j+1) (Nat.succ_pos j) hjk hx₀
+    rw [show j+1-1 = j by omega] at hm
+    exact hm
   have hb := coherent_log_chord_bound hk hx (norm_nonneg (coherentPole x 0))
     (principal_coherentPole_sq x) hlU (hL.symm ▸ hl) (hU.symm ▸ hu) t
     (hL.symm ▸ coherentPole_exp_neg x l) (hU.symm ▸ coherentPole_exp_neg x u) g hc
@@ -62,7 +64,8 @@ theorem actual_logTilt_pole_chord {k : ℕ} (hk : 7 ≤ k) {x : ℝ}
     dsimp only [L,U]
     ring
   rw [hs] at hb
-  exact (mul_lt_mul_left pi_pos).mp hb
+  by_contra! h
+  exact (not_lt_of_ge (mul_le_mul_of_nonneg_left h pi_pos.le)) hb
 
 theorem actual_logTilt_far_pole {k : ℕ} (hk : 7 ≤ k) {x : ℝ}
     (hx : 10*√(k:ℝ) ≤ x) {j : ℤ} (hj : 0 < j)
