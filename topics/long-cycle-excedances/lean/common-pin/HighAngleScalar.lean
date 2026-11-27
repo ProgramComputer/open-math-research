@@ -40,7 +40,7 @@ noncomputable section
 open Finset
 namespace OpenMathResearch.LongCycleExcedances
 
-private theorem shifted_harmonic_sum (m : ℕ) :
+theorem shifted_harmonic_sum (m : ℕ) :
     (∑ i ∈ range m, 1 / ((i:ℝ)+2)) ≤ Real.log ((m:ℝ)+1) := by
   induction m with
   | zero => norm_num

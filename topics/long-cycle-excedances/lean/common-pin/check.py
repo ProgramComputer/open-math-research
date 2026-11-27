@@ -25,7 +25,44 @@ LOGISTIC_IMPORTS = (
     "MarkedTwoCycles", "MarkedTwoEGF", "MarkedExponentialBias", "MarkedLabelBias",
     "MarkedLogistic", "CycleProfile", "CycleProfileEGF", "CycleProfileLogistic",
 )
+UNIFORM_MODULES = (
+    "UniformDiscreteTilt",
+    "LowMomentMass",
+    "RadiusGeometry",
+    "LowMomentInput",
+    "UniformMassSum",
+    "LinearTilt",
+    "PoleMonomial",
+    "UniformHighDegreeLattice",
+    "UniformHighDegreeOddPoles",
+    "RepositoryUniformHighDegree",
+    "RepositoryUniformMass",
+)
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.discrete_low_frequency_sum",
+    "OpenMathResearch.LongCycleExcedances.expPrefix_half_bound",
+    "OpenMathResearch.LongCycleExcedances.discrete_low_mode",
+    "OpenMathResearch.LongCycleExcedances.low_moment_absolute_mass",
+    "OpenMathResearch.LongCycleExcedances.uniform_outer_radius",
+    "OpenMathResearch.LongCycleExcedances.shifted_moment_input",
+    "OpenMathResearch.LongCycleExcedances.lowCut_scale",
+    "OpenMathResearch.LongCycleExcedances.uniform_mass_from_split",
+    "OpenMathResearch.LongCycleExcedances.small_linear_cost",
+    "OpenMathResearch.LongCycleExcedances.large_linear_cost",
+    "OpenMathResearch.LongCycleExcedances.pole_monomial_bound",
+    "OpenMathResearch.LongCycleExcedances.uniform_high_degree_lattice",
+    "OpenMathResearch.LongCycleExcedances.square_majorized_lattice",
+    "OpenMathResearch.LongCycleExcedances.uniform_contour_factor",
+    "OpenMathResearch.LongCycleExcedances.uniform_high_degree_contour_factor",
+    "OpenMathResearch.LongCycleExcedances.uniform_high_degree_odd_poles",
+    "OpenMathResearch.LongCycleExcedances.uniform_small_modulus_odd_poles",
+    "OpenMathResearch.LongCycleExcedances.uniform_high_degree_scale_of_cut",
+    "RepositoryQuotientAudit.uniform_high_degree_coherent_poles",
+    "RepositoryQuotientAudit.uniform_high_degree_coherent_multiplier",
+    "RepositoryQuotientAudit.uniform_small_modulus_coherent_poles",
+    "RepositoryQuotientAudit.uniform_small_modulus_coherent_multiplier",
+    "RepositoryQuotientAudit.original_uniform_tilt_envelope",
+    "RepositoryQuotientAudit.original_uniform_log_mass",
     "RepositoryQuotientAudit.original_coherentTilt_coeff_bound",
     "RepositoryQuotientAudit.seriesValue_original_coherentTilt",
     "RepositoryQuotientAudit.norm_seriesValue_coherentTilt_ge",
@@ -121,6 +158,7 @@ def compile_topic(project):
     files.append((HERE / "HighAngleActualInputs.lean", "HighAngleActualInputs"))
     files.append((HERE / "HighAngleRowEstimate.lean", "HighAngleRowEstimate"))
     files.append((HERE / "ActualHighAngleSign.lean", "ActualHighAngleSign"))
+    files.extend((TOPIC / "uniform-log-tilt" / (m + ".lean"), m) for m in UNIFORM_MODULES)
     observed = {}
     failed = set()
     for source, module in files:
@@ -172,7 +210,7 @@ def compile_topic(project):
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
                    "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
-                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign"):
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *UNIFORM_MODULES):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
