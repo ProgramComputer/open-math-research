@@ -70,7 +70,7 @@ def linearHead (c : ℚ) : ℕ :=
     ⌈(W[(linearHeadIndex q).val]'(by simp [W,linearWeights]):ℚ)/
       (oddGap q a:ℚ)⌉₊)
 
-private theorem linearHead_eq (c : ℚ) :
+theorem linearHead_eq (c : ℚ) :
     linearHead c =
       (signedCenters 31).sup (fun a => ∑ q ∈ (signedHead 31).erase a, linearGapWeight c a q) := by
   unfold linearHead
