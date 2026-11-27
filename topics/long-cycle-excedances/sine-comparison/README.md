@@ -12,6 +12,8 @@ For a pair of principal waves $F_m=a\cos(m\theta)+b\sin(m\theta)$ the sine compa
 
 A fresh-context agent independently derived the determinant and its boundary term and reran all sixteen slabs. The independent checker uses a different lattice cutoff and rounding precision and directly computes powers of the positive majorant. It gives the same lower bounds to six decimal places. [Independent review](independent-review.md) · [Independent checker](independent-check.py) · [Independent output](independent-output.txt)
 
+A single principal-residue estimate now gives the stronger lower bound $322338/10^6$ throughout the same sector. It covers all angles, including the conjugate pole on the unit circle, and removes the earlier Poisson and differentiated-tilt estimates from the middle argument. [Uniform principal-residue proof and checks](uniform-carrier.md)
+
 **Formal status: ⬜ None for the displayed uniform lower bound.** Local Lean 4.19 checks cover the telescoping identity, the signs at samples and old zeros, and the conditional root-list assembly with the exterior and degree theorems supplied as inputs. The quantitative pole estimates remain on paper with a rational checker. The all-size proof retains its separate verification record. [All-cutoff argument and scope](../all-cutoffs/README.md)
 
 ## Computational checks
