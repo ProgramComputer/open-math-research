@@ -144,10 +144,10 @@ private theorem cycle_pole_nearest_error (x : ℝ) (hx : 0 ≤ x) (a : ℕ) (ha 
   have ha' : (8:ℝ) ≤ a := by exact_mod_cast ha
   have hcast : (0:ℝ) ≤ a := by positivity
   have hre := complete_normalization x a a ha' hs (by linarith : (a:ℝ) ≤ 2*(a:ℝ))
-  rw [← Complex.ofReal_pow] at hre
+  rw [← Complex.ofReal_pow, two_mul] at hre
   have hreal := congrArg Complex.re hre
-  simp only [Complex.mul_re, Complex.ofReal_re, Complex.ofReal_im, zero_mul, sub_zero,
-    Complex.ofNat_re, Complex.ofNat_im] at hreal
+  simp only [Complex.mul_re, Complex.add_re, Complex.ofReal_re, Complex.ofReal_im,
+    zero_mul, sub_zero] at hreal
   have hfac : 0 ≤ cycleMomentScale x a :=
     div_nonneg (by positivity) (pow_nonneg (radius_pos x).le _)
   have heq : cyclePoleMoment x a = cycleMomentScale x a * (total (c x) (s x) a).re := by
