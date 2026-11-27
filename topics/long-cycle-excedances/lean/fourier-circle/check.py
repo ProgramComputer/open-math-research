@@ -41,6 +41,14 @@ THEOREMS = {
     "FourierLatticeSplit": [
         "odd_lattice_contrast_split", "circle_contrast_sum",
     ],
+    "NumeratorPoleVolume": ["cauchy_lattice_prefix", "normalized_pole_moment_prefix", "normalized_pole_moment"],
+    "NumeratorOddPoleMoment": ["numerator_actual_pole_moment"],
+    "NumeratorRadialScalars": [
+        "numerator_small_height_scale", "numerator_small_height_budget", "numerator_radial_power",
+        "numerator_geometric_prefactor",
+    ],
+    "NumeratorTaylorContraction": ["numerator_small_height_contraction"],
+    "NumeratorLogSeries": ["numerator_logarithm_series_contraction"],
 }
 ALLOWED = {"propext", "Classical.choice", "Quot.sound"}
 REPORT = re.compile(r"'OpenMathResearch\.LongCycleExcedances\.(\w+)' depends on axioms:\s*\[([^\]]*)\]")

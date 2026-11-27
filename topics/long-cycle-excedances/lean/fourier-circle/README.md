@@ -76,3 +76,5 @@ The integral product estimate also has a specialization to the actual odd lattic
 The differentiated kernel has a termwise angular derivative with an integrated bound in terms of the squared pole factors. [Differentiation and angular integral](derivative.md)
 
 The differentiated contrast kernel satisfies the first-moment bound over the full odd lattice. Both integrations by parts now give coefficient inequalities under their stated inputs. [Coefficient errors and verification record](coefficient-errors.md)
+
+The [small-height numerator contraction](numerator-small-height.md) gives the bound for the explicit odd-pole log series when the height is at most four times the square root of the cutoff.
