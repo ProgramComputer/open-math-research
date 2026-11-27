@@ -19,7 +19,8 @@ theorem actual_principal_displacement (s : ℝ) :
   apply Complex.ext
   · simp only [Complex.sub_re,Complex.ofReal_re,Complex.div_re,Complex.ofReal_im,zero_mul,
       zero_div,add_zero,Complex.mul_I_re,Complex.neg_im,neg_zero,hre,hsq]
-    field_simp [hr.ne'] <;> ring
+    field_simp [hr.ne']
+    ring
   · simp only [Complex.sub_im,Complex.ofReal_im,sub_zero,Complex.div_im,zero_mul,
       zero_div,zero_sub,Complex.mul_I_im,Complex.neg_re,Complex.ofReal_re,him,hsq]
     field_simp [hr.ne']
