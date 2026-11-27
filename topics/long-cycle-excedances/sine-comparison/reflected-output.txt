@@ -1,0 +1,11 @@
+aspect at most 10 logarithm norm < 99911 /1000000
+aspect at most 48 logarithm norm < 799556 /1000000
+aspect 4 6 scaled determinant > 435656 /1000000
+aspect 6 10 scaled determinant > 571187 /1000000
+aspect 10 16 scaled determinant > 402400 /1000000
+aspect 16 22 scaled determinant > 418710 /1000000
+aspect 22 28 scaled determinant > 405652 /1000000
+aspect 28 34 scaled determinant > 383152 /1000000
+aspect 34 40 scaled determinant > 352477 /1000000
+aspect 40 44 scaled determinant > 328592 /1000000
+aspect 44 48 scaled determinant > 325873 /1000000

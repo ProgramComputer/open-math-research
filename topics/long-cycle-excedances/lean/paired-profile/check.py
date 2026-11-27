@@ -53,8 +53,25 @@ MODULES = (
     "EntireCycleEvaluation",
     "RepositoryPrincipalFactor",
     "PrincipalLatticeProduct",
+    "PrimitivePoleKernel",
+    "ReflectedLogTail",
+    "ReflectedLogSum",
+    "ReflectedLogBudget",
+    "PrincipalBudgetJoin",
+    "PrincipalHarmonic",
+    "PrincipalScaledBudget",
 )
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.primitive_angular_bernoulli_kernel",
+    "OpenMathResearch.LongCycleExcedances.reflected_log_all",
+    "OpenMathResearch.LongCycleExcedances.reflected_log_bound_of_pair",
+    "OpenMathResearch.LongCycleExcedances.reflected_log_low_budget",
+    "OpenMathResearch.LongCycleExcedances.reflected_log_all_budget",
+    "OpenMathResearch.LongCycleExcedances.actual_principal_real_bound_all",
+    "OpenMathResearch.LongCycleExcedances.actual_principal_real_bound_low",
+    "OpenMathResearch.LongCycleExcedances.principal_harmonic_prefactor",
+    "OpenMathResearch.LongCycleExcedances.original_scaled_principal_all",
+    "OpenMathResearch.LongCycleExcedances.original_scaled_principal_low",
     "OpenMathResearch.LongCycleExcedances.principal_pole_ratio_norm_le",
     "OpenMathResearch.LongCycleExcedances.principal_log_lattice_summable",
     "OpenMathResearch.LongCycleExcedances.principal_lattice_factors_hasProd",
@@ -170,7 +187,7 @@ def main(project, imports):
         print(f"Reused verified common-pin archive sha256={digest}", flush=True)
 
     inputs = [(name, TOPIC / folder / f"{name}.lean") for folder, name in SUPPORT]
-    inputs.extend((name, HERE / f"{name}.lean") for name in MODULES)
+    inputs.extend((name, (HERE.parent / "sine-comparison" if name == "PrimitivePoleKernel" else HERE) / f"{name}.lean") for name in MODULES)
     observed = {}
     for module, original in inputs:
         source = project / original.name
