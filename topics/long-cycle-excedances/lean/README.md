@@ -44,7 +44,7 @@ $$
 
 for $0\le y\le B$ and a positive denominator. The comparison uses the decreasing ratio of the successive absolute term bounds and the existing finite geometric sum lemma. A strict signed prefix margin larger than this error proves the actual endpoint sign. The checked interval Horner rule also transfers a signed margin to the whole modulus window. Its multiplication bounds are for nonnegative moduli, as in the recorded certificates.
 
-The declaration `interlace_of_prefix_and_mixed_witnesses` supplies the endpoint signs to the mixed root-list theorem above. It accepts exact old roots, whole-row signs already proved by other means, and prefix-certified signs in the same witness family. The remaining inputs are the row degrees, the coefficient envelope for the original permutation rows, and the analytic or finite data placing all the windows. In particular the Lean proof has not replayed all the recorded windows of the reviewed result for $k\ge7$ result.
+The declaration `interlace_of_prefix_and_mixed_witnesses` supplies the endpoint signs to the mixed root-list theorem above. It accepts exact old roots, whole-row signs already proved by other means, and prefix-certified signs in the same witness family. The canonical specialization below supplies the coefficient envelope for the original permutation rows. The row degrees and the analytic or finite data placing all the windows remain inputs. In particular the Lean proof has not replayed all the recorded windows of the reviewed result for $k\ge7$.
 
 The example uses cutoff seven and sizes 14 and 15, which both admit two cycles. The dyadic endpoints are $6/65536$ and $7/65536$. Lean checks opposite old signs and a strictly negative next-row value throughout the window using four low coefficients. The [exact fixture reconstruction](check-cutoff7-fixture.py) separately obtains all 27 coefficients from the one- and two-cycle formulas and compares them to the Lean vectors. That reconstruction is an exact integer calculation. The original-permutation identification is not part of the Lean fixture theorem. [Fixture output](cutoff7-fixture-output.txt)
 
@@ -84,3 +84,38 @@ lake env lean ../../topics/long-cycle-excedances/lean/LongCycleRunColors.lean
 ~~~
 
 The agent-assisted check compiled a fresh object and audited eight declarations. The audit reports subsets of `propext`, `Classical.choice` and `Quot.sound`. [Axiom output](run-colors-axioms.txt)
+
+## Canonical reduced permutation rows
+
+[LongCycleReducedRow.lean](LongCycleReducedRow.lean) defines the reduced polynomial
+by shifting the coefficients of the original enumerator down one place.
+For $n>0$ and $k\ge2$, the coefficient envelope at exponent zero gives
+$[t^0]E_{n,k}=0$. Lean then proves $E_{n,k}=tP_{n,k}$ and that every
+polynomial supplied by such a factorization equals $P_{n,k}$.
+
+The checked declarations `canonical_signed_pos_on_window_of_horner` and
+`canonical_interlace_of_prefix_and_mixed_witnesses` apply the sign and interlacing
+criteria to these permutation rows. The coefficient bounds follow from the
+decreasing-run theorem. The Horner margins, root-list and degree data still need
+to be supplied. The repo's literal cutoff-seven fixture and the low-coefficient
+engine have yet to be linked to these rows in one Lean environment.
+
+Zuo's frozen Lean 4.33.1 sources already provide the all-cutoff
+[cycle quotient identity](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/GeneralCycleQuotient.lean#L98)
+and the [insertion recurrence](https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleBounds/UniversalRecurrence.lean).
+The research check uses Lean 4.19.0 (compiler commit `6caaee842e94`) with mathlib
+`c44e0c8ee63ca166450922a373c7409c5d26b00b`. The uniqueness theorem applies to a
+quotient of the same enumerator once the external factorization is available on
+a common pin. This check uses the research pin.
+
+After preparing the mixed-witness and prefix-tail objects as above, run from
+`shared/lean`
+
+~~~sh
+topic=../../topics/long-cycle-excedances/lean
+lake env lean --root="$topic" -o .lake/build/lib/lean/LongCycleRunColors.olean "$topic/LongCycleRunColors.lean"
+lake env lean --root="$topic" "$topic/LongCycleReducedRow.lean"
+~~~
+
+The four declarations report only `propext`, `Classical.choice` and `Quot.sound`.
+[Axiom output](reduced-row-axioms.txt)
