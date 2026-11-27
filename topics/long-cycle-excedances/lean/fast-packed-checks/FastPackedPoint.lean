@@ -12,7 +12,8 @@ theorem naturalPow2_eq (b : ℕ) : naturalPow2 b = 2^b := by
 def pow2Shift (b : ℕ) : ℤ := naturalPow2 b
 
 theorem pow2Shift_eq (b : ℕ) : pow2Shift b = (2 : ℤ)^b := by
-  simp [pow2Shift, naturalPow2_eq, Int.natCast_pow]
+  rw [pow2Shift, naturalPow2_eq]
+  exact Int.natCast_pow 2 b
 
 /-- Decode the same word through shifts, without constructing its power of two. -/
 def decodeFast (word : ℕ) : ℕ := (word % (1 <<< 48)) <<< (word >>> 48)
@@ -65,12 +66,12 @@ def fastCoarseCheck (n level bits : ℕ) (words : List ℕ) (p s : ℤ) : Bool :
 
 theorem fastCoarseCheck_eq (n level bits : ℕ) (words : List ℕ) (p s : ℤ) :
     fastCoarseCheck n level bits words p s =
-      coarsePointCheck n words.length level ((fun i => (decode 48 (words[i]?.getD 0) : ℤ))) p
+      coarsePointCheck n words.length level (fun i => (decode 48 (words[i]?.getD 0) : ℤ)) p
         (2^bits) s := by
   have hcs := firstCoeffs_decode words words.length le_rfl
   rw [List.take_length] at hcs
   simp only [fastCoarseCheck, coarsePointCheck, pairedHorner_eq, decodeFast_eq, hcs,
-    Int.shiftRight_eq_div_pow, Int.natCast_pow, Int.cast_ofNat_Int, Prod.fst, Prod.snd,
+    Int.shiftRight_eq_div_pow, Int.natCast_pow, Int.cast_ofNat_Int,
     naturalPow2_eq, uncertainty, sub_neg_eq_add, pow2Shift_eq]
   congr 1
   simp only [Int.ediv_lt_iff_lt_mul (by positivity : 0 < (2:ℤ)^(level*words.length))]
