@@ -36,4 +36,12 @@ For $0\le x\le10\sqrt{k}$, the enlarged disk contains no nonprincipal poles. Ind
 
 Independent agent reviewers checked the discrete moments, pole orientation, density and radius estimates, the positive-side summation, and the full range in $x$. [Independent review](independent-review.md)
 
-The shared research-pin rebuild and replay are pending. The [all-cutoff interlacing result](../../all-cutoffs/README.md) has 🟨 Partial · Lean 4 coverage.
+Lean 4.33.1 compiled and replayed all 17 modules against their frozen upstream dependencies. The 31 named declarations use only `propext`, `Classical.choice` and `Quot.sound`. [Compiler receipts, source hashes and axioms](verification.txt) · [Hosted build and replay](https://github.com/ProgramComputer/open-math-research/actions/runs/45944187714)
+
+Reproduce the check with a fresh project directory from the repository root.
+
+~~~sh
+python3 -I topics/long-cycle-excedances/lean/common-pin/check.py /tmp/long-cycle-enclosed-proof
+~~~
+
+The [all-cutoff interlacing result](../../all-cutoffs/README.md) has 🟨 Partial · Lean 4 coverage.
