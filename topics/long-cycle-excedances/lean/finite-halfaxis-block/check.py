@@ -57,7 +57,7 @@ def build(project, name, source, audit, replay):
     digest = sha256(target.read_bytes()).hexdigest()
     print(f"Compile {name} sha256={digest} AS_cap={MEMORY} timeout={TIMEOUT}", flush=True)
     out = project / ".lake/build/lib/lean" / (name + ".olean")
-    log = guarded(project, name, "compile", "lake", "env", "lean", "-j=1",
+    log = guarded(project, name, "compile", "lake", "env", "lean", "--threads=1",
                   "-DwarningAsError=true", "-o", str(out), str(target))
     observed = {}
     for full_name, values in re.findall(
