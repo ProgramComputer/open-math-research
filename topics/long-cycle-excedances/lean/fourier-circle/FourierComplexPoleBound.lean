@@ -38,6 +38,7 @@ private theorem rawPole_facts (P c : ℕ → ℂ) {R : ℝ} (hR : 0 < R)
   refine ⟨continuous_tsum hc (hs.mul_right M) hraw, ?_, ?_⟩
   · apply continuous_tsum (fun i => continuous_const.mul (normalizedPole_continuous hR (hg i))) (hs.mul_right M)
     intro i x
+    change ‖a i * normalizedPole (P i) R x‖ ≤ a i * M
     rw [Real.norm_eq_abs,abs_of_nonneg (hn i x)]
     exact hb i x
   · intro x
@@ -62,6 +63,9 @@ theorem complex_pole_product_bound (P Q c d : ℕ → ℂ) {R : ℝ} (hR : 0 < R
   apply intervalIntegral.integral_mono_on Real.two_pi_pos.le ((cp.mul cq).norm.intervalIntegrable _ _)
     ((cu.mul cv).intervalIntegrable _ _)
   intro x _
+  change ‖complexPoleKernel P c R x * complexPoleKernel Q d R x‖ ≤
+    (∑' i, poleWeight (c i) (P i) R * normalizedPole (P i) R x) *
+      (∑' j, poleWeight (d j) (Q j) R * normalizedPole (Q j) R x)
   rw [norm_mul]
   exact mul_le_mul (hu x) (hv x) (norm_nonneg _) ((norm_nonneg _).trans (hu x))
 

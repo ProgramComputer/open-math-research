@@ -35,8 +35,11 @@ theorem fourier_kernel_error {f D B E : ℝ → ℂ} {M U V : ℝ}
       (hm.intervalIntegrable _ _) (fun x _ => hle x))
   have he : (∫ x in (0:ℝ)..2*π, major x) ≤ (2*π)*(M*(U+V)) := by
     dsimp only [major]
-    rw [intervalIntegral.integral_const_mul,intervalIntegral.integral_add
-      ((cd.mul cb).norm.intervalIntegrable _ _) (ce.norm.intervalIntegrable _ _)]
+    have hadd : (∫ x in (0:ℝ)..2*π, ‖D x*B x‖+‖E x‖) =
+        (∫ x in (0:ℝ)..2*π, ‖D x*B x‖) + (∫ x in (0:ℝ)..2*π, ‖E x‖) :=
+      intervalIntegral.integral_add (f := fun x => ‖D x*B x‖) (g := fun x => ‖E x‖)
+        ((cd.mul cb).norm.intervalIntegrable _ _) (ce.norm.intervalIntegrable _ _)
+    rw [intervalIntegral.integral_const_mul,hadd]
     exact (mul_le_mul_of_nonneg_left (add_le_add hprod hder) hM).trans_eq (by ring)
   unfold normalizedFourierIntegral
   rw [norm_div, norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_pos Real.pi_pos]
@@ -73,9 +76,8 @@ theorem fourier_adjacent_coefficient_bound {f D B E : ℝ → ℂ} {M U V : ℝ}
   have cb := continuous_iff_continuousAt.mpr (fun x => (hb x).continuousAt)
   rw [fourier_adjacent_twice n k a C A hf0 hb0 cd ce hf hb hsplit]
   apply (norm_sub_le _ _).trans
-  apply add_le_add_right
-  exact (norm_add_le _ _).trans (add_le_add_right
-    (fourier_kernel_error cf cd cb ce hM hmax hu hv k (n-k)) _)
+  exact add_le_add ((norm_add_le _ _).trans (add_le_add
+    (fourier_kernel_error cf cd cb ce hM hmax hu hv k (n-k)) le_rfl)) le_rfl
 
 #print axioms fourier_old_coefficient_bound
 #print axioms fourier_adjacent_coefficient_bound
