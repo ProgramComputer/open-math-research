@@ -194,4 +194,5 @@ theorem actual_high_angle_row_error {q k : ℕ} (hq : 0 < q) (hk : 7 ≤ k)
   change _ ≤ A*(((k:ℝ)+1)*ρ^q + 10*ρ^(q-1) + 4*ρ^q)
   nlinarith only [h₁, h₂, hprincipal, htailSum, hmid, hzeroTerm]
 
+#print axioms actual_high_angle_row_error
 end RepositoryQuotientAudit

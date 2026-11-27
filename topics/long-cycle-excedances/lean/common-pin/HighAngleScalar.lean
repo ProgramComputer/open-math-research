@@ -69,8 +69,8 @@ theorem high_angle_finite_log_bound {k : ℕ} (hk : 2 ≤ k)
     refine sum_le_sum fun i hi => ?_
     have hi' := mem_range.mp hi
     have h := hrest (i+1+1) (by omega) (by omega)
-    push_cast at h
-    convert h using 1 <;> ring
+    rw [mul_one_div]
+    simpa only [Nat.cast_add, Nat.cast_one, add_assoc, one_add_one_eq_two] using h
   have hh := shifted_harmonic_sum (k-2)
   have hk' : (k-2)+1 ≤ k := by omega
   have hp' : (0:ℝ) < (((k-2)+1:ℕ):ℝ) := by positivity
@@ -128,7 +128,7 @@ theorem high_angle_geometric_envelope (K : ℝ) (n : ℕ) (hk : 7 ≤ K) (hn : 0
       calc
         _ = -(1/(K+1)) := by
           rw [hqeq]
-          field_simp [(by linarith : K+1 ≠ 0)]
+          field_simp [(by linarith : K+1 ≠ 0)] <;> ring
         _ ≤ _ := neg_le_neg (one_div_le_one_div_of_le (by linarith) (by linarith))
     exact h1.trans h2
   have hncast : ((n-1:ℕ):ℝ) = (n:ℝ)-1 := by

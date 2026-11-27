@@ -26,6 +26,14 @@ LOGISTIC_IMPORTS = (
     "MarkedLogistic", "CycleProfile", "CycleProfileEGF", "CycleProfileLogistic",
 )
 EXPECTED = {
+    "RepositoryQuotientAudit.original_coherentTilt_coeff_bound",
+    "RepositoryQuotientAudit.seriesValue_original_coherentTilt",
+    "RepositoryQuotientAudit.norm_seriesValue_coherentTilt_ge",
+    "RepositoryQuotientAudit.actual_high_angle_log_mass",
+    "RepositoryQuotientAudit.actual_high_angle_row_error",
+    "RepositoryQuotientAudit.original_high_angle_next_sign",
+    "OpenMathResearch.LongCycleExcedances.high_angle_geometric_envelope",
+    "OpenMathResearch.LongCycleExcedances.next_sign_of_unit_principal_mode",
     "OpenMathResearch.LongCycleExcedances.norm_far_pole_truncation_le",
     "RepositoryQuotientAudit.original_logistic_coefficient",
     "RepositoryQuotientAudit.original_rescaled_logTilt_coeff",

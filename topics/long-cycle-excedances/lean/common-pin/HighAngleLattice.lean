@@ -48,11 +48,13 @@ theorem coherentPole_near_le (x : ℝ) (l : ℤ) : ‖coherentPole x 0‖ ≤ �
 
 theorem coherentPole_far_lower (x : ℝ) (j : ℕ) :
     (2*(j:ℝ)+3)*π ≤ ‖coherentPole x ((j+1:ℕ):ℤ)‖ := by
+  have him : (coherentPole x ((j+1:ℕ):ℤ)).im = (2*(j:ℝ)+3)*π := by
+    rw [coherentPole_im]
+    push_cast
+    ring
   have h := Complex.abs_im_le_norm (coherentPole x ((j+1:ℕ):ℤ))
-  rw [coherentPole_im] at h
-  push_cast at h
-  rw [abs_of_nonneg (by positivity)] at h
-  convert h using 1 <;> ring
+  rw [him, abs_of_nonneg (by positivity)] at h
+  exact h
 
 
 

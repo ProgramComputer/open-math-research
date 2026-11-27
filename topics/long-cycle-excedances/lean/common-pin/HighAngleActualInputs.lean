@@ -73,4 +73,5 @@ theorem actual_high_angle_log_mass {k : ℕ} (hk : 7 ≤ k) {x : ℝ} (hx : 0 �
     apply (div_le_div_iff_of_pos_right hj0).2
     exact (mul_le_mul hb hγj (pow_nonneg hγ.le _) (by positivity)).trans (by linarith)
 
+#print axioms actual_high_angle_log_mass
 end RepositoryQuotientAudit
