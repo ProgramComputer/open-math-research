@@ -34,7 +34,7 @@ theorem pole_monomial_bound {d : ℕ} (hd : 1 ≤ d) (m γ : ℝ) (hγ : 0 ≤ �
   rw [mul_pow,abs_mul,abs_div,abs_neg,abs_of_nonneg (Nat.cast_nonneg (α:=ℝ) d.factorial),
     abs_of_nonneg (mul_nonneg (pow_nonneg (norm_nonneg _) _) (pow_nonneg hγ _)),hm,hfac,Nat.cast_mul]
   calc
-    _ = γ^d*(‖w‖^d*‖∑' l, (1:ℂ)/p l^d‖)/(d:ℝ) := by field_simp [hd'.ne',hcount.ne']; ring
+    _ = γ^d*(‖w‖^d*‖∑' l, (1:ℂ)/p l^d‖)/(d:ℝ) := by field_simp [hd'.ne',hcount.ne'] <;> ring
     _ ≤ _ := div_le_div_of_nonneg_right (mul_le_mul_of_nonneg_left hn (pow_nonneg hγ _)) hd'.le
 
 #print axioms pole_monomial_bound

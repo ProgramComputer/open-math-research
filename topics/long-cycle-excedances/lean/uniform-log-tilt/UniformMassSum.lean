@@ -5,9 +5,14 @@ noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
 open Finset Real
 
+private theorem icc_eq_half_open (a b : ℕ) : Icc a b = Ico a b.succ := by
+  ext j
+  simp only [mem_Icc,mem_Ico]
+  omega
+
 private theorem harmonic_tail_log {k : ℕ} (hk : 2 ≤ k) :
     (∑ d ∈ Icc 2 (k-1), (1:ℝ)/(d:ℝ)) ≤ log k := by
-  rw [← Nat.Ico_succ_right, Finset.sum_Ico_eq_sum_range]
+  rw [icc_eq_half_open, Finset.sum_Ico_eq_sum_range]
   have he : (k-1).succ-2 = k-2 := by omega
   rw [he]
   simp only [Nat.cast_add, Nat.cast_ofNat, add_comm (2:ℝ)]
@@ -33,7 +38,7 @@ private theorem positive_band_sum {k : ℕ} (hk : 2 ≤ k) (F : ℕ → ℝ) :
     simp only [mem_Icc,mem_insert]
     omega
   have h1 : 1 ∉ Icc 2 (k-1) := by simp
-  rw [←sum_insert h1,←he,←Nat.Ico_succ_right,sum_Ico_eq_sum_range]
+  rw [←sum_insert h1,←he,icc_eq_half_open,sum_Ico_eq_sum_range]
   have hh : (k-1).succ-1 = k-1 := by omega
   simp only [hh,Nat.add_comm 1]
 
