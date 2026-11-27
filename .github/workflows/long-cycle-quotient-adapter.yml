@@ -39,10 +39,29 @@ jobs:
           set -euo pipefail
           ulimit -Sn 65536
           python3 -Bu topics/long-cycle-excedances/lean/pinned-quotient/check.py "$RUNNER_TEMP/proof" 2>&1 | tee "$RUNNER_TEMP/quotient-adapter.log"
+      - name: Diagnose adapter with retained imports
+        if: failure()
+        working-directory: ${{ runner.temp }}/proof/verified-build
+        run: lake env lean RepositoryQuotientAdapter.lean 2>&1 | tee "$RUNNER_TEMP/quotient-diagnostic.log"
+      - name: Preserve frozen project objects on failure
+        if: failure()
+        working-directory: ${{ runner.temp }}/proof/verified-build
+        run: |
+          set -euo pipefail
+          tar --zstd -cf "$RUNNER_TEMP/quotient-import-objects.tar.zst" .lake/build/lib/lean
+      - name: Upload retained import objects
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: quotient-import-objects
+          path: ${{ runner.temp }}/quotient-import-objects.tar.zst
+          retention-days: 7
       - name: Preserve verification report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: quotient-adapter
-          path: ${{ runner.temp }}/quotient-adapter.log
+          path: |
+            ${{ runner.temp }}/quotient-adapter.log
+            ${{ runner.temp }}/quotient-diagnostic.log
           retention-days: 30

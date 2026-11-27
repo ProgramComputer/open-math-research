@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """Build and audit the original-row adapter with the frozen upstream project."""
 
+import os
 import re
+import runpy
 import shutil
 import subprocess
 import sys
+from contextlib import nullcontext
 from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
+from unittest.mock import patch
 from zipfile import ZipFile
 
 
@@ -76,10 +80,21 @@ def main(directory):
     shutil.copy2(HERE / filename, project / filename)
     with (project / filename).open("a") as module:
         module.writelines(fixture_evaluations())
-    subprocess.run(
-        [sys.executable, "-Bu", "verify_lean.py", ".", "RepositoryQuotientAdapter", "--serial"],
-        cwd=project, check=True,
-    )
+    # The frozen verifier captures Lean's output. Preserve that diagnostic
+    # when a failed Lean subprocess causes the verifier to raise.
+    os.chdir(project)
+    sys.argv = ["verify_lean.py", ".", "RepositoryQuotientAdapter", "--serial"]
+    retained = directory / "verified-build"
+    retained.mkdir()
+    try:
+        # Keep the verifier's clean project until the diagnostic and artifact
+        # steps finish. Every input and check is still selected by the verifier.
+        with patch("tempfile.TemporaryDirectory", return_value=nullcontext(retained)):
+            runpy.run_path("verify_lean.py", run_name="__main__")
+    except subprocess.CalledProcessError as error:
+        if error.stdout:
+            print(error.stdout, end="", flush=True)
+        raise
 
 
 if __name__ == "__main__":
