@@ -26,8 +26,8 @@ theorem anchored_pole_taylor {ι : Type*} (P : ι → ℂ) {r : ℝ} {w : ℂ}
   have hne (i : ι) : P i ≠ 0 := norm_pos_iff.mp (hpos i)
   have he (n : ℕ) (i : ι) : A n i = (w/(P i)^2)*(w/P i)^n := by
     dsimp only [A]
-    rw [pow_add (P i), pow_succ w]
-    field_simp [hne i] <;> ring
+    simp only [div_eq_mul_inv, pow_add, mul_inv_rev, mul_pow, inv_pow]
+    ring
   have hb (n : ℕ) (i : ι) :
       ‖A n i‖ ≤ q^n * (‖w‖*(1/‖P i‖^2)) := by
     rw [he, norm_mul, norm_pow, norm_div, norm_pow, norm_div]

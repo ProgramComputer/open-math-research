@@ -79,8 +79,9 @@ theorem annular_principal_parts {ρ R : ℝ} (hρ : 0 < ρ) (hle : ρ ≤ R)
   classical
   by_cases hEq : R = ρ
   · have he : P = ∅ := by
-      apply Finset.eq_empty_iff_forall_not_mem.mpr
-      intro p hp
+      ext p
+      simp only [Finset.not_mem_empty, iff_false]
+      intro hp
       exact lt_irrefl _ ((hP p hp).1.trans ((hP p hp).2.trans_eq hEq))
     simp [hEq, he]
   let Q (z : ℂ) := ∑ p ∈ P, a p * (z-p)⁻¹
@@ -96,7 +97,7 @@ theorem annular_principal_parts {ρ R : ℝ} (hρ : 0 < ρ) (hle : ρ ≤ R)
       have hz' : z ∉ A := fun h => hz (Finset.mem_insert_of_mem h)
       have hterm : AnalyticAt ℂ (fun w => a q * (w-q)⁻¹) z :=
         analyticAt_const.mul ((analyticAt_id.sub analyticAt_const).inv (sub_ne_zero.mpr hqa))
-      simpa only [sum_insert hq] using hterm.add (ih hz')
+      simpa only [sum_insert hq, Pi.add_apply] using hterm.add (ih hz')
   have hHan (z : ℂ) (hz : z ∈ closedBall (0:ℂ) R \ ball 0 ρ) : AnalyticAt ℂ H z := by
     by_cases hp : z ∈ P
     · have hmore : ∀ᶠ w in 𝓝 z, w ∉ P.erase z :=
