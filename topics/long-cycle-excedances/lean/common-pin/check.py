@@ -22,6 +22,8 @@ IMPORT_SHA = "000f5b74d9fe3aa351b19b0db90b4ab23b1e6329cbe6f6129b355f68b285cc05"
 MATHLIB = "0df444a360eaa60ab8c11dca51a86af692955474"
 COMPILER = "819816b2e0a3bf405af45ae5c7af2491d8f5bee6"
 EXPECTED = {
+    "RepositoryQuotientAudit.original_normalized_pole_profile",
+    "RepositoryQuotientAudit.original_nonprincipal_profile_bound",
     "OpenMathResearch.FirstLevelHits.exists_firstLevelHitOn",
     "OpenMathResearch.FirstLevelHits.exists_lastLower_before_firstUpper",
     "OpenMathResearch.LongCycleExcedances.singleton_windows_of_phase",
@@ -90,6 +92,7 @@ def compile_topic(project):
         (HERE / "ReciprocalCenterSign.lean", "ReciprocalCenterSign"),
         (HERE / "RepositoryCenterSign.lean", "RepositoryCenterSign"),
     ]
+    files.append((HERE / "RepositoryPoleProfile.lean", "RepositoryPoleProfile"))
     observed = {}
     failed = set()
     for source, module in files:
@@ -139,7 +142,7 @@ def compile_topic(project):
                    "StrictRootListTranslation", "RepositoryRootAssembly", "ReciprocalWindowSigns",
                    "ReciprocalHalfWindows", "RepositoryHalfAxisAssembly",
                    "ReciprocalCenterSign", "RepositoryCenterSign",
-                   "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows"):
+                   "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile"):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
