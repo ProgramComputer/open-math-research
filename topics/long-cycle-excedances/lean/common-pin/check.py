@@ -106,6 +106,7 @@ def compile_topic(project):
     files.append((HERE / "RepositoryCoherentPoles.lean", "RepositoryCoherentPoles"))
     files.append((HERE / "FarPoleTruncation.lean", "FarPoleTruncation"))
     files.append((HERE / "MonomialTiltBounds.lean", "MonomialTiltBounds"))
+    files.append((HERE / "TiltAnalyticEvaluation.lean", "TiltAnalyticEvaluation"))
     observed = {}
     failed = set()
     for source, module in files:
@@ -156,7 +157,7 @@ def compile_topic(project):
                    "ReciprocalHalfWindows", "RepositoryHalfAxisAssembly",
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
-                   "FarPoleTruncation", "MonomialTiltBounds"):
+                   "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation"):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)

@@ -4,7 +4,7 @@ noncomputable section
 namespace RepositoryQuotientAudit
 open PowerSeries Finset LongCycleBounds.MarkedTwo LongCycleBounds.CycleProfile
 
-private theorem monomial_exp_coeff (d j : ℕ) (hd : 0 < d) (a : ℝ) :
+theorem monomial_exp_coeff (d j : ℕ) (hd : 0 < d) (a : ℝ) :
     coeff j (expOf (C a * (X : PowerSeries ℝ)^d)) =
       if d ∣ j then a^(j/d)/(j/d).factorial else 0 := by
   have hzero : constantCoeff (C a * (X : PowerSeries ℝ)^d) = 0 := by
@@ -90,7 +90,7 @@ theorem signed_shiftExp_abs {M v : ℝ} (hM : 0 ≤ M)
 def finiteTilt (g : ℕ → ℝ) (m : ℕ) : PowerSeries ℝ :=
   ∑ i ∈ range m, C (g (i+1))*(X : PowerSeries ℝ)^(i+1)
 
-private theorem finiteTilt_constant (g : ℕ → ℝ) (m : ℕ) :
+theorem finiteTilt_constant (g : ℕ → ℝ) (m : ℕ) :
     constantCoeff (finiteTilt g m) = 0 := by
   unfold finiteTilt
   rw [map_sum]
@@ -156,7 +156,7 @@ def cutoffLogCoefficient (k : ℕ) (t : ℝ) (j : ℕ) : ℝ :=
   else if 2 ≤ j ∧ j < k then -LongCycleBounds.Band.moment j t / (j.factorial:ℝ)
   else 0
 
-private theorem coherentTilt_exp_finite {k : ℕ} (hk : 2 ≤ k) (t : ℝ) :
+theorem coherentTilt_exp_finite {k : ℕ} (hk : 2 ≤ k) (t : ℝ) :
     coherentTilt k t = expOf (finiteTilt (cutoffLogCoefficient k t) (k-1)) := by
   have hlin (a : ℝ) : linearExp a = expOf (C a*(X : PowerSeries ℝ)^1) := by
     apply PowerSeries.ext
