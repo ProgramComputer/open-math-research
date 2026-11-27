@@ -15,10 +15,7 @@ theorem from_anchored_polynomials {k : ℕ} (hk : 0 < k)
   apply from_anchored_counts hk (fun r => (E r).eval 1)
   · simp [hzero]
   · intro r rp rs
-    have emp : Icc k r = ∅ := by
-      ext i
-      simp only [mem_Icc, not_mem_empty, iff_false]
-      omega
+    have emp : Icc k r = ∅ := Finset.Icc_eq_empty (not_le_of_gt rs)
     rw [hrec r rp, emp, sum_empty, eval_zero]
   · intro r hr
     have rp : 0 < r := by omega
