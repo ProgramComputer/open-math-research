@@ -1,5 +1,11 @@
 name: Long-cycle all-cutoff centered rows
 on:
+  push:
+    branches: [review/long-cycle-all-wide-centered]
+    paths:
+      - '.github/workflows/long-cycle-all-wide-centered.yml'
+      - 'topics/long-cycle-excedances/lean/fourier-all-wide-centered/*.lean'
+      - 'topics/long-cycle-excedances/lean/fourier-centered/*.lean'
   pull_request:
     branches: [research]
     paths:
