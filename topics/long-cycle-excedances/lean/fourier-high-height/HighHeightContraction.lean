@@ -29,7 +29,7 @@ theorem high_height_tail_tsum (k : ℕ) (s t : ℝ) (hk : 100 ≤ k) (ht : 1 ≤
       (∑' a, highHeightTail k s t a) ≤ 1/1000+2/(69/100) := by
   have hd (a : ℕ) :
       Summable (fun j : ℕ => (((a+1:ℕ):ℝ)*t)^(j+k)/((j+k).factorial:ℝ)) := by
-    exact (NormedSpace.expSeries_div_hasSum_exp ℝ (((a+1:ℕ):ℝ)*t)).summable.comp_injective
+    exact (NormedSpace.expSeries_div_hasSum_exp (((a+1:ℕ):ℝ)*t)).summable.comp_injective
       (add_left_injective k)
   have hn (a : ℕ) : 0 ≤ highHeightTail k s t a := by
     unfold highHeightTail

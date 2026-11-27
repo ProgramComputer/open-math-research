@@ -10,7 +10,7 @@ private theorem complex_exp_tail (k : ℕ) (hk : 0 < k) (z : ℂ) :
     HasSum (fun j : ℕ => z^(j+k)/((j+k).factorial:ℂ))
       (Complex.exp z-1-expWithoutConstantPrefix k z) := by
   apply (hasSum_nat_add_iff (f := fun j : ℕ => z^j/(j.factorial:ℂ)) k).mpr
-  have h := NormedSpace.expSeries_div_hasSum_exp ℂ z
+  have h := NormedSpace.expSeries_div_hasSum_exp z
   rw [←Complex.exp_eq_exp_ℂ] at h
   have he : (∑ j ∈ range k, z^j/(j.factorial:ℂ)) = expWithoutConstantPrefix k z+1 := by
     have hk' : k-1+1=k := by omega
@@ -31,7 +31,7 @@ theorem prefix_tail_frequency_majorant (k : ℕ) (hk : 0 < k) (s : ℝ) (z : ℂ
   have H := (complex_exp_tail k hk w)
   have hnorm : Summable (fun j : ℕ => ‖w^(j+k)/((j+k).factorial:ℂ)‖) := by
     simp_rw [hterm]
-    exact (NormedSpace.expSeries_div_hasSum_exp ℝ ((A:ℝ)*‖z‖)).summable.comp_injective
+    exact (NormedSpace.expSeries_div_hasSum_exp ((A:ℝ)*‖z‖)).summable.comp_injective
       (add_left_injective k)
   have h := norm_tsum_le_tsum_norm hnorm
   rw [H.tsum_eq] at h
