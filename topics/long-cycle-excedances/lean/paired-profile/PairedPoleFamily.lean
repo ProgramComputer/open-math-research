@@ -44,7 +44,7 @@ theorem finite_paired_cycle_series (s : Finset ℤ) (C : ℝ) {S : ℝ} (hS : S 
     (D : ℂ⟦X⟧) :
     (∏ q ∈ s, PowerSeries.rescale (pairedPoleDenom C S q)⁻¹ D) - 1 =
       ∑ a ∈ s, PowerSeries.rescale (pairedPoleDenom C S a)⁻¹ (D-1) *
-        ∏ q ∈ s.erase a, (1+PowerSeries.C ℂ (pairedPoleDenom C S q/
+        ∏ q ∈ s.erase a, (1+PowerSeries.C (R := ℂ) (pairedPoleDenom C S q/
           (Complex.I*(2*((q:ℂ)-(a:ℂ)))*(S:ℂ)))*
           PowerSeries.rescale (pairedPoleDenom C S q)⁻¹ ((D-1)*(1-PowerSeries.X))) := by
   simpa only [pairedPoleDenom_sub] using
@@ -57,7 +57,7 @@ theorem finite_paired_cycle_coeff (s : Finset ℤ) (C : ℝ) {S : ℝ} (hS : S �
     (D : ℂ⟦X⟧) {M : ℕ} (hM : 0 < M) :
     PowerSeries.coeff (R := ℂ) M (∏ q ∈ s, PowerSeries.rescale (pairedPoleDenom C S q)⁻¹ D) =
       ∑ a ∈ s, PowerSeries.coeff (R := ℂ) M (PowerSeries.rescale (pairedPoleDenom C S a)⁻¹ (D-1) *
-        ∏ q ∈ s.erase a, (1+PowerSeries.C ℂ (pairedPoleDenom C S q/
+        ∏ q ∈ s.erase a, (1+PowerSeries.C (R := ℂ) (pairedPoleDenom C S q/
           (Complex.I*(2*((q:ℂ)-(a:ℂ)))*(S:ℂ)))*
           PowerSeries.rescale (pairedPoleDenom C S q)⁻¹ ((D-1)*(1-PowerSeries.X)))) := by
   have h := congrArg (PowerSeries.coeff (R := ℂ) M) (finite_paired_cycle_series s C hS D)
