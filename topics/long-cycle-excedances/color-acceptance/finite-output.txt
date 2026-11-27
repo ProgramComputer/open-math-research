@@ -1,0 +1,2 @@
+Literal enumeration checked 140 triples and 180248 accepted tagged words.
+Every per-permutation barred fiber, row transform, recurrence and boundary passed.

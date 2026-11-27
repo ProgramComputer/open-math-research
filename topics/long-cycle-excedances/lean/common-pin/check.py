@@ -91,7 +91,29 @@ JOIN_MODULES = (
     "RepositoryPolynomialFront",
     "RepositoryExteriorCertificates",
 )
+COLOR_MODULES = (
+    "EulerianColorKernel",
+    "ColorAcceptanceSeries",
+    "ColorTransformError",
+    "RepositoryColorTransform",
+)
 EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.colorPowerSeries_succ",
+    "OpenMathResearch.LongCycleExcedances.color_eulerian_kernel",
+    "OpenMathResearch.LongCycleExcedances.color_convolution_coeff",
+    "OpenMathResearch.LongCycleExcedances.colorTransform_zero",
+    "OpenMathResearch.LongCycleExcedances.colorTransform_mul",
+    "OpenMathResearch.LongCycleExcedances.colorTransform_cycle",
+    "OpenMathResearch.LongCycleExcedances.colorTransform_anchor",
+    "OpenMathResearch.LongCycleExcedances.colorTransform_coeff",
+    "OpenMathResearch.LongCycleExcedances.color_transform_error_twice",
+    "OpenMathResearch.LongCycleExcedances.bar_choices_le_words",
+    "OpenMathResearch.LongCycleExcedances.color_extra_bars",
+    "OpenMathResearch.LongCycleExcedances.color_transform_error",
+    "RepositoryQuotientAudit.original_color_count_of_recurrence",
+    "RepositoryQuotientAudit.original_color_transform_anchor",
+    "RepositoryQuotientAudit.original_color_series_unique",
+    "RepositoryQuotientAudit.original_color_transform_error",
     "RepositoryQuotientAudit.original_interlacing_of_exterior_box_bounds",
     "RepositoryQuotientAudit.original_interlacing_of_exterior_coefficient_bounds",
     "RepositoryQuotientAudit.original_front_of_polynomial_bounds",
@@ -334,6 +356,7 @@ def compile_topic(project):
     files.extend((TOPIC / "vertical-tilt" / (m + ".lean"), m) for m in VERTICAL_MODULES)
     files.extend((TOPIC / "middle-residues" / (m + ".lean"), m) for m in MIDDLE_MODULES)
     files.extend((TOPIC / "front-middle-join" / (m + ".lean"), m) for m in JOIN_MODULES)
+    files.extend((TOPIC.parent / "color-acceptance" / (m + ".lean"), m) for m in COLOR_MODULES)
     observed = {}
     failed = set()
     for source, module in files:
@@ -385,7 +408,7 @@ def compile_topic(project):
                    "ReciprocalCenterSign", "RepositoryCenterSign",
                    "OpenMathResearch.FirstLevelHits", "LongCyclePhaseWindows", "RepositoryPoleProfile", "RepositoryCoherentPoles",
                    "FarPoleTruncation", "MonomialTiltBounds", "TiltAnalyticEvaluation",
-                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES, *MIDDLE_MODULES, *JOIN_MODULES):
+                   "HighAngleScalar", "HighAngleLattice", "HighAngleActualInputs", "HighAngleRowEstimate", "ActualHighAngleSign", *PHASE_MODULES, *UNIFORM_MODULES, *VERTICAL_MODULES, *MIDDLE_MODULES, *JOIN_MODULES, *COLOR_MODULES):
         run(project, "lake", "env", "leanchecker", "--verbose", module)
         print(f"kernel_replay_exit=0 {module}", flush=True)
     print(f"PASS: {len(EXPECTED)} declarations audited", flush=True)
