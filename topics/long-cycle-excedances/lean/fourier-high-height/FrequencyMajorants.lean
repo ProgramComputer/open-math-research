@@ -72,8 +72,7 @@ theorem radial_prefix_frequency_majorant (k : ℕ) (s R t : ℝ) {u : ℂ} (hu :
     push_cast
     have hj : (j.factorial:ℝ) ≠ 0 := by exact_mod_cast Nat.factorial_ne_zero j
     have hsucc : (j:ℝ)+1 ≠ 0 := by positivity
-    field_simp [hj, hsucc]
-    ring
+    field_simp [hj, hsucc] <;> ring
   unfold prefixFrequency radialFrequency expWithoutConstantPrefix
   rw [←mul_sub, ←sum_sub_distrib, norm_mul, norm_frequency_weight]
   apply (mul_le_mul_of_nonneg_left (norm_sum_le _ _) (by positivity)).trans
@@ -87,8 +86,7 @@ theorem radial_prefix_frequency_majorant (k : ℕ) (s R t : ℝ) {u : ℂ} (hu :
   change (Real.exp (-(A:ℝ)*s)/(A:ℝ))*((A:ℝ)*(R-t)*
     (∑ j ∈ range (k-1), ((A:ℝ)*R)^j/(j.factorial:ℝ))) = _
   dsimp [A]
-  field_simp
-  ring
+  field_simp <;> ring
 
 #print axioms prefix_tail_frequency_majorant
 #print axioms radial_prefix_frequency_majorant

@@ -51,8 +51,7 @@ theorem high_height_numerator_at_points (k : ℕ) (hk : 100 ≤ k)
   have hsq : r^2 = s^2+π^2 := by
     dsimp [r,w₁]
     rw [Complex.sq_norm,Complex.normSq_apply]
-    simp
-    ring
+    simp <;> ring
   have hr : 0 ≤ r := norm_nonneg _
   have hr0 : 0 < r := by nlinarith [sq_nonneg π]
   have hR0 : 0 < R := hr0.trans_le hrR
@@ -73,8 +72,7 @@ theorem high_height_numerator_at_points (k : ℕ) (hk : 100 ≤ k)
     dsimp [v,t]
     rw [Complex.ofReal_mul]
     generalize hcoef : (1-1/(k:ℝ))=c
-    field_simp [hrc]
-    ring
+    field_simp [hrc] <;> ring
   have H := high_height_numerator_contraction k hk s r R hs hr hhigh hsq hrR hR g hG hu hv
   change ‖numeratorLog k g ((R:ℂ)*u)-localLogRatio s ((t:ℂ)*u)‖ +
     ‖numeratorLog k g ((r:ℂ)*v)-localLogRatio s ((t:ℂ)*v)‖ < 25 at H

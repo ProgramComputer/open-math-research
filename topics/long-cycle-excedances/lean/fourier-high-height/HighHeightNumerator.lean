@@ -19,11 +19,10 @@ private theorem scale_radial_sum {k s B D : ℝ} (hk : 0 < k) (hs : 0 < s)
     (hc : 0 < 1/50-D/k) :
     (B*s/k)*(((5/4:ℝ)*k/s)*exp (D*(5/4)) + 1/((1/50-D/k)*s)) =
     B*(5/4)*exp (D*(5/4)) + B/(k/50-D) := by
-  have hh : (1/50-D/k)*k = k/50-D := by field_simp; ring
+  have hh : (1/50-D/k)*k = k/50-D := by field_simp <;> ring
   rw [←hh]
   generalize hz : (1/50-D/k) = C at hc ⊢
-  field_simp [hk.ne',hs.ne',hc.ne']
-  ring
+  field_simp [hk.ne',hs.ne',hc.ne'] <;> ring
 
 theorem high_height_numerator_contraction (k : ℕ) (hk : 100 ≤ k)
     (s r R : ℝ) (hs : 0 < s) (hr : 0 ≤ r) (hhigh : 16*(k:ℝ) < s^2)
