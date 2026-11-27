@@ -32,6 +32,7 @@ SINE_MODULES = (
     "PairedSineCoordinates",
     "PairedIntegerWindows",
     "PairedSineComparison",
+    "PairedSineKernel",
     "PairedDeflatedCoefficients",
     "RepositoryPairedSine",
 )
@@ -90,6 +91,10 @@ ASPECT_EXPECTED = {
     "RepositoryQuotientAudit.original_residual_count_bound",
 }
 SINE_EXPECTED = {
+    "OpenMathResearch.LongCycleExcedances.paired_sine_pole_identity",
+    "OpenMathResearch.LongCycleExcedances.paired_sine_ellipse_bound",
+    "OpenMathResearch.LongCycleExcedances.paired_sine_pole_bound",
+    "OpenMathResearch.LongCycleExcedances.paired_sine_occupied_term",
     "OpenMathResearch.LongCycleExcedances.paired_log_derivative",
     "OpenMathResearch.LongCycleExcedances.paired_integer_windows",
     "OpenMathResearch.LongCycleExcedances.paired_sine_sample",
