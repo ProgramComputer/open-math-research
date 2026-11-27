@@ -17,7 +17,8 @@ theorem enumerator_empty (k : ℕ) : enumerator 0 k = 1 := by
 theorem insertionEulerian_agrees (w k : ℕ) :
     agrees w (descentCoeffs (k-1)) (eulerian (k-1)) := by
   intro i _
-  rw [← ofCoeffs_descentCoeffs, coeff_ofCoeffs] <;> rfl
+  rw [← ofCoeffs_descentCoeffs]
+  exact (coeff_ofCoeffs _ _).symm
 
 /-- Every integer in the truncated table counts the original labelled permutations
 with its indicated number of excedances. Dropped high coefficients cannot affect it. -/
