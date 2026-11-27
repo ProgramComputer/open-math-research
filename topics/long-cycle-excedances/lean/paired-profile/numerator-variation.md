@@ -18,4 +18,4 @@ $$
 
 In the second block the adjacent probability recurrence bounds $s|b_s|$ by the width of the reciprocal probability interval. Beyond that, the recurrence gives a telescoping sum of $k-1$ previous differences. Each lag belongs to the preceding block or to the current block at a smaller degree. Strong induction controls both groups with the preceding block bound. Dividing by $s\gt jk$ supplies the factor $j$. [Lean bounds](CycleNumeratorVariation.lean) · [Written degree-block proof](../../degree-blocks/README.md)
 
-The [paired-profile driver](check.py) reuses the pinned probability and reciprocal-bound sources and checks the three modules above. These results provide the numerator input to the occupied-degree estimates.
+The [paired-profile driver](check.py) reuses the pinned probability and reciprocal-bound sources and checks the three modules above. These results provide the numerator input to the occupied-degree estimates. [Verification receipt](numerator-verification.md)
