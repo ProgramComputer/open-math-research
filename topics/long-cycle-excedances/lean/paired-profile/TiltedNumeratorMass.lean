@@ -6,7 +6,7 @@ noncomputable section
 namespace OpenMathResearch.LongCycleExcedances
 open CycleProbability Finset Real
 
-private theorem block_atom_size {k h i : ℕ} {d : ℕ→ℝ} (hd : Spec k d) (hk : 2 ≤ k)
+theorem numerator_block_atom_size {k h i : ℕ} {d : ℕ→ℝ} (hd : Spec k d) (hk : 2 ≤ k)
     (hh : 1 ≤ h) (hi : i < k) :
     |numeratorDiff k d (h*k+i+1)| ≤ 1/((h.factorial:ℝ)*(k:ℝ)^2) := by
   have hk0 : 0 < (k:ℝ) := by exact_mod_cast (show 0 < k by omega)
@@ -61,7 +61,7 @@ private theorem block_tilt_bound {k : ℕ} {d : ℕ→ℝ} (hd : Spec k d) (hk :
   · have hterm (i : ℕ) (hi : i ∈ range k) :
         (k:ℝ)*|numeratorDiff k d (h*k+i+1)| *(9/8:ℝ)^degreeBin k (h*k+i+1) ≤
           (k:ℝ)*(1/((h.factorial:ℝ)*(k:ℝ)^2))*2^(h+1) :=
-      mul_le_mul (mul_le_mul_of_nonneg_left (block_atom_size hd hk (by omega) (mem_range.mp hi)) hk0.le)
+      mul_le_mul (mul_le_mul_of_nonneg_left (numerator_block_atom_size hd hk (by omega) (mem_range.mp hi)) hk0.le)
         (bin_power_bound (by omega) (mem_range.mp hi)) (by positivity) (by positivity)
     apply (sum_le_sum hterm).trans_eq
     simp only [sum_const,card_range,nsmul_eq_mul]

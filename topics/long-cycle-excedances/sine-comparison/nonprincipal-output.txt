@@ -1,0 +1,9 @@
+4 6 maximum bin 25 upper millionths 79191
+6 10 maximum bin 45 upper millionths 71852
+10 16 maximum bin 75 upper millionths 63943
+16 22 maximum bin 105 upper millionths 71088
+22 28 maximum bin 135 upper millionths 84319
+28 34 maximum bin 165 upper millionths 106820
+34 40 maximum bin 195 upper millionths 137495
+40 44 maximum bin 215 upper millionths 161380
+44 48 maximum bin 235 upper millionths 164099
