@@ -1,0 +1,56 @@
+Frozen Lean 4.33.1 common-pin compilation and Lean kernel replay
+proof source b0faa4ffe4e0b2d326078b2fe8ad606dc56abaf1
+run https://github.com/ProgramComputer/open-math-research/actions/runs/45944187714
+Lean 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+
+UnimodalMesh 9d82f40c38872dc853e5ed9fd13ef25c7596b0255c16025e1b6f4ca842bf1b56 compile=0 replay=0 named_declarations=1
+GammaDensity 865dc608d7a6308c536a8fa3f03028f30f961efec5452fb7ebb26dac828c9c2d compile=0 replay=0 named_declarations=1
+GammaPeak 164830a401f07b3ac7585e78a3fe9dde81a6a8e2845e55c00e23427edf798972 compile=0 replay=0 named_declarations=2
+AllCutoffMesh 15c66ffe381bab9f3e34624fd954703d7d6f408a9d9dfd7ab3c51b81e90779bb compile=0 replay=0 named_declarations=1
+VerticalTransport e60a138bf24d6019d43e281d7761ffb80bd09794453d880aa2232f935df57885 compile=0 replay=0 named_declarations=2
+VerticalRadius 40150b2d5f3099d3e202d3bbadeb1004427e7d501822618e9ec108da5e3d6b19 compile=0 replay=0 named_declarations=1
+VerticalMeshSum fa1502a0f54d535476a650417fcb22951ac5a950daa797f19ba198140f4a493b compile=0 replay=0 named_declarations=1
+PoleModeIdentity eb92a3c5bdc67dc0ab185926cd63912fa6b980df50153529841e79001f5cf255 compile=0 replay=0 named_declarations=1
+PoleChord 77a21aefbb1655d526df801cde3dc00e5ce185a68ec0d6d77d074437a46b6fa8 compile=0 replay=0 named_declarations=2
+ComplexDiscreteMoment 81308894502be4c07ce607b3cb294ebdd48a9d5ae2152d262b115cee0d2d1a48 compile=0 replay=0 named_declarations=3
+RepositoryLogTiltDiscrete 21866d86879d15c6cd79b10e67eb8c38112b1db1d341eedbb3df6235596c44c4 compile=0 replay=0 named_declarations=2
+RepositoryPoleTransport 8a3394738577db41c6921402f7faffb9dec32e5c3e555be09cc19e316f644fa2 compile=0 replay=0 named_declarations=5
+MinorPoleMass 0f60740c0032d4090b953aedfaf294597a84e34b07b10bb8a89134cdfbef6489 compile=0 replay=0 named_declarations=2
+MinorPoleRadius 3cde3d59fe18395a2b129257cb7b8879cac4468d43b5775f2f907bed94b12c85 compile=0 replay=0 named_declarations=1
+RepositoryMinorPoles f220730421f6672e938c5cdeb477ab85c3efd89d26f100f80a2ecd6dd5641389 compile=0 replay=0 named_declarations=2
+SmallRadius 160dfdd17f4091808e0dbad06ee8104a9dc13319bf6f6fb4cb52be399b230ce4 compile=0 replay=0 named_declarations=1
+AllAngleMinorPoles 02d4a06deafa8c82fe5fca7f09f1dd2df1c5b2f99983743956a4fcbcec44c965 compile=0 replay=0 named_declarations=3
+
+31 vertical-tilt declarations. Transitive axiom reports
+OpenMathResearch.LongCycleExcedances.unimodal_density_mesh [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.gamma_mesh_peak [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.poisson_peak_le_ninth [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.long_cycle_vertical_density_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.all_cutoff_vertical_density_budget [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.cutoffExp_deriv [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.vertical_mode_transport [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.vertical_radius_power [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.coherent_vertical_transport [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.log_difference_from_modes [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.coherent_log_chord_bound [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.conjugate_logPolyAt [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.complex_hasSum_discrete_moment [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.shifted_complex_geometric [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.complex_exp_negative_odd_pole [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.cutoffLogCoefficient_hasSum [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.coherentPole_exp_neg [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.actualLogTiltAt_principal [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.actual_logTilt_pole_chord [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.actual_logTilt_far_pole [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.principalLogTilt_im_bound [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.actual_logTilt_far_exp_ratio [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.weighted_odd_mode_bound [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.weighted_minor_poles_le_fifth [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.enclosed_radius_decay [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.enclosed_coherent_radial_decay [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.actual_enclosed_minor_poles_le_fifth [Classical.choice, Quot.sound, propext]
+OpenMathResearch.LongCycleExcedances.small_log_radius_excludes [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.enclosed_poles_empty_of_small [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.all_angle_enclosed_minor_poles_le_fifth [Classical.choice, Quot.sound, propext]
+RepositoryQuotientAudit.middle_coherent_square_sum [Classical.choice, Quot.sound, propext]
