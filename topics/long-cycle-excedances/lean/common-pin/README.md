@@ -37,7 +37,7 @@ negative root factorization predicate used by Zuo's frozen
 [weak-interlacing assembly][assembly]. That theorem adjoins the common zero
 to both lists and gives weak interlacing of the literal enumerators. The [hosted assembly check][root-audit] compiled and replayed both new modules.
 The three new declarations use only `propext`, `Classical.choice` and
-`Quot.sound`. [Assembly audit excerpt](assembly-audit.txt)
+`Quot.sound`. [Assembly audit excerpt](assembly-audit.txt) · [Independent assembly review](assembly-review.md)
 
 [root-audit]: https://github.com/ProgramComputer/open-math-research/actions/runs/45922634178
 [assembly]: https://github.com/AlexZander-666/long-cycle-excedance-interlacing/blob/46dc6e9cc3d768ae8b1ed41617d4b1eef9b1b554/LongCycleFinite/Assembly.lean#L8
