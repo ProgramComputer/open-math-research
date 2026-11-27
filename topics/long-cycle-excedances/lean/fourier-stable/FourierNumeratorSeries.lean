@@ -42,8 +42,7 @@ private theorem numerator_series_summable (s : ℝ)
       rfl
     simpa only [he] using hS.mul_left (r^2)
   let M := ∑' i, ‖Z i‖^2
-  apply Summable.of_norm_bounded_eventually _ ((summable_geometric_of_lt_one (norm_nonneg z) hz).mul_left M)
-  rw [Nat.cofinite_eq_atTop]
+  apply Summable.of_norm_bounded_eventually_nat ((summable_geometric_of_lt_one (norm_nonneg z) hz).mul_left M)
   filter_upwards [eventually_ge_atTop 2] with j hj
   have hd (i) : ‖Z i^j‖ ≤ ‖Z i‖^2 := by
     have h1 : ‖Z i‖ ≤ 1 := by
@@ -94,7 +93,6 @@ theorem numerator_series_hasSum_disk_log {s : ℝ} (hs : 0 ≤ s)
     rw [numeratorLogSeries,if_neg (by omega),if_neg (by omega),he]
     push_cast at hJ
     field_simp [hrc,hJ]
-    ring
   have hz' : ‖(r:ℂ)*z‖ < r := by rw [norm_mul,Complex.norm_real,Real.norm_eq_abs,abs_of_pos hr]; nlinarith
   have ht := disk_finite_fourier_log_tendsto hs (Real.sq_sqrt (by positivity : 0 ≤ s^2+π^2))
     (normalized_pole_radius_le s) hS hreal b hb1 hb hz'
@@ -112,7 +110,6 @@ theorem numerator_series_hasSum_disk_log {s : ℝ} (hs : 0 ≤ s)
   rw [mul_pow]
   dsimp only [b]
   field_simp [hrc]
-  ring
 
 #print axioms numerator_series_hasSum_disk_log
 end OpenMathResearch.LongCycleExcedances
