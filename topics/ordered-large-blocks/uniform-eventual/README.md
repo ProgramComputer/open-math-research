@@ -4,6 +4,8 @@
 
 The [uniform assembly](assembly.md) exhausts all possible sequences of failing ranks. The new [sparse two-term proof](sparse.md) preserves the signed coefficient difference even when the matching zeros are closer than the individual root errors. The new [bounded-radius dense proof](dense.md) matches the two contours by their actual physical residues, which fixes the integer ranks through the overlap. The earlier [theta and moving-pole proofs](../growing-outer-ranks/README.md) supply the other growing-rank cases. [Sparse-arm review](review-sparse.md) · [Dense-arm and assembly review](review-dense.md)
 
+The [explicit growing-degree theorem](../effective-degree/README.md) gives a numerical threshold in terms of the old degree.
+
 [Source and scope comparison](literature.md)
 
 [Fresh-context independent review of the complete assembly](review-assembly.md)

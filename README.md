@@ -34,6 +34,7 @@ Reviewed proofs, disproofs, and partial theorems on established open problems. S
 
 ## Partial work
 
+- An [explicit growing-degree bound for ordered partitions](topics/ordered-large-blocks/effective-degree/README.md) gives consecutive strict interlacing at every old degree when the block threshold reaches the stated degree-dependent cutoff.
 - The [uniform outer-rank theorem for ordered partitions](topics/ordered-large-blocks/outer-ranks/README.md) gives one eventual cutoff across every threshold for any fixed number of outer ranks.
 - The [growing outer-rank theorems for ordered partitions](topics/ordered-large-blocks/growing-outer-ranks/README.md) give strict consecutive order in the theta and moving-pole regimes.
 - The [first degree increase for ordered partitions](topics/ordered-large-blocks/first-degree-increase/README.md) completes the consecutive comparisons with a linear old row at every threshold.
